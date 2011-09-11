@@ -1,0 +1,7 @@
+" .gvimrc
+" Author: Mehdi Kabab <http://pioupioum.fr>
+
+" Masquer le superflu de MacVim
+set guioptions=aAce
+set transparency=10
+

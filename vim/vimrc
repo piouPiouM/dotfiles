@@ -1,0 +1,107 @@
+set nocompatible
+
+" activate Pathogen
+filetype off
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+" load ftplugins and indent files
+filetype plugin indent on
+
+" turn on syntax highlighting
+syntax on
+
+scriptencoding utf-8
+set encoding=utf-8
+set fileencoding=utf-8
+set modelines=0
+set ttyfast
+
+" store lots of :cmdline history
+set history=300
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" show matching brackets/parenthesis
+set showmatch
+
+" Whitespace stuff
+
+set nowrap
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set autoindent
+
+" UI stuff
+
+set showmode    " display the current mode
+set number
+silent! set relativenumber
+
+color desert
+set cursorline      " highlight current line
+set colorcolumn=120 " display wrap column
+hi cursorline guibg=#333333   " highlight bg color of current line
+hi cursorcolumn guibg=#333333 " highlight cursor
+
+if has('cmdline_info')
+  set ruler " show the ruler
+  set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
+  set showcmd " show partial commands in status line and
+              " selected characters/lines in visual mode
+endif
+
+set list
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+set showbreak=↪
+
+set wildmenu
+set wildmode=list:longest
+set visualbell
+
+
+"Directories for swp files
+
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
+
+" Search
+
+set ignorecase " Ignore case when searching
+set smartcase  " except if it's an uppercase search
+set hlsearch   " Highlight search things
+set incsearch  " Make search act like search in modern browsers
+set magic      " Set magic on, for regular expressions
+set gdefault   " Apply global substitutions
+
+
+" statusline setup
+set statusline=%f    " Path.
+set statusline+=%m   " Modified flag.
+set statusline+=%r   " Readonly flag.
+set statusline+=%w   " Preview window flag.
+
+set statusline+=\    " Space.
+
+"set statusline+=%#redbar#                    " Highlight the following as a warning.
+"set statusline+=%{SyntasticStatuslineFlag()} " Syntastic errors.
+"set statusline+=%*                           " Reset highlighting.
+
+set statusline+=%=   " Right align.
+
+" File format, encoding and type.  Ex: "(unix/utf-8/python)"
+set statusline+=(
+set statusline+=%{&ff}                        " Format (unix/DOS).
+set statusline+=/
+set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
+set statusline+=/
+set statusline+=%{&ft}                        " Type (python).
+set statusline+=)
+
+" Line and column position and counts.
+set statusline+=\ (line\ %l\/%L,\ col\ %03c)
+set laststatus=2
+
