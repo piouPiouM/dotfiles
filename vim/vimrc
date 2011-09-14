@@ -2,8 +2,8 @@ set nocompatible
 
 " activate Pathogen
 filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+silent! call pathogen#runtime_append_all_bundles()
+silent! call pathogen#helptags()
 
 " load ftplugins and indent files
 filetype plugin indent on
@@ -39,11 +39,9 @@ set autoindent
 
 set showmode    " display the current mode
 set number
-silent! set relativenumber
 
 color desert
 set cursorline      " highlight current line
-set colorcolumn=120 " display wrap column
 hi cursorline guibg=#333333   " highlight bg color of current line
 hi cursorcolumn guibg=#333333 " highlight cursor
 
@@ -103,5 +101,5 @@ set statusline+=)
 
 " Line and column position and counts.
 set statusline+=\ (line\ %l\/%L,\ col\ %03c)
-set laststatus=2
+set laststatus=2 " always show status line
 

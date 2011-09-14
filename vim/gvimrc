@@ -3,5 +3,5 @@
 
 " Masquer le superflu de MacVim
 set guioptions=aAce
-set transparency=10
+set transparency=12
 
