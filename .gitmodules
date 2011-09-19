@@ -14,3 +14,7 @@
 	path = vim/bundle/yankring
 	url = https://github.com/vim-scripts/YankRing.vim.git
 	ignore = dirty
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree
+	ignore = dirty
