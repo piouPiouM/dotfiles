@@ -40,10 +40,10 @@ set autoindent
 set showmode    " display the current mode
 set number
 
-color desert
-set cursorline      " highlight current line
-hi cursorline guibg=#333333   " highlight bg color of current line
-hi cursorcolumn guibg=#333333 " highlight cursor
+color codeburn
+" set cursorline      " highlight current line
+" hi cursorline guibg=#333333   " highlight bg color of current line
+" hi cursorcolumn guibg=#333333 " highlight cursor
 
 if has('cmdline_info')
   set ruler " show the ruler
