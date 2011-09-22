@@ -26,3 +26,7 @@
 	path = vim/bundle/sessionman
 	url = https://github.com/vim-scripts/sessionman.vim.git
 	ignore = dirty
+[submodule "vim/bundle/align"]
+	path = vim/bundle/align
+	url = https://github.com/tsaleh/vim-align
+	ignore = dirty
