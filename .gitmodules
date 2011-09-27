@@ -30,3 +30,7 @@
 	path = vim/bundle/align
 	url = https://github.com/tsaleh/vim-align
 	ignore = dirty
+[submodule "vim/bundle/gist"]
+	path = vim/bundle/gist
+	url = https://github.com/vim-scripts/Gist.vim.git
+	ignore = dirty
