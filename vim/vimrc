@@ -41,7 +41,7 @@ set showmode    " display the current mode
 set number
 
 color codeburn
-" set cursorline      " highlight current line
+set cursorline      " highlight current line
 " hi cursorline guibg=#333333   " highlight bg color of current line
 " hi cursorcolumn guibg=#333333 " highlight cursor
 
