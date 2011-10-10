@@ -1,4 +1,5 @@
 set nocompatible
+let mapleader = ","
 
 " activate Pathogen
 filetype off
@@ -28,7 +29,8 @@ set showmatch
 
 " Whitespace stuff
 
-set nowrap
+set wrap
+set textwidth=120
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -74,6 +76,8 @@ set hlsearch   " Highlight search things
 set incsearch  " Make search act like search in modern browsers
 set magic      " Set magic on, for regular expressions
 set gdefault   " Apply global substitutions
+" Clear out search
+nnoremap <leader><space> :noh<cr>
 
 
 " statusline setup
@@ -102,4 +106,18 @@ set statusline+=)
 " Line and column position and counts.
 set statusline+=\ (line\ %l\/%L,\ col\ %03c)
 set laststatus=2 " always show status line
+
+"
+" Mapping
+"
+" Reselect text that just past
+nnoremap <leader>v V`]
+" Open new vertical split window and switch over it
+nnoremap <leader>w <C-w>v<C-w>l
+
+" Show yank history
+nnoremap <silent> <F3> :YRShow<cr>
+inoremap <silent> <F3> <ESC>:YRShow<cr>
+
+nnoremap <leader>a :Ack
 
