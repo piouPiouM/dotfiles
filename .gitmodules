@@ -46,3 +46,7 @@
 	path = vim/bundle/unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
 	ignore = dirty
+[submodule "vim/bundle/gundo"]
+	path = vim/bundle/gundo
+	url = http://github.com/sjl/gundo.vim.git
+	ignore = dirty
