@@ -3,7 +3,4 @@
 
 " Masquer le superflu de MacVim
 set guioptions=aAce
-set transparency=12
 set cursorline      " highlight current line
-
-color kellys

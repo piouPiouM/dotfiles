@@ -42,7 +42,9 @@ set autoindent
 set showmode    " display the current mode
 set number
 
-color codeburn
+set background=dark
+silent! set transparency=8
+color twilight_pioupioum
 set cursorline      " highlight current line
 " hi cursorline guibg=#333333   " highlight bg color of current line
 " hi cursorcolumn guibg=#333333 " highlight cursor
@@ -107,11 +109,39 @@ set statusline+=)
 set statusline+=\ (line\ %l\/%L,\ col\ %03c)
 set laststatus=2 " always show status line
 
+" Source the vimrc file after saving it
+" http://vimcasts.org/e/24
+if has("autocmd")
+  autocmd bufwritepost .vimrc source $MYVIMRC
+endif
+
+" Show syntax highlighting groups for word under cursor
+" http://vimcasts.org/e/25
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+" Bubbling text in TextMate style.
+" http://vimcasts.org/e/26
+" Requirements: unimpaired plugin.
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
+
 "
 " Mapping
 "
+
 " Reselect text that just past
-nnoremap <leader>v V`]
+nmap gV `[v`]
+
 " Open new vertical split window and switch over it
 nnoremap <leader>w <C-w>v<C-w>l
 
