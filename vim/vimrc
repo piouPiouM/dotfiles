@@ -112,7 +112,10 @@ set laststatus=2 " always show status line
 " Source the vimrc file after saving it
 " http://vimcasts.org/e/24
 if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
+  autocmd! bufwritepost .vimrc source $MYVIMRC
+  if has("gui_running")
+    autocmd! bufwritepost .vimrc source $MYGVIMRC
+  endif
 endif
 
 " Show syntax highlighting groups for word under cursor

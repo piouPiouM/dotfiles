@@ -1,6 +1,13 @@
 " .gvimrc
-" Author: Mehdi Kabab <http://pioupioum.fr>
 
+if has("autocmd")
+  autocmd! bufwritepost .gvimrc source $MYGVIMRC
+endif
 " Masquer le superflu de MacVim
 set guioptions=aAce
-set cursorline      " highlight current line
+
+" Surligner la ligne courante
+set cursorline
+
+set guifont=Menlo:h11
+
