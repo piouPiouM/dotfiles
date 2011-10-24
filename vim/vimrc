@@ -148,6 +148,9 @@ nmap gV `[v`]
 " Open new vertical split window and switch over it
 nnoremap <leader>w <C-w>v<C-w>l
 
+" Write a file with prevledges from an unprivledged session.
+cmap w!! %!sudo tee > /dev/null %
+
 " Show yank history
 nnoremap <silent> <F3> :YRShow<cr>
 inoremap <silent> <F3> <ESC>:YRShow<cr>

@@ -1,5 +1,7 @@
 " .gvimrc
 
+color twilight_pioupioum
+
 if has("autocmd")
   autocmd! bufwritepost .gvimrc source $MYGVIMRC
 endif
