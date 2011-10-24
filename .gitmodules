@@ -50,3 +50,7 @@
 	path = vim/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
 	ignore = dirty
+[submodule "vim/bundle/phpcomplete"]
+	path = vim/bundle/phpcomplete
+	url = https://github.com/shawncplus/phpcomplete.vim.git
+	ignore = dirty
