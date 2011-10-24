@@ -151,6 +151,10 @@ nnoremap <leader>w <C-w>v<C-w>l
 " Write a file with prevledges from an unprivledged session.
 cmap w!! %!sudo tee > /dev/null %
 
+" Toggle NERDTree
+noremap <silent> <F2> :NERDTreeToggle<CR>
+inoremap <silent> <F2> <ESC>:NERDTreeToggle<CR>
+
 " Show yank history
 nnoremap <silent> <F3> :YRShow<cr>
 inoremap <silent> <F3> <ESC>:YRShow<cr>
