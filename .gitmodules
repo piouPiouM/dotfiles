@@ -54,3 +54,7 @@
 	path = vim/bundle/phpcomplete
 	url = https://github.com/shawncplus/phpcomplete.vim.git
 	ignore = dirty
+[submodule "vim/bundle/repeat"]
+	path = vim/bundle/repeat
+	url = https://github.com/tpope/vim-repeat.git
+	ignore = dirty
