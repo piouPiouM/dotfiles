@@ -166,3 +166,6 @@ nnoremap <F5> :GundoToggle<CR>
 let g:gundo_preview_height = 40
 let g:gundo_right = 1
 
+" View PHP documentation for current word
+set keywordprg=~/.vim/php_doc.sh
+
