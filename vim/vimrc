@@ -150,7 +150,7 @@ nnoremap <leader>w <C-w>v<C-w>l
 cmap w!! %!sudo tee > /dev/null %
 
 " Toggle NERDTree
-noremap <silent> <F2> :NERDTreeToggle<CR>
+nnoremap <silent> <F2> :NERDTreeToggle<CR>
 inoremap <silent> <F2> <ESC>:NERDTreeToggle<CR>
 
 " Show yank history
@@ -166,4 +166,8 @@ let g:gundo_right = 1
 
 " View PHP documentation for current word
 set keywordprg=~/.vim/php_doc.sh
+
+" FuzzyFinder plugin
+nnoremap <silent> <C-t> :FufFile<CR>
+inoremap <silent> <C-t> <ESC>:FufFile<CR>
 
