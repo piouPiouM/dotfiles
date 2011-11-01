@@ -70,3 +70,7 @@
 	path = vim/bundle/easymotion
 	url = https://github.com/vim-scripts/EasyMotion.git
 	ignore = dirty
+[submodule "vim/bundle/delimitmate"]
+	path = vim/bundle/delimitmate
+	url = https://github.com/Raimondi/delimitMate.git
+	ignore = dirty
