@@ -83,18 +83,16 @@ nnoremap <leader><space> :noh<cr>
 
 
 " statusline setup
-set statusline=%f    " Path.
-set statusline+=%m   " Modified flag.
-set statusline+=%r   " Readonly flag.
-set statusline+=%w   " Preview window flag.
-
-set statusline+=\    " Space.
-
+set statusline=%-3.3n\                       " buffer number
+set statusline+=%f                           " Path.
+set statusline+=%m                           " Modified flag.
+set statusline+=%r                           " Readonly flag.
+set statusline+=%w                           " Preview window flag.
+set statusline+=\                            " Space.
 set statusline+=%#warningmsg#                " Highlight the following as a warning.
 set statusline+=%{SyntasticStatuslineFlag()} " Syntastic errors.
 set statusline+=%*                           " Reset highlighting.
-
-set statusline+=%=   " Right align.
+set statusline+=%=                           " Right align.
 
 " File format, encoding and type.  Ex: "(unix/utf-8/python)"
 set statusline+=(
@@ -106,7 +104,7 @@ set statusline+=%{&ft}                        " Type (python).
 set statusline+=)
 
 " Line and column position and counts.
-set statusline+=\ (line\ %l\/%L,\ col\ %03c)
+set statusline+=\ (line\ %l\/%L\/%P,\ col\ %03c)
 set laststatus=2 " always show status line
 
 " Source the vimrc file after saving it
