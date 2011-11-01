@@ -66,3 +66,7 @@
 	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
 	ignore = dirty
+[submodule "vim/bundle/easymotion"]
+	path = vim/bundle/easymotion
+	url = https://github.com/vim-scripts/EasyMotion.git
+	ignore = dirty
