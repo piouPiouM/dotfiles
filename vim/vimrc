@@ -286,6 +286,19 @@ augroup ft_markdown
 augroup END
 
 " }}}2
+" Twig {{{2
+
+augroup ft_twig
+  au!
+  au BufRead,BufNewFile *.twig set filetype=htmljinja
+  au BufRead,BufNewFile *.twig set syntax=htmljinja
+  au BufNewFile,BufRead *.twig setlocal tabstop=4
+  au BufNewFile,BufRead *.twig setlocal shiftwidth=4
+  au BufNewFile,BufRead *.twig setlocal softtabstop=4
+  au BufNewFile,BufRead *.twig setlocal expandtab
+augroup END
+
+" }}}2
 " }}}1
 " View PHP documentation for current word
 "set keywordprg=~/.vim/php_doc.sh
