@@ -247,6 +247,14 @@ let g:gundo_preview_height = 40
 let g:gundo_right = 1
 
 " }}}2
+" Syntastic {{{2
+
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_jump=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_quiet_warnings=0
+
+" }}}2
 " }}}1
 " Section: FileType specific stuff {{{1
 " -------------------------------------
