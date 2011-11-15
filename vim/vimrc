@@ -164,7 +164,7 @@ nmap gV `[v`]
 nnoremap <leader>W <C-w>v<C-w>l
 
 " Write a file with prevledges from an unprivledged session.
-cmap w!! %!sudo tee > /dev/null %
+cmap w!! %!sudo tee % >/dev/null
 
 " Bubbling text in TextMate style {{{2
 " http://vimcasts.org/e/26
