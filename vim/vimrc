@@ -151,6 +151,11 @@ let mapleader = ","
 " Add a ---- below
 noremap <leader>h Ypllv$r-
 
+" Jump to the next row instead of to jump over the current line
+" when line wrapping enabled.
+nnoremap j gj
+nnoremap k gk
+
 " Clear out search
 nnoremap <leader><space> :noh<cr>
 
