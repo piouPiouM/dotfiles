@@ -24,14 +24,14 @@ silent! call pathogen#helptags()
 filetype plugin indent on " Load ftplugins and indent files.
 syntax on                 " Turn on syntax highlighting.
 set nocompatible          " Vim motherfucker!
-set hidden " Don't require saving before editing another file.
+set hidden                " Don't require saving before editing another file.
 
 scriptencoding utf-8
 set encoding=utf-8
 set fileencoding=utf-8
 
 set showmatch " show matching brackets/parenthesis
-set autoread " Set to auto read when a file is changed from the outside
+set autoread  " Set to auto read when a file is changed from the outside
 set modelines=0
 set ttyfast
 set history=300
@@ -66,13 +66,13 @@ set gdefault   " Apply global substitutions
 " ------------------------
 
 set display=lastline
-set splitbelow splitright " Split window at right bottom.
-set showmode              " Display the current mode
-set number
-set background=dark
-set cursorline                " highlight current line
-silent! set transparency=8    " Make my coding sessions more fun
-color jellybeans
+set splitbelow splitright  " Split window at right bottom.
+set showmode               " Display the current mode
+set number                 " Always show line numbers
+set background=dark        " I like black color schemes
+set cursorline             " highlight current line
+color Tomorrow-Night
+silent! set transparency=8 " Make my coding sessions more fun
 
 if has('cmdline_info')
   set ruler " show the ruler
@@ -85,6 +85,12 @@ set list
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,nbsp:․
 set showbreak=↪
 
+" Folding rules {{{2
+
+set foldenable        " Enable folding
+set foldmethod=marker " Detect triple-{ style fold marker
+
+" }}}2
 " Command line stuff {{{2
 
 set wildmenu              " Show menu with possible tab completions
@@ -131,12 +137,14 @@ set laststatus=2 " always show status line
 " Section: Text formatting {{{1
 " -----------------------------
 
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-set autoindent
-set wrap
+set tabstop=2        " A tab is 2 spaces
+set shiftwidth=2     " Number of spaces to use for autoindenting
+set softtabstop=2    " When hitting <BS>, pretend like a tab is removed, even if spaces
+set expandtab        " Expand tabs by default
+set autoindent       " Always set autoindenting on
+set copyindent       " Copy the previous indentation on autoindenting
+set wrap             " Wrap lines
+set formatoptions+=1 " When wrapping paragraphs, don't end lines with 1-letter words
 set textwidth=120
 if executable('par')
   set formatprg=par\ -w120re
