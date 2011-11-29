@@ -78,3 +78,7 @@
 	path = vim/bundle/l9
 	url = https://github.com/vim-scripts/L9.git
 	ignore = dirty
+[submodule "vim/bundle/powerline"]
+	path = vim/bundle/powerline
+	url = https://github.com/Lokaltog/vim-powerline.git
+	ignore = dirty
