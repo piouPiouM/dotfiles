@@ -82,3 +82,7 @@
 	path = vim/bundle/powerline
 	url = https://github.com/Lokaltog/vim-powerline.git
 	ignore = dirty
+[submodule "vim/bundle/aftercolors"]
+	path = vim/bundle/aftercolors
+	url = https://github.com/vim-scripts/AfterColors.vim.git
+	ignore = dirty
