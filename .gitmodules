@@ -86,3 +86,7 @@
 	path = vim/bundle/aftercolors
 	url = https://github.com/vim-scripts/AfterColors.vim.git
 	ignore = dirty
+[submodule "vim/bundle/coffeescript"]
+	path = vim/bundle/coffeescript
+	url = https://github.com/kchmck/vim-coffee-script.git
+	ignore = dirty
