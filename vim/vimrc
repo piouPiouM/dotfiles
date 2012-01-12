@@ -265,6 +265,11 @@ let g:gundo_preview_height = 40
 let g:gundo_right = 1
 
 " }}}2
+" Powerline {{{2
+
+let g:Powerline_symbols="unicode"
+
+" }}}2
 " Syntastic {{{2
 
 let g:syntastic_enable_signs=1
