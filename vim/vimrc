@@ -234,8 +234,10 @@ endfunc
 " }}}2
 " FuzzyFinder plugin {{{2
 
-nnoremap <silent> <F1> :FufFile<CR>
-inoremap <silent> <F1> <ESC>:FufFile<CR>
+nnoremap <silent> <F1> :FufFileWithCurrentBufferDir<CR>
+inoremap <silent> <F1> <ESC>:FufFileWithCurrentBufferDir<CR>
+nnoremap <silent> <M-F1> :FufFile<CR>
+inoremap <silent> <M-F1> <ESC>:FufFile<CR>
 nnoremap <silent> <S-F1> :FufBuffer<CR>
 inoremap <silent> <S-F1> <ESC>:FufBuffer<CR>
 
