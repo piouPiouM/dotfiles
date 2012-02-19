@@ -30,10 +30,13 @@ scriptencoding utf-8
 set encoding=utf-8
 set fileencoding=utf-8
 
-set showmatch " show matching brackets/parenthesis
+set showmatch " Show matching brackets/parenthesis
 set autoread  " Set to auto read when a file is changed from the outside
 set modelines=0
-set ttyfast
+set t_Co=256
+set ttyfast    " Speed up rendering in modern shells.
+set lazyredraw " Do not redraw while running macros (much faster).
+set nofsync    " Let the OS decide when it's appropriate to flush the cache, rather than vim (much faster.
 set history=300
 
 if has('balloon_eval') && has('unix')
@@ -71,7 +74,7 @@ set number                 " Always show line numbers
 set background=dark        " I like black color schemes
 set cursorline             " highlight current line
 color Tomorrow-Night
-silent! set transparency=8 " Make my coding sessions more fun
+set guifont=Menlo:h11
 
 if has('cmdline_info')
   set ruler " show the ruler
@@ -295,8 +298,7 @@ augroup ft_css
   au BufNewFile,BufRead *.scss setlocal filetype=scss
   au BufNewFile,BufRead *.sass setlocal filetype=sass
   au BufNewFile,BufRead *.less setlocal filetype=less
-  au BufNewFile,BufRead *.css,*.scss,*.sass,*.less setlocal foldmethod=marker
-  au BufNewFile,BufRead *.css,*.scss,*.sass,*.less setlocal foldmarker={,}
+  au FileType less,sass,scss setlocal foldmethod=marker foldmarker={,}
 augroup END
 
 " }}}2

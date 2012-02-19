@@ -1,6 +1,7 @@
 " .gvimrc
 
 "color twilight_pioupioum
+silent! set transparency=3 " Make my coding sessions more fun
 
 if has("autocmd")
   autocmd! bufwritepost .gvimrc source $MYGVIMRC
@@ -8,8 +9,5 @@ endif
 " Masquer le superflu de MacVim
 set guioptions=aAce
 
-" Surligner la ligne courante
-set cursorline
 
-set guifont=Menlo:h11
 
