@@ -9,5 +9,14 @@ endif
 " Masquer le superflu de MacVim
 set guioptions=aAce
 
+" Section: Mappings {{{1
+" ----------------------
 
+" Syntax highlighting hex values {{{2
+" http://vimcasts.org/e/25
+if exists('*HexHighlight()')
+  nmap <leader>h :call HexHighlight()<Return>
+endif
 
+" }}}2
+" }}}1
