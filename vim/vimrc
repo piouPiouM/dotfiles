@@ -226,6 +226,10 @@ nmap <C-Down> ]e
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
+" Quick svn blame
+" http://tammersaleh.com/posts/quick-vim-svn-blame-snippet
+vmap gl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+
 " }}}2
 " Show syntax highlighting groups for word under cursor {{{2
 " http://vimcasts.org/e/25
