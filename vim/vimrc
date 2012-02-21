@@ -34,6 +34,7 @@ set showmatch " Show matching brackets/parenthesis
 set autoread  " Set to auto read when a file is changed from the outside
 set modelines=0
 set t_Co=256
+set mouse=a    " Enable mouse support.
 set ttyfast    " Speed up rendering in modern shells.
 set lazyredraw " Do not redraw while running macros (much faster).
 set nofsync    " Let the OS decide when it's appropriate to flush the cache, rather than vim (much faster.
@@ -70,20 +71,22 @@ set gdefault   " Apply global substitutions
 
 set display=lastline
 set splitbelow splitright  " Split window at right bottom.
-set number                 " Always show line numbers
-set background=dark        " I like black color schemes
-set cursorline             " highlight current line
 color Tomorrow-Night
+set number                 " Always show line numbers.
+set background=dark        " I like black color schemes.
+set cursorline             " Highlight current line.
+set scrolloff=3            " Provide some context when editing.
 set guifont=Menlo:h11
 
 if has('cmdline_info')
-  set ruler " show the ruler
-  set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
-  set showcmd " show partial commands in status line and
-              " selected characters/lines in visual mode
+  set ruler                                          " Show the ruler.
+  set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids.
+  set showcmd                                        " Show partial commands in status line and
+                                                     " selected characters/lines in visual mode.
 endif
 
-set list
+set list                       " Show invisible characters
+set backspace=indent,eol,start " Backspace through everything in insert mode
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,nbsp:․
 set showbreak=↪
 
@@ -106,14 +109,15 @@ set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.spl                            " compiled spelling word lists
 set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.sassc,*.scssc                  " Sass cache files
 set wildignore+=*.DS_Store?                      " OSX bullshit
 
 " }}}2
 " Statusline {{{2
 
-"set showmode     " Display the current mode
 set laststatus=2 " Always show status line
 if !exists('g:Powerline_theme')
+  set showmode                                 " Display the current mode
   set statusline=%-3.3n\                       " buffer number
   set statusline+=%f                           " Path.
   set statusline+=%m                           " Modified flag.
