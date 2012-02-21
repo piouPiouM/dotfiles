@@ -33,12 +33,12 @@ set fileencoding=utf-8
 set showmatch  " Show matching brackets/parenthesis
 set autoread   " Set to auto read when a file is changed from the outside
 set modelines=0
+set history=300
 set t_Co=256
 set mouse=a    " Enable mouse support.
 set ttyfast    " Speed up rendering in modern shells.
 set lazyredraw " Do not redraw while running macros (much faster).
-set nofsync    " Let the OS decide when it's appropriate to flush the cache, rather than vim (much faster.
-set history=300
+set nofsync    " Let the OS decide when it's appropriate to flush the cache, rather than vim (much faster).
 
 if has('balloon_eval') && has('unix')
   set ballooneval
@@ -71,12 +71,12 @@ set gdefault   " Apply global substitutions
 
 set display=lastline
 set splitbelow splitright  " Split window at right bottom.
-color Tomorrow-Night
 set number                 " Always show line numbers.
 set background=dark        " I like black color schemes.
 set cursorline             " Highlight current line.
 set scrolloff=3            " Provide some context when editing.
 set guifont=Menlo:h11
+color Tomorrow-Night
 
 if has('cmdline_info')
   set ruler                                          " Show the ruler.
@@ -85,21 +85,21 @@ if has('cmdline_info')
                                                      " selected characters/lines in visual mode.
 endif
 
-set list                       " Show invisible characters
-set backspace=indent,eol,start " Backspace through everything in insert mode
+set list                       " Show invisible characters.
+set backspace=indent,eol,start " Backspace through everything in insert mode.
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,nbsp:․
 set showbreak=↪
 
 " Folding rules {{{2
 
-set foldenable        " Enable folding
-set foldmethod=marker " Detect triple-{ style fold marker
+set foldenable        " Enable folding.
+set foldmethod=marker " Detect triple-{ style fold marker.
 
 " }}}2
 " Command line stuff {{{2
 
-set wildmenu              " Show menu with possible tab completions
-set wildmode=list:longest " Bash tab style
+set wildmenu              " Show menu with possible tab completions.
+set wildmode=list:longest " Bash tab style.
 
 " Ignore these filenames during enhanced command line completion:
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
@@ -115,7 +115,7 @@ set wildignore+=*.DS_Store?                      " OSX bullshit
 " }}}2
 " Statusline {{{2
 
-set laststatus=2 " Always show status line
+set laststatus=2                               " Always show status line.
 if !exists('g:Powerline_theme')
   set showmode                                 " Display the current mode
   set statusline=%-3.3n\                       " buffer number
@@ -149,14 +149,14 @@ endif
 " Section: Text formatting {{{1
 " -----------------------------
 
-set tabstop=2        " A tab is 2 spaces
-set shiftwidth=2     " Number of spaces to use for autoindenting
-set softtabstop=2    " When hitting <BS>, pretend like a tab is removed, even if spaces
-set expandtab        " Expand tabs by default
-set autoindent       " Always set autoindenting on
-set copyindent       " Copy the previous indentation on autoindenting
-set wrap             " Wrap lines
-set formatoptions+=1 " When wrapping paragraphs, don't end lines with 1-letter words
+set tabstop=2        " A tab is 2 spaces.
+set shiftwidth=2     " Number of spaces to use for autoindenting.
+set softtabstop=2    " When hitting <BS>, pretend like a tab is removed, even if spaces.
+set expandtab        " Expand tabs by default.
+set autoindent       " Always set autoindenting on.
+set copyindent       " Copy the previous indentation on autoindenting.
+set wrap             " Wrap lines.
+set formatoptions+=1 " When wrapping paragraphs, don't end lines with 1-letter words.
 set textwidth=120
 if executable('par')
   set formatprg=par\ -w120re
@@ -169,7 +169,7 @@ endif
 " Gundo {{{2
 
 let g:gundo_preview_height = 40
-let g:gundo_right = 1
+let g:gundo_right          = 1
 
 " }}}2
 " Powerline {{{2
@@ -195,24 +195,21 @@ let g:syntastic_mode_map        = { 'mode': 'active',
 
 let mapleader = ","
 
-" Add a ---- below
-noremap <leader>h Ypllv$r-
-
 " Jump to the next row instead of to jump over the current line
 " when line wrapping enabled.
 nnoremap j gj
 nnoremap k gk
 
-" Clear out search
+" Clear out search.
 nnoremap <leader><space> :noh<cr>
 
 " Open a Quickfix window for the last search.
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
-" Reselect text that just past
+" Reselect text that just past.
 nmap gV `[v`]
 
-" Open new vertical split window and switch over it
+" Open new vertical split window and switch over it.
 nnoremap <leader>W <C-w>v<C-w>l
 
 " Write a file with prevledges from an unprivledged session.
@@ -222,15 +219,15 @@ cmap w!! %!sudo tee % >/dev/null
 " http://vimcasts.org/e/26
 " Requirements: unimpaired plugin.
 
-" Bubble single lines
+" Bubble single lines.
 nmap <C-Up> [e
 nmap <C-Down> ]e
 
-" Bubble multiple lines
+" Bubble multiple lines.
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
-" Quick svn blame
+" Quick svn blame.
 " http://tammersaleh.com/posts/quick-vim-svn-blame-snippet
 vmap gl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
@@ -278,9 +275,9 @@ nnoremap <F5> :GundoToggle<CR>
 " Section: Autocommands {{{1
 " --------------------------
 
-" CDC = Change to Directory of Current file
+" CDC = Change to Directory of Current file.
 " http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
-command CDC cd %:p:h
+command! CDC cd %:p:h
 
 " Highlight cursorline ONLY in the active window {{{2
 au WinEnter * setlocal cursorline
