@@ -30,8 +30,8 @@ scriptencoding utf-8
 set encoding=utf-8
 set fileencoding=utf-8
 
-set showmatch " Show matching brackets/parenthesis
-set autoread  " Set to auto read when a file is changed from the outside
+set showmatch  " Show matching brackets/parenthesis
+set autoread   " Set to auto read when a file is changed from the outside
 set modelines=0
 set t_Co=256
 set mouse=a    " Enable mouse support.
@@ -277,6 +277,10 @@ nnoremap <F5> :GundoToggle<CR>
 " }}}1
 " Section: Autocommands {{{1
 " --------------------------
+
+" CDC = Change to Directory of Current file
+" http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
+command CDC cd %:p:h
 
 " Highlight cursorline ONLY in the active window {{{2
 au WinEnter * setlocal cursorline
