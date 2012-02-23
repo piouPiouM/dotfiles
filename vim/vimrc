@@ -109,7 +109,8 @@ set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.spl                            " compiled spelling word lists
 set wildignore+=*.sw?                            " Vim swap files
-set wildignore+=*.sassc,*.scssc                  " Sass cache files
+set wildignore+=*.sassc,*.scssc,.sass-cache      " Sass cache files
+set wildignore+=.svn,.git                        " SCM stuff
 set wildignore+=*.DS_Store?                      " OSX bullshit
 
 " }}}2
