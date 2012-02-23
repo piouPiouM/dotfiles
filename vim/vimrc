@@ -166,6 +166,12 @@ endif
 " Section: Plugin settings {{{1
 " -----------------------------
 
+" Command-T {{{2
+
+let g:CommandTMaxCachedDirectories = 30 " Keep in cache the 30 last scanned directories.
+let g:CommandTMatchWindowReverse   = 1  " Display best match in a fixed location on the screen.
+
+" }}}2
 " Gundo {{{2
 
 let g:gundo_preview_height = 40
