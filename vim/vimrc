@@ -75,7 +75,7 @@ set number                 " Always show line numbers.
 set background=dark        " I like black color schemes.
 set cursorline             " Highlight current line.
 set scrolloff=3            " Provide some context when editing.
-set guifont=Menlo:h11
+set guifont=Menlo-RegularForPowerline:h11
 color Tomorrow-Night
 
 if has('cmdline_info')
@@ -181,7 +181,7 @@ let g:gundo_right          = 1
 " }}}2
 " Powerline {{{2
 
-let g:Powerline_symbols="unicode"
+let g:Powerline_symbols="fancy"
 
 " }}}2
 " Syntastic {{{2
