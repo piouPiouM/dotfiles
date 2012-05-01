@@ -5,6 +5,7 @@
 
 augroup ft_css
   autocmd!
+  autocmd FileType css,less,sass,scss set foldmethod=marker foldmarker={,} nofoldenable
   autocmd FileType css,less,sass,scss set tabstop=2
   autocmd FileType css,less,sass,scss set shiftwidth=2
   autocmd FileType css,less,sass,scss set softtabstop=2
