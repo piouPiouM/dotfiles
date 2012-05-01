@@ -1,4 +1,12 @@
 " .gvimrc
+" Author: Mehdi Kabab <http://pioupioum.fr>
+" Source: http://github.com/piouPiouM/dotfiles/vim/gvimrc
+" 
+" 1. Basic configuration
+" 2. Mappings
+
+" Section: Basic configuration {{{1
+" ----------------------------
 
 "color twilight_pioupioum
 silent! set transparency=3 " Make my coding sessions more fun
@@ -9,8 +17,9 @@ endif
 " Masquer le superflu de MacVim
 set guioptions=aAce
 
+" }}}1
 " Section: Mappings {{{1
-" ----------------------
+" -----------------
 
 " Syntax highlighting hex values {{{2
 " http://vimcasts.org/e/25
