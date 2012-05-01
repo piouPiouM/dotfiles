@@ -11,7 +11,12 @@
 " 7. Plugin settings
 
 " Section: Preamble {{{1
-" ----------------------
+" -----------------
+
+let g:ppm_vim_path = escape(fnamemodify(resolve(expand("<sfile>:p" . "vim")), ":h"), ' ')
+
+" Source core functions.
+exe 'source ' . g:ppm_vim_path . '/config/ppm.vim'
 
 filetype off
 silent! call pathogen#runtime_append_all_bundles()
@@ -19,11 +24,11 @@ silent! call pathogen#helptags()
 
 " }}}1
 " Section: Basic configuration {{{1
-" ---------------------------------
+" ----------------------------
 
-filetype plugin indent on " Load ftplugins and indent files.
-syntax on                 " Turn on syntax highlighting.
 set nocompatible          " Vim motherfucker!
+filetype plugin indent on " Load plugin and indent settings for the detected filetype.
+syntax on                 " Turn on syntax highlighting.
 set hidden                " Don't require saving before editing another file.
 
 scriptencoding utf-8
@@ -34,11 +39,13 @@ set showmatch  " Show matching brackets/parenthesis
 set autoread   " Set to auto read when a file is changed from the outside
 set modelines=0
 set history=300
-set t_Co=256
-set mouse=a    " Enable mouse support.
-set ttyfast    " Speed up rendering in modern shells.
 set lazyredraw " Do not redraw while running macros (much faster).
 set nofsync    " Let the OS decide when it's appropriate to flush the cache, rather than vim (much faster).
+if !has("gui_running")
+  set t_Co=256
+  set mouse=a    " Enable mouse support.
+  set ttyfast    " Speed up rendering in modern shells.
+endif
 
 if has('balloon_eval') && has('unix')
   set ballooneval
@@ -67,7 +74,7 @@ set gdefault   " Apply global substitutions
 " }}}2
 " }}}1
 " Section: UI options {{{1
-" ------------------------
+" -------------------
 
 set display=lastline
 set splitbelow splitright  " Split window at right bottom.
@@ -75,7 +82,7 @@ set number                 " Always show line numbers.
 set background=dark        " I like black color schemes.
 set cursorline             " Highlight current line.
 set scrolloff=3            " Provide some context when editing.
-set guifont=Menlo-RegularForPowerline:h11
+set guifont=Menlo-RegularForPowerline:h11 " Use the Powerline specific font
 color Tomorrow-Night
 
 if has('cmdline_info')
@@ -111,44 +118,40 @@ set wildignore+=*.spl                            " compiled spelling word lists
 set wildignore+=*.sw?                            " Vim swap files
 set wildignore+=*.sassc,*.scssc,.sass-cache      " Sass cache files
 set wildignore+=.svn,.git                        " SCM stuff
-set wildignore+=*.DS_Store?                      " OSX bullshit
+set wildignore+=.DS_Store                        " OSX bullshit
 
 " }}}2
 " Statusline {{{2
 
-set laststatus=2                               " Always show status line.
-if !exists('g:Powerline_theme')
-  set showmode                                 " Display the current mode
-  set statusline=%-3.3n\                       " buffer number
-  set statusline+=%f                           " Path.
-  set statusline+=%m                           " Modified flag.
-  set statusline+=%r                           " Readonly flag.
-  set statusline+=%w                           " Preview window flag.
-  set statusline+=\                            " Space.
-  set statusline+=%#warningmsg#                " Highlight the following as a warning.
-  set statusline+=%{SyntasticStatuslineFlag()} " Syntastic errors.
-  set statusline+=%*                           " Reset highlighting.
-  set statusline+=%=                           " Right align.
+set laststatus=2                             " Always show status line.
+set showmode                                 " Display the current mode
+set statusline=%-3.3n\                       " buffer number
+set statusline+=%f                           " Path.
+set statusline+=%m                           " Modified flag.
+set statusline+=%r                           " Readonly flag.
+set statusline+=%w                           " Preview window flag.
+set statusline+=\                            " Space.
+set statusline+=%#warningmsg#                " Highlight the following as a warning.
+set statusline+=%{SyntasticStatuslineFlag()} " Syntastic errors.
+set statusline+=%*                           " Reset highlighting.
+set statusline+=%=                           " Right align.
 
-  " File format, encoding and type.  Ex: "(unix/utf-8/python)"
-  set statusline+=(
-  set statusline+=%{&ff}                        " Format (unix/DOS).
-  set statusline+=/
-  set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
-  set statusline+=/
-  set statusline+=%{&ft}                        " Type (python).
-  set statusline+=)
+" File format, encoding and type.  Ex: "(unix/utf-8/python)"
+set statusline+=(
+set statusline+=%{&ff}                        " Format (unix/DOS).
+set statusline+=/
+set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
+set statusline+=/
+set statusline+=%{&ft}                        " Type (python).
+set statusline+=)
 
-  " Line and column position and counts.
-  set statusline+=\ (line\ %l\/%L\/%P,\ col\ %03c)
-else
-  set noshowmode " Turn off showmode
-endif
+" Line and column position and counts.
+set statusline+=\ (line\ %l\/%L\/%P,\ col\ %03c)
 
 " }}}2
 " }}}1
 " Section: Text formatting {{{1
-" -----------------------------
+" ------------------------
 
 set tabstop=2        " A tab is 2 spaces.
 set shiftwidth=2     " Number of spaces to use for autoindenting.
@@ -164,188 +167,14 @@ if executable('par')
 endif
 
 " }}}1
-" Section: Plugin settings {{{1
-" -----------------------------
 
-" Command-T {{{2
+call ppm#source('config/plugins.vim')
+call ppm#source('config/mappings.vim')
+call ppm#source('config/commands.vim')
+call ppm#source('config/autocommands.vim')
+call ppm#source('config/filetypes.vim')
 
-let g:CommandTMaxCachedDirectories = 30 " Keep in cache the 30 last scanned directories.
-let g:CommandTMatchWindowReverse   = 1  " Display best match in a fixed location on the screen.
-
-" }}}2
-" Gundo {{{2
-
-let g:gundo_preview_height = 40
-let g:gundo_right          = 1
-
-" }}}2
-" Powerline {{{2
-
-let g:Powerline_symbols="fancy"
-
-" }}}2
-" Syntastic {{{2
-
-let g:syntastic_auto_jump       = 1
-let g:syntastic_auto_loc_list   = 1
-let g:syntastic_enable_balloons = 1
-let g:syntastic_enable_signs    = 1
-let g:syntastic_quiet_warnings  = 0
-let g:syntastic_loc_list_height = 5
-let g:syntastic_mode_map        = { 'mode': 'active',
-                                  \ 'passive_filetypes': ['sass', 'scss'] }
-
-" }}}2
-" }}}1
-" Section: Mappings {{{1
-" ----------------------
-
-let mapleader = ","
-
-" Jump to the next row instead of to jump over the current line
-" when line wrapping enabled.
-nnoremap j gj
-nnoremap k gk
-
-" Clear out search.
-nnoremap <leader><space> :noh<cr>
-
-" Open a Quickfix window for the last search.
-nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
-
-" Reselect text that just past.
-nmap gV `[v`]
-
-" Open new vertical split window and switch over it.
-nnoremap <leader>W <C-w>v<C-w>l
-
-" Write a file with prevledges from an unprivledged session.
-cmap w!! %!sudo tee % >/dev/null
-
-" Bubbling text in TextMate style {{{2
-" http://vimcasts.org/e/26
-" Requirements: unimpaired plugin.
-
-" Bubble single lines.
-nmap <C-Up> [e
-nmap <C-Down> ]e
-
-" Bubble multiple lines.
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
-" Quick svn blame.
-" http://tammersaleh.com/posts/quick-vim-svn-blame-snippet
-vmap gl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
-
-" }}}2
-" Show syntax highlighting groups for word under cursor {{{2
-" http://vimcasts.org/e/25
-nmap <F9> :call <SID>SynStack()<CR>
-function! <SID>SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
-
-" }}}2
-" FuzzyFinder plugin {{{2
-
-nnoremap <silent> <F1> :FufFileWithCurrentBufferDir<CR>
-inoremap <silent> <F1> <ESC>:FufFileWithCurrentBufferDir<CR>
-nnoremap <silent> <M-F1> :FufFile<CR>
-inoremap <silent> <M-F1> <ESC>:FufFile<CR>
-nnoremap <silent> <S-F1> :FufBuffer<CR>
-inoremap <silent> <S-F1> <ESC>:FufBuffer<CR>
-
-" }}}2
-" Toggle NERDTree {{{2
-
-nnoremap <silent> <F2> :NERDTreeToggle<CR>
-inoremap <silent> <F2> <ESC>:NERDTreeToggle<CR>
-
-" }}}2
-" Show yank history {{{2
-
-nnoremap <silent> <F3> :YRShow<CR>
-inoremap <silent> <F3> <ESC>:YRShow<CR>
-
-" }}}2
-" Gundo plugin {{{2
-
-nnoremap <F5> :GundoToggle<CR>
-
-" }}}2
-
-" }}}1
-" Section: Autocommands {{{1
-" --------------------------
-
-" CDC = Change to Directory of Current file.
-" http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
-command! CDC cd %:p:h
-
-" Highlight cursorline ONLY in the active window {{{2
-au WinEnter * setlocal cursorline
-au WinLeave * setlocal nocursorline
-
-" }}}2
-" Source the vimrc file after saving it {{{2
-" http://vimcasts.org/e/24
-
-if has("autocmd")
-  autocmd! bufwritepost .vimrc source $MYVIMRC
-  if has("gui_running")
-    autocmd! bufwritepost .vimrc source $MYGVIMRC
-  endif
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
 endif
-
-" }}}2
-" }}}1
-" Section: FileType specific stuff {{{1
-" -------------------------------------
-
-" CSS, Sass and LessCSS {{{2
-
-augroup ft_css
-  au!
-  au BufNewFile,BufRead *.scss setlocal filetype=scss
-  au BufNewFile,BufRead *.sass setlocal filetype=sass
-  au BufNewFile,BufRead *.less setlocal filetype=less
-  au FileType less,sass,scss setlocal foldmethod=marker foldmarker={,}
-augroup END
-
-" }}}2
-" Markdown {{{2
-
-augroup ft_markdown
-  au!
-  au BufNewFile,BufRead *.md,*.m*down setlocal filetype=markdown
-  au BufNewFile,BufRead *.md,*.m*down setlocal nowrap
-  au BufNewFile,BufRead *.md,*.m*down setlocal tabstop=4
-  au BufNewFile,BufRead *.md,*.m*down setlocal shiftwidth=4
-  au BufNewFile,BufRead *.md,*.m*down setlocal softtabstop=4
-  au BufNewFile,BufRead *.md,*.m*down setlocal expandtab
-  au BufNewFile,BufRead *.md,*.m*down setlocal textwidth=120
-  au BufNewFile,BufRead *.md,*.m*down setlocal colorcolumn=+1
-augroup END
-
-" }}}2
-" Twig {{{2
-
-augroup ft_twig
-  au!
-  au BufRead,BufNewFile *.twig set filetype=htmljinja
-  au BufRead,BufNewFile *.twig set syntax=htmljinja
-  au BufNewFile,BufRead *.twig setlocal tabstop=4
-  au BufNewFile,BufRead *.twig setlocal shiftwidth=4
-  au BufNewFile,BufRead *.twig setlocal softtabstop=4
-  au BufNewFile,BufRead *.twig setlocal expandtab
-augroup END
-
-" }}}2
-" }}}1
-" View PHP documentation for current word
-"set keywordprg=~/.vim/php_doc.sh
 
