@@ -6,9 +6,6 @@
 " 2. Basic configuration
 " 3. UI options
 " 4. Text formatting
-" 5. Mappings
-" 6. Autocommands
-" 7. Plugin settings
 
 " Section: Preamble {{{1
 " -----------------
