@@ -96,6 +96,10 @@ inoremap <silent> <S-F1> <ESC>:FufBuffer<CR>
 nnoremap <silent> <F2> :NERDTreeToggle<CR>
 inoremap <silent> <F2> <ESC>:NERDTreeToggle<CR>
 
+" Paste from history with F3
+nnoremap <silent> <F3> :YRShow<CR>
+inoremap <silent> <F3> <ESC>:YRShow<CR>
+
 " Toggle Gundo window with Cmd-u
 nnoremap <D-u> :GundoToggle<CR>
 
