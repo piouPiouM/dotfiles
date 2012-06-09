@@ -24,6 +24,15 @@ augroup trailing
   autocmd InsertLeave * set listchars+=trail:⌴
 augroup END
 
+" Use relative numbers in normal mode when Vim is active
+augroup relativenumber
+  autocmd!
+  autocmd FocusLost * set number
+  autocmd FocusGained * set relativenumber
+  autocmd InsertEnter * set number
+  autocmd InsertLeave * set relativenumber
+augroup END
+
 " Source the vimrc file after saving it.
 " http://vimcasts.org/e/24
 augroup reload_config
