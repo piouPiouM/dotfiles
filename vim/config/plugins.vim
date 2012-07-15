@@ -41,7 +41,7 @@ let g:syntastic_enable_signs    = 1
 let g:syntastic_quiet_warnings  = 0
 let g:syntastic_loc_list_height = 5
 let g:syntastic_mode_map        = { 'mode': 'active',
-                                  \ 'passive_filetypes': ['sass', 'scss'] }
+                                  \ 'passive_filetypes': ['sass', 'scss', 'html'] }
 
 " }}}1
 
