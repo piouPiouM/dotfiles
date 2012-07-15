@@ -75,7 +75,7 @@ set gdefault   " Apply global substitutions
 
 set display=lastline
 set splitbelow splitright  " Split window at right bottom.
-set number                 " Always show line numbers.
+set relativenumber         " Always show line numbers, with relative position.
 set background=dark        " I like black color schemes.
 set cursorline             " Highlight current line.
 set scrolloff=3            " Provide some context when editing.
