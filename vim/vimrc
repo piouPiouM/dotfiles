@@ -16,8 +16,12 @@ let g:ppm_vim_path = escape(fnamemodify(resolve(expand("<sfile>:p" . "vim")), ":
 exe 'source ' . g:ppm_vim_path . '/config/ppm.vim'
 
 filetype off
-silent! call pathogen#runtime_append_all_bundles()
-silent! call pathogen#helptags()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
 
 " }}}1
 " Section: Basic configuration {{{1
