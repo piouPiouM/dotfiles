@@ -23,6 +23,28 @@ call vundle#rc()
 " required! 
 Bundle 'gmarik/vundle'
 
+" My bundles
+Bundle 'gmarik/vundle'
+Bundle 'AfterColors.vim'
+Bundle 'Gundo'
+Bundle 'FuzzyFinder'
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+Bundle 'EasyMotion'
+Bundle 'Gist.vim'
+Bundle 'The-NERD-Commenter'
+Bundle 'phpcomplete.vim'
+Bundle 'repeat.vim'
+Bundle 'surround.vim'
+Bundle 'Syntastic'
+Bundle 'Tagbar'
+Bundle 'unimpaired.vim'
+Bundle 'YankRing.vim'
+Bundle 'hexHighlight.vim'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'kchmck/vim-coffee-script.git'
+Bundle 'tpope/vim-haml'
+
 " }}}1
 " Section: Basic configuration {{{1
 " ----------------------------
