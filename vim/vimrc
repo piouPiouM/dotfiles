@@ -24,10 +24,8 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My bundles
-Bundle 'gmarik/vundle'
 Bundle 'AfterColors.vim'
 Bundle 'Gundo'
-Bundle 'FuzzyFinder'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'EasyMotion'
@@ -44,6 +42,7 @@ Bundle 'hexHighlight.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kchmck/vim-coffee-script.git'
 Bundle 'tpope/vim-haml'
+Bundle 'roman/golden-ratio'
 
 " }}}1
 " Section: Basic configuration {{{1

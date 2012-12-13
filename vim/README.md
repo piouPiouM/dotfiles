@@ -13,6 +13,7 @@ Keymaps
 |----------|-------|--------|------------|
 | `ss`     | N     | Split window horizontally | |
 | `vv`     | N     | Split window vertically   | |
+| `,g`     | N     | Call Golden Ratio resize command | Golden Ratio |
 
 ### File navigation
 
@@ -61,6 +62,7 @@ Installed plugins
 1. Fugitive
 1. FuzzyFinder
 1. Gist
+1. Golden Ratio
 1. Gundo
 1. L9 (as dependence)
 1. NerdCommenter
