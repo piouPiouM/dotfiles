@@ -1,0 +1,138 @@
+# export MANPATH=/opt/local/share/man:$MANPATH
+export LC_CTYPE=fr_FR.UTF-8
+export NODE_PATH=/usr/local/lib/node_modules
+
+export EDITOR='mate -w'
+export SVN_EDITOR='mate -w'
+
+export USER_BASH_COMPLETION_DIR=~/.bash_completion.d
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+fi
+# if [ -f /opt/local/etc/bash_completion ]; then
+#     . /opt/local/etc/bash_completion
+# fi
+
+export PHP_PHOTON=~/Code/vendors/ceondo/photon/src/photon.php
+
+# Alias fonctionnels
+alias ls="ls -GF"
+alias ll="ls -lh"
+alias la="ls -a"
+alias lla="ls -lah"
+alias df="df -h"
+
+# Utiliser la version embarquée dans MacVim de vim en remplacement
+# de la version builtin de OSX
+# http://apple.stackexchange.com/a/14312
+alias vim="mvim -v"
+
+# Alias de commandes
+alias bashrc="mate -aw $HOME/.bashrc && source $HOME/.bash_profile"
+alias grep='GREP_COLOR="1;37;41" LANG=C grep --color=auto'
+alias sha1sum="openssl dgst -sha1"
+# alias actl="sudo /opt/local/apache2/bin/apachectl"
+# alias mysql=mysql5
+# alias mysqladmin=mysqladmin5
+alias inimaquette='mkdir -p dist/{inc,modules,www/{css,files,img,js}} src/{img,js,scss/partials} && touch dist/www/index.php'
+
+# Accès rapide
+alias www="cd /var/www/"
+alias wwww="cd /var/www/htdocs/"
+alias wwwsandbox="cd /var/www/sandbox/"
+
+################################################################
+# Check if the given argument is a known command
+#
+_fn_exists()
+{
+    declare -f $1 >/dev/null
+}
+
+################################################################
+# pre-prompt pour calculer le titre du xterm
+#
+_preprompt()
+{
+    # lancee avant le prompt
+    WHOAMI=`whoami`
+    export WINTITLE="$HOSTNAME/$WHOAMI   $PWD"
+
+    # Selon le type de terminal...
+    case "$TERM$NEXTCONSOLE" in
+        xterm*|*YES|vt100*)
+        # avant chaque prompt, affiche le chemin courant dans la barre de titre
+        echo -ne "\033]0;$WINTITLE  \007\c"
+        ;;
+    esac
+}
+PROMPT_COMMAND=_preprompt
+
+# ##################################################################
+# prompt
+#
+_prompt ()
+{
+    if [ $UID -eq 0 ] ; then
+       # The # character serves as an extra reminder that I am root
+       SYM='#'
+    else
+       SYM='$'
+    fi
+
+    # Regular
+    BLACK="\[\033[0;30m\]"
+    RED="\[\033[0;31m\]"
+    GREEN="\[\033[0;32m\]"
+    YELLOW="\[\033[0;33m\]"
+    BLUE="\[\033[0;34m\]"
+    PURPLE="\[\033[0;35m\]"
+    CYAN="\[\033[0;36m\]"
+    WHITE="\[\033[0;37m\]"
+
+    # Bold
+    BBLACK="\[\033[1;30m\]"
+    BRED="\[\033[1;31m\]"
+    BGREEN="\[\033[1;32m\]"
+    BYELLOW="\[\033[1;33m\]"
+    BBLUE="\[\033[1;34m\]"
+    BPURPLE="\[\033[1;35m\]"
+    BCYAN="\[\033[1;36m\]"
+    BWHITE="\[\033[1;37m\]"
+
+    # Underline
+    UBLACK="\[\033[4;30m\]"
+    URED="\[\033[4;31m\]"
+    UGREEN="\[\033[4;32m\]"
+    UYELLOW="\[\033[4;33m\]"
+    UBLUE="\[\033[4;34m\]"
+    UPURPLE="\[\033[4;35m\]"
+    UCYAN="\[\033[4;36m\]"
+    UWHITE="\[\033[4;37m\]"
+
+    # Background
+    BGBLACK="\[\033[40m\]"
+    BGRED="\[\033[41m\]"
+    BGGEEEN="\[\033[42m\]"
+    BGYELLOW="\[\033[43m\]"
+    BGBLUE="\[\033[44m\]"
+    BGPURPLE="\[\033[45m\]"
+    BGCYAN="\[\033[46m\]"
+    BGWHITE="\[\033[47m\]"
+
+    COLOR_NONE="\[\033[0m\]"
+    BOLD="\[\033[1m\]"
+    NORMAL="\[\033[m\]"
+
+    _fn_exists '__git_ps1'
+    if [ $? -eq 0 ]; then
+        export GIT_PS1_SHOWDIRTYSTATE=1 GIT_PS1_SHOWSTASHSTATE=1 GIT_PS1_SHOWUNTRACKEDFILES=1
+        G="\$(__git_ps1 \"${UPURPLE}%s${NORMAL}:\")"
+    else
+        G=''
+    fi
+    P1="[\A] (${G}${GREEN}\w${NORMAL})\n${BOLD}\u${NORMAL}@${BOLD}\h${NORMAL} ${SYM}${COLOR_NONE} "
+
+    export PS1="$P1"
+}
+_prompt
