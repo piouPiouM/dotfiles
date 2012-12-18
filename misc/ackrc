@@ -1,0 +1,17 @@
+# Always sort the files
+--sort-files
+
+# Print the filename for each match
+--with-filename
+
+# Always groups matches by file name with
+--group
+
+# Ignore Sass cache directory
+--ignore-dir=.sass-cache
+
+# Define Sass and SCSS types
+--type-set=sass=.sass,.scss
+
+# Drupal stuff
+--type-add=php=.module,.inc
