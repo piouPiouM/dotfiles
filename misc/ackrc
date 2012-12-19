@@ -1,9 +1,6 @@
 # Always sort the files
 --sort-files
 
-# Print the filename for each match
---with-filename
-
 # Always groups matches by file name with
 --group
 
