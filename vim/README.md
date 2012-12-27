@@ -52,31 +52,24 @@ Keymaps
 Installed plugins
 -----------------
 
-1. Ack.vim
 1. AfterColors
-1. Align
 1. CoffeScript
-1. Command-T
-1. Delimitmate
+1. ctrlp.vim
 1. Easymotion
-1. Fugitive
-1. FuzzyFinder
 1. Gist
 1. Golden Ratio
 1. Gundo
-1. L9 (as dependence)
+1. Haml
+1. L9 (as dependency)
 1. NerdCommenter
-1. NerdTree
 1. PHPComplete
-1. Pathogen
 1. Powerline
 1. Repeat
-1. SessionMan
-1. SnipMate
 1. Surround
 1. Syntastic
 1. Tagbar
 1. Unimpaired
+1. Vundle
 1. Yankring
 1. hexHighlight
 
@@ -84,14 +77,11 @@ TODO
 ----
 
 * Add support for Drupal projects.
-* Uninstall plugins:
-    - Command-T
-    - FuzzyFinder
-    - NerdTree
-    - SessionMan
-    - Delimitmate?
 * Install plugins:
-    - [CtrlP](https://github.com/kien/ctrlp.vim) in replacement of FuzzyFinder and Command-T.
+    - Ack.vim
+    - Align
+    - SnipMate
+    - Fugitive
     - [extradite](https://github.com/int3/vim-extradite): a git commit browser for vim (extends Fugitive).
     - [ZoomWin](https://github.com/vim-scripts/ZoomWin): zoom in/out of windows (toggle between one window and
       multi-window).
