@@ -84,17 +84,13 @@ endfunc
 " Section: Plugins {{{1
 " ----------------
 
-" Toggle FuzzyFinder
-nnoremap <silent> <F1>   :FufFileWithCurrentBufferDir<CR>
-inoremap <silent> <F1>   <ESC>:FufFileWithCurrentBufferDir<CR>
-nnoremap <silent> <M-F1> :FufFileWithFullCwd<CR>
-inoremap <silent> <M-F1> <ESC>:FufFileWithFullCwd<CR>
-nnoremap <silent> <S-F1> :FufBuffer<CR>
-inoremap <silent> <S-F1> <ESC>:FufBuffer<CR>
-
-" Toggle NERDTree window with F2
-nnoremap <silent> <F2> :NERDTreeToggle<CR>
-inoremap <silent> <F2> <ESC>:NERDTreeToggle<CR>
+" Invoque CtrlP
+nnoremap <silent> <F1> :CtrlP<CR>
+inoremap <silent> <F1> <ESC>:CtrlP<CR>
+nnoremap <silent> <S-F1> :CtrlPBuffer<CR>
+inoremap <silent> <S-F1> <ESC>:CtrlPBuffer<CR>
+nnoremap <silent> <M-F1> :CtrlPRoot<CR>
+inoremap <silent> <M-F1> <ESC>:CtrlPRoot<CR>
 
 " Paste from history with F3
 nnoremap <silent> <F3> :YRShow<CR>

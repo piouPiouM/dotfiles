@@ -2,16 +2,23 @@
 "
 " Plugins settings
 "
-" 1. Command-T
+" 1. CtrlP
 " 2. Gundo
 " 3. Powerline
 " 4. Syntastic
 
-" Section: Command-T {{{1
-" ------------------
+" Section: CtrlP {{{1
+" --------------
 
-let g:CommandTMaxCachedDirectories = 30 " Keep in cache the 30 last scanned directories.
-let g:CommandTMatchWindowReverse   = 1  " Display best match in a fixed location on the screen.
+let g:ctrlp_working_path_mode     = 0  " Disable auto change directory.
+let g:ctrlp_max_height            = 30 " Set the maximum height of the match window.
+let g:ctrlp_follow_symlinks       = 1  " Follow symlinks but ignore internal loops.
+let g:ctrlp_match_window_bottom   = 0  " Show the match window at the bottom of the screen.
+let g:ctrlp_match_window_reversed = 1  " Change the listing order of the files in the match window.
+let g:ctrlp_clear_cache_on_exit   = 0  " Do not delete the cache files upon exiting Vim.
+let g:ctrlp_cache_dir  = '~/.vim/tmp/ctrlp'
+let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
+                        \ 'changes', 'bookmarkdir']
 
 " }}}1
 " Section: Gundo {{{1
@@ -26,7 +33,7 @@ let g:gundo_right          = 1
 
 let g:Powerline_symbols = "fancy"
 function! Do_Powerline_stuff()
-  set noshowmode                            " Turn off showmode
+  set noshowmode                     " Turn off showmode
 endfunction
 call ppm#do_after_plugin("Do_Powerline_stuff", "Powerline")
 

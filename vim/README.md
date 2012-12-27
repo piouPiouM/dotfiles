@@ -19,9 +19,9 @@ Keymaps
 
 | Keymap   | Modes | Action | Dependency |
 |----------|-------|--------|------------|
-| `F1`     | N I   | Launch FuzzyFinder from the directory of the current buffer | FuzzyFinder
-| `⇧F1`    | N I   | Launch FuzzyFinder in Buffer mode | FuzzyFinder
-| `⌥F1`    | N I   | Launch FuzzyFinder in File mode, with full path of the current directory | FuzzyFinder
+| `F2`     | N I   | Launch CtrlP | CtrlP
+| `⇧F2`    | N I   | Launch CtrlP in find buffer | CtrlP
+| `⌥F2`    | N I   | Launch CtrlP from the root path | CtrlP
 
 ### Search / Code navigation
 
