@@ -84,6 +84,10 @@ endfunc
 " Section: Plugins {{{1
 " ----------------
 
+" Launch Ack
+nnoremap <silent> <D-F> :Ack<space>
+inoremap <silent> <D-F> <ESC>:Ack<space>
+
 " Invoque CtrlP
 nnoremap <silent> <F1> :CtrlP<CR>
 inoremap <silent> <F1> <ESC>:CtrlP<CR>

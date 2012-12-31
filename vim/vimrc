@@ -43,6 +43,7 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'kchmck/vim-coffee-script.git'
 Bundle 'tpope/vim-haml'
 Bundle 'roman/golden-ratio'
+Bundle 'mileszs/ack.vim'
 
 " }}}1
 " Section: Basic configuration {{{1

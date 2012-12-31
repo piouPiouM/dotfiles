@@ -30,6 +30,7 @@ Keymaps
 | `⌘*`     | N     | Highlight all occurrences of current word, like `*` but without moving | |
 | `//`     | N     | Cleat out search | |
 | `^Space` | N I   | Omnicomplete | |
+| `⇧⌘f`    | N I   | Find in project | Ack.vim |
 
 ### Movements
 
@@ -52,6 +53,7 @@ Keymaps
 Installed plugins
 -----------------
 
+1. Ack.vim
 1. AfterColors
 1. CoffeScript
 1. ctrlp.vim
@@ -78,7 +80,6 @@ TODO
 
 * Add support for Drupal projects.
 * Install plugins:
-    - Ack.vim
     - Align
     - SnipMate
     - Fugitive
