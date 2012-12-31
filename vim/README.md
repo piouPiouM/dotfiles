@@ -74,6 +74,7 @@ Installed plugins
 1. Vundle
 1. Yankring
 1. hexHighlight
+1. [AutoClose][]
 
 TODO
 ----
@@ -91,4 +92,7 @@ TODO
     - [Easytags](https://github.com/xolox/vim-easytags): automated tag file generation and syntax highlighting of tags
       in Vim.
     - [Threesome](http://stevelosh.com/projects/threesome/): a plugin for resolving conflicts during three-way merges.
+    - [XDebug](https://github.com/vim-scripts/Xdebug) or [DBGPavim](https://github.com/vim-scripts/DBGPavim).
+
+[AutoClose]: https://github.com/Townk/vim-autoclose
 
