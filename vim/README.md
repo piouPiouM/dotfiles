@@ -75,6 +75,7 @@ Installed plugins
 1. Yankring
 1. hexHighlight
 1. [AutoClose][]
+1. [Neocomplcache][]
 
 TODO
 ----
@@ -95,4 +96,4 @@ TODO
     - [XDebug](https://github.com/vim-scripts/Xdebug) or [DBGPavim](https://github.com/vim-scripts/DBGPavim).
 
 [AutoClose]: https://github.com/Townk/vim-autoclose
-
+[Neocomplcache]: https://github.com/vim-scripts/neocomplcache
