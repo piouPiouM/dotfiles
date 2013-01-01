@@ -17,6 +17,17 @@ function! ppm#source(file)
   exe 'source ' . file_to_source
 endfunction
 
+function! ppm#mkdir(dir, flags, ...)
+  let dir = expand(a:dir)
+  if !isdirectory(dir)
+    let permission = 0755
+    if a:0 == 3
+      let permission = a:3
+    endif
+    call mkdir(dir, a:flags, permission)
+  endif
+endfunction
+
 function! ppm#disable_plugin(name, ...)
   return 1
 endfunction
