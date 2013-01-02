@@ -186,6 +186,7 @@ set autoindent       " Always set autoindenting on.
 set copyindent       " Copy the previous indentation on autoindenting.
 set wrap             " Wrap lines.
 set formatoptions+=1 " When wrapping paragraphs, don't end lines with 1-letter words.
+set infercase        " Ignore case on insert completion.
 set textwidth=120
 if executable('par')
   set formatprg=par\ -w120re

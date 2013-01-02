@@ -28,15 +28,18 @@ Keymaps
 | Keymap   | Modes | Action | Dependency |
 |----------|-------|--------|------------|
 | `⌘*`     | N     | Highlight all occurrences of current word, like `*` but without moving | |
-| `//`     | N     | Cleat out search | |
+| `//`     | N     | Clear out search | |
+| `,/`     | N     | Open a Quickfix window for the last search | |
+| `,//`    | N     | Close a Quickfix window | |
 | `^Space` | N I   | Omnicomplete | |
 | `⇧⌘f`    | N I   | Find in project | Ack.vim |
+| `<expr>⇥`  | I     | Complete next suggestion | Neocomplcache |
+| `<expr>⇧⇥` | I     | Complete previous suggestion | Neocomplcache |
 
 ### Movements
 
 | Keymap   | Modes | Action | Dependency |
 |----------|-------|--------|------------|
-| `,.`     | N     | Go to last edit location | |
 | `⌃↑`     | N   V | Bubbling text to up   | Unimpaired
 | `⌃↓`     | N   V | Bubbling text to down | Unimpaired
 

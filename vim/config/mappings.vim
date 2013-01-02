@@ -21,11 +21,8 @@ nnoremap <D-"> ci"
 inoremap <D-'> <ESC>ci'
 inoremap <D-"> <ESC>ci"
 
-" Go to last edit location with ,.
-nnoremap <leader>. '.
-
-"When typing a string, your quotes auto complete. Move past the quote
-"while still in insert mode by hitting Ctrl-a. Example:
+" When typing a string, your quotes auto complete. Move past the quote
+" while still in insert mode by hitting Ctrl-a. Example:
 "
 " type 'foo<c-a>
 "
@@ -51,8 +48,11 @@ cmap w!! %!sudo tee % >/dev/null
 " Clear out search with //
 nnoremap <silent> // :nohlsearch<cr>
 
-" Open a Quickfix window for the last search.
+" Open a Quickfix window for the last search with <leader>/
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+
+" Close the Quickfix window with <leader>//
+nnoremap <Leader>// :cclose<CR>
 
 " Cmd-* for highlight all occurrences of current word (like '*' but without moving)
 " http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches
@@ -103,6 +103,18 @@ inoremap <silent> <F3> <ESC>:YRShow<CR>
 " Toggle Gundo window with Cmd-u
 nnoremap <D-u> :GundoToggle<CR>
 
+" Neocomplcache {{{2
+" <TAB>: completion.
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" <C-e>: close popup.
+inoremap <expr><C-e> pumvisible() ? neocomplcache#cancel_popup() : "\<End>"
+" <C-h>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+" <C-n>: neocomplcache.
+inoremap <expr><C-n> pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>\<Down>"
+
+" }}}2
 " }}}1
 " Section: Dependent plugins {{{1
 " --------------------------
