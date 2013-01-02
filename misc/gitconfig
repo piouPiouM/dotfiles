@@ -3,7 +3,7 @@
 	diff = auto
 	branch = auto
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = ~/.gitignore
 	editor = mate -w
 [alias]
 	amend = commit --amend
