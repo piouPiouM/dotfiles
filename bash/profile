@@ -1,4 +1,1 @@
-export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:`brew --prefix php`/bin:$PATH
-# MacPorts Installer addition on 2011-02-24_at_00:35:10: adding an appropriate PATH variable for use with MacPorts.
-# export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/apache2/bin:$PATH
-# Finished adapting your PATH environment variable for use with MacPorts.
+export PATH=/usr/local/bin:$PATH
