@@ -79,6 +79,7 @@ Installed plugins
 1. hexHighlight
 1. [AutoClose][]
 1. [Neocomplcache][]
+1. [matchit.vim][matchit]
 
 TODO
 ----
@@ -100,3 +101,4 @@ TODO
 
 [AutoClose]: https://github.com/Townk/vim-autoclose
 [Neocomplcache]: https://github.com/vim-scripts/neocomplcache
+[matchit]: https://github.com/vim-scripts/matchit.zip
