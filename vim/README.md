@@ -52,6 +52,8 @@ Keymaps
 | `⌘'`     | N I   | Change inside simple quotes | |
 | `⌘"`     | N I   | Change inside double quotes | |
 | `^a`     |   I   | Jump after autocompleted quote | |
+| `,a=`    | N   V | Align to equals signs | Tabular |
+| `,a:`    | N   V | Align after the colons | Tabular |
 
 Installed plugins
 -----------------
@@ -73,6 +75,7 @@ Installed plugins
 1. Surround
 1. Syntastic
 1. Tagbar
+1. [Tabular][]
 1. Unimpaired
 1. Vundle
 1. Yankring
@@ -102,3 +105,5 @@ TODO
 [AutoClose]: https://github.com/Townk/vim-autoclose
 [Neocomplcache]: https://github.com/vim-scripts/neocomplcache
 [matchit]: https://github.com/vim-scripts/matchit.zip
+[Tabular]: https://github.com/godlygeek/tabular
+

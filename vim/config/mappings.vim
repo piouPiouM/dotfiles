@@ -130,5 +130,14 @@ function! Custom_mapping_unimpaired()
 endfunction
 call ppm#do_after_plugin("Custom_mapping_unimpaired", "unimpaired")
 
+" Requirements: Tabular plugin.
+function! Custom_mapping_tabular()
+  nmap <leader>a= :Tabularize /=<CR>
+  vmap <leader>a= :Tabularize /=<CR>
+  nmap <leader>a: :Tabularize /:\zs<CR>
+  vmap <leader>a: :Tabularize /:\zs<CR>
+endfunction
+call ppm#do_after_plugin("Custom_mapping_tabular", "tabular")
+
 " }}}1
 

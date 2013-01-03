@@ -48,6 +48,7 @@ Bundle 'tpope/vim-haml'
 Bundle 'roman/golden-ratio'
 Bundle 'mileszs/ack.vim'
 Bundle 'Townk/vim-autoclose'
+Bundle 'godlygeek/tabular'
 
 " }}}2
 " Colorscheme bundles {{{2
