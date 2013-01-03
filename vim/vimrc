@@ -23,7 +23,8 @@ call vundle#rc()
 " required! 
 Bundle 'gmarik/vundle'
 
-" My bundles
+" My bundles {{{2
+
 Bundle 'AfterColors.vim'
 Bundle 'Gundo'
 Bundle 'L9'
@@ -48,6 +49,13 @@ Bundle 'roman/golden-ratio'
 Bundle 'mileszs/ack.vim'
 Bundle 'Townk/vim-autoclose'
 
+" }}}2
+" Colorscheme bundles {{{2
+
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'chriskempson/vim-tomorrow-theme'
+
+" }}}2
 " }}}1
 " Section: Basic configuration {{{1
 " ----------------------------
