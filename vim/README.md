@@ -19,9 +19,10 @@ Keymaps
 
 | Keymap   | Modes | Action | Dependency |
 |----------|-------|--------|------------|
-| `F2`     | N I   | Launch CtrlP | CtrlP
-| `⇧F2`    | N I   | Launch CtrlP in find buffer | CtrlP
-| `⌥F2`    | N I   | Launch CtrlP from the root path | CtrlP
+| `F1`     | N I   | Launch CtrlP | CtrlP
+| `⇧F1`    | N I   | Launch CtrlP in find buffer | CtrlP
+| `⌥F1`    | N I   | Launch CtrlP in the current file directory | CtrlP
+| `,F1`    | N I   | Launch CtrlP in MRU mode | CtrlP
 
 ### Search / Code navigation
 

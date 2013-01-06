@@ -93,8 +93,10 @@ nnoremap <silent> <F1> :CtrlP<CR>
 inoremap <silent> <F1> <ESC>:CtrlP<CR>
 nnoremap <silent> <S-F1> :CtrlPBuffer<CR>
 inoremap <silent> <S-F1> <ESC>:CtrlPBuffer<CR>
-nnoremap <silent> <M-F1> :CtrlPRoot<CR>
-inoremap <silent> <M-F1> <ESC>:CtrlPRoot<CR>
+nnoremap <silent> <M-F1> :CtrlPCurFile<CR>
+inoremap <silent> <M-F1> <ESC>:CtrlCurFile<CR>
+nnoremap <silent> <leader><F1> :CtrlPMRU<CR>
+inoremap <silent> <leader><F1> <ESC>:CtrlPMRU<CR>
 
 " Paste from history with F3
 nnoremap <silent> <F3> :YRShow<CR>

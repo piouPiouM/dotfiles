@@ -8,6 +8,9 @@ endif
 augroup enter_cmd
   autocmd!
   autocmd VimEnter * call ppm#exe_vimenter()
+
+  " Set CtrlP window to fit the screen.
+  autocmd VimEnter,VimResized * let g:ctrlp_max_height = &lines
 augroup END
 
 " Highlight cursorline ONLY in the active window
