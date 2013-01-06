@@ -152,8 +152,9 @@ set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.spl                            " compiled spelling word lists
 set wildignore+=*.sw?                            " Vim swap files
 set wildignore+=*.sassc,*.scssc,.sass-cache      " Sass cache files
-set wildignore+=.svn,.git                        " SCM stuff
+set wildignore+=.svn,.git,.gitkeep               " SCM stuff
 set wildignore+=.DS_Store                        " OSX bullshit
+set wildignore+=tags                             " ctags stuff
 
 " }}}2
 " Statusline {{{2
