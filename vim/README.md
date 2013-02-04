@@ -23,6 +23,7 @@ Keymaps
 | `⇧F1`    | N I   | Launch CtrlP in find buffer | CtrlP
 | `⌥F1`    | N I   | Launch CtrlP in the current file directory | CtrlP
 | `,F1`    | N I   | Launch CtrlP in MRU mode | CtrlP
+| `^⇧F1`   | N I   | Launch CtrlP in bookmark dir mode | CtrlP
 
 ### Search / Code navigation
 

@@ -97,6 +97,8 @@ nnoremap <silent> <M-F1> :CtrlPCurFile<CR>
 inoremap <silent> <M-F1> <ESC>:CtrlCurFile<CR>
 nnoremap <silent> <leader><F1> :CtrlPMRU<CR>
 inoremap <silent> <leader><F1> <ESC>:CtrlPMRU<CR>
+nnoremap <silent> <S-C-F1> :CtrlPBookmarkDir<CR>
+inoremap <silent> <S-C-F1> <ESC>:CtrlPBookmarkDir<CR>
 
 " Paste from history with F3
 nnoremap <silent> <F3> :YRShow<CR>
