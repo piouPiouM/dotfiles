@@ -41,7 +41,8 @@ Bundle 'Tagbar'
 Bundle 'unimpaired.vim'
 Bundle 'YankRing.vim'
 Bundle 'hexHighlight.vim'
-Bundle 'neocomplcache'
+Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/neosnippet'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kchmck/vim-coffee-script.git'
 Bundle 'tpope/vim-haml'
@@ -49,6 +50,7 @@ Bundle 'roman/golden-ratio'
 Bundle 'mileszs/ack.vim'
 Bundle 'Townk/vim-autoclose'
 Bundle 'godlygeek/tabular'
+Bundle 'honza/snipmate-snippets'
 
 " }}}2
 " Colorscheme bundles {{{2
