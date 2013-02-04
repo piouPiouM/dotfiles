@@ -80,7 +80,11 @@ augroup END
 " Section: XML {{{1
 " ------------
 
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup ft_xml
+  autocmd!
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+augroup END
 
 " }}}1
 
