@@ -71,6 +71,7 @@ let g:syntastic_quiet_warnings  = 0
 let g:syntastic_loc_list_height = 5
 let g:syntastic_mode_map        = { 'mode': 'active',
                                   \ 'passive_filetypes': ['sass', 'scss', 'html'] }
+let g:syntastic_phpcs_disable = 1
 
 " }}}1
 " Section: YankRing {{{1
