@@ -212,7 +212,7 @@ call ppm#source('config/commands.vim')
 call ppm#source('config/autocommands.vim')
 call ppm#source('config/filetypes.vim')
 
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
+if filereadable(expand("~/.local.vimrc"))
+  source ~/.local.vimrc
 endif
 
