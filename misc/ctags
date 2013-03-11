@@ -1,0 +1,12 @@
+--languages=PHP
+-h ".php"
+--langmap=PHP:.inc.php.module.engine.install.test
+--PHP-kinds=cdfi
+--recurse=yes
+--tag-relative=yes
+--exclude=*/cache/*
+--exclude=*/logs/*
+--exclude=*/data/*
+--exclude="\.git"
+--exclude="\.svn"
+--fields=+l
