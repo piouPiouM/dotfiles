@@ -35,6 +35,9 @@ alias sha1sum="openssl dgst -sha1"
 # alias mysql=mysql5
 # alias mysqladmin=mysqladmin5
 alias inimaquette='mkdir -p dist/{inc,modules,www/{css,files,img,js}} src/{img,js,scss/partials} && touch dist/www/index.php'
+if type -p adb >/dev/null; then
+  alias nexus4db='adb forward tcp:9222 localabstract:chrome_devtools_remote'
+fi
 
 # Accès rapide
 alias www="cd /var/www/"
