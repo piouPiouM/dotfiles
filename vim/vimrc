@@ -53,6 +53,7 @@ Bundle 'mileszs/ack.vim'
 Bundle 'Townk/vim-autoclose'
 Bundle 'godlygeek/tabular'
 Bundle 'honza/snipmate-snippets'
+Bundle 'skammer/vim-css-color'
 
 " }}}2
 " Colorscheme bundles {{{2
