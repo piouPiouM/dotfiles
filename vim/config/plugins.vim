@@ -8,6 +8,7 @@
 " 4. Powerline
 " 5. Syntastic
 " 6. YankRing
+" 7. vim-color-css
 
 " Section: CtrlP {{{1
 " --------------
@@ -78,6 +79,12 @@ let g:syntastic_phpcs_disable = 1
 " -----------------
 
 let g:yankring_history_dir = '~/.vim/tmp'
+
+" }}}1
+" Section: vim-color-css {{{1
+" -----------------
+
+let g:cssColorVimDoNotMessMyUpdatetime = 1
 
 " }}}1
 
