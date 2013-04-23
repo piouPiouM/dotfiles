@@ -85,6 +85,7 @@ Installed plugins
 1. [AutoClose][]
 1. [Neocomplcache][]
 1. [matchit.vim][matchit]
+1. [ZenCoding-vim][zencoding]
 
 TODO
 ----
@@ -108,4 +109,5 @@ TODO
 [Neocomplcache]: https://github.com/vim-scripts/neocomplcache
 [matchit]: https://github.com/vim-scripts/matchit.zip
 [Tabular]: https://github.com/godlygeek/tabular
+[zencoding]: https://github.com/mattn/zencoding-vim
 

@@ -54,6 +54,7 @@ Bundle 'Townk/vim-autoclose'
 Bundle 'godlygeek/tabular'
 Bundle 'honza/snipmate-snippets'
 Bundle 'ap/vim-css-color'
+Bundle 'mattn/zencoding-vim'
 
 " }}}2
 " Colorscheme bundles {{{2
