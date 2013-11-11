@@ -44,6 +44,7 @@ augroup END
 
 augroup ft_markdown
   autocmd!
+  autocmd BufRead,BufNewFile *.md,*.mdown,*.markdown setlocal filetype=markdown
   autocmd FileType markdown setlocal wrap linebreak
   autocmd FileType markdown setlocal tabstop=4 shiftwidth=4 softtabstop=4
   autocmd FileType markdown setlocal textwidth=120
