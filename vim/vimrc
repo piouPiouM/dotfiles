@@ -55,6 +55,7 @@ Bundle 'godlygeek/tabular'
 Bundle 'honza/snipmate-snippets'
 Bundle 'ap/vim-css-color'
 Bundle 'mattn/zencoding-vim'
+Bundle 'terryma/vim-multiple-cursors'
 
 " }}}2
 " Colorscheme bundles {{{2
