@@ -5,7 +5,7 @@
 --group
 
 # Ignore Sass cache directory
---ignore-dir=.sass-cache
+--ignore-dir=.sass-cache,.vendor,.vendors,.bundle
 
 # Define Sass and SCSS types
 --type-set=sass=.sass,.scss
