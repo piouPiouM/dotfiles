@@ -1,5 +1,6 @@
 # export MANPATH=/opt/local/share/man:$MANPATH
 export LC_CTYPE=fr_FR.UTF-8
+export LC_ALL=fr_FR.UTF-8
 export NODE_PATH=/usr/local/lib/node_modules
 
 export EDITOR='mate -w'
@@ -9,11 +10,6 @@ export USER_BASH_COMPLETION_DIR=~/.bash_completion.d
 if [ -f `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion
 fi
-# if [ -f /opt/local/etc/bash_completion ]; then
-#     . /opt/local/etc/bash_completion
-# fi
-
-export PHP_PHOTON=~/Code/vendors/ceondo/photon/src/photon.php
 
 # Alias fonctionnels
 alias ls="ls -GF"
