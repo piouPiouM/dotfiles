@@ -3,8 +3,8 @@
 	diff = auto
 	branch = auto
 [core]
-	excludesfile = ~/.gitignore
-	editor = mate -w
+	excludesfile = ~/.gitignore_global
+	editor = vim
 [alias]
 	amend = commit --amend
 	st = status
