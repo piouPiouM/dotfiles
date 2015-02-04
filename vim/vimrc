@@ -56,6 +56,8 @@ Bundle 'honza/snipmate-snippets'
 Bundle 'ap/vim-css-color'
 Bundle 'mattn/zencoding-vim'
 Bundle 'terryma/vim-multiple-cursors'
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'
 Bundle 'StanAngeloff/php.vim'
 
 " }}}2
