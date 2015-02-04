@@ -11,4 +11,4 @@
 --type-set=sass=.sass,.scss
 
 # Drupal stuff
---type-add=php=.module,.inc
+--type-add=php=.module,.inc,.install
