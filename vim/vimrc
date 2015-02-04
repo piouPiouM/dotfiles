@@ -60,6 +60,7 @@ Bundle 'rizzatti/dash.vim'
 Bundle 'StanAngeloff/php.vim'
 Bundle "mattn/emmet-vim"
 Bundle "dharanasoft/rtf-highlight"
+Bundle 'mustache/vim-mustache-handlebars'
 
 " }}}2
 " Colorscheme bundles {{{2
