@@ -27,6 +27,7 @@ alias vim="mvim -v"
 alias bashrc="mate -aw $HOME/.bashrc && source $HOME/.bash_profile"
 alias grep='GREP_COLOR="1;37;41" LANG=C grep --color=auto'
 alias sha1sum="openssl dgst -sha1"
+alias drushcc="for i in {1..3}; do drush cc all; done"
 # alias actl="sudo /opt/local/apache2/bin/apachectl"
 # alias mysql=mysql5
 # alias mysqladmin=mysqladmin5
