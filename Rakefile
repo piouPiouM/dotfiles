@@ -47,7 +47,7 @@ def install_homebrew
     case $stdin.gets.chomp
     when "y"
       puts "> Installing Homebrew"
-      system %Q{ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"}
+      system %Q{ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"}
       system %Q{brew doctor}
     when "q"
       exit
