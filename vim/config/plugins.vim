@@ -9,6 +9,7 @@
 " 5. Syntastic
 " 6. YankRing
 " 7. vim-color-css
+" 8. php.vim (syntax)
 
 " Section: CtrlP {{{1
 " --------------
@@ -82,9 +83,21 @@ let g:yankring_history_dir = '~/.vim/tmp'
 
 " }}}1
 " Section: vim-color-css {{{1
-" -----------------
+" ----------------------
 
 let g:cssColorVimDoNotMessMyUpdatetime = 1
+
+" }}}1
+" Section: php.vim (syntax) {{{1
+" -------------------------
+
+let php_sql_query          = 0
+let php_html_in_strings    = 1
+let php_parent_error_close = 1
+let php_parent_error_open  = 1
+let php_no_shorttags       = 1
+let php_folding            = 1
+let php_sync_method        = -1
 
 " }}}1
 
