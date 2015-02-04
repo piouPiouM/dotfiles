@@ -59,6 +59,7 @@ Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
 Bundle 'StanAngeloff/php.vim'
 Bundle "mattn/emmet-vim"
+Bundle "dharanasoft/rtf-highlight"
 
 " }}}2
 " Colorscheme bundles {{{2
