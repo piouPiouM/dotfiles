@@ -35,8 +35,8 @@ inoremap <C-a> <ESC>wa
 nnoremap <silent> <leader>f <C-]>
 
 " Create window splits easier.
-nnoremap <silent> vv <C-w>v
-nnoremap <silent> ss <C-w>s
+nnoremap <silent> <leader>vv <C-w>v
+nnoremap <silent> <leader>ss <C-w>s
 
 " }}}1
 " Section: Everyday tasks {{{1

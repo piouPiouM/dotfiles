@@ -11,8 +11,8 @@ Keymaps
 
 | Keymap   | Modes | Action | Dependency |
 |----------|-------|--------|------------|
-| `ss`     | N     | Split window horizontally | |
-| `vv`     | N     | Split window vertically   | |
+| `,ss`    | N     | Split window horizontally | |
+| `,vv`    | N     | Split window vertically   | |
 | `,g`     | N     | Call Golden Ratio resize command | Golden Ratio |
 
 ### File navigation
