@@ -59,6 +59,7 @@ Bundle 'terryma/vim-multiple-cursors'
 Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
 Bundle 'StanAngeloff/php.vim'
+Bundle "mattn/emmet-vim"
 
 " }}}2
 " Colorscheme bundles {{{2
