@@ -8,8 +8,9 @@
 " Section: Basic configuration {{{1
 " ----------------------------
 
-"color twilight_pioupioum
-silent! set transparency=3 " Make my coding sessions more fun
+color solarized
+set background=light
+silent! set transparency=1 " Make my coding sessions more fun
 
 if has("autocmd")
   autocmd! bufwritepost .gvimrc source $MYGVIMRC
