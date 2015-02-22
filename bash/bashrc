@@ -153,6 +153,7 @@ _prompt()
     _fn_exists '__git_ps1'
     if [ $? -eq 0 ]; then
         export GIT_PS1_SHOWDIRTYSTATE=1 GIT_PS1_SHOWSTASHSTATE=1 GIT_PS1_SHOWUNTRACKEDFILES=1
+        export GIT_PS1_SHOWUPSTREAM=verbose GIT_PS1_DESCRIBE_STYLE=branch
         G="\$(__git_ps1 \"${UPURPLE}%s${NORMAL}:\")"
     else
         G=''
