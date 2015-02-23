@@ -21,8 +21,6 @@
 	mate = !git-ls-files -m -z | xargs -0 mate
 	mateall = !git-ls-files -m -o --exclude-standard -z | xargs -0 mate
 	undo = git reset --soft HEAD^
-[user]
-	name = Mehdi Kabab
 [push]
 	default = upstream
 [credential]
