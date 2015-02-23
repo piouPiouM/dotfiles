@@ -5,22 +5,25 @@
 	editor = vim
 	whitespace = -trailing-space
 [alias]
-	amend = commit --amend
+	ci = commit
 	st = status
+	amend = commit --amend
 	who = shortlog -sne
+  lg = log --graph --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'
 	oneline = log --pretty=oneline --abbrev-commit --graph --decorate
 	changes = diff --name-status
 	dic = diff --cached
 	diffstat = diff --stat
 	svnpull = svn rebase
 	svnpush = svn dcommit
-	lc = !git oneline ORIG_HEAD.. --stat --no-merges
+	lc = !git lg @{u}..
 	addm = !git-ls-files -m -z | xargs -0 git-add && git status
 	addu = !git-ls-files -o --exclude-standard -z | xargs -0 git-add && git status
 	rmm = !git ls-files -d -z | xargs -0 git-rm && git status
 	mate = !git-ls-files -m -z | xargs -0 mate
 	mateall = !git-ls-files -m -o --exclude-standard -z | xargs -0 mate
 	undo = git reset --soft HEAD^
+	oops = commit --amend --no-edit
 [push]
 	default = upstream
 [credential]
