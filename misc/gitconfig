@@ -1,10 +1,9 @@
 [color]
-	status = auto
-	diff = auto
-	branch = auto
+	ui = auto
 [core]
 	excludesfile = ~/.gitignore_global
 	editor = vim
+	whitespace = -trailing-space
 [alias]
 	amend = commit --amend
 	st = status
@@ -24,12 +23,33 @@
 	undo = git reset --soft HEAD^
 [user]
 	name = Mehdi Kabab
-[include]
-	path = ~/.local.gitconfig
 [push]
-	default = simple
+	default = upstream
 [credential]
 	helper = osxkeychain
 [rerere]
 	enabled = true
 	autoupdate = true
+[status]
+	submoduleSummary = true
+	showUntrackedFiles = all
+[diff]
+	submodule = log
+	wordRegex = .
+	mnemonicPrefix = true
+[mergetool]
+  keepBackup = false
+  keepTemporaries = false
+  prompt = false
+[fetch]
+	recurseSubmodules = on-demand
+[pull]
+	rebase = preserve
+[merge]
+	conflictStyle = diff3
+[grep]
+	extendedRegexp = true
+[log]
+	abbrevCommit = true
+[include]
+	path = ~/.local.gitconfig
