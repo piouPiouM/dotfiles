@@ -21,52 +21,52 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " My bundles {{{2
 
-Bundle 'AfterColors.vim'
-Bundle 'Gundo'
-Bundle 'L9'
-Bundle 'ctrlp.vim'
-Bundle 'EasyMotion'
-Bundle 'Gist.vim'
-Bundle 'matchit.zip'
-Bundle 'The-NERD-Commenter'
-Bundle 'phpcomplete.vim'
-Bundle 'repeat.vim'
-Bundle 'surround.vim'
-Bundle 'Syntastic'
-Bundle 'Tagbar'
-Bundle 'unimpaired.vim'
-Bundle 'YankRing.vim'
-Bundle 'hexHighlight.vim'
-Bundle 'vim-signature'
-Bundle 'tracwiki'
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/neosnippet'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'kchmck/vim-coffee-script.git'
-Bundle 'tpope/vim-haml'
-"Bundle 'roman/golden-ratio'
-Bundle 'mileszs/ack.vim'
-Bundle 'Townk/vim-autoclose'
-Bundle 'godlygeek/tabular'
-Bundle 'ap/vim-css-color'
-Bundle 'mattn/zencoding-vim'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'rizzatti/funcoo.vim'
-Bundle 'rizzatti/dash.vim'
-Bundle 'StanAngeloff/php.vim'
-Bundle "mattn/emmet-vim"
-Bundle "dharanasoft/rtf-highlight"
-Bundle 'mustache/vim-mustache-handlebars'
+Plugin 'AfterColors.vim'
+Plugin 'Gundo'
+Plugin 'L9'
+Plugin 'ctrlp.vim'
+Plugin 'EasyMotion'
+Plugin 'Gist.vim'
+Plugin 'matchit.zip'
+Plugin 'The-NERD-Commenter'
+Plugin 'phpcomplete.vim'
+Plugin 'repeat.vim'
+Plugin 'surround.vim'
+Plugin 'Syntastic'
+Plugin 'Tagbar'
+Plugin 'unimpaired.vim'
+Plugin 'YankRing.vim'
+Plugin 'hexHighlight.vim'
+Plugin 'vim-signature'
+Plugin 'tracwiki'
+Plugin 'Shougo/neocomplcache'
+Plugin 'Shougo/neosnippet'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'kchmck/vim-coffee-script.git'
+Plugin 'tpope/vim-haml'
+"Plugin 'roman/golden-ratio'
+Plugin 'mileszs/ack.vim'
+Plugin 'Townk/vim-autoclose'
+Plugin 'godlygeek/tabular'
+Plugin 'ap/vim-css-color'
+Plugin 'mattn/zencoding-vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'rizzatti/funcoo.vim'
+Plugin 'rizzatti/dash.vim'
+Plugin 'StanAngeloff/php.vim'
+Plugin "mattn/emmet-vim"
+Plugin "dharanasoft/rtf-highlight"
+Plugin 'mustache/vim-mustache-handlebars'
 
 " }}}2
 " Colorscheme bundles {{{2
 
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'chriskempson/vim-tomorrow-theme'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'chriskempson/vim-tomorrow-theme'
 
 " }}}2
 " }}}1
