@@ -3,4 +3,4 @@ backup/
 vim/.netrwhist
 vim/tmp
 vim/bundle/*
-!vim/bundle/vundle
+!vim/bundle/Vundle.vim
