@@ -28,6 +28,9 @@ let g:ctrlp_mruf_max              = 250 " The number of recently opened files to
 let g:ctrlp_mruf_relative         = 1   " Show only MRU files in the current working directory.
 let g:ctrlp_cache_dir             = '~/.vim/tmp/ctrlp'
 let g:ctrlp_extensions            = ['line', 'tag', 'bookmarkdir']
+let g:ctrlp_custom_ignore         = {
+  \ 'dir':  '\v[\/](node_modules)$',
+  \ }
 
 " }}}1
 " Section: Gundo {{{1
