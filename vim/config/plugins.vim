@@ -9,6 +9,7 @@
 " 5. YankRing
 " 6. vim-color-css
 " 7. php.vim (syntax)
+" 8. Mustache and Handlebars mode
 
 " Section: CtrlP {{{1
 " --------------
@@ -115,4 +116,9 @@ let php_folding            = 1
 let php_sync_method        = -1
 
 " }}}1
+" Section: Mustache and Handlebars mode {{{1
+" -------------------------------------
 
+let g:mustache_abbreviations = 1
+
+" }}}1
