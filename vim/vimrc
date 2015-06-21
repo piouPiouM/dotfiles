@@ -1,7 +1,7 @@
 " .vimrc
 " Author: Mehdi Kabab <http://pioupioum.fr>
 " Source: http://github.com/piouPiouM/dotfiles/
-" 
+"
 " 1. Preamble
 " 2. Basic configuration
 " 3. UI options
@@ -47,7 +47,6 @@ Plugin 'vim-signature'
 Plugin 'tracwiki'
 Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/neosnippet.vim'
-Plugin 'Lokaltog/vim-powerline'
 Plugin 'kchmck/vim-coffee-script.git'
 Plugin 'tpope/vim-haml'
 "Plugin 'roman/golden-ratio'
@@ -62,6 +61,7 @@ Plugin 'rizzatti/dash.vim'
 Plugin 'StanAngeloff/php.vim'
 Plugin 'dharanasoft/rtf-highlight'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'bling/vim-airline'
 
 " }}}2
 " Colorscheme bundles {{{2
@@ -133,7 +133,7 @@ set relativenumber         " Always show line numbers, with relative position.
 set background=dark        " I like black color schemes.
 set cursorline             " Highlight current line.
 set scrolloff=3            " Provide some context when editing.
-set guifont=Menlo-RegularForPowerline:h11 " Use the Powerline specific font
+set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h12 " Use the Powerline specific font
 color Tomorrow-Night
 
 if has('cmdline_info')

@@ -5,11 +5,10 @@
 " 1. CtrlP
 " 2. Gundo
 " 3. Neocomplcache
-" 4. Powerline
-" 5. Syntastic
-" 6. YankRing
-" 7. vim-color-css
-" 8. php.vim (syntax)
+" 4. Syntastic
+" 5. YankRing
+" 6. vim-color-css
+" 7. php.vim (syntax)
 
 " Section: CtrlP {{{1
 " --------------
@@ -52,14 +51,27 @@ let g:neocomplcache_enable_underbar_completion   = 1
 let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
 
 " }}}1
-" Section: Powerline {{{1
+" Section: Airline {{{1
 " ------------------
 
-let g:Powerline_symbols = "fancy"
-function! Do_Powerline_stuff()
-  set noshowmode                     " Turn off showmode
-endfunction
-call ppm#do_after_plugin("Do_Powerline_stuff", "Powerline")
+let g:airline_powerline_fonts=1
+let g:airline_detect_paste=1
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#whitespace#trailing_format = '¬[%s]'
+let g:airline#extensions#whitespace#mixed_indent_format = '▸[%s]'
+let g:airline_mode_map = {
+  \ '__' : '-',
+  \ 'n'  : 'N',
+  \ 'i'  : 'I',
+  \ 'R'  : 'R',
+  \ 'c'  : 'C',
+  \ 'v'  : 'V',
+  \ 'V'  : 'V',
+  \ '' : 'V',
+  \ 's'  : 'S',
+  \ 'S'  : 'S',
+  \ '' : 'S',
+  \ }
 
 " }}}1
 " Section: Syntastic {{{1
