@@ -10,6 +10,7 @@
 " 6. vim-color-css
 " 7. php.vim (syntax)
 " 8. Mustache and Handlebars mode
+" 9. Vim Markdown
 
 " Section: CtrlP {{{1
 " --------------
@@ -120,5 +121,12 @@ let php_sync_method        = -1
 " -------------------------------------
 
 let g:mustache_abbreviations = 1
+
+" }}}1
+" Section: Vim Markdown {{{1
+" ---------------------
+
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_frontmatter      = 1 " Highlight YAML frontmatter
 
 " }}}1

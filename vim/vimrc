@@ -61,6 +61,7 @@ Plugin 'rizzatti/dash.vim'
 Plugin 'StanAngeloff/php.vim'
 Plugin 'dharanasoft/rtf-highlight'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'bling/vim-airline'
 
 " }}}2
