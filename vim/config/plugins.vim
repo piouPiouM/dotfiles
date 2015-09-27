@@ -2,13 +2,14 @@
 "
 " Plugins settings
 "
-" 1. CtrlP
-" 4. Syntastic
-" 5. YankRing
-" 6. vim-color-css
-" 7. php.vim (syntax)
-" 8. Mustache and Handlebars mode
-" 9. Vim Markdown
+"  1. CtrlP
+"  2. Syntastic
+"  3. YankRing
+"  4. vim-color-css
+"  5. php.vim (syntax)
+"  6. Mustache and Handlebars mode
+"  7. Vim Markdown
+"  8. vim-expand-region
 
 " Section: CtrlP {{{1
 " --------------
@@ -105,5 +106,25 @@ let g:mustache_abbreviations = 1
 
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_frontmatter      = 1 " Highlight YAML frontmatter
+
+" }}}1
+" Section: vim-expand-region {{{1
+" --------------------------
+
+let g:expand_region_text_objects = {
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :1,
+      \ 'i''' :1,
+      \ 'i]'  :1,
+      \ 'ib'  :1,
+      \ 'iB'  :1,
+      \ 'ip'  :0,
+      \ 'a"'  :1,
+      \ 'a''' :1,
+      \ 'a]'  :1,
+      \ 'ab'  :0,
+      \ 'aB'  :0
+      \ }
 
 " }}}1
