@@ -40,7 +40,7 @@ augroup END
 " http://vimcasts.org/e/24
 augroup reload_config
   if has("gui_running")
-    autocmd! bufwritepost .vimrc source $MYVIMRC
+    autocmd! bufwritepost .vimrc source $MYVIMRC | source $MYGVIMRC
     autocmd! bufwritepost .gvimrc source $MYGVIMRC
   else
     autocmd! bufwritepost .vimrc source $MYVIMRC
