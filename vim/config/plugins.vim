@@ -10,6 +10,7 @@
 "  6. Mustache and Handlebars mode
 "  7. Vim Markdown
 "  8. vim-expand-region
+"  9. vim-signify
 
 " Section: CtrlP {{{1
 " --------------
@@ -128,3 +129,10 @@ let g:expand_region_text_objects = {
       \ }
 
 " }}}1
+" Section: vim-signify {{{
+" --------------------
+
+let g:signify_vcs_list    = [ 'git', 'svn' ]
+let g:signify_sign_change = '~'
+
+" }}}

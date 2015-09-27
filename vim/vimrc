@@ -63,6 +63,7 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vasconcelloslf/vim-interestingwords'
 Plugin 'terryma/vim-expand-region'
 Plugin 'mbbill/undotree'
+Plugin 'mhinz/vim-signify'
 
 " }}}2
 " Colorscheme bundles {{{2
