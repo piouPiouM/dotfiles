@@ -62,7 +62,7 @@ def initialize_homebrew
   puts "> Updating Homebrew"
   system %Q{brew update && brew tap homebrew/dupes}
   puts "> Installing environment"
-  system %Q{brew install bash-completion wget tree ack ctags}
+  system %Q{brew install bash-completion wget tree ack ctags par trash}
 end
 
 def command?(command)
