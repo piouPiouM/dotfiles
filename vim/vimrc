@@ -64,6 +64,7 @@ Plugin 'vasconcelloslf/vim-interestingwords'
 Plugin 'terryma/vim-expand-region'
 Plugin 'mbbill/undotree'
 Plugin 'mhinz/vim-signify'
+Plugin 'ntpeters/vim-better-whitespace'
 
 " }}}2
 " Colorscheme bundles {{{2
