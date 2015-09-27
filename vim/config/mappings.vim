@@ -104,9 +104,8 @@ inoremap <silent> <S-C-F1> <ESC>:CtrlPBookmarkDir<CR>
 nnoremap <silent> <F3> :YRShow<CR>
 inoremap <silent> <F3> <ESC>:YRShow<CR>
 
-" Toggle Gundo window with Cmd-u
-nnoremap <D-u> :GundoToggle<CR>
-
+" Toggle Undotree window with Cmd-u
+nnoremap <D-u> :UndotreeToggle<CR>
 
 " }}}1
 " Section: Dependent plugins {{{1

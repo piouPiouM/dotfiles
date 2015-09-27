@@ -28,7 +28,6 @@ Plugin 'gmarik/Vundle.vim'
 " My bundles {{{2
 
 Plugin 'AfterColors.vim'
-Plugin 'Gundo'
 Plugin 'L9'
 Plugin 'ctrlp.vim'
 Plugin 'EasyMotion'
@@ -61,6 +60,7 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'bling/vim-airline'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'mbbill/undotree'
 
 " }}}2
 " Colorscheme bundles {{{2

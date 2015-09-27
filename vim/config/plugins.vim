@@ -3,7 +3,6 @@
 " Plugins settings
 "
 " 1. CtrlP
-" 2. Gundo
 " 4. Syntastic
 " 5. YankRing
 " 6. vim-color-css
@@ -32,13 +31,6 @@ let g:ctrlp_extensions            = ['line', 'tag', 'bookmarkdir']
 let g:ctrlp_custom_ignore         = {
   \ 'dir':  '\v[\/](node_modules)$',
   \ }
-
-" }}}1
-" Section: Gundo {{{1
-" --------------
-
-let g:gundo_preview_height = 40
-let g:gundo_right          = 1
 
 " }}}1
 " Section: Airline {{{1
