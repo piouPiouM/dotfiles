@@ -107,31 +107,7 @@ inoremap <silent> <F3> <ESC>:YRShow<CR>
 " Toggle Gundo window with Cmd-u
 nnoremap <D-u> :GundoToggle<CR>
 
-" Neocomplcache, Neosnippet {{{2
 
-imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-smap <C-k>     <Plug>(neocomplcache_snippets_expand)
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
-" <TAB>: completion.
-"inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-" <C-e>: close popup.
-inoremap <expr><C-e> pumvisible() ? neocomplcache#cancel_popup() : "\<End>"
-" <C-h>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-" <C-n>: neocomplcache.
-inoremap <expr><C-n> pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>\<Down>"
-
-" }}}2
-" Neosnippet {{{2
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" }}}2
 " }}}1
 " Section: Dependent plugins {{{1
 " --------------------------

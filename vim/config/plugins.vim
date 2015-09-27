@@ -4,7 +4,6 @@
 "
 " 1. CtrlP
 " 2. Gundo
-" 3. Neocomplcache
 " 4. Syntastic
 " 5. YankRing
 " 6. vim-color-css
@@ -40,20 +39,6 @@ let g:ctrlp_custom_ignore         = {
 
 let g:gundo_preview_height = 40
 let g:gundo_right          = 1
-
-" }}}1
-" Section: Neocomplcache {{{1
-" ----------------------
-
-let g:neocomplcache_temporary_dir     = '~/.vim/tmp/necon'
-let g:neocomplcache_enable_at_startup = 1  " Enable Neocomplcache at startup.
-let g:neocomplcache_max_list          = 50 " Number of candidates displayed in a pop-up menu.
-let g:neocomplcache_enable_smart_case = 0  " Do not use smartcase.
-let g:neocomplcache_auto_completion_start_length = 4 " Number of input to start completion.
-let g:neocomplcache_enable_camel_case_completion = 1 " Enable CameCase completion.
-let g:neocomplcache_enable_fuzzy_completion      = 0 " Disable fuzzy completion, it's too heavy.
-let g:neocomplcache_enable_underbar_completion   = 1
-let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
 
 " }}}1
 " Section: Airline {{{1
