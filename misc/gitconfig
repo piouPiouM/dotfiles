@@ -1,56 +1,68 @@
 [color]
-	ui = auto
+  ui = auto
 [core]
-	excludesfile = ~/.gitignore_global
-	editor = vim
-	whitespace = -trailing-space
+  excludesfile = ~/.gitignore_global
+  editor = vim
+  whitespace = -trailing-space
 [alias]
-	ci = commit
-	st = status
-	amend = commit --amend
-	who = shortlog -sne
+  ci = commit
+  st = status
+  amend = commit --amend
+  oops = commit --amend --no-edit
+  who = shortlog -sne
   lg = log --graph --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'
-	oneline = log --pretty=oneline --abbrev-commit --graph --decorate
-	changes = diff --name-status
-	dic = diff --cached
-	diffstat = diff --stat
-	svnpull = svn rebase
-	svnpush = svn dcommit
-	lc = !git lg @{u}..
-	addm = !git-ls-files -m -z | xargs -0 git-add && git status
-	addu = !git-ls-files -o --exclude-standard -z | xargs -0 git-add && git status
-	rmm = !git ls-files -d -z | xargs -0 git-rm && git status
-	mate = !git-ls-files -m -z | xargs -0 mate
-	mateall = !git-ls-files -m -o --exclude-standard -z | xargs -0 mate
-	undo = git reset --soft HEAD^
-	oops = commit --amend --no-edit
-[push]
-	default = upstream
+  oneline = log --pretty=oneline --abbrev-commit --graph --decorate
+  changes = diff --name-status
+  dic = diff --cached
+  diffstat = diff --stat
+  svnpull = svn rebase
+  svnpush = svn dcommit
+  lc = !git lg @{u}..
+  addm = !git-ls-files -m -z | xargs -0 git-add && git status
+  addu = !git-ls-files -o --exclude-standard -z | xargs -0 git-add && git status
+  rmm = !git ls-files -d -z | xargs -0 git-rm && git status
+  mate = !git-ls-files -m -z | xargs -0 mate
+  mateall = !git-ls-files -m -o --exclude-standard -z | xargs -0 mate
+  undo = git reset --soft HEAD^
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
 [rerere]
-	enabled = true
-	autoupdate = true
+  enabled = true
+  autoupdate = true
 [status]
-	submoduleSummary = true
-	showUntrackedFiles = all
+  submoduleSummary = true
+  showUntrackedFiles = all
 [diff]
-	submodule = log
-	wordRegex = .
-	mnemonicPrefix = true
+  submodule = log
+  wordRegex = .
+  mnemonicPrefix = true
+[merge]
+  conflictStyle = diff3
 [mergetool]
   keepBackup = false
   keepTemporaries = false
+  writeToTemp = true
   prompt = false
 [fetch]
-	recurseSubmodules = on-demand
+  recurseSubmodules = on-demand
 [pull]
-	rebase = preserve
-[merge]
-	conflictStyle = diff3
+  rebase = preserve
+[push]
+  default = upstream
 [grep]
-	extendedRegexp = true
+  extendedRegexp = true
 [log]
-	abbrevCommit = true
+  abbrevCommit = true
+  follow = true
+[tag]
+  # Sort tags as version numbers whenever applicable, so 1.10.2 is AFTER 1.2.0.
+  sort = version:refname
+[versionsort]
+  prereleaseSuffix = -pre
+  prereleaseSuffix = .pre
+  prereleaseSuffix = -beta
+  prereleaseSuffix = .beta
+  prereleaseSuffix = -rc
+  prereleaseSuffix = .rc
 [include]
-	path = ~/.local.gitconfig
+  path = ~/.local.gitconfig

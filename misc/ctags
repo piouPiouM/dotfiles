@@ -1,3 +1,5 @@
+--langmap=javascript:.js
+--regex-javascript=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*\{/\1/o,object/
 --languages=PHP
 -h ".php"
 --langmap=PHP:.inc.php.module.engine.install.test
@@ -9,4 +11,8 @@
 --exclude=*/data/*
 --exclude="\.git"
 --exclude="\.svn"
+--exclude="\.tmp"
+--exclude="\.sass-cache"
+--exclude="\.bundle"
 --fields=+l
+

@@ -44,11 +44,11 @@ augroup END
 
 augroup ft_markdown
   autocmd!
-  autocmd FileType markdown, mkd setlocal wrap linebreak
-  autocmd FileType markdown, mkd setlocal tabstop=4 shiftwidth=4 softtabstop=4
-  autocmd FileType markdown, mkd setlocal textwidth=120
-  autocmd FileType markdown, mkd setlocal colorcolumn=+1
-  autocmd FileType markdown, mkd setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType markdown setlocal wrap linebreak
+  autocmd FileType markdown setlocal tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd FileType markdown setlocal textwidth=120
+  autocmd FileType markdown setlocal colorcolumn=+1
+  autocmd FileType markdown setlocal omnifunc=htmlcomplete#CompleteTags
 augroup END
 
 " }}}1

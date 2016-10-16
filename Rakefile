@@ -14,7 +14,7 @@ task :dotfiles do
   link_files("bash")
 
   puts "> reload bash environment."
-  system %Q{source $HOME/.bash_profile} 
+  system %Q{source $HOME/.bash_profile}
 end
 
 desc "Install and initialize the Homebrew environment"
@@ -22,6 +22,16 @@ task :homebrew do
   install_homebrew
   if command?('brew')
     initialize_homebrew
+  end
+end
+
+desc "Install node applications"
+task :node do
+  if command?('npm')
+    # JavaScript development
+    system %Q{npm install -g typescript}
+    # JavaScript linters
+    system %Q{npm install -g jshint eslint eslint_d}
   end
 end
 
@@ -33,7 +43,7 @@ task :webdev do
   end
 end
 
-desc "Intall applications"
+desc "Install applications"
 task :apps do
   system %Q{brew tap phinze/homebrew-cask}
   system %Q{brew install brew-cask}
@@ -62,7 +72,7 @@ def initialize_homebrew
   puts "> Updating Homebrew"
   system %Q{brew update && brew tap homebrew/dupes}
   puts "> Installing environment"
-  system %Q{brew install bash-completion wget tree ack ctags par trash}
+  system %Q{brew install bash-completion wget tree cloc ack ctags node par macvim trash tidy-html5 editorconfig}
 end
 
 def command?(command)

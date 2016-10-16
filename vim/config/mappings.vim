@@ -122,6 +122,12 @@ function! Custom_mapping_unimpaired()
 endfunction
 call ppm#do_after_plugin("Custom_mapping_unimpaired", "unimpaired")
 
+" Requirements: ArgWrap plugin.
+function! Custom_mapping_argwrap()
+  nnoremap <silent> <leader>aw :ArgWrap<CR>
+endfunction
+call ppm#do_after_plugin("Custom_mapping_argwrap", "argwrap")
+
 " Requirements: Tabular plugin.
 function! Custom_mapping_tabular()
   nmap <leader>a= :Tabularize /=<CR>
