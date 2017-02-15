@@ -3,9 +3,10 @@
 " Source: http://github.com/piouPiouM/dotfiles/
 "
 " 1. Preamble
-" 2. Basic configuration
-" 3. UI options
-" 4. Text formatting
+" 2. vim-plug
+" 3. Basic configuration
+" 4. UI options
+" 5. Text formatting
 
 " Section: Preamble {{{1
 " -----------------
@@ -18,84 +19,104 @@ exe 'source ' . g:ppm_vim_path . '/config/ppm.vim'
 " Vundle prerequesite
 set nocompatible    " Vim motherfucker!
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 
-" let Vundle manage Vundle
-" required!
-Plugin 'gmarik/Vundle.vim'
+" }}}1
+" Section: vim-plug {{{1
+" ----------------
 
-" My bundles {{{2
+call plug#begin('~/.vim/bundle')
 
-Plugin 'AfterColors.vim'
-Plugin 'L9'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'EasyMotion'
-Plugin 'Gist.vim'
-Plugin 'matchit.zip'
-Plugin 'The-NERD-Commenter'
-Plugin 'phpcomplete.vim'
-Plugin 'repeat.vim'
-Plugin 'surround.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'Tagbar'
-Plugin 'unimpaired.vim'
-Plugin 'YankRing.vim'
-Plugin 'hexHighlight.vim'
-Plugin 'vim-signature'
-Plugin 'tracwiki'
-Plugin 'tpope/vim-haml'
-Plugin 'mileszs/ack.vim'
-Plugin 'Townk/vim-autoclose'
-Plugin 'godlygeek/tabular'
-Plugin 'ap/vim-css-color'
-Plugin 'mattn/emmet-vim'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'rizzatti/funcoo.vim'
-Plugin 'rizzatti/dash.vim'
-Plugin 'StanAngeloff/php.vim'
-Plugin 'dharanasoft/rtf-highlight'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'vasconcelloslf/vim-interestingwords'
-Plugin 'terryma/vim-expand-region'
-Plugin 'mbbill/undotree'
-Plugin 'mhinz/vim-signify'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'tpope/vim-git'
-Plugin 'FooSoft/vim-argwrap'
-Plugin 'MattesGroeger/vim-bookmarks'
+" Vim improvments {{{2
 
-" JavaScript stuff
-Plugin 'elzr/vim-json'
-Plugin 'gavocanov/vim-js-indent'
-Plugin 'othree/yajs.vim'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'othree/jspc.vim'
-Plugin 'ternjs/tern_for_vim'
-Plugin 'Valloric/YouCompleteMe'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'easymotion/vim-easymotion'
+Plug 'lfv89/vim-interestingwords'
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'mbbill/undotree'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-expand-region'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-characterize'
+"Plug 'kshenoy/vim-signature'
+"Plug 'unimpaired.vim'
+
+" }}}2
+" Dev Tools {{{2
+
+Plug 'dharanasoft/rtf-highlight'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'mattn/emmet-vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'rizzatti/dash.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-git'
+Plug 'mhinz/vim-signify'
+Plug 'FooSoft/vim-argwrap'
+Plug 'majutsushi/tagbar', { 'tag': 'v2.7' }
+Plug 'mileszs/ack.vim'
+Plug 'scrooloose/syntastic'
+Plug 'Tag-Signature-Balloons'
+"Plug 'Townk/vim-autoclose'
+
+" }}}2
+" CSS {{{2
+
+Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'less']}
+
+" }}}2
+" JavaScript {{{2
+
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
+"Plug 'othree/yajs.vim', { 'for': 'javascript' }
+"Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
+"Plug 'gavocanov/vim-js-indent'
+"Plug 'ternjs/tern_for_vim'
+"Plug 'Valloric/YouCompleteMe'
+
+" Markdown {{{2
+
+"Plug 'godlygeek/tabular'
+"Plug 'plasticboy/vim-markdown'
+"Plug 'tpope/vim-markdown'
+
+" }}}2
+" }}}2
+" PHP {{{2
+
+Plug 'StanAngeloff/php.vim', { 'for': 'php' }
+Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
 
 " }}}2
 " Colorscheme bundles {{{2
 
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'chriskempson/vim-tomorrow-theme'
+Plug 'AfterColors.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/vim-tomorrow-theme'
 
 " }}}2
 
-" Vundle prerequesite
-call vundle#end()
-filetype plugin indent on " Load plugin and indent settings for the detected filetype.
+call plug#end()
+
+" }}}1
+
+"filetype plugin indent on " Load plugin and indent settings for the detected filetype.
 
 " }}}1
 " Section: Basic configuration {{{1
 " ----------------------------
 
-syntax on                 " Turn on syntax highlighting.
+syntax enable             " Turn on syntax highlighting.
 set hidden                " Don't require saving before editing another file.
 
 scriptencoding utf-8

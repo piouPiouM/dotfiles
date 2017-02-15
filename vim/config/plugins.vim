@@ -5,17 +5,15 @@
 "  1. CtrlP
 "  2. Airline
 "  3. Syntastic
-"  4. YankRing
-"  5. vim-color-css
-"  6. php.vim (syntax)
-"  7. Mustache and Handlebars mode
-"  8. Vim Markdown
-"  9. vim-expand-region
-" 10. vim-signify
-" 11. javascript-libraries-syntax
-" 12. YouCompleteMe
-" 13. vim-bookmarks
-" 14. EditorConfig
+"  4. php.vim (syntax)
+"  5. Mustache and Handlebars mode
+"  6. Vim Markdown
+"  7. vim-expand-region
+"  8. vim-signify
+"  9. javascript-libraries-syntax
+" 10. YouCompleteMe
+" 11. vim-bookmarks
+" 12. EditorConfig
 
 " Section: CtrlP {{{1
 " --------------
@@ -95,18 +93,6 @@ highlight link SyntasticStyleWarningSign SignColumn
 
 
 " }}}1
-" Section: YankRing {{{1
-" -----------------
-
-let g:yankring_history_dir = '~/.vim/tmp'
-
-" }}}1
-" Section: vim-color-css {{{1
-" ----------------------
-
-let g:cssColorVimDoNotMessMyUpdatetime = 1
-
-" }}}1
 " Section: php.vim (syntax) {{{1
 " -------------------------
 
@@ -128,8 +114,8 @@ let g:mustache_abbreviations = 1
 " Section: Vim Markdown {{{1
 " ---------------------
 
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_frontmatter      = 1 " Highlight YAML frontmatter
+"let g:vim_markdown_folding_disabled = 1
+"let g:vim_markdown_frontmatter      = 1 " Highlight YAML frontmatter
 
 " }}}1
 " Section: vim-expand-region {{{1
@@ -168,8 +154,8 @@ let g:used_javascript_libs = 'jquery,underscore,requirejs,angularjs,handlebars,r
 " Section: YouCompleteMe {{{
 " ----------------------
 
-let g:ycm_key_list_select_completion = ['<TAB>']
-let g:ycm_key_list_previous_completion = ['<S-TAB>']
+"let g:ycm_key_list_select_completion = ['<TAB>']
+"let g:ycm_key_list_previous_completion = ['<S-TAB>']
 
 " }}}
 " Section: vim-bookmarks {{{
