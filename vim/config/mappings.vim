@@ -100,10 +100,6 @@ inoremap <silent> <leader><F1> <ESC>:CtrlPMRU<CR>
 nnoremap <silent> <S-C-F1> :CtrlPBookmarkDir<CR>
 inoremap <silent> <S-C-F1> <ESC>:CtrlPBookmarkDir<CR>
 
-" Paste from history with F3
-nnoremap <silent> <F3> :YRShow<CR>
-inoremap <silent> <F3> <ESC>:YRShow<CR>
-
 " Toggle Undotree window with Cmd-u
 nnoremap <D-u> :UndotreeToggle<CR>
 

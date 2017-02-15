@@ -62,6 +62,7 @@ Plug 'majutsushi/tagbar', { 'tag': 'v2.7' }
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/syntastic'
 Plug 'Tag-Signature-Balloons'
+Plug 'Yggdroot/indentLine'
 "Plug 'Townk/vim-autoclose'
 
 " }}}2
@@ -96,6 +97,12 @@ Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
 
 Plug 'StanAngeloff/php.vim', { 'for': 'php' }
 Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
+
+" }}}2
+" Text Manipulation {{{2
+
+Plug 'chaoren/vim-wordmotion'
+Plug 'dhruvasagar/vim-table-mode', {'on': ['TableModeToggle', 'TableModeEnable']}
 
 " }}}2
 " Colorscheme bundles {{{2
@@ -251,7 +258,12 @@ set expandtab        " Expand tabs by default.
 set autoindent       " Always set autoindenting on.
 set copyindent       " Copy the previous indentation on autoindenting.
 set wrap             " Wrap lines.
+
 set formatoptions+=1 " When wrapping paragraphs, don't end lines with 1-letter words.
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j " Delete comment character when joining commented lines
+endif
+
 set infercase        " Ignore case on insert completion.
 set textwidth=120
 if executable('par')

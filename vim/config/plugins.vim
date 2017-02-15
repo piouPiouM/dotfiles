@@ -4,16 +4,17 @@
 "
 "  1. CtrlP
 "  2. Airline
-"  3. Syntastic
-"  4. php.vim (syntax)
-"  5. Mustache and Handlebars mode
-"  6. Vim Markdown
-"  7. vim-expand-region
-"  8. vim-signify
-"  9. javascript-libraries-syntax
-" 10. YouCompleteMe
-" 11. vim-bookmarks
-" 12. EditorConfig
+"  3. IndenLine
+"  4. Syntastic
+"  5. php.vim (syntax)
+"  6. Mustache and Handlebars mode
+"  7. Vim Markdown
+"  8. vim-expand-region
+"  9. vim-signify
+" 10. javascript-libraries-syntax
+" 11. YouCompleteMe
+" 12. vim-bookmarks
+" 13. EditorConfig
 
 " Section: CtrlP {{{1
 " --------------
@@ -61,6 +62,11 @@ let g:airline_mode_map = {
   \ 'S'  : 'S',
   \ '' : 'S',
   \ }
+
+" }}}1
+" Section: IndentLine
+
+let g:indentLine_char = "┊"
 
 " }}}1
 " Section: Syntastic {{{1
