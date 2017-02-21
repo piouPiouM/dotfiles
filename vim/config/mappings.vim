@@ -116,7 +116,7 @@ function! Custom_mapping_unimpaired()
   vmap <C-Up>   [egv
   vmap <C-Down> ]egv
 endfunction
-call ppm#do_after_plugin("Custom_mapping_unimpaired", "unimpaired")
+"call ppm#do_after_plugin("Custom_mapping_unimpaired", "unimpaired")
 
 " Requirements: ArgWrap plugin.
 function! Custom_mapping_argwrap()
@@ -131,7 +131,9 @@ function! Custom_mapping_tabular()
   nmap <leader>a: :Tabularize /:\zs<CR>
   vmap <leader>a: :Tabularize /:\zs<CR>
 endfunction
-call ppm#do_after_plugin("Custom_mapping_tabular", "tabular")
+"call ppm#do_after_plugin("Custom_mapping_tabular", "tabular")
+
+map y <Plug>(highlightedyank)
 
 " }}}1
 

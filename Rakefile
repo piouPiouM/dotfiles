@@ -31,21 +31,23 @@ task :node do
     # JavaScript development
     system %Q{npm install -g typescript}
     # JavaScript linters
-    system %Q{npm install -g jshint eslint eslint_d}
+    system %Q{npm install -g jshint eslint eslint_d npm-run}
   end
 end
 
 desc "Install web dev environment"
 task :webdev do
   if command?('brew')
-    system %Q{brew tap josegonzalez/homebrew-php}
-    system %Q{brew install php53 php53-intl php53-xdebug php53-apc}
+    system %Q{brew tap homebrew/apache homebrew/completions homebrew/core homebrew/dupes homebrew/php homebrew/services homebrew/versions}
+    system %Q{brew install php56 php56-intl php56-xdebug php56-apc homebrew/php/composer}
+    system %Q{brew install node yarn}
+    system %Q{pip2 install ansible-lint}
   end
 end
 
 desc "Install applications"
 task :apps do
-  system %Q{brew tap phinze/homebrew-cask}
+  system %Q{brew tap caskroom/cask}
   system %Q{brew install brew-cask}
 end
 
@@ -70,9 +72,11 @@ end
 def initialize_homebrew
   puts
   puts "> Updating Homebrew"
-  system %Q{brew update && brew tap homebrew/dupes}
+  system %Q{brew update && brew upgrade && brew tap homebrew/dupes}
   puts "> Installing environment"
-  system %Q{brew install bash-completion wget tree cloc ack ctags node par macvim trash tidy-html5 editorconfig}
+  system %Q{brew install bash-completion wget tree cloc ack node par macvim trash tidy-html5 editorconfig}
+  system %Q{brew tap universal-ctags/universal-ctags}
+  system %Q{brew install --HEAD universal-ctags}
 end
 
 def command?(command)

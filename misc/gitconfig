@@ -1,29 +1,66 @@
+[user]
+  name = Mehdi Kabab
 [color]
   ui = auto
 [core]
   excludesfile = ~/.gitignore_global
   editor = vim
   whitespace = -trailing-space
+
+  # Make `git rebase` safer on macOS
+  # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+  trustctime = false
+
+  # Prevent showing files whose names contain non-ASCII symbols as unversioned.
+  # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+  precomposeunicode = false
+
 [alias]
   ci = commit
   st = status
+  s = status -s
+
+  oneline = log --pretty=oneline --abbrev-commit --graph --decorate
+  lg = log --graph --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'
+  lc = !git lg @{u}..
+  l = !git oneline -n 20
+
   amend = commit --amend
   oops = commit --amend --no-edit
   who = shortlog -sne
-  lg = log --graph --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'
-  oneline = log --pretty=oneline --abbrev-commit --graph --decorate
+
   changes = diff --name-status
   dic = diff --cached
   diffstat = diff --stat
+
+  # Show the diff between the latest commit and the current state
+  d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+  # `git di $number` shows the diff between the state `$number` revisions ago and the current state
+  di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+  # Pull in remote changes for the current repository and all its submodules
+  p = !"git pull; git submodule foreach git pull origin master"
+
+  # Clone a repository including all submodules
+  c = clone --recursive
+
+  # Commit all changes
+  ca = !git add -A && git commit -av
+
   svnpull = svn rebase
   svnpush = svn dcommit
-  lc = !git lg @{u}..
   addm = !git-ls-files -m -z | xargs -0 git-add && git status
   addu = !git-ls-files -o --exclude-standard -z | xargs -0 git-add && git status
   rmm = !git ls-files -d -z | xargs -0 git-rm && git status
   mate = !git-ls-files -m -z | xargs -0 mate
   mateall = !git-ls-files -m -o --exclude-standard -z | xargs -0 mate
   undo = git reset --soft HEAD^
+
+[apply]
+  # Detect whitespace errors when applying a patch
+  whitespace = fix
+
 [credential]
   helper = osxkeychain
 [rerere]
@@ -65,4 +102,4 @@
   prereleaseSuffix = -rc
   prereleaseSuffix = .rc
 [include]
-  path = ~/.local.gitconfig
+  path = ~/.local/gitconfig

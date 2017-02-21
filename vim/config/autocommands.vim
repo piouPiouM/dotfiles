@@ -4,6 +4,11 @@ if !has("autocmd")
   finish
 endif
 
+augroup ft_json
+  autocmd!
+  autocmd BufReadPost .eslintrc setlocal filetype=json
+augroup END
+
 " Executes a stack of commands when creating windows
 augroup enter_cmd
   autocmd!
@@ -35,6 +40,17 @@ augroup relativenumber
   autocmd InsertEnter * set number
   autocmd InsertLeave * set relativenumber
 augroup END
+
+" Always turn on rainbow_parentheses
+if exists('*RainbowParenthesesToggle')
+  augroup rainbow
+    autocmd!
+    au VimEnter * RainbowParenthesesToggle
+    au Syntax * RainbowParenthesesLoadRound
+    au Syntax * RainbowParenthesesLoadSquare
+    au Syntax * RainbowParenthesesLoadBraces
+  augroup END
+endif
 
 " Source the vimrc file after saving it.
 " http://vimcasts.org/e/24

@@ -45,6 +45,6 @@ endif
 " }}}2
 " }}}1
 
-if filereadable(expand("~/.local.gvimrc"))
-  source ~/.local.gvimrc
+if filereadable(expand("~/.local/gvimrc"))
+  source ~/.local/gvimrc
 endif

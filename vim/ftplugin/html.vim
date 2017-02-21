@@ -1,3 +1,9 @@
+autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+
+if ! exists('*SyntasticStatuslineFlag')
+  finish
+endif
+
 " Set up the arrays to ignore for later
 if !exists('g:syntastic_html_tidy_ignore_errors')
   let g:syntastic_html_tidy_ignore_errors = []

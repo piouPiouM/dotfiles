@@ -7,8 +7,14 @@
 # Ignore Sass cache directory
 --ignore-dir=.sass-cache,.vendor,.vendors,.bundle
 
+--ignore-dir=is:node_modules
+--ignore-dir=is:bower_components
+
 # Define Sass and SCSS types
---type-set=sass=.sass,.scss
+--type-set=sass=ext:sass,scss
+
+# Define Markdown
+--type-set=markdown=ext:md,markdown
 
 # Drupal stuff
---type-add=php=.module,.inc,.install
+--type-add=php=.module,.inc,.install,.view,.engine

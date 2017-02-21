@@ -3,8 +3,8 @@ export LC_CTYPE=fr_FR.UTF-8
 export LC_ALL=fr_FR.UTF-8
 export NODE_PATH=/usr/local/lib/node_modules
 
-export EDITOR='mate -w'
-export SVN_EDITOR='mate -w'
+export EDITOR='vim -f'
+export SVN_EDITOR='vim -f'
 
 export USER_BASH_COMPLETION_DIR=~/.bash_completion.d
 if [ -f `brew --prefix`/etc/bash_completion ]; then
@@ -24,24 +24,35 @@ alias df="df -h"
 alias vim="mvim -v"
 
 # Alias de commandes
-alias bashrc="mate -aw $HOME/.bashrc && source $HOME/.bash_profile"
+alias bashrc="vim -f $HOME/.bashrc && source $HOME/.bash_profile"
 alias grep='GREP_COLOR="1;37;41" LANG=C grep --color=auto'
 alias sha1sum="openssl dgst -sha1"
 alias drushcc="for i in {1..3}; do drush cc all; done"
 alias acksed="_ack_substitute $@"
-# alias actl="sudo /opt/local/apache2/bin/apachectl"
-# alias mysql=mysql5
-# alias mysqladmin=mysqladmin5
-alias inimaquette='mkdir -p dist/{inc,modules,www/{css,files,img,js}} src/{img,js,scss/partials} && touch dist/www/index.php'
-if type -p adb >/dev/null; then
-  alias nexus4db='adb forward tcp:9222 localabstract:chrome_devtools_remote'
-fi
+alias ackdd="ack '\b(var_dump|dpm|kpr|dd|dargs|console\.log)' $@"
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en0"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# Show active network interfaces
+alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
+
+# Flush Directory Service cache
+alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+
+# Clean up LaunchServices to remove duplicates in the “Open With” menu
+alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+
+# Reload the shell (i.e. invoke as a login shell)
+alias reload="exec $SHELL -l"
 
 # Accès rapide
 alias www="cd /var/www/"
 alias wwww="cd /var/www/htdocs/"
 alias wwwsandbox="cd /var/www/sandbox/"
-
+alias slap="afplay -t 4.4 ~/Pictures/lol/slap.mp4"
 ################################################################
 # Check if the given argument is a known command
 #

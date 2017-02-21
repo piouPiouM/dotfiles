@@ -1,1 +1,9 @@
-export PATH=/usr/local/share/npm/bin:/usr/local/sbin:/usr/local/bin:$HOME/Applications/Scripts:$PATH
+if which ruby >/dev/null && which gem >/dev/null; then
+    export PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm ]
+
+export PATH=/usr/local/share/npm/bin:/usr/local/sbin:/usr/local/bin:$HOME/Applications/Scripts:$PATH:`yarn global bin`
+

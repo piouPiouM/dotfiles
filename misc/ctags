@@ -1,18 +1,64 @@
---langmap=javascript:.js
---regex-javascript=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*\{/\1/o,object/
---languages=PHP
--h ".php"
---langmap=PHP:.inc.php.module.engine.install.test
---PHP-kinds=cdfi
+--langmap=javascript:.js.jsx
+--regex-javascript=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*[\(]function[ \t]*\(/\1/f,function,functions/
+--regex-javascript=/^[ \t]*[\(]function[ \t]*([A-Za-z0-9._$]+)/\1/f,function,functions/
+--regex-javascript=/([A-Za-z0-9._$]+)[ \t]*=[ \t]*\{/\1/o,object,objects/
+--regex-javascript=/^[ \t]*([A-Za-z0-9._$]+)[ \t]*[:][ \t]*[^\{]/\1/p,property,properties/
+--regex-javascript=/^[ \t]+(var|let|const)[ \t]*([A-Za-z0-9._$]+)[ \t]*=[ \t]*[\d"'\[]/\2/v,variable,variables/
+
+--langdef=html2
+--langmap=html2:.html
+--regex-html2=/id="([a-zA-Z0-9_]+)"/\1/d,definition/
+
+--langdef=scss
+--langmap=scss:.scss
+--regex-scss=/^[ \t]*@mixin ([A-Za-z0-9_-]+)/\1/m,mixin,mixins/
+--regex-scss=/^[ \t]*\$([A-Za-z0-9_-]+)/\1/v,variable,variables/
+--regex-scss=/^([A-Za-z0-9_-]*)*\.([A-Za-z0-9_-]+) *[,{]/\2/c,class,classes/
+--regex-scss=/^[ \t&]+\.([A-Za-z0-9_-]+) *[,{]/\1/c,class,classes/
+--regex-scss=/^(.*)*\#([A-Za-z0-9_-]+) *[,{]/\2/i,id,ids/
+--regex-scss=/^[ \t&]*#([A-Za-z0-9_-]+)/\1/i,id,ids/
+--regex-scss=/(^([A-Za-z0-9_-])*([A-Za-z0-9_-]+)) *[,|\{]/\1/t,tag,tags/
+--regex-scss=/(^([^\/\/])*)[ \t]+([A-Za-z0-9_-]+)) *[,|\{]/\3/t,tag,tags/
+--regex-scss=/(^(.*, *)([A-Za-z0-9_-]+)) *[,|\{]/\3/t,tag,tags/
+--regex-scss=/(^[ \t]+([A-Za-z0-9_-]+)) *[,|\{]/\1/t,tag,tags/
+--regex-scss=/^[ \t]*@media\s+([A-Za-z0-9_-]+)/\1/d,media,media/
+
+--langmap=php:.engine.inc.module.install.theme.php
+--php-kinds=cdfi
+
+--languages=php,scss
+--fields=+aimlS
 --recurse=yes
 --tag-relative=yes
---exclude=*/cache/*
---exclude=*/logs/*
---exclude=*/data/*
---exclude="\.git"
---exclude="\.svn"
---exclude="\.tmp"
---exclude="\.sass-cache"
---exclude="\.bundle"
---fields=+l
 
+--exclude=.bundle
+--exclude=.cache
+--exclude=.git
+--exclude=.hg
+--exclude=.sass-cache
+--exclude=.svn
+--exclude=.tmp
+--exclude=.vendor
+--exclude=\*.bak
+--exclude=\*.cache
+--exclude=\*.csproj
+--exclude=\*.csproj.user
+--exclude=\*.dll
+--exclude=\*.map
+--exclude=\*.min.\*
+--exclude=\*.pdb
+--exclude=\*.pyc
+--exclude=\*.sln
+--exclude=\*.spec.js
+--exclude=\*.swp
+--exclude=\*.tar.\*
+--exclude=bower_components
+--exclude=cache
+--exclude=cscope.\*
+--exclude=doc
+--exclude=docs
+--exclude=log
+--exclude=logs
+--exclude=node_modules
+--exclude=tags
+--exclude=tmp
