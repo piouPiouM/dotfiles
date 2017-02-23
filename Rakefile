@@ -45,6 +45,28 @@ task :webdev do
   end
 end
 
+desc "Install neovim environment"
+task :neovim do
+  if command?('brew')
+    system %Q{brew tap caskroom/fonts}
+    system %Q{brew cask install font-bitstreamverasansmono-nerd-font}
+    system %Q{brew cask install font-codenewroman-nerd-font}
+    system %Q{brew cask install font-fantasquesansmono-nerd-font}
+    system %Q{brew cask install font-firacode-nerd-font}
+    system %Q{brew cask install font-hack-nerd-font}
+    system %Q{brew cask install font-inconsolata}
+    system %Q{brew cask install font-sourcecodepro-nerd-font}
+    system %Q{brew install python3}
+    system %Q{brew tap brew tap neovim/neovim}
+    system %Q{brew install neovim}
+    system %Q{pip2 install neovim}
+    system %Q{pip3 install neovim}
+    system %Q{gem install neovim}
+    system %Q{ln -siv "#{Dir.pwd}/vim" "#{Dir.home}/.config/nvim"}
+    system %Q{ln -siv "#{Dir.pwd}/vimrc" "#{Dir.home}/.config/nvim/init.vim"}
+  end
+end
+
 desc "Install applications"
 task :apps do
   system %Q{brew tap caskroom/cask}
