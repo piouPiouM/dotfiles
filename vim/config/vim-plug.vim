@@ -188,9 +188,14 @@ Plug 'tommcdo/vim-lion'
 " Section: Colorscheme bundles {{{1
 " ----------------------------
 
+Plug 'ryanoasis/vim-devicons'
 Plug 'AfterColors.vim'
-Plug 'altercation/vim-colors-solarized'
+
 Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'altercation/vim-colors-solarized'
+Plug 'iCyMind/NeoSolarized' " Neovim
+Plug 'MaxSt/FlatColor' " Neovim
+Plug 'joshdick/onedark.vim' " Neovim
 
 " :ColorToggle to toggle hex to colors
 Plug 'lilydjwg/colorizer', { 'on': 'ColorToggle' }

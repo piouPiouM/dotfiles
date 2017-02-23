@@ -20,6 +20,7 @@
 " Section: Colorschemes {{{1
 
 let g:solarized_menu = 0
+let g:neosolarized_italic = 1
 
 " }}}1
 " Section: vim-localvimrc {{{1
@@ -28,6 +29,9 @@ let g:localvimrc_name = ['.lvimrc', '.local.vimrc', '.config/vimrc']
 let g:localvimrc_ask = 1
 let g:localvimrc_persistent = 0
 let g:localvimrc_persistence_file = $HOME . '/.vim/tpm/localvimrc_persistent'
+let g:localvimrc_whitelist = [
+      \ '/var/www/atih/vagrant/www',
+      \]
 
 " }}}1
 " Section: CtrlP {{{1
@@ -56,7 +60,7 @@ let g:ctrlp_custom_ignore         = {
   \ 'dir':  '\v[\/](node_modules|tmp|cache)$',
   \ }
 if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 endif
 
 " }}}1
@@ -90,6 +94,7 @@ let g:airline_mode_map = {
   \ }
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#trailing_format = '¬[%s]'
 let g:airline#extensions#whitespace#mixed_indent_format = '▸[%s]'
 
@@ -103,9 +108,9 @@ let g:indentLine_char = "╎"
 " ----------------
 
 let g:neomake_highlight_lines = 0
-let g:neomake_error_sign   = {'text': emoji#for('anger'), 'texthl': 'NeomakeErrorSign'}
-let g:neomake_warning_sign = {'text': emoji#for('pig'), 'texthl': 'NeomakeWarningSign'}
-let g:neomake_message_sign = {'text': emoji#for('thought_balloon'), 'texthl': 'NeomakeMessageSign'}
+"let g:neomake_error_sign   = {'text': emoji#for('anger'), 'texthl': 'NeomakeErrorSign'}
+"let g:neomake_warning_sign = {'text': emoji#for('pig'), 'texthl': 'NeomakeWarningSign'}
+"let g:neomake_message_sign = {'text': emoji#for('thought_balloon'), 'texthl': 'NeomakeMessageSign'}
 
 let g:neomake_php_enabled_makers = ['php']
 let g:neomake_javascript_enabled_makers = ['eslint']
@@ -203,13 +208,13 @@ let g:expand_region_text_objects = {
 " --------------------
 
 let g:signify_vcs_list    = [ 'git' ]
-let g:signify_sign_change = '♺'
+"let g:signify_sign_change = '♺'
 
-let g:gitgutter_override_sign_column_highlight = 1
-let g:gitgutter_sign_added            = emoji#for('small_blue_diamond')
-let g:gitgutter_sign_modified         = emoji#for('small_orange_diamond')
-let g:gitgutter_sign_removed          = emoji#for('small_red_triangle_down')
-let g:gitgutter_sign_modified_removed = emoji#for('collision')
+let g:gitgutter_override_sign_column_highlight = 0
+"let g:gitgutter_sign_added            = emoji#for('small_blue_diamond')
+"let g:gitgutter_sign_modified         = emoji#for('small_orange_diamond')
+"let g:gitgutter_sign_removed          = emoji#for('small_red_triangle_down')
+"let g:gitgutter_sign_modified_removed = emoji#for('collision')
 
 " }}}1
 " Section: javascript-libraries-syntax {{{1
@@ -320,5 +325,17 @@ let g:vcool_ins_rgba_map = '<D-W>' " Insert rgba color.
 " Section: colorizer {{{1
 
 let g:colorizer_nomap = 1
+
+" }}}1
+" Section: Ack {{{1
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" }}}1
+" Section: vim-css-color {{{1
+
+let g:cssColorVimDoNotMessMyUpdatetime = 1
 
 " }}}1

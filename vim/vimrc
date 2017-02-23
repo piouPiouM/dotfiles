@@ -86,8 +86,23 @@ set background=dark        " I like black color schemes.
 set cursorline             " Highlight current line.
 set scrolloff=3            " Provide some context when editing.
 set clipboard=unnamed
-set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h12 " Use the Powerline specific font
-color solarized
+"set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h12 " Use the Powerline specific font
+set guifont=FantasqueSansMono\ Nerd\ Font:13
+
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
+"color NeoSolarized
+
+let g:onedark_terminal_italics = 1
+let g:airline_theme='onedark'
+color onedark
 
 if has('cmdline_info')
   set ruler                                          " Show the ruler.
