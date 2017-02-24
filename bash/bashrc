@@ -3,8 +3,13 @@ export LC_CTYPE=fr_FR.UTF-8
 export LC_ALL=fr_FR.UTF-8
 export NODE_PATH=/usr/local/lib/node_modules
 
-export EDITOR='vim -f'
-export SVN_EDITOR='vim -f'
+export EDITOR='nvim'
+export SVN_EDITOR='nvim'
+
+# XDG Specification
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=~/.config}
+export XDG_DATA_HOME=${XDG_DATA_HOME:=~/.local/share}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:=~/.cache}
 
 export USER_BASH_COMPLETION_DIR=~/.bash_completion.d
 if [ -f `brew --prefix`/etc/bash_completion ]; then
@@ -18,13 +23,10 @@ alias la="ls -a"
 alias lla="ls -lah"
 alias df="df -h"
 
-# Utiliser la version embarquée dans MacVim de vim en remplacement
-# de la version builtin de OSX
-# http://apple.stackexchange.com/a/14312
-alias vim="mvim -v"
+alias vim="nvim"
 
 # Alias de commandes
-alias bashrc="vim -f $HOME/.bashrc && source $HOME/.bash_profile"
+alias bashrc="nvim $HOME/.bashrc && source $HOME/.bash_profile"
 alias grep='GREP_COLOR="1;37;41" LANG=C grep --color=auto'
 alias sha1sum="openssl dgst -sha1"
 alias drushcc="for i in {1..3}; do drush cc all; done"
@@ -76,7 +78,7 @@ _ack_substitute()
         echo "FROM_STRING."
         echo
         echo "Any additional options are passed directly to ack-grep (e.g.,"
-        echo " --type=html would only run the substitution on html files)." 
+        echo " --type=html would only run the substitution on html files)."
         return 1
     fi
     # Escape forward slashes for sed

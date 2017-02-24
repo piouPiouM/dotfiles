@@ -1,4 +1,8 @@
-call plug#begin('~/.vim/bundle')
+if has('nvim')
+  call plug#begin($XDG_DATA_HOME . '/bundle')
+else
+  call plug#begin('~/.vim/bundle')
+endif
 
 " Section: Vim improvments {{{1
 " ------------------------
@@ -90,6 +94,16 @@ Plug 'tpope/vim-fugitive'
 
 " Show a diff using Vim its sign column
 "Plug 'mhinz/vim-signify'
+
+" ]c to jump to next hunk
+" [c to jump to previous hunk
+" <leader>hs to stage the hunk
+" <leader>hu to undo the hunk
+" <leader>hp to preview the hunk
+"
+" New hunk text object:
+" ic operates on all lines in the current hunk
+" ac operates on all lines in the current hunk and any trailing empty lines
 Plug 'airblade/vim-gitgutter'
 
 " <leader>aw to (un)wrap function arguments, lists and dictionaries
