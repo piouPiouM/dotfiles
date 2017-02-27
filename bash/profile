@@ -1,9 +1,32 @@
-if which ruby >/dev/null && which gem >/dev/null; then
-    export PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+export LC_CTYPE=fr_FR.UTF-8
+export LC_ALL=fr_FR.UTF-8
+
+# XDG Specification
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=~/.config}
+export XDG_DATA_HOME=${XDG_DATA_HOME:=~/.local/share}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:=~/.cache}
+
+# path
+export PATH=/usr/local/sbin:$HOME/Applications/Scripts:$PATH
+
+# z.sh
+export _Z_DATA=$XDG_DATA_HOME/z/z
+if [ -s "/usr/local/etc/profile.d/z.sh" ]; then
+  source /usr/local/etc/profile.d/z.sh
 fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm ]
+# ruby
+if which ruby >/dev/null && which gem >/dev/null; then
+  export PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+fi
 
-export PATH=/usr/local/share/npm/bin:/usr/local/sbin:/usr/local/bin:$HOME/Applications/Scripts:$PATH:`yarn global bin`
+# node
+export NODE_PATH=`brew --prefix`/lib/node_modules
+export NVM_DIR="$XDG_DATA_HOME/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+if which yarn >/dev/null; then
+  export PATH=`yarn global bin`:$PATH
+elif which npm >/dev/null; then
+  export PATH=`npm bin -g`:$PATH
+fi
 

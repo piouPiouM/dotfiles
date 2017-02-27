@@ -1,3 +1,4 @@
+BREW_PREFIX=`brew --prefix`
 
 if [ -f "$HOME/.profile" ]; then
     source $HOME/.profile
@@ -7,11 +8,8 @@ if [ -f "$HOME/.bashrc" ]; then
     source $HOME/.bashrc
 fi
 
-if [ -s "$HOME/.rvm/scripts/rvm" ]; then
-    source "$HOME/.rvm/scripts/rvm"
-fi
-
-if [ -s "/usr/local/etc/profile.d/z.sh" ]; then
-    source /usr/local/etc/profile.d/z.sh
+export USER_BASH_COMPLETION_DIR=~/.bash_completion.d
+if [ -f $BREW_PREFIX/etc/bash_completion ]; then
+    . $BREW_PREFIX/etc/bash_completion
 fi
 

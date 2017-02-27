@@ -1,20 +1,5 @@
-# export MANPATH=/opt/local/share/man:$MANPATH
-export LC_CTYPE=fr_FR.UTF-8
-export LC_ALL=fr_FR.UTF-8
-export NODE_PATH=/usr/local/lib/node_modules
-
 export EDITOR='nvim'
 export SVN_EDITOR='nvim'
-
-# XDG Specification
-export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=~/.config}
-export XDG_DATA_HOME=${XDG_DATA_HOME:=~/.local/share}
-export XDG_CACHE_HOME=${XDG_CACHE_HOME:=~/.cache}
-
-export USER_BASH_COMPLETION_DIR=~/.bash_completion.d
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
-fi
 
 # Alias fonctionnels
 alias ls="ls -GF"
