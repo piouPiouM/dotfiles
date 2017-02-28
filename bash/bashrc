@@ -148,13 +148,17 @@ _prompt()
     BOLD="\[\033[1m\]"
     NORMAL="\[\033[m\]"
 
+    if [ -f `brew --prefix`/etc/bash_completion.d/git-prompt.sh ]; then
+      source `brew --prefix`/etc/bash_completion.d/git-prompt.sh
+    fi
+
     _fn_exists '__git_ps1'
     if [ $? -eq 0 ]; then
-        export GIT_PS1_SHOWDIRTYSTATE=1 GIT_PS1_SHOWSTASHSTATE=1 GIT_PS1_SHOWUNTRACKEDFILES=1
-        export GIT_PS1_SHOWUPSTREAM=verbose GIT_PS1_DESCRIBE_STYLE=branch
-        G="\$(__git_ps1 \"${UPURPLE}%s${NORMAL}:\")"
+      export GIT_PS1_SHOWDIRTYSTATE=1 GIT_PS1_SHOWSTASHSTATE=1 GIT_PS1_SHOWUNTRACKEDFILES=1
+      export GIT_PS1_SHOWUPSTREAM=verbose GIT_PS1_DESCRIBE_STYLE=branch
+      G="\$(__git_ps1 \"${UPURPLE}%s${NORMAL}:\")"
     else
-        G=''
+      G=''
     fi
     P1="[\A] (${G}${GREEN}\w${NORMAL})\n${BOLD}\u${NORMAL}@${BOLD}\h${NORMAL} ${SYM}${COLOR_NONE} "
 
