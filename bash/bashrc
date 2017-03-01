@@ -9,6 +9,7 @@ alias lla="ls -lah"
 alias df="df -h"
 
 alias vim="nvim"
+alias r="ranger"
 
 # Alias de commandes
 alias bashrc="nvim $HOME/.bashrc && source $HOME/.bash_profile"

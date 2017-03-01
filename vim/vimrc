@@ -102,7 +102,6 @@ endif
 "color NeoSolarized
 
 let g:onedark_terminal_italics = 1
-let g:airline_theme='onedark'
 color onedark
 
 if has('cmdline_info')

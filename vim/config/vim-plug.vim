@@ -10,6 +10,13 @@ endif
 Plug 'embear/vim-localvimrc'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+" <space>p to list files from root directory
+" <space><space> to list current directory
+" <space>b to list buffers
+" <space>r to list MRU
+" <space>o to list bookmarked directories
+" <space>t to list tags within the current buffer
 Plug 'ctrlpvim/ctrlp.vim'
 
 " <C-a>/<C-x> to increment dates, times
@@ -28,7 +35,7 @@ Plug 'tpope/vim-speeddating'
 " :SudoEdit  - Edit a privileged file with sudo
 Plug 'tpope/vim-eunuch'
 
-" . - repeat the last command
+" . to repeat the last command
 Plug 'tpope/vim-repeat'
 
 " > "Hello world!"
@@ -121,6 +128,10 @@ Plug 'Tag-Signature-Balloons'
 " Auto close parentheses and repeat by dot dot dot
 Plug 'cohama/lexima.vim'
 
+Plug 'luochen1990/rainbow', { 'on': ['RainbowToggle', 'RainbowToggleOn', 'RainbowToggleOff'] }
+
+Plug 'vim-utils/vim-troll-stopper'
+
 " }}}1
 " Section: Syntax {{{1
 " ---------------
@@ -136,13 +147,15 @@ Plug 'tpope/vim-git'
 " CSS {{{2
 
 " Uses :ColorToggle for javascript and php.
-Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'less']}
+Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'less'] }
 
 " <D-C> to display colorpicker and insert hex color
 " <D-R> to display colorpicker and insert rgb color
 " <D-V> to display colorpicker and insert hsl color
 " <D-W> to display colorpicker and insert rgba color
-Plug 'KabbAmine/vCoolor.vim', { 'for': ['css', 'scss', 'less', 'javascript', 'php']}
+Plug 'KabbAmine/vCoolor.vim', {
+      \ 'for': ['css', 'scss', 'less', 'javascript', 'php', 'vim'],
+      \ }
 
 " }}}2
 " JavaScript {{{2
@@ -210,6 +223,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'iCyMind/NeoSolarized' " Neovim
 Plug 'MaxSt/FlatColor' " Neovim
 Plug 'joshdick/onedark.vim' " Neovim
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
 " :ColorToggle to toggle hex to colors
 Plug 'lilydjwg/colorizer', { 'on': 'ColorToggle' }

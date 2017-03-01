@@ -54,7 +54,7 @@ let g:ctrlp_clear_cache_on_exit   = 0   " Do not delete the cache files upon exi
 let g:ctrlp_mruf_max              = 250 " The number of recently opened files to remember.
 let g:ctrlp_mruf_relative         = 1   " Show only MRU files in the current working directory.
 let g:ctrlp_cache_dir             = $HOME.'/.cache/ctrlp'
-let g:ctrlp_extensions            = ['line', 'tag', 'bookmarkdir']
+let g:ctrlp_extensions            = ['dir', 'buffertag', 'tag', 'changes', 'undo', 'bookmarkdir']
 let g:ctrlp_show_hidden           = 1
 let g:ctrlp_custom_ignore         = {
   \ 'dir':  '\v[\/](node_modules|tmp|cache)$',
@@ -67,6 +67,7 @@ endif
 " Section: Airline {{{1
 " ------------------
 
+let g:airline_theme='onedark'
 let g:airline_powerline_fonts=1
 let g:airline_detect_paste=1
 "let g:airline_extensions = [
@@ -330,12 +331,39 @@ let g:colorizer_nomap = 1
 " Section: Ack {{{1
 
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+  "let g:ackprg = 'ag --vimgrep'
 endif
 
 " }}}1
 " Section: vim-css-color {{{1
 
 let g:cssColorVimDoNotMessMyUpdatetime = 1
+
+" }}}1
+" Section: rainbow parentheses improved {{{1
+
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+      \ 'html': 0,
+      \ }
+
+" }}}1
+" Section: webdevicons {{{1
+
+"  
+" 
+" 
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
+      \ 'css'     : '',
+      \ 'less'    : '',
+      \ 'html'    : '',
+      \ 'module'  : '',
+      \ 'install' : '',
+      \ 'inc'     : '',
+      \ 'info'    : '',
+      \ 'svg'     : '',
+      \ 'md'      : '',
+      \ 'markdown': '',
+      \ }
 
 " }}}1

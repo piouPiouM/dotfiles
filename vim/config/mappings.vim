@@ -89,16 +89,13 @@ nnoremap <silent> <D-F> :Ack<space>
 inoremap <silent> <D-F> <ESC>:Ack<space>
 
 " Invoque CtrlP
-nnoremap <silent> <F1> :CtrlP<CR>
-inoremap <silent> <F1> <ESC>:CtrlP<CR>
-nnoremap <silent> <S-F1> :CtrlPBuffer<CR>
-inoremap <silent> <S-F1> <ESC>:CtrlPBuffer<CR>
-nnoremap <silent> <M-F1> :CtrlPCurFile<CR>
-inoremap <silent> <M-F1> <ESC>:CtrlCurFile<CR>
-nnoremap <silent> <leader><F1> :CtrlPMRU<CR>
-inoremap <silent> <leader><F1> <ESC>:CtrlPMRU<CR>
-nnoremap <silent> <S-C-F1> :CtrlPBookmarkDir<CR>
-inoremap <silent> <S-C-F1> <ESC>:CtrlPBookmarkDir<CR>
+nmap     <space>  <Plug>[ctrlp]
+nnoremap <silent> <Plug>[ctrlp]<space> :CtrlPCurFile<CR>
+nnoremap <silent> <Plug>[ctrlp]p       :CtrlP<CR>
+nnoremap <silent> <Plug>[ctrlp]b       :CtrlPBuffer<CR>
+nnoremap <silent> <Plug>[ctrlp]r       :CtrlPMRU<CR>
+nnoremap <silent> <Plug>[ctrlp]t       :CtrlPBufTag<CR>
+nnoremap <silent> <Plug>[ctrlp]o       :CtrlPBookmarkDir<CR>
 
 " Toggle Undotree window with Cmd-u
 nnoremap <D-u> :UndotreeToggle<CR>

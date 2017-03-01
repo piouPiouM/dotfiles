@@ -16,5 +16,5 @@
 # Define Markdown
 --type-set=markdown=ext:md,markdown
 
-# Drupal stuff
---type-add=php=.module,.inc,.install,.view,.engine
+# Define Drupal 7
+--type-set=d7=ext:php,module,inc,install,view,engine,info

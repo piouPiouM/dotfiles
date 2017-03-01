@@ -1,3 +1,5 @@
+BREW_PREFIX=`brew --prefix`
+
 export LC_CTYPE=fr_FR.UTF-8
 export LC_ALL=fr_FR.UTF-8
 
@@ -10,9 +12,9 @@ export XDG_CACHE_HOME=${XDG_CACHE_HOME:=~/.cache}
 export PATH=/usr/local/sbin:$HOME/Applications/Scripts:$PATH
 
 # z.sh
-export _Z_DATA=$XDG_DATA_HOME/z/z
-if [ -s "/usr/local/etc/profile.d/z.sh" ]; then
-  source /usr/local/etc/profile.d/z.sh
+if [ -s "$BREW_PREFIX/etc/profile.d/z.sh" ]; then
+  export _Z_DATA=$XDG_DATA_HOME/z/z
+  source $BREW_PREFIX/etc/profile.d/z.sh
 fi
 
 # ruby
@@ -21,7 +23,7 @@ if which ruby >/dev/null && which gem >/dev/null; then
 fi
 
 # node
-export NODE_PATH=`brew --prefix`/lib/node_modules
+export NODE_PATH=$BREW_PREFIX/lib/node_modules
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 if which yarn >/dev/null; then
