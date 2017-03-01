@@ -3,7 +3,7 @@
 [color]
   ui = auto
 [core]
-  excludesfile = ~/.gitignore_global
+  excludesfile = ~/.config/git/ignore
   editor = vim
   whitespace = -trailing-space
 
@@ -102,4 +102,4 @@
   prereleaseSuffix = -rc
   prereleaseSuffix = .rc
 [include]
-  path = ~/.local/gitconfig
+  path = ~/.local/git/config
