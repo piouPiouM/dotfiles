@@ -130,7 +130,7 @@ Plug 'cohama/lexima.vim'
 
 Plug 'luochen1990/rainbow', { 'on': ['RainbowToggle', 'RainbowToggleOn', 'RainbowToggleOff'] }
 
-Plug 'vim-utils/vim-troll-stopper'
+"Plug 'vim-utils/vim-troll-stopper'
 
 " }}}1
 " Section: Syntax {{{1
