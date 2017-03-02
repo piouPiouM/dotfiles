@@ -1,1 +1,1 @@
-hi CursorLine guibg=#343b48 ctermbg=242
+hi CursorLine guibg=#2f3642 ctermbg=240
