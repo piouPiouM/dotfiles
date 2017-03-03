@@ -1,5 +1,5 @@
 if has('nvim')
-  call plug#begin($XDG_DATA_HOME . '/bundle')
+  call plug#begin($XDG_DATA_HOME . '/nvim/bundle')
 else
   call plug#begin('~/.vim/bundle')
 endif
@@ -220,10 +220,16 @@ Plug 'AfterColors.vim'
 
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'altercation/vim-colors-solarized'
+
 Plug 'iCyMind/NeoSolarized' " Neovim
 Plug 'MaxSt/FlatColor' " Neovim
 Plug 'joshdick/onedark.vim' " Neovim
+
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
+
+Plug 'w0ng/vim-hybrid'
+Plug 'easysid/mod8.vim'
+Plug 'chriskempson/base16-vim'
 
 " :ColorToggle to toggle hex to colors
 Plug 'lilydjwg/colorizer', { 'on': 'ColorToggle' }

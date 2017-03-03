@@ -25,7 +25,7 @@ endif
 " ----------------
 
 filetype off
-source ~/.vim/config/vim-plug.vim
+source $XDG_CONFIG_HOME/nvim/config/vim-plug.vim
 filetype plugin indent on
 
 " }}}1
@@ -61,6 +61,7 @@ endif
 
 " Undo {{{2
 
+set noswapfile
 if has('persistent_undo')
   set undofile
 endif
@@ -98,11 +99,6 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
-
-"color NeoSolarized
-
-let g:onedark_terminal_italics = 1
-color onedark
 
 if has('cmdline_info')
   set ruler                                          " Show the ruler.
@@ -209,7 +205,16 @@ call ppm#source('config/commands.vim')
 call ppm#source('config/autocommands.vim')
 call ppm#source('config/filetypes.vim')
 
-if filereadable(expand("~/.local/vimrc"))
-  source ~/.local/vimrc
+if has('nvim')
+  if filereadable(expand("$XDG_DATA_HOME/nvim/init.vim"))
+    source $XDG_DATA_HOME/nvim/init.vim
+  endif
+else
+  if filereadable(expand("~/.local/vimrc"))
+    source ~/.local/vimrc
+  endif
 endif
 
+"colorscheme hybrid
+colorscheme base16-ocean
+"colorscheme base16-oceanicnext

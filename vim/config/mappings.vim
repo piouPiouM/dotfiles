@@ -91,7 +91,7 @@ inoremap <silent> <D-F> <ESC>:Ack<space>
 " Invoque CtrlP
 nmap     <space>  <Plug>[ctrlp]
 nnoremap <silent> <Plug>[ctrlp]<space> :CtrlPCurFile<CR>
-nnoremap <silent> <Plug>[ctrlp]p       :CtrlP<CR>
+nnoremap <silent> <Plug>[ctrlp]p       :CtrlPRoot<CR>
 nnoremap <silent> <Plug>[ctrlp]b       :CtrlPBuffer<CR>
 nnoremap <silent> <Plug>[ctrlp]r       :CtrlPMRU<CR>
 nnoremap <silent> <Plug>[ctrlp]t       :CtrlPBufTag<CR>
