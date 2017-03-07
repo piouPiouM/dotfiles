@@ -149,8 +149,8 @@ _prompt()
     BOLD="\[\033[1m\]"
     NORMAL="\[\033[m\]"
 
-    if [ -f `brew --prefix`/etc/bash_completion.d/git-prompt.sh ]; then
-      source `brew --prefix`/etc/bash_completion.d/git-prompt.sh
+    if [ -f $PPM_BREW_PREFIX/etc/bash_completion.d/git-prompt.sh ]; then
+      source $PPM_BREW_PREFIX/etc/bash_completion.d/git-prompt.sh
     fi
 
     _fn_exists '__git_ps1'

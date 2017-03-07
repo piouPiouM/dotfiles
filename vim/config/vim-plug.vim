@@ -204,6 +204,9 @@ Plug 'jaawerth/neomake-local-eslint-first', { 'for': 'javascript' }
 " :JsDoc - Insert JSDoc if the cursor is on `function` keyword line.
 Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
 
+" Completion for roxma/nvim-completion-manager
+Plug 'roxma/nvim-cm-tern',  { 'do': 'yarn global add tern && yarn install' }
+
 "Plug 'othree/yajs.vim', { 'for': 'javascript' }
 "Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
 "Plug 'gavocanov/vim-js-indent'
@@ -213,7 +216,7 @@ Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
 " }}}2
 " PHP {{{2
 
-Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
+"Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
 "Plug 'lvht/phpcd.vim', { 'for': 'php' , 'do': 'composer update' }
 
 " <F2> - step over

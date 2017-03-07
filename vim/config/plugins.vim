@@ -244,11 +244,16 @@ let g:jsdoc_enable_es6 = 1
 let g:echodoc_enable_at_startup = 1
 let g:deoplete#enable_at_startup = 1
 
+let g:LanguageClient_serverCommands = {
+      \ 'javascript': [$PPM_YARN_PREFIX . '/javascript-typescript-stdio'],
+      \ 'javascript.jsx': [$PPM_YARN_PREFIX . '/javascript-typescript-stdio'],
+      \ }
+
 let g:LanguageClient_signColumnAlwaysOn = 1
 let g:LanguageClient_diagnosticsDisplay = {
       \ 1: {
       \     "name": "Error",
-      \     "signText": "",
+      \     "signText": "",
       \     "signTexthl": "NeoMakeErrorSign"
       \ },
       \ 2: {
