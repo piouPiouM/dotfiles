@@ -241,13 +241,28 @@ let g:jsdoc_enable_es6 = 1
 " Section: Completion systems {{{1
 " ---------------------------
 
-let g:echodoc_enable_at_startup = 1
-let g:deoplete#enable_at_startup = 1
-
 let g:LanguageClient_serverCommands = {
       \ 'javascript': [$PPM_YARN_PREFIX . '/javascript-typescript-stdio'],
       \ 'javascript.jsx': [$PPM_YARN_PREFIX . '/javascript-typescript-stdio'],
       \ }
+
+let g:echodoc_enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = [
+      \ 'tern#Complete',
+      \ 'jspc#omni'
+      \ ]
+let g:deoplete#sources = {}
+let g:deoplete#sources['javascript.jsx'] = ['file', 'ternjs'] " buffer, ultisnips
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
+autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:UltiSnipsExpandTrigger="<C-j>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" close the preview window when you're not using it
+let g:SuperTabClosePreviewOnPopupClose = 1
+
 
 let g:LanguageClient_signColumnAlwaysOn = 1
 let g:LanguageClient_diagnosticsDisplay = {

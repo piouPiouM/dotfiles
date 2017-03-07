@@ -143,8 +143,8 @@ Plug 'luochen1990/rainbow', { 'on': ['RainbowToggle', 'RainbowToggleOn', 'Rainbo
 
 "Plug 'vim-utils/vim-troll-stopper'
 
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'ervandew/supertab'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ervandew/supertab'
 
 " }}}1
 " Section: External tools {{{1
@@ -163,7 +163,7 @@ Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer ru
 " (Optional) Showing function signature and inline doc.
 Plug 'Shougo/echodoc.vim'
 
-Plug 'roxma/nvim-completion-manager'
+"Plug 'roxma/nvim-completion-manager'
 
 " (optional) javascript completion
 "Plug 'roxma/nvim-cm-tern',  {'do': 'yarn install'}
@@ -204,8 +204,15 @@ Plug 'jaawerth/neomake-local-eslint-first', { 'for': 'javascript' }
 " :JsDoc - Insert JSDoc if the cursor is on `function` keyword line.
 Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
 
+Plug 'ternjs/tern_for_vim', {
+      \ 'do': 'yarn install',
+      \ 'for': ['javascript', 'javascript.jsx']
+      \ }
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+
 " Completion for roxma/nvim-completion-manager
-Plug 'roxma/nvim-cm-tern',  { 'do': 'yarn global add tern && yarn install' }
+"Plug 'roxma/nvim-cm-tern',  { 'do': 'yarn global add tern && yarn install' }
 
 "Plug 'othree/yajs.vim', { 'for': 'javascript' }
 "Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
