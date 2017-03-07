@@ -93,12 +93,22 @@ nmap     <space>  <Plug>[ctrlp]
 nnoremap <silent> <Plug>[ctrlp]<space> :CtrlPCurFile<CR>
 nnoremap <silent> <Plug>[ctrlp]p       :CtrlPRoot<CR>
 nnoremap <silent> <Plug>[ctrlp]b       :CtrlPBuffer<CR>
-nnoremap <silent> <Plug>[ctrlp]r       :CtrlPMRU<CR>
+nnoremap <silent> <Plug>[ctrlp]m       :CtrlPMRU<CR>
 nnoremap <silent> <Plug>[ctrlp]t       :CtrlPBufTag<CR>
 nnoremap <silent> <Plug>[ctrlp]o       :CtrlPBookmarkDir<CR>
 
+" Invoque Ranger
+nmap     <space>r <Plug>[ranger]
+nnoremap <silent> <Plug>[ranger]r :Ranger<CR>
+nnoremap <silent> <Plug>[ranger]w :RangerWorkingDirectory<CR>
+
 " Toggle Undotree window with Cmd-u
 nnoremap <D-u> :UndotreeToggle<CR>
+
+" LanguageClient
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " }}}1
 " Section: Dependent plugins {{{1
@@ -130,7 +140,7 @@ function! Custom_mapping_tabular()
 endfunction
 "call ppm#do_after_plugin("Custom_mapping_tabular", "tabular")
 
-map y <Plug>(highlightedyank)
+nmap ga <Plug>(UnicodeGA)
 
 " }}}1
 

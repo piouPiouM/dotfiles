@@ -14,10 +14,17 @@ Plug 'vim-airline/vim-airline-themes'
 " <space>p to list files from root directory
 " <space><space> to list current directory
 " <space>b to list buffers
-" <space>r to list MRU
+" <space>m to list MRU
 " <space>o to list bookmarked directories
 " <space>t to list tags within the current buffer
 Plug 'ctrlpvim/ctrlp.vim'
+
+" <space>rr to launch :Ranger
+" <space>rw to launch :RangerWorkingDirectory
+" Note: internally ranger.vim uses Bclose.vim
+" this one does not leave a tray [No name] buffer at startup
+Plug 'moll/vim-bbye' | Plug 'francoiscabrol/ranger.vim'
+command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>
 
 " <C-a>/<C-x> to increment dates, times
 Plug 'tpope/vim-speeddating'
@@ -61,11 +68,11 @@ Plug 'tpope/vim-repeat'
 " > </p>
 Plug 'tpope/vim-surround'
 
-" ga on a character reveals its representation in decimal, octal, and hex
-" Unicode character names, Vim digraphs (for <C-K>), emoji, HTML entities
-Plug 'tpope/vim-characterize'
+Plug 'chrisbra/unicode.vim'
 
+" <leader><leader>f
 Plug 'easymotion/vim-easymotion'
+
 Plug 'chaoren/vim-wordmotion'
 Plug 'lfv89/vim-interestingwords'
 Plug 'MattesGroeger/vim-bookmarks'
@@ -75,6 +82,10 @@ Plug 'terryma/vim-expand-region'
 
 Plug 'mhinz/vim-startify'
 "Plug 'hecal3/vim-leader-guide'
+
+" M-p to cycle backward through the history of yanks
+" M-P to cycle forwards through the history of yanks
+Plug 'maxbrunsfeld/vim-yankstack'
 
 " y to highlight yank
 Plug 'machakann/vim-highlightedyank'
@@ -132,6 +143,31 @@ Plug 'luochen1990/rainbow', { 'on': ['RainbowToggle', 'RainbowToggleOn', 'Rainbo
 
 "Plug 'vim-utils/vim-troll-stopper'
 
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'ervandew/supertab'
+
+" }}}1
+" Section: External tools {{{1
+
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+
+" }}}1
+" Section: Language Server Protocol {{{1
+
+" (optional) language server protocol framework
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+
+" (optional) php completion via LanguageClient-neovim
+Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
+
+" (Optional) Showing function signature and inline doc.
+Plug 'Shougo/echodoc.vim'
+
+Plug 'roxma/nvim-completion-manager'
+
+" (optional) javascript completion
+"Plug 'roxma/nvim-cm-tern',  {'do': 'yarn install'}
+
 " }}}1
 " Section: Syntax {{{1
 " ---------------
@@ -164,6 +200,9 @@ Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
 Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
 Plug 'jaawerth/neomake-local-eslint-first', { 'for': 'javascript' }
+
+" :JsDoc - Insert JSDoc if the cursor is on `function` keyword line.
+Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
 
 "Plug 'othree/yajs.vim', { 'for': 'javascript' }
 "Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }

@@ -14,7 +14,7 @@ export PATH=$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$HOME/Applications/Scripts:$PATH
 # z.sh
 if [ -s "$BREW_PREFIX/etc/profile.d/z.sh" ]; then
   export _Z_DATA=$XDG_DATA_HOME/z/z
-  source $BREW_PREFIX/etc/profile.d/z.sh
+  . $BREW_PREFIX/etc/profile.d/z.sh
 fi
 
 # ruby

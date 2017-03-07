@@ -2,5 +2,6 @@
 
 autocmd FileType php setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType php setlocal expandtab
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+"autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+autocmd FileType php LanguageClientStart
 

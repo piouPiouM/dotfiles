@@ -68,6 +68,9 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 endif
 
+let g:ranger_map_keys = 0
+let g:loaded_netrwPlugin = 'disable'
+
 " }}}1
 " Section: Airline {{{1
 " ------------------
@@ -100,6 +103,8 @@ let g:airline_mode_map = {
   \ }
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#trailing_format = '¬[%s]'
 let g:airline#extensions#whitespace#mixed_indent_format = '▸[%s]'
@@ -228,11 +233,42 @@ let g:gitgutter_override_sign_column_highlight = 0
 " Section: javascript-libraries-syntax {{{1
 " ------------------------------------
 
-let g:used_javascript_libs = 'jquery,underscore,requirejs,angularjs,handlebars,react,flux'
+let g:used_javascript_libs = 'jquery,underscore,react,flux,requirejs,angularjs,handlebars'
+
+let g:jsdoc_enable_es6 = 1
 
 " }}}1
-" Section: YouCompleteMe {{{1
-" ----------------------
+" Section: Completion systems {{{1
+" ---------------------------
+
+let g:echodoc_enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
+
+let g:LanguageClient_signColumnAlwaysOn = 1
+let g:LanguageClient_diagnosticsDisplay = {
+      \ 1: {
+      \     "name": "Error",
+      \     "signText": "",
+      \     "signTexthl": "NeoMakeErrorSign"
+      \ },
+      \ 2: {
+      \     "name": "Warning",
+      \     "signText": "",
+      \     "signTexthl": "NeoMakeWarningSign"
+      \ },
+      \ 3: {
+      \     "name": "Information",
+      \     "texthl": "LanguageClientInformation",
+      \     "signText": "",
+      \     "signTexthl": "SignInformation"
+      \ },
+      \ 4: {
+      \     "name": "Hint",
+      \     "texthl": "LanguageClientHint",
+      \     "signText": "",
+      \     "signTexthl": "SignHint"
+      \ }
+      \ }
 
 "let g:ycm_key_list_select_completion = ['<TAB>']
 
@@ -372,5 +408,15 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
       \ 'md'      : '',
       \ 'markdown': '',
       \ }
+
+" }}}1
+" Section: lexima {{{1
+
+" Don't close if add pair just before a word
+call lexima#add_rule({'char': '(', 'at': '\%#[0-9a-zA-Z]', 'leave': 0})
+call lexima#add_rule({'char': '[', 'at': '\%#[0-9a-zA-Z]', 'leave': 0})
+call lexima#add_rule({'char': '{', 'at': '\%#[0-9a-zA-Z]', 'leave': 0})
+call lexima#add_rule({'char': '"', 'at': '\%#[0-9a-zA-Z]', 'leave': 0})
+call lexima#add_rule({'char': "'", 'at': '\%#[0-9a-zA-Z]', 'leave': 0})
 
 " }}}1

@@ -35,6 +35,13 @@ task :node do
   end
 end
 
+desc "Install shell environment"
+task :shell do
+  if command?('brew')
+    system %Q{brew install z w3m highlight atool mediainfo ranger}
+  end
+end
+
 desc "Install web dev environment"
 task :webdev do
   if command?('brew')
@@ -67,6 +74,15 @@ task :neovim do
   end
 end
 
+desc "Post-install neovim environment"
+task :neovim_post do
+  if command?('brew')
+    system %Q{brew unlink php56}
+    system %Q{brew install php71 brew-php-switcher fzf}
+  end
+end
+
+
 desc "Install applications"
 task :apps do
   system %Q{brew tap caskroom/cask}
@@ -96,7 +112,7 @@ def initialize_homebrew
   puts "> Updating Homebrew"
   system %Q{brew update && brew upgrade && brew tap homebrew/dupes}
   puts "> Installing environment"
-  system %Q{brew install bash-completion wget tree cloc ack node par macvim trash tidy-html5 editorconfig}
+  system %Q{brew install bash-completion wget tree cloc ack node par trash tidy-html5 editorconfig}
   system %Q{brew tap universal-ctags/universal-ctags}
   system %Q{brew install --HEAD universal-ctags}
 end

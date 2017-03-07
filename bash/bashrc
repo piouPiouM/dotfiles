@@ -166,3 +166,5 @@ _prompt()
     export PS1="$P1"
 }
 _prompt
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

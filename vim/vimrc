@@ -50,7 +50,7 @@ set modelines=0
 set history=300
 set lazyredraw " Do not redraw while running macros (much faster).
 set nofsync    " Let the OS decide when it's appropriate to flush the cache, rather than vim (much faster).
-set completeopt-=preview " Disable Scratch window
+"set completeopt-=preview " Disable Scratch window
 
 " used by gf to follow ES6 import - Ctrl-o to come back
 set suffixesadd=.js,.jsx,.styl,.css,.scss
@@ -85,7 +85,6 @@ endif
 
 set splitbelow splitright  " Split window at right bottom.
 set relativenumber         " Always show line numbers, with relative position.
-set background=dark        " I like black color schemes.
 set cursorline             " Highlight current line.
 set scrolloff=3            " Provide some context when editing.
 set clipboard=unnamedplus
@@ -141,7 +140,7 @@ set tags+=/
 " }}}2
 " Statusline {{{2
 
-set showmode                                 " Display the current mode
+set noshowmode                                 " Hide mode line text since it's already in Airline
 
 if !exists('*airline#update_statusline')
   set statusline=%-3.3n\                       " buffer number
@@ -181,6 +180,7 @@ set softtabstop=2    " When hitting <BS>, pretend like a tab is removed, even if
 set expandtab        " Expand tabs by default.
 set copyindent       " Copy the previous indentation on autoindenting.
 set wrap             " Wrap lines.
+set nojoinspaces     " Only insert 1 space
 
 set formatoptions+=1 " When wrapping paragraphs, don't end lines with 1-letter words.
 if v:version > 703 || v:version == 703 && has("patch541")
@@ -194,7 +194,8 @@ if executable('par')
 endif
 
 " }}}1
-
+" Section: Extra configuration {{{1
+" ----------------------------
 if ! has('nvim')
   call ppm#source('config/compat.vim')
 endif
@@ -215,6 +216,13 @@ else
   endif
 endif
 
+" }}}1
+" Section: Colorscheme {{{1
+" --------------------
+
+set background=dark
 "colorscheme hybrid
 colorscheme base16-ocean
 "colorscheme base16-oceanicnext
+
+" }}}1
