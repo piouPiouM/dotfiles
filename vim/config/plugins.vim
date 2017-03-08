@@ -262,6 +262,7 @@ let g:UltiSnipsExpandTrigger="<C-j>"
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " close the preview window when you're not using it
 let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabDefaultCompletionType = 'context'
 
 
 let g:LanguageClient_signColumnAlwaysOn = 1

@@ -196,19 +196,21 @@ Plug 'KabbAmine/vCoolor.vim', {
 " }}}2
 " JavaScript {{{2
 
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
-Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
-Plug 'jaawerth/neomake-local-eslint-first', { 'for': 'javascript' }
+Plug 'jaawerth/neomake-local-eslint-first', { 'for': ['javascript', 'javascript.jsx'] }
 
 " :JsDoc - Insert JSDoc if the cursor is on `function` keyword line.
-Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
+Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx'] }
 
 Plug 'ternjs/tern_for_vim', {
       \ 'do': 'yarn install',
       \ 'for': ['javascript', 'javascript.jsx']
       \ }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'carlitux/deoplete-ternjs', {
+      \ 'do': 'yarn global add tern',
+      \ 'for': ['javascript', 'javascript.jsx']
+      \ }
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 
 " Completion for roxma/nvim-completion-manager
