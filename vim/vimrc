@@ -110,6 +110,11 @@ set list                       " Show invisible characters.
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,nbsp:․
 set showbreak=↪
 
+" - don't give the "ATTENTION" message when an existing swap file is found.
+" - don't give |ins-completion-menu| messages.  For example,
+" '-- XXX completion (YYY)', 'match 1 of 2', 'The only match',
+set shortmess+=Ac
+
 " Folding rules {{{2
 
 set foldenable        " Enable folding.

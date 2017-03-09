@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 export LC_CTYPE=fr_FR.UTF-8
 export LC_ALL=fr_FR.UTF-8
 

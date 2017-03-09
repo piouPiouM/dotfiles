@@ -248,6 +248,9 @@ let g:LanguageClient_serverCommands = {
 
 let g:echodoc_enable_at_startup = 1
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#max_menu_width = 60
+let g:deoplete#file#enable_buffer_path = 1
 let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.javascript = [
       \ 'tern#Complete',
@@ -257,7 +260,7 @@ let g:deoplete#sources = {}
 let g:deoplete#sources['javascript.jsx'] = ['file', 'ternjs'] " buffer, ultisnips
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
-autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+"autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 let g:UltiSnipsExpandTrigger="<C-j>"
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " close the preview window when you're not using it

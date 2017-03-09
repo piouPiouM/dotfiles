@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # source user completion directory definitions
 if [[ -d $USER_BASH_COMPLETION_DIR && -r $USER_BASH_COMPLETION_DIR && \
     -x $USER_BASH_COMPLETION_DIR ]]; then
