@@ -58,7 +58,6 @@ set modelines=0
 set history=300
 set lazyredraw " Do not redraw while running macros (much faster).
 set nofsync    " Let the OS decide when it's appropriate to flush the cache, rather than vim (much faster).
-"set completeopt-=preview " Disable Scratch window
 
 " used by gf to follow ES6 import - Ctrl-o to come back
 set suffixesadd=.js,.jsx,.styl,.css,.scss
@@ -122,7 +121,10 @@ set foldmethod=marker " Detect triple-{ style fold marker.
 " }}}2
 " Command line stuff {{{2
 
-set wildmode=list:longest " Bash tab style.
+"set wildmenu
+set wildmode=list:longest,full " Bash tab style.
+set completeopt=menu,menuone,longest
+"set completeopt-=preview " Disable Scratch window
 
 " Ignore these filenames during enhanced command line completion:
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files

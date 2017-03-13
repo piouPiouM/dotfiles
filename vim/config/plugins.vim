@@ -385,11 +385,11 @@ let g:lion_squeeze_spaces = 1
 " }}}1
 " Section: VCoolor {{{1
 
-let g:vcoolor_lowercase  = 1
-let g:vcoolor_map        = '<D-C>'
-let g:vcool_ins_rgb_map  = '<D-R>' " Insert rgb color.
-let g:vcool_ins_hsl_map  = '<D-V>' " Insert hsl color.
-let g:vcool_ins_rgba_map = '<D-W>' " Insert rgba color.
+let g:vcoolor_lowercase  = 0
+let g:vcoolor_map        = '<C-O>h'
+let g:vcool_ins_rgb_map  = '<C-O>r' " Insert rgb color
+let g:vcool_ins_hsl_map  = '<C-O>s' " Insert hsl color
+let g:vcool_ins_rgba_map = '<C-O>a' " Insert rgba color
 
 " }}}1
 " Section: colorizer {{{1

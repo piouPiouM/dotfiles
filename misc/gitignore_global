@@ -2,3 +2,5 @@
 *~
 tags
 .tern-project
+.tern-port
+*.swp

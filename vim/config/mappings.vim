@@ -15,11 +15,11 @@ let mapleader=","
 nnoremap j gj
 nnoremap k gk
 
-" Change inside quotes with Cmd-" and Cmd-'
-nnoremap <D-'> ci'
-nnoremap <D-"> ci"
-inoremap <D-'> <ESC>ci'
-inoremap <D-"> <ESC>ci"
+" Change inside quotes with ," and ,'
+nnoremap <leader>' ci'
+nnoremap <leader>" ci"
+inoremap <leader>' <ESC>ci'
+inoremap <leader>" <ESC>ci"
 
 " When typing a string, your quotes auto complete. Move past the quote
 " while still in insert mode by hitting Ctrl-a. Example:
@@ -54,9 +54,9 @@ nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 " Close the Quickfix window with <leader>//
 nnoremap <Leader>// :cclose<CR>
 
-" Cmd-* for highlight all occurrences of current word (like '*' but without moving)
+" ¨* for highlight all occurrences of current word (like '*' but without moving)
 " http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches
-nnoremap <silent> <D-*> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+nnoremap <silent> ¨* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 " Omnicomplete with Ctrl+space
 nnoremap <C-space> <C-x><C-o>

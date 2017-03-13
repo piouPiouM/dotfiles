@@ -17,4 +17,4 @@
 --type-set=markdown=ext:md,markdown
 
 # Define Drupal 7
---type-set=d7=ext:php,module,inc,install,view,engine,info
+--type-set=d7=ext:php,tpl.php,module,inc,install,view,engine,info
