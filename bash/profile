@@ -36,7 +36,7 @@ if which yarn >/dev/null; then
   PATH=$PPM_YARN_PREFIX:$PATH
 fi
 
-export PATH
+export PATH=~/.local/bin:$PATH
 export NODE_PATH
 export NVM_DIR
 export PPM_BREW_PREFIX

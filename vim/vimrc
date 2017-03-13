@@ -40,8 +40,16 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 set t_Co=256
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+" set Vim-specific sequences for RGB colors
+" https://github.com/vim/vim/issues/993#issuecomment-255651605
+"let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" beam cursor in insert mode
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=2
 
 set mouse=a    " Enable mouse support.
@@ -89,15 +97,6 @@ set cursorline             " Highlight current line.
 set scrolloff=3            " Provide some context when editing.
 set clipboard=unnamedplus
 set guifont=FantasqueSansMono\ Nerd\ Font:13
-
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
 
 if has('cmdline_info')
   set ruler                                          " Show the ruler.

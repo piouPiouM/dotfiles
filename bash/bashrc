@@ -3,6 +3,9 @@
 export EDITOR='nvim'
 export SVN_EDITOR='nvim'
 
+# fzf
+export FZF_DEFAULT_OPTS='--multi --border --inline-info'
+
 # Alias fonctionnels
 alias ls="ls -GF"
 alias ll="ls -lh"
