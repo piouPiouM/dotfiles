@@ -11,6 +11,8 @@ print_powerline() {
   if [[ $1 == "left" ]]; then
     segment "session_info" colour000 colour004 100
     segment "tmux_window_count" colour007 colour006 50
+    segment "lan_ip" colour007 colour033 100
+    #segment "wan_ip" colour007 colour033 100
     #segment "arc_accepted" colour000 colour010 120
     #segment "arc_needs_revision" colour000 colour009 120
     #segment "arc_needs_review" colour000 colour013 120
@@ -18,9 +20,13 @@ print_powerline() {
   else
      #segment "online" colour000 colour011 110
      segment "now_playing" colour003 colour000 200
-     segment "uptime" colour000 colour004 143
+     #segment "uptime" colour000 colour004 143
     #segment "tw_inbox" colour000 colour09
-    segment "datetime" colour000 colour004 100
+    #segment "datetime" colour000 colour004 100
+    #segment "cpu" colour007 colour208 100
+    segment "ifstat" colour007 colour197 100
+    #segment "tmux_mem_cpu_load" colour000 colour007 100
+    segment "online" colour007 colour197 100
     segment "hostname" colour000 colour004 140
   fi
 

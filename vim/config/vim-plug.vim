@@ -19,6 +19,27 @@ Plug 'vim-airline/vim-airline-themes'
 " <space>t to list tags within the current buffer
 Plug 'ctrlpvim/ctrlp.vim'
 
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'wincent/loupe'
+Plug 'wincent/scalpel'
+Plug 'chase/vim-ansible-yaml'
+Plug 'wincent/vim-docvim'
+Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment'
+Plug 'coderifous/textobj-word-column.vim'
+Plug 'lucapette/vim-textobj-underscore'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-lastpat'
+Plug 'whatyouhide/vim-textobj-xmlattr'
+Plug 'sgur/vim-textobj-parameter'
+Plug 'reedes/vim-textobj-sentence'
+Plug 'beloglazov/vim-textobj-quotes'
+Plug 'reedes/vim-lexical'
+Plug 'reedes/vim-thematic'
+Plug 'tpope/vim-abolish'
+Plug 'ryujinno/shrinkmap.vim'
+" Plug 'derekwyatt/vim-fswitch'
+" Plug 'pondrejk/vim-readability'
+
 " <space>rr to launch :Ranger
 " <space>rw to launch :RangerWorkingDirectory
 " Note: internally ranger.vim uses Bclose.vim
@@ -266,6 +287,7 @@ Plug 'tommcdo/vim-lion'
 " Section: Colorscheme bundles {{{1
 " ----------------------------
 
+Plug 'wincent/pinnacle'
 Plug 'ryanoasis/vim-devicons'
 Plug 'AfterColors.vim'
 

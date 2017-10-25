@@ -17,6 +17,13 @@ run_segment() {
       opts="--short"
     fi
   fi
-  echo -n "  $(hostname ${opts})"
+  if shell_is_osx; then
+    echo -n " "
+  elif shell_is_linux; then
+    echo -n " "
+  elif shell_is_bsd; then
+    echo -n " "
+  fi
+  echo -n "$(hostname ${opts})"
   return 0
 }

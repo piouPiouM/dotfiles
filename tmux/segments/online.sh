@@ -6,6 +6,6 @@ run_segment() {
   if [ $online -eq 0 ]; then
     echo ""
   else
-    echo "⌔ OFFLINE!"
+    echo " OFFLINE"
   fi
 }
