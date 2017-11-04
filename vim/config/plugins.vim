@@ -2,22 +2,25 @@
 "
 " Plugins settings
 "
-"  1. CtrlP
-"  2. Airline
-"  3. IndenLine
-"  4. Syntastic
-"  5. php.vim (syntax)
-"  6. Mustache and Handlebars mode
-"  7. Vim Markdown
-"  8. vim-expand-region
-"  9. vim-signify
-" 10. javascript-libraries-syntax
-" 11. YouCompleteMe
-" 12. vim-bookmarks
-" 13. EditorConfig
-" 14. vim-wordmotion
+"  1. Colorschemes
+"  2. CtrlP
+"  3. Airline
+"  4. vim-polyglot
+"  5. IndenLine
+"  6. Syntastic
+"  7. php.vim (syntax)
+"  8. Mustache and Handlebars mode
+"  9. Vim Markdown
+" 10. vim-expand-region
+" 11. vim-signify
+" 12. javascript-libraries-syntax
+" 13. YouCompleteMe
+" 14. vim-bookmarks
+" 15. EditorConfig
+" 16. vim-wordmotion
 
 " Section: Colorschemes {{{1
+" ---------------------
 
 let g:solarized_menu = 0
 let g:neosolarized_italic = 1
@@ -110,7 +113,14 @@ let g:airline#extensions#whitespace#trailing_format = '¬[%s]'
 let g:airline#extensions#whitespace#mixed_indent_format = '▸[%s]'
 
 " }}}1
+" Section: vim-polyglot {{{1
+" ---------------------
+
+let g:polyglot_disabled = ['elm']
+
+" }}}1
 " Section: IndentLine {{{1
+" -------------------
 
 let g:indentLine_char = "╎"
 

@@ -24,19 +24,57 @@ Plug 'wincent/loupe'
 Plug 'wincent/scalpel'
 Plug 'chase/vim-ansible-yaml'
 Plug 'wincent/vim-docvim'
-Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment'
+
+" DO NOT REMOVE
+Plug 'kana/vim-textobj-user'
+
+" Adds text objects for word-based columns in Vim
+" ac
+" ic
+" aC
+" iC
 Plug 'coderifous/textobj-word-column.vim'
+
+
+" a_
+" i_
 Plug 'lucapette/vim-textobj-underscore'
+
+" Provides text objects to select a block of lines which are similarly indented to the current line
+" ai to select a block of lines which are similarly indented to the current line
+" ii to select a block of lines which are similarly indented to the current line, without empty lines
+" aI
+" iI
 Plug 'kana/vim-textobj-indent'
+
+" Provides text objects to select an area which is matched to last-pattern
+" a/ to select next area (same as n)
+" i/ to select next area (same as n)
+" a? to select previous area (same as N)
+" i? to select previous area (same as N)
 Plug 'kana/vim-textobj-lastpat'
+
+" Provides two text objects: ix and ax
+" ix works with the inner attribute, with no surrounding whitespace
+" ax includes the whitespace before the attribute
 Plug 'whatyouhide/vim-textobj-xmlattr'
+
+" Provides two text objects: i, and a,
+" i, to inner parameter object
+" a, to a parameter object including whitespaces and comma
+" i2, is similar to a, except trailing whitespace characters (especially for first parameter)
 Plug 'sgur/vim-textobj-parameter'
-Plug 'reedes/vim-textobj-sentence'
-Plug 'beloglazov/vim-textobj-quotes'
-Plug 'reedes/vim-lexical'
-Plug 'reedes/vim-thematic'
-Plug 'tpope/vim-abolish'
+
+"Plug 'reedes/vim-textobj-sentence'
+Plug 'reedes/vim-lexical', { 'for': ['markdown', 'textile', 'text'] }
+
+" :ShrinkMapToggle or <leader>ss - Open or close ShrinkMap sidebar
+" :ShrinkMapOpen   or <leader>so - Open ShrinkMap sidebar
+" :ShrinkMapClose  or <leader>sc - Close ShrinkMap sidebar
+" :ShrinkMapUpdate or <leader>su - Draw Braille patterns to ShrinkMap sidebar and highlight the current window in ShinkMap sidebar
 Plug 'ryujinno/shrinkmap.vim'
+
+"Plug 'tpope/vim-abolish'
 " Plug 'derekwyatt/vim-fswitch'
 " Plug 'pondrejk/vim-readability'
 
@@ -214,6 +252,29 @@ Plug 'KabbAmine/vCoolor.vim', {
       \ 'for': ['css', 'scss', 'less', 'javascript', 'php', 'vim'],
       \ }
 
+" Elm {{{2
+
+" <Leader>m to compile the current buffer.
+" <Leader>b to compile the Main.elm file in the project.
+" <Leader>t to runs the tests of the current buffer or 'tests/TestRunner'.
+" <Leader>r to opens an elm repl in a subprocess.
+" <Leader>e to shows the detail of the current error or warning.
+" <Leader>d to shows the type and docs for the word under the cursor.
+" <Leader>w to opens the docs web page for the word under the cursor.
+" :ElmMake [filename] calls elm-make with the given file. If no file is given it uses the current file being edited.
+" :ElmMakeMain attempts to call elm-make with "Main.elm".
+" :ElmTest calls elm-test with the given file. If no file is given it runs it in the root of your project.
+" :ElmRepl runs elm-repl, which will return to vim on exiting.
+" :ElmErrorDetail shows the detail of the current error in the quickfix window.
+" :ElmShowDocs queries elm-oracle, then echoes the type and docs for the word under the cursor.
+" :ElmBrowseDocs queries elm-oracle, then opens docs web page for the word under the cursor.
+" :ElmFormat formats the current buffer with elm-format.
+Plug 'elmcast/elm-vim', {
+      \ 'do': 'yarn global add elm elm-test elm-oracle elm-format'
+      \ 'for': ['elm']
+      \ }
+Plug 'pbogut/deoplete-elm'
+
 " }}}2
 " JavaScript {{{2
 
@@ -289,7 +350,6 @@ Plug 'tommcdo/vim-lion'
 
 Plug 'wincent/pinnacle'
 Plug 'ryanoasis/vim-devicons'
-Plug 'AfterColors.vim'
 
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'altercation/vim-colors-solarized'
@@ -306,6 +366,9 @@ Plug 'chriskempson/base16-vim'
 
 " :ColorToggle to toggle hex to colors
 Plug 'lilydjwg/colorizer', { 'on': 'ColorToggle' }
+
+Plug 'AfterColors.vim'
+Plug 'reedes/vim-thematic'
 
 " }}}1
 
