@@ -20,8 +20,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'wincent/loupe'
-Plug 'wincent/scalpel'
+"Plug 'wincent/scalpel'
 Plug 'chase/vim-ansible-yaml'
 Plug 'wincent/vim-docvim'
 
@@ -153,7 +152,16 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'junegunn/vim-emoji'
 
 "Plug 'kshenoy/vim-signature'
-"Plug 'unimpaired.vim'
+"Plug 'tpope/unimpaired.vim'
+
+
+" <localleader>m to highlight <cword>
+" <localleader>w to highlight <cword>, respect word boundaries
+" <localleader>c to clear the manually added highlight under current cursor
+" <localleader>M to clear all manually added highlight
+" <localleader>j to highlight automatically a word under the cursor
+" <localleader>] to highlight jumpable 'tag'
+Plug 't9md/vim-quickhl'
 
 " }}}1
 " Section: Dev Tools {{{1
@@ -186,14 +194,16 @@ Plug 'airblade/vim-gitgutter'
 " <leader>aw to (un)wrap function arguments, lists and dictionaries
 Plug 'FooSoft/vim-argwrap'
 
-"Plug 'majutsushi/tagbar', { 'tag': 'v2.7' }
+Plug 'majutsushi/tagbar', { 'tag': 'v2.7' }
 
 " <D-F> - :Ack
 Plug 'mileszs/ack.vim', { 'on': 'Ack' }
 
 Plug 'benekastah/neomake'
-Plug 'Tag-Signature-Balloons'
-"Plug 'Yggdroot/indentLine'
+
+"Plug 'vim-scripts/Tag-Signature-Balloons'
+
+Plug 'Yggdroot/indentLine'
 
 " Auto close parentheses and repeat by dot dot dot
 Plug 'cohama/lexima.vim'
@@ -204,6 +214,8 @@ Plug 'luochen1990/rainbow', { 'on': ['RainbowToggle', 'RainbowToggleOn', 'Rainbo
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " }}}1
 " Section: External tools {{{1
@@ -231,9 +243,7 @@ Plug 'Shougo/echodoc.vim'
 " Section: Syntax {{{1
 " ---------------
 
-" Global {{{2
-
-Plug 'sheerun/vim-polyglot'
+" Versionning {{{2
 
 " Git syntax highlighting
 Plug 'tpope/vim-git'
@@ -252,6 +262,7 @@ Plug 'KabbAmine/vCoolor.vim', {
       \ 'for': ['css', 'scss', 'less', 'javascript', 'php', 'vim'],
       \ }
 
+" }}}2
 " Elm {{{2
 
 " <Leader>m to compile the current buffer.
@@ -270,7 +281,7 @@ Plug 'KabbAmine/vCoolor.vim', {
 " :ElmBrowseDocs queries elm-oracle, then opens docs web page for the word under the cursor.
 " :ElmFormat formats the current buffer with elm-format.
 Plug 'elmcast/elm-vim', {
-      \ 'do': 'yarn global add elm elm-test elm-oracle elm-format'
+      \ 'do': 'yarn global add elm elm-test elm-oracle elm-format',
       \ 'for': ['elm']
       \ }
 Plug 'pbogut/deoplete-elm'
@@ -325,6 +336,16 @@ Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'joonty/vdebug', { 'for': 'php' }
 
 " }}}2
+" Tabular data {{{2
+
+Plug 'chrisbra/csv.vim'
+
+" }}}2
+" Polyglot {{{2
+
+Plug 'sheerun/vim-polyglot'
+
+" }}}2
 " }}}1
 " Section: Text Manipulation {{{1
 " --------------------------
@@ -348,26 +369,33 @@ Plug 'tommcdo/vim-lion'
 " Section: Colorscheme bundles {{{1
 " ----------------------------
 
+" :HLT to reveal a linked list of highlighting from the top-level down to
+"      the bottom level for the cursor position.
+" :HLT! same as :HTL but will execute on every CursorMoved event.
+" <leader>htl same as :HTL.
+Plug 'gerw/vim-HiLinkTrace'
 Plug 'wincent/pinnacle'
 Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'altercation/vim-colors-solarized'
+"Plug 'chriskempson/vim-tomorrow-theme'
+"Plug 'altercation/vim-colors-solarized'
 
 Plug 'iCyMind/NeoSolarized' " Neovim
-Plug 'MaxSt/FlatColor' " Neovim
-Plug 'joshdick/onedark.vim' " Neovim
+"Plug 'MaxSt/FlatColor' " Neovim
+"Plug 'joshdick/onedark.vim' " Neovim
 
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
+"Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
 Plug 'w0ng/vim-hybrid'
 Plug 'easysid/mod8.vim'
 Plug 'chriskempson/base16-vim'
+Plug 'cocopon/iceberg.vim'
 
 " :ColorToggle to toggle hex to colors
 Plug 'lilydjwg/colorizer', { 'on': 'ColorToggle' }
 
-Plug 'AfterColors.vim'
+Plug 'vim-scripts/AfterColors.vim'
 Plug 'reedes/vim-thematic'
 
 " }}}1

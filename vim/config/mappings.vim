@@ -9,6 +9,7 @@
 
 " Change leader to a comma because the backslash is a pain to type
 let mapleader=","
+let maplocalleader="ù"
 
 " Jump to the next row instead of to jump over the current line
 " when line wrapping enabled
@@ -35,15 +36,12 @@ inoremap <C-a> <ESC>wa
 nnoremap <silent> <leader>f <C-]>
 
 " Create window splits easier.
-nnoremap <silent> <leader>vv <C-w>v
-nnoremap <silent> <leader>ss <C-w>s
+nnoremap <silent> <space>vv <C-w>v
+nnoremap <silent> <space>ss <C-w>s
 
 " }}}1
 " Section: Everyday tasks {{{1
 " -----------------------
-
-" Save with sudo rights
-cmap w!! %!sudo tee % >/dev/null
 
 " Clear out search with //
 nnoremap <silent> // :nohlsearch<cr>
@@ -72,7 +70,7 @@ vmap gbl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <C
 
 " Show syntax highlighting groups for word under cursor
 " http://vimcasts.org/e/25
-nnoremap <C-S-P> :call <SID>SynStack()<CR>
+nnoremap <C-S-H> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
     return
@@ -102,13 +100,25 @@ nmap     <space>r <Plug>[ranger]
 nnoremap <silent> <Plug>[ranger]r :Ranger<CR>
 nnoremap <silent> <Plug>[ranger]w :RangerWorkingDirectory<CR>
 
-" Toggle Undotree window with Cmd-u
-nnoremap <D-u> :UndotreeToggle<CR>
+" Toggle Undotree window
+nnoremap <leader>u :UndotreeToggle<CR>
 
 " LanguageClient
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+" vim-quickhl
+nmap <localleader>m <Plug>(quickhl-manual-this)
+xmap <localleader>m <Plug>(quickhl-manual-this)
+nmap <localleader>w <Plug>(quickhl-manual-this-whole-word)
+xmap <localleader>w <Plug>(quickhl-manual-this-whole-word)
+nmap <localleader>c <Plug>(quickhl-manual-clear)
+vmap <localleader>c <Plug>(quickhl-manual-clear)
+nmap <localleader>M <Plug>(quickhl-manual-reset)
+xmap <localleader>M <Plug>(quickhl-manual-reset)
+nmap <localleader>j <Plug>(quickhl-cword-toggle)
+nmap <localleader>] <Plug>(quickhl-tag-toggle)
 
 " }}}1
 " Section: Dependent plugins {{{1

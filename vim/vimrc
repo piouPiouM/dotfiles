@@ -51,9 +51,6 @@ endif
 "let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 "let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=2
-
 set mouse=a    " Enable mouse support.
 set showmatch  " Show matching brackets/parenthesis
 set modelines=0
@@ -97,7 +94,8 @@ set relativenumber         " Always show line numbers, with relative position.
 set cursorline             " Highlight current line.
 set scrolloff=3            " Provide some context when editing.
 set clipboard=unnamedplus
-set guifont=FantasqueSansMono\ Nerd\ Font:13
+"set guifont=FantasqueSansMono\ Nerd\ Font:13
+set guifont=Hasklug\ Nerd\ Font\ Mono:13
 
 if has('cmdline_info')
   set ruler                                          " Show the ruler.
@@ -214,13 +212,12 @@ call ppm#source('config/commands.vim')
 call ppm#source('config/autocommands.vim')
 call ppm#source('config/filetypes.vim')
 
+if filereadable(expand("$HOME/.local/vimrc"))
+  source $HOME/.local/vimrc
+endif
 if has('nvim')
   if filereadable(expand("$XDG_DATA_HOME/nvim/init.vim"))
     source $XDG_DATA_HOME/nvim/init.vim
-  endif
-else
-  if filereadable(expand("~/.local/vimrc"))
-    source ~/.local/vimrc
   endif
 endif
 
@@ -230,7 +227,8 @@ endif
 
 set background=dark
 "colorscheme hybrid
-colorscheme base16-ocean
+"colorscheme base16-ocean
 "colorscheme base16-oceanicnext
+colorscheme iceberg
 
 " }}}1

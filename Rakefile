@@ -86,7 +86,6 @@ end
 desc "Install applications"
 task :apps do
   system %Q{brew tap caskroom/cask}
-  system %Q{brew install brew-cask}
 end
 
 def install_homebrew

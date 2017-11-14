@@ -1,23 +1,6 @@
 " plugins.vim
 "
-" Plugins settings
-"
-"  1. Colorschemes
-"  2. CtrlP
-"  3. Airline
-"  4. vim-polyglot
-"  5. IndenLine
-"  6. Syntastic
-"  7. php.vim (syntax)
-"  8. Mustache and Handlebars mode
-"  9. Vim Markdown
-" 10. vim-expand-region
-" 11. vim-signify
-" 12. javascript-libraries-syntax
-" 13. YouCompleteMe
-" 14. vim-bookmarks
-" 15. EditorConfig
-" 16. vim-wordmotion
+" Plugins settings.
 
 " Section: Colorschemes {{{1
 " ---------------------
@@ -78,8 +61,17 @@ let g:loaded_netrwPlugin = 'disable'
 " Section: Airline {{{1
 " ------------------
 
-let g:airline_theme='base16_ocean'
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+let g:airline_theme='iceberg'
+let g:airline_base16_improved_contrast = 1
+
 let g:airline_powerline_fonts=1
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_symbols.readonly = " "
 let g:airline_detect_paste=1
 "let g:airline_extensions = [
       "\ 'quickfix',
@@ -105,12 +97,13 @@ let g:airline_mode_map = {
   \ '' : 'S',
   \ }
 let g:airline#extensions#hunks#non_zero_only = 1
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#trailing_format = '¬[%s]'
 let g:airline#extensions#whitespace#mixed_indent_format = '▸[%s]'
+let g:airline#extensions#tagbar#flags = 's'
 
 " }}}1
 " Section: vim-polyglot {{{1
@@ -122,7 +115,10 @@ let g:polyglot_disabled = ['elm']
 " Section: IndentLine {{{1
 " -------------------
 
-let g:indentLine_char = "╎"
+let g:indentLine_char = "│"
+let g:indentLine_setColors = 1
+let g:indentLine_fileTypeExclude = ["markdown", "json", "help"]
+let g:indentLine_bufNameExclude = ["NERD_tree.*", "startify"]
 
 " }}}1
 " Section: Neomake {{{1
@@ -273,12 +269,14 @@ let g:deoplete#sources['javascript.jsx'] = ['file', 'ternjs'] " buffer, ultisnip
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
 "autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsExpandTrigger="<c-j>"
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " close the preview window when you're not using it
 let g:SuperTabClosePreviewOnPopupClose = 1
-let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabDefaultCompletionType = "<c-n>"
 
+call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
 
 let g:LanguageClient_signColumnAlwaysOn = 1
 let g:LanguageClient_diagnosticsDisplay = {
@@ -337,22 +335,17 @@ let g:startify_fortune_use_unicode = 1
 let g:startify_skiplist = [
       \ 'COMMIT_EDITMSG',
       \ ]
-let g:startify_bookmarks = [
-      \ '/var/www/atih/vagrant/www/internet/',
-      \ '/var/www/atih/vagrant/www/scansante/',
-      \ '/var/www/fpul/www/',
-      \ '/var/www/formation/reactjs/',
-      \ ]
+let g:startify_bookmarks = [] " See $HOME/.local/vimrc
 let g:startify_list_order = [
-      \ ['   Bookmarks:'],
+      \ ['  Bookmarks:'],
       \ 'bookmarks',
-      \ ['   Recently used files:'],
+      \ ['  Recently used files:'],
       \ 'files',
-      \ ['   MRU in the current directory:'],
+      \ ['  MRU in the current directory:'],
       \ 'dir',
-      \ ['   Sessions:'],
+      \ ['  Sessions:'],
       \ 'sessions',
-      \ ['   Commands:'],
+      \ ['  Commands:'],
       \ 'commands'
       \ ]
 
@@ -429,6 +422,9 @@ let g:rainbow_conf = {
 " }}}1
 " Section: webdevicons {{{1
 
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+
 "  
 " 
 " 
@@ -445,6 +441,11 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
       \ 'markdown': '',
       \ }
 
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+let NERDTreeMinimalUI=1
+
 " }}}1
 " Section: lexima {{{1
 
@@ -454,5 +455,22 @@ call lexima#add_rule({'char': '[', 'at': '\%#[0-9a-zA-Z]', 'leave': 0})
 call lexima#add_rule({'char': '{', 'at': '\%#[0-9a-zA-Z]', 'leave': 0})
 call lexima#add_rule({'char': '"', 'at': '\%#[0-9a-zA-Z]', 'leave': 0})
 call lexima#add_rule({'char': "'", 'at': '\%#[0-9a-zA-Z]', 'leave': 0})
+
+" }}}1
+" Section: csv.vim {{{1
+
+let g:csv_nomap_space = 1
+
+" }}}1
+" Section: Elm {{{1
+
+let g:elm_detailed_complete = 1
+let g:elm_format_autosave = 1
+
+" }}}1
+" Section: quickhl {{{1
+
+let g:quickhl_cword_enable_at_startup = 0 " Use :quickhlCwordToggle instead
+let g:quickhl_cword_hl_command = 'QuickhlCword ctermfg=9 cterm=undercurl guifg=#d08770 gui=undercurl'
 
 " }}}1
