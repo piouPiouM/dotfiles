@@ -58,6 +58,44 @@ let g:ranger_map_keys = 0
 let g:loaded_netrwPlugin = 'disable'
 
 " }}}1
+" Section: fzf.vim {{{1
+" An action can be a reference to a function that processes selected lines
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+      \ 'ctrl-q': function('s:build_quickfix_list'),
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-v': 'vsplit'
+      \ }
+
+let g:fzf_tags_command = 'ctags'
+
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+" Files with preview
+command! -bang -nargs=? -complete=dir Files
+      \ call fzf#vim#files(
+      \   <q-args>,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%', '?')
+      \           : fzf#vim#with_preview('right:70%:hidden', '?'),
+      \   <bang>0)
+
+" Command for ripgrep
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --line-number --no-heading --color=always --smart-case --hidden -g "!.git" '.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%', '?')
+      \           : fzf#vim#with_preview('right:60%:hidden', '?'),
+      \   <bang>0)
+
+" }}}1
 " Section: Airline {{{1
 " ------------------
 

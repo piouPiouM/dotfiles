@@ -220,7 +220,8 @@ Plug 'honza/vim-snippets'
 " }}}1
 " Section: External tools {{{1
 
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 
 " }}}1
 " Section: Language Server Protocol {{{1

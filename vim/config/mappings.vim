@@ -95,6 +95,17 @@ nnoremap <silent> <Plug>[ctrlp]m       :CtrlPMRU<CR>
 nnoremap <silent> <Plug>[ctrlp]t       :CtrlPBufTag<CR>
 nnoremap <silent> <Plug>[ctrlp]o       :CtrlPBookmarkDir<CR>
 
+" Invoque fzf.vim
+nmap     <leader><space> <Plug>[fzf]
+nnoremap <silent> <Plug>[fzf]<space> :Files <C-R>=expand('%:h')<CR><CR>
+nnoremap <silent> <Plug>[fzf]p       :GFiles --exclude-standard --cached --others<CR>
+nnoremap <silent> <Plug>[fzf]b       :Buffers<CR>
+nnoremap <silent> <Plug>[fzf]m       :History<CR>
+nnoremap <silent> <Plug>[fzf]t       :Tags<CR>
+nnoremap <silent> <Plug>[fzf]bt      :BTags<CR>
+nnoremap <silent> <Plug>[fzf]l       :Lines<CR>
+nnoremap <silent> <Plug>[fzf]bl      :BLines<CR>
+
 " Invoque Ranger
 nmap     <space>r <Plug>[ranger]
 nnoremap <silent> <Plug>[ranger]r :Ranger<CR>
