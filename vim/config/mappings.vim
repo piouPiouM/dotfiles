@@ -2,10 +2,9 @@
 "
 " 1. General
 " 2. Everyday tasks
-" 3. Dependent plugins
+" 3. Plugins
 
 " Section: General {{{1
-" ----------------
 
 " Change leader to a comma because the backslash is a pain to type
 let mapleader=","
@@ -41,7 +40,6 @@ nnoremap <silent> <space>ss <C-w>s
 
 " }}}1
 " Section: Everyday tasks {{{1
-" -----------------------
 
 " Clear out search with //
 nnoremap <silent> // :nohlsearch<cr>
@@ -65,22 +63,7 @@ inoremap <C-space> <C-x><C-o>
 vmap gbl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
 " }}}1
-" Section: Useful {{{1
-" ---------------
-
-" Show syntax highlighting groups for word under cursor
-" http://vimcasts.org/e/25
-nnoremap <C-S-H> :call <SID>SynStack()<CR>
-function! <SID>SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
-
-" }}}1
 " Section: Plugins {{{1
-" ----------------
 
 " Launch Ack
 nnoremap <silent> <D-F> :Ack<space>
@@ -126,35 +109,22 @@ xmap <localleader>M <Plug>(quickhl-manual-reset)
 nmap <localleader>j <Plug>(quickhl-cword-toggle)
 nmap <localleader>] <Plug>(quickhl-tag-toggle)
 
-" }}}1
-" Section: Dependent plugins {{{1
-" --------------------------
+" unimpaired
+" Bubbling text in TextMate style
+" http://vimcasts.org/e/26
+"nmap <C-Up>   [e
+"nmap <C-Down> ]e
+"vmap <C-Up>   [egv
+"vmap <C-Down> ]egv
 
-" Requirements: unimpaired plugin.
-function! Custom_mapping_unimpaired()
-  " Bubbling text in TextMate style
-  " http://vimcasts.org/e/26
-  nmap <C-Up>   [e
-  nmap <C-Down> ]e
-  vmap <C-Up>   [egv
-  vmap <C-Down> ]egv
-endfunction
-"call ppm#do_after_plugin("Custom_mapping_unimpaired", "unimpaired")
+" ArgWrap
+nnoremap <silent> <leader>aw :ArgWrap<CR>
 
-" Requirements: ArgWrap plugin.
-function! Custom_mapping_argwrap()
-  nnoremap <silent> <leader>aw :ArgWrap<CR>
-endfunction
-call ppm#do_after_plugin("Custom_mapping_argwrap", "argwrap")
-
-" Requirements: Tabular plugin.
-function! Custom_mapping_tabular()
-  nmap <leader>a= :Tabularize /=<CR>
-  vmap <leader>a= :Tabularize /=<CR>
-  nmap <leader>a: :Tabularize /:\zs<CR>
-  vmap <leader>a: :Tabularize /:\zs<CR>
-endfunction
-"call ppm#do_after_plugin("Custom_mapping_tabular", "tabular")
+" Tabular
+"nmap <leader>a= :Tabularize /=<CR>
+"vmap <leader>a= :Tabularize /=<CR>
+"nmap <leader>a: :Tabularize /:\zs<CR>
+"vmap <leader>a: :Tabularize /:\zs<CR>
 
 nmap ga <Plug>(UnicodeGA)
 

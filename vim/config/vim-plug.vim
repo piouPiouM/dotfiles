@@ -5,7 +5,6 @@ else
 endif
 
 " Section: Vim improvments {{{1
-" ------------------------
 
 Plug 'embear/vim-localvimrc'
 Plug 'vim-airline/vim-airline'
@@ -33,6 +32,8 @@ Plug 'szw/vim-maximizer'
 "Plug 'wincent/scalpel'
 Plug 'chase/vim-ansible-yaml'
 Plug 'wincent/vim-docvim'
+
+" Text objects {{{2
 
 " DO NOT REMOVE
 Plug 'kana/vim-textobj-user'
@@ -73,6 +74,8 @@ Plug 'whatyouhide/vim-textobj-xmlattr'
 " a, to a parameter object including whitespaces and comma
 " i2, is similar to a, except trailing whitespace characters (especially for first parameter)
 Plug 'sgur/vim-textobj-parameter'
+
+" }}}2
 
 "Plug 'reedes/vim-textobj-sentence'
 Plug 'reedes/vim-lexical', { 'for': ['markdown', 'textile', 'text'] }
@@ -136,7 +139,9 @@ Plug 'tpope/vim-repeat'
 " > </p>
 Plug 'tpope/vim-surround'
 
-Plug 'chrisbra/unicode.vim'
+Plug 'chrisbra/unicode.vim', {
+      \ 'on': ['UnicodeName', 'UnicodeTable', 'SearchUnicode', 'Digraphs', 'DownloadUnicode']
+      \ }
 
 " <leader><leader>f
 Plug 'easymotion/vim-easymotion'
@@ -252,7 +257,6 @@ Plug 'Shougo/echodoc.vim'
 
 " }}}1
 " Section: Syntax {{{1
-" ---------------
 
 " Versionning {{{2
 
@@ -291,8 +295,8 @@ Plug 'KabbAmine/vCoolor.vim', {
 " :ElmShowDocs queries elm-oracle, then echoes the type and docs for the word under the cursor.
 " :ElmBrowseDocs queries elm-oracle, then opens docs web page for the word under the cursor.
 " :ElmFormat formats the current buffer with elm-format.
+"\ 'do': 'yarn global add elm elm-test elm-oracle elm-format',
 Plug 'elmcast/elm-vim', {
-      \ 'do': 'yarn global add elm elm-test elm-oracle elm-format',
       \ 'for': ['elm']
       \ }
 Plug 'pbogut/deoplete-elm'
@@ -359,7 +363,6 @@ Plug 'sheerun/vim-polyglot'
 " }}}2
 " }}}1
 " Section: Text Manipulation {{{1
-" --------------------------
 
 " - to switch segment of text with predefined replacements
 " :Switch
@@ -377,14 +380,14 @@ Plug 'tommcdo/vim-lion'
 "Plug 'godlygeek/tabular'
 
 " }}}1
-" Section: Colorscheme bundles {{{1
-" ----------------------------
+" Section: Colorscheme stuff {{{1
 
 " :HLT to reveal a linked list of highlighting from the top-level down to
 "      the bottom level for the cursor position.
 " :HLT! same as :HTL but will execute on every CursorMoved event.
 " <leader>htl same as :HTL.
 Plug 'gerw/vim-HiLinkTrace'
+
 Plug 'wincent/pinnacle'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
