@@ -1,3 +1,44 @@
+--fields=+aimlS
+--recurse=yes
+--tag-relative=yes
+
+--exclude=.bundle
+--exclude=.cache
+--exclude=.git
+--exclude=.hg
+--exclude=.sass-cache
+--exclude=.svn
+--exclude=.tmp
+--exclude=.vendor
+--exclude=\*.bak
+--exclude=\*.cache
+--exclude=\*.csproj
+--exclude=\*.csproj.user
+--exclude=\*.dll
+--exclude=\*.map
+--exclude=\*.min.\*
+--exclude=\*.pdb
+--exclude=\*.pyc
+--exclude=\*.sln
+--exclude=\*.spec.js
+--exclude=\*.swp
+--exclude=\*.tar.\*
+--exclude=bower_components
+--exclude=bundle.js
+--exclude=cache
+--exclude=composer.phar
+--exclude=cscope.\*
+--exclude=doc
+--exclude=docs
+--exclude=log
+--exclude=logs
+--exclude=node_modules
+--exclude=tags
+--exclude=tmp
+--langdef=html2
+--langmap=html2:.html
+--regex-html2=/id="([a-zA-Z0-9_]+)"/\1/d,definition/
+
 --langmap=javascript:.js.jsx
 --regex-javascript=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*[\(]function[ \t]*\(/\1/f,function,functions/
 --regex-javascript=/^[ \t]*[\(]function[ \t]*([A-Za-z0-9._$]+)/\1/f,function,functions/
@@ -5,9 +46,8 @@
 --regex-javascript=/^[ \t]*([A-Za-z0-9._$]+)[ \t]*[:][ \t]*[^\{]/\1/p,property,properties/
 --regex-javascript=/^[ \t]+(var|let|const)[ \t]*([A-Za-z0-9._$]+)[ \t]*=[ \t]*[\d"'\[]/\2/v,variable,variables/
 
---langdef=html2
---langmap=html2:.html
---regex-html2=/id="([a-zA-Z0-9_]+)"/\1/d,definition/
+--langmap=php:.engine.inc.module.install.theme.php
+--php-kinds=+cdfi-jv
 
 --langdef=scss
 --langmap=scss:.scss
@@ -23,43 +63,3 @@
 --regex-scss=/(^[ \t]+([A-Za-z0-9_-]+)) *[,|\{]/\1/t,tag,tags/
 --regex-scss=/^[ \t]*@media\s+([A-Za-z0-9_-]+)/\1/d,media,media/
 
---langmap=php:.engine.inc.module.install.theme.php
---php-kinds=cdfi
-
---languages=php,scss
---fields=+aimlS
---recurse=yes
---tag-relative=yes
-
---exclude=.bundle
---exclude=.cache
---exclude=.git
---exclude=.hg
---exclude=.sass-cache
---exclude=.svn
---exclude=.tmp
---exclude=.vendor
---exclude=bundle.js
---exclude=\*.bak
---exclude=\*.cache
---exclude=\*.csproj
---exclude=\*.csproj.user
---exclude=\*.dll
---exclude=\*.map
---exclude=\*.min.\*
---exclude=\*.pdb
---exclude=\*.pyc
---exclude=\*.sln
---exclude=\*.spec.js
---exclude=\*.swp
---exclude=\*.tar.\*
---exclude=bower_components
---exclude=cache
---exclude=cscope.\*
---exclude=doc
---exclude=docs
---exclude=log
---exclude=logs
---exclude=node_modules
---exclude=tags
---exclude=tmp
