@@ -106,11 +106,6 @@ nnoremap <silent> <Plug>[fzf]bt      :BTags<CR>
 nnoremap <silent> <Plug>[fzf]l       :Lines<CR>
 nnoremap <silent> <Plug>[fzf]bl      :BLines<CR>
 
-" Invoque Ranger
-nmap     <space>r <Plug>[ranger]
-nnoremap <silent> <Plug>[ranger]r :Ranger<CR>
-nnoremap <silent> <Plug>[ranger]w :RangerWorkingDirectory<CR>
-
 " Toggle Undotree window
 nnoremap <leader>u :UndotreeToggle<CR>
 
