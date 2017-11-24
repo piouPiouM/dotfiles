@@ -389,15 +389,7 @@ Plug 'wincent/pinnacle'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-"Plug 'chriskempson/vim-tomorrow-theme'
-"Plug 'altercation/vim-colors-solarized'
-
 Plug 'iCyMind/NeoSolarized' " Neovim
-"Plug 'MaxSt/FlatColor' " Neovim
-"Plug 'joshdick/onedark.vim' " Neovim
-
-"Plug 'sonph/onehalf', { 'rtp': 'vim' }
-
 Plug 'w0ng/vim-hybrid'
 Plug 'easysid/mod8.vim'
 Plug 'chriskempson/base16-vim'
