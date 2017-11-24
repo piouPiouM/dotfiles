@@ -39,6 +39,7 @@
 --exclude=.svn
 --exclude=.tmp
 --exclude=.vendor
+--exclude=bundle.js
 --exclude=\*.bak
 --exclude=\*.cache
 --exclude=\*.csproj
