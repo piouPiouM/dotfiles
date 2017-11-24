@@ -65,7 +65,6 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-let g:airline_theme='iceberg'
 let g:airline_base16_improved_contrast = 1
 
 let g:airline_powerline_fonts=1
@@ -116,7 +115,6 @@ let g:polyglot_disabled = ['elm']
 " -------------------
 
 let g:indentLine_char = "│"
-let g:indentLine_setColors = 1
 let g:indentLine_fileTypeExclude = ["markdown", "json", "help"]
 let g:indentLine_bufNameExclude = ["NERD_tree.*", "startify"]
 

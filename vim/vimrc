@@ -225,10 +225,17 @@ endif
 " Section: Colorscheme {{{1
 " --------------------
 
-set background=dark
+try
+  set background=dark
+  colorscheme iceberg
+  let g:airline_theme='iceberg'
+catch 'Cannot find color scheme iceberg'
+  set background=light
+  colorscheme morning
+  let g:airline_theme='aurora'
+endtry
 "colorscheme hybrid
 "colorscheme base16-ocean
 "colorscheme base16-oceanicnext
-colorscheme iceberg
 
 " }}}1
