@@ -20,6 +20,16 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+" Display the contents of the registers on the sidebar
+" @[choise][motion] or "[choise][motion] in normal mode
+" <C-R> in insert mode
+Plug 'junegunn/vim-peekaboo'
+
+" :MaximizerToggle to maximize or restore windows.
+" F3 in Normal, Visual and Insert modes.
+Plug 'szw/vim-maximizer'
+
 "Plug 'wincent/scalpel'
 Plug 'chase/vim-ansible-yaml'
 Plug 'wincent/vim-docvim'
