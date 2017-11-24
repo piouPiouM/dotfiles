@@ -1,0 +1,14 @@
+[ -f $HOME/.profile ] && source $HOME/.profile
+# remove duplicate entries
+typeset -U PATH
+
+source $XDG_CONFIG_HOME/zsh/checks.zsh
+source $XDG_CONFIG_HOME/zsh/setopt.zsh
+source $XDG_CONFIG_HOME/zsh/exports.zsh
+source $XDG_CONFIG_HOME/zsh/completion.zsh
+source $XDG_CONFIG_HOME/zsh/zplug.zsh
+source $XDG_CONFIG_HOME/zsh/functions.zsh
+source $XDG_CONFIG_HOME/zsh/aliases.zsh
+source $XDG_CONFIG_HOME/zsh/history.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

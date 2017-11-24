@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-export LC_CTYPE=fr_FR.UTF-8
-export LC_ALL=fr_FR.UTF-8
-
 PPM_BREW_PREFIX=`brew --prefix`
 
 # XDG Specification
@@ -28,16 +25,33 @@ fi
 NODE_PATH=$PPM_BREW_PREFIX/lib/node_modules
 NVM_DIR="$XDG_DATA_HOME/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-if which npm >/dev/null; then
-  PATH=`npm bin -g`:$PATH
-fi
-if which yarn >/dev/null; then
-  export PPM_YARN_PREFIX=`yarn global bin`
-  PATH=$PPM_YARN_PREFIX:$PATH
-fi
+
+# Same as $PPM_BREW_PREFIX/bin
+#if which npm >/dev/null; then
+  #PATH=`npm bin -g`:$PATH
+#fi
+# Same as $PPM_BREW_PREFIX/bin
+#if which yarn >/dev/null; then
+  #export PPM_YARN_PREFIX=`yarn global bin`
+  #PATH=$PPM_YARN_PREFIX:$PATH
+#fi
 
 export PATH=~/.local/bin:$PATH
 export NODE_PATH
 export NVM_DIR
 export PPM_BREW_PREFIX
+
+export CLICOLOR=1
+export GREP_OPTIONS='--color=auto'
+export GREP_COLOR='3;33'
+
+export LESS='--ignore-case --raw-control-chars'
+export PAGER='less'
+
+export EDITOR='nvim'
+export SVN_EDITOR='nvim'
+
+export LC_CTYPE=fr_FR.UTF-8
+export LC_ALL=fr_FR.UTF-8
+export LANG=fr_FR.UTF-8
 

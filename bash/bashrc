@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-export EDITOR='nvim'
-export SVN_EDITOR='nvim'
-
-# fzf
-export FZF_DEFAULT_OPTS='--multi --border --inline-info'
 
 # Alias fonctionnels
 alias ls="ls -GF"
@@ -183,10 +178,6 @@ _prompt()
 }
 _prompt
 
+# fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-
-if which fish >/dev/null; then
-  exec fish
-fi
 
