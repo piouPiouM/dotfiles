@@ -40,7 +40,6 @@ let g:ctrlp_match_window_bottom   = 1   " Show the match window at the bottom of
 let g:ctrlp_match_window_reversed = 1   " Change the listing order of the files in the match window.
 let g:ctrlp_line_prefix           = '' " ▶︎
 let g:ctrlp_switch_buffer         = 0   " Open files in the desired buffer.
-let g:ctrlp_use_caching           = 1   " Enable caching by session.
 let g:ctrlp_clear_cache_on_exit   = 0   " Do not delete the cache files upon exiting Vim.
 let g:ctrlp_mruf_max              = 250 " The number of recently opened files to remember.
 let g:ctrlp_mruf_relative         = 1   " Show only MRU files in the current working directory.
@@ -50,8 +49,15 @@ let g:ctrlp_show_hidden           = 1
 let g:ctrlp_custom_ignore         = {
   \ 'dir':  '\v[\/](node_modules|tmp|cache)$',
   \ }
-if executable('ag')
+
+if executable('rg')
+  let g:ctrlp_user_command = "rg --files --no-heading --hidden -g '!.git' %s"
+  let g:ctrlp_use_caching = 0   " Disable caching by session.
+elseif executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+  let g:ctrlp_use_caching = 0   " Disable caching by session.
+else
+  let g:ctrlp_use_caching = 1   " Enable caching by session.
 endif
 
 let g:ranger_map_keys = 0
@@ -438,8 +444,8 @@ let g:colorizer_nomap = 1
 " }}}1
 " Section: Ack {{{1
 
-if executable('ag')
-  "let g:ackprg = 'ag --vimgrep'
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep --no-heading'
 endif
 
 " }}}1

@@ -79,6 +79,7 @@ set ignorecase " Ignore case when searching
 set smartcase  " except if it's an uppercase search
 set magic      " Set magic on, for regular expressions
 set gdefault   " Apply global substitutions
+set grepprg=rg\ --vimgrep
 
 if has('nvim')
   set inccommand=nosplit
