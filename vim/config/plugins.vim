@@ -47,7 +47,7 @@ let g:ctrlp_cache_dir             = $XDG_CACHE_HOME . '/nvim/ctrlp'
 let g:ctrlp_extensions            = ['buffertag', 'dir', 'tag', 'changes', 'undo', 'bookmarkdir']
 let g:ctrlp_show_hidden           = 1
 let g:ctrlp_custom_ignore         = {
-  \ 'dir':  '\v[\/](node_modules|tmp|cache)$',
+  \ 'dir':  '\v[\/](node_modules|elm-stuff|tmp|cache)$',
   \ }
 
 if executable('rg')
@@ -508,6 +508,7 @@ let g:csv_nomap_space = 1
 
 let g:elm_detailed_complete = 1
 let g:elm_format_autosave = 1
+let g:elm_make_show_warnings = 1
 
 " }}}1
 " Section: quickhl {{{1
