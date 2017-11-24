@@ -22,7 +22,10 @@ if ! zplug check --verbose; then
   fi
 fi
 
+# zplug breaks the ZSH job management.
+# See https://github.com/zplug/zplug/issues/374
+[ -f $_zplug_lock ] && rm $_zplug_lock
+
 # Then, source plugins and add commands to $PATH
 zplug load
-
 
