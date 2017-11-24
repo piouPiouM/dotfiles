@@ -292,11 +292,9 @@ let g:jsdoc_enable_es6 = 1
 " ---------------------------
 
 let g:LanguageClient_serverCommands = {
-      \ 'javascript': ['/Users/mehdi/.config/yarn/global/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js', '--logfile', '/tmp/javascript-typescript-stdio'],
-      \ 'javascript.jsx': ['/Users/mehdi/.config/yarn/global/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js', '--logfile', '/tmp/javascript-typescript-stdio'],
+      \ 'javascript': ['language-server-stdio', '--logfile', '/tmp/javascript-typescript-stdio'],
+      \ 'javascript.jsx': ['language-server-stdio', '--logfile', '/tmp/javascript-typescript-stdio'],
       \ }
-      "\ 'javascript': [$PPM_YARN_PREFIX . '/javascript-typescript-stdio', '--logfile /tmp/javascript-typescript-stdio'],
-      "\ 'javascript.jsx': [$PPM_YARN_PREFIX . '/javascript-typescript-stdio', '--logfile /tmp/javascript-typescript-stdio'],
 
 let g:echodoc_enable_at_startup = 1
 let g:deoplete#enable_at_startup = 1
