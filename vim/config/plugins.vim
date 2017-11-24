@@ -148,6 +148,8 @@ let g:airline#extensions#whitespace#trailing_format = '¬[%s]'
 let g:airline#extensions#whitespace#mixed_indent_format = '▸[%s]'
 let g:airline#extensions#tagbar#flags = 's'
 
+let g:airline_section_c="%<%f%#__accent_red#%m%#__restore__# %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#"
+
 " }}}1
 " Section: vim-polyglot {{{1
 " ---------------------
