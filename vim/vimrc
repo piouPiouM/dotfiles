@@ -11,7 +11,7 @@
 " Section: Preamble {{{1
 " -----------------
 
-set shell=bash
+set shell=zsh
 
 let g:ppm_vim_path = escape(fnamemodify(resolve(expand("<sfile>:p" . "vim")), ":h"), ' ')
 
