@@ -80,9 +80,10 @@ let g:fzf_action = {
 
 let g:fzf_tags_command = 'ctags'
 
+" Lightweight UI
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
-      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+      \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 " Files with preview
 command! -bang -nargs=? -complete=dir Files
