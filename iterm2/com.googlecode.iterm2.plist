@@ -3695,9 +3695,9 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>330 289 620 392 0 0 1280 778 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>284 292 796 473 0 0 1280 777 </string>
+	<string>284 254 796 473 0 0 1280 778 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>50 200 570 401 0 0 1280 778 </string>
+	<string>0 0 1280 778 0 0 1280 778 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>5 0 1258 777 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -4091,13 +4091,6 @@
 					<key>Text</key>
 					<string>0x7f</string>
 				</dict>
-				<key>0x63-0x80000</key>
-				<dict>
-					<key>Action</key>
-					<integer>10</integer>
-					<key>Text</key>
-					<string>c</string>
-				</dict>
 				<key>0xf700-0x220000</key>
 				<dict>
 					<key>Action</key>
@@ -4353,7 +4346,7 @@
 			<key>Normal Font</key>
 			<string>FuraCodeNerdFontC-Regular 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<integer>0</integer>
 			<key>Right Option Key Sends</key>
@@ -5175,7 +5168,7 @@
 			<key>Normal Font</key>
 			<string>HasklugNerdFontCM-Regular 13</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<integer>0</integer>
 			<key>Right Option Key Sends</key>
@@ -5997,7 +5990,7 @@
 			<key>Normal Font</key>
 			<string>FuraCodeNerdFontC-Regular 12</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<integer>0</integer>
 			<key>Right Option Key Sends</key>
@@ -6180,6 +6173,8 @@
 			<string>/Users/mehdi</string>
 		</dict>
 	</array>
+	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
+	<true/>
 	<key>NoSyncHaveWarnedAboutIncompatibleSoftware</key>
 	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
@@ -6187,11 +6182,11 @@
 	<key>NoSyncInstallationId</key>
 	<string>6BC06B5A-8617-4414-9B71-BD04BCAF8F1F</string>
 	<key>NoSyncLastTipTime</key>
-	<real>532896882.57613701</real>
+	<real>533641594.99668097</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>NoSyncPermissionToShowTip</key>
 	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
@@ -6245,6 +6240,13 @@
 		<string>0039</string>
 		<string>0040</string>
 		<string>0041</string>
+		<string>0042</string>
+		<string>0043</string>
+		<string>0044</string>
+		<string>0045</string>
+		<string>0046</string>
+		<string>0047</string>
+		<string>0048</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -6312,7 +6314,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-11-17T18:24:47Z</date>
+	<date>2017-11-28T17:03:13Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
