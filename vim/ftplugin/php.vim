@@ -1,7 +1,5 @@
-"let g:syntastic_phpcs_disable = 1
+setlocal tabstop=2 shiftwidth=2 softtabstop=2
+setlocal expandtab
 
-autocmd FileType php setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType php setlocal expandtab
-"autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-autocmd FileType php LanguageClientStart
-
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+LanguageClientStart
