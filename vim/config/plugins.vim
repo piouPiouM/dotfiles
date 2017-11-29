@@ -58,9 +58,6 @@ else
   let g:ctrlp_use_caching = 1   " Enable caching by session.
 endif
 
-let g:ranger_map_keys = 0
-"let g:loaded_netrwPlugin = 'disable'
-
 " }}}1
 " Section: fzf.vim {{{1
 

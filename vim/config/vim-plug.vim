@@ -77,25 +77,11 @@ Plug 'sgur/vim-textobj-parameter'
 
 " }}}2
 
-"Plug 'reedes/vim-textobj-sentence'
-Plug 'reedes/vim-lexical', { 'for': ['markdown', 'textile', 'text'] }
-
 " :ShrinkMapToggle or <leader>ss - Open or close ShrinkMap sidebar
 " :ShrinkMapOpen   or <leader>so - Open ShrinkMap sidebar
 " :ShrinkMapClose  or <leader>sc - Close ShrinkMap sidebar
 " :ShrinkMapUpdate or <leader>su - Draw Braille patterns to ShrinkMap sidebar and highlight the current window in ShinkMap sidebar
 Plug 'ryujinno/shrinkmap.vim'
-
-"Plug 'tpope/vim-abolish'
-" Plug 'derekwyatt/vim-fswitch'
-" Plug 'pondrejk/vim-readability'
-
-" <space>rr to launch :Ranger
-" <space>rw to launch :RangerWorkingDirectory
-" Note: internally ranger.vim uses Bclose.vim
-" this one does not leave a tray [No name] buffer at startup
-Plug 'moll/vim-bbye' | Plug 'francoiscabrol/ranger.vim'
-command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>
 
 " <C-a>/<C-x> to increment dates, times
 Plug 'tpope/vim-speeddating'
@@ -146,14 +132,20 @@ Plug 'chrisbra/unicode.vim'
 Plug 'easymotion/vim-easymotion'
 
 Plug 'chaoren/vim-wordmotion'
-Plug 'lfv89/vim-interestingwords'
-Plug 'MattesGroeger/vim-bookmarks'
-Plug 'mbbill/undotree'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'terryma/vim-expand-region'
 
-Plug 'mhinz/vim-startify'
-"Plug 'hecal3/vim-leader-guide'
+Plug 'MattesGroeger/vim-bookmarks'
+
+" <F5> to toggle undo-tree panel
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+
+" + to expand the visual selection
+" _ to shrink the visual selection
+Plug 'terryma/vim-expand-region', {
+      \ 'on': ['<Plug>(expand_region_expand)', '<Plug>(expand_region_shrink)']
+      \ }
+
+" Temporarily disable
+"Plug 'mhinz/vim-startify'
 
 " M-p to cycle backward through the history of yanks
 " M-P to cycle forwards through the history of yanks
@@ -165,34 +157,37 @@ Plug 'machakann/vim-highlightedyank'
 " emoji#for('small_blue_diamond')
 Plug 'junegunn/vim-emoji'
 
-"Plug 'kshenoy/vim-signature'
-"Plug 'tpope/unimpaired.vim'
+" <leader>k to toggle highlighting of a word.
+" <leader>K to clear all highlighted words.
+" n and N to navigate through the occurrences of the word under cursor.
+Plug 'lfv89/vim-interestingwords'
 
-
-" <localleader>m to highlight <cword>
-" <localleader>w to highlight <cword>, respect word boundaries
-" <localleader>c to clear the manually added highlight under current cursor
-" <localleader>M to clear all manually added highlight
-" <localleader>j to highlight automatically a word under the cursor
-" <localleader>] to highlight jumpable 'tag'
-Plug 't9md/vim-quickhl'
+" <localleader>k to highlight automatically a word under the cursor
+" <localleader>] to toggle highlight of jumpable 'tag'
+Plug 't9md/vim-quickhl', {
+      \ 'on': ['<Plug>(quickhl-cword-toggle)', '<Plug>(quickhl-tag-toggle)']
+      \ }
 
 " }}}1
 " Section: Dev Tools {{{1
 " ------------------
 
-Plug 'dharanasoft/rtf-highlight'
+Plug 'dharanasoft/rtf-highlight', { 'on': 'RTFHighlight' }
+
 Plug 'editorconfig/editorconfig-vim'
+
+" <C-y>, to expand abbreviations similar to emmet
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'scss', 'javascript', 'php'] }
+
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'rizzatti/dash.vim'
+
+Plug 'rizzatti/dash.vim', {
+      \ 'on': ['Dash', 'DashKeywords', '<Plug>DashSearch', '<Plug>DashGlobalSearch']
+      \ }
 Plug 'scrooloose/nerdcommenter'
 
 " Usefull to display the current branch in vim-airline
 Plug 'tpope/vim-fugitive'
-
-" Show a diff using Vim its sign column
-"Plug 'mhinz/vim-signify'
 
 " ]c to jump to next hunk
 " [c to jump to previous hunk
@@ -208,14 +203,12 @@ Plug 'airblade/vim-gitgutter'
 " <leader>aw to (un)wrap function arguments, lists and dictionaries
 Plug 'FooSoft/vim-argwrap'
 
-Plug 'majutsushi/tagbar', { 'tag': 'v2.7' }
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
 " <D-F> - :Ack
 Plug 'mileszs/ack.vim', { 'on': 'Ack' }
 
 Plug 'benekastah/neomake'
-
-"Plug 'vim-scripts/Tag-Signature-Balloons'
 
 Plug 'Yggdroot/indentLine'
 
@@ -236,6 +229,9 @@ Plug 'honza/vim-snippets'
 
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+
+" <leader>gi to create .gitignore files using the gitignore.io API
+Plug 'fszymanski/fzf-gitignore', {'do': ':UpdateRemotePlugins'}
 
 " }}}1
 " Section: Language Server Protocol {{{1
@@ -332,6 +328,9 @@ Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 " }}}2
 " PHP {{{2
 
+" :Composer command wrapper around composer with smart completion
+Plug 'noahfrederick/vim-composer', { 'for': 'php' }
+
 "Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
 "Plug 'lvht/phpcd.vim', { 'for': 'php' , 'do': 'composer update' }
 
@@ -352,7 +351,7 @@ Plug 'joonty/vdebug', { 'for': 'php' }
 " }}}2
 " Tabular data {{{2
 
-Plug 'chrisbra/csv.vim'
+Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 
 " }}}2
 " Polyglot {{{2
@@ -381,27 +380,30 @@ Plug 'tommcdo/vim-lion'
 " }}}1
 " Section: Colorscheme stuff {{{1
 
+Plug 'vim-scripts/AfterColors.vim'
+
+" :ColorToggle to toggle hex to colors
+Plug 'lilydjwg/colorizer', {
+      \ 'on': ['ColorHighlight', 'ColorClear', 'ColorToggle']
+      \ }
+
 " :HLT to reveal a linked list of highlighting from the top-level down to
 "      the bottom level for the cursor position.
 " :HLT! same as :HTL but will execute on every CursorMoved event.
 " <leader>htl same as :HTL.
 Plug 'gerw/vim-HiLinkTrace'
 
+" Pinnacle provides functions for manipulating `:highlight` groups.
 Plug 'wincent/pinnacle'
+
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-Plug 'iCyMind/NeoSolarized' " Neovim
+Plug 'iCyMind/NeoSolarized'
 Plug 'w0ng/vim-hybrid'
 Plug 'easysid/mod8.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'cocopon/iceberg.vim'
-
-" :ColorToggle to toggle hex to colors
-Plug 'lilydjwg/colorizer', { 'on': 'ColorToggle' }
-
-Plug 'vim-scripts/AfterColors.vim'
-Plug 'reedes/vim-thematic'
 
 " }}}1
 

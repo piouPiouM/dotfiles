@@ -90,22 +90,14 @@ nnoremap <silent> <Plug>[fzf]l       :Lines<CR>
 nnoremap <silent> <Plug>[fzf]bl      :BLines<CR>
 
 " Toggle Undotree window
-nnoremap <leader>u :UndotreeToggle<CR>
+nnoremap <F5> :UndotreeToggle<CR>
 
 " LanguageClient
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " vim-quickhl
-nmap <localleader>m <Plug>(quickhl-manual-this)
-xmap <localleader>m <Plug>(quickhl-manual-this)
-nmap <localleader>w <Plug>(quickhl-manual-this-whole-word)
-xmap <localleader>w <Plug>(quickhl-manual-this-whole-word)
-nmap <localleader>c <Plug>(quickhl-manual-clear)
-vmap <localleader>c <Plug>(quickhl-manual-clear)
-nmap <localleader>M <Plug>(quickhl-manual-reset)
-xmap <localleader>M <Plug>(quickhl-manual-reset)
-nmap <localleader>j <Plug>(quickhl-cword-toggle)
+nmap <localleader>k <Plug>(quickhl-cword-toggle)
 nmap <localleader>] <Plug>(quickhl-tag-toggle)
 
 " unimpaired
