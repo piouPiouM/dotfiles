@@ -246,9 +246,10 @@ let g:jsdoc_enable_es6 = 1
 " }}}1
 " Section: Completion systems {{{1
 
+let g:LanguageClient_autoStart = 0
 let g:LanguageClient_serverCommands = {
-      \ 'javascript': ['language-server-stdio', '--logfile', '/tmp/javascript-typescript-stdio'],
-      \ 'javascript.jsx': ['language-server-stdio', '--logfile', '/tmp/javascript-typescript-stdio'],
+      \ 'javascript': ['javascript-typescript-stdio', '--logfile', '/tmp/javascript-typescript-stdio'],
+      \ 'javascript.jsx': ['javascript-typescript-stdio', '--logfile', '/tmp/javascript-typescript-stdio'],
       \ }
 
 let g:echodoc_enable_at_startup = 1
