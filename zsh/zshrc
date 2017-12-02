@@ -2,6 +2,9 @@
 # remove duplicate entries
 typeset -U PATH
 
+# Allow C-a / C-e in tmux
+bindkey -e
+
 source $XDG_CONFIG_HOME/zsh/checks.zsh
 source $XDG_CONFIG_HOME/zsh/setopt.zsh
 source $XDG_CONFIG_HOME/zsh/exports.zsh

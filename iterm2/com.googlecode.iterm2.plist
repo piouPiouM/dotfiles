@@ -3695,9 +3695,9 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>330 289 620 392 0 0 1280 778 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>284 254 796 473 0 0 1280 778 </string>
+	<string>111 208 796 473 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1280 778 0 0 1280 778 </string>
+	<string>0 0 1280 777 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>5 0 1258 777 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -6182,7 +6182,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>6BC06B5A-8617-4414-9B71-BD04BCAF8F1F</string>
 	<key>NoSyncLastTipTime</key>
-	<real>533641594.99668097</real>
+	<real>533815062.56141901</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -6247,6 +6247,8 @@
 		<string>0046</string>
 		<string>0047</string>
 		<string>0048</string>
+		<string>0049</string>
+		<string>0050</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -6314,7 +6316,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-11-28T17:03:13Z</date>
+	<date>2017-11-30T14:44:59Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -6328,7 +6330,7 @@
 	<key>SmartPlacement</key>
 	<true/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.40000000596046448</real>
+	<real>0.20973307887713119</real>
 	<key>StretchTabsToFillBar</key>
 	<false/>
 	<key>SwitchTabModifier</key>
