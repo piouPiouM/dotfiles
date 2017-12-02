@@ -16,6 +16,9 @@ Plug 'embear/vim-localvimrc'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" <leader>fml to display all <leader> mappings
+Plug 'ktonga/vim-follow-my-lead'
+
 " DimInactiveOn / DimInactiveOff
 " DimInactiveSyntaxOn / DimInactiveSyntaxOff
 " DimInactiveColorcolumnOn / DimInactiveColorcolumnOff

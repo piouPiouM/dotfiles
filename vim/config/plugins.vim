@@ -13,6 +13,11 @@ let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1
 
 " }}}1
+" Section: vim-follow-my-lead {{{1
+
+let g:fml_all_sources = 1
+
+" }}}1
 " Section: vim-localvimrc {{{1
 
 let g:localvimrc_name = ['.lvimrc', '.local.vimrc', '.config/vimrc']
