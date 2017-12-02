@@ -4,11 +4,26 @@ else
   call plug#begin('~/.vim/bundle')
 endif
 
+" Section: Tmux {{{1
+
+" Note: turn on `focus-events` option in Tmux
+Plug 'tmux-plugins/vim-tmux-focus-events'
+
+" }}}1
 " Section: Vim improvments {{{1
 
 Plug 'embear/vim-localvimrc'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+" DimInactiveOn / DimInactiveOff
+" DimInactiveSyntaxOn / DimInactiveSyntaxOff
+" DimInactiveColorcolumnOn / DimInactiveColorcolumnOff
+" DimInactiveWindowOn / DimInactiveWindowOff
+" DimInactiveWindowReset
+" DimInactiveBufferOn / DimInactiveBufferOff
+" DimInactiveBufferReset
+Plug 'blueyed/vim-diminactive'
 
 " <space>p to list files from root directory
 " <space><space> to list current directory

@@ -464,3 +464,8 @@ let g:quickhl_cword_enable_at_startup = 0 " Use :quickhlCwordToggle instead
 let g:quickhl_cword_hl_command = 'QuickhlCword ctermfg=9 cterm=underline guifg=#d08770 gui=undercurl'
 
 " }}}1
+" Section: vim-diminactive {{{1
+
+let g:diminactive_enable_focus = 1
+
+" }}}1
