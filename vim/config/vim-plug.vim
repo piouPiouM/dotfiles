@@ -282,12 +282,12 @@ Plug 'tpope/vim-git'
 " Uses :ColorToggle for javascript and php.
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'less'] }
 
-" <C-O>h to display colorpicker and insert hex color
-" <C-O>r to display colorpicker and insert rgb color
-" <C-O>s to display colorpicker and insert hsl color
-" <C-O>a to display colorpicker and insert rgba color
+" <C-o>h to display colorpicker and insert hex color
+" <C-o>r to display colorpicker and insert rgb color
+" <C-o>s to display colorpicker and insert hsl color
+" <C-o>a to display colorpicker and insert rgba color
 Plug 'KabbAmine/vCoolor.vim', {
-      \ 'for': ['css', 'scss', 'less', 'javascript', 'php', 'vim'],
+      \ 'for': ['css', 'scss', 'less', 'javascript', 'php', 'vim', 'tmux'],
       \ }
 
 " }}}2
