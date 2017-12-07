@@ -1,0 +1,15 @@
+# Global ignore file.
+# Used by ripgrep (rg)
+
+.git/
+build-artifacts/
+node_modules/
+tmp/
+
+.DS_Store
+tags
+*.elmi
+*.min.css
+*.min.js
+*.swp
+

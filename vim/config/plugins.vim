@@ -98,7 +98,7 @@ command! -bang -nargs=? -complete=dir Files
 " Command for ripgrep
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
-      \   'rg --line-number --no-heading --color=always --smart-case --hidden -g "!.git" '.shellescape(<q-args>), 1,
+      \   'rg --line-number --no-messages --no-heading --color=always --smart-case --hidden --no-ignore-vcs '.shellescape(<q-args>), 1,
       \   <bang>0 ? fzf#vim#with_preview('up:60%', '?')
       \           : fzf#vim#with_preview('right:60%:hidden', '?'),
       \   <bang>0)
