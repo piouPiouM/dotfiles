@@ -319,6 +319,7 @@ let g:bookmark_auto_save_file =  $XDG_DATA_HOME . '/nvim/vim-bookmarks'
 
 let g:EditorConfig_core_mode = "external_command"
 let g:EditorConfig_exec_path = "/usr/local/bin/editorconfig"
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " }}}1
 " Section: vim-wordmotion {{{1
@@ -396,6 +397,7 @@ let g:vcool_ins_rgba_map = '<C-O>a' " Insert rgba color
 " Section: colorizer {{{1
 
 let g:colorizer_nomap = 1
+let g:colorizer_startup = 0
 
 " }}}1
 " Section: vim-css-color {{{1
@@ -433,12 +435,21 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
       \ }
 
 " }}}1
+" Section: netrw {{{1
+
+let g:netrw_home=$XDG_CACHE_HOME . '/nvim'
+let g:netrw_liststyle = 3
+let g:netrw_list_hide = &wildignore
+
+" }}}1
 " Section: NERDTree {{{1
 
+let g:NERDTreeMinimalUI=1 " Disables display of the 'Bookmarks' label and 'Press ? for help' text.
+let g:NERDTreeNaturalSort = 1
+let g:NERDTreeShowHidden=1
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
-let NERDTreeMinimalUI=1
 
 " }}}1
 " Section: lexima {{{1
