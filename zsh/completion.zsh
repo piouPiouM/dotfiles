@@ -4,7 +4,11 @@ zmodload -i zsh/complist
 # Enable zsh-completions from Homebrew
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-# Enable completion caching, use rehash to clear
+# Avoid having to run `rehash` on each new executable in $PATH
+setopt nohashdirs
+setopt nocorrect
+
+# Enable completion caching, use `rehash` to clear
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path $XDG_CACHE_HOME/zsh/completion
 
