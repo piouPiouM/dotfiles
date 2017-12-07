@@ -20,7 +20,7 @@ let g:fml_all_sources = 1
 " }}}1
 " Section: vim-localvimrc {{{1
 
-let g:localvimrc_name = ['.lvimrc', '.local.vimrc', '.config/vimrc']
+let g:localvimrc_name = ['.git/vimrc', '.lvimrc', '.local.vimrc', '.config/vimrc']
 let g:localvimrc_ask = 1
 let g:localvimrc_persistent = 0
 let g:localvimrc_persistence_file = $XDG_DATA_HOME . '/nvim/localvimrc_persistent'

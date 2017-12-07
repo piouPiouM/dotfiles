@@ -143,6 +143,7 @@ set wildignore+=.tmp,.cache,.vendors
 set wildignore+=tags                             " ctags stuff
 
 set tags+=/
+set tags+=./.git/tags,tags
 
 " }}}2
 " Statusline {{{2
