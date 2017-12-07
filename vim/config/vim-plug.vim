@@ -340,7 +340,6 @@ Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 "Plug 'othree/yajs.vim', { 'for': 'javascript' }
 "Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
 "Plug 'gavocanov/vim-js-indent'
-"Plug 'ternjs/tern_for_vim'
 "Plug 'Valloric/YouCompleteMe'
 
 " }}}2
