@@ -1,3 +1,7 @@
+" Remove background for better experience with vim-diminactive
+hi! NonText ctermbg=NONE ctermfg=236 guibg=NONE guifg=#242940
+hi! ColorColumn cterm=NONE ctermbg=235 guibg=#1e2132
+
 hi! String ctermfg=224 guifg=#ceb0b6
 hi! Conceal ctermfg=237 guifg=#2a3158
 hi! link elmDelimiter elmOperator
