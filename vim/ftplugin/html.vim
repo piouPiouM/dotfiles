@@ -1,5 +1,7 @@
 autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
 
+LanguageClientStart
+
 if ! exists('*SyntasticStatuslineFlag')
   finish
 endif

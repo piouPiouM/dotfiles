@@ -164,16 +164,64 @@ let g:indentLine_bufNameExclude = ["NERD_tree.*", "startify"]
 " Section: Neomake {{{1
 
 let g:neomake_highlight_lines = 0
-"let g:neomake_error_sign   = {'text': emoji#for('anger'), 'texthl': 'NeomakeErrorSign'}
-"let g:neomake_warning_sign = {'text': emoji#for('pig'), 'texthl': 'NeomakeWarningSign'}
-"let g:neomake_message_sign = {'text': emoji#for('thought_balloon'), 'texthl': 'NeomakeMessageSign'}
+let g:neomake_error_sign   = {'text': '●', 'texthl': 'NeomakeErrorSign'}
+"let g:neomake_warning_sign = {'text': '●', 'texthl': 'NeomakeWarningSign'}
+"let g:neomake_message_sign = {'text': '⦿', 'texthl': 'NeomakeMessageSign'}
 
 let g:neomake_php_enabled_makers = ['php']
 let g:neomake_javascript_enabled_makers = ['eslint']
 if executable('eslint_d')
-  "let g:neomake_javascript_enabled_makers = ['eslint_d']
+  let g:neomake_javascript_enabled_makers = ['eslint_d']
 endif
 autocmd! BufWritePost * Neomake
+
+" }}}1
+" Section: Completion systems {{{1
+
+let g:LanguageClient_autoStart = 0
+let g:LanguageClient_serverCommands = {
+      \ 'javascript':     ['/usr/local/bin/javascript-typescript-stdio', '--logfile', '/tmp/javascript-typescript-stdio'],
+      \ 'javascript.jsx': ['/usr/local/bin/javascript-typescript-stdio', '--logfile', '/tmp/javascript-typescript-stdio'],
+      \ 'typescript':     ['/usr/local/bin/javascript-typescript-stdio', '--logfile', '/tmp/javascript-typescript-stdio'],
+      \ 'html': ['/usr/local/bin/html-languageserver', '--stdio'],
+      \ 'css':  ['/usr/local/bin/css-languageserver', '--stdio'],
+      \ 'sass': ['/usr/local/bin/css-languageserver', '--stdio'],
+      \ 'scss': ['/usr/local/bin/css-languageserver', '--stdio'],
+      \ }
+
+let g:echodoc_enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#max_menu_width = 60
+let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = [
+      \ 'tern#Complete',
+      \ 'jspc#omni'
+      \ ]
+let g:deoplete#sources = {}
+let g:deoplete#sources['javascript.jsx'] = ['file', 'ternjs'] " buffer, ultisnips
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
+"autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:UltiSnipsExpandTrigger="<c-j>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" close the preview window when you're not using it
+let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabDefaultCompletionType = "<c-n>"
+
+call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+
+let g:LanguageClient_signColumnAlwaysOn = 1
+let g:LanguageClient_diagnosticsDisplay = {
+      \ 1: { "name": "Error",       "signText": "●", "signTexthl": "NeoMakeErrorSign"   },
+      \ 2: { "name": "Warning",     "signText": "", "signTexthl": "NeoMakeWarningSign" },
+      \ 3: { "name": "Information", "signText": "", "signTexthl": "SignInformation", "texthl": "LanguageClientInformation" },
+      \ 4: { "name": "Hint",        "signText": "", "signTexthl": "SignHint",        "texthl": "LanguageClientHint"        }
+      \ }
+
+"let g:ycm_key_list_select_completion = ['<TAB>']
 
 " }}}1
 " Section: PHP {{{1
@@ -247,67 +295,6 @@ let g:gitgutter_override_sign_column_highlight = 0
 
 let g:used_javascript_libs = 'jquery,underscore,react,flux,requirejs,angularjs,handlebars'
 let g:jsdoc_enable_es6 = 1
-
-" }}}1
-" Section: Completion systems {{{1
-
-let g:LanguageClient_autoStart = 0
-let g:LanguageClient_serverCommands = {
-      \ 'javascript': ['javascript-typescript-stdio', '--logfile', '/tmp/javascript-typescript-stdio'],
-      \ 'javascript.jsx': ['javascript-typescript-stdio', '--logfile', '/tmp/javascript-typescript-stdio'],
-      \ }
-
-let g:echodoc_enable_at_startup = 1
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#max_menu_width = 60
-let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-      \ 'tern#Complete',
-      \ 'jspc#omni'
-      \ ]
-let g:deoplete#sources = {}
-let g:deoplete#sources['javascript.jsx'] = ['file', 'ternjs'] " buffer, ultisnips
-let g:tern#command = ['tern']
-let g:tern#arguments = ['--persistent']
-"autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-let g:UltiSnipsExpandTrigger="<c-j>"
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" close the preview window when you're not using it
-let g:SuperTabClosePreviewOnPopupClose = 1
-let g:SuperTabDefaultCompletionType = "context"
-"let g:SuperTabDefaultCompletionType = "<c-n>"
-
-call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
-
-let g:LanguageClient_signColumnAlwaysOn = 1
-let g:LanguageClient_diagnosticsDisplay = {
-      \ 1: {
-      \     "name": "Error",
-      \     "signText": "",
-      \     "signTexthl": "NeoMakeErrorSign"
-      \ },
-      \ 2: {
-      \     "name": "Warning",
-      \     "signText": "",
-      \     "signTexthl": "NeoMakeWarningSign"
-      \ },
-      \ 3: {
-      \     "name": "Information",
-      \     "texthl": "LanguageClientInformation",
-      \     "signText": "",
-      \     "signTexthl": "SignInformation"
-      \ },
-      \ 4: {
-      \     "name": "Hint",
-      \     "texthl": "LanguageClientHint",
-      \     "signText": "",
-      \     "signTexthl": "SignHint"
-      \ }
-      \ }
-
-"let g:ycm_key_list_select_completion = ['<TAB>']
 
 " }}}1
 " Section: vim-bookmarks {{{1

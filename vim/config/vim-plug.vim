@@ -1,8 +1,4 @@
-if has('nvim')
-  call plug#begin($XDG_DATA_HOME . '/nvim/bundle')
-else
-  call plug#begin('~/.vim/bundle')
-endif
+call plug#begin($XDG_DATA_HOME . '/nvim/bundle')
 
 " Section: Tmux {{{1
 
@@ -237,10 +233,44 @@ Plug 'luochen1990/rainbow', { 'on': ['RainbowToggle', 'RainbowToggleOn', 'Rainbo
 
 "Plug 'vim-utils/vim-troll-stopper'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+
+" }}}1
+" Section: Language Server Protocol {{{1
+
+" Performs installation of LanguageServer-neovim and usefull services.
+" https://github.com/autozimu/LanguageClient-neovim/issues/83#issuecomment-323446843
+function! InstallVSCodeLanguageServices(info)
+  !./install.sh
+  !npm install --global
+        \ vscode-css-languageserver-bin
+        \ vscode-html-languageserver-bin
+        \ vscode-json-languageserver-bin
+endfunction
+
+" Language server protocol framework
+Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': function('InstallVSCodeLanguageServices')
+      \ }
+
+" PHP completion via LanguageClient-neovim
+Plug 'roxma/LanguageServer-php-neovim',  {
+      \ 'do': 'composer install && composer run-script parse-stubs'
+      \ }
+
+" }}}1
+" Section: Completion {{{1
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'tenfyzhong/CompleteParameter.vim'
+
+" (Optional) Showing function signature and inline doc.
+Plug 'Shougo/echodoc.vim'
+
+"Plug 'roxma/nvim-completion-manager'
 
 " }}}1
 " Section: External tools {{{1
@@ -249,24 +279,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 " <leader>gi to create .gitignore files using the gitignore.io API
-Plug 'fszymanski/fzf-gitignore', {'do': ':UpdateRemotePlugins'}
-
-" }}}1
-" Section: Language Server Protocol {{{1
-
-" (optional) language server protocol framework
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-
-" (optional) php completion via LanguageClient-neovim
-Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
-
-" (Optional) Showing function signature and inline doc.
-Plug 'Shougo/echodoc.vim'
-
-"Plug 'roxma/nvim-completion-manager'
-
-" (optional) javascript completion
-"Plug 'roxma/nvim-cm-tern',  {'do': 'yarn install'}
+"Plug 'fszymanski/fzf-gitignore', {'do': ':UpdateRemotePlugins'}
 
 " }}}1
 " Section: Syntax {{{1
@@ -308,7 +321,7 @@ Plug 'KabbAmine/vCoolor.vim', {
 " :ElmShowDocs queries elm-oracle, then echoes the type and docs for the word under the cursor.
 " :ElmBrowseDocs queries elm-oracle, then opens docs web page for the word under the cursor.
 " :ElmFormat formats the current buffer with elm-format.
-"\ 'do': 'yarn global add elm elm-test elm-oracle elm-format',
+"\ 'do': 'npm install --global elm elm-test elm-oracle elm-format',
 Plug 'elmcast/elm-vim', {
       \ 'for': ['elm']
       \ }
@@ -325,17 +338,17 @@ Plug 'jaawerth/neomake-local-eslint-first', { 'for': ['javascript', 'javascript.
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx'] }
 
 Plug 'ternjs/tern_for_vim', {
-      \ 'do': 'yarn install',
+      \ 'do': 'npm install',
       \ 'for': ['javascript', 'javascript.jsx']
       \ }
 Plug 'carlitux/deoplete-ternjs', {
-      \ 'do': 'yarn global add tern',
+      \ 'do': 'npm install --global tern',
       \ 'for': ['javascript', 'javascript.jsx']
       \ }
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 
 " Completion for roxma/nvim-completion-manager
-"Plug 'roxma/nvim-cm-tern',  { 'do': 'yarn global add tern && yarn install' }
+"Plug 'roxma/nvim-cm-tern',  { 'do': 'npm install --global tern && npm install' }
 
 "Plug 'othree/yajs.vim', { 'for': 'javascript' }
 "Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
