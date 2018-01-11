@@ -20,6 +20,7 @@
   st = status
   s = status -s
 
+  last = rev-parse --short HEAD
   oneline = log --pretty=oneline --abbrev-commit --graph --decorate
   lg = log --graph --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'
   lc = !git lg @{u}..
