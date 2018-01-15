@@ -161,19 +161,33 @@ let g:indentLine_fileTypeExclude = ["markdown", "json", "help"]
 let g:indentLine_bufNameExclude = ["NERD_tree.*", "startify"]
 
 " }}}1
-" Section: Neomake {{{1
+" Section: Ale {{{1
 
-let g:neomake_highlight_lines = 0
-let g:neomake_error_sign   = {'text': '●', 'texthl': 'NeomakeErrorSign'}
-"let g:neomake_warning_sign = {'text': '●', 'texthl': 'NeomakeWarningSign'}
-"let g:neomake_message_sign = {'text': '⦿', 'texthl': 'NeomakeMessageSign'}
+let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_column_always = 1
+let g:ale_sign_error   = '●'
+let g:ale_sign_warning = ''
+let g:ale_sign_info    = ''
 
-let g:neomake_php_enabled_makers = ['php']
-let g:neomake_javascript_enabled_makers = ['eslint']
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+
+" Do not lint or fix minified files.
+let g:ale_pattern_options = {
+      \ '\.min\.js$':  {'ale_enabled': 0},
+      \ '\.min\.css$': {'ale_enabled': 0},
+      \ }
+
+let g:ale_linters = {
+      \ 'typescript': ['tsserver', 'tslint', 'typecheck']
+      \ }
+
 if executable('eslint_d')
-  let g:neomake_javascript_enabled_makers = ['eslint_d']
+  let g:ale_javascript_eslint_executable = 'eslint_d'
+  let g:ale_javascript_eslint_use_global = 1
 endif
-autocmd! BufWritePost * Neomake
 
 " }}}1
 " Section: Completion systems {{{1
@@ -187,6 +201,13 @@ let g:LanguageClient_serverCommands = {
       \ 'css':  ['/usr/local/bin/css-languageserver', '--stdio'],
       \ 'sass': ['/usr/local/bin/css-languageserver', '--stdio'],
       \ 'scss': ['/usr/local/bin/css-languageserver', '--stdio'],
+      \ }
+let g:LanguageClient_signColumnAlwaysOn = 1
+let g:LanguageClient_diagnosticsDisplay = {
+      \ 1: { "name": "Error",       "signText": "●", "signTexthl": "ALEErrorSign"   },
+      \ 2: { "name": "Warning",     "signText": "", "signTexthl": "ALEWarningSign" },
+      \ 3: { "name": "Information", "signText": "", "signTexthl": "SignInformation", "texthl": "LanguageClientInformation" },
+      \ 4: { "name": "Hint",        "signText": "", "signTexthl": "SignHint",        "texthl": "LanguageClientHint"        }
       \ }
 
 let g:echodoc_enable_at_startup = 1
@@ -210,16 +231,6 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 let g:SuperTabClosePreviewOnPopupClose = 1
 let g:SuperTabDefaultCompletionType = "context"
 "let g:SuperTabDefaultCompletionType = "<c-n>"
-
-call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
-
-let g:LanguageClient_signColumnAlwaysOn = 1
-let g:LanguageClient_diagnosticsDisplay = {
-      \ 1: { "name": "Error",       "signText": "●", "signTexthl": "NeoMakeErrorSign"   },
-      \ 2: { "name": "Warning",     "signText": "", "signTexthl": "NeoMakeWarningSign" },
-      \ 3: { "name": "Information", "signText": "", "signTexthl": "SignInformation", "texthl": "LanguageClientInformation" },
-      \ 4: { "name": "Hint",        "signText": "", "signTexthl": "SignHint",        "texthl": "LanguageClientHint"        }
-      \ }
 
 "let g:ycm_key_list_select_completion = ['<TAB>']
 

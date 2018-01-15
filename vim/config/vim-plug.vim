@@ -158,8 +158,8 @@ Plug 'terryma/vim-expand-region', {
       \ 'on': ['<Plug>(expand_region_expand)', '<Plug>(expand_region_shrink)']
       \ }
 
-" Temporarily disable
-"Plug 'mhinz/vim-startify'
+" Friendly welcome screen
+Plug 'mhinz/vim-startify'
 
 " M-p to cycle backward through the history of yanks
 " M-P to cycle forwards through the history of yanks
@@ -222,7 +222,9 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 " <D-F> - :Ack
 Plug 'mileszs/ack.vim', { 'on': 'Ack' }
 
-Plug 'benekastah/neomake'
+" <C-k> to jump to the next error
+" <C-j> to jump to the previous error
+Plug 'w0rp/ale'
 
 Plug 'Yggdroot/indentLine'
 

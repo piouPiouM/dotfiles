@@ -96,6 +96,10 @@ nnoremap <F5> :UndotreeToggle<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
+" Ale
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
 " vim-quickhl
 nmap <localleader>k <Plug>(quickhl-cword-toggle)
 nmap <localleader>] <Plug>(quickhl-tag-toggle)
