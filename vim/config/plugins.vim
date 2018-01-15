@@ -367,6 +367,7 @@ let g:switch_custom_definitions =
       \   ['yes', 'no'],
       \   ['on', 'off'],
       \   ['first', 'last'],
+      \   ['previous', 'next'],
       \   ['else', 'else if'],
       \ ]
 autocmd FileType gitrebase let b:switch_custom_definitions =

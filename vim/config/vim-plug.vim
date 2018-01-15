@@ -59,7 +59,6 @@ Plug 'kana/vim-textobj-user'
 " iC
 Plug 'coderifous/textobj-word-column.vim'
 
-
 " a_
 " i_
 Plug 'lucapette/vim-textobj-underscore'
@@ -220,7 +219,7 @@ Plug 'FooSoft/vim-argwrap'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
 " <D-F> - :Ack
-Plug 'mileszs/ack.vim', { 'on': 'Ack' }
+"Plug 'mileszs/ack.vim', { 'on': 'Ack' }
 
 " <C-k> to jump to the next error
 " <C-j> to jump to the previous error
@@ -231,7 +230,9 @@ Plug 'Yggdroot/indentLine'
 " Auto close parentheses and repeat by dot dot dot
 Plug 'cohama/lexima.vim'
 
-Plug 'luochen1990/rainbow', { 'on': ['RainbowToggle', 'RainbowToggleOn', 'RainbowToggleOff'] }
+Plug 'luochen1990/rainbow', {
+      \ 'on': ['RainbowToggle', 'RainbowToggleOn', 'RainbowToggleOff']
+      \ }
 
 "Plug 'vim-utils/vim-troll-stopper'
 
@@ -267,12 +268,9 @@ Plug 'roxma/LanguageServer-php-neovim',  {
 " Section: Completion {{{1
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'tenfyzhong/CompleteParameter.vim'
 
-" (Optional) Showing function signature and inline doc.
+" Showing function signature and inline doc.
 Plug 'Shougo/echodoc.vim'
-
-"Plug 'roxma/nvim-completion-manager'
 
 " }}}1
 " Section: External tools {{{1
@@ -323,8 +321,8 @@ Plug 'KabbAmine/vCoolor.vim', {
 " :ElmShowDocs queries elm-oracle, then echoes the type and docs for the word under the cursor.
 " :ElmBrowseDocs queries elm-oracle, then opens docs web page for the word under the cursor.
 " :ElmFormat formats the current buffer with elm-format.
-"\ 'do': 'npm install --global elm elm-test elm-oracle elm-format',
 Plug 'elmcast/elm-vim', {
+      \ 'do': 'npm install --global elm elm-test elm-oracle elm-format',
       \ 'for': ['elm']
       \ }
 Plug 'pbogut/deoplete-elm'
@@ -405,14 +403,17 @@ Plug 'AndrewRadev/switch.vim'
 
 " Table creator
 " <leader>tm - :TableModeToggle
-Plug 'dhruvasagar/vim-table-mode', {'on': ['TableModeToggle', 'TableModeEnable']}
+Plug 'dhruvasagar/vim-table-mode', {
+      \ 'on': ['TableModeToggle', 'TableModeEnable']
+      \ }
 
 " A tool for aligning text by some character.
-" gl to add spaces to the left
-" gL to add spaces to the right
+" [count]gl[motion][character] to add spaces to the left
+" [count]gL[motion][character] to add spaces to the right
+" Ex:
+"   glip=
+"   3gLi(,
 Plug 'tommcdo/vim-lion'
-
-"Plug 'godlygeek/tabular'
 
 " }}}1
 " Section: Colorscheme stuff {{{1
@@ -428,7 +429,9 @@ Plug 'lilydjwg/colorizer', {
 "      the bottom level for the cursor position.
 " :HLT! same as :HTL but will execute on every CursorMoved event.
 " <leader>htl same as :HTL.
-Plug 'gerw/vim-HiLinkTrace'
+Plug 'gerw/vim-HiLinkTrace', {
+      \ 'on': 'HLT'
+      \ }
 
 " Pinnacle provides functions for manipulating `:highlight` groups.
 Plug 'wincent/pinnacle'
@@ -436,10 +439,10 @@ Plug 'wincent/pinnacle'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-Plug 'iCyMind/NeoSolarized'
-Plug 'w0ng/vim-hybrid'
+"Plug 'iCyMind/NeoSolarized'
+"Plug 'w0ng/vim-hybrid'
+"Plug 'chriskempson/base16-vim'
 Plug 'easysid/mod8.vim'
-Plug 'chriskempson/base16-vim'
 Plug 'cocopon/iceberg.vim'
 
 " }}}1

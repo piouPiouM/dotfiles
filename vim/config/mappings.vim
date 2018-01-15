@@ -66,8 +66,8 @@ vmap gbl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <C
 " Section: Plugins {{{1
 
 " Launch Ack
-nnoremap <silent> <D-F> :Ack<space>
-inoremap <silent> <D-F> <ESC>:Ack<space>
+"nnoremap <silent> <D-F> :Ack<space>
+"inoremap <silent> <D-F> <ESC>:Ack<space>
 
 " Invoque CtrlP
 nmap     <space>  <Plug>[ctrlp]
@@ -115,10 +115,10 @@ nmap <localleader>] <Plug>(quickhl-tag-toggle)
 " ArgWrap
 nnoremap <silent> <leader>aw :ArgWrap<CR>
 
-" Tabular
-"nmap <leader>a= :Tabularize /=<CR>
+" vim-lion
+nmap <leader>a= glip=
 "vmap <leader>a= :Tabularize /=<CR>
-"nmap <leader>a: :Tabularize /:\zs<CR>
+nmap <leader>a: gLi{:
 "vmap <leader>a: :Tabularize /:\zs<CR>
 
 nmap ga <Plug>(UnicodeGA)
