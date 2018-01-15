@@ -151,7 +151,7 @@ let g:airline_section_c="%<%f%#__accent_red#%m%#__restore__# %#__accent_red#%{ai
 " }}}1
 " Section: vim-polyglot {{{1
 
-let g:polyglot_disabled = ['elm']
+let g:polyglot_disabled = ['elm', 'typescript']
 
 " }}}1
 " Section: IndentLine {{{1
@@ -211,19 +211,28 @@ let g:LanguageClient_diagnosticsDisplay = {
       \ }
 
 let g:echodoc_enable_at_startup = 1
+
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
-let g:deoplete#max_menu_width = 60
+let g:deoplete#max_abbr_width = 0
+let g:deoplete#max_menu_width = 0
 let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-      \ 'tern#Complete',
-      \ 'jspc#omni'
-      \ ]
-let g:deoplete#sources = {}
-let g:deoplete#sources['javascript.jsx'] = ['file', 'ternjs'] " buffer, ultisnips
+"let g:deoplete#omni#functions = {}
+"let g:deoplete#omni#functions.javascript = [
+      "\ 'tern#Complete',
+      "\ 'jspc#omni'
+      "\ ]
+"let g:deoplete#sources = {}
+"let g:deoplete#sources['javascript.jsx'] = ['file', 'ternjs'] " buffer, ultisnips
+call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
+let g:tern_request_timeout = 1
+let g:tern_request_timeout = 6000
+
 "autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 let g:UltiSnipsExpandTrigger="<c-j>"
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"

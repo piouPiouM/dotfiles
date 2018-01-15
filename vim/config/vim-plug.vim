@@ -302,7 +302,7 @@ Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'less'] }
 " <C-o>s to display colorpicker and insert hsl color
 " <C-o>a to display colorpicker and insert rgba color
 Plug 'KabbAmine/vCoolor.vim', {
-      \ 'for': ['css', 'scss', 'less', 'javascript', 'php', 'vim', 'tmux'],
+      \ 'for': ['css', 'scss', 'less', 'javascript', 'typescript', 'php', 'vim', 'tmux'],
       \ }
 
 " }}}2
@@ -332,30 +332,35 @@ Plug 'pbogut/deoplete-elm'
 " }}}2
 " JavaScript {{{2
 
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/javascript-libraries-syntax.vim', {
+      \ 'for': ['javascript', 'javascript.jsx']
+      \ }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
-Plug 'jaawerth/neomake-local-eslint-first', { 'for': ['javascript', 'javascript.jsx'] }
 
 " :JsDoc - Insert JSDoc if the cursor is on `function` keyword line.
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx'] }
 
 Plug 'ternjs/tern_for_vim', {
-      \ 'do': 'npm install',
+      \ 'do': 'npm install && npm install --global tern',
       \ 'for': ['javascript', 'javascript.jsx']
       \ }
 Plug 'carlitux/deoplete-ternjs', {
-      \ 'do': 'npm install --global tern',
       \ 'for': ['javascript', 'javascript.jsx']
       \ }
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/jspc.vim', {
+      \ 'for': ['javascript', 'javascript.jsx', 'typescript']
+      \ }
+"Plug 'tenfyzhong/CompleteParameter.vim'
 
-" Completion for roxma/nvim-completion-manager
-"Plug 'roxma/nvim-cm-tern',  { 'do': 'npm install --global tern && npm install' }
-
-"Plug 'othree/yajs.vim', { 'for': 'javascript' }
-"Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
-"Plug 'gavocanov/vim-js-indent'
-"Plug 'Valloric/YouCompleteMe'
+function! InstallTypeScript(info)
+  !npm install --global typescript
+  UpdateRemotePlugins
+endfunction
+Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
+Plug 'mhartington/nvim-typescript', {
+      \ 'do': function('InstallTypeScript'),
+      \ 'for': 'typescript'
+      \ }
 
 " }}}2
 " PHP {{{2
