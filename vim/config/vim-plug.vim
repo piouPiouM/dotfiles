@@ -335,8 +335,12 @@ Plug 'othree/javascript-libraries-syntax.vim', {
       \ }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
 
+Plug 'Quramy/vim-js-pretty-template', {
+      \ 'for': ['javascript', 'typescript']
+      \ }
+
 " :JsDoc - Insert JSDoc if the cursor is on `function` keyword line.
-Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx', 'typescript'] }
 
 Plug 'ternjs/tern_for_vim', {
       \ 'do': 'npm install && npm install --global tern',
@@ -394,6 +398,7 @@ Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 Plug 'sheerun/vim-polyglot'
 
 " }}}2
+
 " }}}1
 " Section: Text Manipulation {{{1
 

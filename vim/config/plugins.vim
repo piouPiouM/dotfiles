@@ -212,6 +212,8 @@ let g:LanguageClient_diagnosticsDisplay = {
 
 let g:echodoc_enable_at_startup = 1
 
+let g:nvim_typescript#type_info_on_hold = 1
+
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
@@ -219,6 +221,10 @@ let g:deoplete#enable_camel_case = 1
 let g:deoplete#max_abbr_width = 0
 let g:deoplete#max_menu_width = 0
 let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#auto_complete_delay = 25
+let g:deoplete#auto_refresh_delay = 250
+let g:deoplete#enable_refresh_always = 1
+" let g:deoplete#delimiters = ['/', '.']
 "let g:deoplete#omni#functions = {}
 "let g:deoplete#omni#functions.javascript = [
       "\ 'tern#Complete',
