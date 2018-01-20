@@ -353,10 +353,10 @@ let g:startify_bookmarks = [] " See $HOME/.local/vimrc
 let g:startify_list_order = [
       \ ['  Bookmarks:'],
       \ 'bookmarks',
-      \ ['  Recently used files:'],
-      \ 'files',
       \ ['  MRU in the current directory:'],
       \ 'dir',
+      \ ['  Recently used files:'],
+      \ 'files',
       \ ['  Sessions:'],
       \ 'sessions',
       \ ['  Commands:'],
