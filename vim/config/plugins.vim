@@ -403,10 +403,6 @@ let g:lion_squeeze_spaces = 1
 " Section: VCoolor {{{1
 
 let g:vcoolor_lowercase  = 1
-let g:vcoolor_map        = '<C-O>h'
-let g:vcool_ins_rgb_map  = '<C-O>r' " Insert rgb color
-let g:vcool_ins_hsl_map  = '<C-O>s' " Insert hsl color
-let g:vcool_ins_rgba_map = '<C-O>a' " Insert rgba color
 
 " }}}1
 " Section: colorizer {{{1
@@ -465,6 +461,11 @@ let g:NERDTreeShowHidden=1
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
+
+" }}}1
+" Section: NERDCommenter {{{1
+
+let g:NERDSpaceDelims = 1
 
 " }}}1
 " Section: lexima {{{1

@@ -15,13 +15,13 @@ Plug 'vim-airline/vim-airline-themes'
 " <leader>fml to display all <leader> mappings
 Plug 'ktonga/vim-follow-my-lead'
 
-" DimInactiveOn / DimInactiveOff
-" DimInactiveSyntaxOn / DimInactiveSyntaxOff
-" DimInactiveColorcolumnOn / DimInactiveColorcolumnOff
-" DimInactiveWindowOn / DimInactiveWindowOff
-" DimInactiveWindowReset
-" DimInactiveBufferOn / DimInactiveBufferOff
-" DimInactiveBufferReset
+" :DimInactiveOn / :DimInactiveOff
+" :DimInactiveSyntaxOn / :DimInactiveSyntaxOff
+" :DimInactiveColorcolumnOn / :DimInactiveColorcolumnOff
+" :DimInactiveWindowOn / :DimInactiveWindowOff
+" :DimInactiveWindowReset
+" :DimInactiveBufferOn / :DimInactiveBufferOff
+" :DimInactiveBufferReset
 Plug 'blueyed/vim-diminactive'
 
 " <space>p to list files from root directory
@@ -39,12 +39,11 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " <C-R> in insert mode
 Plug 'junegunn/vim-peekaboo'
 
-" :MaximizerToggle to maximize or restore windows.
+" :MaximizerToggle - Maximize or restore windows.
 " F3 in Normal, Visual and Insert modes.
 Plug 'szw/vim-maximizer'
 
 "Plug 'wincent/scalpel'
-Plug 'chase/vim-ansible-yaml'
 Plug 'wincent/vim-docvim'
 
 " Text objects {{{2
@@ -57,6 +56,7 @@ Plug 'kana/vim-textobj-user'
 " ic
 " aC
 " iC
+" TODO: to replace with rhysd/vim-textobj-word-column
 Plug 'coderifous/textobj-word-column.vim'
 
 " a_
@@ -144,8 +144,26 @@ Plug 'chrisbra/unicode.vim'
 " <leader><leader>f
 Plug 'easymotion/vim-easymotion'
 
+" <leader>w
+" <leader>b
+" <leader>e
+" <leader>ge
+" <leader>aw
+" <leader>iw
 Plug 'chaoren/vim-wordmotion'
 
+" mm to add/remove bookmark at current line
+" mi to add/edit/remove annotation at current line
+" mn to jump to next bookmark in buffer
+" mp to jump to previous bookmark in buffer
+" ma to show all bookmarks (toggle)
+" mc to clear bookmarks in current buffer only
+" mc to clear bookmarks in all buffers
+" [count]mkk to move up bookmark at current line
+" [count]mjj to move down bookmark at current line
+" [count]mg to move bookmark at current line to another line
+" :BookmarkSave <FILE_PATH> - Save all bookmarks to a file
+" :BookmarkLoad <FILE_PATH> - Load bookmarks from a file
 Plug 'MattesGroeger/vim-bookmarks'
 
 " <F5> to toggle undo-tree panel
@@ -190,8 +208,12 @@ Plug 'dharanasoft/rtf-highlight', { 'on': 'RTFHighlight' }
 Plug 'editorconfig/editorconfig-vim'
 
 " <C-y>, to expand abbreviations similar to emmet
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'scss', 'javascript', 'php'] }
+Plug 'mattn/emmet-vim', {
+      \ 'for': ['html', 'css', 'scss', 'javascript', 'php']
+      \ }
 
+" :ToggleWhitespace - Toggle whitespace highlighting on/off
+" [range]:StripWhitespace - To clean extra whitespace
 Plug 'ntpeters/vim-better-whitespace'
 
 Plug 'rizzatti/dash.vim', {
@@ -270,6 +292,7 @@ Plug 'roxma/LanguageServer-php-neovim',  {
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Showing function signature and inline doc.
+" <c-y> to accept a completion for a function
 Plug 'Shougo/echodoc.vim'
 
 " }}}1
@@ -290,15 +313,22 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-git'
 
 " }}}2
+" Ansible {{{2
+
+" TODO: to replace with pearofducks/ansible-vim
+Plug 'chase/vim-ansible-yaml'
+
+" }}}2
 " CSS {{{2
 
 " Uses :ColorToggle for javascript and php.
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'less'] }
 
-" <C-o>h to display colorpicker and insert hex color
-" <C-o>r to display colorpicker and insert rgb color
-" <C-o>s to display colorpicker and insert hsl color
-" <C-o>a to display colorpicker and insert rgba color
+" <M-c> to display colorpicker and insert hex color
+" <M-r> to display colorpicker and insert rgb color
+" <M-v> to display colorpicker and insert hsl color
+" <M-w> to display colorpicker and insert rgba color
+" :VCase - Toggle between lower/upper case for the returned hex color
 Plug 'KabbAmine/vCoolor.vim', {
       \ 'for': ['css', 'scss', 'less', 'javascript', 'typescript', 'php', 'vim', 'tmux'],
       \ }
@@ -335,12 +365,14 @@ Plug 'othree/javascript-libraries-syntax.vim', {
       \ }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
 
-Plug 'Quramy/vim-js-pretty-template', {
-      \ 'for': ['javascript', 'typescript']
-      \ }
+" Plug 'Quramy/vim-js-pretty-template', {
+"       \ 'for': ['javascript', 'typescript']
+"       \ }
 
 " :JsDoc - Insert JSDoc if the cursor is on `function` keyword line.
-Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx', 'typescript'] }
+Plug 'heavenshell/vim-jsdoc', {
+      \ 'for': ['javascript', 'javascript.jsx', 'typescript']
+      \ }
 
 Plug 'ternjs/tern_for_vim', {
       \ 'do': 'npm install && npm install --global tern',
