@@ -97,18 +97,9 @@ nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " Ale
-nnoremap <buffer> <silent> <C-k> <Plug>(ale_previous_wrap)
-nnoremap <buffer> <silent> <C-j> <Plug>(ale_next_wrap)
-nnoremap <buffer> <silent> <F12> <Plug>(ale_go_to_definition)
-
-" nvim-typescript
-nnoremap <buffer> <silent> <S-F12> :TSRefs<CR>
-" nnoremap <buffer> <silent> <> :TSDef<CR>
-" nnoremap <buffer> <silent> <> :TSDefsPreview<CR>
-" nnoremap <buffer> <silent> <> :TSType<CR>
-" nnoremap <buffer> <silent> <> :TSTypeDef<CR>
-" nnoremap <buffer> <silent> <> :TSImport<CR>
-" nnoremap <buffer> <silent> <> :TSDoc<CR>
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" nmap <silent> <F12> <Plug>(ale_go_to_definition)
 
 " vim-quickhl
 nmap <localleader>k <Plug>(quickhl-cword-toggle)

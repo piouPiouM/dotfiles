@@ -9,10 +9,10 @@ augroup ft_json
   autocmd BufReadPost .eslintrc setlocal filetype=json
 augroup END
 
-augroup ft_typescript
-  autocmd!
-  autocmd FileType typescript JsPreTmpl html
-augroup END
+" augroup ft_typescript
+"   autocmd!
+"   autocmd FileType typescript JsPreTmpl html
+" augroup END
 
 " Executes a stack of commands when creating windows
 augroup enter_cmd

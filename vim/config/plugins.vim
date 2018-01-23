@@ -25,9 +25,7 @@ let g:localvimrc_ask = 1
 let g:localvimrc_persistent = 0
 let g:localvimrc_sandbox = 0
 let g:localvimrc_persistence_file = $XDG_DATA_HOME . '/nvim/localvimrc_persistent'
-let g:localvimrc_whitelist = [
-      \ '/var/www/atih/vagrant/www',
-      \]
+let g:localvimrc_whitelist = []
 
 " }}}1
 " Section: CtrlP {{{1
@@ -104,6 +102,8 @@ command! -bang -nargs=* Rg
       \           : fzf#vim#with_preview('right:60%:hidden', '?'),
       \   <bang>0)
 
+" TODO: creates a command to display the jump list (`:ju[mps]`)
+
 " }}}1
 " Section: Ack {{{1
 
@@ -169,6 +169,8 @@ let g:ale_sign_column_always = 1
 let g:ale_sign_error   = '●'
 let g:ale_sign_warning = ''
 let g:ale_sign_info    = ''
+let g:ale_sign_style_error = '⚡︎'
+let g:ale_sign_style_warning = '✽'
 
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 1
@@ -181,8 +183,10 @@ let g:ale_pattern_options = {
       \ '\.min\.css$': {'ale_enabled': 0},
       \ }
 
+" Do not use 'tsserver' to avoid slowdown of system because of LSP support
+" offers by nvim-typescript plugin.
 let g:ale_linters = {
-      \ 'typescript': ['tsserver', 'tslint', 'typecheck']
+      \ 'typescript': ['eslint', 'tslint', 'typecheck']
       \ }
 
 if executable('eslint_d')
@@ -192,6 +196,8 @@ endif
 
 " }}}1
 " Section: Completion systems {{{1
+
+let g:echodoc_enable_at_startup = 1
 
 let g:LanguageClient_autoStart = 0
 let g:LanguageClient_serverCommands = {
@@ -205,15 +211,27 @@ let g:LanguageClient_serverCommands = {
       \ }
 let g:LanguageClient_signColumnAlwaysOn = 1
 let g:LanguageClient_diagnosticsDisplay = {
-      \ 1: { "name": "Error",       "signText": "●", "signTexthl": "ALEErrorSign"   },
-      \ 2: { "name": "Warning",     "signText": "", "signTexthl": "ALEWarningSign" },
-      \ 3: { "name": "Information", "signText": "", "signTexthl": "SignInformation", "texthl": "LanguageClientInformation" },
-      \ 4: { "name": "Hint",        "signText": "", "signTexthl": "SignHint",        "texthl": "LanguageClientHint"        }
+      \ 1: { "name": "Error",
+      \      "signText": "●",
+      \      "signTexthl": "ALEErrorSign"
+      \    },
+      \ 2: { "name": "Warning",
+      \      "signText": "",
+      \      "signTexthl": "ALEWarningSign"
+      \    },
+      \ 3: { "name": "Information",
+      \      "signText": "",
+      \      "signTexthl": "SignInformation",
+      \      "texthl": "LanguageClientInformation"
+      \    },
+      \ 4: { "name": "Hint",
+      \      "signText": "",
+      \      "signTexthl": "SignHint",
+      \      "texthl": "LanguageClientHint"
+      \    }
       \ }
 
-let g:echodoc_enable_at_startup = 1
-
-let g:nvim_typescript#type_info_on_hold = 1
+let g:nvim_typescript#type_info_on_hold = 0
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
@@ -222,10 +240,10 @@ let g:deoplete#enable_camel_case = 1
 let g:deoplete#max_abbr_width = 0
 let g:deoplete#max_menu_width = 0
 let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#auto_complete_delay = 25
-let g:deoplete#auto_refresh_delay = 250
-let g:deoplete#enable_refresh_always = 1
-" let g:deoplete#delimiters = ['/', '.']
+" let g:deoplete#auto_complete_delay = 35
+" let g:deoplete#auto_refresh_delay = 500
+"let g:deoplete#enable_refresh_always = 1
+let g:deoplete#delimiters = ['/', '.']
 "let g:deoplete#omni#functions = {}
 "let g:deoplete#omni#functions.javascript = [
       "\ 'tern#Complete',
@@ -244,8 +262,8 @@ let g:tern_request_timeout = 6000
 let g:UltiSnipsExpandTrigger="<c-j>"
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " close the preview window when you're not using it
-let g:SuperTabClosePreviewOnPopupClose = 1
-let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabClosePreviewOnPopupClose = 1
+" let g:SuperTabDefaultCompletionType = "context"
 "let g:SuperTabDefaultCompletionType = "<c-n>"
 
 "let g:ycm_key_list_select_completion = ['<TAB>']
@@ -320,7 +338,7 @@ let g:gitgutter_override_sign_column_highlight = 0
 " }}}1
 " Section: javascript-libraries-syntax {{{1
 
-let g:used_javascript_libs = 'jquery,underscore,react,flux,requirejs,angularjs,handlebars'
+let g:used_javascript_libs = 'jquery,underscore,requirejs'
 let g:jsdoc_enable_es6 = 1
 
 " }}}1

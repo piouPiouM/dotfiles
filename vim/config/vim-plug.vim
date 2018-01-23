@@ -258,7 +258,7 @@ Plug 'luochen1990/rainbow', {
 
 "Plug 'vim-utils/vim-troll-stopper'
 
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
