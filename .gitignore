@@ -2,5 +2,3 @@ sessions/
 backup/
 vim/.netrwhist
 vim/tmp
-vim/bundle/*
-!vim/bundle/Vundle.vim

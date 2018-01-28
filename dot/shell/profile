@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 PPM_BREW_PREFIX=`brew --prefix`
 
@@ -8,7 +8,7 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:=~/.local/share}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:=~/.cache}
 
 # path
-PATH=$PPM_BREW_PREFIX/bin:$PPM_BREW_PREFIX/sbin:$HOME/Applications/Scripts:$PATH
+PATH=$PPM_BREW_PREFIX/bin:$PPM_BREW_PREFIX/sbin:$PATH
 
 # z.sh
 if [ -s "$PPM_BREW_PREFIX/etc/profile.d/z.sh" ]; then
@@ -36,7 +36,7 @@ NVM_DIR="$XDG_DATA_HOME/nvm"
   #PATH=$PPM_YARN_PREFIX:$PATH
 #fi
 
-export PATH=~/.local/bin:$PATH
+export PATH=$XDG_DATA_HOME/bin:$PATH
 export NODE_PATH
 export NVM_DIR
 export PPM_BREW_PREFIX
