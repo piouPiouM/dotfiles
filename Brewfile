@@ -92,6 +92,7 @@ mas "Magnet", id: 441258766
 mas "Pocket", id: 568494494
 mas "Renamer", id: 402286241
 mas "Rocket.Chat+", id: 1086818840
+mas "Stay", id: 435410196
 mas "Skitch", id: 425955336
 mas "The Archive Browser", id: 510232205
 mas "The Unarchiver", id: 425424353
