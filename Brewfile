@@ -44,6 +44,7 @@ brew "trash"
 brew "tree"
 brew "wget"
 
+brew "exa"
 brew "fd"
 brew "fzf"
 brew "ripgrep"

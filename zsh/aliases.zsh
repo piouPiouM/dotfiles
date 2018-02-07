@@ -10,6 +10,10 @@ alias l='ls -lah'
 alias ll='ls -lh'
 alias la='ls -lAh'
 
+alias exa='exa --color-scale --git --group-directories-first --long --group --all'
+alias le='exa'
+alias lg='exa --git-ignore -I .git'
+
 # Editors
 alias vim=nvim
 alias v=vim
