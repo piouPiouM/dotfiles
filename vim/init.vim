@@ -56,6 +56,7 @@ set modelines=0
 set history=300
 set lazyredraw " Do not redraw while running macros (much faster).
 set nofsync    " Let the OS decide when it's appropriate to flush the cache, rather than vim (much faster).
+set regexpengine=1
 
 " used by gf to follow ES6 import - Ctrl-o to come back
 set suffixesadd=.js,.jsx,.styl,.css,.scss
@@ -90,7 +91,7 @@ endif
 
 set splitbelow splitright  " Split window at right bottom.
 set relativenumber         " Always show line numbers, with relative position.
-set cursorline             " Highlight current line.
+set nocursorline           " Disable current line highlighting.
 set scrolloff=3            " Provide some context when editing.
 set clipboard=unnamedplus
 set guifont=FuraCode\ Nerd\ Font:12

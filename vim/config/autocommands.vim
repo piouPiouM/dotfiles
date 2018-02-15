@@ -23,13 +23,6 @@ augroup enter_cmd
   autocmd VimEnter,VimResized * let g:ctrlp_max_height = &lines
 augroup END
 
-" Highlight cursorline ONLY in the active window
-augroup cursor_line
-  autocmd!
-  autocmd WinEnter * set cursorline
-  autocmd WinLeave * set nocursorline
-augroup END
-
 " Display trailing whitespace in insert mode only
 augroup trailing
   autocmd!
