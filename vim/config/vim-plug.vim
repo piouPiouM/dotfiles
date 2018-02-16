@@ -166,14 +166,13 @@ Plug 'chaoren/vim-wordmotion'
 " :BookmarkLoad <FILE_PATH> - Load bookmarks from a file
 Plug 'MattesGroeger/vim-bookmarks'
 
-" <F5> to toggle undo-tree panel
+" :UndotreeToggle - Toggle undo-tree panel
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 
-" + to expand the visual selection
-" _ to shrink the visual selection
-Plug 'terryma/vim-expand-region', {
-      \ 'on': ['<Plug>(expand_region_expand)', '<Plug>(expand_region_shrink)']
-      \ }
+" vv to select quickly text between markers (<, >, ", ', `, (, ), [, ], {, }, t)
+"  v (after selection) to increase selection
+" <C-S-V> to cancel last smartpairs selection
+Plug 'gorkunov/smartpairs.vim'
 
 " Friendly welcome screen
 Plug 'mhinz/vim-startify'
@@ -221,7 +220,7 @@ Plug 'rizzatti/dash.vim', {
       \ }
 Plug 'scrooloose/nerdcommenter'
 
-" Usefull to display the current branch in vim-airline
+" Useful to display the current branch in vim-airline
 Plug 'tpope/vim-fugitive'
 
 " ]c to jump to next hunk
@@ -243,9 +242,22 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 " <D-F> - :Ack
 "Plug 'mileszs/ack.vim', { 'on': 'Ack' }
 
+" Performs installation of useful linters.
+function! InstallLinters(info)
+  !brew install ansible-lint hadolint shellcheck
+  !npm install --global
+        \ csslint
+        \ htmlhint
+        \ prettier
+        \ sass-lint
+  !pip3 install yamllint
+endfunction
+
 " <C-k> to jump to the next error
 " <C-j> to jump to the previous error
-Plug 'w0rp/ale'
+Plug 'w0rp/ale', {
+      \ 'do': function('InstallLinters')
+      \ }
 
 Plug 'Yggdroot/indentLine'
 
@@ -265,11 +277,12 @@ Plug 'honza/vim-snippets'
 " }}}1
 " Section: Language Server Protocol {{{1
 
-" Performs installation of LanguageServer-neovim and usefull services.
+" Performs installation of LanguageServer-neovim and useful services.
 " https://github.com/autozimu/LanguageClient-neovim/issues/83#issuecomment-323446843
 function! InstallVSCodeLanguageServices(info)
   !./install.sh
   !npm install --global
+        \ javascript-typescript-langserver
         \ vscode-css-languageserver-bin
         \ vscode-html-languageserver-bin
         \ vscode-json-languageserver-bin
@@ -289,7 +302,13 @@ Plug 'roxma/LanguageServer-php-neovim',  {
 " }}}1
 " Section: Completion {{{1
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Freeze to 4.0-serial to keep completion works with nvim-typescript:
+" - https://github.com/mhartington/nvim-typescript/issues/115
+" - https://github.com/Shougo/deoplete.nvim/issues/638
+Plug 'Shougo/deoplete.nvim', {
+      \ 'tag': '4.0-serial',
+      \ 'do': ':UpdateRemotePlugins',
+      \ }
 
 " Showing function signature and inline doc.
 " <c-y> to accept a completion for a function

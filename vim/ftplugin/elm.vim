@@ -1,6 +1,6 @@
 setlocal tabstop=4
 setlocal shiftwidth=4
 setlocal softtabstop=4
-set expandtab
+setlocal expandtab
 
 "hi! link elmOperator jsOperator

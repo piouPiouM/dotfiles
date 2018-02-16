@@ -22,10 +22,10 @@ let g:fml_all_sources = 1
 
 let g:localvimrc_name = ['.git/vimrc', '.lvimrc', '.local.vimrc', '.config/vimrc']
 let g:localvimrc_ask = 1
-let g:localvimrc_persistent = 0
-let g:localvimrc_sandbox = 0
+let g:localvimrc_persistent = 1 " Store and restore decisions only for upper case answer (Y/N/A)
 let g:localvimrc_persistence_file = $XDG_DATA_HOME . '/nvim/localvimrc_persistent'
-let g:localvimrc_whitelist = []
+let g:localvimrc_sandbox = 0
+let g:localvimrc_whitelist = [] " See $HOME/.local/vimrc
 
 " }}}1
 " Section: CtrlP {{{1
@@ -76,10 +76,19 @@ let g:fzf_action = {
       \ 'ctrl-q': function('s:build_quickfix_list'),
       \ 'ctrl-x': 'split',
       \ 'ctrl-t': 'tab split',
-      \ 'ctrl-v': 'vsplit'
+      \ 'ctrl-v': 'vsplit',
+      \ 'ctrl-o': '!open',
       \ }
 
+let g:fzf_command_prefix = 'Fzf'
 let g:fzf_tags_command = 'ctags'
+let g:fzf_commits_log_options = "--graph --color=always --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'"
+
+let g:rg_command = '
+    \ rg --line-number --no-messages --no-heading --color=always --smart-case --hidden --no-ignore-vcs --follow
+    \ -g "!{.git,node_modules,vendor,build}/*" '
+
+command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
 " Lightweight UI
 autocmd! FileType fzf
@@ -87,7 +96,7 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
       \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 " Files with preview
-command! -bang -nargs=? -complete=dir Files
+command! -bang -nargs=? -complete=dir FzfFiles
       \ call fzf#vim#files(
       \   <q-args>,
       \   <bang>0 ? fzf#vim#with_preview('up:60%', '?')
@@ -95,14 +104,43 @@ command! -bang -nargs=? -complete=dir Files
       \   <bang>0)
 
 " Command for ripgrep
-command! -bang -nargs=* Rg
+" Search "color" in vim files only:
+"     :Rg color -tvim
+"     :Rg -tvim color
+command! -bang -nargs=* FzfRg
       \ call fzf#vim#grep(
-      \   'rg --line-number --no-messages --no-heading --color=always --smart-case --hidden --no-ignore-vcs '.shellescape(<q-args>), 1,
+      \   g:rg_command . <q-args>, 1,
       \   <bang>0 ? fzf#vim#with_preview('up:60%', '?')
       \           : fzf#vim#with_preview('right:60%:hidden', '?'),
       \   <bang>0)
 
-" TODO: creates a command to display the jump list (`:ju[mps]`)
+" TODO: creates a commands to
+"   - display the jump list (`:ju[mps]`)
+"   - search file in dotfiles
+
+command! -bang -nargs=1 FzfWhich call fzf#run(fzf#wrap(
+      \ {'source': 'which -a <q-args>', 'options': '+m'}, <bang>0))
+
+" Search spotlight {{{2
+command! -nargs=1 FzfSpotlight call fzf#run(fzf#wrap({
+      \ 'source'  : 'mdfind ' . <q-args>,
+      \ 'options' : '-m --prompt "Spotlight> "'
+      \ }))
+" }}}2
+
+command! -bang FzfGModified call fzf#run(fzf#wrap({
+      \ 'source': 'git ls-files --exclude-standard --others --modified',
+      \ }),
+      \   <bang>0 ? fzf#vim#with_preview('up:60%', '?')
+      \           : fzf#vim#with_preview('right:70%:hidden', '?'),
+      \   <bang>0
+      \ )
+
+command! -nargs=1 FzfUnicode call fzf#run(fzf#wrap('unicode#PrintUnicode(<q-args>, 0)'))
+
+command! -nargs=* FzfDirectories call fzf#run(fzf#wrap({
+      \ 'source': "$FZF_ALT_C_COMMAND <q-args>"
+      \ }))
 
 " }}}1
 " Section: Ack {{{1
@@ -165,16 +203,17 @@ let g:indentLine_bufNameExclude = ["NERD_tree.*", "startify"]
 " Section: Ale {{{1
 
 let g:airline#extensions#ale#enabled = 1
+let g:ale_change_sign_column_color = 0
 let g:ale_sign_column_always = 1
 let g:ale_sign_error   = '●'
-let g:ale_sign_warning = ''
+let g:ale_sign_warning = '●'
 let g:ale_sign_info    = ''
 let g:ale_sign_style_error = '⚡︎'
 let g:ale_sign_style_warning = '✽'
 
 let g:ale_lint_on_save = 1
-let g:ale_lint_on_enter = 1
-let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
 
 " Do not lint or fix minified files.
@@ -183,23 +222,42 @@ let g:ale_pattern_options = {
       \ '\.min\.css$': {'ale_enabled': 0},
       \ }
 
-" Do not use 'tsserver' to avoid slowdown of system because of LSP support
-" offers by nvim-typescript plugin.
+let g:ale_linters_explicit = 0
 let g:ale_linters = {
-      \ 'typescript': ['eslint', 'tslint', 'typecheck']
+      \ 'sh': ['shellcheck', 'shell'],
+      \ 'html': ['htmlhint'],
+      \ }
+
+let g:ale_fix_on_save = 1
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_fixers = {
+      \ 'javascript': ['prettier', 'eslint'],
+      \ 'css': ['prettier'],
+      \ 'scss': ['prettier'],
+      \ 'elm': ['format'],
       \ }
 
 if executable('eslint_d')
   let g:ale_javascript_eslint_executable = 'eslint_d'
-  let g:ale_javascript_eslint_use_global = 1
+  let g:ale_javascript_eslint_use_global = 0
 endif
+
+let g:ale_html_htmlhint_options = '--rules tagname-lowercase,attr-value-double-quotes,attr-no-duplication,tag-pair,tag-self-close,spec-char-escape,id-unique,src-not-empty,title-require,alt-require'
+
+let g:ale_html_tidy_options = '-q -e -language en
+      \ --custom-tags yes
+      \ --strict-tags-attributes 0
+      \ --fix-uri no
+      \ --show-body-only 1
+      \ --mute-id 0
+      \ --mute PROPRIETARY_ATTRIBUTE,PROPRIETARY_ELEMENT'
 
 " }}}1
 " Section: Completion systems {{{1
 
 let g:echodoc_enable_at_startup = 1
 
-let g:LanguageClient_autoStart = 0
+let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
       \ 'javascript':     ['/usr/local/bin/javascript-typescript-stdio', '--logfile', '/tmp/javascript-typescript-stdio'],
       \ 'javascript.jsx': ['/usr/local/bin/javascript-typescript-stdio', '--logfile', '/tmp/javascript-typescript-stdio'],
@@ -216,7 +274,7 @@ let g:LanguageClient_diagnosticsDisplay = {
       \      "signTexthl": "ALEErrorSign"
       \    },
       \ 2: { "name": "Warning",
-      \      "signText": "",
+      \      "signText": "●",
       \      "signTexthl": "ALEWarningSign"
       \    },
       \ 3: { "name": "Information",
@@ -330,10 +388,10 @@ let g:signify_vcs_list    = [ 'git' ]
 "let g:signify_sign_change = '♺'
 
 let g:gitgutter_override_sign_column_highlight = 0
-"let g:gitgutter_sign_added            = emoji#for('small_blue_diamond')
-"let g:gitgutter_sign_modified         = emoji#for('small_orange_diamond')
-"let g:gitgutter_sign_removed          = emoji#for('small_red_triangle_down')
-"let g:gitgutter_sign_modified_removed = emoji#for('collision')
+let g:gitgutter_sign_added            = '┃'
+let g:gitgutter_sign_modified         = '┃'
+let g:gitgutter_sign_removed          = '┃'
+let g:gitgutter_sign_modified_removed = '⁞'
 
 " }}}1
 " Section: javascript-libraries-syntax {{{1
@@ -363,20 +421,22 @@ let g:wordmotion_prefix = '<Leader>'
 
 let g:startify_enable_special = 0
 let g:startify_session_dir =  $XDG_DATA_HOME . '/nvim/startify-session'
+let g:startify_change_to_dir = 0
+let g:startify_change_to_vcs_root = 1
 let g:startify_fortune_use_unicode = 1
 let g:startify_skiplist = [
       \ 'COMMIT_EDITMSG',
       \ ]
 let g:startify_bookmarks = [] " See $HOME/.local/vimrc
 let g:startify_list_order = [
-      \ ['  Bookmarks:'],
-      \ 'bookmarks',
       \ ['  MRU in the current directory:'],
       \ 'dir',
       \ ['  Recently used files:'],
       \ 'files',
       \ ['  Sessions:'],
       \ 'sessions',
+      \ ['  Bookmarks:'],
+      \ 'bookmarks',
       \ ['  Commands:'],
       \ 'commands'
       \ ]
@@ -438,7 +498,7 @@ let g:cssColorVimDoNotMessMyUpdatetime = 1
 
 let g:rainbow_active = 1
 let g:rainbow_conf = {
-      \ 'html': 0,
+      \ 'html': 1,
       \ }
 
 " }}}1
@@ -466,8 +526,9 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
 " }}}1
 " Section: netrw {{{1
 
-let g:netrw_home=$XDG_CACHE_HOME . '/nvim'
-let g:netrw_liststyle = 3
+let g:netrw_home      = $XDG_CACHE_HOME . '/nvim'
+let g:netrw_liststyle = 3 " Tree view
+let g:netrw_banner    = 0 " Type I to toggle banner
 let g:netrw_list_hide = &wildignore
 
 " }}}1
@@ -479,6 +540,7 @@ let g:NERDTreeShowHidden=1
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
+let g:NERDTreeBookmarksFile = $XDG_DATA_HOME . '/nvim/NERDTreeBookmarks'
 
 " }}}1
 " Section: NERDCommenter {{{1
@@ -519,3 +581,10 @@ let g:quickhl_cword_hl_command = 'QuickhlCword ctermfg=9 cterm=underline guifg=#
 let g:diminactive_enable_focus = 1
 
 " }}}1
+" Section: Yankstack {{{1
+
+" Remove S to keep vim-surround working in visual mode.
+let g:yankstack_yank_keys = ['c', 'C', 'd', 'D', 'y', 'Y']
+
+" }}}1
+

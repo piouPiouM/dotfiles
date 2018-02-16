@@ -5,10 +5,13 @@ hi! ColorColumn cterm=NONE ctermbg=235 guibg=#1e2132
 hi! String ctermfg=224 guifg=#ceb0b6
 hi! Conceal ctermfg=237 guifg=#2a3158
 hi! link elmDelimiter elmOperator
+hi! link QuickFixLine Underline
 
 " Custom Ale support
-hi! ALEError cterm=underline ctermfg=203 ctermbg=235 gui=undercurl guifg=#e27878 guibg=#1e2132
-hi! ALEWarning cterm=underline ctermfg=150 ctermbg=235 gui=undercurl guifg=#d8e599 guibg=#1e2132
+hi! ALEError cterm=underline ctermfg=203 gui=undercurl guifg=#e27878
+hi! ALEWarning cterm=underline ctermfg=150 gui=undercurl guifg=#d8e599
+hi! ALEErrorSign ctermfg=203 ctermbg=235 guifg=#e27878 guibg=#1e2132
+hi! ALEWarningSign ctermfg=150 ctermbg=235 guifg=#d8e599 guibg=#1e2132
 
 " Force IndentLine to use my custom Conceal colors.
 let g:indentLine_color_term=237

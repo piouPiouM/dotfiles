@@ -15,11 +15,36 @@ let maplocalleader="ù"
 nnoremap j gj
 nnoremap k gk
 
-" Change inside quotes with ," and ,'
-nnoremap <leader>' ci'
-nnoremap <leader>" ci"
-inoremap <leader>' <ESC>ci'
-inoremap <leader>" <ESC>ci"
+" Circular windows navigation
+nnoremap <tab>   <c-w>w
+nnoremap <S-tab> <c-w>W
+
+" Toggle relativenumber
+nnoremap <F5> :setlocal relativenumber!<CR>
+
+" Change content inside single quotes
+nnoremap <localleader>' ci'
+
+" Change content inside double quotes
+nnoremap <localleader>" ci"
+
+" Change content inside square brackets
+nnoremap <localleader>] ci]
+
+" Change content inside parentheses
+nnoremap <localleader>) ci)
+
+" Surround word with single quotes (visual: S')
+nmap <leader>' ysiw'
+
+" Surround word with double quotes (visual: S")
+nmap <leader>" ysiw"
+
+" Surround word with square brackets (visual: S])
+nmap <leader>] ysiw]
+
+" Surround word with parentheses (visual: S))
+nmap <leader>) ysiw)
 
 " When typing a string, your quotes auto complete. Move past the quote
 " while still in insert mode by hitting Ctrl-a. Example:
@@ -35,8 +60,8 @@ inoremap <C-a> <ESC>wa
 nnoremap <silent> <leader>f <C-]>
 
 " Create window splits easier.
-nnoremap <silent> <space>vv <C-w>v
-nnoremap <silent> <space>ss <C-w>s
+nnoremap <silent> <LocalLeader>vv <C-w>v
+nnoremap <silent> <LocalLeader>ss <C-w>s
 
 " }}}1
 " Section: Everyday tasks {{{1
@@ -47,8 +72,8 @@ nnoremap <silent> // :nohlsearch<cr>
 " Open a Quickfix window for the last search with <leader>/
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
-" Close the Quickfix window with <leader>//
-nnoremap <Leader>// :cclose<CR>
+" Close the Quickfix or Location window with <leader>//
+nnoremap <Leader>// :cclose<BAR>lclose<CR>
 
 " ¨* for highlight all occurrences of current word (like '*' but without moving)
 " http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches
@@ -70,27 +95,33 @@ vmap gbl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <C
 "inoremap <silent> <D-F> <ESC>:Ack<space>
 
 " Invoque CtrlP
-nmap     <space>  <Plug>[ctrlp]
-nnoremap <silent> <Plug>[ctrlp]<space> :CtrlPCurFile<CR>
-nnoremap <silent> <Plug>[ctrlp]p       :CtrlPRoot<CR>
-nnoremap <silent> <Plug>[ctrlp]b       :CtrlPBuffer<CR>
-nnoremap <silent> <Plug>[ctrlp]m       :CtrlPMRU<CR>
-nnoremap <silent> <Plug>[ctrlp]t       :CtrlPBufTag<CR>
-nnoremap <silent> <Plug>[ctrlp]o       :CtrlPBookmarkDir<CR>
+" nmap     <space>  <Plug>[ctrlp]
+" nnoremap <silent> <Plug>[ctrlp]<space> :CtrlPCurFile<CR>
+" nnoremap <silent> <Plug>[ctrlp]p       :CtrlPRoot<CR>
+" nnoremap <silent> <Plug>[ctrlp]b       :CtrlPBuffer<CR>
+" nnoremap <silent> <Plug>[ctrlp]m       :CtrlPMRU<CR>
+" nnoremap <silent> <Plug>[ctrlp]t       :CtrlPBufTag<CR>
+" nnoremap <silent> <Plug>[ctrlp]o       :CtrlPBookmarkDir<CR>
 
 " Invoque fzf.vim
-nmap     <leader><space> <Plug>[fzf]
-nnoremap <silent> <Plug>[fzf]<space> :Files <C-R>=expand('%:h')<CR><CR>
-nnoremap <silent> <Plug>[fzf]p       :GFiles --exclude-standard --cached --others<CR>
-nnoremap <silent> <Plug>[fzf]b       :Buffers<CR>
-nnoremap <silent> <Plug>[fzf]m       :History<CR>
-nnoremap <silent> <Plug>[fzf]t       :Tags<CR>
-nnoremap <silent> <Plug>[fzf]bt      :BTags<CR>
-nnoremap <silent> <Plug>[fzf]l       :Lines<CR>
-nnoremap <silent> <Plug>[fzf]bl      :BLines<CR>
+nmap     <Space>  <Plug>[fzf]
+nnoremap <silent> <Plug>[fzf]<Space> :FzfFiles <C-R>=expand('%:p:h')<CR><CR>
+nnoremap <silent> <Plug>[fzf]p       :FzfGFiles --exclude-standard --cached --others<CR>
+nnoremap <silent> <Plug>[fzf]b       :FzfBuffers<CR>
+nnoremap <silent> <Plug>[fzf]m       :FzfHistory<CR>
+nnoremap <silent> <Plug>[fzf]t       :FzfTags<CR>
+nnoremap <silent> <Plug>[fzf]bt      :FzfBTags<CR>
+nnoremap <silent> <Plug>[fzf]l       :FzfLines<CR>
+nnoremap <silent> <Plug>[fzf]bl      :FzfBLines<CR>
+nnoremap <silent> <Plug>[fzf]gc      :FzfCommits<CR>
+nnoremap <silent> <Plug>[fzf]gst     :FzfGFiles?<CR>
+nnoremap <silent> <Plug>[fzf]gm      :FzfGModified<CR>
+nnoremap          <Plug>[fzf]s       :FzfSpotlight <C-R><C-W><Space>
 
-" Toggle Undotree window
-nnoremap <F5> :UndotreeToggle<CR>
+" Surcharge original commands with fzf.vim
+imap <C-X><C-L> <plug>(fzf-complete-line)
+imap <C-X><C-F> <plug>(fzf-complete-file)
+inoremap <expr> <C-X><C-K> fzf#vim#complete#word({'left': '15%'})
 
 " LanguageClient
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>

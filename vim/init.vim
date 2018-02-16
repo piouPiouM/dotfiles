@@ -59,7 +59,7 @@ set nofsync    " Let the OS decide when it's appropriate to flush the cache, rat
 set regexpengine=1
 
 " used by gf to follow ES6 import - Ctrl-o to come back
-set suffixesadd=.js,.jsx,.styl,.css,.scss
+set suffixesadd=.js,.jsx,.json,.ts,.styl,.css,.scss
 
 if has('balloon_eval') && has('unix')
   set ballooneval
@@ -90,7 +90,7 @@ endif
 " Section: UI options {{{1
 
 set splitbelow splitright  " Split window at right bottom.
-set relativenumber         " Always show line numbers, with relative position.
+set number relativenumber  " Hybrid line numbers.
 set nocursorline           " Disable current line highlighting.
 set scrolloff=3            " Provide some context when editing.
 set clipboard=unnamedplus
@@ -186,6 +186,7 @@ set expandtab        " Expand tabs by default.
 set copyindent       " Copy the previous indentation on autoindenting.
 set wrap             " Wrap lines.
 set nojoinspaces     " Only insert 1 space
+set nrformats+=alpha " Single alphabetical characters will be incremented or decremented.
 
 set formatoptions+=1 " When wrapping paragraphs, don't end lines with 1-letter words.
 if v:version > 703 || v:version == 703 && has("patch541")

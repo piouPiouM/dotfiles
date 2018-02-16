@@ -30,33 +30,10 @@ augroup trailing
   autocmd InsertLeave * set listchars+=trail:⌴
 augroup END
 
-" Use relative numbers in normal mode when Vim is active
-augroup relativenumber
-  autocmd!
-  autocmd FocusLost * set number
-  autocmd FocusGained * set relativenumber
-  autocmd InsertEnter * set number
-  autocmd InsertLeave * set relativenumber
-augroup END
+" let s:ft_to_ignore = ['nerdtree', 'fzf']
+" augroup relativenumber_toggle
+"   autocmd!
+"   autocmd BufEnter,FocusGained,InsertLeave * if index(s:ft_to_ignore, &filetype) < 0 | setlocal relativenumber
+"   autocmd BufLeave,FocusLost,InsertEnter   * if index(s:ft_to_ignore, &filetype) < 0 | setlocal norelativenumber
+" augroup END
 
-" Always turn on rainbow_parentheses
-if exists('*RainbowParenthesesToggle')
-  augroup rainbow
-    autocmd!
-    au VimEnter * RainbowParenthesesToggle
-    au Syntax * RainbowParenthesesLoadRound
-    au Syntax * RainbowParenthesesLoadSquare
-    au Syntax * RainbowParenthesesLoadBraces
-  augroup END
-endif
-
-" Source the vimrc file after saving it.
-" http://vimcasts.org/e/24
-augroup reload_config
-  if has("gui_running")
-    autocmd! bufwritepost .vimrc source $MYVIMRC | source $MYGVIMRC
-    autocmd! bufwritepost .gvimrc source $MYGVIMRC
-  else
-    autocmd! bufwritepost .vimrc source $MYVIMRC
-  endif
-augroup END
