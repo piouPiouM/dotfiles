@@ -28,41 +28,6 @@ let g:localvimrc_sandbox = 0
 let g:localvimrc_whitelist = [] " See $HOME/.local/vimrc
 
 " }}}1
-" Section: CtrlP {{{1
-
-let g:ctrlp_working_path_mode     = 'ra' " Disable auto change directory.
-let g:ctrlp_root_markers          = ['package.json', '.editorconfig']
-let g:ctrlp_arg_map               = 1   " <c-o> and <c-y> mappings will accept one extra key.
-let g:ctrlp_max_height            = 30  " Set the maximum height of the match window.
-let g:ctrlp_by_filename           = 0   " <c-d> to set searching by filename mode.
-let g:ctrlp_regexp                = 0   " <c-r> to set regexp search mode.
-let g:ctrlp_follow_symlinks       = 1   " Follow symlinks but ignore internal loops.
-"let g:ctrlp_lazy_update           = 100 " Update the match window after typing's been stopped (in ms).
-let g:ctrlp_match_window_bottom   = 1   " Show the match window at the bottom of the screen.
-let g:ctrlp_match_window_reversed = 1   " Change the listing order of the files in the match window.
-let g:ctrlp_line_prefix           = '> ' " ▶︎
-let g:ctrlp_switch_buffer         = 0   " Open files in the desired buffer.
-let g:ctrlp_clear_cache_on_exit   = 0   " Do not delete the cache files upon exiting Vim.
-let g:ctrlp_mruf_max              = 250 " The number of recently opened files to remember.
-let g:ctrlp_mruf_relative         = 1   " Show only MRU files in the current working directory.
-let g:ctrlp_cache_dir             = $XDG_CACHE_HOME . '/nvim/ctrlp'
-let g:ctrlp_extensions            = ['buffertag', 'dir', 'tag', 'changes', 'undo', 'bookmarkdir']
-let g:ctrlp_show_hidden           = 1
-let g:ctrlp_custom_ignore         = {
-  \ 'dir':  '\v[\/](node_modules|elm-stuff|tmp|cache)$',
-  \ }
-
-if executable('rg')
-  let g:ctrlp_user_command = "rg --files --no-heading --hidden -g '!.git' %s"
-  let g:ctrlp_use_caching = 0   " Disable caching by session.
-elseif executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-  let g:ctrlp_use_caching = 0   " Disable caching by session.
-else
-  let g:ctrlp_use_caching = 1   " Enable caching by session.
-endif
-
-" }}}1
 " Section: fzf.vim {{{1
 
 " An action can be a reference to a function that processes selected lines

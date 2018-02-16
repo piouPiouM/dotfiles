@@ -94,15 +94,6 @@ vmap gbl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <C
 "nnoremap <silent> <D-F> :Ack<space>
 "inoremap <silent> <D-F> <ESC>:Ack<space>
 
-" Invoque CtrlP
-" nmap     <space>  <Plug>[ctrlp]
-" nnoremap <silent> <Plug>[ctrlp]<space> :CtrlPCurFile<CR>
-" nnoremap <silent> <Plug>[ctrlp]p       :CtrlPRoot<CR>
-" nnoremap <silent> <Plug>[ctrlp]b       :CtrlPBuffer<CR>
-" nnoremap <silent> <Plug>[ctrlp]m       :CtrlPMRU<CR>
-" nnoremap <silent> <Plug>[ctrlp]t       :CtrlPBufTag<CR>
-" nnoremap <silent> <Plug>[ctrlp]o       :CtrlPBookmarkDir<CR>
-
 " Invoque fzf.vim
 nmap     <Space>  <Plug>[fzf]
 nnoremap <silent> <Plug>[fzf]<Space> :FzfFiles <C-R>=expand('%:p:h')<CR><CR>

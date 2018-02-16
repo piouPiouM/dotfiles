@@ -24,14 +24,6 @@ Plug 'ktonga/vim-follow-my-lead'
 " :DimInactiveBufferReset
 Plug 'blueyed/vim-diminactive'
 
-" <space>p to list files from root directory
-" <space><space> to list current directory
-" <space>b to list buffers
-" <space>m to list MRU
-" <space>o to list bookmarked directories
-" <space>t to list tags within the current buffer
-Plug 'ctrlpvim/ctrlp.vim'
-
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " Display the contents of the registers on the sidebar
