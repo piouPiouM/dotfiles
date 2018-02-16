@@ -17,6 +17,9 @@ export XDG_CACHE_HOME  := $(HOME)/.cache
 
 .PHONY: zsh-check
 
+# https://stackoverflow.com/a/44221541/392725
+_n := $(findstring -n,$(firstword -$(MAKEFLAGS)))
+
 GREEN  := $(shell tput -Txterm setaf 2)
 YELLOW := $(shell tput -Txterm setaf 3)
 WHITE  := $(shell tput -Txterm setaf 7)
@@ -47,14 +50,29 @@ zsh-check:
 # Target: main
 # -----------------------------------------------------------------------------
 
-.PHONY: install
+.PHONY: install cleanup versions
 
 ## Install all the prerequisites and perform installation of Homebrew.
-install: install-dirs install-links brew
+install: install-dirs install-links brew npm-install-packages
 	@echo '$(GREEN)Next target to run:$(RESET)'
 	@echo ''
 	@echo '$(YELLOW)make neovim$(RESET)'
 	@echo ''
+
+## Clean all cache systems.
+cleanup:
+	@brew $(_n) cleanup
+	@brew cask $(_n) cleanup
+	@npm cache verify
+	@gem cleanup --silent $(_n)
+
+## Print the version number of main programs.
+versions:
+	@brew --version
+	@echo "$(YELLOW)node$(RESET) $$(node --version)"
+	@echo "$(YELLOW)npm$(RESET) $$(npm --version)"
+	@ruby --version
+	@echo "$(YELLOW)gem$(RESET) $$(gem --version)"
 
 # -----------------------------------------------------------------------------
 # Target: tree structure
@@ -135,10 +153,10 @@ $(XDG_CONFIG_HOME)/zplug/packages.zsh: | $(ENSURE_DIRS)
 # Target: Homebrew
 # -----------------------------------------------------------------------------
 
-.PHONY: brew brew-download brew-install brew-postinstall
+.PHONY: brew brew-download brew-install brew-postinstall brew-upgrade
 
 ## Install Homebrew and your packages.
-brew: brew-download brew-install brew-postinstall
+brew: brew-download brew-install brew-postinstall brew-upgrade
 
 # Download Homebrew the first time.
 brew-download:
@@ -157,7 +175,27 @@ brew-postinstall: zsh-check
 	@pip2 install --upgrade pip setuptools wheel
 	@pip3 install --upgrade pip setuptools wheel
 	@gem update --system --no-document
-	@$(call cmd_exists,fzf) && $$(brew --prefix)/opt/fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish
+	@$(call cmd_exists,fzf) && $(MAKE) fzf-postinstall
+	@open '/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app'
+
+## Update Homebrew packages.
+brew-upgrade:
+	@brew update
+	@$(MAKE) fzf-update
+
+# -----------------------------------------------------------------------------
+# Target: npm
+# -----------------------------------------------------------------------------
+
+.PHONY: npm-save-packages npm-install-packages
+
+## Backup list of global npm packages.
+npm-save-packages:
+	@npm list --global --parseable --depth=0 | sed '1d' | awk '{gsub(/\/.*\//,"",$$1); print}' > ./npm/global-packages.txt
+
+## Install globaly all npm packages.
+npm-install-packages:
+	@xargs npm install --global < ./npm/global-packages.txt
 
 # -----------------------------------------------------------------------------
 # Target: Neovim
@@ -169,16 +207,16 @@ neovim-dependencies: GEM_COMMAND = $(shell gem list --silent -i neovim && echo '
 
 ## Update the Neovim environment.
 neovim: neovim-update neovim-dependencies neovim-plugins
-	nvim +checkhealth
+	@nvim +checkhealth
 
 ## Updates Neovim from Homebrew.
 neovim-update:
-	brew upgrade --fetch-HEAD neovim
+	@brew upgrade --fetch-HEAD neovim || exit 0
 
 ## Updates Neovim's plugins.
 neovim-plugins:
-	nvim +PlugInstall +PlugUpdate +qa
-	tmp_file=$$(mktemp -t dotfiles); mv $$tmp_file "$${tmp_file}.ts" && tmp_file="$${tmp_file}.ts" && \
+	@nvim +PlugInstall +PlugUpdate +qa
+	@tmp_file=$$(mktemp -t dotfiles); mv $$tmp_file "$${tmp_file}.ts" && tmp_file="$${tmp_file}.ts" && \
 		nvim $$tmp_file +UpdateRemotePlugins +qa && \
 		rm -f $$tmp_file
 
@@ -188,6 +226,20 @@ neovim-dependencies:
 	@pip2 install --upgrade neovim
 	@pip3 install --upgrade neovim
 	@gem $(GEM_COMMAND) neovim --no-document
+
+# -----------------------------------------------------------------------------
+# Target: applications
+# -----------------------------------------------------------------------------
+
+.PHONY: fzf-postinstall fzf-update
+
+fzf-postinstall:
+	@$$(brew --prefix)/opt/fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish
+
+fzf-update:
+	@brew reinstall fzf
+	@$(call cmd_exists,fzf) && $(MAKE) fzf-postinstall
+	@nvim "+set nomore" "+PlugUpdate fzf" +qa
 
 # -----------------------------------------------------------------------------
 # Target: usage and help
