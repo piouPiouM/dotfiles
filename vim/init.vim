@@ -89,6 +89,9 @@ endif
 " }}}1
 " Section: UI options {{{1
 
+" filename* - chemin (pwd)
+set title titlestring=%t%(\ %M%)%(\ •\ %{expand(\"%:~:.:h\")}%)%(\ (%{fnamemodify(getcwd(),\":~\")})%)%(\ %a%)
+
 set splitbelow splitright  " Split window at right bottom.
 set number relativenumber  " Hybrid line numbers.
 set nocursorline           " Disable current line highlighting.
