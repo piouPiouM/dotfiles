@@ -144,7 +144,5 @@ nmap <leader>a= glip=
 nmap <leader>a: gLi{:
 "vmap <leader>a: :Tabularize /:\zs<CR>
 
-nmap ga <Plug>(UnicodeGA)
-
 " }}}1
 

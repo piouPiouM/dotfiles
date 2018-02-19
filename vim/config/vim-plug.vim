@@ -130,9 +130,6 @@ Plug 'tpope/vim-repeat'
 " > </p>
 Plug 'tpope/vim-surround'
 
-" Do not load lazily because otherwise an E117 error is throwned by Airline.
-Plug 'chrisbra/unicode.vim'
-
 " <leader><leader>f
 Plug 'easymotion/vim-easymotion'
 
