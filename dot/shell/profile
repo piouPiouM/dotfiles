@@ -68,7 +68,7 @@ FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 '
 export FZF_DEFAULT_OPTS
 
-export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS --preview '(highlight -O ansi -f --replace-tabs=2 {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+FZF_PREWIEW_OPTS='(highlight -O ansi -f --replace-tabs=2 {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -300'
 
 export FZF_CTRL_T_OPTS="${FZF_DEFAULT_OPTS} --preview '${FZF_PREWIEW_OPTS}' --height 70%"
 
