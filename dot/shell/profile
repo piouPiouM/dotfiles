@@ -75,7 +75,7 @@ export FZF_CTRL_T_OPTS="${FZF_DEFAULT_OPTS} --preview '${FZF_PREWIEW_OPTS}' --he
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 if hash rg 2>/dev/null; then
-  export FZF_DEFAULT_COMMAND='rg --files --no-messages --hidden --no-ignore-vcs --follow'
+  export FZF_DEFAULT_COMMAND='rg --files --no-messages --hidden --no-ignore-vcs --follow --smart-case'
 fi
 
 if hash fd 2>/dev/null; then
