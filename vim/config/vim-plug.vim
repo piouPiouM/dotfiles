@@ -317,8 +317,12 @@ Plug 'junegunn/fzf.vim'
 
 " Versionning {{{2
 
-" Git syntax highlighting
-Plug 'tpope/vim-git'
+Plug 'tpope/vim-git', {
+      \ 'for': ['git', 'gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail'],
+      \ 'on': ['DiffGitCached'],
+      \ }
+
+Plug 'gisphm/vim-gitignore', { 'for': 'gitignore' }
 
 " }}}2
 " Ansible {{{2
