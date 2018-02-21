@@ -1,20 +1,20 @@
 #!/usr/bin/env sh
 
-PPM_BREW_PREFIX=`brew --prefix`
-
 # XDG Specification
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=~/.config}
 export XDG_DATA_HOME=${XDG_DATA_HOME:=~/.local/share}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:=~/.cache}
 
 # path
-PATH=$PPM_BREW_PREFIX/bin:$PPM_BREW_PREFIX/sbin:$PATH
+PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
+PPM_BREW_PREFIX=$(brew --prefix)
 
 # z.sh
 if [ -s "$PPM_BREW_PREFIX/etc/profile.d/z.sh" ]; then
   export _Z_DATA=$XDG_DATA_HOME/z/z
-  . $PPM_BREW_PREFIX/etc/profile.d/z.sh
-fi
+  . "$PPM_BREW_PREFIX/etc/profile.d/z.sh"
+  fi
 
 # ruby
 if which ruby >/dev/null && which gem >/dev/null; then
@@ -61,17 +61,16 @@ FZF_DEFAULT_OPTS='
   --no-bold --tabstop=2
 '
 # Iceberg theme
-FZF_DEFAULT_OPTS+='
+FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --color fg:#c6c8d1,bg:#161821,hl:#e2a478,fg+:#cdd1e6,bg+:#2a3158,hl+:#e27878
   --color info:#a093c7,prompt:#818596,spinner:#b4be82
   --color pointer:#e27878,marker:#89b8c2,header:#6b7089
 '
 export FZF_DEFAULT_OPTS
-#--color fg:252,bg:234,hl:216,fg+:253,bg+:237,hl+:234
-#--color info:140,prompt:245,spinner:150
-#--color pointer:234,marker:109,header:242
 
 export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS --preview '(highlight -O ansi -f --replace-tabs=2 {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+
+export FZF_CTRL_T_OPTS="${FZF_DEFAULT_OPTS} --preview '${FZF_PREWIEW_OPTS}' --height 70%"
 
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
@@ -83,4 +82,4 @@ if hash fd 2>/dev/null; then
   export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git --exclude node_modules"
 fi
 
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
