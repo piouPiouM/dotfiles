@@ -1,6 +1,6 @@
 " Vim compatibility
 
-call ppm#source('config/xdg.vim')
+source $XDG_CONFIG_HOME/nvim/config/xdg.vim
 
 set ttyfast    " Speed up rendering in modern shells.
 

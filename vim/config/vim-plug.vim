@@ -251,7 +251,7 @@ Plug 'w0rp/ale', {
 Plug 'Yggdroot/indentLine'
 
 " Auto close parentheses and repeat by dot dot dot
-Plug 'cohama/lexima.vim'
+" Plug 'cohama/lexima.vim'
 
 Plug 'luochen1990/rainbow', {
       \ 'on': ['RainbowToggle', 'RainbowToggleOn', 'RainbowToggleOff']
@@ -462,8 +462,6 @@ Plug 'tommcdo/vim-lion'
 
 " }}}1
 " Section: Colorscheme stuff {{{1
-
-Plug 'vim-scripts/AfterColors.vim'
 
 " :ColorToggle to toggle hex to colors
 Plug 'lilydjwg/colorizer', {

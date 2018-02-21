@@ -17,10 +17,9 @@ augroup END
 " Executes a stack of commands when creating windows
 augroup enter_cmd
   autocmd!
-  autocmd VimEnter * call ppm#exe_vimenter()
 
   " Set CtrlP window to fit the screen.
-  autocmd VimEnter,VimResized * let g:ctrlp_max_height = &lines
+  " autocmd VimEnter,VimResized * let g:ctrlp_max_height = &lines
 augroup END
 
 " Display trailing whitespace in insert mode only

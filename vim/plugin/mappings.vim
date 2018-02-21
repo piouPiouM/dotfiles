@@ -6,10 +6,6 @@
 
 " Section: General {{{1
 
-" Change leader to a comma because the backslash is a pain to type
-let mapleader=","
-let maplocalleader="ù"
-
 " Jump to the next row instead of to jump over the current line
 " when line wrapping enabled
 nnoremap j gj
@@ -63,6 +59,8 @@ nnoremap <silent> <leader>f <C-]>
 nnoremap <silent> <LocalLeader>vv <C-w>v
 nnoremap <silent> <LocalLeader>ss <C-w>s
 
+nnoremap <silent> gx :call ppm#functions#plug_gx()<CR>
+
 " }}}1
 " Section: Everyday tasks {{{1
 
@@ -73,7 +71,7 @@ nnoremap <silent> // :nohlsearch<cr>
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
 " Close the Quickfix or Location window with <leader>//
-nnoremap <Leader>// :cclose<BAR>lclose<CR>
+nnoremap <silent> <Leader>// :cclose<BAR>lclose<CR>
 
 " ¨* for highlight all occurrences of current word (like '*' but without moving)
 " http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches
@@ -90,24 +88,20 @@ vmap gbl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <C
 " }}}1
 " Section: Plugins {{{1
 
-" Launch Ack
-"nnoremap <silent> <D-F> :Ack<space>
-"inoremap <silent> <D-F> <ESC>:Ack<space>
-
 " Invoque fzf.vim
 nmap     <Space>  <Plug>[fzf]
-nnoremap <silent> <Plug>[fzf]<Space> :FzfFiles <C-R>=expand('%:p:h')<CR><CR>
-nnoremap <silent> <Plug>[fzf]p       :FzfGFiles --exclude-standard --cached --others<CR>
-nnoremap <silent> <Plug>[fzf]b       :FzfBuffers<CR>
-nnoremap <silent> <Plug>[fzf]m       :FzfHistory<CR>
-nnoremap <silent> <Plug>[fzf]t       :FzfTags<CR>
-nnoremap <silent> <Plug>[fzf]bt      :FzfBTags<CR>
-nnoremap <silent> <Plug>[fzf]l       :FzfLines<CR>
-nnoremap <silent> <Plug>[fzf]bl      :FzfBLines<CR>
-nnoremap <silent> <Plug>[fzf]gc      :FzfCommits<CR>
-nnoremap <silent> <Plug>[fzf]gst     :FzfGFiles?<CR>
-nnoremap <silent> <Plug>[fzf]gm      :FzfGModified<CR>
-nnoremap          <Plug>[fzf]s       :FzfSpotlight <C-R><C-W><Space>
+nnoremap <silent> <Plug>[fzf]<Space> :Files <C-R>=expand('%:p:h')<CR><CR>
+nnoremap <silent> <Plug>[fzf]p       :GFiles --exclude-standard --cached --others<CR>
+nnoremap <silent> <Plug>[fzf]b       :Buffers<CR>
+nnoremap <silent> <Plug>[fzf]m       :History<CR>
+nnoremap <silent> <Plug>[fzf]t       :Tags<CR>
+nnoremap <silent> <Plug>[fzf]bt      :BTags<CR>
+nnoremap <silent> <Plug>[fzf]l       :Lines<CR>
+nnoremap <silent> <Plug>[fzf]bl      :BLines<CR>
+nnoremap <silent> <Plug>[fzf]gc      :Commits<CR>
+nnoremap <silent> <Plug>[fzf]gs      :GFiles?<CR>
+nnoremap <silent> <Plug>[fzf]gm      :GModified<CR>
+nnoremap          <Plug>[fzf]s       :Spotlight <C-R><C-W><Space>
 
 " Surcharge original commands with fzf.vim
 imap <C-X><C-L> <plug>(fzf-complete-line)

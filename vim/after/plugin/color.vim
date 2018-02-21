@@ -9,13 +9,19 @@ function s:UnderlineSearchGroup()
   execute 'highlight Search ' . l:highlight
 endfunction
 
+function! s:AfterColors()
+  if exists('g:colors_name') && strlen(g:colors_name)
+    execute 'runtime! after/colors/' . g:colors_name . '.vim'
+  endif
+endfunction
+
 if v:progname !=# 'vi'
   if has('autocmd')
-    augroup PioupioumUnderlineSearchGroup
+    augroup PpmColors
       autocmd!
-      autocmd colorscheme * call s:UnderlineSearchGroup()
+      autocmd VimEnter,ColorScheme * call s:AfterColors()
+      autocmd VimEnter,ColorScheme * call s:UnderlineSearchGroup()
     augroup END
   endif
-
-  call s:UnderlineSearchGroup()
 endif
+
