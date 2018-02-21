@@ -21,10 +21,16 @@
   s = status -s
 
   last = rev-parse --short HEAD
+  sha = rev-parse HEAD
+  origin = config --get remote.origin.url
+  current = rev-parse --abbrev-ref HEAD
+
   oneline = log --pretty=oneline --abbrev-commit --graph --decorate
   lg = log --graph --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'
   lc = !git lg @{u}..
   l = !git oneline -n 20
+
+  recent = !git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads/ | head -n 20
 
   amend = commit --amend
   oops = commit --amend --no-edit
