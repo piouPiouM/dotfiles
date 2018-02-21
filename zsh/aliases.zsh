@@ -11,7 +11,7 @@ alias ll='ls -lh'
 alias la='ls -lAh'
 
 alias exa='exa --color-scale --git --group-directories-first --long --group --all'
-alias le='exa'
+alias le='exa -I .git'
 alias lg='exa --git-ignore -I .git'
 
 # Editors
