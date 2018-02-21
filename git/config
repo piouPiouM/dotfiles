@@ -32,6 +32,10 @@
 
   recent = !git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads/ | head -n 20
 
+  fa = !FILES=`git status -s | awk '{ print $2 }' | fzf -x -m` && git add --all ${FILES}
+  fs = !HASH=`git log --pretty=oneline | head -n 100 | fzf` && git show `echo ${HASH} | awk '{ print $1 }'`
+  fl = !HASH=`git log --pretty=oneline | head -n 100 | fzf` && echo ${HASH} | awk '{ print $1 }' | xargs echo -n | pbcopy
+
   amend = commit --amend
   oops = commit --amend --no-edit
   who = shortlog -sne
