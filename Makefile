@@ -150,6 +150,22 @@ $(XDG_CONFIG_HOME)/zplug/packages.zsh: | $(ENSURE_DIRS)
 	ln -s $(realpath zsh/packages.zsh) $@
 
 # -----------------------------------------------------------------------------
+# Target: Downloads
+# -----------------------------------------------------------------------------
+
+bin/vim-profiler:
+	@curl --silent --create-dirs -o $@ "https://raw.githubusercontent.com/bchretien/vim-profiler/master/vim-profiler.py"
+	@chmod +x $@
+
+bin/imgcat:
+	@curl --silent --create-dirs -o $@ "https://iterm2.com/utilities/imgcat"
+	@chmod +x $@
+
+bin/imgls:
+	@curl --silent --create-dirs -o $@ "https://iterm2.com/utilities/imgls"
+	@chmod +x $@
+
+# -----------------------------------------------------------------------------
 # Target: Homebrew
 # -----------------------------------------------------------------------------
 
