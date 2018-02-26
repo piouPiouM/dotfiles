@@ -75,6 +75,14 @@ handle_extension() {
             odt2txt "${FILE_PATH}" && exit 5
             exit 1;;
 
+        # RTF
+        rtf)
+          textutil -convert html -stdout "${FILE_PATH}" \
+            | w3m -T text/html -s -dump \
+            | head -50 \
+            && exit 5
+          exit 1;;
+
         # HTML
         htm|html|xhtml)
             # Preview as text conversion
