@@ -1,0 +1,32 @@
+# RipGrep configuration file.
+#
+# vim: ft=conf
+
+# Classical configuration.
+--color=always
+--follow
+--hidden
+--no-ignore-vcs
+--smart-case
+
+# Colors, like Ag
+--colors=line:fg:yellow
+--colors=line:style:bold
+--colors=path:fg:green
+--colors=path:style:bold
+--colors=match:fg:black
+--colors=match:bg:yellow
+--colors=match:style:nobold
+
+# Add 'drupal' type.
+--type-add
+drupal:*.{php,tpl.php,module,inc,install,view,engine,info}
+
+# Add an global 'ignore' type, like the wildignore option in Vim.
+--type-add
+ignore:*.{aux,out,toc,luac,o,obj,exe,dll,manifest,pyc,pyo,spl,sw?}
+--type-add
+ignore:*.{sassc,scssc,sass-cache,svn,git,gitkeep,bundle,DS_Store,tmp,cache,vendors}
+--type-add
+ignore:node_modules,vendor
+

@@ -145,7 +145,6 @@ if executable('par')
 endif
 
 let g:rg_command = '
-    \ rg --line-number --no-messages --no-heading --color=always
-    \    --smart-case --hidden --no-ignore-vcs --follow
+    \ rg --line-number --no-messages --no-heading
     \    -g "!{.git,node_modules,vendor,build}/*"'
 

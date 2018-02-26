@@ -56,10 +56,8 @@ export LC_ALL=fr_FR.UTF-8
 export LANG=fr_FR.UTF-8
 
 # fzf
-FZF_DEFAULT_OPTS='
-  --multi --inline-info --cycle
-  --no-bold --tabstop=2
-'
+FZF_DEFAULT_OPTS='--ansi --multi --inline-info --cycle --tabstop=2'
+
 # Iceberg theme
 FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --color fg:#c6c8d1,bg:#161821,hl:#e2a478,fg+:#cdd1e6,bg+:#2a3158,hl+:#e27878
@@ -75,11 +73,12 @@ export FZF_CTRL_T_OPTS="${FZF_DEFAULT_OPTS} --preview '${FZF_PREWIEW_OPTS}' --he
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 if hash rg 2>/dev/null; then
+  export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgreprc
   export FZF_DEFAULT_COMMAND='rg --files --no-messages --hidden --no-ignore-vcs --follow --smart-case'
 fi
 
 if hash fd 2>/dev/null; then
-  export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git --exclude node_modules"
+  export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --color=always --exclude .git --exclude node_modules"
+  export FZF_CTRL_T_COMMAND='fd --hidden --follow --color=always'
 fi
 
-export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"

@@ -114,7 +114,10 @@ $(ENSURE_DIRS):
 
 DOTFILES      := $(shell find dot -type f -not -name '.*') # Flattened structure, excluding hidden files
 DEST_DOTFILES := $(addprefix ~/., $(notdir $(DOTFILES)))
-LINK_DIRS     := $(XDG_CONFIG_HOME)/git $(XDG_CONFIG_HOME)/zsh $(XDG_DATA_HOME)/bin
+LINK_DIRS     := $(XDG_CONFIG_HOME)/git \
+								 $(XDG_CONFIG_HOME)/ranger \
+								 $(XDG_CONFIG_HOME)/zsh \
+								 $(XDG_DATA_HOME)/bin
 
 ## Generates all the symlinks.
 install-links: link-home link-dirs $(XDG_CONFIG_HOME)/zplug/packages.zsh

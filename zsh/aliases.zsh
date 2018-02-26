@@ -20,6 +20,5 @@ alias v=vim
 alias view='vim -R'
 
 # Tools
-alias rg='rg --type-add "drupal:*.{php,tpl.php,module,inc,install,view,engine,info}"'
 alias mux='tmuxinator'
 

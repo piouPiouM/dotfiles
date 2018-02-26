@@ -23,8 +23,9 @@ brew "yarn"
 brew "ansible"
 brew "ansible-lint"
 
+# ranger tools
+brew "atool"
 brew "highlight"
-brew "ifstat"
 brew "media-info"
 brew "urlview"
 brew "w3m"
@@ -39,6 +40,7 @@ brew "shellcheck"
 brew "tidy-html5"
 
 # brew "htop"
+brew "ifstat"
 brew "mas"
 brew "multitail"
 brew "neofetch"
