@@ -17,7 +17,7 @@ endif
 
 set mouse=a    " Enable mouse support.
 set showmatch  " Show matching brackets/parenthesis
-set modelines=0
+set modeline
 set history=300
 set lazyredraw " Do not redraw while running macros (much faster).
 set nofsync    " Let the OS decide when it's appropriate to flush the cache, rather than vim (much faster).
@@ -86,10 +86,9 @@ set completeopt=menu,menuone,longest
 
 " Ignore these filenames during enhanced command line completion:
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
-set wildignore+=*.jpe?g,*.png,*.bmp,*.gif        " Binary images
 set wildignore+=*.luac                           " Lua byte code
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-set wildignore+=*.pyc                            " Python byte code
+set wildignore+=*.pyc,*.pyo                      " Python files
 set wildignore+=*.spl                            " compiled spelling word lists
 set wildignore+=*.sw?                            " Vim swap files
 set wildignore+=*.sassc,*.scssc,.sass-cache      " Sass cache files

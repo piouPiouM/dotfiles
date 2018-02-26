@@ -1,8 +1,11 @@
 # Global ignore file.
 # Used by ripgrep (rg)
+#
+# vim: ft=gitignore
 
 .git/
 build-artifacts/
+cache/
 node_modules/
 tmp/
 
@@ -12,4 +15,6 @@ tags
 *.min.css
 *.min.js
 *.swp
-
+*.pyc
+*.pyo
+*.map

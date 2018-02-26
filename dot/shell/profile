@@ -55,7 +55,12 @@ export LC_CTYPE=fr_FR.UTF-8
 export LC_ALL=fr_FR.UTF-8
 export LANG=fr_FR.UTF-8
 
+# -------------------------------------------------------------------
 # fzf
+# -------------------------------------------------------------------
+
+FZF_PREWIEW_OPTS='(highlight -O ansi -f --replace-tabs=2 {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -300'
+
 FZF_DEFAULT_OPTS='--ansi --multi --inline-info --cycle --tabstop=2'
 
 # Iceberg theme
@@ -65,20 +70,21 @@ FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --color pointer:#e27878,marker:#89b8c2,header:#6b7089
 '
 export FZF_DEFAULT_OPTS
-
-FZF_PREWIEW_OPTS='(highlight -O ansi -f --replace-tabs=2 {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -300'
-
-export FZF_CTRL_T_OPTS="${FZF_DEFAULT_OPTS} --preview '${FZF_PREWIEW_OPTS}' --height 70%"
-
+export FZF_CTRL_T_OPTS="--preview '${FZF_PREWIEW_OPTS}' --height 70%"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 if hash rg 2>/dev/null; then
   export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgreprc
-  export FZF_DEFAULT_COMMAND='rg --files --no-messages --hidden --no-ignore-vcs --follow --smart-case'
+  export FZF_DEFAULT_COMMAND='rg --files --no-messages'
+  export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 fi
 
 if hash fd 2>/dev/null; then
-  export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --color=always --exclude .git --exclude node_modules"
-  export FZF_CTRL_T_COMMAND='fd --hidden --follow --color=always'
+  FD_DEFAULT_COMMAND='fd --color=always --hidden --follow --no-ignore-vcs'
+  export FZF_ALT_C_COMMAND="${FD_DEFAULT_COMMAND} --type directory"
+
+  if [ -z "$FZF_CTRL_T_COMMAND" ]; then
+    export FZF_CTRL_T_COMMAND="${FD_DEFAULT_COMMAND} --type file --type symlink"
+  fi
 fi
 
