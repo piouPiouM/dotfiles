@@ -322,7 +322,8 @@ Plug 'tpope/vim-git', {
       \ 'on': ['DiffGitCached'],
       \ }
 
-Plug 'gisphm/vim-gitignore', { 'for': 'gitignore' }
+" TODO: fork it to remove the "snippets" templates
+" Plug 'gisphm/vim-gitignore', { 'for': 'gitignore' }
 
 " }}}2
 " Ansible {{{2
