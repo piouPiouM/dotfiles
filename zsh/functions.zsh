@@ -66,11 +66,11 @@ myip() {
 }
 
 # -------------------------------------------------------------------
-# fe [FUZZY PATTERN] - Open the selected file with the default editor
+# e [FUZZY PATTERN] - Open the selected file with the default editor
 # -------------------------------------------------------------------
-fe() {
+e() {
   local files
-  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0 --preview ${FZF_PREWIEW_OPTS}))
   echo "$files"
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
@@ -80,14 +80,52 @@ fe() {
 #   - CTRL-O to open with `open` command,
 #   - CTRL-E or Enter key to open with the $EDITOR
 # -------------------------------------------------------------------
-fo() {
+o() {
   local out file key
-  IFS=$'\n' out=($(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e))
+  IFS=$'\n' out=($(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e --preview ${FZF_PREWIEW_OPTS}))
   key=$(head -1 <<< "$out")
   file=$(head -2 <<< "$out" | tail -1)
   if [ -n "$file" ]; then
     [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
   fi
+}
+
+# -------------------------------------------------------------------
+# fgshow - Browsing git commit history with fzf
+# https://gist.github.com/akatrevorjay/9fc061e8371529c4007689a696d33c62
+# -------------------------------------------------------------------
+gshow() {
+  local g=(
+    git log
+    --color=always
+    --format='%C(auto)%h%d %s %C(white)%C(bold)%cr'
+    --graph
+    "$@"
+  )
+
+  local fzf=(
+    fzf
+    --ansi
+    --bind=ctrl-s:toggle-sort
+    --no-sort
+    --reverse
+    --tiebreak=index
+    --preview 'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git show --color=always --color-moved --color-words --patch-with-stat $1; }; f {}'
+  )
+  $g | $fzf
+}
+
+fshow() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --no-multi --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --header "? to toggle preview" \
+      --preview 'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git show --color=always --color-moved --color-words --patch-with-stat $1; }; f {}' \
+      --bind "?:toggle-preview,ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always --color-moved --color-words --patch-with-stat % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
 }
 
 # -------------------------------------------------------------------
