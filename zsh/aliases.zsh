@@ -21,4 +21,5 @@ alias view='vim -R'
 
 # Tools
 alias mux='tmuxinator'
+alias idimensions='identify -format "%f: %G\n"'
 
