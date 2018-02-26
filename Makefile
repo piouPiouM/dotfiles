@@ -168,6 +168,9 @@ bin/imgls:
 	@curl --silent --create-dirs -o $@ "https://iterm2.com/utilities/imgls"
 	@chmod +x $@
 
+ranger/devicons.py ranger/plugins/devicons_linemode.py:
+	@curl --silent -o $@ "https://raw.githubusercontent.com/alexanderjeurissen/ranger_devicons/master/$(notdir $@)"
+
 # -----------------------------------------------------------------------------
 # Target: Homebrew
 # -----------------------------------------------------------------------------
