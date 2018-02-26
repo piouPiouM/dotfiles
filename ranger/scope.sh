@@ -78,7 +78,7 @@ handle_extension() {
         # HTML
         htm|html|xhtml)
             # Preview as text conversion
-            w3m -dump "${FILE_PATH}" && exit 5
+            w3m -dump -T text/html -s "${FILE_PATH}" && exit 5
             lynx -dump -- "${FILE_PATH}" && exit 5
             elinks -dump "${FILE_PATH}" && exit 5
             ;; # Continue with next handler on failure
