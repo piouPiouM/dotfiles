@@ -129,6 +129,22 @@ FZF-EOF"
 }
 
 # -------------------------------------------------------------------
+# gbr - Checkout git branch (including remote branches)
+# Inspired buy https://github.com/junegunn/fzf/wiki/Examples#git
+# -------------------------------------------------------------------
+gbr() {
+  local branches branch remotes
+
+  branches=$(git branch --all | grep -v HEAD) &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  # remove `  remotes/` or `* ` or `  ` from head:
+  branch=${branch##* (remotes/)#} &&
+  remotes=$(git remote) &&
+          git checkout $( (( ${remotes[(I)${branch%%/*}]} )) && echo "--track" ) "${branch}"
+}
+
+# -------------------------------------------------------------------
 # From https://github.com/junegunn/fzf/wiki/Examples#z
 # -------------------------------------------------------------------
 unalias z 2> /dev/null
