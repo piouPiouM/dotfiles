@@ -14,6 +14,7 @@ tags
 *.elmi
 *.min.css
 *.min.js
+*.bundle.js
 *.swp
 *.pyc
 *.pyo
