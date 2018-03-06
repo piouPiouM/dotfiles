@@ -26,6 +26,9 @@ NODE_PATH=$PPM_BREW_PREFIX/lib/node_modules
 NVM_DIR="$XDG_DATA_HOME/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
+# python
+[ -d "/usr/local/opt/python@2/bin" ] && PATH="/usr/local/opt/python@2/bin:$PATH"
+
 # Same as $PPM_BREW_PREFIX/bin
 #if which npm >/dev/null; then
   #PATH=`npm bin -g`:$PATH
