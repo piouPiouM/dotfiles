@@ -18,6 +18,10 @@
 # --colors=match:bg:yellow
 # --colors=match:style:nobold
 
+# Update 'docker' type.
+--type-add
+docker:docker-compose*.yml
+
 # Add 'drupal' type.
 --type-add
 drupal:*.{php,tpl.php,module,inc,install,view,engine,info,theme,html.twig,info.yml}
