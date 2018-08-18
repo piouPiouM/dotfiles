@@ -3,7 +3,7 @@
 # vim: ft=conf
 
 # Classical configuration.
---color=always
+--color=auto
 --follow
 --hidden
 --no-ignore-vcs
@@ -20,7 +20,7 @@
 
 # Add 'drupal' type.
 --type-add
-drupal:*.{php,tpl.php,module,inc,install,view,engine,info}
+drupal:*.{php,tpl.php,module,inc,install,view,engine,info,theme,html.twig,info.yml}
 
 # Add an global 'ignore' type, like the wildignore option in Vim.
 --type-add
