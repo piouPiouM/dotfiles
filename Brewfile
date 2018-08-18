@@ -57,6 +57,7 @@ brew "svgo"
 brew "vips", args: ["with-imagemagick", "with-mozjpeg", "with-jpeg-turbo"]
 
 brew "exa"
+brew "fasd"
 brew "fd"
 brew "fzf"
 brew "ranger"
