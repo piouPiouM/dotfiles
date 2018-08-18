@@ -2,16 +2,14 @@ export ZPLUG_HOME=$XDG_DATA_HOME/zplug
 export ZPLUG_CACHE_DIR=$XDG_CACHE_HOME/zplug
 export ZPLUG_LOADFILE=$XDG_CONFIG_HOME/zplug/packages.zsh
 
-[ ! -d $XDG_CONFIG_HOME/zplug ] && mkdir -p $XDG_CONFIG_HOME/zplug
-[ ! -d $ZPLUG_HOME/repos ] && mkdir -p $ZPLUG_HOME/repos
-
 # Check if zplug is installed
-if [[ ! -d $ZPLUG_HOME/repos/zplug ]]; then
+if [[ ! -d $ZPLUG_HOME ]]; then
   echo "zplug is missing. Launch install."
-  git clone https://github.com/zplug/zplug $ZPLUG_HOME/repos/zplug
-  source $ZPLUG_HOME/repos/zplug/init.zsh && zplug install
+  git clone https://github.com/zplug/zplug $ZPLUG_HOME
 fi
-source $ZPLUG_HOME/repos/zplug/init.zsh
+
+# Essential
+source $ZPLUG_HOME/init.zsh
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
