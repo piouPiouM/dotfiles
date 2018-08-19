@@ -35,10 +35,10 @@ augroup trailing
   autocmd InsertLeave * set listchars+=trail:⌴
 augroup END
 
-" let s:ft_to_ignore = ['nerdtree', 'fzf']
-" augroup relativenumber_toggle
-"   autocmd!
-"   autocmd BufEnter,FocusGained,InsertLeave * if index(s:ft_to_ignore, &filetype) < 0 | setlocal relativenumber
-"   autocmd BufLeave,FocusLost,InsertEnter   * if index(s:ft_to_ignore, &filetype) < 0 | setlocal norelativenumber
-" augroup END
+" Disable numbers for specific filetypes
+let s:ft_number_disabled = ['nerdtree', 'fzf']
+augroup disable_number
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertEnter * if index(s:ft_number_disabled, &filetype) >= 0 | setlocal nonumber
+augroup END
 

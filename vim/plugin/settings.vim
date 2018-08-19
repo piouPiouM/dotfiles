@@ -53,10 +53,10 @@ endif
 " filename - chemin (pwd)
 set title titlestring=%t%(\ %M%)%(\ •\ %{expand(\"%:~:.:h\")}%)%(\ (%{fnamemodify(getcwd(),\":~\")})%)%(\ %a%)
 
-set splitbelow splitright  " Split window at right bottom.
-set number relativenumber  " Hybrid line numbers.
-set nocursorline           " Disable current line highlighting.
-set scrolloff=3            " Provide some context when editing.
+set splitbelow splitright   " Split window at right bottom.
+set number norelativenumber " Activate hybrid line numbers w/ <F5>.
+set nocursorline            " Disable current line highlighting.
+set scrolloff=3             " Provide some context when editing.
 set clipboard=unnamedplus
 set guifont=FuraCode\ Nerd\ Font:12
 
