@@ -4,6 +4,15 @@
 " 2. Everyday tasks
 " 3. Plugins
 
+" Section: Command mode {{{1
+
+" Expand ùù to file path
+cabbrev <expr> ùù expand('%:p')
+
+" Expand %% to file directory path
+cabbrev <expr> %% expand('%:p:h')
+
+" }}}1
 " Section: General {{{1
 
 " Jump to the next row instead of to jump over the current line
@@ -92,6 +101,7 @@ vmap gbl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <C
 nmap     <Space>  <Plug>[fzf]
 nnoremap <silent> <Plug>[fzf]<Space> :Files <C-R>=expand('%:p:h')<CR><CR>
 nnoremap <silent> <Plug>[fzf]p       :GFiles --exclude-standard --cached --others<CR>
+nnoremap <silent> <Plug>[fzf]r       :Files <C-R>=getcwd()<CR><CR>
 nnoremap <silent> <Plug>[fzf]b       :Buffers<CR>
 nnoremap <silent> <Plug>[fzf]m       :History<CR>
 nnoremap <silent> <Plug>[fzf]t       :Tags<CR>

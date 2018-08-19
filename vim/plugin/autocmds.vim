@@ -14,6 +14,12 @@ augroup END
 "   autocmd FileType typescript JsPreTmpl html
 " augroup END
 
+" Propose to create nonexistent directories at save.
+augroup auto_mkdir
+  autocmd!
+  autocmd BufWritePre * call ppm#functions#auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
+augroup END
+
 " Executes a stack of commands when creating windows
 augroup enter_cmd
   autocmd!
