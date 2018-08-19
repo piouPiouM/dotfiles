@@ -197,7 +197,7 @@ Plug 'editorconfig/editorconfig-vim'
 
 " <C-y>, to expand abbreviations similar to emmet
 Plug 'mattn/emmet-vim', {
-      \ 'for': ['html', 'css', 'scss', 'javascript', 'php']
+      \ 'for': ['html', 'css', 'scss', 'javascript', 'php', 'twig']
       \ }
 
 " :ToggleWhitespace - Toggle whitespace highlighting on/off
