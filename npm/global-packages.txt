@@ -6,8 +6,11 @@ elm-test
 eslint_d
 htmlhint
 javascript-typescript-langserver
+name-color
+name-that-color
 neovim
 npm
+npm-check-updates
 prettier
 sass-lint
 tern
