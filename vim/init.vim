@@ -27,12 +27,12 @@ endif
 source $XDG_CONFIG_HOME/nvim/config/vim-plug.vim
 syntax enable
 
-" try
+if globpath(&runtimepath, 'colors/iceberg.vim', 1) !=# ''
   set background=dark
   colorscheme iceberg
-  " let g:airline_theme='iceberg'
-" catch 'Cannot find color scheme iceberg'
-  " set background=light
-  " colorscheme morning
-  " let g:airline_theme='aurora'
-" endtry
+else
+  set background=light
+  colorscheme zellner
+  let g:airline_theme='aurora'
+endif
+
