@@ -22,7 +22,7 @@ set history=300
 set lazyredraw " Do not redraw while running macros (much faster).
 set nofsync    " Let the OS decide when it's appropriate to flush the cache, rather than vim (much faster).
 set regexpengine=0
-set synmaxcol=300 " vs 3000
+set synmaxcol=800 " vs 3000
 " syntax sync minlines=256 / maxlines=500 à définir au cas par cas suivant le filetype
 
 " used by gf to follow ES6 import - Ctrl-o to come back
