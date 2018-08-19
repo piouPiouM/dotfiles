@@ -3440,6 +3440,8 @@
 	<false/>
 	<key>DisableFullscreenTransparency</key>
 	<false/>
+	<key>DoubleClickPerformsSmartSelection</key>
+	<true/>
 	<key>EnableDivisionView</key>
 	<false/>
 	<key>EnableProxyIcon</key>
@@ -3619,11 +3621,19 @@
 	<key>NSColorPanelMode</key>
 	<string>6</string>
 	<key>NSColorPanelMode.modal</key>
-	<integer>6</integer>
+	<integer>13370000</integer>
 	<key>NSColorPanelToolbarIsShown.modal</key>
 	<integer>1</integer>
 	<key>NSColorPanelVisibleSwatchRows.modal</key>
 	<integer>2</integer>
+	<key>NSColorPickerPreferredRGBEntryMode</key>
+	<integer>2</integer>
+	<key>NSColorPickerSlidersDefaults</key>
+	<string>3</string>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 0</string>
+	<key>NSFontPanelSizeSliderParams</key>
+	<string>2 0 100</string>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/Code/dotfiles/iterm</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
@@ -3648,7 +3658,7 @@
 	gAKACoAN0xAJChEVGVdOUy5rZXlzoxITFIADgASABaMWFxiABoAHgAiACVpJZGVudGlm
 	aWVyVVdpZHRoVkhpZGRlblEwI0BowAAAAAAACNIhIiMkWiRjbGFzc25hbWVYJGNsYXNz
 	ZXNcTlNEaWN0aW9uYXJ5oiMlWE5TT2JqZWN00xAJCicrGaMSExSAA4AEgAWjLC0YgAuA
-	DIAIgAlRMSNAc7Gdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
+	DIAIgAlRMSNAdKGdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
 	TlNLZXllZEFyY2hpdmVy0Tg5VUFycmF5gAEACAARABoAIwAtADIANwBGAEwAUQBcAGMA
 	ZgBoAGoAbABzAHsAfwCBAIMAhQCJAIsAjQCPAJEAnACiAKkAqwC0ALUAugDFAM4A2wDe
 	AOcA7gDyAPQA9gD4APwA/gEAAQIBBAEGAQ8BFAEjAScBLwFBAUQBSgAAAAAAAAIBAAAA
@@ -3670,15 +3680,21 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSColorPanel</key>
-	<string>0 78 224 280 0 0 2560 1418 </string>
+	<string>0 78 224 280 0 0 2560 1440 </string>
 	<key>NSWindow Frame NSColorPanel.modal</key>
-	<string>1168 876 224 280 0 0 2560 1418 </string>
+	<string>1097 815 366 384 0 0 2560 1440 </string>
+	<key>NSWindow Frame NSFontPanel</key>
+	<string>1669 656 445 77 0 0 2560 1440 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>530 225 620 392 0 0 1440 878 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
-	<string>2829 -25 606 469 2560 -151 1440 900 </string>
+	<string>2829 40 606 469 2560 -151 1440 900 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>584 120 796 473 0 0 2560 1418 </string>
+	<string>250 401 796 473 0 0 1440 878 </string>
+	<key>NSWindow Frame UKCrashReporter</key>
+	<string>52 234 592 584 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2560 -147 1440 446 2560 -151 1440 900 </string>
+	<string>0 0 2560 1418 0 0 2560 1418 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -3905,9 +3921,9 @@
 			<key>Blinking Cursor</key>
 			<false/>
 			<key>Blur</key>
-			<false/>
+			<true/>
 			<key>Blur Radius</key>
-			<real>2</real>
+			<real>11.413116671954313</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -4321,7 +4337,9 @@
 			<key>Non-ASCII Ligatures</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FuraCodeNerdFontC-Regular 12</string>
+			<string>FuraCodeNerdFontComplete-Regular 11</string>
+			<key>Only The Default BG Color Uses Transparency</key>
+			<false/>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -4479,7 +4497,7 @@
 			<key>Thin Strokes</key>
 			<integer>1</integer>
 			<key>Transparency</key>
-			<real>0.0</real>
+			<real>0.0091370558375634507</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
@@ -6166,6 +6184,8 @@
 	<false/>
 	<key>OpenTmuxWindowsIn</key>
 	<integer>0</integer>
+	<key>PMPrintingExpandedStateForPrint2</key>
+	<false/>
 	<key>PassOnControlClick</key>
 	<false/>
 	<key>PasteFromClipboard</key>
@@ -6217,6 +6237,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>/Users/mkabab/Code/dotfiles/iterm</string>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>PromptOnQuit</key>
 	<true/>
 	<key>QuitWhenAllWindowsClosed</key>
@@ -6234,7 +6256,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-02-14T12:50:30Z</date>
+	<date>2018-08-18T19:09:09Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -6272,7 +6294,9 @@
 		<string>Paste History</string>
 	</array>
 	<key>TripleClickSelectsFullWrappedLines</key>
-	<false/>
+	<true/>
+	<key>UKCrashReporterLastCrashReportDate</key>
+	<real>1534619136</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
@@ -6285,6 +6309,8 @@
 	<integer>11</integer>
 	<key>WebKitStandardFont</key>
 	<string>.Helvetica Neue DeskInterface</string>
+	<key>Window Arrangements</key>
+	<dict/>
 	<key>WindowNumber</key>
 	<true/>
 	<key>WindowStyle</key>
@@ -6298,7 +6324,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.5</string>
+	<string>3.1.6</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>5</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
