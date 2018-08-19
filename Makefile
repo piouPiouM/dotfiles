@@ -58,6 +58,8 @@ install: install-dirs install-links brew npm-install-packages
 	@echo ''
 	@echo '$(YELLOW)make neovim$(RESET)'
 	@echo ''
+	@echo '$(GREEN)But before that, let\'s start installing Adobe Creative Cloud:$(RESET)'
+	@open '/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app'
 
 ## Clean all cache systems.
 cleanup:
@@ -198,12 +200,13 @@ brew-postinstall: zsh-check
 	@pip3 install --upgrade pip setuptools wheel
 	@gem update --system --no-document
 	@$(call cmd_exists,fzf) && $(MAKE) fzf-postinstall
-	@open '/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app'
 
 ## Update Homebrew packages.
 brew-upgrade:
 	@brew update
-	@$(MAKE) fzf-update
+	@brew upgrade
+	@$(call cmd_exists,fzf) && $(MAKE) fzf-update
+	@$(MAKE) brew-postinstall
 
 # -----------------------------------------------------------------------------
 # Target: npm
@@ -257,11 +260,11 @@ neovim-dependencies:
 
 fzf-postinstall:
 	@$$(brew --prefix)/opt/fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish
+	@nvim "+set nomore" "+PlugUpdate fzf" +qa
 
 fzf-update:
-	@brew reinstall fzf
+	@$(call cmd_exists,fzf) && brew reinstall fzf || exit 0
 	@$(call cmd_exists,fzf) && $(MAKE) fzf-postinstall
-	@nvim "+set nomore" "+PlugUpdate fzf" +qa
 
 # -----------------------------------------------------------------------------
 # Target: usage and help
