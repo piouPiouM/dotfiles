@@ -107,24 +107,15 @@ let g:wordmotion_prefix = '<Leader>'
 let g:switch_mapping = "-"
 let g:switch_custom_definitions =
       \ [
-      \   ['top', 'bottom'],
-      \   ['left', 'right'],
+      \   ['top', 'left', 'bottom', 'right'],
       \   ['yes', 'no'],
       \   ['on', 'off'],
       \   ['first', 'last'],
+      \   ['prev', 'next'],
       \   ['previous', 'next'],
+      \   ['prefix', 'suffix'],
       \   ['else', 'else if'],
-      \ ]
-autocmd FileType gitrebase let b:switch_custom_definitions =
-      \ [
-      \   [ 'pick', 'reword', 'edit', 'squash', 'fixup', 'exec' ]
-      \ ]
-autocmd FileType php let b:switch_custom_definitions =
-      \ [
-      \   {
-      \     '\CTRUE':  'FALSE',
-      \     '\CFALSE': 'TRUE',
-      \   }
+      \   ['padding', 'margin'],
       \ ]
 
 " }}}1

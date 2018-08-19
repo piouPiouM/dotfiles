@@ -13,3 +13,11 @@ setlocal expandtab
 
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 
+let b:switch_custom_definitions =
+      \ [
+      \   {
+      \     '\CTRUE':  'FALSE',
+      \     '\CFALSE': 'TRUE',
+      \   }
+      \ ]
+
