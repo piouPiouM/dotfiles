@@ -25,7 +25,10 @@ nnoremap <tab>   <c-w>w
 nnoremap <S-tab> <c-w>W
 
 " Toggle relativenumber
-nnoremap <F5> :setlocal relativenumber!<CR>
+nnoremap <leader>n :setlocal relativenumber!<CR>
+
+" Toggle cursorline
+nnoremap <leader><space> :setlocal cursorline!<CR>
 
 " Change content inside single quotes
 nnoremap <localleader>' ci'
