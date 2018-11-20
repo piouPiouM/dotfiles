@@ -233,7 +233,9 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
 " Performs installation of useful linters.
 function! InstallLinters(info)
-  !brew install ansible-lint hadolint shellcheck
+  !brew install ansible-lint || return 0
+  !brew install hadolint || return 0
+  !brew install shellcheck || return 0
   !npm install --global
         \ csslint
         \ htmlhint
