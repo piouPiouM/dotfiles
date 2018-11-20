@@ -45,7 +45,7 @@ endfunction
 function! ppm#functions#auto_mkdir(dir, force)
   if !isdirectory(a:dir)
         \   && (a:force
-        \       || input("'" . a:dir . "' does not exist. Create? [y/N]") =~? '^y\%[es]$')
+        \       || input("'" . a:dir . "' does not exist. Create? [y/N] ") =~? '^y\%[es]$')
     call mkdir(a:dir, 'p')
   endif
 endfunction
