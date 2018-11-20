@@ -259,9 +259,10 @@ neovim-dependencies:
 .PHONY: fzf-postinstall fzf-update
 
 fzf-postinstall:
-	@$$(brew --prefix)/opt/fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish
+	@$$(brew --prefix)/opt/fzf/install --xdg --key-bindings --completion --no-update-rc --no-bash --no-fish
 	@nvim "+set nomore" "+PlugUpdate fzf" +qa
 
+## Updates fzf.
 fzf-update:
 	@$(call cmd_exists,fzf) && brew reinstall fzf || exit 0
 	@$(call cmd_exists,fzf) && $(MAKE) fzf-postinstall
