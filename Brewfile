@@ -24,6 +24,7 @@ cask "iterm2"
 
 brew "git"
 brew "git-flow"
+brew "git-lfs"
 
 #
 # Languages
@@ -33,7 +34,7 @@ brew "node"
 brew "yarn"
 brew "python@2"
 brew "python"
-brew "ruby"
+brew "ruby", link: true
 brew "ansible"
 
 #
