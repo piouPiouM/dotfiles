@@ -116,6 +116,7 @@ let g:switch_custom_definitions =
       \   ['prefix', 'suffix'],
       \   ['else', 'else if'],
       \   ['padding', 'margin'],
+      \   ['after', 'before'],
       \ ]
 
 " }}}1
