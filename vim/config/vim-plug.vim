@@ -401,6 +401,11 @@ Plug 'othree/jspc.vim', {
       \ }
 "Plug 'tenfyzhong/CompleteParameter.vim'
 
+Plug 'styled-components/vim-styled-components', {
+      \ 'branch': 'main',
+      \ 'for': ['javascript', 'javascript.jsx', 'typescript']
+      \ }
+
 function! InstallTypeScript(info)
   !npm install --global typescript
   UpdateRemotePlugins
