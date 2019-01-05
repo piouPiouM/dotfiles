@@ -117,6 +117,7 @@ let g:switch_custom_definitions =
       \   ['else', 'else if'],
       \   ['padding', 'margin'],
       \   ['after', 'before'],
+      \   ['min', 'max'],
       \ ]
 
 " }}}1
