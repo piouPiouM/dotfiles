@@ -1,0 +1,22 @@
+# vim: ft=gitconfig
+[user]
+  email = me@example.org
+
+[diff]
+  tool = diffmerge
+
+[merge]
+  tool = diffmerge
+
+[difftool "sourcetree"]
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+[mergetool "sourcetree"]
+  cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
+
+[difftool "diffmerge"]
+  cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
+[mergetool "diffmerge"]
+  trustExitCode = true
+  cmd = /usr/local/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+
