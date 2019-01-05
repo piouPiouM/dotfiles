@@ -18,7 +18,8 @@ if [ -s "$PPM_BREW_PREFIX/etc/profile.d/z.sh" ]; then
 
 # ruby
 if which ruby >/dev/null && which gem >/dev/null; then
-  PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+  PATH="$(/usr/local/opt/ruby/bin/ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+  PATH="/usr/local/opt/ruby/bin:$PATH"
 fi
 
 # node
