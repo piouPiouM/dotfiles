@@ -1,0 +1,27 @@
+{
+  // could be 'always' 'trigger' => for specified trigger characters only 'none'
+  "coc.preferences.autoTrigger": "always",
+  // "coc.preferences.triggerCompletionWait": 200,
+  // only used when autoTrigger is always
+  "coc.preferences.triggerAfterInsertEnter": false,
+  // timeout for completion
+  "coc.preferences.timeout": 2000,
+  // make vim select first item on completion start
+  "coc.preferences.noselect": false,
+  // enable formatOnType feature
+  "coc.preferences.formatOnType": false,
+  // when snippet activated and pumvisible, prefer complete completion.
+  "coc.preferences.preferCompleteThanJumpPlaceholder": true,
+  // command used for jump to other buffer
+  "coc.preferences.jumpCommand": "edit",
+  // executable path for https://facebook.github.io/watchman/, detected from $PATH by default
+  // "coc.preferences.watchmanPath": "",
+  // enable diagnostic
+  "coc.preferences.diagnostic.enable": true,
+  "coc.preferences.diagnostic.signOffset": 1000,
+  "coc.preferences.diagnostic.errorSign": "●",
+  "coc.preferences.diagnostic.warningSign": "⚠",
+  "coc.preferences.diagnostic.infoSign": "",
+  "coc.preferences.diagnostic.hintSign": "⚡︎",
+  "coc.preferences.snippetIndicator": "⚡︎",
+}

@@ -246,9 +246,9 @@ endfunction
 
 " <C-k> to jump to the next error
 " <C-j> to jump to the previous error
-Plug 'w0rp/ale', {
-      \ 'do': function('InstallLinters')
-      \ }
+" Plug 'w0rp/ale', {
+"       \ 'do': function('InstallLinters')
+"       \ }
 
 Plug 'Yggdroot/indentLine'
 
@@ -262,8 +262,8 @@ Plug 'luochen1990/rainbow', {
 "Plug 'vim-utils/vim-troll-stopper'
 
 " Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
 
 " }}}1
 " Section: Language Server Protocol {{{1
@@ -280,15 +280,15 @@ function! InstallVSCodeLanguageServices(info)
 endfunction
 
 " Language server protocol framework
-Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': function('InstallVSCodeLanguageServices')
-      \ }
+" Plug 'autozimu/LanguageClient-neovim', {
+"       \ 'branch': 'next',
+"       \ 'do': function('InstallVSCodeLanguageServices')
+"       \ }
 
 " PHP completion via LanguageClient-neovim
-Plug 'roxma/LanguageServer-php-neovim',  {
-      \ 'do': 'composer install && composer run-script parse-stubs'
-      \ }
+" Plug 'roxma/LanguageServer-php-neovim',  {
+"       \ 'do': 'composer install && composer run-script parse-stubs'
+"       \ }
 
 " }}}1
 " Section: Completion {{{1
@@ -300,7 +300,7 @@ Plug 'Shougo/deoplete.nvim', {
 
 " Showing function signature and inline doc.
 " <c-y> to accept a completion for a function
-Plug 'Shougo/echodoc.vim'
+" Plug 'Shougo/echodoc.vim'
 
 " }}}1
 " Section: External tools {{{1
@@ -367,7 +367,7 @@ Plug 'elmcast/elm-vim', {
       \ 'do': 'npm install --global elm elm-test elm-oracle elm-format',
       \ 'for': ['elm']
       \ }
-Plug 'pbogut/deoplete-elm'
+" Plug 'pbogut/deoplete-elm'
 
 " }}}2
 " JavaScript {{{2
@@ -386,16 +386,16 @@ Plug 'heavenshell/vim-jsdoc', {
       \ 'for': ['javascript', 'javascript.jsx', 'typescript']
       \ }
 
-Plug 'ternjs/tern_for_vim', {
-      \ 'do': 'npm install && npm install --global tern',
-      \ 'for': ['javascript', 'javascript.jsx']
-      \ }
-Plug 'carlitux/deoplete-ternjs', {
-      \ 'for': ['javascript', 'javascript.jsx']
-      \ }
-Plug 'othree/jspc.vim', {
-      \ 'for': ['javascript', 'javascript.jsx', 'typescript']
-      \ }
+" Plug 'ternjs/tern_for_vim', {
+"       \ 'do': 'npm install && npm install --global tern',
+"       \ 'for': ['javascript', 'javascript.jsx']
+"       \ }
+" Plug 'carlitux/deoplete-ternjs', {
+"       \ 'for': ['javascript', 'javascript.jsx']
+"       \ }
+" Plug 'othree/jspc.vim', {
+"       \ 'for': ['javascript', 'javascript.jsx', 'typescript']
+"       \ }
 "Plug 'tenfyzhong/CompleteParameter.vim'
 
 Plug 'styled-components/vim-styled-components', {
@@ -408,10 +408,10 @@ function! InstallTypeScript(info)
   UpdateRemotePlugins
 endfunction
 Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
-Plug 'mhartington/nvim-typescript', {
-      \ 'do': function('InstallTypeScript'),
-      \ 'for': 'typescript'
-      \ }
+" Plug 'mhartington/nvim-typescript', {
+"       \ 'do': function('InstallTypeScript'),
+"       \ 'for': 'typescript'
+"       \ }
 
 " }}}2
 " PHP {{{2
@@ -445,6 +445,8 @@ Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 " Polyglot {{{2
 
 Plug 'sheerun/vim-polyglot'
+
+Plug 'neoclide/jsonc.vim'
 
 " }}}2
 

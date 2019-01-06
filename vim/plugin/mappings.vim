@@ -90,8 +90,8 @@ nnoremap <silent> <Leader>// :cclose<BAR>lclose<CR>
 nnoremap <silent> ¨* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 " Omnicomplete with Ctrl+space
-nnoremap <C-space> <C-x><C-o>
-inoremap <C-space> <C-x><C-o>
+" nnoremap <C-space> <C-x><C-o>
+" inoremap <C-space> <C-x><C-o>
 
 " Quick svn blame.
 " http://tammersaleh.com/posts/quick-vim-svn-blame-snippet
@@ -122,8 +122,8 @@ imap <C-X><C-F> <plug>(fzf-complete-file)
 inoremap <expr> <C-X><C-K> fzf#vim#complete#word({'left': '15%'})
 
 " LanguageClient
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " Ale
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
