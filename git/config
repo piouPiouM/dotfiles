@@ -97,7 +97,7 @@
 [pull]
   rebase = preserve
 [push]
-  default = upstream
+  default = current
 [grep]
   extendedRegexp = true
 [log]
