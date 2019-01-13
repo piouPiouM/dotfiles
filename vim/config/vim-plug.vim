@@ -1,4 +1,4 @@
-call plug#begin($XDG_DATA_HOME . '/nvim/bundle')
+silent! if plug#begin($XDG_DATA_HOME . '/nvim/bundle')
 
 " Section: Tmux {{{1
 
@@ -500,4 +500,4 @@ Plug 'cocopon/iceberg.vim'
 " }}}1
 
 call plug#end()
-
+endif

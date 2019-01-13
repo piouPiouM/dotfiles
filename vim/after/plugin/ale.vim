@@ -1,3 +1,7 @@
+if !exists('g:loaded_ale')
+  finish
+endif
+
 let g:airline#extensions#ale#enabled = 1
 let g:ale_change_sign_column_color = 0
 let g:ale_sign_column_always = 1

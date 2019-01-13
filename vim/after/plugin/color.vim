@@ -1,4 +1,4 @@
-" Makes the words found less aggressive.
+" Make the search terms less aggressive.
 function s:UnderlineSearchGroup()
   let l:color=pinnacle#extract_bg('Search')
   let l:highlight=pinnacle#highlight({
@@ -20,7 +20,7 @@ if v:progname !=# 'vi'
     augroup PpmColors
       autocmd!
       autocmd VimEnter,ColorScheme * call s:AfterColors()
-      autocmd VimEnter,ColorScheme * call s:UnderlineSearchGroup()
+      autocmd VimEnter,ColorScheme * silent! call s:UnderlineSearchGroup()
     augroup END
   endif
 endif

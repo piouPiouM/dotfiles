@@ -1,3 +1,7 @@
+if !exists("loaded_nerd_tree")
+  finish
+endif
+
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeNaturalSort = 1
 let g:NERDTreeShowHidden = 1
