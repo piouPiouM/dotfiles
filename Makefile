@@ -154,6 +154,9 @@ $(XDG_CONFIG_HOME)/nvim: | $(ENSURE_DIRS)
 $(XDG_CONFIG_HOME)/zplug/packages.zsh: | $(ENSURE_DIRS)
 	ln -s $(realpath zsh/packages.zsh) $@
 
+$(XDG_CONFIG_HOME)/ripgreprc: | $(ENSURE_DIRS)
+	ln -s $(realpath config/ripgreprc) $@
+
 # -----------------------------------------------------------------------------
 # Target: Downloads
 # -----------------------------------------------------------------------------
