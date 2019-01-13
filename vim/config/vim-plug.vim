@@ -262,22 +262,72 @@ Plug 'luochen1990/rainbow', {
 "Plug 'vim-utils/vim-troll-stopper'
 
 " Plug 'ervandew/supertab'
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
+
+" }}}1
+" Section: Completion {{{1
+
+function! PlugRemotePlugins(info) abort
+  if has('nvim')
+    UpdateRemotePlugins
+  endif
+endfunction
+
+function! PlugCoc(info) abort
+  if a:info.status ==? 'installed'  || a:info.force
+    !yarn install
+    call coc#util#install_extension(join(get(s:, 'coc_extensions', [])))
+  elseif a:info.status ==? 'updated'
+    !yarn install
+    call coc#util#update()
+  endif
+  call PlugRemotePlugins(a:info)
+endfunction
+
+Plug 'Shougo/denite.nvim', {'do': function('PlugRemotePlugins')}
+Plug 'neoclide/denite-extra', {'do': function('PlugRemotePlugins')}
+
+let s:coc_extensions = [
+\   'coc-css',
+\   'coc-html',
+\   'coc-json',
+\   'coc-yaml',
+\   'coc-emmet',
+\   'coc-emoji',
+\   'coc-eslint',
+\   'coc-prettier',
+\   'coc-tsserver',
+\   'coc-ultisnips'
+\ ]
+" Plug 'neoclide/coc-neco'
+Plug 'neoclide/coc.nvim', {
+      \ 'tag': '*',
+      \ 'do': function('PlugCoc')
+      \ }
+
+" Plug 'Shougo/deoplete.nvim', {
+"       \ 'tag': '*',
+"       \ 'do': ':UpdateRemotePlugins',
+"       \ }
+
+" Showing function signature and inline doc.
+" <c-y> to accept a completion for a function
+" Plug 'Shougo/echodoc.vim'
 
 " }}}1
 " Section: Language Server Protocol {{{1
 
 " Performs installation of LanguageServer-neovim and useful services.
 " https://github.com/autozimu/LanguageClient-neovim/issues/83#issuecomment-323446843
-function! InstallVSCodeLanguageServices(info)
-  !./install.sh
-  !npm install --global
-        \ javascript-typescript-langserver
-        \ vscode-css-languageserver-bin
-        \ vscode-html-languageserver-bin
-        \ vscode-json-languageserver-bin
-endfunction
+" function! InstallVSCodeLanguageServices(info)
+"   !./install.sh
+"   !npm install --global
+"         \ javascript-typescript-langserver
+"         \ vscode-css-languageserver-bin
+"         \ vscode-html-languageserver-bin
+"         \ vscode-json-languageserver-bin
+" endfunction
 
 " Language server protocol framework
 " Plug 'autozimu/LanguageClient-neovim', {
@@ -289,18 +339,6 @@ endfunction
 " Plug 'roxma/LanguageServer-php-neovim',  {
 "       \ 'do': 'composer install && composer run-script parse-stubs'
 "       \ }
-
-" }}}1
-" Section: Completion {{{1
-
-Plug 'Shougo/deoplete.nvim', {
-      \ 'tag': '*',
-      \ 'do': ':UpdateRemotePlugins',
-      \ }
-
-" Showing function signature and inline doc.
-" <c-y> to accept a completion for a function
-" Plug 'Shougo/echodoc.vim'
 
 " }}}1
 " Section: External tools {{{1
@@ -403,10 +441,10 @@ Plug 'styled-components/vim-styled-components', {
       \ 'for': ['javascript', 'javascript.jsx', 'typescript']
       \ }
 
-function! InstallTypeScript(info)
-  !npm install --global typescript
-  UpdateRemotePlugins
-endfunction
+" function! InstallTypeScript(info)
+"   !npm install --global typescript
+"   UpdateRemotePlugins
+" endfunction
 Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 " Plug 'mhartington/nvim-typescript', {
 "       \ 'do': function('InstallTypeScript'),
@@ -446,6 +484,7 @@ Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 
 Plug 'sheerun/vim-polyglot'
 
+" After vim-polyglot to avoid overriding.
 Plug 'neoclide/jsonc.vim'
 
 " }}}2

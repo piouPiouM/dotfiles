@@ -1,11 +1,11 @@
 {
   // could be 'always' 'trigger' => for specified trigger characters only 'none'
   "coc.preferences.autoTrigger": "always",
-  // "coc.preferences.triggerCompletionWait": 200,
+  "coc.preferences.triggerCompletionWait": 200,
   // only used when autoTrigger is always
   "coc.preferences.triggerAfterInsertEnter": false,
   // timeout for completion
-  "coc.preferences.timeout": 2000,
+  "coc.preferences.timeout": 4000,
   // make vim select first item on completion start
   "coc.preferences.noselect": false,
   // enable formatOnType feature
