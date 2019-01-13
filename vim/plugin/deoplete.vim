@@ -16,5 +16,5 @@ let g:deoplete#delimiters = ['/', '.']
       "\ ]
 "let g:deoplete#sources = {}
 "let g:deoplete#sources['javascript.jsx'] = ['file', 'ternjs'] " buffer, ultisnips
-call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
 

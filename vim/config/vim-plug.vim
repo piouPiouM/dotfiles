@@ -293,11 +293,8 @@ Plug 'roxma/LanguageServer-php-neovim',  {
 " }}}1
 " Section: Completion {{{1
 
-" Freeze to 4.0-serial to keep completion works with nvim-typescript:
-" - https://github.com/mhartington/nvim-typescript/issues/115
-" - https://github.com/Shougo/deoplete.nvim/issues/638
 Plug 'Shougo/deoplete.nvim', {
-      \ 'tag': '4.0-serial',
+      \ 'tag': '*',
       \ 'do': ':UpdateRemotePlugins',
       \ }
 
