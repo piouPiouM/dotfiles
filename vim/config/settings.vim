@@ -44,6 +44,9 @@ set gdefault   " Apply global substitutions
 
 if executable('rg')
   set grepprg=rg\ --vimgrep
+  let g:rg_command = '
+        \ rg --line-number --no-messages --no-heading
+        \    -g "!{.git,node_modules,vendor,build}/*"'
 endif
 
 if has('nvim')
@@ -55,8 +58,10 @@ set title titlestring=%t%(\ %M%)%(\ •\ %{expand(\"%:~:.:h\")}%)%(\ (%{fnamemod
 
 set splitbelow splitright   " Split window at right bottom.
 set number norelativenumber " Activate hybrid line numbers w/ <F5>.
+set signcolumn=yes          " Prevent buffer moving when adding/deleting sign.
 set nocursorline            " Disable current line highlighting.
 set scrolloff=3             " Provide some context when editing.
+set updatetime=300          " Smaller updatetime for CursorHold & CursorHoldI
 set clipboard=unnamedplus
 set guifont=FuraCode\ Nerd\ Font:12
 
@@ -81,8 +86,8 @@ set foldmethod=marker " Detect triple-{ style fold marker.
 
 "set wildmenu
 set wildmode=list:longest,full " Bash tab style.
-set completeopt=menu,menuone,longest
-"set completeopt-=preview " Disable Scratch window
+" set completeopt=menu,menuone,longest
+set completeopt-=preview " Disable Scratch window
 
 " Ignore these filenames during enhanced command line completion:
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
@@ -101,7 +106,7 @@ set wildignore+=tags                             " ctags stuff
 set tags+=/
 set tags+=./.git/tags,tags
 
-set noshowmode                                 " Hide mode line text since it's already in Airline
+set noshowmode                               " Hide mode line text since it's already in Airline
 
 set statusline=%-3.3n\                       " buffer number
 set statusline+=%f                           " Path.
@@ -142,8 +147,4 @@ set textwidth=120
 if executable('par')
   set formatprg=par\ -w120re
 endif
-
-let g:rg_command = '
-    \ rg --line-number --no-messages --no-heading
-    \    -g "!{.git,node_modules,vendor,build}/*"'
 
