@@ -39,6 +39,6 @@ augroup END
 let s:ft_number_disabled = ['nerdtree', 'fzf']
 augroup disable_number
   autocmd!
-  autocmd BufEnter,FocusGained,InsertEnter * if index(s:ft_number_disabled, &filetype) >= 0 | setlocal nonumber
+  autocmd BufEnter,FocusGained * if index(s:ft_number_disabled, &filetype) >= 0 | setlocal nonumber
 augroup END
 
