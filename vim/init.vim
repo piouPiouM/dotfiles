@@ -15,6 +15,11 @@ if ! has('nvim')
   source $XDG_CONFIG_HOME/nvim/config/compat.vim
 endif
 
+source $XDG_CONFIG_HOME/nvim/config/vim-plug.vim
+syntax enable
+
+source $XDG_CONFIG_HOME/nvim/config/settings.vim
+
 if filereadable(expand("$HOME/.local/vimrc"))
   source $HOME/.local/vimrc
 endif
@@ -23,9 +28,6 @@ if has('nvim')
     source $XDG_DATA_HOME/nvim/init.vim
   endif
 endif
-
-source $XDG_CONFIG_HOME/nvim/config/vim-plug.vim
-syntax enable
 
 if globpath(&runtimepath, 'colors/iceberg.vim', 1) !=# ''
   set background=dark

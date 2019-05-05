@@ -32,8 +32,8 @@ let g:echodoc_enable_at_startup = 1
 let g:nvim_typescript#type_info_on_hold = 0
 
 "autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-let g:UltiSnipsExpandTrigger="<c-j>"
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" let g:UltiSnipsExpandTrigger="<c-s-j>"
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " close the preview window when you're not using it
 " let g:SuperTabClosePreviewOnPopupClose = 1
 " let g:SuperTabDefaultCompletionType = "context"
@@ -188,3 +188,4 @@ let g:yankstack_yank_keys = ['c', 'C', 'd', 'D', 'y', 'Y']
 
 " }}}1
 
+" let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']
