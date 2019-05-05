@@ -1,5 +1,35 @@
 silent! if plug#begin($XDG_DATA_HOME . '/nvim/bundle')
 
+" Section: Plug tools {{{1
+
+function! PlugRemotePlugins(info) abort
+  if has('nvim')
+    UpdateRemotePlugins
+  endif
+endfunction
+
+function! PlugCoc(info) abort
+  if a:info.status ==? 'installed'  || a:info.force
+    !yarn install
+    call PlugCocExtensions()
+  elseif a:info.status ==? 'updated'
+    !yarn install
+    call coc#util#update()
+  endif
+  call PlugRemotePlugins(a:info)
+endfunction
+
+function! PlugCocExtensions() abort
+  call coc#util#install_extension(join(get(s:, 'coc_extensions', [])))
+  call coc#util#install_extension(join(get(s:, 'coc_vscode_extensions', [])))
+endfunction
+
+function! PlugNpmPlugin(info) abort
+  !npm install
+  call PlugRemotePlugins(a:info)
+endfunction
+
+" }}}1
 " Section: Tmux {{{1
 
 " Note: turn on `focus-events` option in Tmux
@@ -231,25 +261,6 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 " <D-F> - :Ack
 "Plug 'mileszs/ack.vim', { 'on': 'Ack' }
 
-" Performs installation of useful linters.
-function! InstallLinters(info)
-  !brew install ansible-lint || return 0
-  !brew install hadolint || return 0
-  !brew install shellcheck || return 0
-  !npm install --global
-        \ csslint
-        \ htmlhint
-        \ prettier
-        \ sass-lint
-  !pip3 install yamllint
-endfunction
-
-" <C-k> to jump to the next error
-" <C-j> to jump to the previous error
-" Plug 'w0rp/ale', {
-"       \ 'do': function('InstallLinters')
-"       \ }
-
 Plug 'Yggdroot/indentLine'
 
 " Auto close parentheses and repeat by dot dot dot
@@ -262,83 +273,36 @@ Plug 'luochen1990/rainbow', {
 "Plug 'vim-utils/vim-troll-stopper'
 
 " Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
 
 " }}}1
 " Section: Completion {{{1
 
-function! PlugRemotePlugins(info) abort
-  if has('nvim')
-    UpdateRemotePlugins
-  endif
-endfunction
-
-function! PlugCoc(info) abort
-  if a:info.status ==? 'installed'  || a:info.force
-    !yarn install
-    call coc#util#install_extension(join(get(s:, 'coc_extensions', [])))
-  elseif a:info.status ==? 'updated'
-    !yarn install
-    call coc#util#update()
-  endif
-  call PlugRemotePlugins(a:info)
-endfunction
-
-Plug 'Shougo/denite.nvim', {'do': function('PlugRemotePlugins')}
-Plug 'neoclide/denite-extra', {'do': function('PlugRemotePlugins')}
-
 let s:coc_extensions = [
-\   'coc-css',
-\   'coc-html',
-\   'coc-json',
-\   'coc-yaml',
-\   'coc-emmet',
-\   'coc-emoji',
-\   'coc-eslint',
-\   'coc-prettier',
-\   'coc-tsserver',
-\   'coc-ultisnips'
-\ ]
+      \ 'coc-css',
+      \ 'coc-emmet',
+      \ 'coc-emoji',
+      \ 'coc-eslint',
+      \ 'coc-html',
+      \ 'coc-json',
+      \ 'coc-prettier',
+      \ 'coc-snippets',
+      \ 'coc-tsserver',
+      \ 'coc-yaml'
+      \ ]
+
+let s:coc_vscode_extensions = []
+
 " Plug 'neoclide/coc-neco'
 Plug 'neoclide/coc.nvim', {
       \ 'tag': '*',
       \ 'do': function('PlugCoc')
       \ }
 
-" Plug 'Shougo/deoplete.nvim', {
-"       \ 'tag': '*',
-"       \ 'do': ':UpdateRemotePlugins',
-"       \ }
-
 " Showing function signature and inline doc.
 " <c-y> to accept a completion for a function
-" Plug 'Shougo/echodoc.vim'
-
-" }}}1
-" Section: Language Server Protocol {{{1
-
-" Performs installation of LanguageServer-neovim and useful services.
-" https://github.com/autozimu/LanguageClient-neovim/issues/83#issuecomment-323446843
-" function! InstallVSCodeLanguageServices(info)
-"   !./install.sh
-"   !npm install --global
-"         \ javascript-typescript-langserver
-"         \ vscode-css-languageserver-bin
-"         \ vscode-html-languageserver-bin
-"         \ vscode-json-languageserver-bin
-" endfunction
-
-" Language server protocol framework
-" Plug 'autozimu/LanguageClient-neovim', {
-"       \ 'branch': 'next',
-"       \ 'do': function('InstallVSCodeLanguageServices')
-"       \ }
-
-" PHP completion via LanguageClient-neovim
-" Plug 'roxma/LanguageServer-php-neovim',  {
-"       \ 'do': 'composer install && composer run-script parse-stubs'
-"       \ }
+Plug 'Shougo/echodoc.vim'
 
 " }}}1
 " Section: External tools {{{1
@@ -405,7 +369,6 @@ Plug 'elmcast/elm-vim', {
       \ 'do': 'npm install --global elm elm-test elm-oracle elm-format',
       \ 'for': ['elm']
       \ }
-" Plug 'pbogut/deoplete-elm'
 
 " }}}2
 " JavaScript {{{2
@@ -424,41 +387,18 @@ Plug 'heavenshell/vim-jsdoc', {
       \ 'for': ['javascript', 'javascript.jsx', 'typescript']
       \ }
 
-" Plug 'ternjs/tern_for_vim', {
-"       \ 'do': 'npm install && npm install --global tern',
-"       \ 'for': ['javascript', 'javascript.jsx']
-"       \ }
-" Plug 'carlitux/deoplete-ternjs', {
-"       \ 'for': ['javascript', 'javascript.jsx']
-"       \ }
-" Plug 'othree/jspc.vim', {
-"       \ 'for': ['javascript', 'javascript.jsx', 'typescript']
-"       \ }
-"Plug 'tenfyzhong/CompleteParameter.vim'
-
 Plug 'styled-components/vim-styled-components', {
       \ 'branch': 'main',
       \ 'for': ['javascript', 'javascript.jsx', 'typescript']
       \ }
 
-" function! InstallTypeScript(info)
-"   !npm install --global typescript
-"   UpdateRemotePlugins
-" endfunction
 Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
-" Plug 'mhartington/nvim-typescript', {
-"       \ 'do': function('InstallTypeScript'),
-"       \ 'for': 'typescript'
-"       \ }
 
 " }}}2
 " PHP {{{2
 
 " :Composer command wrapper around composer with smart completion
 Plug 'noahfrederick/vim-composer', { 'for': 'php' }
-
-"Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
-"Plug 'lvht/phpcd.vim', { 'for': 'php' , 'do': 'composer update' }
 
 " <F2> - step over
 " <F3> - step into
@@ -472,7 +412,7 @@ Plug 'noahfrederick/vim-composer', { 'for': 'php' }
 " :Breakpoint <type> <args> - set a breakpoint of any type (see :help VdebugBreakpoints)
 " :VdebugEval <code> - evaluate some code and display the result
 " <Leader>e - evaluate the expression under visual highlight and display the result
-Plug 'joonty/vdebug', { 'for': 'php' }
+" Plug 'joonty/vdebug', { 'for': 'php' }
 
 " }}}2
 " Tabular data {{{2
