@@ -1,26 +1,9 @@
 {
   "coc.preferences.extensionUpdateCheck": "weekly",
-  // could be 'always' 'trigger' => for specified trigger characters only 'none'
-  "coc.preferences.autoTrigger": "always",
   "coc.preferences.messageLevel": "warning",
-  "coc.preferences.triggerCompletionWait": 200,
-  // only used when autoTrigger is always
-  "coc.preferences.triggerAfterInsertEnter": false,
-  // timeout for completion
-  "coc.preferences.timeout": 3000,
-  // do not make vim select first item on completion start
-  "coc.preferences.noselect": true,
-  // make completion triggered with one input character
-  "coc.preferences.minTriggerInputLength": 1,
-  // confirm completion instead of jump to next placeholder when completion is activted
-  "coc.preferences.preferCompleteThanJumpPlaceholder": true,
-  // command used for jump to other buffer
-  "coc.preferences.jumpCommand": "drop",
-  "coc.preferences.fixInsertedWord": true,
-  // Controls whether suggestions should be accepted on commit characters.
-  // For example, in JavaScript, the semi-colon (`;`) can be a commit character that accepts a suggestion and types that character.
-  "coc.preferences.acceptSuggestionOnCommitCharacter": true,
-  "coc.preferences.echodocSupport": true,
+  "suggest.preferCompleteThanJumpPlaceholder": true,
+  "suggest.acceptSuggestionOnCommitCharacter": true,
+  "suggest.echodocSupport": true,
   "coc.preferences.colorSupport": true,
   "coc.preferences.hoverTarget": "echo",
   "coc.preferences.formatOnType": false,
@@ -32,15 +15,14 @@
     "json",
     "jsonc"
   ],
-
-  "coc.preferences.codeLens.enable": true,
-  "coc.preferences.diagnostic.enable": true,
-  "coc.preferences.diagnostic.signOffset": 1000,
+  "codeLens.enable": true,
+  "diagnostic.enable": true,
+  "diagnostic.virtualText": true,
 
   //
   // Completion priorities
   //
-  "coc.preferences.languageSourcePriority": 101,
+  "suggest.languageSourcePriority": 101,
   "snippets.priority": 90,
   "coc.source.file.priority": 10,
   "coc.source.emoji.priority": 3,
@@ -50,21 +32,15 @@
   //
   // UI
   //
-  "coc.preferences.diagnostic.errorSign": "●",
-  "coc.preferences.diagnostic.warningSign": "⚠",
-  "coc.preferences.diagnostic.infoSign": "",
-  "coc.preferences.diagnostic.hintSign": "",
-  "coc.preferences.diagnostic.virtualText": true,
-  "coc.preferences.diagnostic.virtualTextPrefix": "שּ ",
-  "coc.preferences.diagnostic.virtualTextLines": 3,
-  "coc.preferences.diagnostic.virtualTextLineSeparator": " ℓ.",
-  "coc.preferences.codeLens.separator": "‣",
+  "diagnostic.errorSign": "●",
+  "diagnostic.warningSign": "⚠",
+  "diagnostic.infoSign": "",
+  "diagnostic.hintSign": "",
+  "diagnostic.virtualTextPrefix": "שּ ",
+  "diagnostic.virtualTextLines": 3,
+  "diagnostic.virtualTextLineSeparator": " ℓ.",
+  "codeLens.separator": "‣",
   "coc.preferences.snippetIndicator": " ⚡︎",
-  // "coc.source.around.shortcut": "A",
-  // "coc.source.file.shortcut": "F",
-  // "coc.source.buffer.shortcut": "B",
-  // "coc.source.emoji.shortcut": "T",
-  // "snippets.shortcut": "S",
 
   //
   // Extensions
