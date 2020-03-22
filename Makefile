@@ -251,8 +251,8 @@ neovim-plugins:
 ## Updates Neovim dependencies.
 neovim-dependencies:
 	@npm install -g neovim --no-progress
-	@pip2 install --upgrade neovim
-	@pip3 install --upgrade neovim
+	@pip2 install --upgrade pynvim neovim
+	@pip3 install --upgrade pynvim neovim
 	@gem $(GEM_COMMAND) neovim --no-document
 
 # -----------------------------------------------------------------------------
