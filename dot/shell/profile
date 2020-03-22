@@ -5,6 +5,9 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=~/.config}
 export XDG_DATA_HOME=${XDG_DATA_HOME:=~/.local/share}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:=~/.cache}
 
+# Homebrew
+export HOMEBREW_NO_ANALYTICS=1
+
 # path
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
