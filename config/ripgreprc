@@ -22,9 +22,25 @@
 --type-add
 docker:docker-compose*.yml
 
+# Update 'js' type
+--type-add
+js:!*.js.snap
+
 # Add 'drupal' type.
 --type-add
 drupal:*.{php,tpl.php,module,inc,install,view,engine,info,theme,html.twig,info.yml}
+
+# Add a shortcut for package.json files.
+--type-add
+npm:package.json
+
+# Add a 'functional tests' type
+--type-add
+ft:*.feature
+
+# Add a 'jest tests' type
+--type-add
+jest:*.spec.js
 
 # Add an global 'ignore' type, like the wildignore option in Vim.
 --type-add
