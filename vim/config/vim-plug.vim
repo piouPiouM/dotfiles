@@ -336,7 +336,7 @@ Plug 'chase/vim-ansible-yaml'
 " CSS {{{2
 
 " Uses :ColorToggle for javascript and php.
-Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'less'] }
+" Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'less'] }
 
 " <M-c> to display colorpicker and insert hex color
 " <M-r> to display colorpicker and insert rgb color
@@ -393,6 +393,10 @@ Plug 'styled-components/vim-styled-components', {
       \ }
 
 Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
+
+Plug 'meain/vim-package-info', {
+      \ 'do': function('PlugNpmPlugin'),
+      \ }
 
 " }}}2
 " PHP {{{2
@@ -454,9 +458,13 @@ Plug 'tommcdo/vim-lion'
 " Section: Colorscheme stuff {{{1
 
 " :ColorToggle to toggle hex to colors
-Plug 'lilydjwg/colorizer', {
-      \ 'on': ['ColorHighlight', 'ColorClear', 'ColorToggle']
-      \ }
+" Plug 'lilydjwg/colorizer', {
+"       \ 'on': ['ColorHighlight', 'ColorClear', 'ColorToggle']
+"       \ }
+
+" :HexokinaseToggle to toggle the colouring
+" :HexokinaseRefresh to refresh the colouring
+Plug 'RRethy/vim-hexokinase'
 
 " :HLT to reveal a linked list of highlighting from the top-level down to
 "      the bottom level for the cursor position.
@@ -475,7 +483,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 "Plug 'iCyMind/NeoSolarized'
 "Plug 'w0ng/vim-hybrid'
 "Plug 'chriskempson/base16-vim'
-Plug 'easysid/mod8.vim'
+" Plug 'easysid/mod8.vim'
 Plug 'cocopon/iceberg.vim'
 
 " }}}1

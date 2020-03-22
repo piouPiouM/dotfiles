@@ -61,7 +61,7 @@ set number norelativenumber " Activate hybrid line numbers w/ <F5>.
 set signcolumn=yes          " Prevent buffer moving when adding/deleting sign.
 set nocursorline            " Disable current line highlighting.
 set scrolloff=3             " Provide some context when editing.
-set updatetime=300          " Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=600          " Smaller updatetime for CursorHold & CursorHoldI
 set clipboard=unnamedplus
 set guifont=FuraCode\ Nerd\ Font:12
 
