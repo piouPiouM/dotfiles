@@ -66,9 +66,9 @@ export LANG=fr_FR.UTF-8
 # fzf
 # -------------------------------------------------------------------
 
-FZF_PREWIEW_OPTS='(highlight -O ansi -f --replace-tabs=2 {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -300'
+FZF_PREWIEW_OPTS='(bat {} || highlight -O ansi -f --replace-tabs=2 {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null'
 
-FZF_DEFAULT_OPTS='--ansi --multi --inline-info --cycle --tabstop=2'
+FZF_DEFAULT_OPTS='--multi --inline-info --cycle --tabstop=2 --color gutter:-1'
 
 # Iceberg theme
 FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
@@ -78,7 +78,7 @@ FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 '
 export FZF_DEFAULT_OPTS
 export FZF_CTRL_T_OPTS="--preview '${FZF_PREWIEW_OPTS}' --height 70%"
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 
 if hash rg 2>/dev/null; then
   export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgreprc
