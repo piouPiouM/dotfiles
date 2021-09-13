@@ -18,7 +18,6 @@
   "codeLens.enable": true,
   "diagnostic.enable": true,
   "diagnostic.virtualText": true,
-
   //
   // Completion priorities
   //
@@ -28,7 +27,6 @@
   "coc.source.emoji.priority": 3,
   "coc.source.around.priority": 2,
   "coc.source.buffer.priority": 1,
-
   //
   // UI
   //
@@ -40,16 +38,14 @@
   "diagnostic.virtualTextLines": 3,
   "diagnostic.virtualTextLineSeparator": " ℓ.",
   "codeLens.separator": "‣",
-  "coc.preferences.snippetIndicator": " ⚡︎",
-
+  "suggest.snippetIndicator": " ⚡︎",
   //
   // Extensions
   //
   "coc.source.emoji.filetypes": ["markdown", "text", "textile", "rst"],
-
   "javascript.referencesCodeLens.enable": true,
   "javascript.implementationsCodeLens.enable": true,
-
+  "javascript.updateImportsOnFileMove.enable": true,
   "eslint.autoFix": false,
   "eslint.autoFixOnSave": false,
   "eslint.run": "onType",
@@ -59,12 +55,8 @@
     "typescript",
     "typescriptreact"
   ],
-
   "prettier.eslintIntegration": true,
-
   "snippets.ultisnips.enable": false,
-
   "tsserver.formatOnType": false,
-  "tsserver.enableJavascript": true,
-  "tsserver.orgnizeImportOnSave": false
+  "tsserver.enableJavascript": true
 }

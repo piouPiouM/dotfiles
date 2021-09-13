@@ -4,7 +4,7 @@
 [color]
   ui = auto
 [core]
-  excludesfile = ~/.config/git/ignore
+	excludesfile = ~/.config/git/ignore
   editor = nvim
   ignoreCase = false
   whitespace = -trailing-space
@@ -17,7 +17,7 @@
   # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
   precomposeunicode = false
 
-  pager = delta --highlight-removed --theme='Nord' --minus-color="#3f0001" --minus-emph-color="#901011" --plus-color="#0c2c10" --plus-emph-color="#006000"
+  ; pager = delta --highlight-removed --theme='Nord' --minus-color="#3f0001" --minus-emph-color="#901011" --plus-color="#0c2c10" --plus-emph-color="#006000"
 
 [alias]
   ci = commit

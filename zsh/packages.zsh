@@ -6,3 +6,4 @@ zplug "Tarrasch/zsh-bd"                                   # go back to a parent 
 zplug "ael-code/zsh-colored-man-pages"                    # colored man pages
 zplug "changyuheng/zsh-interactive-cd"                    # fzf + fish like cd tab completion
 zplug "zsh-users/zsh-autosuggestions"                     # suggest from history
+zplug 'wfxr/forgit'

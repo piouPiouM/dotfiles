@@ -38,6 +38,11 @@ $(WHITE)
 	sudo echo $$(brew --prefix)/bin/zsh >> /etc/shells
 	exit
 $(RESET)
+$(YELLOW)In order to use zsh as default shell,
+please execute the following commands:$(RESET)
+$(WHITE)
+	chsh -s $$(brew --prefix)/bin/zsh
+$(RESET)
 endef
 
 # Checks that zsh (brew version) is in the acceptable shells list.
@@ -57,14 +62,10 @@ install: install-dirs install-links brew npm-install-packages
 	@echo '$(GREEN)Next target to run:$(RESET)'
 	@echo ''
 	@echo '$(YELLOW)make neovim$(RESET)'
-	@echo ''
-	@echo '$(GREEN)But before that, let\'s start installing Adobe Creative Cloud:$(RESET)'
-	@open '/usr/local/Caskroom/adobe-creative-cloud/latest/Creative Cloud Installer.app'
 
 ## Clean all cache systems.
 cleanup:
 	@brew $(_n) cleanup
-	@brew cask $(_n) cleanup
 	@npm cache verify
 	@gem cleanup --silent $(_n)
 
@@ -90,6 +91,7 @@ ENSURE_DIRS = $(XDG_CACHE_HOME)/nvim/backup \
 			  $(XDG_CACHE_HOME)/nvim/undo \
 			  $(XDG_CACHE_HOME)/zplug \
 			  $(XDG_CACHE_HOME)/zsh \
+			  $(XDG_CONFIG_HOME)/bat \
 			  $(XDG_CONFIG_HOME)/zplug \
 			  $(XDG_DATA_HOME)/git \
 			  $(XDG_DATA_HOME)/nvim/bundle \
@@ -122,7 +124,7 @@ LINK_DIRS     := $(XDG_CONFIG_HOME)/git \
 								 $(XDG_DATA_HOME)/bin
 
 ## Generates all the symlinks.
-install-links: link-home link-dirs $(XDG_CONFIG_HOME)/zplug/packages.zsh
+install-links: link-home link-dirs $(XDG_CONFIG_HOME)/zplug/packages.zsh $(XDG_CONFIG_HOME)/ripgreprc $(XDG_CONFIG_HOME)/bat/config
 
 ## Generates only symlinks in the Home directory.
 link-home: $(DEST_DOTFILES)
@@ -157,6 +159,9 @@ $(XDG_CONFIG_HOME)/zplug/packages.zsh: | $(ENSURE_DIRS)
 $(XDG_CONFIG_HOME)/ripgreprc: | $(ENSURE_DIRS)
 	ln -s $(realpath config/ripgreprc) $@
 
+$(XDG_CONFIG_HOME)/bat/config: | $(ENSURE_DIRS)
+	ln -s $(realpath config/bat) $@
+
 # -----------------------------------------------------------------------------
 # Target: Downloads
 # -----------------------------------------------------------------------------
@@ -189,7 +194,7 @@ brew: brew-download brew-install brew-postinstall brew-upgrade
 brew-download:
 	@echo '$(YELLOW)Download Homebrew if necessary…$(RESET)'
 	@$(call cmd_exists,brew) && exit 0 || \
-		/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 ## Install Homebrew packages.
 brew-install:
@@ -197,10 +202,10 @@ brew-install:
 	@$(call cmd_exists,brew) && brew bundle --no-upgrade --file=$(realpath Brewfile)
 
 # Run Homebrew post-install tasks.
-brew-postinstall: zsh-check
+brew-postinstall:
 	@echo '$(YELLOW)Run Homebrew post-install…$(RESET)'
-	@pip2 install --upgrade pip setuptools wheel
 	@pip3 install --upgrade pip setuptools wheel
+	@update_rubygems
 	@gem update --system --no-document
 	@$(call cmd_exists,fzf) && $(MAKE) fzf-postinstall
 
@@ -251,7 +256,6 @@ neovim-plugins:
 ## Updates Neovim dependencies.
 neovim-dependencies:
 	@npm install -g neovim --no-progress
-	@pip2 install --upgrade pynvim neovim
 	@pip3 install --upgrade pynvim neovim
 	@gem $(GEM_COMMAND) neovim --no-document
 

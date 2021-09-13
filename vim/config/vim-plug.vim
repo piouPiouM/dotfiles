@@ -10,10 +10,8 @@ endfunction
 
 function! PlugCoc(info) abort
   if a:info.status ==? 'installed'  || a:info.force
-    !yarn install
     call PlugCocExtensions()
   elseif a:info.status ==? 'updated'
-    !yarn install
     call coc#util#update()
   endif
   call PlugRemotePlugins(a:info)
@@ -253,6 +251,9 @@ Plug 'tpope/vim-fugitive'
 " ac operates on all lines in the current hunk and any trailing empty lines
 Plug 'airblade/vim-gitgutter'
 
+" <leader>gm to display commit information of the current line
+Plug 'rhysd/git-messenger.vim'
+
 " <leader>aw to (un)wrap function arguments, lists and dictionaries
 Plug 'FooSoft/vim-argwrap'
 
@@ -288,6 +289,7 @@ let s:coc_extensions = [
       \ 'coc-json',
       \ 'coc-prettier',
       \ 'coc-snippets',
+      \ 'coc-svg',
       \ 'coc-tsserver',
       \ 'coc-yaml'
       \ ]
@@ -296,7 +298,7 @@ let s:coc_vscode_extensions = []
 
 " Plug 'neoclide/coc-neco'
 Plug 'neoclide/coc.nvim', {
-      \ 'tag': '*',
+      \ 'branch': 'release',
       \ 'do': function('PlugCoc')
       \ }
 
@@ -365,10 +367,10 @@ Plug 'KabbAmine/vCoolor.vim', {
 " :ElmShowDocs queries elm-oracle, then echoes the type and docs for the word under the cursor.
 " :ElmBrowseDocs queries elm-oracle, then opens docs web page for the word under the cursor.
 " :ElmFormat formats the current buffer with elm-format.
-Plug 'elmcast/elm-vim', {
-      \ 'do': 'npm install --global elm elm-test elm-oracle elm-format',
-      \ 'for': ['elm']
-      \ }
+" Plug 'elmcast/elm-vim', {
+"       \ 'do': 'npm install --global elm elm-test elm-oracle elm-format',
+"       \ 'for': ['elm']
+"       \ }
 
 " }}}2
 " JavaScript {{{2
@@ -426,10 +428,16 @@ Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 " }}}2
 " Polyglot {{{2
 
+let g:polyglot_disabled = ['elm', 'typescript']
 Plug 'sheerun/vim-polyglot'
 
 " After vim-polyglot to avoid overriding.
 Plug 'neoclide/jsonc.vim'
+
+" }}}2
+" Misc {{{2
+
+Plug 'fladson/vim-kitty'
 
 " }}}2
 
@@ -464,7 +472,7 @@ Plug 'tommcdo/vim-lion'
 
 " :HexokinaseToggle to toggle the colouring
 " :HexokinaseRefresh to refresh the colouring
-Plug 'RRethy/vim-hexokinase'
+Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " :HLT to reveal a linked list of highlighting from the top-level down to
 "      the bottom level for the cursor position.

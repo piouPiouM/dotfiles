@@ -28,7 +28,7 @@ nnoremap <S-tab> <c-w>W
 nnoremap <leader>n :setlocal relativenumber!<CR>
 
 " Toggle cursorline
-nnoremap <leader><space> :setlocal cursorline!<CR>
+nnoremap <leader><space> :set cursorline!<CR>
 
 " Change content inside single quotes
 nnoremap <localleader>' ci'
@@ -41,6 +41,12 @@ nnoremap <localleader>] ci]
 
 " Change content inside parentheses
 nnoremap <localleader>) ci)
+
+" Change content inside tag
+nnoremap <localleader>t cit
+
+" Change content inside named tag
+nnoremap <localleader>< ci<
 
 " Surround word with single quotes (visual: S')
 nmap <leader>' ysiw'
@@ -126,8 +132,8 @@ inoremap <expr> <C-X><C-K> fzf#vim#complete#word({'left': '15%'})
 " nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " Ale
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " nmap <silent> <F12> <Plug>(ale_go_to_definition)
 
 " vim-quickhl

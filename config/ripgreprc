@@ -25,6 +25,8 @@ docker:docker-compose*.yml
 # Update 'js' type
 --type-add
 js:!*.js.snap
+--type-add
+js:!*.spec.js
 
 # Add 'drupal' type.
 --type-add
