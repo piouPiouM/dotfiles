@@ -1,0 +1,10 @@
+# bat configuration file.
+# https://github.com/sharkdp/bat
+#
+# vim: ft=conf
+
+--style="numbers,changes,header,snip"
+--color=always
+--italic-text=always
+--theme="Nord"
+--tabs=2

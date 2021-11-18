@@ -16,10 +16,11 @@ alias lg='exa --git-ignore -I .git'
 
 # Editors
 alias vim=nvim
+alias vi=vim
 alias v=vim
 alias view='vim -R'
 
 # Tools
 alias mux='tmuxinator'
 alias idimensions='identify -format "%f: %G\n"'
-
+alias samlcredential='saml2aws login --skip-prompt'
