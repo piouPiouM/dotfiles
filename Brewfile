@@ -1,162 +1,119 @@
-tap "homebrew/dupes"
-tap "homebrew/core"
-tap "homebrew/php"
-tap "homebrew/bundle"
-tap "homebrew/cask"
+#tap "adoptopenjdk/openjdk"
+#tap "homebrew/bundle"
+#tap "homebrew/cask"
+#tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
-tap "neovim/neovim"
-
-#
-# Shell
-#
-
+tap "homebrew/cask-versions"
+#tap "homebrew/core"
+#tap "homebrew/services"
+#tap "kabel/php-ext"
+#tap "neovim/neovim"
+#brew "openssl@1.1"
+#brew "python@3.8"
+#brew "ansible"
+#brew "ansible-lint"
+#brew "atool"
+#brew "autoconf"
+#brew "awscli"
+brew "bash-completion"
+brew "bat"
+brew "python@3.9"
+brew "cloc"
+#brew "cmake"
+#brew "composer"
+brew "ctags"
+brew "curl"
+brew "editorconfig"
+brew "node", link: false
+#brew "emscripten"
+brew "exa"
+brew "exiftool"
+brew "fasd"
+brew "fastmod"
+brew "fd"
+#brew "fftw"
+brew "fx"
+brew "fzf"
+#brew "gdk-pixbuf"
+brew "git"
+#brew "git-delta"
+#brew "git-flow"
+#brew "git-lfs"
+brew "go"
+#brew "graphicsmagick"
+#brew "hadolint"
+#brew "harfbuzz"
+brew "highlight"
+#brew "ifstat"
+#brew "libheif"
+#brew "imagemagick"
+brew "jq"
+#brew "libgsf"
+brew "pango"
+#brew "librsvg"
+#brew "libuv"
+#brew "libxml2"
+#brew "mas"
+brew "media-info"
+brew "multitail"
+brew "neofetch"
+brew "neovim", args: ["HEAD"]
+#brew "nginx"
+brew "par"
+brew "tidy-html5"
+#brew "php", link: false
+#brew "php@7.2", link: true
+#brew "rabbitmq-c"
+#brew "ranger"
+#brew "reattach-to-user-namespace"
+#brew "recode"
+brew "ripgrep"
+brew "ruby"
+brew "shellcheck"
+brew "svgo"
+brew "tldr"
+#brew "tmux"
+brew "trash"
+brew "tree"
+brew "urlview"
+brew "w3m"
+brew "watchman"
+brew "wget"
+brew "z"
 brew "zsh"
 brew "zsh-completions"
-brew "bash-completion"
+#cask "adoptopenjdk8"
+cask "alfred"
+#cask "appcleaner"
+#cask "color-oracle"
+cask "dash"
+cask "diffmerge"
+#cask "firefox-developer-edition"
 cask "font-firacode-nerd-font"
 cask "font-hasklig-nerd-font-mono"
 cask "font-inconsolata"
-cask "iterm2"
-
-#
-# Git
-#
-
-brew "git"
-brew "git-flow"
-brew "git-lfs"
-
-#
-# Languages
-#
-
-brew "node"
-brew "yarn"
-brew "python@2"
-brew "python"
-brew "ruby", link: true
-brew "ansible"
-
-#
-# Text tools
-#
-
-brew "par"
-brew "recode"
-
-#
-# Shell tools
-#
-
-# brew "htop"
-brew "jq"
-brew "mas"
-brew "multitail"
-brew "neofetch"
-brew "tldr"
-brew "trash"
-brew "wget"
-
-#
-# Image tools
-#
-
-brew "svgo"
-brew "vips", args: ["with-imagemagick", "without-graphicsmagick"]
+#cask "gimp"
+#cask "graphiql"
 cask "imageoptim"
-
-#
-# File navigation
-#
-
-brew "exa"
-brew "fasd"
-brew "fd"
-brew "fzf"
-brew "ranger"
-brew "ripgrep"
-brew "tree"
-brew "z"
-
-#
-# ranger tools
-#
-
-brew "atool"
-brew "exiftool"
-brew "highlight"
-brew "media-info"
-brew "w3m"
-
-#
-# Tmux
-#
-
-brew "tmux"
-brew "ifstat"
-brew "reattach-to-user-namespace"
-brew "urlview"
-
-#
-# Linters
-#
-
-brew "ansible-lint"
-brew "hadolint"
-brew "shellcheck"
-brew "tidy-html5"
-
-#
-# Developement tools
-#
-
-brew "cloc"
-brew "ctags"
-brew "editorconfig"
-brew "neovim", args: ["HEAD"]
-cask "dash"
-cask "diffmerge"
-cask "postman"
-cask "sequel-pro"
+#cask "keepassxc"
+cask "kitty"
+#cask "logitech-control-center"
+#cask "macdown"
+#cask "opera"
+#cask "postman"
+#cask "sketch"
 cask "sourcetree"
-cask "ssh-tunnel-manager"
+#cask "spotify"
 cask "visual-studio-code"
-cask "virtualbox"
-cask "virtualbox-extension-pack"
-cask "vagrant"
-cask "docker"
-
-#
-# Other applications
-#
-
-cask "alfred"
-cask "appcleaner"
-cask "carbon-copy-cloner"
-cask "color-oracle"
-cask "dropbox"
-cask "google-backup-and-sync"
-cask "keepassxc"
-cask "keeweb"
-cask "macdown"
-cask "opera"
-cask "rambox"
-cask "spotify"
-cask "transmit"
-
-cask "adobe-creative-cloud"
-cask "xquartz"
-cask "inkscape"
-cask "gimp"
-
-mas "Keynote", id: 40918369
-mas "Magnet", id: 441258766
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
-mas "Pocket", id: 568494494
-mas "Renamer", id: 402286241
-mas "Rocket.Chat+", id: 1086818840
-mas "Skitch", id: 425955336
-mas "The Archive Browser", id: 510232205
-mas "The Unarchiver", id: 425424353
-
+#cask "zeplin"
+#mas "Gapplin", id: 768053424
+#mas "GarageBand", id: 682658836
+#mas "iMovie", id: 408981434
+#mas "Keynote", id: 409183694
+#mas "Magnet", id: 441258766
+#mas "Numbers", id: 409203825
+#mas "Pages", id: 409201541
+#mas "Renamer", id: 402286241
+#mas "The Archive Browser", id: 510232205
+#mas "The Unarchiver", id: 425424353
+#mas "Xcode", id: 497799835

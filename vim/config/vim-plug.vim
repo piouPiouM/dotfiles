@@ -1,5 +1,33 @@
-call plug#begin($XDG_DATA_HOME . '/nvim/bundle')
+silent! if plug#begin($XDG_DATA_HOME . '/nvim/bundle')
 
+" Section: Plug tools {{{1
+
+function! PlugRemotePlugins(info) abort
+  if has('nvim')
+    UpdateRemotePlugins
+  endif
+endfunction
+
+function! PlugCoc(info) abort
+  if a:info.status ==? 'installed'  || a:info.force
+    call PlugCocExtensions()
+  elseif a:info.status ==? 'updated'
+    call coc#util#update()
+  endif
+  call PlugRemotePlugins(a:info)
+endfunction
+
+function! PlugCocExtensions() abort
+  call coc#util#install_extension(join(get(s:, 'coc_extensions', [])))
+  call coc#util#install_extension(join(get(s:, 'coc_vscode_extensions', [])))
+endfunction
+
+function! PlugNpmPlugin(info) abort
+  !npm install
+  call PlugRemotePlugins(a:info)
+endfunction
+
+" }}}1
 " Section: Tmux {{{1
 
 " Note: turn on `focus-events` option in Tmux
@@ -223,6 +251,9 @@ Plug 'tpope/vim-fugitive'
 " ac operates on all lines in the current hunk and any trailing empty lines
 Plug 'airblade/vim-gitgutter'
 
+" <leader>gm to display commit information of the current line
+Plug 'rhysd/git-messenger.vim'
+
 " <leader>aw to (un)wrap function arguments, lists and dictionaries
 Plug 'FooSoft/vim-argwrap'
 
@@ -230,25 +261,6 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
 " <D-F> - :Ack
 "Plug 'mileszs/ack.vim', { 'on': 'Ack' }
-
-" Performs installation of useful linters.
-function! InstallLinters(info)
-  !brew install ansible-lint || return 0
-  !brew install hadolint || return 0
-  !brew install shellcheck || return 0
-  !npm install --global
-        \ csslint
-        \ htmlhint
-        \ prettier
-        \ sass-lint
-  !pip3 install yamllint
-endfunction
-
-" <C-k> to jump to the next error
-" <C-j> to jump to the previous error
-Plug 'w0rp/ale', {
-      \ 'do': function('InstallLinters')
-      \ }
 
 Plug 'Yggdroot/indentLine'
 
@@ -262,40 +274,32 @@ Plug 'luochen1990/rainbow', {
 "Plug 'vim-utils/vim-troll-stopper'
 
 " Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
-" }}}1
-" Section: Language Server Protocol {{{1
-
-" Performs installation of LanguageServer-neovim and useful services.
-" https://github.com/autozimu/LanguageClient-neovim/issues/83#issuecomment-323446843
-function! InstallVSCodeLanguageServices(info)
-  !./install.sh
-  !npm install --global
-        \ javascript-typescript-langserver
-        \ vscode-css-languageserver-bin
-        \ vscode-html-languageserver-bin
-        \ vscode-json-languageserver-bin
-endfunction
-
-" Language server protocol framework
-Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': function('InstallVSCodeLanguageServices')
-      \ }
-
-" PHP completion via LanguageClient-neovim
-Plug 'roxma/LanguageServer-php-neovim',  {
-      \ 'do': 'composer install && composer run-script parse-stubs'
-      \ }
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
 
 " }}}1
 " Section: Completion {{{1
 
-Plug 'Shougo/deoplete.nvim', {
-      \ 'tag': '*',
-      \ 'do': ':UpdateRemotePlugins',
+let s:coc_extensions = [
+      \ 'coc-css',
+      \ 'coc-emmet',
+      \ 'coc-emoji',
+      \ 'coc-eslint',
+      \ 'coc-html',
+      \ 'coc-json',
+      \ 'coc-prettier',
+      \ 'coc-snippets',
+      \ 'coc-svg',
+      \ 'coc-tsserver',
+      \ 'coc-yaml'
+      \ ]
+
+let s:coc_vscode_extensions = []
+
+" Plug 'neoclide/coc-neco'
+Plug 'neoclide/coc.nvim', {
+      \ 'branch': 'release',
+      \ 'do': function('PlugCoc')
       \ }
 
 " Showing function signature and inline doc.
@@ -334,7 +338,7 @@ Plug 'chase/vim-ansible-yaml'
 " CSS {{{2
 
 " Uses :ColorToggle for javascript and php.
-Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'less'] }
+" Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'less'] }
 
 " <M-c> to display colorpicker and insert hex color
 " <M-r> to display colorpicker and insert rgb color
@@ -363,11 +367,10 @@ Plug 'KabbAmine/vCoolor.vim', {
 " :ElmShowDocs queries elm-oracle, then echoes the type and docs for the word under the cursor.
 " :ElmBrowseDocs queries elm-oracle, then opens docs web page for the word under the cursor.
 " :ElmFormat formats the current buffer with elm-format.
-Plug 'elmcast/elm-vim', {
-      \ 'do': 'npm install --global elm elm-test elm-oracle elm-format',
-      \ 'for': ['elm']
-      \ }
-Plug 'pbogut/deoplete-elm'
+" Plug 'elmcast/elm-vim', {
+"       \ 'do': 'npm install --global elm elm-test elm-oracle elm-format',
+"       \ 'for': ['elm']
+"       \ }
 
 " }}}2
 " JavaScript {{{2
@@ -386,31 +389,15 @@ Plug 'heavenshell/vim-jsdoc', {
       \ 'for': ['javascript', 'javascript.jsx', 'typescript']
       \ }
 
-Plug 'ternjs/tern_for_vim', {
-      \ 'do': 'npm install && npm install --global tern',
-      \ 'for': ['javascript', 'javascript.jsx']
-      \ }
-Plug 'carlitux/deoplete-ternjs', {
-      \ 'for': ['javascript', 'javascript.jsx']
-      \ }
-Plug 'othree/jspc.vim', {
-      \ 'for': ['javascript', 'javascript.jsx', 'typescript']
-      \ }
-"Plug 'tenfyzhong/CompleteParameter.vim'
-
 Plug 'styled-components/vim-styled-components', {
       \ 'branch': 'main',
       \ 'for': ['javascript', 'javascript.jsx', 'typescript']
       \ }
 
-function! InstallTypeScript(info)
-  !npm install --global typescript
-  UpdateRemotePlugins
-endfunction
 Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
-Plug 'mhartington/nvim-typescript', {
-      \ 'do': function('InstallTypeScript'),
-      \ 'for': 'typescript'
+
+Plug 'meain/vim-package-info', {
+      \ 'do': function('PlugNpmPlugin'),
       \ }
 
 " }}}2
@@ -418,9 +405,6 @@ Plug 'mhartington/nvim-typescript', {
 
 " :Composer command wrapper around composer with smart completion
 Plug 'noahfrederick/vim-composer', { 'for': 'php' }
-
-"Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
-"Plug 'lvht/phpcd.vim', { 'for': 'php' , 'do': 'composer update' }
 
 " <F2> - step over
 " <F3> - step into
@@ -434,7 +418,7 @@ Plug 'noahfrederick/vim-composer', { 'for': 'php' }
 " :Breakpoint <type> <args> - set a breakpoint of any type (see :help VdebugBreakpoints)
 " :VdebugEval <code> - evaluate some code and display the result
 " <Leader>e - evaluate the expression under visual highlight and display the result
-Plug 'joonty/vdebug', { 'for': 'php' }
+" Plug 'joonty/vdebug', { 'for': 'php' }
 
 " }}}2
 " Tabular data {{{2
@@ -444,7 +428,16 @@ Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 " }}}2
 " Polyglot {{{2
 
+let g:polyglot_disabled = ['elm', 'typescript']
 Plug 'sheerun/vim-polyglot'
+
+" After vim-polyglot to avoid overriding.
+Plug 'neoclide/jsonc.vim'
+
+" }}}2
+" Misc {{{2
+
+Plug 'fladson/vim-kitty'
 
 " }}}2
 
@@ -473,9 +466,13 @@ Plug 'tommcdo/vim-lion'
 " Section: Colorscheme stuff {{{1
 
 " :ColorToggle to toggle hex to colors
-Plug 'lilydjwg/colorizer', {
-      \ 'on': ['ColorHighlight', 'ColorClear', 'ColorToggle']
-      \ }
+" Plug 'lilydjwg/colorizer', {
+"       \ 'on': ['ColorHighlight', 'ColorClear', 'ColorToggle']
+"       \ }
+
+" :HexokinaseToggle to toggle the colouring
+" :HexokinaseRefresh to refresh the colouring
+Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " :HLT to reveal a linked list of highlighting from the top-level down to
 "      the bottom level for the cursor position.
@@ -494,10 +491,10 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 "Plug 'iCyMind/NeoSolarized'
 "Plug 'w0ng/vim-hybrid'
 "Plug 'chriskempson/base16-vim'
-Plug 'easysid/mod8.vim'
+" Plug 'easysid/mod8.vim'
 Plug 'cocopon/iceberg.vim'
 
 " }}}1
 
 call plug#end()
-
+endif

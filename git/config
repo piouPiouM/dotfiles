@@ -4,8 +4,9 @@
 [color]
   ui = auto
 [core]
-  excludesfile = ~/.config/git/ignore
+	excludesfile = ~/.config/git/ignore
   editor = nvim
+  ignoreCase = false
   whitespace = -trailing-space
 
   # Make `git rebase` safer on macOS
@@ -15,6 +16,8 @@
   # Prevent showing files whose names contain non-ASCII symbols as unversioned.
   # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
   precomposeunicode = false
+
+  ; pager = delta --highlight-removed --theme='Nord' --minus-color="#3f0001" --minus-emph-color="#901011" --plus-color="#0c2c10" --plus-emph-color="#006000"
 
 [alias]
   ci = commit
@@ -94,8 +97,6 @@
   prompt = false
 [fetch]
   recurseSubmodules = on-demand
-[pull]
-  rebase = preserve
 [push]
   default = current
 [grep]
@@ -113,11 +114,11 @@
   prereleaseSuffix = .beta
   prereleaseSuffix = -rc
   prereleaseSuffix = .rc
-[include]
-  path = ~/.local/share/git/config
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
+[include]
+  path = ~/.local/share/git/config
 

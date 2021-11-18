@@ -14,5 +14,9 @@ source $XDG_CONFIG_HOME/zsh/functions.zsh
 source $XDG_CONFIG_HOME/zsh/aliases.zsh
 source $XDG_CONFIG_HOME/zsh/history.zsh
 
+[ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/exports.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/exports.zsh"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 

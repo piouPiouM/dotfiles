@@ -32,8 +32,8 @@ let g:echodoc_enable_at_startup = 1
 let g:nvim_typescript#type_info_on_hold = 0
 
 "autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-let g:UltiSnipsExpandTrigger="<c-j>"
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" let g:UltiSnipsExpandTrigger="<c-s-j>"
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " close the preview window when you're not using it
 " let g:SuperTabClosePreviewOnPopupClose = 1
 " let g:SuperTabDefaultCompletionType = "context"
@@ -94,7 +94,7 @@ let g:bookmark_auto_save_file =  $XDG_DATA_HOME . '/nvim/vim-bookmarks'
 
 let g:EditorConfig_core_mode = "external_command"
 let g:EditorConfig_exec_path = "/usr/local/bin/editorconfig"
-let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'gitgutter://.*']
 
 " }}}1
 " Section: vim-wordmotion {{{1
@@ -179,6 +179,7 @@ let g:quickhl_cword_hl_command = 'QuickhlCword ctermfg=9 cterm=underline guifg=#
 " Section: vim-diminactive {{{1
 
 let g:diminactive_enable_focus = 1
+let g:diminactive_filetype_blacklist = ['startify', 'gitmessengerpopup', 'fzf']
 
 " }}}1
 " Section: Yankstack {{{1
@@ -188,3 +189,4 @@ let g:yankstack_yank_keys = ['c', 'C', 'd', 'D', 'y', 'Y']
 
 " }}}1
 
+" let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']

@@ -1,3 +1,7 @@
+if !exists('g:loaded_webdevicons')
+  finish
+endif
+
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 
