@@ -107,25 +107,25 @@ vmap gbl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <C
 " Section: Plugins {{{1
 
 " Invoque fzf.vim
-nmap     <Space>  <Plug>[fzf]
-nnoremap <silent> <Plug>[fzf]<Space> :Files <C-R>=expand('%:p:h')<CR><CR>
-nnoremap <silent> <Plug>[fzf]p       :GFiles --exclude-standard --cached --others<CR>
-nnoremap <silent> <Plug>[fzf]r       :Files <C-R>=getcwd()<CR><CR>
-nnoremap <silent> <Plug>[fzf]b       :Buffers<CR>
-nnoremap <silent> <Plug>[fzf]m       :History<CR>
-nnoremap <silent> <Plug>[fzf]t       :Tags<CR>
-nnoremap <silent> <Plug>[fzf]bt      :BTags<CR>
-nnoremap <silent> <Plug>[fzf]l       :Lines<CR>
-nnoremap <silent> <Plug>[fzf]bl      :BLines<CR>
-nnoremap <silent> <Plug>[fzf]gc      :Commits<CR>
-nnoremap <silent> <Plug>[fzf]gs      :GFiles?<CR>
-nnoremap <silent> <Plug>[fzf]gm      :GModified<CR>
-nnoremap          <Plug>[fzf]s       :Spotlight <C-R><C-W><Space>
+" nmap     <Space>  <Plug>[fzf]
+" nnoremap <silent> <Plug>[fzf]<Space> :Files <C-R>=expand('%:p:h')<CR><CR>
+" nnoremap <silent> <Plug>[fzf]p       :GFiles --exclude-standard --cached --others<CR>
+" nnoremap <silent> <Plug>[fzf]r       :Files <C-R>=getcwd()<CR><CR>
+" nnoremap <silent> <Plug>[fzf]b       :Buffers<CR>
+" nnoremap <silent> <Plug>[fzf]m       :History<CR>
+" nnoremap <silent> <Plug>[fzf]t       :Tags<CR>
+" nnoremap <silent> <Plug>[fzf]bt      :BTags<CR>
+" nnoremap <silent> <Plug>[fzf]l       :Lines<CR>
+" nnoremap <silent> <Plug>[fzf]bl      :BLines<CR>
+" nnoremap <silent> <Plug>[fzf]gc      :Commits<CR>
+" nnoremap <silent> <Plug>[fzf]gs      :GFiles?<CR>
+" nnoremap <silent> <Plug>[fzf]gm      :GModified<CR>
+" nnoremap          <Plug>[fzf]s       :Spotlight <C-R><C-W><Space>
 
 " Surcharge original commands with fzf.vim
-imap <C-X><C-L> <plug>(fzf-complete-line)
-imap <C-X><C-F> <plug>(fzf-complete-file)
-inoremap <expr> <C-X><C-K> fzf#vim#complete#word({'left': '15%'})
+" imap <C-X><C-L> <plug>(fzf-complete-line)
+" imap <C-X><C-F> <plug>(fzf-complete-file)
+" inoremap <expr> <C-X><C-K> fzf#vim#complete#word({'left': '15%'})
 
 " LanguageClient
 " nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
