@@ -183,9 +183,6 @@ Plug 'mhinz/vim-startify'
 " M-P to cycle forwards through the history of yanks
 Plug 'maxbrunsfeld/vim-yankstack'
 
-" y to highlight yank
-Plug 'machakann/vim-highlightedyank'
-
 " emoji#for('small_blue_diamond')
 Plug 'junegunn/vim-emoji'
 

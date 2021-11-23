@@ -42,3 +42,7 @@ augroup disable_number
   autocmd BufEnter,FocusGained * if index(s:ft_number_disabled, &filetype) >= 0 | setlocal nonumber
 augroup END
 
+augroup highlight_yank
+  autocmd!
+  au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 800 }
+augroup END
