@@ -23,8 +23,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " Section: Vim improvments {{{1
 
 Plug 'embear/vim-localvimrc'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-lualine/lualine.nvim'
 
 " <leader>fml to display all <leader> mappings
 Plug 'ktonga/vim-follow-my-lead'
