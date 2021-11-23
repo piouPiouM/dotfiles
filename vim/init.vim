@@ -29,12 +29,26 @@ if has('nvim')
   endif
 endif
 
-if globpath(&runtimepath, 'colors/iceberg.vim', 1) !=# ''
-  set background=dark
-  colorscheme iceberg
-else
-  set background=light
-  colorscheme zellner
-  let g:airline_theme='aurora'
-endif
+lua << EOF
+vim.opt.background = 'dark'
 
+vim.g.nord_contrast = true
+vim.g.nord_borders = true
+vim.g.nord_disable_background = false
+vim.g.nord_cursorline_transparent = true
+vim.g.nord_italic = true
+-- require('nord').set()
+
+vim.g.nord_underline_option = 'undercurl'
+vim.g.nord_italic = true
+vim.g.nord_italic_comments = true
+vim.g.nord_minimal_mode = false
+vim.cmd('colorscheme nordbuddy')
+
+local nightfox = require('nightfox')
+nightfox.setup({
+  fox = "nordfox",
+  alt_nc = true,
+})
+-- nightfox.load()
+EOF
