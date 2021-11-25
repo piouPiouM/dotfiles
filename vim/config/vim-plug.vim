@@ -36,11 +36,6 @@ Plug 'nvim-lualine/lualine.nvim'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
-" Display the contents of the registers on the sidebar
-" @[choise][motion] or "[choise][motion] in normal mode
-" <C-R> in insert mode
-Plug 'junegunn/vim-peekaboo'
-
 " :MaximizerToggle - Maximize or restore windows.
 " F3 in Normal, Visual and Insert modes.
 Plug 'szw/vim-maximizer'
@@ -173,9 +168,6 @@ Plug 'mhinz/vim-startify'
 " M-p to cycle backward through the history of yanks
 " M-P to cycle forwards through the history of yanks
 Plug 'maxbrunsfeld/vim-yankstack'
-
-" emoji#for('small_blue_diamond')
-Plug 'junegunn/vim-emoji'
 
 " <leader>k to toggle highlighting of a word.
 " <leader>K to clear all highlighted words.
