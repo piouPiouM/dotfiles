@@ -269,7 +269,9 @@ Plug 'kyazdani42/nvim-web-devicons'
 " - @cucumber/language-server
 " - emmet-ls
 Plug 'neovim/nvim-lspconfig'
-Plug 'glepnir/lspsaga.nvim'
+" Plug 'tami5/lspsaga.nvim', {
+"       \ 'branch': 'nvim51'
+"       \ }
 Plug 'nvim-lua/plenary.nvim'
 Plug 'arkav/lualine-lsp-progress'
 Plug 'b0o/schemastore.nvim'
@@ -285,8 +287,10 @@ Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/cmp-calc'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'rafamadriz/friendly-snippets'
 
 " }}}2
 " Fuzzy Finder {{{2
