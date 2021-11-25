@@ -9,23 +9,10 @@ augroup ft_json
   autocmd BufReadPost .eslintrc setlocal filetype=json
 augroup END
 
-" augroup ft_typescript
-"   autocmd!
-"   autocmd FileType typescript JsPreTmpl html
-" augroup END
-
 " Propose to create nonexistent directories at save.
 augroup auto_mkdir
   autocmd!
   autocmd BufWritePre * call ppm#functions#auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
-augroup END
-
-" Executes a stack of commands when creating windows
-augroup enter_cmd
-  autocmd!
-
-  " Set CtrlP window to fit the screen.
-  " autocmd VimEnter,VimResized * let g:ctrlp_max_height = &lines
 augroup END
 
 " Display trailing whitespace in insert mode only

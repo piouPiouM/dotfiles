@@ -60,15 +60,6 @@ nmap <leader>] ysiw]
 " Surround word with parentheses (visual: S))
 nmap <leader>) ysiw)
 
-" When typing a string, your quotes auto complete. Move past the quote
-" while still in insert mode by hitting Ctrl-a. Example:
-"
-" type 'foo<c-a>
-"
-" the first quote will autoclose so you'll get 'foo' and hitting <c-a> will
-" put the cursor right after the quote
-inoremap <C-a> <ESC>wa
-
 " hit ,f to find the definition of the current class
 " this uses ctags. the standard way to get this is Ctrl-]
 nnoremap <silent> <leader>f <C-]>
@@ -95,14 +86,6 @@ nnoremap <silent> <Leader>// :cclose<BAR>lclose<CR>
 " http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches
 nnoremap <silent> ¨* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
-" Omnicomplete with Ctrl+space
-" nnoremap <C-space> <C-x><C-o>
-" inoremap <C-space> <C-x><C-o>
-
-" Quick svn blame.
-" http://tammersaleh.com/posts/quick-vim-svn-blame-snippet
-vmap gbl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
-
 " }}}1
 " Section: Plugins {{{1
 
@@ -126,15 +109,6 @@ vmap gbl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <C
 " imap <C-X><C-L> <plug>(fzf-complete-line)
 " imap <C-X><C-F> <plug>(fzf-complete-file)
 " inoremap <expr> <C-X><C-K> fzf#vim#complete#word({'left': '15%'})
-
-" LanguageClient
-" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
-" Ale
-" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-" nmap <silent> <C-j> <Plug>(ale_next_wrap)
-" nmap <silent> <F12> <Plug>(ale_go_to_definition)
 
 " vim-quickhl
 nmap <localleader>k <Plug>(quickhl-cword-toggle)

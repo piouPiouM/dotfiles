@@ -25,9 +25,6 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'embear/vim-localvimrc'
 Plug 'nvim-lualine/lualine.nvim'
 
-" <leader>fml to display all <leader> mappings
-Plug 'ktonga/vim-follow-my-lead'
-
 " :DimInactiveOn / :DimInactiveOff
 " :DimInactiveSyntaxOn / :DimInactiveSyntaxOff
 " :DimInactiveColorcolumnOn / :DimInactiveColorcolumnOff
@@ -94,12 +91,6 @@ Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'sgur/vim-textobj-parameter'
 
 " }}}2
-
-" :ShrinkMapToggle or <leader>ss - Open or close ShrinkMap sidebar
-" :ShrinkMapOpen   or <leader>so - Open ShrinkMap sidebar
-" :ShrinkMapClose  or <leader>sc - Close ShrinkMap sidebar
-" :ShrinkMapUpdate or <leader>su - Draw Braille patterns to ShrinkMap sidebar and highlight the current window in ShinkMap sidebar
-Plug 'ryujinno/shrinkmap.vim'
 
 " <C-a>/<C-x> to increment dates, times
 Plug 'tpope/vim-speeddating'
