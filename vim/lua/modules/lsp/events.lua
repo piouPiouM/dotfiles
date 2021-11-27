@@ -1,6 +1,3 @@
-local api = vim.api
-local fn = vim.fn
-
 local M = {}
 
 M.on_init = function (client)
@@ -8,17 +5,6 @@ M.on_init = function (client)
 end
 
 M.on_attach = function(client)
-  if client.name == 'tsserver' then
-    client.resolved_capabilities.document_formatting = false
-
-    -- local ts_utils = require('nvim-lsp-ts-utils')
-    -- ts_utils.setup {
-    --   auto_inlay_hints = false, -- enable this once #9496 got merged
-    --   enable_import_on_completion = true,
-    -- }
-    -- ts_utils.setup_client(client)
-  end
-
   if client.resolved_capabilities.code_lens then
     vim.cmd [[
     augroup CodeLens

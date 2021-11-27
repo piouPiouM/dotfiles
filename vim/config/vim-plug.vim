@@ -237,8 +237,7 @@ Plug 'Yggdroot/indentLine'
 " }}}1
 " Section: LSP {{{1
 
-" Basic configuration {{{2
-
+Plug 'nvim-lua/plenary.nvim'
 Plug 'tjdevries/astronauta.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
@@ -251,16 +250,11 @@ Plug 'kyazdani42/nvim-web-devicons'
 " - @cucumber/language-server
 " - emmet-ls
 Plug 'neovim/nvim-lspconfig'
-" Plug 'tami5/lspsaga.nvim', {
-"       \ 'branch': 'nvim51'
-"       \ }
-Plug 'nvim-lua/plenary.nvim'
 Plug 'arkav/lualine-lsp-progress'
 Plug 'b0o/schemastore.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'simrat39/symbols-outline.nvim'
 
-" }}}2
 " Completion {{{2
 
 Plug 'onsails/lspkind-nvim'
@@ -286,6 +280,7 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
 " }}}2
@@ -418,11 +413,6 @@ Plug 'tommcdo/vim-lion'
 
 " }}}1
 " Section: Colorscheme stuff {{{1
-
-" :ColorToggle to toggle hex to colors
-" Plug 'lilydjwg/colorizer', {
-"       \ 'on': ['ColorHighlight', 'ColorClear', 'ColorToggle']
-"       \ }
 
 " :HexokinaseToggle to toggle the colouring
 " :HexokinaseRefresh to refresh the colouring
