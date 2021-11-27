@@ -167,12 +167,12 @@ Plug 'mhinz/vim-startify'
 
 " M-p to cycle backward through the history of yanks
 " M-P to cycle forwards through the history of yanks
-Plug 'maxbrunsfeld/vim-yankstack'
+" Plug 'maxbrunsfeld/vim-yankstack'
 
 " <leader>k to toggle highlighting of a word.
 " <leader>K to clear all highlighted words.
 " n and N to navigate through the occurrences of the word under cursor.
-Plug 'lfv89/vim-interestingwords'
+" Plug 'lfv89/vim-interestingwords'
 
 " <localleader>k to highlight automatically a word under the cursor
 " <localleader>] to toggle highlight of jumpable 'tag'
@@ -196,9 +196,6 @@ Plug 'rizzatti/dash.vim', {
       \ 'on': ['Dash', 'DashKeywords', '<Plug>DashSearch', '<Plug>DashGlobalSearch']
       \ }
 Plug 'scrooloose/nerdcommenter'
-
-" Useful to display the current branch in vim-airline
-Plug 'tpope/vim-fugitive'
 
 " ]c to jump to next hunk
 " [c to jump to previous hunk
@@ -242,9 +239,11 @@ Plug 'Yggdroot/indentLine'
 
 " Basic configuration {{{2
 
+Plug 'tjdevries/astronauta.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
 " post-install the following global npm packages:
+" - eslint_d
 " - vscode-langservers-extracted
 " - typescript typescript-language-server
 " - vim-language-server
