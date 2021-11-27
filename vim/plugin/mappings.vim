@@ -16,9 +16,20 @@ cabbrev <expr> %% expand('%:p:h')
 " Section: General {{{1
 
 " Jump to the next row instead of to jump over the current line
-" when line wrapping enabled
+" when line wrapping enabled.
 nnoremap j gj
 nnoremap k gk
+
+" Move selection down and up w/o ruining its register 🙌
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Always center the next search jump and open any folds.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+nnoremap Y yg$
+nnoremap J mzJ`z
 
 " Circular windows navigation
 nnoremap <tab>   <c-w>w
