@@ -7,7 +7,7 @@ scriptencoding utf-8
 set encoding=utf-8
 set fileencoding=utf-8
 
-let mapleader=","
+let mapleader=" "
 let maplocalleader="ù"
 
 if ! has('nvim')

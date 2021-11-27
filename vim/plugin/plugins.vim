@@ -94,7 +94,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'gitgutter://.*']
 " }}}1
 " Section: vim-wordmotion {{{1
 
-let g:wordmotion_prefix = '<Leader>'
+let g:wordmotion_prefix = '<localleader>'
 
 " }}}1
 " Section: switch {{{1

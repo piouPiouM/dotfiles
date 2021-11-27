@@ -25,10 +25,10 @@ nnoremap <tab>   <c-w>w
 nnoremap <S-tab> <c-w>W
 
 " Toggle relativenumber
-nnoremap <leader>n :setlocal relativenumber!<CR>
+nnoremap <localleader>n :setlocal relativenumber!<CR>
 
 " Toggle cursorline
-nnoremap <leader><space> :set cursorline!<CR>
+nnoremap <localleader><space> :set cursorline!<CR>
 
 " Change content inside single quotes
 nnoremap <localleader>' ci'
@@ -60,13 +60,11 @@ nmap <leader>] ysiw]
 " Surround word with parentheses (visual: S))
 nmap <leader>) ysiw)
 
-" hit ,f to find the definition of the current class
-" this uses ctags. the standard way to get this is Ctrl-]
-nnoremap <silent> <leader>f <C-]>
+nnoremap <silent> <leader>k <C-]>
 
 " Create window splits easier.
-nnoremap <silent> <LocalLeader>vv <C-w>v
-nnoremap <silent> <LocalLeader>ss <C-w>s
+nnoremap <silent> <localleader>vv <C-w>v
+nnoremap <silent> <localleader>ss <C-w>s
 
 nnoremap <silent> gx :call ppm#functions#plug_gx()<CR>
 
@@ -80,7 +78,7 @@ nnoremap <silent> // :nohlsearch<cr>
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
 " Close the Quickfix or Location window with <leader>//
-nnoremap <silent> <Leader>// :cclose<BAR>lclose<CR>
+nnoremap <silent> <leader>// :cclose<BAR>lclose<CR>
 
 " ¨* for highlight all occurrences of current word (like '*' but without moving)
 " http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches
@@ -89,46 +87,17 @@ nnoremap <silent> ¨* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 " }}}1
 " Section: Plugins {{{1
 
-" Invoque fzf.vim
-" nmap     <Space>  <Plug>[fzf]
-" nnoremap <silent> <Plug>[fzf]<Space> :Files <C-R>=expand('%:p:h')<CR><CR>
-" nnoremap <silent> <Plug>[fzf]p       :GFiles --exclude-standard --cached --others<CR>
-" nnoremap <silent> <Plug>[fzf]r       :Files <C-R>=getcwd()<CR><CR>
-" nnoremap <silent> <Plug>[fzf]b       :Buffers<CR>
-" nnoremap <silent> <Plug>[fzf]m       :History<CR>
-" nnoremap <silent> <Plug>[fzf]t       :Tags<CR>
-" nnoremap <silent> <Plug>[fzf]bt      :BTags<CR>
-" nnoremap <silent> <Plug>[fzf]l       :Lines<CR>
-" nnoremap <silent> <Plug>[fzf]bl      :BLines<CR>
-" nnoremap <silent> <Plug>[fzf]gc      :Commits<CR>
-" nnoremap <silent> <Plug>[fzf]gs      :GFiles?<CR>
-" nnoremap <silent> <Plug>[fzf]gm      :GModified<CR>
-" nnoremap          <Plug>[fzf]s       :Spotlight <C-R><C-W><Space>
-
-" Surcharge original commands with fzf.vim
-" imap <C-X><C-L> <plug>(fzf-complete-line)
-" imap <C-X><C-F> <plug>(fzf-complete-file)
-" inoremap <expr> <C-X><C-K> fzf#vim#complete#word({'left': '15%'})
-
 " vim-quickhl
 nmap <localleader>k <Plug>(quickhl-cword-toggle)
 nmap <localleader>] <Plug>(quickhl-tag-toggle)
 
-" unimpaired
-" Bubbling text in TextMate style
-" http://vimcasts.org/e/26
-"nmap <C-Up>   [e
-"nmap <C-Down> ]e
-"vmap <C-Up>   [egv
-"vmap <C-Down> ]egv
-
 " ArgWrap
-nnoremap <silent> <leader>aw :ArgWrap<CR>
+nnoremap <silent> <localleader>aw :ArgWrap<CR>
 
 " vim-lion
-nmap <leader>a= glip=
+nmap <localleader>a= glip=
 "vmap <leader>a= :Tabularize /=<CR>
-nmap <leader>a: gLi{:
+nmap <localleader>a: gLi{:
 "vmap <leader>a: :Tabularize /:\zs<CR>
 
 " }}}1
