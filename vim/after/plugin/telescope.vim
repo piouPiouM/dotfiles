@@ -1,4 +1,4 @@
-nnoremap <silent> <leader><Space> :Telescope.find_files cwd='%:p:h'<CR>
+nnoremap <silent> <leader><Space> :Telescope find_files cwd=%:p:h<CR>
 nnoremap <silent> <leader>e :Telescope file_browser<CR>
 nnoremap <silent> <leader>f :Telescope live_grep<CR>
 nnoremap <silent> <leader>b :Telescope buffers<CR>
