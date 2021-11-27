@@ -258,6 +258,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'arkav/lualine-lsp-progress'
 Plug 'b0o/schemastore.nvim'
 Plug 'folke/trouble.nvim'
+Plug 'simrat39/symbols-outline.nvim'
 
 " }}}2
 " Completion {{{2

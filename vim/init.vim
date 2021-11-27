@@ -9,6 +9,7 @@ set fileencoding=utf-8
 
 let mapleader=" "
 let maplocalleader="ù"
+let g:vimsyn_embed = 'l'
 
 if ! has('nvim')
   set nocompatible

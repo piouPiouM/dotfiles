@@ -14,7 +14,7 @@ require'lualine'.setup {
   options = {
     icons_enabled = true,
     theme = 'auto',
-    component_separators = { left = '', right = ''},
+    component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {},
     always_divide_middle = true,
@@ -24,8 +24,14 @@ require'lualine'.setup {
     lualine_b = {'branch', 'diff',
                   {'diagnostics', sources={'nvim_lsp', 'coc'}}},
     lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'lsp_progress'},
+    lualine_x = {
+      {
+        'lsp_progress',
+        spinner_symbols_square = { '', '' },
+        spinner_symbols = { '', '', '' },
+      }
+    },
+    lualine_y = {'encoding', 'fileformat', 'filetype'},
     lualine_z = {'location'}
   },
   inactive_sections = {
