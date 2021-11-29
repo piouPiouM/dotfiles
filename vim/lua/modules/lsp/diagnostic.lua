@@ -20,8 +20,13 @@ vim.diagnostic.config {
   severity_sort = true,
   update_in_insert = false,
   virtual_text = {
-    prefix = '■ ',
+    prefix = 'ﯭ ',
     spacing = 4,
-    source = 'always',
+    source = 'if_many',
   },
+  float = {
+    border = require'ppm.utils'.borders.rounded,
+    header = false,
+    max_width = 80,
+  }
 }

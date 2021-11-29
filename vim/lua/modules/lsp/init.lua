@@ -25,12 +25,13 @@ local servers = {
   tsserver = require('modules.lsp.tsserver').config,
   sumneko_lua = require('modules.lsp.sumneko').config,
   jsonls = require('modules.lsp.json').config,
+  eslint = {},
   html = {},
   cssls = {},
   bashls = {},
-  eslint = {},
   cucumber_language_server = {},
   emmet_ls = {},
+  efm = require('modules.lsp.efm').config,
 }
 
 for name, opts in pairs(servers) do

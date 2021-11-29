@@ -31,6 +31,7 @@ M.on_attach = function(client)
       autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()
     augroup END
     ]]
+    vim.cmd [[command! Format lua vim.lsp.buf.formatting_seq_sync()]]
   end
 
   require('modules.lsp.mappings').mappings()
