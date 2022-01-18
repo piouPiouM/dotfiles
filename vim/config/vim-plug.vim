@@ -13,6 +13,8 @@ function! PlugNpmPlugin(info) abort
   call PlugRemotePlugins(a:info)
 endfunction
 
+Plug 'dstein64/vim-startuptime'
+
 " }}}1
 " Section: Tmux {{{1
 
@@ -214,11 +216,6 @@ Plug 'rhysd/git-messenger.vim'
 " <leader>aw to (un)wrap function arguments, lists and dictionaries
 Plug 'FooSoft/vim-argwrap'
 
-Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-
-" <D-F> - :Ack
-"Plug 'mileszs/ack.vim', { 'on': 'Ack' }
-
 Plug 'Yggdroot/indentLine'
 
 " Auto close parentheses and repeat by dot dot dot
@@ -300,10 +297,10 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
 " Versionning {{{2
 
-Plug 'tpope/vim-git', {
-      \ 'for': ['git', 'gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail'],
-      \ 'on': ['DiffGitCached'],
-      \ }
+" Plug 'tpope/vim-git', {
+"       \ 'for': ['git', 'gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail'],
+"       \ 'on': ['DiffGitCached'],
+"       \ }
 
 " TODO: fork it to remove the "snippets" templates
 " Plug 'gisphm/vim-gitignore', { 'for': 'gitignore' }

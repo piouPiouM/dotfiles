@@ -20,23 +20,6 @@ if executable('rg')
 endif
 
 " }}}1
-" Section: Completion systems {{{1
-
-let g:echodoc_enable_at_startup = 1
-
-let g:nvim_typescript#type_info_on_hold = 0
-
-"autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-" let g:UltiSnipsExpandTrigger="<c-s-j>"
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" close the preview window when you're not using it
-" let g:SuperTabClosePreviewOnPopupClose = 1
-" let g:SuperTabDefaultCompletionType = "context"
-"let g:SuperTabDefaultCompletionType = "<c-n>"
-
-"let g:ycm_key_list_select_completion = ['<TAB>']
-
-" }}}1
 " Section: Mustache and Handlebars mode {{{1
 
 let g:mustache_abbreviations = 1
@@ -65,13 +48,6 @@ let g:expand_region_text_objects = {
       \ 'ab'  :0,
       \ 'aB'  :0
       \ }
-
-" }}}1
-" Section: vim-signify {{{1
-
-let g:signify_vcs_list    = [ 'git' ]
-"let g:signify_sign_change = '♺'
-
 
 " }}}1
 " Section: javascript-libraries-syntax {{{1
@@ -177,5 +153,3 @@ let g:diminactive_filetype_blacklist = ['startify', 'gitmessengerpopup', 'fzf']
 let g:yankstack_yank_keys = ['c', 'C', 'd', 'D', 'y', 'Y']
 
 " }}}1
-
-" let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']

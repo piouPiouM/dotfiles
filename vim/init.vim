@@ -16,6 +16,11 @@ if ! has('nvim')
   source $XDG_CONFIG_HOME/nvim/config/compat.vim
 endif
 
+let g:loaded_python_provider = 0
+let g:python3_host_prog = '/usr/local/bin/python3'
+let g:loaded_perl_provider = 0
+let g:node_host_prog = '/usr/local/bin/neovim-node-host'
+
 source $XDG_CONFIG_HOME/nvim/config/vim-plug.vim
 syntax enable
 
