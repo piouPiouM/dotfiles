@@ -1,10 +1,10 @@
 " Make the search terms less aggressive.
 function s:UnderlineSearchGroup()
-  let l:color=pinnacle#extract_bg('Search')
+  let l:color=pinnacle#extract_fg('Search')
   let l:highlight=pinnacle#highlight({
         \ 'bg': 'NONE',
         \ 'fg': l:color,
-        \ 'term': 'underline,italic'
+        \ 'term': 'undercurl,italic'
         \ })
   execute 'highlight Search ' . l:highlight
 endfunction

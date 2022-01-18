@@ -126,12 +126,6 @@ let g:lion_squeeze_spaces = 1
 let g:vcoolor_lowercase  = 1
 
 " }}}1
-" Section: colorizer {{{1
-
-let g:colorizer_nomap = 1
-let g:colorizer_startup = 0
-
-" }}}1
 " Section: vim-css-color {{{1
 
 let g:cssColorVimDoNotMessMyUpdatetime = 1

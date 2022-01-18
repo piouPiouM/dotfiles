@@ -44,7 +44,7 @@ vim.g.nord_underline_option = 'undercurl'
 vim.g.nord_italic = true
 vim.g.nord_italic_comments = true
 vim.g.nord_minimal_mode = false
-vim.cmd('colorscheme nordbuddy')
+-- vim.cmd('colorscheme nordbuddy')
 
 local nightfox = require('nightfox')
 nightfox.setup({
@@ -52,4 +52,26 @@ nightfox.setup({
   alt_nc = true,
 })
 -- nightfox.load()
+
+local catppuccin = require('catppuccin')
+catppuccin.setup {
+  term_colors = true,
+  integrations = {
+    gitgutter = true,
+    hop = true,
+    lsp_trouble = true,
+    markdown = true,
+    native_lsp = {
+      underlines = {
+        errors = 'undercurl',
+        hints = 'undercurl',
+        warnings = 'undercurl',
+        information = 'undercurl',
+      },
+    },
+    telescope = true,
+  }
+}
+
+vim.cmd[[colorscheme catppuccin]]
 EOF

@@ -63,7 +63,7 @@ set nocursorline            " Disable current line highlighting.
 set scrolloff=3             " Provide some context when editing.
 set updatetime=600          " Smaller updatetime for CursorHold & CursorHoldI
 set clipboard=unnamedplus
-set guifont=FuraCode\ Nerd\ Font:12
+set guifont=JetBrainsMono\ Nerd\ Font:13
 
 if has('cmdline_info')
   set ruler                                          " Show the ruler.

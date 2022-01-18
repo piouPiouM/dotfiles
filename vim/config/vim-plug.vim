@@ -433,10 +433,6 @@ Plug 'wincent/pinnacle'
 
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-"Plug 'iCyMind/NeoSolarized'
-"Plug 'w0ng/vim-hybrid'
-"Plug 'chriskempson/base16-vim'
-" Plug 'easysid/mod8.vim'
 Plug 'cocopon/iceberg.vim'
 Plug 'antonk52/lake.vim'
 " Plug 'crispgm/nord-vim'
