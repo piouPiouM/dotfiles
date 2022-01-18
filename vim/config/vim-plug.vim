@@ -254,6 +254,8 @@ Plug 'arkav/lualine-lsp-progress'
 Plug 'b0o/schemastore.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'simrat39/symbols-outline.nvim'
+Plug 'kosayoda/nvim-lightbulb'
+
 
 " Completion {{{2
 
