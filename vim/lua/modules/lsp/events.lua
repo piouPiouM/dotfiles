@@ -18,7 +18,7 @@ M.on_attach = function(client)
     vim.cmd [[
     augroup HighlightWord
       autocmd!
-      autocmd CursorHold,CursorHoldI  <buffer> lua vim.lsp.buf.document_highlight()
+      autocmd CursorHold,CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
       autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
     augroup END
     ]]
