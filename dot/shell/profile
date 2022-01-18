@@ -17,7 +17,9 @@ PPM_BREW_PREFIX=$(brew --prefix)
 if [ -s "$PPM_BREW_PREFIX/etc/profile.d/z.sh" ]; then
   export _Z_DATA=$XDG_DATA_HOME/z/z
   . "$PPM_BREW_PREFIX/etc/profile.d/z.sh"
-  fi
+fi
+
+[ -d "$HOME/bin/lua-language-server/bin/macOS" ] && PATH="$HOME/bin/lua-language-server/bin/macOS:$PATH"
 
 # ruby
 if which ruby >/dev/null && which gem >/dev/null; then

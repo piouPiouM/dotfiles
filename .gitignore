@@ -2,5 +2,6 @@ sessions/
 backup/
 vim/.netrwhist
 vim/tmp
+vim/autoload/plug.vim
 vim/autoload/plug.vim.old
 

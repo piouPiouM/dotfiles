@@ -13,11 +13,6 @@ let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1
 
 " }}}1
-" Section: vim-follow-my-lead {{{1
-
-let g:fml_all_sources = 1
-
-" }}}1
 " Section: Ack {{{1
 
 if executable('rg')
@@ -99,7 +94,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'gitgutter://.*']
 " }}}1
 " Section: vim-wordmotion {{{1
 
-let g:wordmotion_prefix = '<Leader>'
+let g:wordmotion_prefix = '<localleader>'
 
 " }}}1
 " Section: switch {{{1

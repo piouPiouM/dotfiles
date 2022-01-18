@@ -8,20 +8,6 @@ function! PlugRemotePlugins(info) abort
   endif
 endfunction
 
-function! PlugCoc(info) abort
-  if a:info.status ==? 'installed'  || a:info.force
-    call PlugCocExtensions()
-  elseif a:info.status ==? 'updated'
-    call coc#util#update()
-  endif
-  call PlugRemotePlugins(a:info)
-endfunction
-
-function! PlugCocExtensions() abort
-  call coc#util#install_extension(join(get(s:, 'coc_extensions', [])))
-  call coc#util#install_extension(join(get(s:, 'coc_vscode_extensions', [])))
-endfunction
-
 function! PlugNpmPlugin(info) abort
   !npm install
   call PlugRemotePlugins(a:info)
@@ -37,11 +23,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " Section: Vim improvments {{{1
 
 Plug 'embear/vim-localvimrc'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" <leader>fml to display all <leader> mappings
-Plug 'ktonga/vim-follow-my-lead'
+Plug 'nvim-lualine/lualine.nvim'
 
 " :DimInactiveOn / :DimInactiveOff
 " :DimInactiveSyntaxOn / :DimInactiveSyntaxOff
@@ -50,14 +32,9 @@ Plug 'ktonga/vim-follow-my-lead'
 " :DimInactiveWindowReset
 " :DimInactiveBufferOn / :DimInactiveBufferOff
 " :DimInactiveBufferReset
-Plug 'blueyed/vim-diminactive'
+" Plug 'blueyed/vim-diminactive'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-
-" Display the contents of the registers on the sidebar
-" @[choise][motion] or "[choise][motion] in normal mode
-" <C-R> in insert mode
-Plug 'junegunn/vim-peekaboo'
 
 " :MaximizerToggle - Maximize or restore windows.
 " F3 in Normal, Visual and Insert modes.
@@ -109,12 +86,6 @@ Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'sgur/vim-textobj-parameter'
 
 " }}}2
-
-" :ShrinkMapToggle or <leader>ss - Open or close ShrinkMap sidebar
-" :ShrinkMapOpen   or <leader>so - Open ShrinkMap sidebar
-" :ShrinkMapClose  or <leader>sc - Close ShrinkMap sidebar
-" :ShrinkMapUpdate or <leader>su - Draw Braille patterns to ShrinkMap sidebar and highlight the current window in ShinkMap sidebar
-Plug 'ryujinno/shrinkmap.vim'
 
 " <C-a>/<C-x> to increment dates, times
 Plug 'tpope/vim-speeddating'
@@ -196,18 +167,12 @@ Plug 'mhinz/vim-startify'
 
 " M-p to cycle backward through the history of yanks
 " M-P to cycle forwards through the history of yanks
-Plug 'maxbrunsfeld/vim-yankstack'
-
-" y to highlight yank
-Plug 'machakann/vim-highlightedyank'
-
-" emoji#for('small_blue_diamond')
-Plug 'junegunn/vim-emoji'
+" Plug 'maxbrunsfeld/vim-yankstack'
 
 " <leader>k to toggle highlighting of a word.
 " <leader>K to clear all highlighted words.
 " n and N to navigate through the occurrences of the word under cursor.
-Plug 'lfv89/vim-interestingwords'
+" Plug 'lfv89/vim-interestingwords'
 
 " <localleader>k to highlight automatically a word under the cursor
 " <localleader>] to toggle highlight of jumpable 'tag'
@@ -223,11 +188,6 @@ Plug 'dharanasoft/rtf-highlight', { 'on': 'RTFHighlight' }
 
 Plug 'editorconfig/editorconfig-vim'
 
-" <C-y>, to expand abbreviations similar to emmet
-Plug 'mattn/emmet-vim', {
-      \ 'for': ['html', 'css', 'scss', 'javascript', 'php', 'twig']
-      \ }
-
 " :ToggleWhitespace - Toggle whitespace highlighting on/off
 " [range]:StripWhitespace - To clean extra whitespace
 Plug 'ntpeters/vim-better-whitespace'
@@ -236,9 +196,6 @@ Plug 'rizzatti/dash.vim', {
       \ 'on': ['Dash', 'DashKeywords', '<Plug>DashSearch', '<Plug>DashGlobalSearch']
       \ }
 Plug 'scrooloose/nerdcommenter'
-
-" Useful to display the current branch in vim-airline
-Plug 'tpope/vim-fugitive'
 
 " ]c to jump to next hunk
 " [c to jump to previous hunk
@@ -267,9 +224,9 @@ Plug 'Yggdroot/indentLine'
 " Auto close parentheses and repeat by dot dot dot
 " Plug 'cohama/lexima.vim'
 
-Plug 'luochen1990/rainbow', {
-      \ 'on': ['RainbowToggle', 'RainbowToggleOn', 'RainbowToggleOff']
-      \ }
+" Plug 'luochen1990/rainbow', {
+      " \ 'on': ['RainbowToggle', 'RainbowToggleOn', 'RainbowToggleOff']
+      " \ }
 
 "Plug 'vim-utils/vim-troll-stopper'
 
@@ -278,39 +235,62 @@ Plug 'luochen1990/rainbow', {
 " Plug 'honza/vim-snippets'
 
 " }}}1
-" Section: Completion {{{1
+" Section: LSP {{{1
 
-let s:coc_extensions = [
-      \ 'coc-css',
-      \ 'coc-emmet',
-      \ 'coc-emoji',
-      \ 'coc-eslint',
-      \ 'coc-html',
-      \ 'coc-json',
-      \ 'coc-prettier',
-      \ 'coc-snippets',
-      \ 'coc-svg',
-      \ 'coc-tsserver',
-      \ 'coc-yaml'
-      \ ]
+Plug 'nvim-lua/plenary.nvim'
+Plug 'tjdevries/astronauta.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 
-let s:coc_vscode_extensions = []
+" post-install the following global npm packages:
+" - eslint_d
+" - vscode-langservers-extracted
+" - typescript typescript-language-server
+" - vim-language-server
+" - bash-language-server
+" - @cucumber/language-server
+" - emmet-ls
+Plug 'neovim/nvim-lspconfig'
+Plug 'arkav/lualine-lsp-progress'
+Plug 'b0o/schemastore.nvim'
+Plug 'folke/trouble.nvim'
+Plug 'simrat39/symbols-outline.nvim'
+Plug 'kosayoda/nvim-lightbulb'
 
-" Plug 'neoclide/coc-neco'
-Plug 'neoclide/coc.nvim', {
-      \ 'branch': 'release',
-      \ 'do': function('PlugCoc')
-      \ }
 
-" Showing function signature and inline doc.
-" <c-y> to accept a completion for a function
-Plug 'Shougo/echodoc.vim'
+" Completion {{{2
 
+Plug 'onsails/lspkind-nvim'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-calc'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'rafamadriz/friendly-snippets'
+
+" }}}2
+" Fuzzy Finder {{{2
+
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+
+" }}}2
+" Syntax {{{2
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+
+" }}}2
 " }}}1
 " Section: External tools {{{1
 
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
+" Plug '/usr/local/opt/fzf'
+" Plug 'junegunn/fzf.vim'
 
 " <leader>gi to create .gitignore files using the gitignore.io API
 "Plug 'fszymanski/fzf-gitignore', {'do': ':UpdateRemotePlugins'}
@@ -329,12 +309,6 @@ Plug 'tpope/vim-git', {
 " Plug 'gisphm/vim-gitignore', { 'for': 'gitignore' }
 
 " }}}2
-" Ansible {{{2
-
-" TODO: to replace with pearofducks/ansible-vim
-Plug 'chase/vim-ansible-yaml'
-
-" }}}2
 " CSS {{{2
 
 " Uses :ColorToggle for javascript and php.
@@ -350,61 +324,38 @@ Plug 'KabbAmine/vCoolor.vim', {
       \ }
 
 " }}}2
-" Elm {{{2
-
-" <Leader>m to compile the current buffer.
-" <Leader>b to compile the Main.elm file in the project.
-" <Leader>t to runs the tests of the current buffer or 'tests/TestRunner'.
-" <Leader>r to opens an elm repl in a subprocess.
-" <Leader>e to shows the detail of the current error or warning.
-" <Leader>d to shows the type and docs for the word under the cursor.
-" <Leader>w to opens the docs web page for the word under the cursor.
-" :ElmMake [filename] calls elm-make with the given file. If no file is given it uses the current file being edited.
-" :ElmMakeMain attempts to call elm-make with "Main.elm".
-" :ElmTest calls elm-test with the given file. If no file is given it runs it in the root of your project.
-" :ElmRepl runs elm-repl, which will return to vim on exiting.
-" :ElmErrorDetail shows the detail of the current error in the quickfix window.
-" :ElmShowDocs queries elm-oracle, then echoes the type and docs for the word under the cursor.
-" :ElmBrowseDocs queries elm-oracle, then opens docs web page for the word under the cursor.
-" :ElmFormat formats the current buffer with elm-format.
-" Plug 'elmcast/elm-vim', {
-"       \ 'do': 'npm install --global elm elm-test elm-oracle elm-format',
-"       \ 'for': ['elm']
-"       \ }
-
-" }}}2
 " JavaScript {{{2
 
-Plug 'othree/javascript-libraries-syntax.vim', {
-      \ 'for': ['javascript', 'javascript.jsx']
-      \ }
-Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
+" Plug 'othree/javascript-libraries-syntax.vim', {
+      " \ 'for': ['javascript', 'javascript.jsx']
+      " \ }
+" Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
 
 " Plug 'Quramy/vim-js-pretty-template', {
 "       \ 'for': ['javascript', 'typescript']
 "       \ }
 
 " :JsDoc - Insert JSDoc if the cursor is on `function` keyword line.
-Plug 'heavenshell/vim-jsdoc', {
-      \ 'for': ['javascript', 'javascript.jsx', 'typescript']
-      \ }
+" Plug 'heavenshell/vim-jsdoc', {
+"       \ 'for': ['javascript', 'javascript.jsx', 'typescript']
+"       \ }
 
-Plug 'styled-components/vim-styled-components', {
-      \ 'branch': 'main',
-      \ 'for': ['javascript', 'javascript.jsx', 'typescript']
-      \ }
+" Plug 'styled-components/vim-styled-components', {
+"       \ 'branch': 'main',
+"       \ 'for': ['javascript', 'javascript.jsx', 'typescript']
+"       \ }
 
-Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
+" Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 
-Plug 'meain/vim-package-info', {
-      \ 'do': function('PlugNpmPlugin'),
-      \ }
+" Plug 'meain/vim-package-info', {
+"       \ 'do': function('PlugNpmPlugin'),
+"       \ }
 
 " }}}2
 " PHP {{{2
 
 " :Composer command wrapper around composer with smart completion
-Plug 'noahfrederick/vim-composer', { 'for': 'php' }
+" Plug 'noahfrederick/vim-composer', { 'for': 'php' }
 
 " <F2> - step over
 " <F3> - step into
@@ -423,16 +374,16 @@ Plug 'noahfrederick/vim-composer', { 'for': 'php' }
 " }}}2
 " Tabular data {{{2
 
-Plug 'chrisbra/csv.vim', { 'for': 'csv' }
+" Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 
 " }}}2
 " Polyglot {{{2
 
-let g:polyglot_disabled = ['elm', 'typescript']
-Plug 'sheerun/vim-polyglot'
+" let g:polyglot_disabled = ['elm', 'typescript']
+" Plug 'sheerun/vim-polyglot'
 
 " After vim-polyglot to avoid overriding.
-Plug 'neoclide/jsonc.vim'
+" Plug 'neoclide/jsonc.vim'
 
 " }}}2
 " Misc {{{2
@@ -465,11 +416,6 @@ Plug 'tommcdo/vim-lion'
 " }}}1
 " Section: Colorscheme stuff {{{1
 
-" :ColorToggle to toggle hex to colors
-" Plug 'lilydjwg/colorizer', {
-"       \ 'on': ['ColorHighlight', 'ColorClear', 'ColorToggle']
-"       \ }
-
 " :HexokinaseToggle to toggle the colouring
 " :HexokinaseRefresh to refresh the colouring
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
@@ -485,7 +431,6 @@ Plug 'gerw/vim-HiLinkTrace', {
 " Pinnacle provides functions for manipulating `:highlight` groups.
 Plug 'wincent/pinnacle'
 
-Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 "Plug 'iCyMind/NeoSolarized'
@@ -493,6 +438,12 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 "Plug 'chriskempson/base16-vim'
 " Plug 'easysid/mod8.vim'
 Plug 'cocopon/iceberg.vim'
+Plug 'antonk52/lake.vim'
+" Plug 'crispgm/nord-vim'
+Plug 'shaunsingh/nord.nvim'
+Plug 'maaslalani/nordbuddy'
+Plug 'EdenEast/nightfox.nvim'
+Plug 'catppuccin/nvim'
 
 " }}}1
 
