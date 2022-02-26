@@ -216,7 +216,7 @@ Plug 'rhysd/git-messenger.vim'
 " <leader>aw to (un)wrap function arguments, lists and dictionaries
 Plug 'FooSoft/vim-argwrap'
 
-Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Auto close parentheses and repeat by dot dot dot
 " Plug 'cohama/lexima.vim'
