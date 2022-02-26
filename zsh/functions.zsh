@@ -136,26 +136,26 @@ FZF-EOF"
 # gbr - Checkout git branch (including remote branches)
 # Inspired buy https://github.com/junegunn/fzf/wiki/Examples#git
 # -------------------------------------------------------------------
-gbr() {
-  local branches branch remotes
+# gbr() {
+#   local branches branch remotes
 
-  branches=$(git branch --all | grep -v HEAD) &&
-  branch=$(echo "$branches" |
-           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
-  # remove `  remotes/` or `* ` or `  ` from head:
-  branch=${branch##* (remotes/)#} &&
-  remotes=$(git remote) &&
-          git checkout $( (( ${remotes[(I)${branch%%/*}]} )) && echo "--track" ) "${branch}"
-}
+#   branches=$(git branch --all | grep -v HEAD) &&
+#   branch=$(echo "$branches" |
+#            fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+#   # remove `  remotes/` or `* ` or `  ` from head:
+#   branch=${branch##* (remotes/)#} &&
+#   remotes=$(git remote) &&
+#           git checkout $( (( ${remotes[(I)${branch%%/*}]} )) && echo "--track" ) "${branch}"
+# }
 
 # -------------------------------------------------------------------
 # From https://github.com/junegunn/fzf/wiki/Examples#z
 # -------------------------------------------------------------------
-unalias z 2> /dev/null
-z() {
-  [ $# -gt 0 ] && _z "$*" && return
-  cd "$(_z -l 2>&1 | fzf-tmux --height 25% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
-}
+# unalias z 2> /dev/null
+# z() {
+#   [ $# -gt 0 ] && _z "$*" && return
+#   cd "$(_z -l 2>&1 | fzf-tmux --height 25% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+# }
 
 # -------------------------------------------------------------------
 # Install (one or multiple) selected application(s)
