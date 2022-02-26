@@ -13,12 +13,6 @@ PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 PPM_BREW_PREFIX=$(brew --prefix)
 
-# z.sh
-if [ -s "$PPM_BREW_PREFIX/etc/profile.d/z.sh" ]; then
-  export _Z_DATA=$XDG_DATA_HOME/z/z
-  . "$PPM_BREW_PREFIX/etc/profile.d/z.sh"
-fi
-
 # ruby
 if which ruby >/dev/null && which gem >/dev/null; then
   PATH="$(/usr/local/opt/ruby/bin/ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
@@ -97,3 +91,16 @@ if hash fd 2>/dev/null; then
   fi
 fi
 
+# -------------------------------------------------------------------
+# jump
+# -------------------------------------------------------------------
+
+# z.sh
+if [ -s "$PPM_BREW_PREFIX/etc/profile.d/z.sh" ]; then
+	export _Z_DATA=$XDG_DATA_HOME/z/z
+	. "$PPM_BREW_PREFIX/etc/profile.d/z.sh"
+fi
+
+if hash zoxide 2>/dev/null; then
+	export _ZO_DATA_DIR=$XDG_DATA_HOME
+fi
