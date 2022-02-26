@@ -162,6 +162,9 @@ $(XDG_CONFIG_HOME)/ripgreprc: | $(ENSURE_DIRS)
 $(XDG_CONFIG_HOME)/bat/config: | $(ENSURE_DIRS)
 	ln -s $(realpath config/bat) $@
 
+$(XDG_CONFIG_HOME)/kitty: | $(ENSURE_DIRS)
+	ln -s $(realpath config/kitty) $@
+
 $(XDG_CONFIG_HOME)/broot: | $(ENSURE_DIRS)
 	ln -s $(realpath config/broot) $@
 
