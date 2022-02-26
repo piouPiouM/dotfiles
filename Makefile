@@ -165,6 +165,9 @@ $(XDG_CONFIG_HOME)/bat/config: | $(ENSURE_DIRS)
 $(XDG_CONFIG_HOME)/broot: | $(ENSURE_DIRS)
 	ln -s $(realpath config/broot) $@
 
+$(XDG_CONFIG_HOME)/luaformatter: | $(ENSURE_DIRS)
+	ln -s $(realpath config/luaformatter) $@
+
 # -----------------------------------------------------------------------------
 # Target: Downloads
 # -----------------------------------------------------------------------------
@@ -266,7 +269,7 @@ neovim-dependencies:
 # Target: applications
 # -----------------------------------------------------------------------------
 
-.PHONY: fzf-postinstall fzf-update
+.PHONY: fzf-postinstall fzf-update lua-install-packages
 
 fzf-postinstall:
 	@$$(brew --prefix)/opt/fzf/install --xdg --key-bindings --completion --no-update-rc --no-bash --no-fish
@@ -276,6 +279,10 @@ fzf-postinstall:
 fzf-update:
 	@$(call cmd_exists,fzf) && brew reinstall fzf || exit 0
 	@$(call cmd_exists,fzf) && $(MAKE) fzf-postinstall
+
+lua-install-packages:
+	@$(call cmd_exists,luarocks) && brew reinstall luarocks || exit 0
+	@$(call cmd_exists,luarocks) && luarocks install --server=https://luarocks.org/dev luaformatter
 
 # -----------------------------------------------------------------------------
 # Target: usage and help

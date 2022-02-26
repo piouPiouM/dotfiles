@@ -19,8 +19,6 @@ if [ -s "$PPM_BREW_PREFIX/etc/profile.d/z.sh" ]; then
   . "$PPM_BREW_PREFIX/etc/profile.d/z.sh"
 fi
 
-[ -d "$HOME/bin/lua-language-server/bin/macOS" ] && PATH="$HOME/bin/lua-language-server/bin/macOS:$PATH"
-
 # ruby
 if which ruby >/dev/null && which gem >/dev/null; then
   PATH="$(/usr/local/opt/ruby/bin/ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"

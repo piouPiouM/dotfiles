@@ -14,18 +14,18 @@ local lsp = vim.lsp
 -- )
 
 -- https://www.reddit.com/r/neovim/comments/jvisg5/lets_talk_formatting_again/
-lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
-  if err ~= nil or result == nil then
-    return
-  end
+-- lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
+--   if err ~= nil or result == nil then
+--     return
+--   end
 
-  if not api.nvim_buf_get_option(bufnr, "modified") then
-    local view = fn.winsaveview()
-    lsp.util.apply_text_edits(result, bufnr)
-    fn.winrestview(view)
+--   if not api.nvim_buf_get_option(bufnr, "modified") then
+--     local view = fn.winsaveview()
+--     lsp.util.apply_text_edits(result, bufnr)
+--     fn.winrestview(view)
 
-    if bufnr == api.nvim_get_current_buf() then
-      api.nvim_command("noautocmd :update")
-    end
-  end
-end
+--     if bufnr == api.nvim_get_current_buf() then
+--       api.nvim_command("noautocmd :update")
+--     end
+--   end
+-- end
