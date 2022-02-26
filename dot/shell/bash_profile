@@ -13,3 +13,5 @@ if [ -f $PPM_BREW_PREFIX/etc/bash_completion ]; then
     . $PPM_BREW_PREFIX/etc/bash_completion
 fi
 
+
+source /Users/mkabab/.config/broot/launcher/bash/br

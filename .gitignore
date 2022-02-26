@@ -1,5 +1,6 @@
 sessions/
 backup/
+config/broot/launcher
 vim/.netrwhist
 vim/tmp
 vim/autoload/plug.vim
