@@ -194,7 +194,7 @@ ranger/devicons.py ranger/plugins/devicons_linemode.py:
 # Target: Homebrew
 # -----------------------------------------------------------------------------
 
-.PHONY: brew brew-download brew-install brew-postinstall brew-upgrade
+.PHONY: brew brew-download brew-dump brew-install brew-postinstall brew-upgrade
 
 ## Install Homebrew and your packages.
 brew: brew-download brew-install brew-postinstall brew-upgrade
@@ -204,6 +204,11 @@ brew-download:
 	@echo '$(YELLOW)Download Homebrew if necessary…$(RESET)'
 	@$(call cmd_exists,brew) && exit 0 || \
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+## Dump Homebrew packages.
+brew-dump:
+	@echo '$(YELLOW)Dump Homebrew packages…$(RESET)'
+	@$(call cmd_exists,brew) && brew bundle dump --force --file=$(realpath Brewfile) && git restore --staged -- $(realpath Brewfile)
 
 ## Install Homebrew packages.
 brew-install:
