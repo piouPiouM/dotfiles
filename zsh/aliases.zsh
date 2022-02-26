@@ -6,13 +6,10 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ls="ls -F"
 alias lsa='ls -lah'
-alias l='ls -lah'
 alias ll='ls -lh'
 alias la='ls -lAh'
-
-alias exa='exa --color-scale --git --group-directories-first --long --group --all'
-alias le='exa -I .git'
-alias lg='exa --git-ignore -I .git'
+alias l='br --permissions'
+alias lg='br --permissions --show-git-info'
 
 # Editors
 alias vim=nvim
