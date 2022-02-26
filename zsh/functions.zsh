@@ -1,3 +1,7 @@
+if hash broot 2>/dev/null; then
+  source $XDG_CONFIG_HOME/broot/functions.sh
+fi
+
 # -------------------------------------------------------------------
 # display the top process in CPU usage
 # -------------------------------------------------------------------
