@@ -15,8 +15,8 @@ PPM_BREW_PREFIX=$(brew --prefix)
 
 # ruby
 if which ruby >/dev/null && which gem >/dev/null; then
-  PATH="$(/usr/local/opt/ruby/bin/ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-  PATH="/usr/local/opt/ruby/bin:$PATH"
+	PATH="$(/usr/local/opt/ruby/bin/ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+	PATH="/usr/local/opt/ruby/bin:$PATH"
 fi
 
 # node
@@ -31,12 +31,12 @@ NVM_DIR="$XDG_DATA_HOME/nvm"
 
 # Same as $PPM_BREW_PREFIX/bin
 #if which npm >/dev/null; then
-  #PATH=`npm bin -g`:$PATH
+#PATH=`npm bin -g`:$PATH
 #fi
 # Same as $PPM_BREW_PREFIX/bin
 #if which yarn >/dev/null; then
-  #export PPM_YARN_PREFIX=`yarn global bin`
-  #PATH=$PPM_YARN_PREFIX:$PATH
+#export PPM_YARN_PREFIX=`yarn global bin`
+#PATH=$PPM_YARN_PREFIX:$PATH
 #fi
 
 export PATH=$XDG_DATA_HOME/bin:$HOME/bin:$PATH
@@ -77,18 +77,18 @@ export FZF_CTRL_T_OPTS="--preview '${FZF_PREWIEW_OPTS}' --height 70%"
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 
 if hash rg 2>/dev/null; then
-  export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgreprc
-  export FZF_DEFAULT_COMMAND='rg --files --no-messages'
-  export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
+	export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgreprc
+	export FZF_DEFAULT_COMMAND='rg --files --no-messages'
+	export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 fi
 
 if hash fd 2>/dev/null; then
-  FD_DEFAULT_COMMAND='fd --color=always --hidden --follow --no-ignore-vcs'
-  export FZF_ALT_C_COMMAND="${FD_DEFAULT_COMMAND} --type directory"
+	FD_DEFAULT_COMMAND='fd --color=always --hidden --follow --no-ignore-vcs'
+	export FZF_ALT_C_COMMAND="${FD_DEFAULT_COMMAND} --type directory"
 
-  if [ -z "$FZF_CTRL_T_COMMAND" ]; then
-    export FZF_CTRL_T_COMMAND="${FD_DEFAULT_COMMAND} --type file --type symlink"
-  fi
+	if [ -z "$FZF_CTRL_T_COMMAND" ]; then
+		export FZF_CTRL_T_COMMAND="${FD_DEFAULT_COMMAND} --type file --type symlink"
+	fi
 fi
 
 # -------------------------------------------------------------------
