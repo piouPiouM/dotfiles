@@ -323,6 +323,7 @@ Plug 'KabbAmine/vCoolor.vim', {
 " }}}2
 " JavaScript {{{2
 
+Plug 'jxnblk/vim-mdx-js'
 " Plug 'othree/javascript-libraries-syntax.vim', {
       " \ 'for': ['javascript', 'javascript.jsx']
       " \ }
