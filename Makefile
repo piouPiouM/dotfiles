@@ -218,6 +218,7 @@ brew-install:
 # Run Homebrew post-install tasks.
 brew-postinstall:
 	@echo '$(YELLOW)Run Homebrew post-install…$(RESET)'
+	@brew completions link
 	@pip3 install --upgrade pip setuptools wheel
 	@update_rubygems
 	@gem update --system --no-document

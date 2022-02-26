@@ -1,8 +1,11 @@
-autoload -U compinit && compinit
-zmodload -i zsh/complist
-
 # Enable zsh-completions from Homebrew
-fpath=(/usr/local/share/zsh-completions $fpath)
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:$(brew --prefix)/share/zsh-completions:${FPATH}"
+fi
+
+autoload -Uz compinit && compinit
+zmodload -i zsh/complist
 
 # Avoid having to run `rehash` on each new executable in $PATH
 setopt nohashdirs

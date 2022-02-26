@@ -39,7 +39,7 @@ NVM_DIR="$XDG_DATA_HOME/nvm"
 #PATH=$PPM_YARN_PREFIX:$PATH
 #fi
 
-export PATH=$XDG_DATA_HOME/bin:$HOME/bin:$PATH
+export PATH="$XDG_DATA_HOME/bin:$HOME/bin:$PATH"
 export NODE_PATH
 export NVM_DIR
 export PPM_BREW_PREFIX
