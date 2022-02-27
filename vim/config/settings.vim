@@ -1,8 +1,5 @@
 scriptencoding utf-8
 
-let g:python_host_prog  = '/usr/local/bin/python2'
-let g:python3_host_prog = '/usr/local/bin/python3'
-
 set hidden                " Don't require saving before editing another file.
 
 set t_Co=256
@@ -26,7 +23,7 @@ set synmaxcol=800 " vs 3000
 " syntax sync minlines=256 / maxlines=500 à définir au cas par cas suivant le filetype
 
 " used by gf to follow ES6 import - Ctrl-o to come back
-set suffixesadd=.js,.jsx,.json,.ts,.styl,.css,.scss
+set suffixesadd=.js,.jsx,.json,.ts,.tsx.styl,.css,.scss,.sass
 
 if has('balloon_eval') && has('unix')
   set ballooneval
@@ -57,9 +54,9 @@ endif
 set title titlestring=%t%(\ %M%)%(\ •\ %{expand(\"%:~:.:h\")}%)%(\ (%{fnamemodify(getcwd(),\":~\")})%)%(\ %a%)
 
 set splitbelow splitright   " Split window at right bottom.
-set number norelativenumber " Activate hybrid line numbers w/ <F5>.
+set number relativenumber   " Activate hybrid line numbers w/ <F5>.
 set signcolumn=yes          " Prevent buffer moving when adding/deleting sign.
-set nocursorline            " Disable current line highlighting.
+set cursorline              " Enable current line highlighting.
 set scrolloff=3             " Provide some context when editing.
 set updatetime=600          " Smaller updatetime for CursorHold & CursorHoldI
 set clipboard=unnamedplus

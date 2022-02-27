@@ -6,9 +6,8 @@ vim.opt.listchars:append("eol:↴")
 
 require("indent_blankline").setup {
   bufname_exclude = { "NERD_tree.*", "startify", "fzf", "vim-plug" },
-  filetype_exclude = { "markdown", "json" },
+  filetype_exclude = { "markdown", "json", "help" },
   use_treesitter = true,
   show_current_context = true,
   show_current_context_start = false,
-  -- space_char_blankline = " ",
 }
