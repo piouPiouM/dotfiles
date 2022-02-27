@@ -1,7 +1,6 @@
 -- +-------------------------------------------------+
 -- | A | B | C                             X | Y | Z |
 -- +-------------------------------------------------+
-
 local fmt_mode = function(str)
   if str == "V-BLOCK" then return "B" end
 
@@ -18,16 +17,10 @@ require"lualine".setup {
     always_divide_middle = true,
   },
   sections = {
-    lualine_x = {
-      {
-        'lsp_progress',
-        spinner_symbols_square = { '', '' },
-        spinner_symbols = { '', '', '' },
-      }
-    },
     lualine_a = { { "mode", fmt = fmt_mode } },
     lualine_b = { "branch", "diff", { "diagnostics", sources = { "nvim_lsp", "coc" } } },
     lualine_c = { "filename" },
+    lualine_x = {},
     lualine_y = { "encoding", "fileformat", "filetype" },
     lualine_z = { "location" },
   },

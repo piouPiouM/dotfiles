@@ -248,7 +248,7 @@ Plug 'mortepau/codicons.nvim'
 " - @cucumber/language-server
 " - emmet-ls
 Plug 'neovim/nvim-lspconfig'
-Plug 'arkav/lualine-lsp-progress'
+Plug 'j-hui/fidget.nvim'
 Plug 'b0o/schemastore.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'simrat39/symbols-outline.nvim'
