@@ -1,17 +1,5 @@
 local M = {}
 
-M.box = {
-  TOP = "─",
-  BOTTOM = "─",
-  RIGHT = "│",
-  SPACE = " ",
-  LEFT = "│",
-  CORNER = {
-    TOP_LEFT = "╭",
-    TOP_RIGHT = "╮",
-  },
-}
-
 local function prequire(...)
   local status, lib = pcall(require, ...)
 
@@ -21,12 +9,20 @@ end
 
 M.prequire = prequire
 
-
 M.borders = {
-  simple = 'simple',
-  rounded = 'rounded',
-  fancy = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-  solid =   { '▄', '▄', '▄', '█', '▀', '▀', '▀', '█' },
+  simple = "simple",
+  rounded = "rounded",
+  fancy = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+  solid = { "▄", "▄", "▄", "█", "▀", "▀", "▀", "█" },
+}
+
+M.box = {
+  TOP = "─",
+  BOTTOM = "─",
+  RIGHT = "│",
+  SPACE = " ",
+  LEFT = "│",
+  CORNER = { TOP_LEFT = "╭", TOP_RIGHT = "╮" },
 }
 
 return M

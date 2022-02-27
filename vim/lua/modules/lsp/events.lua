@@ -1,8 +1,8 @@
 local M = {}
 
 M.on_init = function(client)
-  vim.notify(" " .. client.name .. ": Language Server Client successfully started!", "info")
-  -- print(vim.inspect(client.resolved_capabilities))
+  vim.notify(" " .. client.name .. ": Language Server Client successfully started!",
+             vim.log.levels.DEBUG)
 end
 
 M.on_attach = function(client)

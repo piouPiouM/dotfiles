@@ -1,6 +1,4 @@
-if vim.g.loaded_indent_blankline ~= 1 then
-  return nil
-end
+if vim.g.loaded_indent_blankline ~= 1 then return nil end
 
 vim.opt.list = true
 -- vim.opt.listchars:append("space:⋅")

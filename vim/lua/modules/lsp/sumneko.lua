@@ -9,7 +9,7 @@ M.path = function()
   return path
 end
 
-M.name = 'sumneko_lua'
+M.name = "sumneko_lua"
 M.config = {
   -- not working 🤔
   on_attach = function(client)
@@ -17,23 +17,23 @@ M.config = {
     client.resolved_capabilities.document_range_formatting = true
   end,
 
-  cmd = {"lua-language-server"},
+  cmd = { "lua-language-server" },
   settings = {
     Lua = {
       runtime = { version = "LuaJIT", path = M.path() },
-      completion = {callSnippet = "Replace"},
+      completion = { callSnippet = "Replace" },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'}
+        globals = { "vim" },
       },
-      hint = {enable = true},
+      hint = { enable = true },
       workspace = {
         -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file('', true)
+        library = vim.api.nvim_get_runtime_file("", true),
       },
-      telemetry = {enable = false}
-    }
-  }
+      telemetry = { enable = false },
+    },
+  },
 }
 
 return M

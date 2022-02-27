@@ -1,1 +1,1 @@
-require('modules.lsp')
+require("modules.lsp")

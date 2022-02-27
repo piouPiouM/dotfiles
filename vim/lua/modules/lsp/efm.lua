@@ -32,8 +32,15 @@ M.config = {
     goto_definition = false,
   },
   filetypes = {
-    "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescript.tsx",
-    "typescriptreact", "sh", "bash", "lua",
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescript.tsx",
+    "typescriptreact",
+    "sh",
+    "bash",
+    "lua",
   },
   settings = {
     rootMarkers = { ".git/", "package.json" },

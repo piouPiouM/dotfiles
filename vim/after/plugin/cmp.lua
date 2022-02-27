@@ -22,14 +22,20 @@ cmp.setup({
   },
   sources = cmp.config.sources({
     -- LSP
-    { name = "nvim_lsp" }, { name = "treesitter" }, { name = "nvim_lua" }, { name = "luasnip" },
+    { name = "nvim_lua" },
+    { name = "nvim_lsp" },
+    { name = "treesitter" },
+    { name = "luasnip" },
 
     -- Utils
-    { name = "path" }, { name = "calc" }, {
+    { name = "path" },
+    { name = "calc" },
+    {
       name = "buffer",
       keyword_length = 5,
       option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end },
-    }, { name = "spell" },
+    },
+    { name = "spell" },
   }),
   formatting = {
     format = lspkind.cmp_format {
