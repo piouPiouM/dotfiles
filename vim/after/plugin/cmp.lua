@@ -51,8 +51,8 @@ cmp.setup({
   }),
   formatting = {
     format = lspkind.cmp_format {
-      with_text = false,
-      maxwidth = 50,
+      mode = "symbol",
+      maxwidth = 60,
       menu = {
         nvim_lua = "",
         nvim_lsp = "",

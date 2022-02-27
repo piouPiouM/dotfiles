@@ -38,7 +38,7 @@ brew "luajit"
 brew "media-info"
 brew "n"
 brew "tree-sitter"
-brew "neovim", args: ["HEAD"]
+brew "neovim"
 brew "ninja"
 brew "pango"
 brew "par"

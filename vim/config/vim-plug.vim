@@ -437,7 +437,7 @@ Plug 'antonk52/lake.vim'
 Plug 'shaunsingh/nord.nvim'
 Plug 'maaslalani/nordbuddy'
 Plug 'EdenEast/nightfox.nvim'
-Plug 'catppuccin/nvim'
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 
 " }}}1
 
