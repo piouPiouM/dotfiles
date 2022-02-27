@@ -21,3 +21,4 @@ alias view='nvim -R'
 alias idimensions='identify -format "%f: %G\n"'
 alias samlcredential='saml2aws login --skip-prompt'
 alias nerdfonts='fc-list : family | rg -i nerd'
+alias gitui="gitui -t $XDG_CONFIG_HOME/gitui/theme-catppuccin.ron"
