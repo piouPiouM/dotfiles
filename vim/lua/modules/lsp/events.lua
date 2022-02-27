@@ -1,13 +1,12 @@
 local M = {}
 
-M.on_init = function (client)
-  vim.notify(' ' .. client.name .. ': Language Server Client successfully started!', 'info')
+M.on_init = function(client)
+  vim.notify(" " .. client.name .. ": Language Server Client successfully started!", "info")
+  -- print(vim.inspect(client.resolved_capabilities))
 end
 
 M.on_attach = function(client)
-  if client.resolved_capabilities.code_action then
-    require 'modules.lsp.lightbulb'
-  end
+  if client.resolved_capabilities.code_action then require "modules.lsp.lightbulb" end
 
   if client.resolved_capabilities.code_lens then
     vim.cmd [[
@@ -38,7 +37,7 @@ M.on_attach = function(client)
     vim.cmd [[command! Format lua vim.lsp.buf.formatting_seq_sync()]]
   end
 
-  require('modules.lsp.mappings').mappings()
+  require("modules.lsp.mappings").mappings()
 end
 
 return M

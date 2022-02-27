@@ -201,7 +201,13 @@ bcp() {
 # List all vagrant boxes available in the system including its
 # status, and try to access the selected one via ssh
 # -------------------------------------------------------------------
-vssh(){
+vssh() {
   cd $(cat ~/.vagrant.d/data/machine-index/index | jq '.machines[] | {name, vagrantfile_path, state}' | jq '.name + "," + .state  + "," + .vagrantfile_path'| sed 's/^"\(.*\)"$/\1/'| column -s, -t | sort -rk 2 | fzf | awk '{print $3}'); vagrant ssh
 }
 
+# -------------------------------------------------------------------
+# List locally available vscode-codicons
+# -------------------------------------------------------------------
+codicons() {
+  open -a firefox "file://$(npm -g prefix)/lib/node_modules/@vscode/codicons/dist/codicon.html"
+}

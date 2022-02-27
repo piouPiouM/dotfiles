@@ -1,3 +1,4 @@
+codicons
 eslint_d
 htmlhint
 name-color

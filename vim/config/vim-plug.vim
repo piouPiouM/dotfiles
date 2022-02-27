@@ -237,6 +237,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'tjdevries/astronauta.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'mortepau/codicons.nvim'
 
 " post-install the following global npm packages:
 " - eslint_d
