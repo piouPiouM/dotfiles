@@ -8,18 +8,18 @@ function! PlugRemotePlugins(info) abort
   endif
 endfunction
 
-function! PlugNpmPlugin(info) abort
+function! PlugNpmPlugin(ixnfo) abort
   !npm install
   call PlugRemotePlugins(a:info)
 endfunction
 
-Plug 'dstein64/vim-startuptime'
+" Plug 'dstein64/vim-startuptime'
 
 " }}}1
 " Section: Tmux {{{1
 
 " Note: turn on `focus-events` option in Tmux
-Plug 'tmux-plugins/vim-tmux-focus-events'
+" Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " }}}1
 " Section: Vim improvments {{{1
@@ -27,16 +27,9 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'embear/vim-localvimrc'
 Plug 'nvim-lualine/lualine.nvim'
 
-" :DimInactiveOn / :DimInactiveOff
-" :DimInactiveSyntaxOn / :DimInactiveSyntaxOff
-" :DimInactiveColorcolumnOn / :DimInactiveColorcolumnOff
-" :DimInactiveWindowOn / :DimInactiveWindowOff
-" :DimInactiveWindowReset
-" :DimInactiveBufferOn / :DimInactiveBufferOff
-" :DimInactiveBufferReset
-" Plug 'blueyed/vim-diminactive'
-
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
 
 " :MaximizerToggle - Maximize or restore windows.
 " F3 in Normal, Visual and Insert modes.
@@ -142,20 +135,6 @@ Plug 'easymotion/vim-easymotion'
 " <leader>iw
 Plug 'chaoren/vim-wordmotion'
 
-" mm to add/remove bookmark at current line
-" mi to add/edit/remove annotation at current line
-" mn to jump to next bookmark in buffer
-" mp to jump to previous bookmark in buffer
-" ma to show all bookmarks (toggle)
-" mc to clear bookmarks in current buffer only
-" mc to clear bookmarks in all buffers
-" [count]mkk to move up bookmark at current line
-" [count]mjj to move down bookmark at current line
-" [count]mg to move bookmark at current line to another line
-" :BookmarkSave <FILE_PATH> - Save all bookmarks to a file
-" :BookmarkLoad <FILE_PATH> - Load bookmarks from a file
-Plug 'MattesGroeger/vim-bookmarks'
-
 " :UndotreeToggle - Toggle undo-tree panel
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 
@@ -166,15 +145,6 @@ Plug 'gorkunov/smartpairs.vim'
 
 " Friendly welcome screen
 Plug 'mhinz/vim-startify'
-
-" M-p to cycle backward through the history of yanks
-" M-P to cycle forwards through the history of yanks
-" Plug 'maxbrunsfeld/vim-yankstack'
-
-" <leader>k to toggle highlighting of a word.
-" <leader>K to clear all highlighted words.
-" n and N to navigate through the occurrences of the word under cursor.
-" Plug 'lfv89/vim-interestingwords'
 
 " <localleader>k to highlight automatically a word under the cursor
 " <localleader>] to toggle highlight of jumpable 'tag'
@@ -194,9 +164,6 @@ Plug 'editorconfig/editorconfig-vim'
 " [range]:StripWhitespace - To clean extra whitespace
 Plug 'ntpeters/vim-better-whitespace'
 
-Plug 'rizzatti/dash.vim', {
-      \ 'on': ['Dash', 'DashKeywords', '<Plug>DashSearch', '<Plug>DashGlobalSearch']
-      \ }
 Plug 'scrooloose/nerdcommenter'
 
 " ]c to jump to next hunk
@@ -217,19 +184,6 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'FooSoft/vim-argwrap'
 
 Plug 'lukas-reineke/indent-blankline.nvim'
-
-" Auto close parentheses and repeat by dot dot dot
-" Plug 'cohama/lexima.vim'
-
-" Plug 'luochen1990/rainbow', {
-      " \ 'on': ['RainbowToggle', 'RainbowToggleOn', 'RainbowToggleOff']
-      " \ }
-
-"Plug 'vim-utils/vim-troll-stopper'
-
-" Plug 'ervandew/supertab'
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
 
 " }}}1
 " Section: LSP {{{1
@@ -253,7 +207,6 @@ Plug 'b0o/schemastore.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'kosayoda/nvim-lightbulb'
-
 
 " Completion {{{2
 
@@ -290,27 +243,11 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 " Plug '/usr/local/opt/fzf'
 " Plug 'junegunn/fzf.vim'
 
-" <leader>gi to create .gitignore files using the gitignore.io API
-"Plug 'fszymanski/fzf-gitignore', {'do': ':UpdateRemotePlugins'}
-
 " }}}1
 " Section: Syntax {{{1
 
-" Versionning {{{2
-
-" Plug 'tpope/vim-git', {
-"       \ 'for': ['git', 'gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail'],
-"       \ 'on': ['DiffGitCached'],
-"       \ }
-
-" TODO: fork it to remove the "snippets" templates
-" Plug 'gisphm/vim-gitignore', { 'for': 'gitignore' }
-
 " }}}2
 " CSS {{{2
-
-" Uses :ColorToggle for javascript and php.
-" Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'less'] }
 
 " <M-c> to display colorpicker and insert hex color
 " <M-r> to display colorpicker and insert rgb color
@@ -325,64 +262,6 @@ Plug 'KabbAmine/vCoolor.vim', {
 " JavaScript {{{2
 
 Plug 'jxnblk/vim-mdx-js'
-" Plug 'othree/javascript-libraries-syntax.vim', {
-      " \ 'for': ['javascript', 'javascript.jsx']
-      " \ }
-" Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.mustache' }
-
-" Plug 'Quramy/vim-js-pretty-template', {
-"       \ 'for': ['javascript', 'typescript']
-"       \ }
-
-" :JsDoc - Insert JSDoc if the cursor is on `function` keyword line.
-" Plug 'heavenshell/vim-jsdoc', {
-"       \ 'for': ['javascript', 'javascript.jsx', 'typescript']
-"       \ }
-
-" Plug 'styled-components/vim-styled-components', {
-"       \ 'branch': 'main',
-"       \ 'for': ['javascript', 'javascript.jsx', 'typescript']
-"       \ }
-
-" Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
-
-" Plug 'meain/vim-package-info', {
-"       \ 'do': function('PlugNpmPlugin'),
-"       \ }
-
-" }}}2
-" PHP {{{2
-
-" :Composer command wrapper around composer with smart completion
-" Plug 'noahfrederick/vim-composer', { 'for': 'php' }
-
-" <F2> - step over
-" <F3> - step into
-" <F4> - step out
-" <F6> - stop debugging (kills script)
-" <F7> - detach script from debugger
-" <F9> - run to cursor
-" <F10> - toggle line breakpoint
-" <F11> - show context variables (e.g. after "eval")
-" <F12> - evaluate variable under cursor
-" :Breakpoint <type> <args> - set a breakpoint of any type (see :help VdebugBreakpoints)
-" :VdebugEval <code> - evaluate some code and display the result
-" <Leader>e - evaluate the expression under visual highlight and display the result
-" Plug 'joonty/vdebug', { 'for': 'php' }
-
-" }}}2
-" Tabular data {{{2
-
-" Plug 'chrisbra/csv.vim', { 'for': 'csv' }
-
-" }}}2
-" Polyglot {{{2
-
-" let g:polyglot_disabled = ['elm', 'typescript']
-" Plug 'sheerun/vim-polyglot'
-
-" After vim-polyglot to avoid overriding.
-" Plug 'neoclide/jsonc.vim'
 
 " }}}2
 " Misc {{{2
@@ -397,12 +276,6 @@ Plug 'fladson/vim-kitty'
 " - to switch segment of text with predefined replacements
 " :Switch
 Plug 'AndrewRadev/switch.vim'
-
-" Table creator
-" <leader>tm - :TableModeToggle
-Plug 'dhruvasagar/vim-table-mode', {
-      \ 'on': ['TableModeToggle', 'TableModeEnable']
-      \ }
 
 " A tool for aligning text by some character.
 " [count]gl[motion][character] to add spaces to the left
@@ -429,8 +302,6 @@ Plug 'gerw/vim-HiLinkTrace', {
 
 " Pinnacle provides functions for manipulating `:highlight` groups.
 Plug 'wincent/pinnacle'
-
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 Plug 'cocopon/iceberg.vim'
 Plug 'antonk52/lake.vim'

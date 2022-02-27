@@ -2,7 +2,7 @@ local M = {}
 
 M.on_init = function(client)
   vim.notify(" " .. client.name .. ": Language Server Client successfully started!",
-             vim.log.levels.DEBUG)
+             vim.log.levels.INFO)
 end
 
 M.on_attach = function(client)

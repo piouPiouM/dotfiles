@@ -107,9 +107,7 @@ nnoremap <silent> <localleader>aw :ArgWrap<CR>
 
 " vim-lion
 nmap <localleader>a= glip=
-"vmap <leader>a= :Tabularize /=<CR>
 nmap <localleader>a: gLi{:
-"vmap <leader>a: :Tabularize /:\zs<CR>
 
 " }}}1
 
