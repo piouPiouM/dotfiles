@@ -1,49 +1,11 @@
 #!/usr/bin/env zsh
 
-unsetopt PROMPT_SP
+# `.zshrc' is sourced in interactive shells. It should contain commands to set up aliases, functions, options, key
+# bindings, etc.
 
-# XDG Specification
-export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=$HOME/.config}
-export XDG_DATA_HOME=${XDG_DATA_HOME:=$HOME/.local/share}
-export XDG_CACHE_HOME=${XDG_CACHE_HOME:=$HOME/.cache}
+HISTSIZE=20000
+SAVEHIST=10000
 
-PPM_BREW_PREFIX=/usr/local
-
-# Path
-PATH=/usr/local/bin:/usr/local/sbin:$PATH
-
-if which ruby >/dev/null && which gem >/dev/null; then
-	PATH="$($PPM_BREW_PREFIX/opt/ruby/bin/ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-	PATH="$PPM_BREW_PREFIX/opt/ruby/bin:$PATH"
-fi
-
-[ -d "$PPM_BREW_PREFIX/opt/python@2/bin" ] && PATH="$PPM_BREW_PREFIX/opt/python@2/bin:$PATH"
-
-export PATH="$XDG_DATA_HOME/bin:$HOME/bin:$PATH"
-export NODE_PATH="$PPM_BREW_PREFIX/lib/node_modules"
-export PPM_BREW_PREFIX
-
-# Homebrew
-export HOMEBREW_NO_ANALYTICS=1
-
-export EDITOR="nvim"
-export TERMINAL="kitty"
-export BROWSER="firefox"
-
-# export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-
-export CLICOLOR=1
-export GREP_OPTIONS='--color=auto'
-export GREP_COLOR='3;33'
-
-# export LESS='-iFR'
-export PAGER='less'
-
-export SVN_EDITOR=$EDITOR
-
-export LC_CTYPE=fr_FR.UTF-8
-export LC_ALL=fr_FR.UTF-8
-export LANG=fr_FR.UTF-8
 
 # -------------------------------------------------------------------
 # fzf
@@ -82,8 +44,6 @@ fi
 # jump
 # -------------------------------------------------------------------
 
-if which zoxide >/dev/null 2>&1; then
-	export _ZO_DATA_DIR=$XDG_DATA_HOME
-fi
 
 [ -s "$HOME/bin/cloud_functions.sh" ] && source "$HOME/bin/cloud_functions.sh"
+

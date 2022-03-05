@@ -1,3 +1,8 @@
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}
+
 if hash broot 2>/dev/null; then
   source $XDG_CONFIG_HOME/broot/functions.sh
 fi
@@ -13,16 +18,12 @@ topprocess() {
 # Dash functions
 # -------------------------------------------------------------------
 # Open argument in Dash
-dash() {
-  open dash://$*
+h() {
+  open -a Dash dash://"$*"
 }
 
-dman() {
-  open dash://man:$*
-}
-
-dphp() {
-  open dash://php:$*
+hman() {
+  open -a Dash dash://man:"$*"
 }
 
 # -------------------------------------------------------------------
