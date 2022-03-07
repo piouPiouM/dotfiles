@@ -3,47 +3,72 @@
 # `.zshrc' is sourced in interactive shells. It should contain commands to set up aliases, functions, options, key
 # bindings, etc.
 
-HISTSIZE=20000
-SAVEHIST=10000
+# Set editor default keymap to emacs (`-e`) or vi (`-v`)
+bindkey -v
 
+# Remove older command from the history if a duplicate is to be added.
+setopt HIST_IGNORE_ALL_DUPS
 
-# -------------------------------------------------------------------
-# fzf
-# -------------------------------------------------------------------
+# Save timestamp of command and duration.
+setopt EXTENDED_HISTORY
 
-FZF_PREWIEW_OPTS='(bat {} || highlight -O ansi -f --replace-tabs=2 {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null'
+# When trimming history, lose oldest duplicates first.
+setopt HIST_EXPIRE_DUPS_FIRST
 
-FZF_DEFAULT_OPTS='--multi --inline-info --cycle --tabstop=2 --color gutter:-1'
+# Disable spelling correction for arguments.
+unsetopt CORRECT_ALL
 
-# Iceberg theme
-FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-  --color fg:#c6c8d1,bg:#161821,hl:#e2a478,fg+:#cdd1e6,bg+:#2a3158,hl+:#e27878
-  --color info:#a093c7,prompt:#818596,spinner:#b4be82
-  --color pointer:#e27878,marker:#89b8c2,header:#6b7089
-'
-export FZF_DEFAULT_OPTS
-export FZF_CTRL_T_OPTS="--preview '${FZF_PREWIEW_OPTS}' --height 70%"
-export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+# Prompt for spelling correction of commands.
+setopt CORRECT
 
-if which rg >/dev/null 2>&1; then
-	export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgreprc
-	export FZF_DEFAULT_COMMAND='rg --files --no-messages'
-	export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
+# Customize spelling correction prompt.
+SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+
+# Remove path separator from WORDCHARS.
+WORDCHARS=${WORDCHARS//[\/]}
+
+# Disable automatic widget re-binding on each precmd. This can be set when
+# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+# Set what highlighters will be used.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
+# Set a custom path for the completion dump file.
+zstyle ':zim:completion' dumpfile "${XDG_CACHE_HOME}/zsh/.zcompdump-${ZSH_VERSION}"
+
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! "${ZIM_HOME}/init.zsh" -nt "${ZDOTDIR:-${HOME}}/.zimrc" ]]; then
+  source "${ZIM_HOME}/zimfw.zsh" init -q
 fi
 
-if which fd >/dev/null 2>&1; then
-	FD_DEFAULT_COMMAND='fd --color=always --hidden --follow --no-ignore-vcs'
-	export FZF_ALT_C_COMMAND="${FD_DEFAULT_COMMAND} --type directory"
+source "${ZIM_HOME}/init.zsh"
 
-	if [ -z "$FZF_CTRL_T_COMMAND" ]; then
-		export FZF_CTRL_T_COMMAND="${FD_DEFAULT_COMMAND} --type file --type symlink"
-	fi
+# Post-init module configuration {{{
+#
+# zsh-history-substring-search
+#
+# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# Bind up and down keys
+zmodload -F zsh/terminfo +p:terminfo
+if [[ -n ${terminfo[kcuu1]} && -n ${terminfo[kcud1]} ]]; then
+  bindkey ${terminfo[kcuu1]} history-substring-search-up
+  bindkey ${terminfo[kcud1]} history-substring-search-down
+fi
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+# }}}
+
+if which zoxide >/dev/null 2>&1; then
+  _evalcache zoxide init zsh
 fi
 
-# -------------------------------------------------------------------
-# jump
-# -------------------------------------------------------------------
-
-
-[ -s "$HOME/bin/cloud_functions.sh" ] && source "$HOME/bin/cloud_functions.sh"
+# [ -s "$HOME/bin/cloud_functions.sh" ] && source "$HOME/bin/cloud_functions.sh"
 

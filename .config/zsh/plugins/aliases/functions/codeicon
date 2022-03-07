@@ -1,0 +1,8 @@
+# -------------------------------------------------------------------
+# List locally available vscode-codicons
+# -------------------------------------------------------------------
+# vim:et sts=2 sw=2 ft=zsh
+
+codeicon() {
+  open -a firefox "file://$(npm -g prefix)/lib/node_modules/@vscode/codicons/dist/codicon.html"
+}

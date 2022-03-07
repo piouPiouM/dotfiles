@@ -1,0 +1,20 @@
+# Needed by broot because some shell commands, like `cd`,
+# have no useful effect if executed in a subshell.
+# vim:et sts=2 sw=2 ft=zsh
+
+if (( ! ${+commands[broot]} )); then
+  return 1
+fi
+
+local cmd cmd_file code
+cmd_file=$(mktemp)
+
+if broot --outcmd "$cmd_file" "$@"; then
+  cmd=$(<"$cmd_file")
+  rm -f "$cmd_file"
+  eval "$cmd"
+else
+  code=$?
+  rm -f "$cmd_file"
+  return "$code"
+fi

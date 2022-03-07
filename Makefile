@@ -89,10 +89,8 @@ ENSURE_DIRS = $(XDG_CACHE_HOME)/nvim/backup \
 			  $(XDG_CACHE_HOME)/nvim/ctrlp/mru \
 			  $(XDG_CACHE_HOME)/nvim/swap \
 			  $(XDG_CACHE_HOME)/nvim/undo \
-			  $(XDG_CACHE_HOME)/zplug \
 			  $(XDG_CACHE_HOME)/zsh \
 			  $(XDG_CONFIG_HOME)/bat \
-			  $(XDG_CONFIG_HOME)/zplug \
 			  $(XDG_DATA_HOME)/git \
 			  $(XDG_DATA_HOME)/nvim/bundle \
 			  $(XDG_DATA_HOME)/nvim/shada \
@@ -100,8 +98,7 @@ ENSURE_DIRS = $(XDG_CACHE_HOME)/nvim/backup \
 			  $(XDG_DATA_HOME)/nvim/undo \
 			  $(XDG_DATA_HOME)/nvim/view \
 			  $(XDG_DATA_HOME)/tmux \
-			  $(XDG_DATA_HOME)/z \
-			  $(XDG_DATA_HOME)/zplug \
+			  $(XDG_DATA_HOME)/zoxide \
 			  $(XDG_DATA_HOME)/zsh
 
 ## Creates the dotfiles tree structure.
@@ -120,11 +117,10 @@ DOTFILES      := $(shell find dot -type f -not -name '.*') # Flattened structure
 DEST_DOTFILES := $(addprefix ~/., $(notdir $(DOTFILES)))
 LINK_DIRS     := $(XDG_CONFIG_HOME)/git \
 								 $(XDG_CONFIG_HOME)/ranger \
-								 $(XDG_CONFIG_HOME)/zsh \
 								 $(XDG_DATA_HOME)/bin
 
 ## Generates all the symlinks.
-install-links: link-home link-dirs $(XDG_CONFIG_HOME)/zplug/packages.zsh $(XDG_CONFIG_HOME)/ripgreprc $(XDG_CONFIG_HOME)/bat/config
+install-links: link-home link-dirs $(XDG_CONFIG_HOME)/ripgreprc $(XDG_CONFIG_HOME)/bat/config
 
 ## Generates only symlinks in the Home directory.
 link-home: $(DEST_DOTFILES)
@@ -134,7 +130,6 @@ link-dirs: $(LINK_DIRS) $(XDG_CONFIG_HOME)/nvim
 
 ## Deletes all the symlinks.
 unlink-all: unlink-home unlink-dirs
-	rm -f $(XDG_CONFIG_HOME)/zplug/packages.zsh
 
 ## Deletes symlinks in the Home directory.
 unlink-home:
@@ -152,9 +147,6 @@ $(LINK_DIRS):
 
 $(XDG_CONFIG_HOME)/nvim: | $(ENSURE_DIRS)
 	ln -s $(realpath vim) $@
-
-$(XDG_CONFIG_HOME)/zplug/packages.zsh: | $(ENSURE_DIRS)
-	ln -s $(realpath zsh/packages.zsh) $@
 
 $(XDG_CONFIG_HOME)/ripgreprc: | $(ENSURE_DIRS)
 	ln -s $(realpath config/ripgreprc) $@
@@ -189,6 +181,9 @@ bin/imgls:
 
 ranger/devicons.py ranger/plugins/devicons_linemode.py:
 	@curl --silent -o $@ "https://raw.githubusercontent.com/alexanderjeurissen/ranger_devicons/master/$(notdir $@)"
+
+${XDG_CACHE_HOME}/zim/zimfw.zsh:
+	@curl -fsSL --create-dirs -o $@ "https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh"
 
 # -----------------------------------------------------------------------------
 # Target: Homebrew

@@ -1,0 +1,74 @@
+# vim:ft=zsh
+
+# -------
+# Modules
+# -------
+
+# Boost evalued tools like zoxide
+zmodule mroth/evalcache
+
+# Sets sane Zsh built-in environment options.
+zmodule environment
+
+# Provides handy git aliases and functions.
+zmodule git
+
+# Applies correct bindkeys for input events.
+zmodule input
+
+# Sets a custom terminal title.
+# zmodule termtitle
+
+# Utility aliases and functions. Adds colour to ls, grep and less.
+# TODO: use a custom plugin to do that
+zmodule utility
+
+zmodule $ZDOTDIR/plugins/aliases
+zmodule $ZDOTDIR/plugins/broot
+zmodule $ZDOTDIR/plugins/macos
+
+# Prompt {{{
+
+# Exposes to prompts how long the last command took to execute, used by asciiship.
+# zmodule duration-info
+
+# Exposes git repository status information to prompts, used by asciiship.
+# zmodule git-info
+
+# A heavily reduced, ASCII-only version of the Spaceship and Starship prompts.
+# zmodule asciiship
+
+# zmodule sindresorhus/pure --source async.zsh --source pure.zsh
+zmodule $ZDOTDIR/plugins/starship
+
+# }}}
+# Completion {{{
+
+# Additional completion definitions for Zsh.
+zmodule zsh-users/zsh-completions
+
+# Enables and configures smart and extensive tab completion.
+# completion must be sourced after zsh-users/zsh-completions
+zmodule completion
+
+# Replace zsh's default completion selection menu with fzf.
+# fzf-tab needs to be loaded after compinit, but before plugins which will wrap widgets,
+# such as zsh-autosuggestions or fast-syntax-highlighting.
+# zmodule Aloxaf/fzf-tab
+zmodule unixorn/fzf-zsh-plugin
+
+# zmodule $ZDOTDIR/plugins/fzf
+
+# Fish-like syntax highlighting for Zsh.
+# zsh-users/zsh-syntax-highlighting must be sourced after completion
+# zmodule zsh-users/zsh-syntax-highlighting
+zmodule zdharma-continuum/fast-syntax-highlighting
+
+# Fish-like history search (up arrow) for Zsh.
+# zsh-users/zsh-history-substring-search must be sourced after zsh-users/zsh-syntax-highlighting
+zmodule zsh-users/zsh-history-substring-search
+
+# Fish-like autosuggestions for Zsh.
+zmodule zsh-users/zsh-autosuggestions
+
+# }}}

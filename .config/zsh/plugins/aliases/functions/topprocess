@@ -1,0 +1,8 @@
+# -------------------------------------------------------------------
+# Display the top process in CPU usage
+# -------------------------------------------------------------------
+# vim:et sts=2 sw=2 ft=zsh
+
+topprocess() {
+  ps -xarco pid=,%cpu=,command= | head -1 | awk '{if($2!=0.0) print $3 " (" $2 "%)"}'
+}
