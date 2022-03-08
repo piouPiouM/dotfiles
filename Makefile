@@ -89,7 +89,6 @@ ENSURE_DIRS = $(XDG_CACHE_HOME)/nvim/backup \
 			  $(XDG_CACHE_HOME)/nvim/ctrlp/mru \
 			  $(XDG_CACHE_HOME)/nvim/swap \
 			  $(XDG_CACHE_HOME)/nvim/undo \
-			  $(XDG_CACHE_HOME)/zsh \
 			  $(XDG_CONFIG_HOME)/bat \
 			  $(XDG_DATA_HOME)/git \
 			  $(XDG_DATA_HOME)/nvim/bundle \
@@ -99,7 +98,6 @@ ENSURE_DIRS = $(XDG_CACHE_HOME)/nvim/backup \
 			  $(XDG_DATA_HOME)/nvim/view \
 			  $(XDG_DATA_HOME)/tmux \
 			  $(XDG_DATA_HOME)/zoxide \
-			  $(XDG_DATA_HOME)/zsh
 
 ## Creates the dotfiles tree structure.
 install-dirs: $(ENSURE_DIRS)
@@ -121,6 +119,11 @@ LINK_DIRS     := $(XDG_CONFIG_HOME)/git \
 
 ## Generates all the symlinks.
 install-links: link-home link-dirs $(XDG_CONFIG_HOME)/ripgreprc $(XDG_CONFIG_HOME)/bat/config
+
+## Install
+link-zsh:
+	@echo '$(YELLOW)Link zsh environment…$(RESET)'
+	@stow zsh
 
 ## Generates only symlinks in the Home directory.
 link-home: $(DEST_DOTFILES)

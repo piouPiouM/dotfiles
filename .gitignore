@@ -8,5 +8,5 @@ vim/autoload/plug.vim.old
 
 *.zwc
 *.zwc.old
-.config/zsh/.zcompcache
-.config/zsh/.zsh_history
+.zcompcache
+.zsh_history
