@@ -33,6 +33,7 @@ export ZIM_HOME="$XDG_CACHE_HOME/zim"
 export ZSH_EVALCACHE_DIR="$XDG_CACHE_HOME/zsh/.evalcache"
 export FZF_PATH="$XDG_CONFIG_HOME/fzf"
 export FZF_PREVIEW_ADVANCED=true
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/rc"
 
 export PPM_BREW_PREFIX=/usr/local
 export VISUAL="nvim"

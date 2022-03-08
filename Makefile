@@ -116,7 +116,7 @@ LINK_DIRS     := $(XDG_CONFIG_HOME)/git \
 								 $(XDG_DATA_HOME)/bin
 
 ## Generates all the symlinks.
-install-links: link-home link-zsh link-bash link-dirs $(XDG_CONFIG_HOME)/ripgreprc $(XDG_CONFIG_HOME)/bat/config
+install-links: link-home link-zsh link-bash link-dirs link-ripgrep $(XDG_CONFIG_HOME)/bat/config
 
 ## Generates only symlinks in the Home directory.
 link-home:
@@ -132,6 +132,11 @@ link-zsh:
 link-bash:
 	@echo '$(YELLOW)Link bash environment…$(RESET)'
 	@stow bash
+
+## Install ripgrep environment
+link-ripgrep:
+	@echo '$(YELLOW)Link ripgrep environment…$(RESET)'
+	@stow ripgrep
 
 ## Generates symlinks of directories
 link-dirs: $(LINK_DIRS) $(XDG_CONFIG_HOME)/nvim
@@ -152,9 +157,6 @@ $(LINK_DIRS):
 
 $(XDG_CONFIG_HOME)/nvim: | $(ENSURE_DIRS)
 	ln -s $(realpath vim) $@
-
-$(XDG_CONFIG_HOME)/ripgreprc: | $(ENSURE_DIRS)
-	ln -s $(realpath config/ripgreprc) $@
 
 $(XDG_CONFIG_HOME)/bat/config: | $(ENSURE_DIRS)
 	ln -s $(realpath config/bat) $@
