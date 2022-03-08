@@ -111,22 +111,27 @@ $(ENSURE_DIRS):
 
 .PHONY: install-links link-home link-dirs unlink-all unlink-home unlink-dirs
 
-DOTFILES      := $(shell find dot -type f -not -name '.*') # Flattened structure, excluding hidden files
-DEST_DOTFILES := $(addprefix ~/., $(notdir $(DOTFILES)))
 LINK_DIRS     := $(XDG_CONFIG_HOME)/git \
 								 $(XDG_CONFIG_HOME)/ranger \
 								 $(XDG_DATA_HOME)/bin
 
 ## Generates all the symlinks.
-install-links: link-home link-dirs $(XDG_CONFIG_HOME)/ripgreprc $(XDG_CONFIG_HOME)/bat/config
+install-links: link-home link-zsh link-bash link-dirs $(XDG_CONFIG_HOME)/ripgreprc $(XDG_CONFIG_HOME)/bat/config
 
-## Install
+## Generates only symlinks in the Home directory.
+link-home:
+	@echo '$(YELLOW)Link home environment…$(RESET)'
+	@stow --dotfiles dot
+
+## Install zsh environment
 link-zsh:
 	@echo '$(YELLOW)Link zsh environment…$(RESET)'
 	@stow zsh
 
-## Generates only symlinks in the Home directory.
-link-home: $(DEST_DOTFILES)
+## Install bash environment
+link-bash:
+	@echo '$(YELLOW)Link bash environment…$(RESET)'
+	@stow bash
 
 ## Generates symlinks of directories
 link-dirs: $(LINK_DIRS) $(XDG_CONFIG_HOME)/nvim
@@ -136,14 +141,11 @@ unlink-all: unlink-home unlink-dirs
 
 ## Deletes symlinks in the Home directory.
 unlink-home:
-	rm -f $(DEST_DOTFILES)
+	@stow --dotfiles --delete dot
 
 ## Deletes symlinks of directories
 unlink-dirs:
 	rm -rf $(LINK_DIRS) $(XDG_CONFIG_HOME)/nvim
-
-$(DEST_DOTFILES): | $(ENSURE_DIRS)
-	ln -s $(realpath $(filter %/$(shell echo $(notdir $@) | sed 's/^\.//'), $(DOTFILES))) $@
 
 $(LINK_DIRS):
 	ln -s $(realpath $(notdir $@)) $@
