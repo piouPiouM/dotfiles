@@ -151,6 +151,11 @@ link-kitty:
 	@echo '$(YELLOW)Link kitty environment…$(RESET)'
 	@stow kitty
 
+## Install bat environment
+link-bat:
+	@echo '$(YELLOW)Link bat environment…$(RESET)'
+	@stow bat
+
 ## Generates symlinks of directories
 link-dirs: $(LINK_DIRS) $(XDG_CONFIG_HOME)/nvim
 
