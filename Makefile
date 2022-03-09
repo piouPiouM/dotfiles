@@ -146,6 +146,11 @@ link-neovim:
 	@echo '$(YELLOW)Link neovim environment…$(RESET)'
 	@stow nvim
 
+## Install kitty environment
+link-kitty:
+	@echo '$(YELLOW)Link kitty environment…$(RESET)'
+	@stow kitty
+
 ## Generates symlinks of directories
 link-dirs: $(LINK_DIRS) $(XDG_CONFIG_HOME)/nvim
 
