@@ -161,6 +161,11 @@ link-broot:
 	@echo '$(YELLOW)Link broot environment…$(RESET)'
 	@stow broot
 
+## Install ranger environment
+link-ranger:
+	@echo '$(YELLOW)Link ranger environment…$(RESET)'
+	@stow ranger
+
 ## Generates symlinks of directories
 link-dirs: $(LINK_DIRS) $(XDG_CONFIG_HOME)/nvim
 
