@@ -141,6 +141,11 @@ link-ripgrep:
 	@echo '$(YELLOW)Link ripgrep environment…$(RESET)'
 	@stow ripgrep
 
+## Install neovim environment
+link-neovim:
+	@echo '$(YELLOW)Link neovim environment…$(RESET)'
+	@stow nvim
+
 ## Generates symlinks of directories
 link-dirs: $(LINK_DIRS) $(XDG_CONFIG_HOME)/nvim
 
