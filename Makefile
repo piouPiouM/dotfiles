@@ -90,7 +90,6 @@ ENSURE_DIRS = $(XDG_CACHE_HOME)/nvim/backup \
 			  $(XDG_CACHE_HOME)/nvim/swap \
 			  $(XDG_CACHE_HOME)/nvim/undo \
 			  $(XDG_CONFIG_HOME)/bat \
-			  $(XDG_DATA_HOME)/git \
 			  $(XDG_DATA_HOME)/nvim/bundle \
 			  $(XDG_DATA_HOME)/nvim/shada \
 			  $(XDG_DATA_HOME)/nvim/swap \
@@ -111,12 +110,11 @@ $(ENSURE_DIRS):
 
 .PHONY: install-links link-home link-dirs unlink-all unlink-home unlink-dirs
 
-LINK_DIRS     := $(XDG_CONFIG_HOME)/git \
-								 $(XDG_CONFIG_HOME)/ranger \
+LINK_DIRS     := $(XDG_CONFIG_HOME)/ranger \
 								 $(XDG_DATA_HOME)/bin
 
 ## Generates all the symlinks.
-install-links: link-home link-zsh link-bash link-dirs link-ripgrep $(XDG_CONFIG_HOME)/bat/config
+install-links: link-home link-zsh link-bash link-git link-ripgrep link-dirs link-ripgrep $(XDG_CONFIG_HOME)/bat/config
 
 ## Generates only symlinks in the Home directory.
 link-home:
@@ -132,6 +130,11 @@ link-zsh:
 link-bash:
 	@echo '$(YELLOW)Link bash environment…$(RESET)'
 	@stow bash
+
+## Install git environment
+link-git:
+	@echo '$(YELLOW)Link git environment…$(RESET)'
+	@stow git
 
 ## Install ripgrep environment
 link-ripgrep:
