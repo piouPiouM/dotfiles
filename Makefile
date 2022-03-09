@@ -156,6 +156,11 @@ link-bat:
 	@echo '$(YELLOW)Link bat environment…$(RESET)'
 	@stow bat
 
+## Install broot environment
+link-broot:
+	@echo '$(YELLOW)Link broot environment…$(RESET)'
+	@stow broot
+
 ## Generates symlinks of directories
 link-dirs: $(LINK_DIRS) $(XDG_CONFIG_HOME)/nvim
 

@@ -1,6 +1,5 @@
 sessions/
 backup/
-config/broot/launcher
 nvim/.config/nvim/autoload/plug.vim
 nvim/.config/nvim/autoload/plug.vim.old
 *.zwc
