@@ -20,6 +20,7 @@ export XDG_CACHE_HOME  := $(HOME)/.cache
 # https://stackoverflow.com/a/44221541/392725
 _n := $(findstring -n,$(firstword -$(MAKEFLAGS)))
 
+RED    := $(shell tput -Txterm setaf 1)
 GREEN  := $(shell tput -Txterm setaf 2)
 YELLOW := $(shell tput -Txterm setaf 3)
 WHITE  := $(shell tput -Txterm setaf 7)
@@ -50,6 +51,11 @@ zsh-check: export MSG_UPDATE_SHELLS := $(MSG_UPDATE_SHELLS)
 zsh-check:
 	@[ $$SHELL = "$$(brew --prefix)/bin/zsh" ] && \
 		(grep -qx $$(brew --prefix)/bin/zsh /etc/shells || echo "$$MSG_UPDATE_SHELLS")
+
+# Activate zsh as default shell.
+zsh-activate:
+	command -v zsh | sudo tee -a /etc/shells
+	chsh -s $$(brew --prefix)/bin/zsh
 
 # -----------------------------------------------------------------------------
 # Target: main
@@ -83,14 +89,7 @@ versions:
 
 .PHONY: install-dirs
 
-ENSURE_DIRS = $(XDG_CACHE_HOME)/nvim/backup \
-			  $(XDG_CACHE_HOME)/nvim/ctrlp/dir \
-			  $(XDG_CACHE_HOME)/nvim/ctrlp/hist \
-			  $(XDG_CACHE_HOME)/nvim/ctrlp/mru \
-			  $(XDG_CACHE_HOME)/nvim/swap \
-			  $(XDG_CACHE_HOME)/nvim/undo \
-			  $(XDG_CONFIG_HOME)/bat \
-			  $(XDG_DATA_HOME)/nvim/bundle \
+ENSURE_DIRS = $(XDG_DATA_HOME)/nvim/bundle \
 			  $(XDG_DATA_HOME)/nvim/shada \
 			  $(XDG_DATA_HOME)/nvim/swap \
 			  $(XDG_DATA_HOME)/nvim/undo \
@@ -110,64 +109,74 @@ $(ENSURE_DIRS):
 
 .PHONY: install-links link-home link-dirs unlink-all unlink-home unlink-dirs
 
-LINK_DIRS     := $(XDG_CONFIG_HOME)/ranger \
-								 $(XDG_DATA_HOME)/bin
-
 ## Generates all the symlinks.
-install-links: link-home link-zsh link-bash link-git link-ripgrep link-dirs link-ripgrep $(XDG_CONFIG_HOME)/bat/config
+install-links: link-bash \
+	link-bat \
+	link-bin \
+	link-broot \
+	link-git \
+	link-home \
+	link-kitty \
+	link-neovim \
+	link-ranger \
+	link-ripgrep \
+	link-zsh \
+
 
 ## Generates only symlinks in the Home directory.
 link-home:
-	@echo '$(YELLOW)Link home environment…$(RESET)'
-	@stow --dotfiles dot
+	@echo -n '$(YELLOW)Link home environment…$(RESET)'
+	@stow --dotfiles dot && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install zsh environment
 link-zsh:
-	@echo '$(YELLOW)Link zsh environment…$(RESET)'
-	@stow zsh
+	@echo -n '$(YELLOW)Link zsh environment…$(RESET)'
+	@stow zsh && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install bash environment
 link-bash:
-	@echo '$(YELLOW)Link bash environment…$(RESET)'
-	@stow bash
+	@echo -n '$(YELLOW)Link bash environment…$(RESET)'
+	@stow bash && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install git environment
 link-git:
-	@echo '$(YELLOW)Link git environment…$(RESET)'
-	@stow git
+	@echo -n '$(YELLOW)Link git environment…$(RESET)'
+	@stow git && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install ripgrep environment
 link-ripgrep:
-	@echo '$(YELLOW)Link ripgrep environment…$(RESET)'
-	@stow ripgrep
+	@echo -n '$(YELLOW)Link ripgrep environment…$(RESET)'
+	@stow ripgrep && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install neovim environment
 link-neovim:
-	@echo '$(YELLOW)Link neovim environment…$(RESET)'
-	@stow nvim
+	@echo -n '$(YELLOW)Link neovim environment…$(RESET)'
+	@stow nvim && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install kitty environment
 link-kitty:
-	@echo '$(YELLOW)Link kitty environment…$(RESET)'
-	@stow kitty
+	@echo -n '$(YELLOW)Link kitty environment…$(RESET)'
+	@stow kitty && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install bat environment
 link-bat:
-	@echo '$(YELLOW)Link bat environment…$(RESET)'
-	@stow bat
+	@echo -n '$(YELLOW)Link bat environment…$(RESET)'
+	@stow bat && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install broot environment
 link-broot:
-	@echo '$(YELLOW)Link broot environment…$(RESET)'
-	@stow broot
+	@echo -n '$(YELLOW)Link broot environment…$(RESET)'
+	@stow broot && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install ranger environment
 link-ranger:
-	@echo '$(YELLOW)Link ranger environment…$(RESET)'
-	@stow ranger
+	@echo -n '$(YELLOW)Link ranger environment…$(RESET)'
+	@stow ranger && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
-## Generates symlinks of directories
-link-dirs: $(LINK_DIRS) $(XDG_CONFIG_HOME)/nvim
+link-bin:
+	@echo -n '$(YELLOW)Link binaries…$(RESET)'
+	@mkdir -p $(XDG_DATA_HOME)/bin
+	@stow --target=$(XDG_DATA_HOME)/bin bin && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Deletes all the symlinks.
 unlink-all: unlink-home unlink-dirs
@@ -175,28 +184,6 @@ unlink-all: unlink-home unlink-dirs
 ## Deletes symlinks in the Home directory.
 unlink-home:
 	@stow --dotfiles --delete dot
-
-## Deletes symlinks of directories
-unlink-dirs:
-	rm -rf $(LINK_DIRS) $(XDG_CONFIG_HOME)/nvim
-
-$(LINK_DIRS):
-	ln -s $(realpath $(notdir $@)) $@
-
-$(XDG_CONFIG_HOME)/nvim: | $(ENSURE_DIRS)
-	ln -s $(realpath vim) $@
-
-$(XDG_CONFIG_HOME)/bat/config: | $(ENSURE_DIRS)
-	ln -s $(realpath config/bat) $@
-
-$(XDG_CONFIG_HOME)/kitty: | $(ENSURE_DIRS)
-	ln -s $(realpath config/kitty) $@
-
-$(XDG_CONFIG_HOME)/broot: | $(ENSURE_DIRS)
-	ln -s $(realpath config/broot) $@
-
-$(XDG_CONFIG_HOME)/luaformatter: | $(ENSURE_DIRS)
-	ln -s $(realpath config/luaformatter) $@
 
 # -----------------------------------------------------------------------------
 # Target: Downloads
@@ -214,7 +201,7 @@ bin/imgls:
 	@curl --silent --create-dirs -o $@ "https://iterm2.com/utilities/imgls"
 	@chmod +x $@
 
-ranger/devicons.py ranger/plugins/devicons_linemode.py:
+ranger/.config/ranger/devicons.py ranger/.config/ranger/plugins/devicons_linemode.py:
 	@curl --silent -o $@ "https://raw.githubusercontent.com/alexanderjeurissen/ranger_devicons/master/$(notdir $@)"
 
 ${XDG_CACHE_HOME}/zim/zimfw.zsh:
@@ -288,7 +275,7 @@ neovim: neovim-update neovim-dependencies neovim-plugins
 	@nvim +checkhealth
 
 ## Updates Neovim from Homebrew.
-neovim-update:
+neovim-update: | $(ENSURE_DIRS)
 	@brew upgrade --fetch-HEAD neovim || exit 0
 
 ## Updates Neovim's plugins.
