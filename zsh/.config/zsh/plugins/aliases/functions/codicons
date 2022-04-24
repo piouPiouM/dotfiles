@@ -3,6 +3,12 @@
 # -------------------------------------------------------------------
 # vim:et sts=2 sw=2 ft=zsh
 
-codeicon() {
-  open -a firefox "file://$(npm -g prefix)/lib/node_modules/@vscode/codicons/dist/codicon.html"
+codicons() {
+  local doc="file://$(npm -g prefix)/lib/node_modules/@vscode/codicons/dist/codicon.html"
+
+  if [[ $OSTYPE == "darwin*" ]] then
+    open -a firefox $doc
+  else
+    xdg-open $doc
+  fi
 }

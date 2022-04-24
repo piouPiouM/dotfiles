@@ -65,13 +65,24 @@ export LC_ALL=fr_FR.UTF-8
 export LESSCHARSET=utf-8
 
 #
+# Development languages
+#
+
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+
+#
 # Path management
 #
 
-# Eliminates duplicates in *paths
-typeset -gU cdpath fpath mailpath path
-
 path=(
-	$PPM_BREW_PREFIX/{bin,sbin}
+  $GOBIN
+  # $GOROOT/bin
+  $HOME/.luarocks/bin
+  $HOME/.cargo/bin
+	$XDG_DATA_HOME/gem/ruby/bin
 	$path
 )
+
+# Eliminates duplicates in *paths
+typeset -gU cdpath fpath mailpath path

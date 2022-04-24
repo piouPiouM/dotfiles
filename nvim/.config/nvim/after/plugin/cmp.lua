@@ -13,6 +13,8 @@ cmp.setup({
     end,
   },
   mapping = {
+    ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item()),
+    ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item()),
     ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
     ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -44,11 +46,11 @@ cmp.setup({
       maxwidth = 60,
       menu = {
         nvim_lua = "",
-        nvim_lsp = codicons.get("rocket"),
+        nvim_lsp = codicons.get("hubot"),
         calc = "",
         path = codicons.get("file-submodule"),
         treesitter = codicons.get("type-hierarchy"),
-        luasnip = codicons.get("hubot"),
+        luasnip = codicons.get("squirrel"),
         buffer = codicons.get("layers"),
       },
       symbol_map = { Snippet = codicons.get("symbol-snippet") },

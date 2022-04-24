@@ -267,6 +267,7 @@ Plug 'jxnblk/vim-mdx-js'
 " Misc {{{2
 
 Plug 'fladson/vim-kitty'
+Plug 'terminalnode/sway-vim-syntax'
 
 " }}}2
 

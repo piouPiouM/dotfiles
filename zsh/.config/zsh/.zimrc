@@ -25,7 +25,8 @@ zmodule utility
 
 zmodule $ZDOTDIR/plugins/aliases
 zmodule $ZDOTDIR/plugins/broot
-zmodule $ZDOTDIR/plugins/macos
+
+[[ $OSTYPE == "darwin*" ]] && zmodule $ZDOTDIR/plugins/macos
 
 # Prompt {{{
 

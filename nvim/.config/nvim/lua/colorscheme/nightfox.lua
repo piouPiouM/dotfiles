@@ -1,8 +1,8 @@
 local nightfox = require("nightfox")
 local M = {}
 
-M.setup = function() nightfox.setup({ fox = "nordfox", alt_nc = true }) end
+M.setup = function() nightfox.setup({ options = { dim_inactive = true } }) end
 
-M.set = function() nightfox.load() end
+M.set = function() vim.cmd("colorscheme nordfox") end
 
 return M

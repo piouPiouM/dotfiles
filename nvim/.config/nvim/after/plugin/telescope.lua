@@ -1,6 +1,8 @@
 local actions = require "telescope.actions"
 local action_layout = require "telescope.actions.layout"
 local action_state = require("telescope.actions.state")
+local codicons = require "codicons"
+local ui = require("ppm.ui")
 
 -- https://github.com/nvim-telescope/telescope.nvim/issues/1048#issuecomment-889122232
 -- TODO: breaks `symbols` builtin command
@@ -31,8 +33,8 @@ local config = {
 require"telescope".setup {
   defaults = {
     cache_picker = { num_pickers = 5 },
-    prompt_prefix = " ",
-    selection_caret = " ",
+    prompt_prefix = codicons.get("telescope") .. " ",
+    selection_caret = ui.icons.caret,
     layout_strategy = "flex",
     layout_config = {
       bottom_pane = config.bottom_pane,
@@ -72,5 +74,5 @@ require"telescope".setup {
   },
 }
 
-require"telescope".load_extension("fzf")
 
+require"telescope".load_extension("fzf")

@@ -17,6 +17,16 @@ export XDG_CACHE_HOME  := $(HOME)/.cache
 
 .PHONY: zsh-check
 
+uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
+
+ifeq ($(uname_S),Linux)
+	OS_LINUX = Yes
+endif
+
+ifeq ($(uname_S),Darwin)
+	OS_MACOS = Yes
+endif
+
 # https://stackoverflow.com/a/44221541/392725
 _n := $(findstring -n,$(firstword -$(MAKEFLAGS)))
 
@@ -96,6 +106,8 @@ ENSURE_DIRS = $(XDG_DATA_HOME)/nvim/bundle \
 			  $(XDG_DATA_HOME)/nvim/view \
 			  $(XDG_DATA_HOME)/tmux \
 			  $(XDG_DATA_HOME)/zoxide \
+			  $(XDG_CACHE_HOME)/zsh \
+			  ${HOME}/go/bin
 
 ## Creates the dotfiles tree structure.
 install-dirs: $(ENSURE_DIRS)
@@ -120,8 +132,7 @@ install-links: link-bash \
 	link-neovim \
 	link-ranger \
 	link-ripgrep \
-	link-zsh \
-
+	link-zsh
 
 ## Generates only symlinks in the Home directory.
 link-home:
@@ -178,6 +189,11 @@ link-bin:
 	@mkdir -p $(XDG_DATA_HOME)/bin
 	@stow --target=$(XDG_DATA_HOME)/bin bin && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
+## Install bat environment
+link-sway:
+	@echo -n '$(YELLOW)Link sway environment…$(RESET)'
+	@stow sway && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+
 ## Deletes all the symlinks.
 unlink-all: unlink-home unlink-dirs
 
@@ -208,9 +224,37 @@ ${XDG_CACHE_HOME}/zim/zimfw.zsh:
 	@curl -fsSL --create-dirs -o $@ "https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh"
 
 # -----------------------------------------------------------------------------
+# Target: Fonts
+# -----------------------------------------------------------------------------
+
+.PHONY: install-fonts codeicon nerd-fonts
+
+FONTS_DIR = $(XDG_DATA_HOME)/fonts
+FONTS_IA = $(FONTS_DIR)/iAWriterQuattroS-Bold.ttf \
+					 $(FONTS_DIR)/iAWriterQuattroS-BoldItalic.ttf \
+					 $(FONTS_DIR)/iAWriterQuattroS-Italic.ttf \
+					 $(FONTS_DIR)/iAWriterQuattroS-Regular.ttf
+
+## Download and install fonts
+install-fonts: codicon nerd-fonts $(FONTS_IA)
+	ifdef OS_LINUX
+		@fc-cache -f $(FONTS_DIR)
+	endif
+
+$(FONTS_IA):
+	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/iaolo/iA-Fonts/raw/master/iA%20Writer%20Quattro/Static/$(notdir $@)"
+
+codicon:
+	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/microsoft/vscode-codicons/raw/main/dist/codicon.ttf"
+
+nerd-fonts:
+	@curl -fsSL --create-dirs -o $(FONTS_DIR)/SymbolsNerdFontComplete-2048-em.ttf "https://github.com/ryanoasis/nerd-fonts/raw/master/src/glyphs/Symbols-2048-em%20Nerd%20Font%20Complete.ttf"
+
+# -----------------------------------------------------------------------------
 # Target: Homebrew
 # -----------------------------------------------------------------------------
 
+ifdef OS_MACOS
 .PHONY: brew brew-download brew-dump brew-install brew-postinstall brew-upgrade
 
 ## Install Homebrew and your packages.
@@ -247,6 +291,7 @@ brew-upgrade:
 	@brew upgrade
 	@$(call cmd_exists,fzf) && $(MAKE) fzf-update
 	@$(MAKE) brew-postinstall
+endif
 
 # -----------------------------------------------------------------------------
 # Target: npm
@@ -307,7 +352,9 @@ fzf-update:
 	@$(call cmd_exists,fzf) && $(MAKE) fzf-postinstall
 
 lua-install-packages:
+ifdef OS_MACOS
 	@$(call cmd_exists,luarocks) && brew reinstall luarocks || exit 0
+endif
 	@$(call cmd_exists,luarocks) && luarocks install --server=https://luarocks.org/dev luaformatter
 
 # -----------------------------------------------------------------------------
@@ -326,7 +373,7 @@ help:
 	@echo '  $(YELLOW)make$(RESET) $(GREEN)<target>$(RESET)'
 	@echo ''
 	@echo 'Targets:'
-	@awk '/^[a-zA-Z\-\_0-9]+:/ { \
+	@awk '/^[a-zA-Z0-9_-]+:/ { \
 		helpMessage = match(lastLine, /^## (.*)/); \
 		if (helpMessage) { \
 			helpCommand = substr($$1, 0, index($$1, ":")-1); \

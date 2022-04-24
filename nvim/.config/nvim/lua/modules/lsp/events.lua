@@ -1,7 +1,8 @@
+local ui = require("ppm.ui")
 local M = {}
 
 M.on_init = function(client)
-  vim.notify(" " .. client.name .. ": Language Server Client successfully started!",
+  vim.notify(ui.icons.info .. client.name .. ": Language Server Client successfully started!",
              vim.log.levels.INFO)
 end
 

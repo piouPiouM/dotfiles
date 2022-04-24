@@ -1,5 +1,6 @@
 sessions/
 backup/
+git/.local/share/git/config
 nvim/.config/nvim/autoload/plug.vim
 nvim/.config/nvim/autoload/plug.vim.old
 *.zwc
