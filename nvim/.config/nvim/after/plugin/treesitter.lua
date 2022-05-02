@@ -18,6 +18,7 @@ require"nvim-treesitter.configs".setup {
     "php",
     "python",
     "regex",
+    "rasi",
     "rust",
     "scss",
     "tsx",

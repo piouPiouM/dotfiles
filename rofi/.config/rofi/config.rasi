@@ -1,0 +1,19 @@
+configuration{
+    modi: [run, drun, window, "emoji:rofimoji"];
+    lines: 8;
+    /* font: "JetBrainsMono 14, Symbols Nerd Font 14"; */
+    terminal: "kitty";
+    display-drun: "  Apps ";
+    display-run: "  Run ";
+    display-window: " 﩯 Window ";
+    display-emoji: " 🌞 Emoji ";
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    sidebar-mode: true;
+    window-thumbnail: true;
+    run-shell-command: "{terminal} zsh -ic \"{cmd}\"";
+}
+
+/* @theme "catppuccin" */

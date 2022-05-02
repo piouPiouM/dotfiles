@@ -1,21 +1,26 @@
 {
-  // "layer": "top", // Waybar at top layer
-  // "position": "bottom", // Waybar position (top|bottom|left|right)
+  "layer": "bottom", // Waybar at top layer
+  "position": "top", // Waybar position (top|bottom|left|right)
+  "margin-top": 6,
+  "margin-right": 6,
+  "margin-left": 6,
   "height": 30, // Waybar height (to be removed for auto height)
   // "width": 1280, // Waybar width
-  "spacing": 4, // Gaps between modules (4px)
-  "fixed-center": false,
+  // "spacing": 4, // Gaps between modules (4px)
+  "fixed-center": true,
   // Choose the order of the modules
   "modules-left": [
     "sway/workspaces",
-    "sway/mode",
-    "custom/media"
+    "custom/player",
+    "custom/spotify",
+    "sway/mode"
   ],
   "modules-center": [
-    "sway/window"
+    "clock"
+    // "sway/window"
   ],
   "modules-right": [
-    "mpd",
+    // "mpd",
     "idle_inhibitor",
     "pulseaudio",
     "network",
@@ -23,22 +28,39 @@
     "memory",
     "temperature",
     "backlight",
-    "keyboard-state",
-    "sway/language",
+    // "keyboard-state",
+    // "sway/language",
     "battery",
-    "battery#bat2",
-    "clock",
-    "tray"
+    // "battery#bat2",
+    "tray",
+    "custom/notification"
   ],
   // Modules configuration
   "sway/workspaces": {
-    //     "disable-scroll": true,
-    //     "all-outputs": true,
+    "all-outputs": false,
+    "disable-scroll": true,
+    "persistent_workspaces": {
+      "1": [
+        "eDP-1"
+      ],
+      "2": [
+        "eDP-1"
+      ],
+      "3": [
+        "eDP-1"
+      ],
+      "4": [
+        "eDP-1"
+      ],
+      "5": [
+        "eDP-1"
+      ]
+    },
     "format": "{icon} {name}",
     "format-icons": {
-      "1": "",
-      "2": "",
-      "3": "",
+      "1": "",
+      "2": "",
+      "3": "",
       "4": "",
       "5": "",
       "urgent": "",
@@ -93,7 +115,8 @@
   },
   "tray": {
     // "icon-size": 21,
-    "spacing": 10
+    "spacing": 5,
+    "show-passive-items": true
   },
   "clock": {
     // "timezone": "America/New_York",
@@ -114,31 +137,33 @@
     // "format-critical": "{temperatureC}°C {icon}",
     "format": "{temperatureC}°C {icon}",
     "format-icons": [
-      "",
+      "",
       "",
-      ""
+      ""
     ]
   },
   "backlight": {
-    // "device": "acpi_video1",
     "format": "{percent}% {icon}",
     "format-icons": [
+      "•",
+      "☼",
+      "o",
       "",
       ""
     ]
   },
   "battery": {
     "states": {
-      // "good": 95,
-      "warning": 30,
+      "good": 80,
+      "warning": 25,
       "critical": 15
     },
     "format": "{capacity}% {icon}",
     "format-charging": "{capacity}% ",
     "format-plugged": "{capacity}% ",
     "format-alt": "{time} {icon}",
-    // "format-good": "", // An empty format will hide the module
-    // "format-full": "",
+    // "format-good": "{icon}", // An empty format will hide the module
+    "format-full": "{icon}",
     "format-icons": [
       "",
       "",
@@ -147,24 +172,20 @@
       ""
     ]
   },
-  "battery#bat2": {
-    "bat": "BAT2"
-  },
   "network": {
-    // "interface": "wlp2*", // (Optional) To force the use of this interface
-    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-wifi": "",
     "format-ethernet": "{ipaddr}/{cidr} ",
     "tooltip-format": "{ifname} via {gwaddr} ",
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "Disconnected ⚠",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    "format-alt": "{essid} ({signalStrength}%) "
   },
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
     "format": "{volume}% {icon} {format_source}",
     "format-bluetooth": "{volume}% {icon} {format_source}",
     "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
+    "format-muted": " {format_source}",
     "format-source": "{volume}% ",
     "format-source-muted": "",
     "format-icons": {
@@ -182,7 +203,21 @@
     },
     "on-click": "pavucontrol"
   },
-  "custom/media": {
+  "custom/spotify": {
+    "format": "{icon} {}",
+    "escape": true,
+    "return-type": "json",
+    "max-length": 40,
+    "interval": 30, // Remove this if your script is endless and write in loop
+    "on-click": "playerctl -p spotify play-pause",
+    "on-click-right": "killall spotify",
+    "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+    "on-scroll-up": "playerctl -p spotify next",
+    "on-scroll-down": "playerctl -p spotify previous",
+    "exec": "$XDG_CONFIG_HOME/waybar/custom_modules/mediaplayer.py --player spotify 2> /dev/null", // Script in resources/custom_modules folder
+    "exec-if": "pgrep spotify"
+  },
+  "custom/player": {
     "format": "{icon} {}",
     "return-type": "json",
     "max-length": 40,
@@ -191,7 +226,22 @@
       "default": "🎜"
     },
     "escape": true,
-    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-    // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    "exec": "$XDG_CONFIG_HOME/waybar/custom_modules/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+  },
+  "custom/notification": {
+    "tooltip": true,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "pidof swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
   }
 }

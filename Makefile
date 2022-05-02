@@ -126,18 +126,26 @@ install-links: link-bash \
 	link-bat \
 	link-bin \
 	link-broot \
+	link-environment \
 	link-git \
 	link-home \
 	link-kitty \
 	link-neovim \
 	link-ranger \
 	link-ripgrep \
-	link-zsh
+	link-rofi \
+	link-sway \
+	link-zsh \
 
 ## Generates only symlinks in the Home directory.
 link-home:
 	@echo -n '$(YELLOW)Link home environment…$(RESET)'
 	@stow --dotfiles dot && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+
+## Install environment configutation
+link-environment:
+	@echo -n '$(YELLOW)Link environment…$(RESET)'
+	@stow environment && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install zsh environment
 link-zsh:
@@ -189,10 +197,15 @@ link-bin:
 	@mkdir -p $(XDG_DATA_HOME)/bin
 	@stow --target=$(XDG_DATA_HOME)/bin bin && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
-## Install bat environment
+## Install Sway environment
 link-sway:
 	@echo -n '$(YELLOW)Link sway environment…$(RESET)'
 	@stow sway && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+
+## Install Rofi environment
+link-rofi:
+	@echo -n '$(YELLOW)Link rofi environment…$(RESET)'
+	@stow rofi && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Deletes all the symlinks.
 unlink-all: unlink-home unlink-dirs
@@ -222,6 +235,13 @@ ranger/.config/ranger/devicons.py ranger/.config/ranger/plugins/devicons_linemod
 
 ${XDG_CACHE_HOME}/zim/zimfw.zsh:
 	@curl -fsSL --create-dirs -o $@ "https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh"
+
+theme-catppuccin:
+	@echo '$(YELLOW)Download Catppuccin for Kitty$(RESET)'
+	@curl --silent -o "./kitty/.config/kitty/themes/Catppuccin.conf" "https://raw.githubusercontent.com/catppuccin/kitty/main/catppuccin.conf"
+	@echo '$(YELLOW)Download Catppuccin for Rofi$(RESET)'
+	@curl --silent --output-dir $(XDG_CONFIG_HOME)/rofi/ --remote-name "https://raw.githubusercontent.com/catppuccin/rofi/main/.config/rofi/config.rasi"
+	@curl --silent --output-dir $(XDG_DATA_HOME)/rofi/themes/ --remote-name "https://raw.githubusercontent.com/catppuccin/rofi/main/.local/share/rofi/themes/catppuccin.rasi"
 
 # -----------------------------------------------------------------------------
 # Target: Fonts

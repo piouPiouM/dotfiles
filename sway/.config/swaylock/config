@@ -2,3 +2,4 @@ ignore-empty-password
 show-failed-attempts
 show-keyboard-layout
 indicator-caps-lock
+color=1E1E2E

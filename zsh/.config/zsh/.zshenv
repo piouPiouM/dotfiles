@@ -81,6 +81,7 @@ path=(
   $HOME/.luarocks/bin
   $HOME/.cargo/bin
 	$XDG_DATA_HOME/gem/ruby/bin
+	$HOME/bin
 	$path
 )
 
