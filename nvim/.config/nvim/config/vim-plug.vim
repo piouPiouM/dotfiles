@@ -245,9 +245,6 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 " }}}1
 " Section: Syntax {{{1
 
-" }}}2
-" CSS {{{2
-
 " <M-c> to display colorpicker and insert hex color
 " <M-r> to display colorpicker and insert rgb color
 " <M-v> to display colorpicker and insert hsl color
@@ -256,19 +253,10 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'KabbAmine/vCoolor.vim', {
       \ 'for': ['css', 'scss', 'less', 'javascript', 'typescript', 'php', 'vim', 'tmux'],
       \ }
-
-" }}}2
-" JavaScript {{{2
-
 Plug 'jxnblk/vim-mdx-js'
-
-" }}}2
-" Misc {{{2
-
+Plug 'VebbNix/lf-vim'
 Plug 'fladson/vim-kitty'
 Plug 'terminalnode/sway-vim-syntax'
-
-" }}}2
 
 " }}}1
 " Section: Text Manipulation {{{1
