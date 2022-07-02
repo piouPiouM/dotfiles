@@ -7,6 +7,17 @@ local function prequire(...)
   return nil
 end
 
+M.keymap = {
+  with_desc = function(desc, ...)
+    local options = { desc = desc }
+
+    print(vim.inspect(select("#", ...)))
+    if select("#", ...) > 0 then return vim.tbl_extend("force", ..., options) end
+
+    return options
+  end,
+}
+
 M.prequire = prequire
 
 M.borders = {

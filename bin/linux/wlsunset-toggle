@@ -1,0 +1,47 @@
+#!/usr/bin/env zsh
+
+ON='enabled'
+OFF='disabled'
+
+function get_status () {
+  pidof -q wlsunset && echo $ON || echo $OFF
+}
+
+function output_json () {
+  local json='{"text":"wlsunset","alt":"%s","tooltip":"Night shift is %1$s","class":"is-%1$s"}'
+  printf "${json}" "$1"
+}
+
+while getopts "hsb" option; do
+  case $option in
+    s)
+      output_json `get_status`
+      exit 0
+      ;;
+    b)
+      update_swaybar=1
+      ;;
+    h)
+      echo "wlsunset-toggle: toggle wlsunset execution."
+      echo "Usage: -s to use with swaybar."
+      exit 0
+      ;;
+    *)
+      if [ "$OPTERR" != 1 ] || [ "${optspec:0:1}" = ":" ]; then
+        echo "Non-option argument: '-${OPTARG}'" >&2
+      fi
+      exit 1
+      ;;
+  esac
+done
+
+if [[ `get_status` = $ON ]]; then
+  killall -9 wlsunset &> /dev/null
+  [[ $update_swaybar -eq 1 ]] && output_json $OFF
+else
+  wlsunset -l 47.77 -L 4.80 &> /dev/null &
+  [[ $update_swaybar -eq 1 ]] && output_json $ON
+fi
+
+pkill -RTMIN+10 waybar
+exit 0

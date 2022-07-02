@@ -1,5 +1,15 @@
 local M = {}
 
-M.icons = { bulb = "💡", cross = "", help = "ﯭ", info = "", warn = "" }
+local codicon = {
+  bulb = "",
+  cross = "",
+  help = "",
+  info = "",
+  warn = "",
+  caret = "",
+  search = "",
+}
+
+M.icons = codicon
 
 return M

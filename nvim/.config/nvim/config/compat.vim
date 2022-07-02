@@ -19,7 +19,9 @@ set hlsearch   " Highlight search things
 set incsearch  " Make search act like search in modern browsers
 
 " Statusline
-set laststatus=2 " Always show status line.
+if not has('nvim')
+  set laststatus=2 " Always show status line.
+endif
 
 set wildmenu              " Show menu with possible tab completions.
 set tags=./tags;,tags;/

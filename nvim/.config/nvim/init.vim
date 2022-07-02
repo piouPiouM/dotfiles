@@ -9,17 +9,23 @@ set fileencoding=utf-8
 
 let mapleader=" "
 let maplocalleader="ù"
-let g:vimsyn_embed = 'l'
+let g:vimsyn_embed = 'l'  " Support embedded lua
 
 if ! has('nvim')
   set nocompatible
   source $XDG_CONFIG_HOME/nvim/config/compat.vim
 endif
 
-let g:loaded_python_provider = 0
-let g:python_host_prog  = '/usr/local/bin/python2'
-let g:python3_host_prog = '/usr/local/bin/python3'
 let g:loaded_perl_provider = 0
+
+if has('macunix')
+  let g:python_host_prog  = '/usr/local/bin/python2'
+  let g:python3_host_prog = '/usr/local/bin/python3'
+else
+  let g:loaded_python_provider = 0
+  let g:python3_host_prog = '/usr/bin/python'
+endif
+
 let g:node_host_prog = '/usr/local/bin/neovim-node-host'
 
 source $XDG_CONFIG_HOME/nvim/config/vim-plug.vim

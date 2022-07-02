@@ -1,12 +1,10 @@
-language-server
-codicons
+@vscode/codicons
 bash-language-server
 browserslist-cli
 emmet-ls
 eslint_d
 htmlhint
-name-color
-name-that-color
+language-server
 neovim
 npm
 npm-check

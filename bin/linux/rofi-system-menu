@@ -1,0 +1,41 @@
+#!/usr/bin/env zsh
+
+set -e
+set -u
+
+WM="sway"
+
+wmpid(){
+  tree="$(pstree -ps $$)"
+  tree="${tree#*$WM(}"
+	echo "${tree%%)*}"
+}
+
+all=(lockscreen logout leave renew suspend shutdown)
+
+declare -A texts
+texts[lockscreen]="lock screen"
+texts[logout]="logout"
+texts[suspend]="suspend"
+texts[leave]="leave $WM"
+texts[renew]="renew $WM"
+texts[reboot]="reboot"
+texts[shutdown]="shutdown"
+
+declare -A icons
+icons[lockscreen]="\uf023"
+icons[logout]="\uf842"
+icons[suspend]="\uf9b1"
+icons[leave]="\ufc07"
+icons[renew]="\ufc07"
+icons[reboot]="\ufc07"
+icons[shutdown]="\uf011"
+
+declare -A actions
+actions[lockscreen]="loginctl lock-session ${XDG_SESSION_ID-}"
+actions[logout]="loginctl terminate-session ${XDG_SESSION_ID-}"
+actions[suspend]="systemctl suspend"
+actions[leave]="kill -TERM "$(wmpid)""
+actions[renew]="kill -HUP "$(wmpid)""
+actions[reboot]="systemctl reboot -i"
+actions[shutdown]="systemctl poweroff -i"
