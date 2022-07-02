@@ -105,6 +105,10 @@ set tags+=./.git/tags,tags
 
 set noshowmode                               " Hide mode line text since it's already in Airline
 
+if has('nvim-0.7')
+  set laststatus=3 " Global statusline
+endif
+
 set statusline=%-3.3n\                       " buffer number
 set statusline+=%f                           " Path.
 set statusline+=%m                           " Modified flag.

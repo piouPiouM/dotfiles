@@ -189,7 +189,6 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 " Section: LSP {{{1
 
 Plug 'nvim-lua/plenary.nvim'
-Plug 'tjdevries/astronauta.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'mortepau/codicons.nvim'
 
