@@ -17,6 +17,19 @@ skip_global_compinit=1
 
 # setopt noglobalrcs
 
+local UNAME_S=$(uname -s 2>/dev/null || echo not)
+if [[ "${UNAME_S:l}" == "darwin" ]]
+then
+  export CURRENT_OS="macos"
+  export OS_MACOS=true
+elif [[ "${UNAME_S:l}" == "linux" ]]
+then
+  export CURRENT_OS="linux"
+  export OS_LINUX=true
+else
+  export CURRENT_OS="unknown"
+fi
+
 #
 # XDG Specification
 #
@@ -75,7 +88,7 @@ export GOBIN=$GOPATH/bin
 # Path management
 #
 
-export LOCAL_BIN_CURRENT_OS=[[ $OSTYPE == "darwin*" ]] && "$XDG_DATA_HOME/bin/macos" || "$XDG_DATA_HOME/bin/linux"
+# export LOCAL_BIN_CURRENT_OS=[[ $OSTYPE == "darwin*" ]] && "$XDG_DATA_HOME/bin/macos" || "$XDG_DATA_HOME/bin/linux"
 
 path=(
   $GOBIN
@@ -84,7 +97,8 @@ path=(
   $HOME/.cargo/bin
 	$XDG_DATA_HOME/gem/ruby/bin
 	$XDG_DATA_HOME/bin
-	$XDG_DATA_HOME/bin/linux
+	"$XDG_DATA_HOME/bin/${CURRENT_OS}"
+	"$HOME/.gem/ruby/2.6.0/bin"
 	$HOME/bin
 	$path
 )
