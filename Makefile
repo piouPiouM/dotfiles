@@ -214,6 +214,9 @@ unlink-all: unlink-home unlink-dirs
 unlink-home:
 	@stow --dotfiles --delete dot
 
+unlink-bin:
+	@stow --target=$(XDG_DATA_HOME)/bin --delete bin
+
 # -----------------------------------------------------------------------------
 # Target: Downloads
 # -----------------------------------------------------------------------------

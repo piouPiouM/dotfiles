@@ -11,16 +11,18 @@
   // Choose the order of the modules
   "modules-left": [
     "sway/workspaces",
-    "custom/player",
+    "custom/scratchpad-indicator",
+    // "custom/player",
     "custom/spotify",
     "sway/mode"
   ],
   "modules-center": [
-    "clock"
+    "clock",
+    "custom/notification"
     // "sway/window"
   ],
   "modules-right": [
-    // "mpd",
+    "custom/nightshift",
     "idle_inhibitor",
     "pulseaudio",
     "network",
@@ -31,9 +33,8 @@
     // "keyboard-state",
     // "sway/language",
     "battery",
-    // "battery#bat2",
     "tray",
-    "custom/notification"
+    "custom/system"
   ],
   // Modules configuration
   "sway/workspaces": {
@@ -97,7 +98,7 @@
       "on": " "
     },
     "single-icons": {
-      "on": "1 "
+      "on": " 1"
     },
     "state-icons": {
       "paused": "",
@@ -159,8 +160,8 @@
       "critical": 15
     },
     "format": "{capacity}% {icon}",
-    "format-charging": "{capacity}% ",
-    "format-plugged": "{capacity}% ",
+    "format-charging": "{capacity}%⚡",
+    "format-plugged": "{icon} ",
     "format-alt": "{time} {icon}",
     // "format-good": "{icon}", // An empty format will hide the module
     "format-full": "{icon}",
@@ -220,7 +221,7 @@
   "custom/player": {
     "format": "{icon} {}",
     "return-type": "json",
-    "max-length": 40,
+    // "max-length": 40,
     "format-icons": {
       "spotify": "",
       "default": "🎜"
@@ -232,10 +233,10 @@
     "tooltip": true,
     "format": "{icon}",
     "format-icons": {
-      "notification": "<span foreground='red'><sup></sup></span>",
-      "none": "",
-      "dnd-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-none": ""
+      "notification": "",
+      "none": "",
+      "dnd-notification": "",
+      "dnd-none": ""
     },
     "return-type": "json",
     "exec-if": "pidof swaync-client",
@@ -243,5 +244,31 @@
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true
+  },
+  "custom/system": {
+    "format": "",
+    "on-click": "rofi -show p -modi p:~/.local/share/bin/linux/rofi-power-menu",
+    "tooltip": false
+  },
+  "custom/nightshift": {
+    "format": "{icon}",
+    "format-icons": {
+      "enabled": "望",
+      "disabled": ""
+    },
+    "exec": "~/.local/share/bin/linux/wlsunset-toggle -s",
+    "on-click": "~/.local/share/bin/linux/wlsunset-toggle -b",
+    "return-type": "json",
+    "interval": "once",
+    "signal": 10,
+    "escape": true
+  },
+  "custom/scratchpad-indicator": {
+    "interval": 3,
+    "return-type": "json",
+    "exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '(recurse(.nodes[]) | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | if ($scratch_nodes|length) > 0 then { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") } else empty end'",
+    "format": "🗗 {}",
+    "on-click": "exec swaymsg 'scratchpad show'",
+    "on-click-right": "exec swaymsg 'move scratchpad'"
   }
 }

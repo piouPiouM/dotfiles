@@ -75,12 +75,16 @@ export GOBIN=$GOPATH/bin
 # Path management
 #
 
+export LOCAL_BIN_CURRENT_OS=[[ $OSTYPE == "darwin*" ]] && "$XDG_DATA_HOME/bin/macos" || "$XDG_DATA_HOME/bin/linux"
+
 path=(
   $GOBIN
   # $GOROOT/bin
   $HOME/.luarocks/bin
   $HOME/.cargo/bin
 	$XDG_DATA_HOME/gem/ruby/bin
+	$XDG_DATA_HOME/bin
+	$XDG_DATA_HOME/bin/linux
 	$HOME/bin
 	$path
 )
