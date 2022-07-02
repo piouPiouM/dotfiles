@@ -11,6 +11,9 @@ alias v="nvim"
 alias view="nvim -R"
 alias dotfiles="nvim $HOME/.dotfiles"
 
+# Files and directory
+alias ll="ls -laGH"
+
 # Tools
 alias gitui="gitui -t $XDG_CONFIG_HOME/gitui/theme-catppuccin.ron"
 alias gu="gitui"

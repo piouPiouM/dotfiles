@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function()
-  require("catppuccin").setup {
+  require("catppuccin").setup({
     term_colors = true,
     integrations = {
       gitgutter = true,
@@ -22,7 +22,8 @@ M.setup = function()
       neotree = { enabled = false },
       indent_blankline = { enabled = false },
     },
-  }
+  })
+  vim.g.catppuccin_flavour = "latte"
 end
 
 M.set = function() vim.cmd [[colorscheme catppuccin]] end

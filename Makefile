@@ -295,7 +295,7 @@ neovim-dependencies:
 # Target: applications
 # -----------------------------------------------------------------------------
 
-.PHONY: fzf-postinstall fzf-update lua-install-packages
+.PHONY: fzf-postinstall fzf-update lua-install-packages icon-kitty-dark icon-kitty-light
 
 fzf-postinstall:
 	@$$(brew --prefix)/opt/fzf/install --xdg --key-bindings --completion --no-update-rc --no-bash --no-fish
@@ -309,6 +309,16 @@ fzf-update:
 lua-install-packages:
 	@$(call cmd_exists,luarocks) && brew reinstall luarocks || exit 0
 	@$(call cmd_exists,luarocks) && luarocks install --server=https://luarocks.org/dev luaformatter
+
+icon-kitty-dark:
+	@cp ./kitty/assets/kitty-dark.icns "$$(mdfind kMDItemCFBundleIdentifier = 'net.kovidgoyal.kitty')/Contents/Resources/kitty.icns"
+	@rm /var/folders/*/*/*/com.apple.dock.iconcache
+	@killall Dock
+
+icon-kitty-light:
+	@cp ./kitty/assets/kitty-light.icns "$$(mdfind kMDItemCFBundleIdentifier = 'net.kovidgoyal.kitty')/Contents/Resources/kitty.icns"
+	@rm /var/folders/*/*/*/com.apple.dock.iconcache
+	@killall Dock
 
 # -----------------------------------------------------------------------------
 # Target: usage and help
