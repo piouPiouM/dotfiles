@@ -88,8 +88,6 @@ export GOBIN=$GOPATH/bin
 # Path management
 #
 
-# export LOCAL_BIN_CURRENT_OS=[[ $OSTYPE == "darwin*" ]] && "$XDG_DATA_HOME/bin/macos" || "$XDG_DATA_HOME/bin/linux"
-
 path=(
   $GOBIN
   # $GOROOT/bin
@@ -100,7 +98,10 @@ path=(
 	"$XDG_DATA_HOME/bin/${CURRENT_OS}"
 	"$HOME/.gem/ruby/2.6.0/bin"
 	$HOME/bin
+	$PPM_BREW_PREFIX/bin
+	$PPM_BREW_PREFIX/sbin
 	$path
+	$HOME/go/bin
 )
 
 # Eliminates duplicates in *paths

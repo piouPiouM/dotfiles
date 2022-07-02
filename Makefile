@@ -119,7 +119,7 @@ $(ENSURE_DIRS):
 # Target: symlinks
 # -----------------------------------------------------------------------------
 
-.PHONY: install-links link-home link-dirs unlink-all unlink-home unlink-dirs
+.PHONY: install-links link-home link-dirs link-lf unlink-all unlink-home unlink-dirs
 
 ## Generates all the symlinks.
 install-links: link-bash \
@@ -130,6 +130,7 @@ install-links: link-bash \
 	link-git \
 	link-home \
 	link-kitty \
+	link-lf \
 	link-neovim \
 	link-ranger \
 	link-ripgrep \
@@ -176,6 +177,11 @@ link-neovim:
 link-kitty:
 	@echo -n '$(YELLOW)Link kitty environment…$(RESET)'
 	@stow kitty && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+
+## Install lf environment
+link-lf:
+	@echo -n '$(YELLOW)Link lf environment…$(RESET)'
+	@stow lf && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install bat environment
 link-bat:
@@ -363,7 +369,7 @@ neovim-dependencies:
 # Target: applications
 # -----------------------------------------------------------------------------
 
-.PHONY: fzf-postinstall fzf-update lua-install-packages icon-kitty-dark icon-kitty-light
+.PHONY: fzf-postinstall fzf-update lua-install-packages icon-kitty-dark icon-kitty-light lf-dependencies
 
 fzf-postinstall:
 	@$$(brew --prefix)/opt/fzf/install --xdg --key-bindings --completion --no-update-rc --no-bash --no-fish
@@ -389,6 +395,9 @@ icon-kitty-light:
 	@cp ./kitty/assets/kitty-light.icns "$$(mdfind kMDItemCFBundleIdentifier = 'net.kovidgoyal.kitty')/Contents/Resources/kitty.icns"
 	@rm /var/folders/*/*/*/com.apple.dock.iconcache
 	@killall Dock
+
+lf-dependencies:
+	@env CGO_ENABLED=1 GO111MODULE=on go get -u github.com/doronbehar/pistol/cmd/pistol
 
 # -----------------------------------------------------------------------------
 # Target: usage and help

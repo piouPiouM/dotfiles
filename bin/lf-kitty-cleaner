@@ -1,0 +1,3 @@
+#!/usr/bin/env dash
+
+kitty +kitten icat --clear --silent --transfer-mode file

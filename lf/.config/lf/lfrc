@@ -1,0 +1,44 @@
+%[ $LF_LEVEL -eq 1 ] || echo "Warning: You're in a nested lf instance!"
+
+# Split words by default in zsh
+set shell /usr/local/bin/zsh
+set shellopts '-euy'
+set filesep "\n"
+
+set icons
+set drawbox
+set hidden
+
+set previewer ~/.local/share/bin/lf-kitty-preview
+set cleaner ~/.local/share/bin/lf-kitty-cleaner
+
+# Copy and move files asynchronously
+cmd paste &{{
+  set -- $(cat ${XDG_CACHE_HOME}/lf/files)
+    mode="$1"
+    shift
+  case "$mode" in
+    copy) cp -rn -- "$@" .;;
+    move) mv -n -- "$@" .;;
+  esac
+    rm ${XDG_CACHE_HOME}/lf/files
+    lf -remote "send clear"
+}}
+
+# Create directories
+cmd mkdir %mkdir -p "$@"
+map a push :mkdir<space>
+
+# New folder with selected item(s)
+cmd newfold ${{
+  set -f
+  read newd
+  printf "Directory name: "
+  mkdir -- "$newd"
+  mv -- $fx "$newd"
+}}
+map <a-n> newfold
+
+# Put lf into background
+map <c-z> $ kill -STOP $PPID
+

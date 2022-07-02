@@ -1,0 +1,15 @@
+#!/usr/bin/env dash
+file=$1
+w=$2
+h=$3
+x=$4
+y=$5
+
+case "$(file -Lb --mime-type -- "$file")" in
+  image/*)
+  kitty +kitten icat --silent --transfer-mode file --align left --place "${w}x${h}@${x}x${y}" "$file" >/dev/tty
+  exit 1
+  ;;
+esac
+
+pistol "$file"
