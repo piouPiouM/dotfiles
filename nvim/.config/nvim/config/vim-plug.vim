@@ -225,6 +225,7 @@ Plug 'rafamadriz/friendly-snippets'
 " Fuzzy Finder {{{2
 
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 
