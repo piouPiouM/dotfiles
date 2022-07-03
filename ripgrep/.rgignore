@@ -8,6 +8,7 @@ build-artifacts/
 cache/
 node_modules/
 tmp/
+.zcompcache/
 
 .DS_Store
 tags

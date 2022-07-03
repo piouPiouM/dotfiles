@@ -27,6 +27,8 @@ docker:docker-compose*.yml
 js:!*.js.snap
 --type-add
 js:!*.spec.js
+--type-add
+js:!*.int.js
 
 # Add 'drupal' type.
 --type-add
@@ -42,7 +44,7 @@ ft:*.feature
 
 # Add a 'jest tests' type
 --type-add
-jest:*.spec.js
+jest:*.{int,spec}.js
 
 # Add an global 'ignore' type, like the wildignore option in Vim.
 --type-add
