@@ -33,7 +33,7 @@ local config = {
 require"telescope".setup {
   defaults = {
     cache_picker = { num_pickers = 5 },
-    prompt_prefix = codicons.get("telescope") .. " ",
+    prompt_prefix = codicons.get("telescope", "icon") .. " ",
     selection_caret = ui.icons.caret,
     layout_strategy = "flex",
     layout_config = {
@@ -74,5 +74,5 @@ require"telescope".setup {
   },
 }
 
-
-require"telescope".load_extension("fzf")
+require("telescope").load_extension("fzf")
+require("telescope").load_extension("live_grep_args")
