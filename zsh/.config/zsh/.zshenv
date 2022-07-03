@@ -17,7 +17,7 @@ skip_global_compinit=1
 
 # setopt noglobalrcs
 
-local UNAME_S=$(uname -s 2>/dev/null || echo not)
+local UNAME_S=$(uname -s 2>/dev/null || echo "unkown")
 if [[ "${UNAME_S:l}" == "darwin" ]]
 then
   export CURRENT_OS="macos"
