@@ -59,7 +59,7 @@ require"telescope".setup {
   pickers = {
     buffers = { theme = "dropdown", ignore_current_buffer = true, sort_mru = true },
     fd = config.ivy,
-    find_files = config.ivy,
+    find_files = vim.tbl_extend("force", config.ivy, { find_command = { "rg", "--files" } }),
     oldfiles = { preview = { hide_on_startup = true } },
     lsp_code_actions = { theme = "cursor" },
     colorscheme = { enable_preview = true },
