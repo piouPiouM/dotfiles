@@ -2,5 +2,5 @@ if (( ! ${+commands[broot]} )); then
   return 1
 fi
 
-alias l='br --permissions'
-alias lg='br --permissions --show-git-info'
+alias lb='br --permissions'
+alias lbg='br --permissions --show-git-info'
