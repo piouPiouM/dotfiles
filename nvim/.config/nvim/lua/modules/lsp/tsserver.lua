@@ -1,4 +1,4 @@
-local nnoremap = vim.keymap.nnoremap
+local keymap = vim.keymap
 local M = {}
 
 M.name = "tsserver"
@@ -13,8 +13,8 @@ M.config = {
   },
   init_options = require("nvim-lsp-ts-utils").init_options,
   on_attach = function(client)
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
 
     local ts_utils = require("nvim-lsp-ts-utils")
     ts_utils.setup {
@@ -31,9 +31,9 @@ M.config = {
     ts_utils.setup_client(client)
 
     local opts = { buffer = true }
-    nnoremap { "go", ":TSLspOrganize<CR>", opts }
-    nnoremap { "gR", ":TSLspRenameFile<CR>", opts }
-    nnoremap { "gi", ":TSLspImportAll<CR>", opts }
+    keymap.set("n", "go", ":TSLspOrganize<CR>", opts)
+    keymap.set("n", "gR", ":TSLspRenameFile<CR>", opts)
+    keymap.set("n", "gi", ":TSLspImportAll<CR>", opts)
 
     require("modules.lsp.events").on_attach(client)
   end,

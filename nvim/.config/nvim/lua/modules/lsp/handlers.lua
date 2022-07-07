@@ -1,6 +1,6 @@
-local api = vim.api
-local fn = vim.fn
-local lsp = vim.lsp
+-- local api = vim.api
+-- local fn = vim.fn
+-- local lsp = vim.lsp
 
 -- lsp.handlers['textDocument/hover'] = lsp.with(lsp.handlers.hover, {
 --   border = Util.borders,
