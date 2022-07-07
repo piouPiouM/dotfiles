@@ -1,6 +1,4 @@
-if vim.g.loaded_nvim_treesitter ~= 1 then return nil end
-
-require"nvim-treesitter.configs".setup {
+require("nvim-treesitter.configs").setup {
   ensure_installed = {
     "bash",
     "comment",
@@ -8,6 +6,7 @@ require"nvim-treesitter.configs".setup {
     "dockerfile",
     "go",
     "graphql",
+    "help",
     "html",
     "javascript",
     "jsdoc",
@@ -15,10 +14,12 @@ require"nvim-treesitter.configs".setup {
     "json5",
     "jsonc",
     "lua",
+    "markdown",
+    "markdown_inline",
     "php",
     "python",
-    "regex",
     "rasi",
+    "regex",
     "rust",
     "scss",
     "tsx",

@@ -2,8 +2,8 @@ local M = {}
 
 M.config = {
   on_attach = function(client)
-    client.resolved_capabilities.document_formatting = true
-    client.resolved_capabilities.document_range_formatting = true
+    client.server_capabilities.documentFormattingProvider = true
+    client.server_capabilities.documentRangeFormattingProvider = true
   end,
 }
 

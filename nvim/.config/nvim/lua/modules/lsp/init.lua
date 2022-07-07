@@ -46,4 +46,3 @@ for name, opts in pairs(servers) do
 end
 
 require("trouble").setup {}
-

@@ -334,17 +334,17 @@ npm-install-packages:
 # Target: Neovim
 # -----------------------------------------------------------------------------
 
-.PHONY: neovim neovim-update neovim-dependencies neovim-plugins
+.PHONY: neovim neovim-update neovim-dependencies neovim-plugins neovim-treesitter
 
 neovim-dependencies: GEM_COMMAND = $(shell gem list --silent -i neovim && echo 'update' || echo 'install')
 
 ## Update the Neovim environment.
-neovim: neovim-update neovim-dependencies neovim-plugins
+neovim: neovim-update neovim-dependencies neovim-plugins neovim-treesitter
 	@nvim +checkhealth
 
 ## Updates Neovim from Homebrew.
 neovim-update: | $(ENSURE_DIRS)
-	@brew upgrade --fetch-HEAD neovim || exit 0
+	@brew upgrade --fetch-HEAD tree-sitter neovim || exit 0
 
 ## Updates Neovim's plugins.
 neovim-plugins:
@@ -352,6 +352,10 @@ neovim-plugins:
 	@tmp_file=$$(mktemp -t dotfiles); mv $$tmp_file "$${tmp_file}.ts" && tmp_file="$${tmp_file}.ts" && \
 		nvim $$tmp_file +UpdateRemotePlugins +qa && \
 		rm -f $$tmp_file
+
+## Update tree-sitter parsers.
+neovim-treesitter:
+	@nvim "+TSUninstall all" +qa
 
 ## Updates Neovim dependencies.
 neovim-dependencies:

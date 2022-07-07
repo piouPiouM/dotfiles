@@ -1,15 +1,16 @@
 local ui = require("ppm.ui")
 local M = {}
 
-M.on_init = function(client)
-  vim.notify(ui.icons.info .. client.name .. ": Language Server Client successfully started!",
-             vim.log.levels.INFO)
-end
+--[[ M.on_init = function(client)
+  vim.notify(
+      ui.icons.info .. " " .. client.name .. ": Language Server Client successfully started!",
+      vim.log.levels.INFO)
+end ]]
 
 M.on_attach = function(client)
-  if client.resolved_capabilities.code_action then require "modules.lsp.lightbulb" end
+  if client.server_capabilities.codeActionProvider then require "modules.lsp.lightbulb" end
 
-  if client.resolved_capabilities.code_lens then
+  if client.server_capabilities.code_lens then
     vim.cmd [[
     augroup CodeLens
       autocmd!
@@ -18,7 +19,7 @@ M.on_attach = function(client)
     ]]
   end
 
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     vim.cmd [[
     augroup HighlightWord
       autocmd!
@@ -28,14 +29,14 @@ M.on_attach = function(client)
     ]]
   end
 
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.documentFormattingProvider then
     vim.cmd [[
     augroup Format
       autocmd! * <buffer>
-      autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()
+      autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
     augroup END
     ]]
-    vim.cmd [[command! Format lua vim.lsp.buf.formatting_seq_sync()]]
+    vim.cmd [[command! Format lua vim.lsp.buf.format()]]
   end
 
   require("modules.lsp.mappings").mappings()

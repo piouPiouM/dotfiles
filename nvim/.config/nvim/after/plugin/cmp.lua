@@ -4,26 +4,31 @@ local prequire = require("ppm.utils").prequire
 local cmp = prequire "cmp"
 local lspkind = prequire "lspkind"
 local luasnip = prequire "luasnip"
-local codicons = require "codicons"
+local codicons = prequire "codicons"
+
+if cmp == nil then return nil end
 
 cmp.setup({
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body) -- For `luasnip` users.
+      if luasnip ~= nil then
+        luasnip.lsp_expand(args.body) -- For `luasnip` users.
+      end
     end,
   },
-  mapping = {
-    ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-    ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
-    ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-    ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+  mapping = cmp.mapping.preset.insert({
+    -- ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item()),
+    -- ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item()),
+    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-d>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete()),
     ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     ["<C-e>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
     ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-  },
+  }),
   sources = cmp.config.sources({
     -- LSP
+    { name = "nvim_lsp_signature_help" },
     { name = "nvim_lua" },
     { name = "nvim_lsp" },
     { name = "treesitter" },
@@ -60,11 +65,15 @@ cmp.setup({
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline("/", { sources = { { name = "nvim_lsp_document_symbol" }, { name = "buffer" } } })
+cmp.setup.cmdline("/", {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({ { name = "nvim_lsp_document_symbol" } }, { { name = "buffer" } }),
+})
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(":", {
   completion = { autocomplete = true },
+  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({ { name = "path" } },
-                               { { name = "cmdline", max_item_count = 20, keyword_length = 4 } }),
+    { { name = "cmdline", max_item_count = 20, keyword_length = 4 } }),
 })

@@ -1,12 +1,13 @@
 local actions = require "telescope.actions"
 local action_layout = require "telescope.actions.layout"
-local action_state = require("telescope.actions.state")
+local themes = require "telescope.themes"
+-- local action_state = require "telescope.actions.state"
 local codicons = require "codicons"
-local ui = require("ppm.ui")
+local ui = require "ppm.ui"
 
 -- https://github.com/nvim-telescope/telescope.nvim/issues/1048#issuecomment-889122232
 -- TODO: breaks `symbols` builtin command
-local custom_actions = {
+--[[ local custom_actions = {
   fzf_multi_select = function(prompt_bufnr)
     local picker = action_state.get_current_picker(prompt_bufnr)
     local num_selections = table.getn(picker:get_multi_selection())
@@ -21,7 +22,7 @@ local custom_actions = {
       actions.file_edit(prompt_bufnr)
     end
   end,
-}
+} ]]
 
 local config = {
   bottom_pane = { preview_width = 0.6 },
@@ -61,10 +62,10 @@ require"telescope".setup {
     fd = config.ivy,
     find_files = vim.tbl_extend("force", config.ivy, { find_command = { "rg", "--files" } }),
     oldfiles = { preview = { hide_on_startup = true } },
-    lsp_code_actions = { theme = "cursor" },
     colorscheme = { enable_preview = true },
   },
   extensions = {
+    ["ui-select"] = { themes.get_cursor() },
     fzf = {
       fuzzy = true,
       override_generic_sorter = true,
@@ -74,6 +75,7 @@ require"telescope".setup {
   },
 }
 
+require("telescope").load_extension("ui-select")
 require("telescope").load_extension("file_browser")
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("live_grep_args")
