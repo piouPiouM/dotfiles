@@ -1,5 +1,8 @@
 require("ppm.globals")
 
+-- enable filetype.lua
+vim.g.do_filetype_lua = 1
+
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
 
