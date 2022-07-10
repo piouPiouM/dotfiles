@@ -12,6 +12,8 @@ M.mappings = function()
   keymap.set("x", "ga", vim.lsp.buf.range_code_action, opts("Display code actions"))
   keymap.set("n", "gd", function() telescope.lsp_definitions() end, opts("List definitions"))
   keymap.set("n", "gr", vim.lsp.buf.rename, opts("Rename symbol"))
+  keymap.set("n", "gk", vim.diagnostic.goto_prev, opts("Go to previous diagnostic"))
+  keymap.set("n", "gj", vim.diagnostic.goto_next, opts("Go to next diagnostic"))
   keymap.set("n", "gD",
              function() vim.diagnostic.open_float(0, { severity_sort = true, scope = "line" }) end,
              opts("Open diagnostic", { silent = true }))
