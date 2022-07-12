@@ -12,9 +12,11 @@ end
 M.name = "sumneko_lua"
 M.config = {
   -- not working 🤔
-  on_attach = function(client)
+  on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = true
     client.server_capabilities.documentRangeFormattingProvider = true
+
+    require("nvim-navic").attach(client, bufnr)
   end,
 
   cmd = { "lua-language-server" },

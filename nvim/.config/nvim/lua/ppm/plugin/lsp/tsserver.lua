@@ -12,7 +12,7 @@ M.config = {
     "typescript.tsx",
   },
   init_options = require("nvim-lsp-ts-utils").init_options,
-  on_attach = function(client)
+  on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
 
@@ -35,7 +35,8 @@ M.config = {
     keymap.set("n", "gR", ":TSLspRenameFile<CR>", opts)
     keymap.set("n", "gi", ":TSLspImportAll<CR>", opts)
 
-    require("modules.lsp.events").on_attach(client)
+    require("nvim-navic").attach(client, bufnr)
+    require("ppm.plugin.lsp.events").on_attach(client)
   end,
 }
 

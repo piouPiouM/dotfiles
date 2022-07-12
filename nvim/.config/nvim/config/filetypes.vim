@@ -1,14 +1,5 @@
 " filetypes.vim
 
-" Section: Configuration files {{{1
-" ----------------------------
-
-augroup ft_conf
-  autocmd!
-  autocmd BufRead,BufNewFile */apache2/*.conf,*/apache2/*/.conf setlocal filetype=apache
-augroup END
-
-" }}}1
 " Section: CSS, Sass, SCSS and LessCSS {{{1
 " ------------------------------------
 

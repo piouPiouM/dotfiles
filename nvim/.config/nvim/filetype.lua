@@ -21,5 +21,9 @@ vim.filetype.add({
     ["tsconfig.json"] = "jsonc",
     ["jsconfig.json"] = "jsonc",
   },
-  pattern = { [".*/git/ignore"] = "gitignore", [".*/waybar/config"] = "jsonc" },
+  pattern = {
+    [".*/apache2/.*.conf"] = "apache2",
+    [".*/git/ignore"] = "gitignore",
+    [".*/waybar/config"] = "jsonc",
+  },
 })

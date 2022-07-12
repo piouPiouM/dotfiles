@@ -1,3 +1,4 @@
+local ui = require("ppm.ui")
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 
 for type, icon in pairs(signs) do
@@ -11,5 +12,5 @@ vim.diagnostic.config {
   severity_sort = true,
   update_in_insert = false,
   virtual_text = { prefix = "ﯭ ", spacing = 4, source = "if_many" },
-  float = { border = require"ppm.utils".borders.rounded, header = false, max_width = 80 },
+  float = { border = ui.borders.rounded, header = false, max_width = 80 },
 }

@@ -1,14 +1,7 @@
-local ui = require("ppm.ui")
 local M = {}
 
---[[ M.on_init = function(client)
-  vim.notify(
-      ui.icons.info .. " " .. client.name .. ": Language Server Client successfully started!",
-      vim.log.levels.INFO)
-end ]]
-
-M.on_attach = function(client)
-  if client.server_capabilities.codeActionProvider then require "modules.lsp.lightbulb" end
+M.on_attach = function(client, bufnr)
+  if client.server_capabilities.codeActionProvider then require("ppm.plugin.lightbulb") end
 
   if client.server_capabilities.code_lens then
     vim.cmd [[
@@ -39,7 +32,7 @@ M.on_attach = function(client)
     vim.cmd [[command! Format lua vim.lsp.buf.format()]]
   end
 
-  require("modules.lsp.mappings").mappings()
+  require("ppm.plugin.lsp.mappings").mappings(bufnr)
 end
 
 return M

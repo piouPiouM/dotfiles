@@ -23,9 +23,11 @@ M.setup = function()
       indent_blankline = { enabled = false },
     },
   })
-  vim.g.catppuccin_flavour = "latte"
 end
 
-M.set = function() vim.cmd [[colorscheme catppuccin]] end
+M.use = function()
+  vim.g.catppuccin_flavour = "latte"
+  vim.cmd [[colorscheme catppuccin]]
+end
 
 return M

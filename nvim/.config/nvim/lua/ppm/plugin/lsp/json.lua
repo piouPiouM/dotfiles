@@ -2,7 +2,7 @@ local M = {}
 
 M.name = "jsonls"
 M.config = {
-  on_attach = require("modules.lsp.events").on_attach,
+  on_attach = require("ppm.plugin.lsp.events").on_attach,
   settings = {
     json = {
       schemas = require("schemastore").json.schemas {
@@ -30,4 +30,3 @@ M.config = {
 }
 
 return M
-

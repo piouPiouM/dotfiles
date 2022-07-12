@@ -1,7 +1,7 @@
-local lspconfig = require "lspconfig"
-local events = require "modules.lsp.events"
+local lspconfig = require("lspconfig")
+local events = require("ppm.plugin.lsp.events")
 
-require "modules.lsp.diagnostic"
+require "ppm.plugin.lsp.diagnostic"
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol
                                                                      .make_client_capabilities())
@@ -19,16 +19,16 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 
 local servers = {
-  tsserver = require("modules.lsp.tsserver").config,
-  sumneko_lua = require("modules.lsp.sumneko").config,
-  jsonls = require("modules.lsp.json").config,
-  eslint = require("modules.lsp.eslint").config,
+  tsserver = require("ppm.plugin.lsp.tsserver").config,
+  sumneko_lua = require("ppm.plugin.lsp.sumneko").config,
+  jsonls = require("ppm.plugin.lsp.json").config,
+  eslint = require("ppm.plugin.lsp.eslint").config,
   html = {},
   cssls = {},
   bashls = {},
   cucumber_language_server = {},
   emmet_ls = {},
-  efm = require("modules.lsp.efm").config,
+  efm = require("ppm.plugin.lsp.efm").config,
 }
 
 for name, opts in pairs(servers) do
@@ -44,5 +44,3 @@ for name, opts in pairs(servers) do
     }, opts))
   end
 end
-
-require("trouble").setup {}
