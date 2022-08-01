@@ -24,24 +24,24 @@ endfunction
 " }}}1
 " Section: Vim improvments {{{1
 
-Plug 'embear/vim-localvimrc'
-Plug 'nvim-lualine/lualine.nvim'
+Plug 'embear/vim-localvimrc' " STATUS: migrated
+Plug 'nvim-lualine/lualine.nvim' " STATUS: migrated
 
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " STATUS: migrated
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " STATUS: migrated
 
 
 " :MaximizerToggle - Maximize or restore windows.
 " F3 in Normal, Visual and Insert modes.
-Plug 'szw/vim-maximizer'
+Plug 'szw/vim-maximizer' " STATUS: migrated
 
 "Plug 'wincent/scalpel'
-Plug 'wincent/vim-docvim'
+Plug 'wincent/vim-docvim' " STATUS: migrated
 
 " Text objects {{{2
 
 " DO NOT REMOVE
-Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-user' " STATUS: migrated
 
 " Adds text objects for word-based columns in Vim
 " ac
@@ -49,41 +49,41 @@ Plug 'kana/vim-textobj-user'
 " aC
 " iC
 " TODO: to replace with rhysd/vim-textobj-word-column
-Plug 'coderifous/textobj-word-column.vim'
+Plug 'coderifous/textobj-word-column.vim' " STATUS: migrated
 
 " a_
 " i_
-Plug 'lucapette/vim-textobj-underscore'
+Plug 'lucapette/vim-textobj-underscore' " STATUS: migrated
 
 " Provides text objects to select a block of lines which are similarly indented to the current line
 " ai to select a block of lines which are similarly indented to the current line
 " ii to select a block of lines which are similarly indented to the current line, without empty lines
 " aI
 " iI
-Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-indent' " STATUS: not used
 
 " Provides text objects to select an area which is matched to last-pattern
 " a/ to select next area (same as n)
 " i/ to select next area (same as n)
 " a? to select previous area (same as N)
 " i? to select previous area (same as N)
-Plug 'kana/vim-textobj-lastpat'
+Plug 'kana/vim-textobj-lastpat' " STATUS: not used
 
 " Provides two text objects: ix and ax
 " ix works with the inner attribute, with no surrounding whitespace
 " ax includes the whitespace before the attribute
-Plug 'whatyouhide/vim-textobj-xmlattr'
+Plug 'whatyouhide/vim-textobj-xmlattr' " STATUS: migrated
 
 " Provides two text objects: i, and a,
 " i, to inner parameter object
 " a, to a parameter object including whitespaces and comma
 " i2, is similar to a, except trailing whitespace characters (especially for first parameter)
-Plug 'sgur/vim-textobj-parameter'
+Plug 'sgur/vim-textobj-parameter' " STATUS: migrated
 
 " }}}2
 
 " <C-a>/<C-x> to increment dates, times
-Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-speeddating' " STATUS: migrated
 
 " :Remove - Delete a buffer and the file on disk simultaneously
 " :Unlink - Like :Remove, but keeps the now empty buffer
@@ -96,10 +96,10 @@ Plug 'tpope/vim-speeddating'
 " :Wall   -  Write every open window. Handy for kicking off tools like guard
 " :SudoWrite - Write a privileged file with sudo
 " :SudoEdit  - Edit a privileged file with sudo
-Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch' " STATUS: migrated
 
 " . to repeat the last command
-Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat' " STATUS: migrated
 
 " > "Hello world!"
 " cs"'
@@ -122,10 +122,10 @@ Plug 'tpope/vim-repeat'
 " > <p class="important">
 " >   Hello world!
 " > </p>
-Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround' " STATUS: migrated
 
 " <leader><leader>f
-Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion' " STATUS: to replace with hop
 
 " <leader>w
 " <leader>b
@@ -133,38 +133,38 @@ Plug 'easymotion/vim-easymotion'
 " <leader>ge
 " <leader>aw
 " <leader>iw
-Plug 'chaoren/vim-wordmotion'
+Plug 'chaoren/vim-wordmotion' " STATUS: not used
 
 " :UndotreeToggle - Toggle undo-tree panel
-Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' } " STATUS: migrated
 
 " vv to select quickly text between markers (<, >, ", ', `, (, ), [, ], {, }, t)
 "  v (after selection) to increase selection
 " <C-S-V> to cancel last smartpairs selection
-Plug 'gorkunov/smartpairs.vim'
+Plug 'gorkunov/smartpairs.vim' " STATUS: to replace with treesitter
 
 " Friendly welcome screen
-Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify' " STATUS: migrated
 
 " <localleader>k to highlight automatically a word under the cursor
 " <localleader>] to toggle highlight of jumpable 'tag'
 Plug 't9md/vim-quickhl', {
       \ 'on': ['<Plug>(quickhl-cword-toggle)', '<Plug>(quickhl-tag-toggle)']
-      \ }
+      \ } " TODO
 
 " }}}1
 " Section: Dev Tools {{{1
 " ------------------
 
-Plug 'dharanasoft/rtf-highlight', { 'on': 'RTFHighlight' }
+Plug 'dharanasoft/rtf-highlight', { 'on': 'RTFHighlight' } " TODO
 
-Plug 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim' " STATUS: migrated
 
 " :ToggleWhitespace - Toggle whitespace highlighting on/off
 " [range]:StripWhitespace - To clean extra whitespace
-Plug 'ntpeters/vim-better-whitespace'
+Plug 'ntpeters/vim-better-whitespace' " TODO
 
-Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter' " STATUS: migrated
 
 " ]c to jump to next hunk
 " [c to jump to previous hunk
@@ -175,22 +175,22 @@ Plug 'scrooloose/nerdcommenter'
 " New hunk text object:
 " ic operates on all lines in the current hunk
 " ac operates on all lines in the current hunk and any trailing empty lines
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter' " TODO
 
 " <leader>gm to display commit information of the current line
-Plug 'rhysd/git-messenger.vim'
+Plug 'rhysd/git-messenger.vim' " TODO
 
 " <leader>aw to (un)wrap function arguments, lists and dictionaries
-Plug 'FooSoft/vim-argwrap'
+Plug 'FooSoft/vim-argwrap' " TODO
 
-Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim' " TODO
 
 " }}}1
 " Section: LSP {{{1
 
-Plug 'nvim-lua/plenary.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'mortepau/codicons.nvim'
+Plug 'nvim-lua/plenary.nvim' " STATUS: migrated
+Plug 'kyazdani42/nvim-web-devicons' " STATUS: migrated
+Plug 'mortepau/codicons.nvim' " STATUS: migrated
 
 " post-install the following global npm packages:
 " - eslint_d
@@ -200,44 +200,44 @@ Plug 'mortepau/codicons.nvim'
 " - bash-language-server
 " - @cucumber/language-server
 " - emmet-ls
-Plug 'neovim/nvim-lspconfig'
-Plug 'j-hui/fidget.nvim'
-Plug 'b0o/schemastore.nvim'
-Plug 'folke/trouble.nvim'
-Plug 'simrat39/symbols-outline.nvim'
-Plug 'kosayoda/nvim-lightbulb'
+Plug 'neovim/nvim-lspconfig' " STATUS: migrated
+Plug 'j-hui/fidget.nvim' " STATUS: migrated
+Plug 'b0o/schemastore.nvim' " STATUS: migrated
+Plug 'folke/trouble.nvim' " STATUS: migrated
+Plug 'simrat39/symbols-outline.nvim' " STATUS: migrated
+Plug 'kosayoda/nvim-lightbulb' " STATUS: migrated
 
 " Completion {{{2
 
-Plug 'onsails/lspkind-nvim'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-nvim-lua'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-calc'
-Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'rafamadriz/friendly-snippets'
+Plug 'onsails/lspkind-nvim' " STATUS: migrated
+Plug 'hrsh7th/nvim-cmp' " STATUS: migrated
+Plug 'hrsh7th/cmp-nvim-lsp' " STATUS: migrated
+Plug 'hrsh7th/cmp-nvim-lua' " STATUS: migrated
+Plug 'hrsh7th/cmp-buffer' " STATUS: migrated
+Plug 'hrsh7th/cmp-cmdline' " STATUS: migrated
+Plug 'hrsh7th/cmp-path' " STATUS: migrated
+Plug 'hrsh7th/cmp-calc' " STATUS: migrated
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help' " STATUS: migrated
+Plug 'L3MON4D3/LuaSnip' " STATUS: migrated
+Plug 'saadparwaiz1/cmp_luasnip' " STATUS: migrated
+Plug 'rafamadriz/friendly-snippets' " STATUS: migrated
 
 " }}}2
 " Fuzzy Finder {{{2
 
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-ui-select.nvim'
-Plug 'nvim-telescope/telescope-file-browser.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'nvim-telescope/telescope-live-grep-args.nvim'
+Plug 'nvim-telescope/telescope.nvim' " STATUS: migrated
+Plug 'nvim-telescope/telescope-ui-select.nvim' " STATUS: migrated
+Plug 'nvim-telescope/telescope-file-browser.nvim' " STATUS: migrated
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " STATUS: migrated
+Plug 'nvim-telescope/telescope-live-grep-args.nvim' " STATUS: migrated
 
 " }}}2
 " Syntax {{{2
 
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/playground'
-Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
-Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " STATUS: migrated
+Plug 'nvim-treesitter/playground' " STATUS: migrated
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils' " STATUS: migrated
+Plug 'JoosepAlviste/nvim-ts-context-commentstring' " STATUS: migrated
 
 " }}}2
 " }}}1
@@ -256,18 +256,18 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 " :VCase - Toggle between lower/upper case for the returned hex color
 Plug 'KabbAmine/vCoolor.vim', {
       \ 'for': ['css', 'scss', 'less', 'javascript', 'typescript', 'php', 'vim', 'tmux'],
-      \ }
-Plug 'jxnblk/vim-mdx-js'
-Plug 'VebbNix/lf-vim'
-Plug 'fladson/vim-kitty'
-Plug 'terminalnode/sway-vim-syntax'
+      \ } " TODO
+Plug 'jxnblk/vim-mdx-js' " STATUS: migrated
+Plug 'VebbNix/lf-vim' " STATUS: migrated
+Plug 'fladson/vim-kitty' " STATUS: migrated
+Plug 'terminalnode/sway-vim-syntax' " STATUS: migrated
 
 " }}}1
 " Section: Text Manipulation {{{1
 
 " - to switch segment of text with predefined replacements
 " :Switch
-Plug 'AndrewRadev/switch.vim'
+Plug 'AndrewRadev/switch.vim' " STATUS: migrated
 
 " A tool for aligning text by some character.
 " [count]gl[motion][character] to add spaces to the left
@@ -275,14 +275,14 @@ Plug 'AndrewRadev/switch.vim'
 " Ex:
 "   glip=
 "   3gLi(,
-Plug 'tommcdo/vim-lion'
+Plug 'tommcdo/vim-lion' " STATUS: abandoned in favor of linters
 
 " }}}1
 " Section: Colorscheme stuff {{{1
 
 " :HexokinaseToggle to toggle the colouring
 " :HexokinaseRefresh to refresh the colouring
-Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' } " STATUS: migrated
 
 " :HLT to reveal a linked list of highlighting from the top-level down to
 "      the bottom level for the cursor position.
@@ -290,18 +290,18 @@ Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 " <leader>htl same as :HTL.
 Plug 'gerw/vim-HiLinkTrace', {
       \ 'on': 'HLT'
-      \ }
+      \ } " TODO
 
 " Pinnacle provides functions for manipulating `:highlight` groups.
-Plug 'wincent/pinnacle'
+Plug 'wincent/pinnacle' " STATUS: migrated
 
-Plug 'cocopon/iceberg.vim'
-Plug 'antonk52/lake.vim'
+Plug 'cocopon/iceberg.vim' " TODO
+Plug 'antonk52/lake.vim' " TODO
 " Plug 'crispgm/nord-vim'
-Plug 'shaunsingh/nord.nvim'
-Plug 'maaslalani/nordbuddy'
-Plug 'EdenEast/nightfox.nvim'
-Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+Plug 'shaunsingh/nord.nvim' " STATUS: migrated
+Plug 'maaslalani/nordbuddy' " STATUS: migrated
+Plug 'EdenEast/nightfox.nvim' " STATUS: migrated
+Plug 'catppuccin/nvim', {'as': 'catppuccin'} " STATUS: migrated
 
 " }}}1
 

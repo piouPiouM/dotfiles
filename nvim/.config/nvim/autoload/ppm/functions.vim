@@ -29,7 +29,7 @@ function! ppm#functions#plug_gx()
   let cfile = expand('<cfile>')
   let fname = expand(exists("g:netrw_gx") ? g:netrw_gx : cfile)
 
-  if getline('.') =~ '^Plug\s'
+  if getline('.') =~ '\v^\s*<(Plug|use)>'
     if cfile !~ 'github\.com' && !filereadable(cfile)
       let fname = printf('https://github.com/%s', cfile)
     endif
