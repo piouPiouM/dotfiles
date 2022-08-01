@@ -142,6 +142,12 @@ return require("packer").startup({
         config = function() require("goto-preview").setup { default_mappings = true } end,
       },
       {
+        "SmiteshP/nvim-navic",
+        requires = "neovim/nvim-lspconfig",
+        module = "nvim-navic",
+        config = config("navic"),
+      },
+      {
         -- TODO: archived project. Replaced by jose-elias-alvarez/typescript.nvim
         "jose-elias-alvarez/nvim-lsp-ts-utils",
         requires = { "neovim/nvim-lspconfig", "nvim-lua/plenary.nvim" },
