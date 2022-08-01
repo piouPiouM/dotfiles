@@ -15,7 +15,11 @@ return require("packer").startup({
     }
 
     -- Friendly welcome screen
-    use "mhinz/vim-startify"
+    use {
+      "goolord/alpha-nvim",
+      requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons" },
+      config = config("alpha"),
+    }
 
     use { "nvim-lualine/lualine.nvim", config = config("lualine") }
 
