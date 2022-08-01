@@ -218,7 +218,7 @@ return require("packer").startup({
 
     -- Git
     use {
-      "airblade/vim-gitgutter",
+      { "lewis6991/gitsigns.nvim", config = config("gitsigns") },
       { "rhysd/git-messenger.vim", keys = { { "n", "<leader>gm" } }, cmd = "GitMessenger" },
     }
 
