@@ -203,12 +203,12 @@ return require("packer").startup({
       },
     }
 
-    -- TODO: may be replaced by monaqa/dial.nvim 🤔
     use {
-      -- Increment/decrement dates, times
-      { "tpope/vim-speeddating", keys = { { "n", "C-a" }, { "n", "C-x" } } },
-      -- Switch text with predefined replacements
-      { "AndrewRadev/switch.vim", cmd = "Switch", keys = { "n", "-" }, config = config("switch") },
+      "monaqa/dial.nvim",
+      requires = { "nvim-lua/plenary.nvim" },
+      setup = config("dial_setup"),
+      config = config("dial"),
+      keys = { "<C-a>", "<C-x>", "g<C-a>", "g<C-x>" },
     }
 
     use "tpope/vim-surround"
