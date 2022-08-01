@@ -17,11 +17,11 @@ endfunction
 
 if v:progname !=# 'vi'
   if has('autocmd')
-    augroup PpmColors
-      autocmd!
-      autocmd VimEnter,ColorScheme * call s:AfterColors()
-      autocmd VimEnter,ColorScheme * silent! call s:UnderlineSearchGroup()
-    augroup END
+    " augroup PpmColors
+    "   autocmd!
+    "   autocmd VimEnter,ColorScheme * call s:AfterColors()
+    "   autocmd VimEnter,ColorScheme * silent! call s:UnderlineSearchGroup()
+    " augroup END
   endif
 endif
 

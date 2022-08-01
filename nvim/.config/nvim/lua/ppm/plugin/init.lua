@@ -261,6 +261,12 @@ return require("packer").startup({
       config = function() require("ppm.colorscheme.nightfox").setup() end,
       run = ":NightfoxCompile",
     }
+    use {
+      "rose-pine/neovim",
+      as = "rose-pine",
+      tag = "v1.*",
+      config = function() require("ppm.colorscheme.rose-pine").setup() end,
+    }
   end,
   config = {
     display = { open_fn = function() return require("packer.util").float({ border = "single" }) end },

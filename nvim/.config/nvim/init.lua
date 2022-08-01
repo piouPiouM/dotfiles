@@ -58,7 +58,8 @@ cmd [[syntax enable]]
 --   source $XDG_DATA_HOME/nvim/init.vim
 -- end
 
-opt.diffopt:append { "algorithm:patience" }
+opt.diffopt:append{ "algorithm:patience" }
 opt.background = "dark"
 
-require("ppm.colorscheme.catppuccin").use()
+-- require("ppm.colorscheme.catppuccin").use()
+require("ppm.colorscheme.rose-pine").use()
