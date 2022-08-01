@@ -11,6 +11,8 @@ export XDG_CONFIG_HOME := $(HOME)/.config
 export XDG_DATA_HOME   := $(HOME)/.local/share
 export XDG_CACHE_HOME  := $(HOME)/.cache
 
+NIGHTFOX_THEME_PATH := "$(XDG_DATA_HOME)/nvim/site/pack/packer/start/nightfox.nvim/extra"
+
 # -----------------------------------------------------------------------------
 # Utilities
 # -----------------------------------------------------------------------------
@@ -245,6 +247,15 @@ theme-catppuccin:
 	@echo '$(YELLOW)Download Catppuccin for Rofi$(RESET)'
 	@curl --silent --output-dir $(XDG_CONFIG_HOME)/rofi/ --remote-name "https://raw.githubusercontent.com/catppuccin/rofi/main/.config/rofi/config.rasi"
 	@curl --silent --output-dir $(XDG_DATA_HOME)/rofi/themes/ --remote-name "https://raw.githubusercontent.com/catppuccin/rofi/main/.local/share/rofi/themes/catppuccin.rasi"
+
+theme-nightfox:
+	@echo '$(YELLOW)Install Nightfox for Kitty from Neovim$(RESET)'
+	@cp "$(NIGHTFOX_THEME_PATH)/dawnfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Dawnfox.conf"
+	@cp "$(NIGHTFOX_THEME_PATH)/dayfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Dayfox.conf"
+	@cp "$(NIGHTFOX_THEME_PATH)/duskfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Duskfox.conf"
+	@cp "$(NIGHTFOX_THEME_PATH)/nightfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Nightfox.conf"
+	@cp "$(NIGHTFOX_THEME_PATH)/nordfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Nordfox.conf"
+	@cp "$(NIGHTFOX_THEME_PATH)/terafox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Terafox.conf"
 
 # -----------------------------------------------------------------------------
 # Target: Fonts
