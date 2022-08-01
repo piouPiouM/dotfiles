@@ -211,10 +211,9 @@ return require("packer").startup({
       keys = { "<C-a>", "<C-x>", "g<C-a>", "g<C-x>" },
     }
 
-    use "tpope/vim-surround"
+    use { "kylechui/nvim-surround", config = config("nvim-surround") }
 
     -- TODO consider wellle/targets.vim
-    -- TODO consider machakann/vim-sandwich
 
     -- Git
     use {
