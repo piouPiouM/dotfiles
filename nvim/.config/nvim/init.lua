@@ -26,18 +26,16 @@ if not status then vim.notify("Error requiring packer_compiled.lua: run PackerSy
 
 g.node_host_prog = "/usr/local/bin/neovim-node-host"
 
-if fn.has("macunix") then
+if fn.has("macunix") == 1 then
   g.python_host_prog = "/usr/local/bin/python2"
   g.python3_host_prog = "/usr/local/bin/python3"
 else
-  g.python3_host_prog = "/usr/bin/python"
+  g.python3_host_prog = "/usr/bin/python3"
 end
 
 -- }}}
 
 require("ppm.plugin")
-
--- cmd [[source $XDG_CONFIG_HOME/nvim/config/vim-plug.vim]]
 
 cmd [[
   runtime! lua/ppm/setup/disable-builtin.lua
