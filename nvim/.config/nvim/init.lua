@@ -5,10 +5,6 @@ local opt = vim.opt
 local cmd = vim.cmd
 local fn = vim.fn
 
--- Enable filetype.lua and disable filetype.vim
-g.do_filetype_lua = 1
-g.did_load_filetypes = 0
-
 require("ppm.setup.globals")
 
 opt.encoding = "utf-8"
