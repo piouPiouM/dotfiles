@@ -29,6 +29,18 @@ return require("packer").startup({
       { "scrooloose/nerdtree", cmd = "NERDTreeToggle" },
       { "tiagofumo/vim-nerdtree-syntax-highlight", after = "nerdtree", opt = true },
     }
+    use {
+      "nvim-neo-tree/neo-tree.nvim",
+      branch = "v2.x",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+        "MunifTanjim/nui.nvim",
+      },
+      setup = config("neotree_setup"),
+      config = config("neotree"),
+      cmd = { "Neotree" },
+    }
 
     -- Maximize or restore windows.
     use { "szw/vim-maximizer", cmd = "MaximizerToggle", keys = { { "n", "<F3>" } } }
