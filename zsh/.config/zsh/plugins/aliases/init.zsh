@@ -21,3 +21,4 @@ alias idimensions='identify -format "%f: %G\n"'
 alias nerdfonts='fc-list : family | rg -i nerd'
 alias samlcredential='saml2aws login --skip-prompt'
 alias zim="zimfw"
+alias gpg-switch-yubikey='gpg-connect-agent "scd serialno" "learn --force" /bye'
