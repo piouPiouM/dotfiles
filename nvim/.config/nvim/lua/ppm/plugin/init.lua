@@ -263,7 +263,6 @@ return require("packer").startup({
     use {
       "rose-pine/neovim",
       as = "rose-pine",
-      tag = "v1.*",
       config = function() require("ppm.colorscheme.rose-pine").setup() end,
     }
   end,
