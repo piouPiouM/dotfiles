@@ -10,7 +10,11 @@ return require("packer").startup({
 
     -- Icons
     use {
-      { "kyazdani42/nvim-web-devicons", config = config("web-devicons") },
+      {
+        "kyazdani42/nvim-web-devicons",
+        config = config("web-devicons"),
+        module = "nvim-web-devicons",
+      },
       "mortepau/codicons.nvim",
     }
 
@@ -52,6 +56,7 @@ return require("packer").startup({
         requires = {
           "RRethy/nvim-treesitter-textsubjects",
           "JoosepAlviste/nvim-ts-context-commentstring",
+          "windwp/nvim-ts-autotag",
         },
         run = ":TSUpdate",
         config = config("treesitter"),
@@ -59,12 +64,13 @@ return require("packer").startup({
       { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
     }
 
+    use { "lukas-reineke/indent-blankline.nvim", config = config("indent-blankline") }
     use "preservim/nerdcommenter" -- TODO: replace with numToStr/Comment.nvim
     use {
-      "RRethy/vim-hexokinase",
-      run = "make hexokinase",
-      config = config("hexokinase"),
+      "NvChad/nvim-colorizer.lua",
+      config = config("colorizer"),
       ft = { "css", "scss", "sass", "less", "javascript", "typescript", "vim", "lua", "markdown" },
+      cmd = "ColorizerToggle",
     }
 
     -- Fuzzy Finder
@@ -102,6 +108,10 @@ return require("packer").startup({
       { "nvim-telescope/telescope-symbols.nvim", opt = true },
       { "nvim-telescope/telescope-ui-select.nvim", opt = true },
     }
+
+    -- use { "camspiers/snap", rocks = { "fzy" } }
+    -- The project seems to be on pause :/
+    -- use { "camspiers/snap", config = config("snap") }
 
     -- Completion
     use { "b0o/schemastore.nvim", module = "schemastore" }
@@ -226,7 +236,9 @@ return require("packer").startup({
       requires = { "nvim-lua/plenary.nvim" },
       setup = config("dial_setup"),
       config = config("dial"),
-      keys = { "<C-a>", "<C-x>", "g<C-a>", "g<C-x>" },
+      -- keys = { "<C-a>", "<C-x>", "g<C-a>", "g<C-x>" },
+      -- cmd = { "DialIncrement" },
+      module = "dial.map",
     }
 
     use { "kylechui/nvim-surround", config = config("nvim-surround") }

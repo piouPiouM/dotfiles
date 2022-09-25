@@ -3,11 +3,11 @@ local M = {}
 M.name = "efm"
 
 local eslint = {
-  lintCommand = "eslint_d --no-color --format unix --stdin --stdin-filename ${INPUT}",
+  lintCommand = "eslint_d --cache --no-color --format unix --stdin --stdin-filename ${INPUT}",
   lintStdin = true,
   lintFormats = { "%f:%l:%c: %m" },
   lintIgnoreExitCode = true,
-  formatCommand = "eslint_d --no-color --fix-to-stdout --stdin --stdin-filename ${INPUT}",
+  formatCommand = "eslint_d --cache --no-color --fix-to-stdout --stdin --stdin-filename ${INPUT}",
   formatStdin = true,
 }
 

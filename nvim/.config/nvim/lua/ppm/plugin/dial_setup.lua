@@ -5,12 +5,17 @@ local u = require("ppm.utils")
 
 -- }
 
-u.nmap("<C-a>", "<Plug>(dial-increment)")
-u.nmap("<C-x>", "<Plug>(dial-decrement)")
-u.vmap("<C-a>", "<Plug>(dial-increment)")
-u.vmap("<C-x>", "<Plug>(dial-decrement)")
-u.vmap("g<C-a>", "g<Plug>(dial-increment)")
-u.vmap("g<C-x>", "g<Plug>(dial-decrement)")
+u.nmap("<C-a>", require("dial.map").inc_normal())
+u.nmap("<C-x>", require("dial.map").dec_normal())
+u.vmap("<C-a>", require("dial.map").inc_visual())
+u.vmap("<C-x>", require("dial.map").dec_visual())
+u.vmap("g<C-a>", require("dial.map").inc_gvisual())
+u.vmap("g<C-x>", require("dial.map").dec_gvisual())
+
+-- u.nmap("-", require("dial.map").inc_normal("case"))
+-- u.nmap("_", require("dial.map").dec_normal("case"))
+-- u.vmap("-", require("dial.map").inc_visual("case"))
+-- u.vmap("_", require("dial.map").dec_visual("case"))
 
 -- vim.api.nvim_create_autocmd("FileType", {
 --   pattern = {"typescript", "javascript", "css", "scss", "sass" },

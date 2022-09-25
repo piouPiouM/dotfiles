@@ -7,11 +7,12 @@ local edges = augend.constant.new({
 })
 
 local boundaries = augend.constant.new(
-                       { elements = { "first", "last" }, word = true, cyclic = true })
+  { elements = { "first", "last" }, word = true, cyclic = true })
 
 local onOff = augend.constant.new({ elements = { "on", "off" }, word = true, cyclic = true })
+local yesNo = augend.constant.new({ elements = { "yes", "no" }, word = true, cyclic = true })
 
-local commons = {
+local common = {
   augend.constant.alias.Alpha,
   augend.constant.alias.alpha,
   augend.constant.alias.bool,
@@ -21,9 +22,16 @@ local commons = {
   augend.semver.alias.semver,
   boundaries,
   onOff,
+  yesNo,
 }
 
 require("dial.config").augends:register_group({
-  default = commons,
-  front = vim.tbl_extend("force", commons, { edges }),
+  default = common,
+  front = vim.tbl_extend("force", common, { edges }),
+  case = {
+    augend.case.new({
+      types = { "camelCase", "snake_case", "kebab-case", "PascalCase", "SCREAMING_SNAKE_CASE" },
+      cyclic = true,
+    }),
+  },
 })

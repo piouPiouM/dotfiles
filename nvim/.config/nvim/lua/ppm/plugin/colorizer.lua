@@ -1,4 +1,5 @@
-vim.g.Hexokinase_ftEnabled = {
+require("colorizer").setup({
+  "!*",
   "css",
   "scss",
   "sass",
@@ -8,4 +9,4 @@ vim.g.Hexokinase_ftEnabled = {
   "vim",
   "lua",
   "markdown",
-}
+})

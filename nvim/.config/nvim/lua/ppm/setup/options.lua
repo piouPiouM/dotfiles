@@ -1,5 +1,6 @@
 local fn = vim.fn
 local opt = vim.opt
+local wo = vim.wo
 
 opt.hidden = true -- Don't require saving before editing another file.
 opt.swapfile = false
@@ -58,6 +59,7 @@ opt.history = 300
 opt.list = true -- Show invisible characters.
 opt.listchars = { eol = "¬", extends = "❯", precedes = "❮", nbsp = "․", tab = "▸ " }
 opt.showbreak = "↪"
+wo.fillchars = "eob: " -- Hide the end of buffer tilde.
 
 -- Used by `gf` to follow ES6 import. `Ctrl-o` to come back.
 opt.suffixesadd = { ".js", ".jsx", ".json", ".ts", ".tsx.styl", ".css", ".scss", ".sass" }

@@ -18,8 +18,12 @@ require"lualine".setup {
   },
   sections = {
     lualine_a = { { "mode", fmt = fmt_mode } },
-    lualine_b = { "branch", "diff", { "diagnostics", sources = { "nvim_lsp", "coc" } } },
-    lualine_c = { "filename" },
+    lualine_b = {
+      "branch",
+      "diff",
+      { "diagnostics", sources = { "nvim_diagnostic", "nvim_lsp" }, sections = { "error", "warn" } },
+    },
+    lualine_c = { { "filename", file_status = true, path = 3 } },
     lualine_x = {},
     lualine_y = { "encoding", "fileformat", "filetype" },
     lualine_z = { "location" },
