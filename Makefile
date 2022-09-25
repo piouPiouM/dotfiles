@@ -257,6 +257,9 @@ theme-nightfox:
 	@cp "$(NIGHTFOX_THEME_PATH)/nordfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Nordfox.conf"
 	@cp "$(NIGHTFOX_THEME_PATH)/terafox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Terafox.conf"
 
+download-dictionaries:
+	 @curl --silent --create-dirs --output-dir $(XDG_DATA_HOME)/dictionaries/ --output "fr.wordlist" "https://raw.githubusercontent.com/redacted/XKCD-password-generator/master/xkcdpass/static/fr-corrected.txt" && sed -i '' 's@c/@ç@g' "$(XDG_DATA_HOME)/dictionaries/fr.wordlist"
+
 # -----------------------------------------------------------------------------
 # Target: Fonts
 # -----------------------------------------------------------------------------
