@@ -12,8 +12,13 @@ M.map = function(mode, target, source, desc, ...)
   vim.keymap.set(mode, target, source, get_map_options(desc, ...))
 end
 
+M.quickmap = function(mode, keymap, source, ...)
+  vim.keymap.set(mode, keymap.key, source, get_map_options(keymap.desc or nil, ...))
+end
+
 for _, mode in ipairs({ "n", "i", "v", "o", "x", "t", "c" }) do
   M[mode .. "map"] = function(...) M.map(mode, ...) end
+  M[mode .. "quickmap"] = function(...) M.quickmap(mode, ...) end
 end
 
 M.buf_map = function(bufnr, mode, target, source, desc, ...)

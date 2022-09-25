@@ -1,7 +1,7 @@
 local M = {}
 
 M.on_attach = function(client, bufnr)
-  if client.server_capabilities.codeActionProvider then require("ppm.plugin.lightbulb") end
+  -- if client.server_capabilities.codeActionProvider then require("ppm.plugin.lightbulb") end
 
   if client.server_capabilities.code_lens then
     vim.cmd [[

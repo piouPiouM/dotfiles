@@ -127,38 +127,44 @@ return require("packer").startup({
     use {
       { "j-hui/fidget.nvim", config = config("fidget") },
       { "neovim/nvim-lspconfig", config = config("lsp") },
-      "onsails/lspkind-nvim",
-      { "simrat39/symbols-outline.nvim", cmd = { "SymbolsOutline", "SymbolsOutlineOpen" } },
       {
-        "kosayoda/nvim-lightbulb",
-        requires = "antoinemadec/FixCursorHold.nvim",
-        setup = config("lightbulb_setup"),
-        config = config("lightbulb"),
-        module = "ppm.plugin.lightbulb",
+        "glepnir/lspsaga.nvim",
+        branch = "main",
+        setup = config("lspsaga_setup"),
+        config = config("lspsaga"),
       },
+      "onsails/lspkind-nvim",
+      -- { "simrat39/symbols-outline.nvim", cmd = { "SymbolsOutline", "SymbolsOutlineOpen" } },
+      -- {
+      --   "kosayoda/nvim-lightbulb",
+      --   requires = "antoinemadec/FixCursorHold.nvim",
+      --   setup = config("lightbulb_setup"),
+      --   config = config("lightbulb"),
+      --   module = "ppm.plugin.lightbulb",
+      -- },
       {
         "folke/trouble.nvim",
         cmd = { "Trouble", "TroubleToggle" },
         module = "trouble",
         config = function() require("trouble").setup {} end,
       },
-      {
-        "rmagatti/goto-preview",
-        -- after = "telescope",
-        keys = {
-          "gpd", -- Preview definition
-          "gpi", -- Preview inmplementation
-          "gpr", -- Preview references in Telescope
-          "gP", -- Close all preview floating windows
-        },
-        config = function() require("goto-preview").setup { default_mappings = true } end,
-      },
-      {
-        "SmiteshP/nvim-navic",
-        requires = "neovim/nvim-lspconfig",
-        module = "nvim-navic",
-        config = config("navic"),
-      },
+      -- {
+      --   "rmagatti/goto-preview",
+      --   -- after = "telescope",
+      --   keys = {
+      --     "gpd", -- Preview definition
+      --     "gpi", -- Preview inmplementation
+      --     "gpr", -- Preview references in Telescope
+      --     "gP", -- Close all preview floating windows
+      --   },
+      --   config = function() require("goto-preview").setup { default_mappings = true } end,
+      -- },
+      -- {
+      --   "SmiteshP/nvim-navic",
+      --   requires = "neovim/nvim-lspconfig",
+      --   module = "nvim-navic",
+      --   config = config("navic"),
+      -- },
       {
         -- TODO: archived project. Replaced by jose-elias-alvarez/typescript.nvim
         "jose-elias-alvarez/nvim-lsp-ts-utils",

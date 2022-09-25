@@ -1,3 +1,5 @@
+local M = {}
+
 local codicon = {
   bulb = "",
   cross = "",
@@ -6,11 +8,10 @@ local codicon = {
   warn = "",
   caret = "",
   search = "",
+  comment = "",
 }
 
-local M = {}
-
-M.icons = codicon
+M.icons = vim.tbl_extend("force", codicon, { error = codicon.cross, hint = codicon.comment })
 
 M.borders = {
   simple = "simple",
