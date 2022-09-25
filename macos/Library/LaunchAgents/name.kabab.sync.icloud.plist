@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>name.kabab.sync.icloud.plist</string>
+	<key>LowPriorityIO</key>
+	<true/>
+	<key>Program</key>
+  <string>~/Library/Scripts/icloud.sync.sh</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>icloud.sync.sh</string>
+	</array>
+	<key>WatchPaths</key>
+	<array>
+		<string>~/Sync</string>
+	</array>
+	<key>StandardErrorPath</key>
+	<string>/tmp/icloud.sync.err</string>
+	<key>StandardOutPath</key>
+	<string>/tmp/icloud.sync.out</string>
+</dict>
+</plist>
