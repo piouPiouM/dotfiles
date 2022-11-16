@@ -16,7 +16,7 @@ M.config = {
     client.server_capabilities.documentFormattingProvider = true
     client.server_capabilities.documentRangeFormattingProvider = true
 
-    -- require("nvim-navic").attach(client, bufnr)
+    require("nvim-navic").attach(client, bufnr)
   end,
 
   cmd = { "lua-language-server" },

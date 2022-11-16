@@ -43,7 +43,10 @@ require("nvim-treesitter.configs").setup {
 
   -- Plugins
   autotag = { enable = true },
-  context_commentstring = { enable = true },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false, -- Disable CursorHold to work with Comment.nvim
+  },
 }
 
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()

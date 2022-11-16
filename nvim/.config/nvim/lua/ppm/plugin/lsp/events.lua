@@ -32,7 +32,7 @@ M.on_attach = function(client, bufnr)
     vim.cmd [[command! Format lua vim.lsp.buf.format()]]
   end
 
-  require("ppm.plugin.lsp.mappings").mappings(bufnr)
+  -- require("ppm.plugin.lsp.mappings").mappings(bufnr)
 end
 
 return M

@@ -6,7 +6,9 @@ return require("packer").startup({
 
     use "wbthomason/packer.nvim"
     use "lewis6991/impatient.nvim"
-    use { "embear/vim-localvimrc", config = config("localvimrc") }
+    use { "embear/vim-localvimrc", config = config("localvimrc"), disable = true }
+
+    --[[ Interface ]]
 
     -- Icons
     use {
@@ -19,20 +21,24 @@ return require("packer").startup({
     }
 
     -- Friendly welcome screen
+    -- Note: I can use the event `User AlphaClosed` to lazy load some plugins.
     use {
       "goolord/alpha-nvim",
       requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons" },
       config = config("alpha"),
     }
 
-    use { "nvim-lualine/lualine.nvim", config = config("lualine") }
+    -- StatusLine
+    use {
+      "nvim-lualine/lualine.nvim",
+      requires = {
+        "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+        "SmiteshP/nvim-navic",
+      },
+      config = config("lualine"),
+    }
 
     -- File tree
-    use {
-      -- TODO: replace with nvim-neo-tree/neo-tree.nvim
-      { "scrooloose/nerdtree", cmd = "NERDTreeToggle" },
-      { "tiagofumo/vim-nerdtree-syntax-highlight", after = "nerdtree", opt = true },
-    }
     use {
       "nvim-neo-tree/neo-tree.nvim",
       branch = "v2.x",
@@ -63,9 +69,22 @@ return require("packer").startup({
       },
       { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
     }
+    use {
+      "nvim-treesitter/nvim-treesitter-context",
+      requires = { "nvim-treesitter/nvim-treesitter" },
+    }
 
-    use { "lukas-reineke/indent-blankline.nvim", config = config("indent-blankline") }
-    use "preservim/nerdcommenter" -- TODO: replace with numToStr/Comment.nvim
+    use {
+      "lukas-reineke/indent-blankline.nvim",
+      config = config("indent-blankline"),
+      event = "User AlphaClosed",
+    }
+    use {
+      "numToStr/Comment.nvim",
+      requires = { "JoosepAlviste/nvim-ts-context-commentstring" },
+      config = config("comment"),
+      event = "User AlphaClosed",
+    }
     use {
       "NvChad/nvim-colorizer.lua",
       config = config("colorizer"),
@@ -113,13 +132,19 @@ return require("packer").startup({
     -- The project seems to be on pause :/
     -- use { "camspiers/snap", config = config("snap") }
 
+    use { "onsails/lspkind-nvim", opt = true }
+
+    use {
+      { "rafamadriz/friendly-snippets", opt = true },
+      { "L3MON4D3/LuaSnip", opt = true, wants = "friendly-snippets" },
+    }
+
     -- Completion
-    use { "b0o/schemastore.nvim", module = "schemastore" }
+    use { "b0o/schemastore.nvim", ft = { "json", "yaml" } }
     use {
       "hrsh7th/nvim-cmp",
       requires = {
-        "L3MON4D3/LuaSnip",
-        { "hrsh7th/cmp-nvim-lsp" },
+        { "hrsh7th/cmp-nvim-lsp", event = "User AlphaClosed" }, -- INFO: lazy loading breaks the configuration.
         { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
         { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
         { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
@@ -127,23 +152,30 @@ return require("packer").startup({
         { "hrsh7th/cmp-calc", after = "nvim-cmp" },
         { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
         { "saadparwaiz1/cmp_luasnip", after = { "nvim-cmp", "LuaSnip" } },
-        "rafamadriz/friendly-snippets",
+        { "ray-x/cmp-treesitter", after = "nvim-cmp" },
       },
-      event = "InsertEnter *",
+      event = "InsertEnter",
       config = config("cmp"),
+      wants = { "lspkind-nvim", "LuaSnip" },
     }
 
     -- Language Server Protocol
     use {
-      { "j-hui/fidget.nvim", config = config("fidget") },
-      { "neovim/nvim-lspconfig", config = config("lsp") },
+      { "folke/neodev.nvim", event = "User AlphaClosed" },
+      { "j-hui/fidget.nvim", config = config("fidget"), event = "User AlphaClosed" },
+      {
+        "neovim/nvim-lspconfig",
+        config = config("lsp"),
+        wants = "neodev.nvim",
+        event = "User AlphaClosed",
+      },
       {
         "glepnir/lspsaga.nvim",
         branch = "main",
         setup = config("lspsaga_setup"),
         config = config("lspsaga"),
+        after = "nvim-lspconfig",
       },
-      "onsails/lspkind-nvim",
       -- { "simrat39/symbols-outline.nvim", cmd = { "SymbolsOutline", "SymbolsOutlineOpen" } },
       -- {
       --   "kosayoda/nvim-lightbulb",
@@ -169,12 +201,12 @@ return require("packer").startup({
       --   },
       --   config = function() require("goto-preview").setup { default_mappings = true } end,
       -- },
-      -- {
-      --   "SmiteshP/nvim-navic",
-      --   requires = "neovim/nvim-lspconfig",
-      --   module = "nvim-navic",
-      --   config = config("navic"),
-      -- },
+      {
+        "SmiteshP/nvim-navic",
+        requires = "neovim/nvim-lspconfig",
+        module = "nvim-navic",
+        config = config("navic"),
+      },
       {
         -- TODO: archived project. Replaced by jose-elias-alvarez/typescript.nvim
         "jose-elias-alvarez/nvim-lsp-ts-utils",
@@ -195,7 +227,7 @@ return require("packer").startup({
 
     -- Syntax
     use {
-      { "editorconfig/editorconfig-vim", event = "InsertEnter *", config = config("editorconfig") },
+      { "editorconfig/editorconfig-vim", event = "InsertEnter", config = config("editorconfig") },
       { "wincent/vim-docvim", ft = "vim" },
       { "jxnblk/vim-mdx-js", ft = "markdown.mdx" },
       { "fladson/vim-kitty", ft = "kitty" },
@@ -238,35 +270,38 @@ return require("packer").startup({
       config = config("dial"),
       -- keys = { "<C-a>", "<C-x>", "g<C-a>", "g<C-x>" },
       -- cmd = { "DialIncrement" },
-      module = "dial.map",
+      -- module = "dial.map",
+      event = "User AlphaClosed",
     }
 
-    use { "kylechui/nvim-surround", config = config("nvim-surround") }
+    use { "kylechui/nvim-surround", config = config("nvim-surround"), event = "User AlphaClosed" }
 
     -- TODO consider wellle/targets.vim
 
     -- Git
-    use {
-      { "lewis6991/gitsigns.nvim", config = config("gitsigns") },
-      { "rhysd/git-messenger.vim", keys = { { "n", "<leader>gm" } }, cmd = "GitMessenger" },
-    }
+    use { "lewis6991/gitsigns.nvim", config = config("gitsigns") }
 
     -- Utils
-    use "tpope/vim-repeat"
+    use { "tpope/vim-repeat", event = "User AlphaClosed" }
     use {
       "tpope/vim-eunuch",
       cmd = {
-        "Remove", -- Delete a buffer and the file on disk simultaneously
-        "Unlink", -- LikeRemove,", -but keeps the now empty buffer
-        "Move", -- Rename a buffer and the file on disk simultaneously
-        "Rename", -- LikeMove,", -but relative to the current file's containing directory
+        "Cfind", -- Run find and load the results into the quickfix list.
+        "Lfind", -- Like above, but use the location list.
+        "Clocate", -- Run locate and load the results into the quickfix list.
+        "Llocate", -- Like above, but use the location list.
         "Chmod", -- Change the permissions of the current file
+        "Copy",
+        "Delete", -- Delete a buffer and the file on disk simultaneously
+        "Duplicate",
         "Mkdir", -- Create a directory, defaulting to the parent of the current file
-        "Find", -- Run find and load the results into the quickfix list
-        "Locate", -- Run locate and load the results into the quickfix list
-        "Wall", --  Write every open window. Handy for kicking off tools like guard
-        "SudoWrite", -- Write a privileged file with sudo
+        "Move", -- Rename a buffer and the file on disk simultaneously
+        "Remove", -- Delete a file on disk without E211: File no longer available
+        "Rename", -- LikeMove,", -but relative to the current file's containing directory
         "SudoEdit", -- Edit a privileged file with sudo
+        "SudoWrite", -- Write a privileged file with sudo
+        "Unlink", -- LikeRemove,", -but keeps the now empty buffer
+        "Wall", -- Write every open window. Handy for kicking off tools like guard
       },
     }
 
@@ -298,6 +333,10 @@ return require("packer").startup({
     }
   end,
   config = {
-    display = { open_fn = function() return require("packer.util").float({ border = "single" }) end },
+    display = {
+      compact = true,
+      open_fn = function() return require("packer.util").float({ border = "single" }) end,
+    },
+    luarocks = { python_cmd = "python3" },
   },
 })

@@ -7,10 +7,16 @@ local edges = augend.constant.new({
 })
 
 local boundaries = augend.constant.new(
-  { elements = { "first", "last" }, word = true, cyclic = true })
+                       { elements = { "first", "last" }, word = true, cyclic = true })
 
 local onOff = augend.constant.new({ elements = { "on", "off" }, word = true, cyclic = true })
 local yesNo = augend.constant.new({ elements = { "yes", "no" }, word = true, cyclic = true })
+
+local breakpointNames = augend.constant.new({
+  elements = { "xsmall", "small", "medium", "large", "xlarge", "wide" },
+  word = true,
+  cyclic = true,
+})
 
 local common = {
   augend.constant.alias.Alpha,
@@ -23,6 +29,7 @@ local common = {
   boundaries,
   onOff,
   yesNo,
+  breakpointNames,
 }
 
 require("dial.config").augends:register_group({

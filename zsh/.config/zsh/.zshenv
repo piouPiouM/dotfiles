@@ -101,6 +101,8 @@ path=(
 	"$XDG_DATA_HOME/bin/${CURRENT_OS}"
 	"$HOME/.gem/ruby/2.6.0/bin"
 	$HOME/bin
+	/usr/local/opt/curl/bin
+  /usr/local/opt/ruby/bin
 	$path
 )
 

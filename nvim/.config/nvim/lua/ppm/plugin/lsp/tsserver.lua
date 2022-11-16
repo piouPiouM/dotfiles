@@ -35,7 +35,7 @@ M.config = {
     keymap.set("n", "gR", ":TSLspRenameFile<CR>", opts)
     keymap.set("n", "gi", ":TSLspImportAll<CR>", opts)
 
-    -- require("nvim-navic").attach(client, bufnr)
+    require("nvim-navic").attach(client, bufnr)
     require("ppm.plugin.lsp.events").on_attach(client)
   end,
 }

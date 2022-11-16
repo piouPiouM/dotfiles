@@ -69,6 +69,11 @@ if fn.executable("par") then
   opt.formatprg = string.format("par -w%dre", vim.api.nvim_get_option("textwidth"))
 end
 
+opt.foldminlines = 3
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldlevel = 30
+
 -- }}}1
 -- Search {{{1
 

@@ -4,30 +4,36 @@ M.setup = function()
   require("catppuccin").setup({
     term_colors = true,
     integrations = {
-      gitgutter = true,
-      gitsigns = false,
+      cmp = true,
+      fidget = true,
+      gitgutter = false,
+      gitsigns = true,
       hop = true,
+      lsp_saga = true,
       lsp_trouble = true,
       markdown = true,
+      neotree = true,
       telescope = true,
+      treesitter = true,
+      treesitter_context = true,
+      indent_blankline = { enabled = true, colored_indent_levels = true },
       native_lsp = {
+        enabled = true,
         underlines = {
-          errors = "undercurl",
-          hints = "undercurl",
-          warnings = "undercurl",
-          information = "undercurl",
+          errors = { "undercurl" },
+          hints = { "undercurl" },
+          warnings = { "undercurl" },
+          information = { "undercurl" },
         },
       },
-      nvimtree = { enabled = false },
-      neotree = { enabled = false },
-      indent_blankline = { enabled = false },
+      navic = { enabled = true, custom_bg = "NONE" },
     },
   })
 end
 
 M.use = function()
-  vim.g.catppuccin_flavour = "latte"
-  vim.cmd [[colorscheme catppuccin]]
+  vim.g.catppuccin_flavour = "mocha"
+  vim.api.nvim_command "colorscheme catppuccin"
 end
 
 return M

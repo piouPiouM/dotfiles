@@ -336,9 +336,11 @@ endif
 
 .PHONY: npm-save-packages npm-install-packages
 
+NPM_GLOBAL_ROOT := $(shell sh -c 'npm root -g')
+
 ## Backup list of global npm packages.
 npm-save-packages:
-	@npm list --global --parseable --depth=0 | sed '1d' | awk '{gsub(/\/.*\//,"",$$1); print}' > ./npm/global-packages.txt
+	@npm list --global --parseable | sed '1d' | sed 's:^$(NPM_GLOBAL_ROOT)/::' > ./npm/global-packages.txt
 
 ## Install globaly all npm packages.
 npm-install-packages:
@@ -348,21 +350,22 @@ npm-install-packages:
 # Target: Neovim
 # -----------------------------------------------------------------------------
 
-.PHONY: neovim neovim-update neovim-dependencies neovim-plugins neovim-treesitter
+.PHONY: neovim neovim-update neovim-dependencies neovim-plugins neovim-treesitter neovim-packer
 
 neovim-dependencies: GEM_COMMAND = $(shell gem list --silent -i neovim && echo 'update' || echo 'install')
 
 ## Update the Neovim environment.
-neovim: neovim-update neovim-dependencies neovim-plugins neovim-treesitter
+neovim: neovim-update neovim-dependencies neovim-packer
 	@nvim +checkhealth
 
 ## Updates Neovim from Homebrew.
 neovim-update: | $(ENSURE_DIRS)
+	@brew upgrade luajit
 	@brew upgrade --fetch-HEAD tree-sitter neovim || exit 0
 
 ## Updates Neovim's plugins.
 neovim-plugins:
-	@nvim +PlugInstall +PlugUpdate +qa
+	# @nvim +PlugInstall +PlugUpdate +qa
 	@tmp_file=$$(mktemp -t dotfiles); mv $$tmp_file "$${tmp_file}.ts" && tmp_file="$${tmp_file}.ts" && \
 		nvim $$tmp_file +UpdateRemotePlugins +qa && \
 		rm -f $$tmp_file
@@ -370,6 +373,10 @@ neovim-plugins:
 ## Update tree-sitter parsers.
 neovim-treesitter:
 	@nvim "+TSUninstall all" +qa
+
+neovim-packer:
+	@rm -rf $$XDG_DATA_HOME/nvim/site/pack/packer/*
+	@git clone --depth 1 https://github.com/wbthomason/packer.nvim $$XDG_DATA_HOME/nvim/site/pack/packer/start/packer.nvim
 
 ## Updates Neovim dependencies.
 neovim-dependencies:

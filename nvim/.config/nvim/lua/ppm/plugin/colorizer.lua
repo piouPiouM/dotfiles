@@ -1,12 +1,3 @@
 require("colorizer").setup({
-  "!*",
-  "css",
-  "scss",
-  "sass",
-  "less",
-  "javascript",
-  "typescript",
-  "vim",
-  "lua",
-  "markdown",
+  filetypes = { "css", "scss", "sass", "less", "javascript", "typescript", "vim", "lua", "markdown" },
 })

@@ -4,9 +4,9 @@
 # vim:et sts=2 sw=2 ft=zsh
 
 codicons() {
-  local doc="file://$(npm -g prefix)/lib/node_modules/@vscode/codicons/dist/codicon.html"
+  local doc="file://$(npm -g root)/@vscode/codicons/dist/codicon.html"
 
-  if [[ $OSTYPE == "darwin*" ]] then
+  if [[ $CURRENT_OS == "macos" ]] then
     open -a firefox $doc
   else
     xdg-open $doc

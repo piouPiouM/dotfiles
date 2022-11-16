@@ -3,20 +3,20 @@ local events = require("ppm.plugin.lsp.events")
 
 require "ppm.plugin.lsp.diagnostic"
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol
-                                                                     .make_client_capabilities())
+-- Customize keybiding on `LspAttach` event emit by Neovim each time a language server is attached to a buffer.
+vim.api.nvim_create_autocmd("LspAttach", {
+  desc = "LSP actions",
+  callback = function() require("ppm.plugin.lsp.mappings").mappings(true) end,
+})
 
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-capabilities.textDocument.completion.completionItem.insertTextModeSupport = { valueSet = { 2 } }
-capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = { "documentation", "detail", "additionalTextEdits" },
-}
+local lsp_defaults = lspconfig.util.default_config
+
+lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities,
+  require("cmp_nvim_lsp").default_capabilities(), {
+  textDocument = {
+    completion = { completionItem = { insertTextModeSupport = { valueSet = { 2 } } } },
+  },
+})
 
 local servers = {
   tsserver = require("ppm.plugin.lsp.tsserver").config,
@@ -40,7 +40,7 @@ for name, opts in pairs(servers) do
       flags = { debounce_text_changes = 150 },
       on_attach = events.on_attach,
       on_init = events.on_init,
-      capabilities = capabilities,
+      capabilities = lsp_defaults.capabilities,
     }, opts))
   end
 end

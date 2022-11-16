@@ -24,6 +24,8 @@ docker:docker-compose*.yml
 
 # Update 'js' type
 --type-add
+js:*.ts{,x}
+--type-add
 js:!*.js.snap
 --type-add
 js:!*.spec.js

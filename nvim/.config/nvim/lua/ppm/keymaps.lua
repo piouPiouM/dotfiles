@@ -1,18 +1,20 @@
 local lsp_key = function(key) return "<leader>g" .. key end
-local search_key = function(key) return "<leader><leader>" .. (key or "") end
+local search_key = function(key) return "<leader>" .. (key or "") end
 
 local M = {
   open = "o",
   split = "s",
   vsplit = "v",
+  tabe = "t",
   scroll_down = "<C-d>",
   scroll_up = "<C-u>",
+  completion = { complete = "<C-Space>", escape = "<C-e>" },
   search = {
     buffer = { key = search_key("b"), desc = "Search buffers" },
     oldfile = { key = search_key("m"), desc = "Search recent files (MRU)" },
     file = { key = search_key("p"), desc = "Search files" },
     file_cwd = { key = search_key("<Space>"), desc = "Search files in current directory" },
-    git_file = { key = search_key("g"), desc = "Search files in git repository" },
+    git_file = { key = search_key("s"), desc = "Search files in git repository" },
     grep = { key = search_key("fg"), desc = "Live grep" },
     grep_cursor = { key = search_key("f;"), desc = "Search word under the cursor" },
     help_tags = { key = search_key("H"), desc = "Search in Neovim help" },
@@ -28,6 +30,7 @@ local M = {
     search = { key = lsp_key("f"), desc = "LSP finder" },
     definition = { key = lsp_key("d"), desc = "Preview definition of current symbol" },
     hover_doc = { key = "K", desc = "Display hover documentation" },
+    outline = { key = lsp_key("o"), desc = "Display outline symbols" },
     signature_help = { key = lsp_key("s"), desc = "Display signature of the current function" },
     diagnostic = {
       previous = { key = lsp_key("k"), desc = "Go to previous diagnostic" },

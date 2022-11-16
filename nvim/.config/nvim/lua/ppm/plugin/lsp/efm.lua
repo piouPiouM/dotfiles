@@ -30,6 +30,7 @@ M.config = {
     codeAction = true,
     completion = true,
     goto_definition = false,
+    locale = "fr",
   },
   filetypes = {
     "javascript",
@@ -38,8 +39,11 @@ M.config = {
     "typescript",
     "typescript.tsx",
     "typescriptreact",
+    "json",
+    "jsonc",
     "sh",
     "bash",
+    "zsh",
     "lua",
   },
   settings = {
