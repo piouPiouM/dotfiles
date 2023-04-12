@@ -36,6 +36,7 @@ local winbar = {
       "diff",
       source = diff_source,
       symbols = { added = " ", modified = " ", removed = " " },
+      cond = function() return vim.api.nvim_buf_get_option(0, "filetype") ~= "alpha" end,
     },
   },
 }
