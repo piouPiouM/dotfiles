@@ -185,13 +185,6 @@ return require("packer").startup({
         after = "nvim-lspconfig",
       },
       -- { "simrat39/symbols-outline.nvim", cmd = { "SymbolsOutline", "SymbolsOutlineOpen" } },
-      -- {
-      --   "kosayoda/nvim-lightbulb",
-      --   requires = "antoinemadec/FixCursorHold.nvim",
-      --   setup = config("lightbulb_setup"),
-      --   config = config("lightbulb"),
-      --   module = "ppm.plugin.lightbulb",
-      -- },
       {
         "folke/trouble.nvim",
         cmd = { "Trouble", "TroubleToggle" },
