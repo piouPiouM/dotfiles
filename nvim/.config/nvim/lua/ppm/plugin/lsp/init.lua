@@ -19,6 +19,7 @@ lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabiliti
 })
 
 local servers = {
+  astro = {},
   tsserver = require("ppm.plugin.lsp.tsserver").config,
   sumneko_lua = require("ppm.plugin.lsp.sumneko").config,
   jsonls = require("ppm.plugin.lsp.json").config,

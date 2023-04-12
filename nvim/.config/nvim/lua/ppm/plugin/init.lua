@@ -69,6 +69,8 @@ return require("packer").startup({
       },
       { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
     }
+    use "virchau13/tree-sitter-astro"
+
     use {
       "nvim-treesitter/nvim-treesitter-context",
       requires = { "nvim-treesitter/nvim-treesitter" },
