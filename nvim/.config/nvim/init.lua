@@ -1,14 +1,14 @@
 pcall(require, "impatient")
 
 local g = vim.g
-local opt = vim.opt
+local o = vim.o
 local cmd = vim.cmd
 local fn = vim.fn
 
 require("ppm.setup.globals")
 
-opt.encoding = "utf-8"
-opt.fileencoding = "utf-8"
+o.encoding = "utf-8"
+o.fileencoding = "utf-8"
 
 g.mapleader = " "
 g.maplocalleader = "ù"
@@ -54,8 +54,7 @@ cmd [[syntax enable]]
 --   source $XDG_DATA_HOME/nvim/init.vim
 -- end
 
-opt.diffopt:append { "algorithm:patience" }
-opt.background = "dark"
+o.background = "dark"
 
 require("ppm.colorscheme.rose-pine").use()
 require("ppm.colorscheme.catppuccin").use()
