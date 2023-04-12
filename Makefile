@@ -360,7 +360,7 @@ neovim: neovim-update neovim-dependencies neovim-packer
 
 ## Updates Neovim from Homebrew.
 neovim-update: | $(ENSURE_DIRS)
-	@brew upgrade luajit
+	@brew upgrade luajit luajit-openresty
 	@brew upgrade --fetch-HEAD tree-sitter neovim || exit 0
 
 ## Updates Neovim's plugins.
@@ -383,6 +383,7 @@ neovim-dependencies:
 	@npm install -g neovim --no-progress
 	@pip3 install --upgrade pynvim neovim
 	@gem $(GEM_COMMAND) neovim --no-document
+	@brew upgrade lua-language-server
 
 # -----------------------------------------------------------------------------
 # Target: applications

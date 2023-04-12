@@ -9,7 +9,7 @@ M.path = function()
   return path
 end
 
-M.name = "sumneko_lua"
+M.name = "lua_ls"
 M.config = {
   -- not working 🤔
   on_attach = function(client, bufnr)
@@ -18,7 +18,6 @@ M.config = {
 
     require("nvim-navic").attach(client, bufnr)
   end,
-
   cmd = { "lua-language-server" },
   settings = {
     Lua = {
@@ -32,6 +31,7 @@ M.config = {
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false,
       },
       telemetry = { enable = false },
     },
