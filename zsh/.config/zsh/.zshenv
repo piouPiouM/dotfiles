@@ -22,6 +22,8 @@ if [[ "${UNAME_S:l}" == "darwin" ]]
 then
   export CURRENT_OS="macos"
   export OS_MACOS=true
+  # Useful for Packer's Hererocks (nvim)
+  export MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion)
 elif [[ "${UNAME_S:l}" == "linux" ]]
 then
   export CURRENT_OS="linux"
