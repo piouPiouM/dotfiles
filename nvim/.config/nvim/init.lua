@@ -1,11 +1,10 @@
 pcall(require, "impatient")
 
+local api = vim.api
 local g = vim.g
 local o = vim.o
 local cmd = vim.cmd
 local fn = vim.fn
-
-require("ppm.setup.globals")
 
 o.encoding = "utf-8"
 o.fileencoding = "utf-8"
@@ -21,9 +20,6 @@ g.vimsyn_embed = "l"
 
 -- Configure providers to make startup faster {{{
 -- See https://neovim.io/doc/user/provider.html
---[[ local status, _ = pcall(require, "packer_compiled")
-if not status then vim.notify("Error requiring packer_compiled.lua: run PackerSync to fix!") end ]]
-
 g.node_host_prog = "/usr/local/bin/neovim-node-host"
 
 if fn.has("macunix") then
@@ -35,14 +31,13 @@ end
 
 -- }}}
 
-require("ppm.plugin")
-
--- cmd [[source $XDG_CONFIG_HOME/nvim/config/vim-plug.vim]]
-
 cmd [[
+  runtime! lua/ppm/setup/globals.lua
   runtime! lua/ppm/setup/disable-builtin.lua
   runtime! lua/ppm/setup/options.lua
 ]]
+
+require("ppm.plugin")
 
 cmd [[syntax enable]]
 
@@ -58,3 +53,31 @@ o.background = "dark"
 
 require("ppm.colorscheme.rose-pine").use()
 require("ppm.colorscheme.catppuccin").use()
+
+-- Lazy load plugins using a custom autocmd `User ActuallyEditing` {{{
+
+local autocmd = vim.api.nvim_create_autocmd
+local group_id = vim.api.nvim_create_augroup("lazyLoading", { clear = true })
+local function emitActuallyEditingEvent()
+  api.nvim_exec_autocmds("User", { pattern = "ActuallyEditing" })
+end
+
+autocmd("BufReadPre", {
+  group = group_id,
+  pattern = "*",
+  once = true,
+  callback = function()
+    if fn.argc() ~= 0 or fn.line2byte(fn.line("$")) ~= -1 or o.insertmode then
+      emitActuallyEditingEvent()
+    end
+  end,
+})
+
+autocmd("User", {
+  group = group_id,
+  pattern = "AlphaClosed",
+  once = true,
+  callback = emitActuallyEditingEvent,
+})
+
+-- }}}

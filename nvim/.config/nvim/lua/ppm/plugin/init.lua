@@ -21,11 +21,13 @@ return require("packer").startup({
     }
 
     -- Friendly welcome screen
-    -- Note: I can use the event `User AlphaClosed` to lazy load some plugins.
+    -- Note: I can use the event `User ActuallyEditing` to lazy load some plugins.
     use {
       "goolord/alpha-nvim",
+      -- as = { "alpha", "alpha-nvim" },
       requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons" },
       config = config("alpha"),
+
     }
 
     -- StatusLine
@@ -74,19 +76,22 @@ return require("packer").startup({
     use {
       "nvim-treesitter/nvim-treesitter-context",
       requires = { "nvim-treesitter/nvim-treesitter" },
+      event = "User ActuallyEditing",
     }
 
     use {
       "lukas-reineke/indent-blankline.nvim",
       config = config("indent-blankline"),
-      event = "User AlphaClosed",
+      event = "User ActuallyEditing",
     }
+
     use {
       "numToStr/Comment.nvim",
       requires = { "JoosepAlviste/nvim-ts-context-commentstring" },
       config = config("comment"),
-      event = "User AlphaClosed",
+      event = "User ActuallyEditing",
     }
+
     use {
       "NvChad/nvim-colorizer.lua",
       config = config("colorizer"),
@@ -146,15 +151,15 @@ return require("packer").startup({
     use {
       "hrsh7th/nvim-cmp",
       requires = {
-        { "hrsh7th/cmp-nvim-lsp", event = "User AlphaClosed" }, -- INFO: lazy loading breaks the configuration.
-        { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
-        { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-        { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
-        { "hrsh7th/cmp-path", after = "nvim-cmp" },
-        { "hrsh7th/cmp-calc", after = "nvim-cmp" },
+        { "hrsh7th/cmp-nvim-lsp",                event = "User ActuallyEditing" },
+        { "hrsh7th/cmp-nvim-lua",                after = "nvim-cmp" },
+        { "hrsh7th/cmp-buffer",                  after = "nvim-cmp" },
+        { "hrsh7th/cmp-cmdline",                 after = "nvim-cmp" },
+        { "hrsh7th/cmp-path",                    after = "nvim-cmp" },
+        { "hrsh7th/cmp-calc",                    after = "nvim-cmp" },
         { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
-        { "saadparwaiz1/cmp_luasnip", after = { "nvim-cmp", "LuaSnip" } },
-        { "ray-x/cmp-treesitter", after = "nvim-cmp" },
+        { "saadparwaiz1/cmp_luasnip",            after = { "nvim-cmp", "LuaSnip" } },
+        { "ray-x/cmp-treesitter",                after = "nvim-cmp" },
       },
       event = "InsertEnter",
       config = config("cmp"),
@@ -163,17 +168,18 @@ return require("packer").startup({
 
     -- Language Server Protocol
     use {
-      { "folke/neodev.nvim", event = "User AlphaClosed" },
-      { "j-hui/fidget.nvim", config = config("fidget"), event = "User AlphaClosed" },
+      { "folke/neodev.nvim", event = "User ActuallyEditing" },
+      { "j-hui/fidget.nvim", config = config("fidget"),     event = "User ActuallyEditing" },
       {
         "neovim/nvim-lspconfig",
         config = config("lsp"),
         wants = "neodev.nvim",
-        event = "User AlphaClosed",
+        event = "User ActuallyEditing",
       },
       {
         "glepnir/lspsaga.nvim",
         branch = "main",
+        event = "LspAttach",
         setup = config("lspsaga_setup"),
         config = config("lspsaga"),
         after = "nvim-lspconfig",
@@ -189,7 +195,6 @@ return require("packer").startup({
       {
         "folke/trouble.nvim",
         cmd = { "Trouble", "TroubleToggle" },
-        module = "trouble",
         config = function() require("trouble").setup {} end,
       },
       -- {
@@ -273,37 +278,38 @@ return require("packer").startup({
       -- keys = { "<C-a>", "<C-x>", "g<C-a>", "g<C-x>" },
       -- cmd = { "DialIncrement" },
       -- module = "dial.map",
-      event = "User AlphaClosed",
+      event = "User ActuallyEditing",
     }
 
-    use { "kylechui/nvim-surround", config = config("nvim-surround"), event = "User AlphaClosed" }
+    use { "kylechui/nvim-surround", config = config("nvim-surround"),
+      event = "User ActuallyEditing" }
 
     -- TODO consider wellle/targets.vim
 
     -- Git
-    use { "lewis6991/gitsigns.nvim", config = config("gitsigns") }
+    use { "lewis6991/gitsigns.nvim", config = config("gitsigns"), event = "User ActuallyEditing" }
 
     -- Utils
-    use { "tpope/vim-repeat", event = "User AlphaClosed" }
+    use { "tpope/vim-repeat", event = "User ActuallyEditing" }
     use {
       "tpope/vim-eunuch",
       cmd = {
-        "Cfind", -- Run find and load the results into the quickfix list.
-        "Lfind", -- Like above, but use the location list.
-        "Clocate", -- Run locate and load the results into the quickfix list.
-        "Llocate", -- Like above, but use the location list.
-        "Chmod", -- Change the permissions of the current file
+        "Cfind",     -- Run find and load the results into the quickfix list.
+        "Lfind",     -- Like above, but use the location list.
+        "Clocate",   -- Run locate and load the results into the quickfix list.
+        "Llocate",   -- Like above, but use the location list.
+        "Chmod",     -- Change the permissions of the current file
         "Copy",
-        "Delete", -- Delete a buffer and the file on disk simultaneously
+        "Delete",    -- Delete a buffer and the file on disk simultaneously
         "Duplicate",
-        "Mkdir", -- Create a directory, defaulting to the parent of the current file
-        "Move", -- Rename a buffer and the file on disk simultaneously
-        "Remove", -- Delete a file on disk without E211: File no longer available
-        "Rename", -- LikeMove,", -but relative to the current file's containing directory
-        "SudoEdit", -- Edit a privileged file with sudo
+        "Mkdir",     -- Create a directory, defaulting to the parent of the current file
+        "Move",      -- Rename a buffer and the file on disk simultaneously
+        "Remove",    -- Delete a file on disk without E211: File no longer available
+        "Rename",    -- LikeMove,", -but relative to the current file's containing directory
+        "SudoEdit",  -- Edit a privileged file with sudo
         "SudoWrite", -- Write a privileged file with sudo
-        "Unlink", -- LikeRemove,", -but keeps the now empty buffer
-        "Wall", -- Write every open window. Handy for kicking off tools like guard
+        "Unlink",    -- LikeRemove,", -but keeps the now empty buffer
+        "Wall",      -- Write every open window. Handy for kicking off tools like guard
       },
     }
 
