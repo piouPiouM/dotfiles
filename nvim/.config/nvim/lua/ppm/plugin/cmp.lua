@@ -15,7 +15,7 @@ local luasnip = require("luasnip")
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and
-             vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 vim.api.nvim_set_hl(0, "CmpItemMenu", { link = "@conditional" })
@@ -58,10 +58,10 @@ cmp.setup({
     { name = "nvim_lua" },
     { name = "nvim_lsp" },
     { name = "treesitter" },
-    { name = "luasnip", keyword_length = 2 },
+    { name = "luasnip",                keyword_length = 2 },
 
     -- Utils
-    { name = "path", option = { trailing_slash = true } },
+    { name = "path",                   option = { trailing_slash = true } },
     { name = "calc" },
   }, {
     {
@@ -124,7 +124,7 @@ cmp.setup.cmdline(":", {
   completion = { autocomplete = true },
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({ { name = "path" } },
-                               { { name = "cmdline", max_item_count = 20, keyword_length = 4 } }),
+    { { name = "cmdline", max_item_count = 20, keyword_length = 4 } }),
 })
 
 -- cmp.setup.filetype("gitcommit", {

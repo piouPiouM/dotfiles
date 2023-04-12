@@ -126,10 +126,11 @@ return require("packer").startup({
         cmd = "Telescope",
         module = "telescope",
       },
-      { "nvim-lua/plenary.nvim", opt = true },
-      { "nvim-lua/popup.nvim", opt = true },
-      { "nvim-telescope/telescope-file-browser.nvim", opt = true },
-      { "nvim-telescope/telescope-fzf-native.nvim", run = "make", opt = true },
+      { "nvim-lua/plenary.nvim",                        opt = true },
+      { "nvim-lua/popup.nvim",                          opt = true },
+      { "kkharji/sqlite.lua",                           opt = true },
+      { "nvim-telescope/telescope-file-browser.nvim",   opt = true },
+      { "nvim-telescope/telescope-fzf-native.nvim",     run = "make", opt = true },
       { "nvim-telescope/telescope-live-grep-args.nvim", opt = true },
       { "nvim-telescope/telescope-symbols.nvim", opt = true },
       { "nvim-telescope/telescope-ui-select.nvim", opt = true },
@@ -143,7 +144,7 @@ return require("packer").startup({
 
     use {
       { "rafamadriz/friendly-snippets", opt = true },
-      { "L3MON4D3/LuaSnip", opt = true, wants = "friendly-snippets" },
+      { "L3MON4D3/LuaSnip",             opt = true, wants = "friendly-snippets" },
     }
 
     -- Completion
@@ -228,10 +229,10 @@ return require("packer").startup({
     -- Syntax
     use {
       { "editorconfig/editorconfig-vim", event = "InsertEnter", config = config("editorconfig") },
-      { "wincent/vim-docvim", ft = "vim" },
-      { "jxnblk/vim-mdx-js", ft = "markdown.mdx" },
-      { "fladson/vim-kitty", ft = "kitty" },
-      { "terminalnode/sway-vim-syntax", ft = "swayconfig" },
+      { "wincent/vim-docvim",            ft = "vim" },
+      { "jxnblk/vim-mdx-js",             ft = "markdown.mdx" },
+      { "fladson/vim-kitty",             ft = "kitty" },
+      { "terminalnode/sway-vim-syntax",  ft = "swayconfig" },
     }
 
     -- Text manipulation
