@@ -86,6 +86,7 @@ export LESSCHARSET=utf-8
 
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
+export PNPM_HOME="${XDG_DATA_HOME}/pnpm"
 
 #
 # Path management
@@ -96,6 +97,7 @@ export GOBIN=$GOPATH/bin
 path=(
   $GOBIN
   # $GOROOT/bin
+  $PNPM_HOME
   $HOME/.luarocks/bin
   $HOME/.cargo/bin
 	$XDG_DATA_HOME/gem/ruby/bin
