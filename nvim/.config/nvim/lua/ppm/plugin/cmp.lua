@@ -83,6 +83,7 @@ cmp.setup({
           nvim_lua = ui.icons.lua,
           nvim_lsp = ui.icons.lsp,
           calc = ui.icons.calc,
+          comment = ui.icons.comment,
           path = ui.icons.folder,
           treesitter = ui.icons.treesitter,
           luasnip = ui.icons.snippet,
@@ -97,7 +98,7 @@ cmp.setup({
 
       if entry.completion_item.detail ~= nil and entry.completion_item.detail ~= "" then
         kind.menu = menu .. "  " .. entry.completion_item.detail
-      else
+      elseif #(strings) > 1 then
         kind.menu = menu .. "  (" .. strings[2]:lower() .. ")"
       end
 
