@@ -1,28 +1,39 @@
+local fun = require("fun")
 local codicons = require("codicons")
 
 local M = {}
 
-local codicon = function(name) return codicons.get(name, "icon") end
-
-M.icons = {
-  bulb = codicon("bulb"),
-  caret = codicon("chevron-right"),
-  error = codicon("error"),
-  help = codicon("question"),
-  hint = codicon("comment"),
-  info = codicon("info"),
-  search = codicon("search"),
-  warn = codicon("warning"),
-  action = codicon("github-action"),
-  folder = codicon("folder"),
+M.icons = fun.iter({
+  bulb = "bulb", -- FIXME
+  caret = "chevron-right",
+  comment = "comment",
+  error = "error",
+  help = "question",
+  hint = "comment",
+  info = "info",
+  search = "search",
+  warn = "warning",
+  action = "github-action",
+  folder = "folder",
   ellipsis = "…",
-  lua = "",
-  lsp = codicon("server-environment"),
-  treesitter = codicon("type-hierarchy"),
-  snippet = codicon("rocket"),
-  buffer = codicon("layers"),
-  calc = codicon("pie-chart"),
-}
+  lua = " ",
+  lsp = "server-environment",
+  treesitter = "type-hierarchy",
+  snippet = "rocket",
+  buffer = "layers",  -- FIXME
+  calc = "pie-chart", -- FIXME
+  expand = "chevron-right",
+  collapse = "chevron-down",
+  incoming = "call-incoming",
+  outgoing = "call-outgoing",
+  hover = " ",
+  actionfix = "lightbulb-autofix",
+}):map(function(name, icon_name)
+  local icon = codicons.get(icon_name, "icon")
+
+  return name, (icon ~= nil and icon .. " " or
+      (vim.fn.strdisplaywidth(icon_name) < 3 and icon_name or ""))
+end):tomap()
 
 M.borders = {
   simple = "simple",

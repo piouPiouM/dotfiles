@@ -1,15 +1,22 @@
 vim.cmd("packadd packer.nvim")
 
+require("packer.luarocks").install_commands()
+
 return require("packer").startup({
-  function(use)
+  function(use, use_rocks)
     local config = function(name) return string.format("require('ppm.plugin.%s')", name) end
 
     use "wbthomason/packer.nvim"
     use "lewis6991/impatient.nvim"
+
+    use_rocks {
+      "fun",   -- functional programming library
+      "moses", -- functional programming library
+    }
+
     use { "embear/vim-localvimrc", config = config("localvimrc"), disable = true }
 
     --[[ Interface ]]
-
     -- Icons
     use {
       {
