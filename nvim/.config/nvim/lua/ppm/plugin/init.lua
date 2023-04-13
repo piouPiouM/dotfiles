@@ -75,9 +75,8 @@ return require("packer").startup({
         run = ":TSUpdate",
         config = config("treesitter"),
       },
-      { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
+      { "virchau13/tree-sitter-astro", opt = true, ft = "astro" },
     }
-    use "virchau13/tree-sitter-astro"
 
     use {
       "nvim-treesitter/nvim-treesitter-context",
