@@ -29,10 +29,8 @@ return require("packer").startup({
     }
 
     -- Friendly welcome screen
-    -- Note: I can use the event `User ActuallyEditing` to lazy load some plugins.
     use {
       "goolord/alpha-nvim",
-      -- as = { "alpha", "alpha-nvim" },
       requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons" },
       config = config("alpha"),
 
@@ -226,11 +224,10 @@ return require("packer").startup({
 
     -- Syntax
     use {
-      { "editorconfig/editorconfig-vim", event = "InsertEnter", config = config("editorconfig") },
-      { "wincent/vim-docvim",            ft = "vim" },
-      { "jxnblk/vim-mdx-js",             ft = "markdown.mdx" },
-      { "fladson/vim-kitty",             ft = "kitty" },
-      { "terminalnode/sway-vim-syntax",  ft = "swayconfig" },
+      { "wincent/vim-docvim",           ft = "vim" },
+      { "jxnblk/vim-mdx-js",            ft = "markdown.mdx" },
+      { "fladson/vim-kitty",            ft = "kitty" },
+      { "terminalnode/sway-vim-syntax", ft = "swayconfig" },
     }
 
     -- Text manipulation
