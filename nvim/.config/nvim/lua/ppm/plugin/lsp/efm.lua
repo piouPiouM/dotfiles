@@ -2,15 +2,6 @@ local M = {}
 
 M.name = "efm"
 
-local eslint = {
-  lintCommand = "eslint_d --cache --no-color --format unix --stdin --stdin-filename ${INPUT}",
-  lintStdin = true,
-  lintFormats = { "%f:%l:%c: %m" },
-  lintIgnoreExitCode = true,
-  formatCommand = "eslint_d --cache --no-color --fix-to-stdout --stdin --stdin-filename ${INPUT}",
-  formatStdin = true,
-}
-
 local sh = {
   rootMarkers = {},
   lintCommand = "shellcheck --color=never --format=gcc -",
@@ -32,25 +23,10 @@ M.config = {
     goto_definition = false,
     locale = "fr",
   },
-  filetypes = {
-    "javascript",
-    "javascriptreact",
-    "javascript.jsx",
-    "typescript",
-    "typescript.tsx",
-    "typescriptreact",
-    "json",
-    "jsonc",
-    "sh",
-    "bash",
-    "zsh",
-    "lua",
-  },
+  filetypes = { "json", "jsonc", "sh", "bash", "zsh", "lua" },
   settings = {
     rootMarkers = { ".git/", "package.json" },
     languages = {
-      javascript = { eslint },
-      typescript = { eslint },
       bash = { sh },
       sh = { sh },
       lua = {

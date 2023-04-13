@@ -4,6 +4,7 @@ require("packer.luarocks").install_commands()
 
 return require("packer").startup({
   function(use, use_rocks)
+    local ft = require("ppm.filetype")
     local config = function(name) return string.format("require('ppm.plugin.%s')", name) end
 
     use "wbthomason/packer.nvim"
@@ -216,20 +217,10 @@ return require("packer").startup({
         config = config("navic"),
       },
       {
-        -- TODO: archived project. Replaced by jose-elias-alvarez/typescript.nvim
-        "jose-elias-alvarez/nvim-lsp-ts-utils",
+        "jose-elias-alvarez/typescript.nvim",
         requires = { "neovim/nvim-lspconfig", "nvim-lua/plenary.nvim" },
-        -- ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-        cmd = {
-          "TSLspOrganize",
-          "TSLspOrganizeSync",
-          "TSLspRenameFile",
-          "TSLspImportAll",
-          "TSLspImportCurrent",
-          "TSLspInlayHints",
-          "TSLspToggleInlayHints",
-        },
-        module = "cmp_nvim_lsp",
+        config = config("typescript"),
+        ft = ft.typescript,
       },
     }
 

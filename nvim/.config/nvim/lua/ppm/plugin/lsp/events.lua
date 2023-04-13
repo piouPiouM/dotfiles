@@ -1,8 +1,7 @@
+local plsp = require("ppm.lsp")
 local M = {}
 
 M.on_attach = function(client, bufnr)
-  -- if client.server_capabilities.codeActionProvider then require("ppm.plugin.lightbulb") end
-
   if client.server_capabilities.code_lens then
     vim.cmd [[
     augroup CodeLens
@@ -22,17 +21,9 @@ M.on_attach = function(client, bufnr)
     ]]
   end
 
-  if client.server_capabilities.documentFormattingProvider then
-    vim.cmd [[
-    augroup Format
-      autocmd! * <buffer>
-      autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
-    augroup END
-    ]]
-    vim.cmd [[command! Format lua vim.lsp.buf.format()]]
+  if client.supports_method("textDocument/formatting") then
+    plsp.event.format(plsp.format, client, bufnr)
   end
-
-  -- require("ppm.plugin.lsp.mappings").mappings(bufnr)
 end
 
 return M

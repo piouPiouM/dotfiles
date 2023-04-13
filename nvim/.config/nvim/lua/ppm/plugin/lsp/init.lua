@@ -20,7 +20,6 @@ lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabiliti
 
 local servers = {
   astro = {},
-  tsserver = require("ppm.plugin.lsp.tsserver").config,
   lua_ls = require("ppm.plugin.lsp.lua_ls").config,
   jsonls = require("ppm.plugin.lsp.json").config,
   eslint = require("ppm.plugin.lsp.eslint").config,
