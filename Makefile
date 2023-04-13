@@ -132,6 +132,7 @@ install-links: link-bash \
 	link-git \
 	link-home \
 	link-kitty \
+	link-lazygit \
 	link-neovim \
 	link-ranger \
 	link-ripgrep \
@@ -178,6 +179,11 @@ link-neovim:
 link-kitty:
 	@echo -n '$(YELLOW)Link kitty environment…$(RESET)'
 	@stow kitty && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+
+## Install Lazygit environment
+link-lazygit:
+	@echo -n '$(YELLOW)Link lazygit environment…$(RESET)'
+	@stow lazygit && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install bat environment
 link-bat:

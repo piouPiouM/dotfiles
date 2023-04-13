@@ -1,4 +1,10 @@
 gui:
+  border: 'rounded'
   showIcons: true
+  theme:
+    selectedLineBgColor:
+      - black
+    selectedRangeBgColor:
+      - reverse
 os:
   editCommandTemplate: '{{editor}} +{{line}} -- {{filename}}'

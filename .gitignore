@@ -1,8 +1,9 @@
-sessions/
 backup/
 git/.local/share/git/config
+lazygit/.config/lazygit/state.yml
 nvim/.config/nvim/autoload/plug.vim
 nvim/.config/nvim/autoload/plug.vim.old
+sessions/
 *.zwc
 *.zwc.old
 .zcompcache
