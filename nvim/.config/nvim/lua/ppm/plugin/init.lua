@@ -13,6 +13,7 @@ return require("packer").startup({
     use_rocks {
       "fun",   -- functional programming library
       "moses", -- functional programming library
+      { "luaformatter", server = "https://luarocks.org/dev" },
     }
 
     use { "embear/vim-localvimrc", config = config("localvimrc"), disable = true }

@@ -1,8 +1,10 @@
-column_limit: 100
-indent_width: 2
-continuation_indent_width: 4
 chop_down_parameter: true
 chop_down_table: true
+column_limit: 120
+column_table_limit: 100
+column_table_limit_kv: 100
+continuation_indent_width: 4
 extra_sep_at_table_end: true
+indent_width: 2
 single_quote_to_double_quote: true
 spaces_inside_table_braces: true
