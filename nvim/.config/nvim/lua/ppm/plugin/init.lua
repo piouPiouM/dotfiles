@@ -57,7 +57,7 @@ return require("packer").startup({
       },
       setup = config("neotree_setup"),
       config = config("neotree"),
-      cmd = { "Neotree" },
+      cmd = { "Neotree", "NeoTreeFloatToggle", "NeoTreeRevealToggle" },
     }
 
     -- Maximize or restore windows.
@@ -190,23 +190,11 @@ return require("packer").startup({
         config = config("lspsaga"),
         after = "nvim-lspconfig",
       },
-      -- { "simrat39/symbols-outline.nvim", cmd = { "SymbolsOutline", "SymbolsOutlineOpen" } },
       {
         "folke/trouble.nvim",
         cmd = { "Trouble", "TroubleToggle" },
         config = function() require("trouble").setup {} end,
       },
-      -- {
-      --   "rmagatti/goto-preview",
-      --   -- after = "telescope",
-      --   keys = {
-      --     "gpd", -- Preview definition
-      --     "gpi", -- Preview inmplementation
-      --     "gpr", -- Preview references in Telescope
-      --     "gP", -- Close all preview floating windows
-      --   },
-      --   config = function() require("goto-preview").setup { default_mappings = true } end,
-      -- },
       {
         "SmiteshP/nvim-navic",
         requires = "neovim/nvim-lspconfig",
