@@ -1,7 +1,8 @@
 -- +-------------------------------------------------+
 -- | A | B | C                             X | Y | Z |
 -- +-------------------------------------------------+
-local navic = require "nvim-navic"
+local ui = require("ppm.ui")
+local icons = ui.icons
 
 local function diff_source()
   local gitsigns = vim.b.gitsigns_status_dict
@@ -12,18 +13,32 @@ local function diff_source()
 end
 
 local file_status_symbols = {
-  modified = "",
-  readonly = "",
+  modified = icons.modified,
+  readonly = icons.readonly,
   unnamed = "[No Name]",
   newfile = "[New]",
 }
 
 local winbar = {
   lualine_a = {
-    { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-    { "filename", newfile_status = true, symbols = file_status_symbols },
+    {
+      "filetype",
+      icon_only = true,
+      separator = "",
+      padding = { left = 1, right = 0 }
+    },
+    {
+      "filename",
+      newfile_status = true,
+      symbols = file_status_symbols
+    },
   },
-  lualine_c = { { navic.get_location, cond = navic.is_available, separator = { left = "" } } },
+  --lualine_c = {
+  --  {
+  --    require('lspsaga.symbolwinbar'):get_winbar(),
+  --    separator = { left = "" }
+  --  },
+  --},
   lualine_y = {
     {
       "diagnostics",
@@ -35,7 +50,7 @@ local winbar = {
     {
       "diff",
       source = diff_source,
-      symbols = { added = " ", modified = " ", removed = " " },
+      symbols = { added = icons.diff_added, modified = icons.diff_modified, removed = icons.diff_removed },
       cond = function() return vim.api.nvim_buf_get_option(0, "filetype") ~= "alpha" end,
     },
   },
@@ -63,7 +78,7 @@ require("lualine").setup({
   inactive_winbar = inactive_winbar,
   sections = {
     lualine_a = { { "mode", fmt = fmt_mode } },
-    lualine_b = { { "b:gitsigns_head", icon = "" } },
+    lualine_b = { { "b:gitsigns_head", icon = icons.git_head } },
     lualine_c = { { "filename", file_status = true, path = 3, symbols = file_status_symbols } },
     lualine_x = {},
     lualine_y = {
@@ -82,5 +97,5 @@ require("lualine").setup({
   },
   inactive_sections = {}, -- No longer useful since I use the global status bar.
   tabline = {},
-  extensions = { "quickfix", "neo-tree" },
+  extensions = { "quickfix", "neo-tree", "trouble" },
 })

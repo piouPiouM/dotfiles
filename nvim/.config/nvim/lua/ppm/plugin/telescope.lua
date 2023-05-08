@@ -1,8 +1,7 @@
 local actions = require "telescope.actions"
 local action_layout = require "telescope.actions.layout"
-local themes = require "telescope.themes"
+local lga_actions = require("telescope-live-grep-args.actions")
 -- local action_state = require "telescope.actions.state"
-local codicons = require "codicons"
 local ui = require "ppm.ui"
 
 -- https://github.com/nvim-telescope/telescope.nvim/issues/1048#issuecomment-889122232
@@ -23,7 +22,6 @@ local ui = require "ppm.ui"
     end
   end,
 } ]]
-
 local config = {
   bottom_pane = { preview_width = 0.6 },
   horizontal = { preview_width = 0.6, width = 0.9 },
@@ -31,18 +29,18 @@ local config = {
   ivy = { theme = "ivy", preview_width = 0.6, preview = { hide_on_startup = true } },
 }
 
-require"telescope".setup {
+require "telescope".setup {
   defaults = {
     cache_picker = { num_pickers = 5 },
-    prompt_prefix = codicons.get("telescope", "icon") .. " ",
-    selection_caret = ui.icons.caret,
+    prompt_prefix = " " .. ui.icons.search .. " ",
+    selection_caret = ui.icons.caret .. " ",
     layout_strategy = "flex",
     layout_config = {
       bottom_pane = config.bottom_pane,
       horizontal = config.horizontal,
       flex = { horizontal = config.horizontal },
     },
-    winblend = 15,
+    winblend = 0,
     mappings = {
       n = {
         ["<C-p>"] = action_layout.toggle_preview,
@@ -65,17 +63,28 @@ require"telescope".setup {
     colorscheme = { enable_preview = true },
   },
   extensions = {
-    ["ui-select"] = { themes.get_cursor() },
+    -- ["ui-select"] = { themes.get_cursor() },
     fzf = {
       fuzzy = true,
       override_generic_sorter = true,
       override_file_sorter = true,
       case_mode = "smart_case", -- or "ignore_case" or "respect_case"
     },
+    live_grep_args = {
+      auto_quoting = true, -- enable/disable auto-quoting
+      mappings = {
+        i = {
+          ["<C-k>"] = lga_actions.quote_prompt({ postfix = " -t" .. vim.bo.filetype }),
+          ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+        },
+      },
+    },
   },
 }
 
-require("telescope").load_extension("ui-select")
-require("telescope").load_extension("file_browser")
-require("telescope").load_extension("fzf")
-require("telescope").load_extension("live_grep_args")
+local load_extension = require("telescope").load_extension
+-- require("telescope").load_extension("ui-select")
+load_extension("file_browser")
+load_extension("fzf")
+load_extension("live_grep_args")
+load_extension("notify")

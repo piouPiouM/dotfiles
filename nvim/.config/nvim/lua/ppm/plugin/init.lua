@@ -128,7 +128,7 @@ return require("packer").startup({
           "nvim-telescope/telescope-fzf-native.nvim",
           "nvim-telescope/telescope-live-grep-args.nvim",
           "nvim-telescope/telescope-symbols.nvim",
-          "nvim-telescope/telescope-ui-select.nvim",
+          -- "nvim-telescope/telescope-ui-select.nvim",
         },
         wants = {
           "plenary.nvim",
@@ -137,7 +137,7 @@ return require("packer").startup({
           "telescope-fzf-native.nvim",
           "telescope-live-grep-args.nvim",
           "telescope-symbols.nvim",
-          "telescope-ui-select.nvim",
+          -- "telescope-ui-select.nvim",
         },
         setup = config("telescope_setup"),
         config = config("telescope"),
@@ -150,8 +150,8 @@ return require("packer").startup({
       { "nvim-telescope/telescope-file-browser.nvim",   opt = true },
       { "nvim-telescope/telescope-fzf-native.nvim",     run = "make", opt = true },
       { "nvim-telescope/telescope-live-grep-args.nvim", opt = true },
-      { "nvim-telescope/telescope-symbols.nvim", opt = true },
-      { "nvim-telescope/telescope-ui-select.nvim", opt = true },
+      { "nvim-telescope/telescope-symbols.nvim",        opt = true },
+      { "nvim-telescope/telescope-ui-select.nvim",      opt = true,   disable = true },
     }
 
     -- use { "camspiers/snap", rocks = { "fzy" } }
