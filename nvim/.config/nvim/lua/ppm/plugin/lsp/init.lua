@@ -37,10 +37,15 @@ local servers = {
 }
 
 for name, opts in pairs(servers) do
+  if name == 'lua_ls' then
+    require("neodev").setup()
+  end
+
   if type(opts) == "function" then
     opts()
   else
     local client = lspconfig[name]
+
     client.setup(vim.tbl_extend("force", {
       flags = { debounce_text_changes = 150 },
       on_attach = events.on_attach,

@@ -1,4 +1,4 @@
-local lsp_key = function(key) return "<leader>g" .. key end
+local code_key = function(key) return "<leader>g" .. key end
 local search_key = function(key) return "<leader>" .. (key or "") end
 
 local M = {
@@ -25,20 +25,24 @@ local M = {
     },
   },
   lsp = {
-    codeaction = { key = lsp_key("a"), desc = "Display code actions" },
-    rename = { key = lsp_key("r"), desc = "Rename current symbol" },
-    search = { key = lsp_key("f"), desc = "LSP finder" },
-    definition = { key = lsp_key("d"), desc = "Preview definition of current symbol" },
+    codeaction = { key = code_key("a"), desc = "Display code actions" },
+    rename = { key = code_key("r"), desc = "Rename current symbol" },
+    search = { key = code_key("f"), desc = "LSP finder" },
+    definition = { key = code_key("d"), desc = "Preview definition of current symbol" },
     hover_doc = { key = "K", desc = "Display hover documentation" },
-    outline = { key = lsp_key("o"), desc = "Display outline symbols" },
-    signature_help = { key = lsp_key("s"), desc = "Display signature of the current function" },
+    outline = { key = code_key("o"), desc = "Display outline symbols" },
+    signature_help = { key = code_key("s"), desc = "Display signature of the current function" },
     diagnostic = {
-      previous = { key = lsp_key("k"), desc = "Go to previous diagnostic" },
-      next = { key = lsp_key("j"), desc = "Go to next diagnostic" },
+      previous = { key = code_key("k"), desc = "Go to previous diagnostic" },
+      next = { key = code_key("j"), desc = "Go to next diagnostic" },
       -- "h" for "Health"
-      cursor = { key = lsp_key("h;"), desc = "Display diagnostic under the cursor" },
-      line = { key = lsp_key("hl"), desc = "Display diagnostic for the current line" },
+      cursor = { key = code_key("h;"), desc = "Display diagnostic under the cursor" },
+      line = { key = code_key("hl"), desc = "Display diagnostic for the current line" },
     },
+  },
+  code = {
+    swap_prev_arg = { key = code_key("S"), desc = "Swap with previous argument" },
+    swap_next_arg = { key = code_key("s"), desc = "Swap with next argument" },
   },
 }
 

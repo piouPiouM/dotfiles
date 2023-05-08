@@ -184,8 +184,12 @@ return require("packer").startup({
         event = "User ActuallyEditing",
       },
       {
-        "glepnir/lspsaga.nvim",
+        "nvimdev/lspsaga.nvim",
         branch = "main",
+        requires = {
+          "nvim-tree/nvim-web-devicons",
+          "nvim-treesitter/nvim-treesitter"
+        },
         event = "LspAttach",
         setup = config("lspsaga_setup"),
         config = config("lspsaga"),

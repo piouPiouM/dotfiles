@@ -1,5 +1,10 @@
 local ui = require("ppm.ui")
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs = {
+  Error = ui.icons.error,
+  Warn = ui.icons.warn,
+  Hint = ui.icons.bulb,
+  Info = ui.icons.info
+}
 
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
