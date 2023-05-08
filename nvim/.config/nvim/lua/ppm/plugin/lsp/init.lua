@@ -3,20 +3,25 @@ local events = require("ppm.plugin.lsp.events")
 
 require "ppm.plugin.lsp.diagnostic"
 
--- Customize keybiding on `LspAttach` event emit by Neovim each time a language server is attached to a buffer.
+-- Customize keybiding and options on `LspAttach` event emit by Neovim each time
+-- a language server is attached to a buffer.
 vim.api.nvim_create_autocmd("LspAttach", {
-  desc = "LSP actions",
-  callback = function() require("ppm.plugin.lsp.mappings").mappings(true) end,
+  desc = "Performs LSP customization when a server is attached",
+  callback = function(info)
+    local lsp_common = require("ppm.plugin.lsp.common")
+    lsp_common.set_mappings(info.buf)
+    lsp_common.set_options(info.buf)
+  end,
 })
 
 local lsp_defaults = lspconfig.util.default_config
 
 lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities,
-                                                require("cmp_nvim_lsp").default_capabilities(), {
-  textDocument = {
-    completion = { completionItem = { insertTextModeSupport = { valueSet = { 2 } } } },
-  },
-})
+  require("cmp_nvim_lsp").default_capabilities(), {
+    textDocument = {
+      completion = { completionItem = { insertTextModeSupport = { valueSet = { 2 } } } },
+    },
+  })
 
 local servers = {
   astro = {},
