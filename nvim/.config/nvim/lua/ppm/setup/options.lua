@@ -87,6 +87,12 @@ o.incsearch = true  -- Makes search act like search in modern browsers
 o.grepprg = "rg --vimgrep"
 
 -- }}}1
+-- Spell {{{1
+
+o.spelllang = "en_us,fr"
+o.spellsuggest = "best"
+
+-- }}}1
 -- Completion {{{1
 
 o.infercase = true -- Ignore case on insert completion.

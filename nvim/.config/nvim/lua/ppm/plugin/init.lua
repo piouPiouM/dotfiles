@@ -179,6 +179,7 @@ return require("packer").startup({
         { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
         { "saadparwaiz1/cmp_luasnip",            after = { "nvim-cmp", "LuaSnip" } },
         { "ray-x/cmp-treesitter",                after = "nvim-cmp" },
+        { "f3fora/cmp-spell",                    after = "nvim-cmp" },
       },
       event = "InsertEnter",
       config = config("cmp"),
