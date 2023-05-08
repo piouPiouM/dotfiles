@@ -2,6 +2,7 @@ local ui = require("ppm.ui")
 local keymaps = require("ppm.keymaps")
 
 require("lspsaga").setup({
+  kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
   ui = {
     border = "rounded",
     winblend = 10,
