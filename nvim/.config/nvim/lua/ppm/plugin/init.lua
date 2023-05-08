@@ -17,6 +17,7 @@ return require("packer").startup({
       { "luaformatter", server = "https://luarocks.org/dev" },
     }
 
+    -- TODO: use https://github.com/folke/neoconf.nvim instead
     use { "embear/vim-localvimrc", config = config("localvimrc"), disable = true }
 
     --[[ Interface ]]
@@ -148,17 +149,15 @@ return require("packer").startup({
       { "nvim-lua/popup.nvim",                          opt = true },
       { "kkharji/sqlite.lua",                           opt = true },
       { "nvim-telescope/telescope-file-browser.nvim",   opt = true },
-      { "nvim-telescope/telescope-fzf-native.nvim",     run = "make", opt = true },
+      { "nvim-telescope/telescope-fzf-native.nvim",     opt = true, run = "make" },
       { "nvim-telescope/telescope-live-grep-args.nvim", opt = true },
       { "nvim-telescope/telescope-symbols.nvim",        opt = true },
-      { "nvim-telescope/telescope-ui-select.nvim",      opt = true,   disable = true },
+      { "nvim-telescope/telescope-ui-select.nvim",      opt = true, disable = true },
     }
 
     -- use { "camspiers/snap", rocks = { "fzy" } }
     -- The project seems to be on pause :/
     -- use { "camspiers/snap", config = config("snap") }
-
-    use { "onsails/lspkind-nvim", opt = true }
 
     use {
       { "rafamadriz/friendly-snippets", opt = true },
@@ -183,7 +182,7 @@ return require("packer").startup({
       },
       event = "InsertEnter",
       config = config("cmp"),
-      wants = { "lspkind-nvim", "LuaSnip" },
+      wants = { "LuaSnip" },
     }
 
     -- Language Server Protocol
