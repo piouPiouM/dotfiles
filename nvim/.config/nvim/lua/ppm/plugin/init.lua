@@ -48,7 +48,6 @@ return require("packer").startup({
       "nvim-lualine/lualine.nvim",
       requires = {
         "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-        "SmiteshP/nvim-navic",
       },
       config = config("lualine"),
     }
@@ -212,10 +211,6 @@ return require("packer").startup({
         "folke/trouble.nvim",
         cmd = { "Trouble", "TroubleToggle" },
         config = function() require("trouble").setup {} end,
-      },
-      {
-        "SmiteshP/nvim-navic",
-        config = config("navic"),
       },
       {
         "jose-elias-alvarez/typescript.nvim",

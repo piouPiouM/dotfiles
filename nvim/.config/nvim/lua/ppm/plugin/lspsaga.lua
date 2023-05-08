@@ -47,7 +47,16 @@ require("lspsaga").setup({
   },
   rename = { in_select = false },
   request_timeout = 5000,
-  symbol_in_winbar = { enable = false, in_custom = false },
+  symbol_in_winbar = {
+    enable = false,
+    separator = " 󰅂 ",
+    ignore_patterns = {},
+    hide_keyword = true,
+    show_file = false,
+    folder_level = 2,
+    respect_root = true,
+    color_mode = true,
+  },
   outline = { win_with = "Neotree" },
   -- diagnostic_header = { ui.icons.error, ui.icons.warn, ui.icons.info, ui.icons.hint },
 })

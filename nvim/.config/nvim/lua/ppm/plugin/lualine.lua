@@ -12,6 +12,11 @@ local function diff_source()
   end
 end
 
+local function symbolwinbar()
+  return require('lspsaga.symbolwinbar'):get_winbar()
+end
+
+
 local file_status_symbols = {
   modified = icons.modified,
   readonly = icons.readonly,
@@ -33,12 +38,13 @@ local winbar = {
       symbols = file_status_symbols
     },
   },
-  --lualine_c = {
-  --  {
-  --    require('lspsaga.symbolwinbar'):get_winbar(),
-  --    separator = { left = "" }
-  --  },
-  --},
+  lualine_c = {
+    {
+      symbolwinbar,
+      draw_empty = true,
+      separator = { left = "" },
+    },
+  },
   lualine_y = {
     {
       "diagnostics",
