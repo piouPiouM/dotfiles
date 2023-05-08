@@ -6,6 +6,7 @@ return require("packer").startup({
   function(use, use_rocks)
     local ft = require("ppm.filetype")
     local config = function(name) return string.format("require('ppm.plugin.%s')", name) end
+    local simple_setup = function(name) return string.format("require('%s').setup({})", name) end
 
     use "wbthomason/packer.nvim"
     use "lewis6991/impatient.nvim"
@@ -210,7 +211,7 @@ return require("packer").startup({
       {
         "folke/trouble.nvim",
         cmd = { "Trouble", "TroubleToggle" },
-        config = function() require("trouble").setup {} end,
+        config = simple_setup("trouble"),
       },
       {
         "jose-elias-alvarez/typescript.nvim",
@@ -268,8 +269,23 @@ return require("packer").startup({
       event = "User ActuallyEditing",
     }
 
-    use { "kylechui/nvim-surround", config = config("nvim-surround"),
-      event = "User ActuallyEditing" }
+    use {
+      "kylechui/nvim-surround",
+      config = config("nvim-surround"),
+      event = "User ActuallyEditing",
+    }
+
+    -- s{c1}{c2}
+    -- S{c1}{c2}
+    -- gs{c1}{c2}
+    -- Note: do not lazy-load it or precise a dependency that is lazy-loaded.
+    use {
+      "ggandor/leap.nvim",
+      config = config("leap"),
+      requires = {
+        { "ggandor/flit.nvim", config = simple_setup("flit") }
+      },
+    }
 
     -- TODO consider wellle/targets.vim
 
