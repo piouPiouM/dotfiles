@@ -5,8 +5,9 @@ require("neo-tree").setup({
   popup_border_style = "rounded",
   enable_git_status = true,
   enable_diagnostics = true,
+  open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "TelescopePrompt", "lspsagaoutline" },
   filesystem = {
-    filtered_items = { hide_by_name = { "node_modules" }, never_show = { ".DS_Store" } },
+    filtered_items = { hide_by_name = { "node_modules" }, always_show = { ".config" }, never_show = { ".DS_Store" } },
     follow_current_file = true,
     use_libuv_file_watcher = true,
     window = { mappings = { ["h"] = "toggle_hidden" } },
