@@ -89,6 +89,14 @@ export GOBIN=$GOPATH/bin
 export PNPM_HOME="${XDG_DATA_HOME}/pnpm"
 
 #
+# Local to current device
+#
+
+if [[ -s "$XDG_DATA_HOME/zsh/exports.zsh" ]] then
+  source "$XDG_DATA_HOME/zsh/exports.zsh"
+fi
+
+#
 # Path management
 #
 
