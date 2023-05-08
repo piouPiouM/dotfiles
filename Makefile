@@ -344,7 +344,7 @@ endif
 # Target: npm
 # -----------------------------------------------------------------------------
 
-.PHONY: npm-save-packages npm-install-packages
+.PHONY: npm-save-packages npm-install-packages npm-update-packages
 
 NPM_GLOBAL_ROOT := $(shell sh -c 'npm root -g')
 
@@ -355,6 +355,10 @@ npm-save-packages:
 ## Install globaly all npm packages.
 npm-install-packages:
 	@xargs npm install --global < ./npm/global-packages.txt
+
+## Update globaly all npm packages.
+npm-update-packages:
+	@xargs npm update --global < ./npm/global-packages.txt
 
 # -----------------------------------------------------------------------------
 # Target: Neovim

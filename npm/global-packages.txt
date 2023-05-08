@@ -1,3 +1,4 @@
+@astrojs/language-server
 @cucumber/language-server
 @vscode/codicons
 bash-language-server
