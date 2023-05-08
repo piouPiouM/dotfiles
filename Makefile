@@ -291,7 +291,11 @@ codicon:
 	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/microsoft/vscode-codicons/raw/main/dist/codicon.ttf"
 
 nerd-fonts:
-	@curl -fsSL --create-dirs -o $(FONTS_DIR)/SymbolsNerdFontComplete-2048-em.ttf "https://github.com/ryanoasis/nerd-fonts/raw/master/src/glyphs/Symbols-2048-em%20Nerd%20Font%20Complete.ttf"
+	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFontMono-Regular.ttf"
+	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFont-Regular.ttf"
+	ifdef OS_MACOS
+		@cp "$(FONTS_DIR)/SymbolsNerdFont{,Mono}-Regular.ttf" ~/Library/Fonts/
+	endif
 
 # -----------------------------------------------------------------------------
 # Target: Homebrew

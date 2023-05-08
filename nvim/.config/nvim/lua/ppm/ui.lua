@@ -1,39 +1,47 @@
-local fun = require("fun")
-local codicons = require("codicons")
-
 local M = {}
 
-M.icons = fun.iter({
-  bulb = "bulb", -- FIXME
-  caret = "chevron-right",
-  comment = "comment",
-  error = "error",
-  help = "question",
-  hint = "comment",
-  info = "info",
-  search = "search",
-  warn = "warning",
-  action = "github-action",
-  folder = "folder",
-  ellipsis = "…",
-  lua = " ",
-  lsp = "server-environment",
-  treesitter = "type-hierarchy",
-  snippet = "rocket",
-  buffer = "layers",  -- FIXME
-  calc = "pie-chart", -- FIXME
-  expand = "chevron-right",
-  collapse = "chevron-down",
-  incoming = "call-incoming",
-  outgoing = "call-outgoing",
-  hover = " ",
-  actionfix = "lightbulb-autofix",
-}):map(function(name, icon_name)
-  local icon = codicons.get(icon_name, "icon")
-
-  return name, (icon ~= nil and icon .. " " or
-      (vim.fn.strdisplaywidth(icon_name) < 3 and icon_name or ""))
-end):tomap()
+M.icons = {
+  -- completion
+  comment = " ",
+  lua = "󰢱 ",
+  lsp = "",
+  treesitter = " ",
+  snippet = "󱐋",
+  buffer = " ",
+  calc = "󱖦 ",
+  ellipsis = " ",
+  -- diagnostic / log
+  error = " ",
+  warn = " ",
+  info = " ",
+  debug = " ",
+  trace = " ",
+  -- git
+  diff = " ",
+  diff_added = " ",
+  diff_ignored = " ",
+  diff_modified = " ",
+  diff_removed = " ",
+  diff_renamed = " ",
+  git_head = "",
+  -- lsp
+  action = " ",
+  actionfix = " ",
+  bulb = "",
+  help = " ",
+  hint = " ",
+  incoming = " ",
+  outgoing = " ",
+  -- navigation
+  caret = "",
+  expand = "",
+  collapse = " ",
+  folder = " ",
+  search = " ",
+  hover = " ",
+  modified = "",
+  readonly = "󰒃 ",
+}
 
 M.borders = {
   simple = "simple",
