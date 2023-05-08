@@ -92,7 +92,7 @@ o.grepprg = "rg --vimgrep"
 o.infercase = true -- Ignore case on insert completion.
 
 -- Better floating windows
-o.pumblend = 17
+o.pumblend = 0 -- plumblend > 0 cause issue with icon font rendering :(
 o.wildmode = "longest:full"
 o.wildoptions = "pum"
 
