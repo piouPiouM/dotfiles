@@ -37,6 +37,12 @@ return require("packer").startup({
 
     }
 
+    -- Notification
+    use {
+      "rcarriga/nvim-notify",
+      config = config("notify"),
+    }
+
     -- StatusLine
     use {
       "nvim-lualine/lualine.nvim",
