@@ -248,8 +248,6 @@ ${XDG_CACHE_HOME}/zim/zimfw.zsh:
 	@curl -fsSL --create-dirs -o $@ "https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh"
 
 theme-catppuccin:
-	@echo '$(YELLOW)Download Catppuccin for Kitty$(RESET)'
-	@curl --silent -o "./kitty/.config/kitty/themes/Catppuccin.conf" "https://raw.githubusercontent.com/catppuccin/kitty/main/catppuccin.conf"
 	@echo '$(YELLOW)Download Catppuccin for Rofi$(RESET)'
 	@curl --silent --output-dir $(XDG_CONFIG_HOME)/rofi/ --remote-name "https://raw.githubusercontent.com/catppuccin/rofi/main/.config/rofi/config.rasi"
 	@curl --silent --output-dir $(XDG_DATA_HOME)/rofi/themes/ --remote-name "https://raw.githubusercontent.com/catppuccin/rofi/main/.local/share/rofi/themes/catppuccin.rasi"
