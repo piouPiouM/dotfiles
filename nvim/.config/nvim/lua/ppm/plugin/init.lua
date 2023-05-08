@@ -86,6 +86,12 @@ return require("packer").startup({
     }
 
     use {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      after = "nvim-treesitter",
+      requires = "nvim-treesitter/nvim-treesitter",
+    }
+
+    use {
       "nvim-treesitter/nvim-treesitter-context",
       requires = { "nvim-treesitter/nvim-treesitter" },
       event = "User ActuallyEditing",
@@ -182,7 +188,7 @@ return require("packer").startup({
     -- Language Server Protocol
     use {
       { "folke/neodev.nvim", event = "User ActuallyEditing" },
-      { "j-hui/fidget.nvim", config = config("fidget"),     event = "User ActuallyEditing" },
+      { "j-hui/fidget.nvim", event = "User ActuallyEditing", config = config("fidget") },
       {
         "neovim/nvim-lspconfig",
         config = config("lsp"),
@@ -208,8 +214,6 @@ return require("packer").startup({
       },
       {
         "SmiteshP/nvim-navic",
-        requires = "neovim/nvim-lspconfig",
-        module = "nvim-navic",
         config = config("navic"),
       },
       {

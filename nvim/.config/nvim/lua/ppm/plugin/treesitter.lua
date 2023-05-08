@@ -26,6 +26,7 @@ require("nvim-treesitter.configs").setup {
     "jsonc",
     "lua",
     "luadoc",
+    "luap",
     "make",
     "markdown",
     "markdown_inline",
@@ -46,11 +47,11 @@ require("nvim-treesitter.configs").setup {
     "vimdoc",
     "vue",
     "yaml",
-  }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  },                    -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
   highlight = {
-    enable = true, -- false will disable the whole extension
-    disable = {}, -- list of language that will be disabled
+    enable = true,      -- false will disable the whole extension
+    disable = {},       -- list of language that will be disabled
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
@@ -65,6 +66,26 @@ require("nvim-treesitter.configs").setup {
     enable = true,
     enable_autocmd = false, -- Disable CursorHold to work with Comment.nvim
   },
+  textobjects = {
+    swap = {
+      enable = true,
+      swap_next = {
+        ["<leader>gs"] = "@parameter.inner",
+      },
+      swap_previous = {
+        ["<leader>gS"] = "@parameter.inner",
+      },
+    },
+  },
+  textsubjects = {
+    enable = true,
+    prev_selection = ',',
+    keymaps = {
+      ['.'] = 'textsubjects-smart',
+      [';'] = 'textsubjects-container-outer',
+      ['i;'] = 'textsubjects-container-inner',
+    },
+  }
 }
 
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
