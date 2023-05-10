@@ -24,7 +24,6 @@ zmodule input
 zmodule utility
 
 zmodule $ZDOTDIR/plugins/aliases
-zmodule $ZDOTDIR/plugins/broot
 
 [[ -v $OS_MACOS ]] && zmodule $ZDOTDIR/plugins/macos
 

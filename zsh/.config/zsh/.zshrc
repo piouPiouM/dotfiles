@@ -71,4 +71,3 @@ if which zoxide >/dev/null 2>&1; then
 fi
 
 # [ -s "$HOME/bin/cloud_functions.sh" ] && source "$HOME/bin/cloud_functions.sh"
-

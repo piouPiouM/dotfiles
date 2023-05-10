@@ -177,3 +177,5 @@ _prompt
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash
 
 source $XDG_CONFIG_HOME/broot/launcher/bash/br
+
+source /Users/mkabab/.config/broot/launcher/bash/br

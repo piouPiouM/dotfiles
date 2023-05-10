@@ -122,12 +122,12 @@ $(ENSURE_DIRS):
 # -----------------------------------------------------------------------------
 
 .PHONY: install-links link-home link-dirs unlink-all unlink-home unlink-dirs
+.PHONY: link-bash link-bat link-bin link-environment link-fzf link-git link-home link-kitty link-lazygit link-neovim link-ranger link-ripgrep link-rofi link-sway link-zsh
 
 ## Generates all the symlinks.
 install-links: link-bash \
 	link-bat \
 	link-bin \
-	link-broot \
 	link-environment \
 	link-git \
 	link-home \
@@ -138,7 +138,7 @@ install-links: link-bash \
 	link-ripgrep \
 	link-rofi \
 	link-sway \
-	link-zsh \
+	link-zsh
 
 ## Generates only symlinks in the Home directory.
 link-home:
@@ -189,11 +189,6 @@ link-lazygit:
 link-bat:
 	@echo -n '$(YELLOW)Link bat environment…$(RESET)'
 	@stow bat && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
-
-## Install broot environment
-link-broot:
-	@echo -n '$(YELLOW)Link broot environment…$(RESET)'
-	@stow broot && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install ranger environment
 link-ranger:
