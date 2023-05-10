@@ -1,5 +1,10 @@
-.NOTPARALLEL:
+MAKEFLAGS += --warn-undefined-variables
+MAKEFLAGS += --no-builtin-rules
 .DEFAULT_GOAL = help
+.DELETE_ON_ERROR:
+.NOTPARALLEL:
+.ONESHELL:
+.SHELLFLAGS := -eu -o pipefail -c
 
 all: help
 
@@ -11,13 +16,11 @@ export XDG_CONFIG_HOME := $(HOME)/.config
 export XDG_DATA_HOME   := $(HOME)/.local/share
 export XDG_CACHE_HOME  := $(HOME)/.cache
 
-NIGHTFOX_THEME_PATH := "$(XDG_DATA_HOME)/nvim/site/pack/packer/start/nightfox.nvim/extra"
-
 # -----------------------------------------------------------------------------
 # Utilities
 # -----------------------------------------------------------------------------
 
-.PHONY: zsh-check
+.PHONY: zsh-activate zsh-check
 
 uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
 
@@ -129,6 +132,7 @@ install-links: link-bash \
 	link-bat \
 	link-bin \
 	link-environment \
+	link-fzf \
 	link-git \
 	link-home \
 	link-kitty \
@@ -184,6 +188,11 @@ link-kitty:
 link-lazygit:
 	@echo -n '$(YELLOW)Link lazygit environment…$(RESET)'
 	@stow lazygit && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+
+## Install fzf environment
+link-fzf:
+	@echo -n '$(YELLOW)Link fzf environment…$(RESET)'
+	@stow fzf && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install bat environment
 link-bat:
@@ -242,13 +251,77 @@ ranger/.config/ranger/devicons.py ranger/.config/ranger/plugins/devicons_linemod
 ${XDG_CACHE_HOME}/zim/zimfw.zsh:
 	@curl -fsSL --create-dirs -o $@ "https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh"
 
-theme-catppuccin:
-	@echo '$(YELLOW)Download Catppuccin for Rofi$(RESET)'
-	@curl --silent --output-dir $(XDG_CONFIG_HOME)/rofi/ --remote-name "https://raw.githubusercontent.com/catppuccin/rofi/main/.config/rofi/config.rasi"
-	@curl --silent --output-dir $(XDG_DATA_HOME)/rofi/themes/ --remote-name "https://raw.githubusercontent.com/catppuccin/rofi/main/.local/share/rofi/themes/catppuccin.rasi"
+download-dictionaries:
+	 @curl --silent --create-dirs --output-dir $(XDG_DATA_HOME)/dictionaries/ --output "fr.wordlist" "https://raw.githubusercontent.com/redacted/XKCD-password-generator/master/xkcdpass/static/fr-corrected.txt" && sed -i '' 's@c/@ç@g' "$(XDG_DATA_HOME)/dictionaries/fr.wordlist"
 
+# -----------------------------------------------------------------------------
+# Target: Themes
+# https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html
+# -----------------------------------------------------------------------------
+
+NIGHTFOX_THEME_PATH := "$(XDG_DATA_HOME)/nvim/site/pack/packer/start/nightfox.nvim/extra"
+
+THEME_CATPPUCCIN_BAT := $(XDG_CONFIG_HOME)/bat/themes/catppuccin-frappe.tmTheme \
+												$(XDG_CONFIG_HOME)/bat/themes/catppuccin-latte.tmTheme \
+												$(XDG_CONFIG_HOME)/bat/themes/catppuccin-macchiato.tmTheme \
+												$(XDG_CONFIG_HOME)/bat/themes/catppuccin-mocha.tmTheme
+
+THEME_CATPPUCCIN_LAZYGIT := $(XDG_DATA_HOME)/lazygit/themes/catppuccin-frappe.yml \
+														$(XDG_DATA_HOME)/lazygit/themes/catppuccin-latte.yml \
+														$(XDG_DATA_HOME)/lazygit/themes/catppuccin-macchiato.yml \
+														$(XDG_DATA_HOME)/lazygit/themes/catppuccin-mocha.yml
+
+THEME_CATPPUCCIN_ROFI := $(XDG_DATA_HOME)/rofi/themes/catppuccin-frappe.rasi \
+												$(XDG_DATA_HOME)/rofi/themes/catppuccin-latte.rasi \
+												$(XDG_DATA_HOME)/rofi/themes/catppuccin-macchiato.rasi \
+												$(XDG_DATA_HOME)/rofi/themes/catppuccin-mocha.rasi
+
+THEME_ROSE_PINE_ROFI := $(XDG_DATA_HOME)/rofi/themes/rose-pine.rasi \
+												$(XDG_DATA_HOME)/rofi/themes/rose-pine-dawn.rasi \
+												$(XDG_DATA_HOME)/rofi/themes/rose-pine-moon.rasi
+
+THEME_ROSE_PINE_FZF := $(XDG_DATA_HOME)/fzf/themes/rose-pine.sh \
+											 $(XDG_DATA_HOME)/fzf/themes/rose-pine-dawn.sh \
+											 $(XDG_DATA_HOME)/fzf/themes/rose-pine-moon.sh
+
+.PHONY: install-themes theme-catppuccin theme-nightfox theme-rose-pine theme-postinstall
+
+## Install themes for various tools
+install-themes: theme-catppuccin theme-nightfox theme-rose-pine
+
+$(THEME_CATPPUCCIN_BAT):
+	@echo "$(YELLOW)Download $(@F) for bat$(RESET)"
+	@curl --silent --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/bat/main/$(subst catppuccin,Catppuccin,$(@F))" -o $(@F)
+
+$(THEME_CATPPUCCIN_LAZYGIT):
+	@echo "$(YELLOW)Download $(@F) for Lazygit$(RESET)"
+	@curl --silent --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/lazygit/main/themes/$(subst catppuccin-,,$(@F))" -o $(@F)
+	@sed -i '' -e 's/^/  /' -e '1s/^/gui:\n/' $(@)
+
+$(THEME_CATPPUCCIN_ROFI):
+ifdef OS_LINUX
+	@echo "$(YELLOW)Download $(@F) for Rofi$(RESET)"
+	@curl --silent --output-dir $(@D) --remote-name "https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/$(@F)"
+endif
+
+$(THEME_ROSE_PINE_ROFI):
+ifdef OS_LINUX
+	@echo "$(YELLOW)Download $(@F) for Rofi$(RESET)"
+	@curl --silent --output-dir $(@D) --remote-name "https://raw.githubusercontent.com/rose-pine/rofi/main/$(@F)"
+endif
+
+$(THEME_ROSE_PINE_FZF):
+	@echo "$(YELLOW)Download $(@F) for fzf$(RESET)"
+	@curl --silent --output-dir $(@D) --remote-name "https://raw.githubusercontent.com/rose-pine/fzf/main/dist/$(@F)"
+	@sed -i '' 's/FZF_DEFAULT_OPTS/FZF_THEME/' $(@)
+
+## Download Catppuccin theme
+theme-catppuccin: | $(THEME_CATPPUCCIN_BAT) $(THEME_CATPPUCCIN_LAZYGIT) $(THEME_CATPPUCCIN_ROFI)
+	@$(MAKE) theme-postinstall
+
+## Download Nightfox theme
 theme-nightfox:
-	@echo '$(YELLOW)Install Nightfox for Kitty from Neovim$(RESET)'
+	@echo "$(YELLOW)Install Nightfox for Kitty from Neovim$(RESET)"
 	@cp "$(NIGHTFOX_THEME_PATH)/dawnfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Dawnfox.conf"
 	@cp "$(NIGHTFOX_THEME_PATH)/dayfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Dayfox.conf"
 	@cp "$(NIGHTFOX_THEME_PATH)/duskfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Duskfox.conf"
@@ -256,8 +329,11 @@ theme-nightfox:
 	@cp "$(NIGHTFOX_THEME_PATH)/nordfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Nordfox.conf"
 	@cp "$(NIGHTFOX_THEME_PATH)/terafox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Terafox.conf"
 
-download-dictionaries:
-	 @curl --silent --create-dirs --output-dir $(XDG_DATA_HOME)/dictionaries/ --output "fr.wordlist" "https://raw.githubusercontent.com/redacted/XKCD-password-generator/master/xkcdpass/static/fr-corrected.txt" && sed -i '' 's@c/@ç@g' "$(XDG_DATA_HOME)/dictionaries/fr.wordlist"
+theme-rose-pine: | $(THEME_ROSE_PINE_FZF) $(THEME_ROSE_PINE_ROFI)
+	@$(MAKE) theme-postinstall
+
+theme-postinstall:
+	@$(call cmd_exists,bat) && bat cache --build
 
 # -----------------------------------------------------------------------------
 # Target: Fonts
@@ -273,9 +349,9 @@ FONTS_IA = $(FONTS_DIR)/iAWriterQuattroS-Bold.ttf \
 
 ## Download and install fonts
 install-fonts: codicon nerd-fonts $(FONTS_IA)
-	ifdef OS_LINUX
-		@fc-cache -f $(FONTS_DIR)
-	endif
+ifdef OS_LINUX
+	@fc-cache -f $(FONTS_DIR)
+endif
 
 $(FONTS_IA):
 	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/iaolo/iA-Fonts/raw/master/iA%20Writer%20Quattro/Static/$(notdir $@)"
@@ -286,9 +362,9 @@ codicon:
 nerd-fonts:
 	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFontMono-Regular.ttf"
 	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFont-Regular.ttf"
-	ifdef OS_MACOS
-		@cp "$(FONTS_DIR)/SymbolsNerdFont{,Mono}-Regular.ttf" ~/Library/Fonts/
-	endif
+ifdef OS_MACOS
+	@cp "$(FONTS_DIR)/SymbolsNerdFont{,Mono}-Regular.ttf" ~/Library/Fonts/
+endif
 
 # -----------------------------------------------------------------------------
 # Target: Homebrew
@@ -362,7 +438,7 @@ npm-update-packages:
 neovim-dependencies: GEM_COMMAND = $(shell gem list --silent -i neovim && echo 'update' || echo 'install')
 
 ## Update the Neovim environment.
-neovim: neovim-update neovim-dependencies neovim-packer
+neovim: neovim-treesitter neovim-update neovim-dependencies neovim-packer
 	@nvim +checkhealth
 
 ## Updates Neovim from Homebrew.

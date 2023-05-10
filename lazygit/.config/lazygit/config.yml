@@ -1,10 +1,5 @@
 gui:
   border: 'rounded'
   showIcons: true
-  theme:
-    selectedLineBgColor:
-      - black
-    selectedRangeBgColor:
-      - reverse
 os:
   editPreset: 'nvim'
