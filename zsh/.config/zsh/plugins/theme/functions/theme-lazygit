@@ -1,0 +1,14 @@
+# -------------------------------------------------------------------
+# vim:et sts=2 sw=2 ft=zsh
+# -------------------------------------------------------------------
+# @name theme-lazygit
+# @arg $1 string Theme name
+
+local -r _theme_file="${XDG_DATA_HOME}/lazygit/themes/${1}.yml"
+if [[ -f $_theme_file ]]; then
+  export LG_CONFIG_FILE="${XDG_CONFIG_HOME}/lazygit/config.yml,${_theme_file}"
+
+  return 0
+fi
+
+return 1

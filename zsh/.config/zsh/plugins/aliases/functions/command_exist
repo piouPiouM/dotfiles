@@ -1,0 +1,9 @@
+# -------------------------------------------------------------------
+# vim:et sts=2 sw=2 ft=zsh
+# -------------------------------------------------------------------
+# @arg $1 string The name of the command to be tested.
+if (( ${+commands[$1]} )); then
+  return 0
+fi
+
+return 1

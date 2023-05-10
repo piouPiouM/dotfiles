@@ -1,0 +1,10 @@
+# -------------------------------------------------------------------
+# vim:et sts=2 sw=2 ft=zsh
+# -------------------------------------------------------------------
+# @name theme-fzf
+# @arg $1 string Theme name
+
+typeset -r _theme_file="${XDG_DATA_HOME}/fzf/themes/${1}.sh"
+if [[ -f $_theme_file ]]; then
+  source $_theme_file
+fi

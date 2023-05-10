@@ -1,0 +1,15 @@
+# -------------------------------------------------------------------
+# vim:et sts=2 sw=2 ft=zsh
+# -------------------------------------------------------------------
+# @name theme-kitty
+# @arg $1 string Theme name
+
+typeset -Ar _resolved=(
+  "catppuccin-mocha" "Catppuccin-Mocha"
+  "catppuccin-latte" "Catppuccin-Latte"
+  "rose-pine" "Rosé Pine"
+  "rose-pine-dawn" "Rosé Pine Dawn"
+)
+kitty +kitten themes --reload-in=all ${_resolved[$1]}
+
+return $?

@@ -24,6 +24,7 @@ zmodule input
 zmodule utility
 
 zmodule $ZDOTDIR/plugins/aliases
+zmodule $ZDOTDIR/plugins/theme
 
 [[ -v $OS_MACOS ]] && zmodule $ZDOTDIR/plugins/macos
 
@@ -51,13 +52,8 @@ zmodule zsh-users/zsh-completions
 # completion must be sourced after zsh-users/zsh-completions
 zmodule completion
 
-# Replace zsh's default completion selection menu with fzf.
-# fzf-tab needs to be loaded after compinit, but before plugins which will wrap widgets,
-# such as zsh-autosuggestions or fast-syntax-highlighting.
-# zmodule Aloxaf/fzf-tab
 zmodule unixorn/fzf-zsh-plugin
-
-# zmodule $ZDOTDIR/plugins/fzf
+zmodule $ZDOTDIR/plugins/fzf
 
 # Fish-like syntax highlighting for Zsh.
 # zsh-users/zsh-syntax-highlighting must be sourced after completion
