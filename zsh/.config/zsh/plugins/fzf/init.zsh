@@ -4,26 +4,17 @@ if ! command_exist fzf; then
   return 0
 fi
 
-
-
-
-
-
-
-# From https://github.com/unixorn/fzf-zsh-plugin/blob/19a22259ee62a2f01541f8ef8d9942529f70c690/fzf-zsh-plugin.plugin.zsh#L95
 _fzf_preview() {
+  local -r preview_file='([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {}))'
+  local -r preview_dir='([[ -d {} ]] && (tree -C {} | less))'
+  local -r preview_fallback='echo {} 2>/dev/null | head -n 200'
 
-
-  foolproofPreview='([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2>/dev/null | head -n 200'
-  local preview
-  [[ "$FZF_PREVIEW_ADVANCED" == true ]] \
-    && preview="lessfilter-fzf {}" \
-    || preview="$foolproofPreview"
-  echo "$preview"
+  echo "${preview_file} || ${preview_dir} || ${preview_fallback}"
 }
 
 [[ -z "$FZF_PREVIEW" ]]        && export FZF_PREVIEW="$(_fzf_preview)"
-[[ -z "$FZF_PREVIEW_WINDOW" ]] && export FZF_PREVIEW_WINDOW=':hidden'
+# [[ -z "$FZF_PREVIEW_WINDOW" ]] && export FZF_PREVIEW_WINDOW=':hidden'
+  # "--preview-window='${FZF_PREVIEW_WINDOW}'"
 
 _fzf_default_opts+=(
   "--layout=reverse"
@@ -31,7 +22,6 @@ _fzf_default_opts+=(
   "--height=80%"
   "--multi"
   "--preview='${FZF_PREVIEW}'"
-  "--preview-window='${FZF_PREVIEW_WINDOW}'"
   "--prompt='  '"
   "--pointer='󰅂'"
   "--marker='✓'"
