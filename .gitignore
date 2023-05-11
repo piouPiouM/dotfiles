@@ -6,5 +6,3 @@ nvim/.config/nvim/autoload/plug.vim.old
 sessions/
 *.zwc
 *.zwc.old
-.zcompcache
-.zsh_history
