@@ -125,12 +125,14 @@ $(ENSURE_DIRS):
 # -----------------------------------------------------------------------------
 
 .PHONY: install-links link-home link-dirs unlink-all unlink-home unlink-dirs
-.PHONY: link-bash link-bat link-bin link-environment link-fzf link-git link-home link-kitty link-lazygit link-neovim link-ranger link-ripgrep link-rofi link-sway link-zsh
+.PHONY: link-bash link-bat link-bin link-clifm link-environment link-fzf link-git link-home link-kitty link-lazygit link-neovim
+.PHONY: link-ranger link-ripgrep link-rofi link-sway link-zsh
 
 ## Generates all the symlinks.
 install-links: link-bash \
 	link-bat \
 	link-bin \
+	link-clifm \
 	link-environment \
 	link-fzf \
 	link-git \
@@ -203,6 +205,11 @@ link-bat:
 link-ranger:
 	@echo -n '$(YELLOW)Link ranger environment…$(RESET)'
 	@stow ranger && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+
+## Install clifm environment
+link-clifm:
+	@echo -n '$(YELLOW)Link clifm environment…$(RESET)'
+	@stow --restow clifm && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 link-bin:
 	@echo -n '$(YELLOW)Link binaries…$(RESET)'

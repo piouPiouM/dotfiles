@@ -1,0 +1,8 @@
+.config/clifm/colors/default*.clifm
+.config/clifm/profiles/*/.last
+.config/clifm/profiles/*/bookmarks.clifm
+.config/clifm/profiles/*/dirhist.clifm
+.config/clifm/profiles/*/history.clifm
+.config/clifm/profiles/*/jump.clifm
+.config/clifm/profiles/*/log.clifm
+.config/clifm/profiles/*/nets.clifm
