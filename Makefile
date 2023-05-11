@@ -149,82 +149,82 @@ install-links: link-bash \
 ## Generates only symlinks in the Home directory.
 link-home:
 	@echo -n '$(YELLOW)Link home environment…$(RESET)'
-	@stow --dotfiles dot && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow --dotfiles dot && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install environment configutation
 link-environment:
 	@echo -n '$(YELLOW)Link environment…$(RESET)'
-	@stow environment && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow environment && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install zsh environment
 link-zsh:
 	@echo -n '$(YELLOW)Link zsh environment…$(RESET)'
-	@stow zsh && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow zsh && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install bash environment
 link-bash:
 	@echo -n '$(YELLOW)Link bash environment…$(RESET)'
-	@stow bash && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow bash && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install git environment
 link-git:
 	@echo -n '$(YELLOW)Link git environment…$(RESET)'
-	@stow git && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow git && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install ripgrep environment
 link-ripgrep:
 	@echo -n '$(YELLOW)Link ripgrep environment…$(RESET)'
-	@stow ripgrep && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow ripgrep && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install neovim environment
 link-neovim:
 	@echo -n '$(YELLOW)Link neovim environment…$(RESET)'
-	@stow nvim && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow nvim && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install kitty environment
 link-kitty:
 	@echo -n '$(YELLOW)Link kitty environment…$(RESET)'
-	@stow kitty && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow kitty && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install Lazygit environment
 link-lazygit:
 	@echo -n '$(YELLOW)Link lazygit environment…$(RESET)'
-	@stow lazygit && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow lazygit && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install fzf environment
 link-fzf:
 	@echo -n '$(YELLOW)Link fzf environment…$(RESET)'
-	@stow fzf && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow fzf && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install bat environment
 link-bat:
 	@echo -n '$(YELLOW)Link bat environment…$(RESET)'
-	@stow bat && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow bat && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install ranger environment
 link-ranger:
 	@echo -n '$(YELLOW)Link ranger environment…$(RESET)'
-	@stow ranger && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow ranger && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install clifm environment
 link-clifm:
 	@echo -n '$(YELLOW)Link clifm environment…$(RESET)'
-	@stow --restow clifm && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow --restow --restow clifm && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 link-bin:
 	@echo -n '$(YELLOW)Link binaries…$(RESET)'
 	@mkdir -p $(XDG_DATA_HOME)/bin
-	@stow --target=$(XDG_DATA_HOME)/bin bin && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow --target=$(XDG_DATA_HOME)/bin bin && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install Sway environment
 link-sway:
 	@echo -n '$(YELLOW)Link sway environment…$(RESET)'
-	@stow sway && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow sway && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install Rofi environment
 link-rofi:
 	@echo -n '$(YELLOW)Link rofi environment…$(RESET)'
-	@stow rofi && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@stow --restow rofi && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Deletes all the symlinks.
 unlink-all: unlink-home unlink-dirs
