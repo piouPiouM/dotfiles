@@ -68,7 +68,7 @@ cmp.setup({
   }),
   sorting = require("ppm.plugin.cmp.sorting"),
   formatting = require("ppm.plugin.cmp.formatting"),
-  experimental = { ghost_text = { hl_group = 'Comment' } },
+  experimental = { ghost_text = true },
   view = {
     entries = { name = 'custom', selection_order = 'near_cursor' }
   },
