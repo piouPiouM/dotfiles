@@ -392,7 +392,7 @@ brew-download:
 ## Dump Homebrew packages.
 brew-dump:
 	@echo '$(YELLOW)Dump Homebrew packages…$(RESET)'
-	@$(call cmd_exists,brew) && brew bundle dump --force --file=$(realpath Brewfile) && git restore --staged -- $(realpath Brewfile)
+	@$(call cmd_exists,brew) && $(realpath bin/macos/brew-dump) $(realpath Brewfile)
 
 ## Install Homebrew packages.
 brew-install:

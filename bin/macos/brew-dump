@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+# @file @brew-dump
+# @brief Dump first level formula installed with Homebrew
+# @arg $1 string Output file. Default to './Brewfile'.
+
+DUMP=$(brew bundle dump --file=-)
+BREWS=$(echo "$DUMP" | grep -Fw -f <(brew leaves --installed-on-request))
+OTHERS=$(echo "$DUMP" | grep -v '^brew')
+
+(
+	echo "$OTHERS"
+	echo "$BREWS"
+) >"${1:-${PWD}/Brewfile}"
