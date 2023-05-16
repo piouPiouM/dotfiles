@@ -208,6 +208,12 @@ return require("packer").startup({
         after = "nvim-lspconfig",
       },
       {
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        config = config("lsp_lines"),
+        event = "LspAttach",
+        after = "nvim-lspconfig",
+      },
+      {
         "folke/trouble.nvim",
         cmd = { "Trouble", "TroubleToggle" },
         config = simple_setup("trouble"),
@@ -218,6 +224,11 @@ return require("packer").startup({
         config = config("typescript"),
         ft = ft.typescript,
       },
+      {
+        "marilari88/twoslash-queries.nvim",
+        config = config("twoslash-queries"),
+        ft = ft.typescript,
+      }
     }
 
     -- Syntax
