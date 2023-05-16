@@ -8,6 +8,7 @@ _fzf_preview() {
   local -r preview_file='([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {}))'
   local -r preview_dir='([[ -d {} ]] && (tree -C {} | less))'
   local -r preview_fallback='echo {} 2>/dev/null | head -n 200'
+  # local -r preview_image='([[ -f {} && "${$(file --dereference --brief --mime-type -- {})//\/*}" ]]) && kitty +kitten icat --clear --silent --stdin=no --unicode-placeholder --place "40x40@150x12" {}'
 
   echo "${preview_file} || ${preview_dir} || ${preview_fallback}"
 }
@@ -19,16 +20,22 @@ _fzf_preview() {
 _fzf_default_opts+=(
   "--layout=reverse"
   "--info=inline"
-  "--height=80%"
   "--multi"
+  "--cycle"
+  "--scroll-off=3"
+  "--height=80%"
+  "--border=top"
+  "--tabstop=2"
   "--preview='${FZF_PREVIEW}'"
   "--prompt='  '"
   "--pointer='󰅂'"
-  "--marker='✓'"
+  "--marker=' '"
+  "--color='gutter:-1'"
   "--bind 'ctrl-p:toggle-preview'"
   "--bind 'ctrl-a:select-all'"
   "--bind 'ctrl-e:execute(${EDITOR} {+} >/dev/tty)'"
   "--bind 'ctrl-v:execute(code {+})'"
+  "--bind backward-eof:abort"
 )
 
 if command_exist pbcopy; then

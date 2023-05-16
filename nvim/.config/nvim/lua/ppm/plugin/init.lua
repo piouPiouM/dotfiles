@@ -120,39 +120,39 @@ return require("packer").startup({
 
     -- Fuzzy Finder
     use {
+      "ibhagwan/fzf-lua",
+      requires = { "nvim-tree/nvim-web-devicons" },
+      setup = config("fzf-lua/setup"),
+      config = config("fzf-lua"),
+      cmd = "FzfLua",
+      module = "fzf-lua",
+    }
+
+    use {
       {
         "nvim-telescope/telescope.nvim",
         requires = {
           "nvim-lua/plenary.nvim",
           "nvim-lua/popup.nvim",
-          "nvim-telescope/telescope-file-browser.nvim",
-          "nvim-telescope/telescope-fzf-native.nvim",
-          "nvim-telescope/telescope-live-grep-args.nvim",
           "nvim-telescope/telescope-symbols.nvim",
           -- "nvim-telescope/telescope-ui-select.nvim",
         },
         wants = {
           "plenary.nvim",
           "popup.nvim",
-          "telescope-file-browser.nvim",
-          "telescope-fzf-native.nvim",
-          "telescope-live-grep-args.nvim",
           "telescope-symbols.nvim",
           -- "telescope-ui-select.nvim",
         },
-        setup = config("telescope_setup"),
+        -- setup = config("telescope_setup"),
         config = config("telescope"),
         cmd = "Telescope",
         module = "telescope",
       },
-      { "nvim-lua/plenary.nvim",                        opt = true },
-      { "nvim-lua/popup.nvim",                          opt = true },
-      { "kkharji/sqlite.lua",                           opt = true },
-      { "nvim-telescope/telescope-file-browser.nvim",   opt = true },
-      { "nvim-telescope/telescope-fzf-native.nvim",     opt = true, run = "make" },
-      { "nvim-telescope/telescope-live-grep-args.nvim", opt = true },
-      { "nvim-telescope/telescope-symbols.nvim",        opt = true },
-      { "nvim-telescope/telescope-ui-select.nvim",      opt = true, disable = true },
+      { "nvim-lua/plenary.nvim",                   opt = true },
+      { "nvim-lua/popup.nvim",                     opt = true },
+      { "kkharji/sqlite.lua",                      opt = true },
+      { "nvim-telescope/telescope-symbols.nvim",   opt = true },
+      { "nvim-telescope/telescope-ui-select.nvim", opt = true, disable = true },
     }
 
     -- use { "camspiers/snap", rocks = { "fzy" } }

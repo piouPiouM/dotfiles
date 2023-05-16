@@ -1,5 +1,4 @@
 local code_key = function(key) return "<leader>g" .. key end
-local search_key = function(key) return "<leader>" .. (key or "") end
 
 local M = {
   open = "o",
@@ -10,17 +9,19 @@ local M = {
   scroll_up = "<C-u>",
   completion = { complete = "<C-Space>", escape = "<C-e>" },
   search = {
-    buffer = { key = search_key("b"), desc = "Search buffers" },
-    oldfile = { key = search_key("m"), desc = "Search recent files (MRU)" },
-    file = { key = search_key("p"), desc = "Search files" },
-    file_cwd = { key = search_key("<Space>"), desc = "Search files in current directory" },
-    git_file = { key = search_key("s"), desc = "Search files in git repository" },
-    grep = { key = search_key("fg"), desc = "Live grep" },
-    grep_cursor = { key = search_key("f;"), desc = "Search word under the cursor" },
-    help_tags = { key = search_key("H"), desc = "Search in Neovim help" },
-    tree_reveal = { key = search_key("R"), desc = "Reaveal current file in file browser" },
+    buffer = { key = "<leader>b", desc = "Search buffers" },
+    oldfile = { key = "<leader>m", desc = "Search recent files (MRU)" },
+    file = { key = "<leader>p", desc = "Search files" },
+    file_all = { key = "<leader>fa", desc = "Search files without any restriction" },
+    file_cwd = { key = "<leader><Space>", desc = "Search files in current directory" },
+    git_file = { key = "<leader>s", desc = "Search files in git repository" },
+    grep = { key = "<leader>fg", desc = "Live grep" },
+    grep_cursor = { key = "<leader>f;", desc = "Search word under the cursor" },
+    help_tags = { key = "<leader>H", desc = "Search in Neovim help" },
+    resume = { key = "<leader>r", desc = "Resume last search" },
+    tree_reveal = { key = "<leader>R", desc = "Reaveal current file in file browser" },
     tree_reveal_cursor = {
-      key = search_key(";"),
+      key = "<leader>;",
       desc = "Reveal file under the cursor in file browser",
     },
   },
