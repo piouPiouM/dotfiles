@@ -376,7 +376,7 @@ nerd-fonts:
 	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFontMono-Regular.ttf"
 	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFont-Regular.ttf"
 ifdef OS_MACOS
-	@cp "$(FONTS_DIR)/SymbolsNerdFont{,Mono}-Regular.ttf" ~/Library/Fonts/
+	@cp "$(FONTS_DIR)/SymbolsNerdFont-Regular.ttf" "$(FONTS_DIR)/SymbolsNerdFontMono-Regular.ttf"  ~/Library/Fonts/
 endif
 
 # -----------------------------------------------------------------------------
