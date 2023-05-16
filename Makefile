@@ -134,6 +134,7 @@ install-links: link-bash \
 	link-bin \
 	link-clifm \
 	link-environment \
+	link-fd \
 	link-fzf \
 	link-git \
 	link-home \
@@ -190,6 +191,11 @@ link-kitty:
 link-lazygit:
 	@echo -n '$(YELLOW)Link lazygit environment…$(RESET)'
 	@stow --restow lazygit && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+
+## Install fd environment
+link-fd:
+	@echo -n '$(YELLOW)Link fd environment…$(RESET)'
+	@stow --restow fd && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Install fzf environment
 link-fzf:

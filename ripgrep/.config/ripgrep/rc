@@ -6,8 +6,10 @@
 --color=auto
 --follow
 --hidden
---no-ignore-vcs
+--ignore
 --smart-case
+--no-require-git
+--one-file-system
 
 # Colors, like Ag
 # --colors=line:fg:yellow

@@ -1,5 +1,6 @@
 # Global ignore file.
-# Used by ripgrep (rg)
+# Used by fd and ripgrep (rg).
+# Note: ripgrep only takes it in consideration in my personal directory.
 #
 # vim: ft=gitignore
 
@@ -9,7 +10,7 @@ cache/
 node_modules/
 tmp/
 .zcompcache/
-
+packer_compiled.lua
 .DS_Store
 tags
 *.elmi

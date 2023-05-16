@@ -34,6 +34,7 @@ zmodule zsh-users/zsh-completions
 # completion must be sourced after zsh-users/zsh-completions
 zmodule completion
 
+zmodule $ZDOTDIR/plugins/fd
 zmodule $ZDOTDIR/plugins/fzf
 zmodule unixorn/fzf-zsh-plugin
 

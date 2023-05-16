@@ -41,3 +41,6 @@ typeset -a _fzf_theme=( ${=FZF_THEME} )
 _fzf_default_opts+=("${_fzf_theme[@]}")
 
 export FZF_DEFAULT_OPTS=$(printf '%s\n' "${_fzf_default_opts[@]}")
+export FZF_DEFAULT_COMMAND="fd ${FD_DEFAULT_OPTS} --follow"
+export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
+export FZF_ALT_C_COMMAND="${FZF_DEFAULT_COMMAND} --type d"
