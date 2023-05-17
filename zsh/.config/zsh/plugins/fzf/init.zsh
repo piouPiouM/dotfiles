@@ -31,7 +31,7 @@ _fzf_default_opts+=(
   "--pointer='󰅂'"
   "--marker=' '"
   "--color='gutter:-1'"
-  "--bind 'ctrl-p:toggle-preview'"
+  "--bind '?:toggle-preview'"
   "--bind 'ctrl-a:select-all'"
   "--bind 'ctrl-e:execute(${EDITOR} {+} >/dev/tty)'"
   "--bind 'ctrl-v:execute(code {+})'"
