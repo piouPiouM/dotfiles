@@ -1,11 +1,18 @@
 local fp = require("moses")
 local ui = require("ppm.ui")
+local with_theme = require("ppm.plugin.fzf-lua.theme").with
 
-local M = { themes = {}, providers = {} }
+local M = { providers = {} }
 
 local function title(label)
   return string.format(" %s ", label)
 end
+
+local with_title = fp.curry(function(label, opts)
+  return vim.tbl_deep_extend("force", {
+    winopts = { title = title(label) }
+  }, opts)
+end)
 
 local with_history = fp.curry(function(type, opts)
   return vim.tbl_deep_extend("force", {
@@ -23,85 +30,22 @@ local function without_history(opts)
   })
 end
 
-local with_theme = fp.curry(function(name, opts)
-  return vim.tbl_deep_extend("force", M.themes[name], opts)
-end)
+M.providers.command_history = fp.pipe({
+  prompt = "  ",
+}, with_theme("ivy"), with_title("Command history"))
 
-M.themes.cursor = {
-  fzf_opts = {
-    ["--info"] = "hidden",
-    ["--layout"] = "reverse",
-  },
-  winopts_fn = function()
-    local height = 15
-    local position = vim.api.nvim_win_get_position(0)
-    local border_size = 1
-    local top_left = {
-      col = vim.fn.wincol() + position[2],
-      row = vim.fn.winline() + position[1] + border_size,
-    }
-    local winopts = {
-      col = top_left.col,
-      row = top_left.row + height < vim.o.lines
-          and top_left.row
-          or vim.fn.winline() + position[1] - height - border_size - 1,
-      width = vim.o.columns - top_left.col - 4,
-      height = height,
-    }
+M.providers.search_history = fp.pipe({
+  prompt = "  ",
+}, with_theme("ivy"), with_title("Search history"))
 
-    return winopts
-  end
-}
-
-M.themes.vertical = {
-  winopts = {
-    preview = {
-      layout = "vertical",
-      vertical = "up",
-    },
-  },
-}
-
-M.themes.ivy = {
-  fzf_opts = {
-    ["--layout"] = "reverse",
-    ["--no-separator"] = "",
-    ["--pointer"] = "󰅂",
-    ["--marker"] = " ",
-  },
-  winopts = {
-    height = 0.42,
-    width  = 1,
-    row    = 1,
-  },
-}
-
-M.themes.sidebar_right = {
-  winopts_fn = function()
-    local WIN_WIDTH = vim.o.columns
-    local max_width = math.floor(WIN_WIDTH * 0.3)
-
-    return {
-      height  = 1,
-      width   = max_width,
-      col     = WIN_WIDTH - max_width - 1,
-      row     = 0,
-      preview = {
-        hidden = "hidden",
-        title = false,
-      },
-    }
-  end
-}
-
-M.providers.complete_file = with_theme("cursor")({
+M.providers.complete_file = fp.pipe({
   prompt = ui.icons.search .. " ",
   winopts = {
     title = title("Insert filepath"),
   },
-})
+}, with_theme("cursor"))
 
-M.providers.registers = M.themes.sidebar_right
+M.providers.registers = with_theme("sidebar_right")
 
 M.providers.files = fp.pipe({
   git_icons = false,
@@ -157,6 +101,15 @@ M.providers.git = {
 
 M.providers.grep = fp.pipe({
   rg_glob = true,
+  -- Add support for all arguments passed to rg after the separator ` --`.
+  -- @example
+  --   fzf -- -tzsh
+  rg_glob_fn = function(query, opts)
+    local search_query, glob_str = query:match("(.*)" .. opts.glob_separator .. "(.*)")
+    local glob_args = glob_str:gsub("^%s+", ""):gsub("-", "%-") .. " "
+
+    return search_query, glob_args
+  end,
 }, with_history("grep"), with_theme("ivy"))
 
 M.providers.keymaps = fp.pipe({
@@ -167,12 +120,22 @@ M.providers.keymaps = fp.pipe({
   },
 }, with_theme("ivy"))
 
+M.providers.spell_suggest = fp.pipe({
+  prompt = ui.icons.search .. " ",
+  winopts = {
+    title = title("Spell suggestions"),
+  },
+}, with_theme("cursor"))
+
 local config = {
   "telescope",
   global_git_icons = true,
   global_resume = true,
   global_resume_query = true,
   file_icon_padding = vim.env.TERM == "xterm-kitty" and " " or "",
+  fzf_opts = {
+    ["--no-separator"] = "",
+  },
   winopts = {
     title = "",
     title_pos = "center",
@@ -186,6 +149,11 @@ local config = {
         ["png"] = { "viu", "-t" },
       }
     }
+  },
+  keymap = {
+    builtin = {
+      ["?"] = "toggle-preview",
+    },
   },
 }
 
