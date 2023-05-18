@@ -1,13 +1,15 @@
 #! /usr/bin/env bash
 # @file @brew-dump
-# @brief Dump first level formula installed with Homebrew
+# @brief Dump first level formula installed with Homebrew.
+#        NOTE: requires installing the `pcre2` formula.
 # @arg $1 string Output file. Default to './Brewfile'.
 
-DUMP=$(brew bundle dump --file=-)
-BREWS=$(echo "$DUMP" | grep -Fw -f <(brew leaves --installed-on-request))
-OTHERS=$(echo "$DUMP" | grep -v '^brew')
+DUMP=$(brew bundle dump --describe --file=-)
+BREWS=$(echo "$DUMP" | grep -B 1 -Fw -f <(brew leaves --installed-on-request) | grep -v '^--')
+OTHERS=$(echo "$DUMP" | grep -v -f <(echo "$BREWS") | pcre2grep -vM '^(# .*$\n)?brew ')
+BREWFILE="${1:-${PWD}/Brewfile}"
 
 (
 	echo "$OTHERS"
 	echo "$BREWS"
-) >"${1:-${PWD}/Brewfile}"
+) >"$BREWFILE"

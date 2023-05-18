@@ -398,6 +398,7 @@ brew-download:
 ## Dump Homebrew packages.
 brew-dump:
 	@echo '$(YELLOW)Dump Homebrew packages…$(RESET)'
+	@$(call cmd_exists,brew) && brew list | grep -Fw pcre2 >/dev/null || brew install pcre2
 	@$(call cmd_exists,brew) && $(realpath bin/macos/brew-dump) $(realpath Brewfile)
 
 ## Install Homebrew packages.
