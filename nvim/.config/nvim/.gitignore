@@ -1,1 +1,4 @@
 packer_compiled.lua
+spell/*.spl
+spell/*.sug
+!spell/*.add.*
