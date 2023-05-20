@@ -1,3 +1,4 @@
+SHELL=/bin/bash
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 .DEFAULT_GOAL = help
@@ -7,6 +8,7 @@ MAKEFLAGS += --no-builtin-rules
 .SHELLFLAGS := -eu -o pipefail -c
 
 all: help
+.PHONY: all
 
 # -----------------------------------------------------------------------------
 # Configutation
@@ -19,6 +21,13 @@ export XDG_CACHE_HOME  := $(HOME)/.cache
 # -----------------------------------------------------------------------------
 # Utilities
 # -----------------------------------------------------------------------------
+
+# Use the FORCE rule as dependency to force the execution of the target rule when
+# the false prerequisites contain `%` which is interpreted as a literal.
+# https://www.gnu.org/software/make/manual/html_node/Force-Targets.html
+# https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html
+FORCE:
+.PHONY: FORCE
 
 .PHONY: zsh-activate zsh-check
 
@@ -33,7 +42,7 @@ ifeq ($(uname_S),Darwin)
 endif
 
 # https://stackoverflow.com/a/44221541/392725
-_n := $(findstring -n,$(firstword -$(MAKEFLAGS)))
+_DRY_RUN := $(findstring -n,$(firstword -$(MAKEFLAGS)))
 
 RED    := $(shell tput -Txterm setaf 1)
 GREEN  := $(shell tput -Txterm setaf 2)
@@ -80,15 +89,15 @@ zsh-activate:
 
 ## Install all the prerequisites and perform installation of Homebrew.
 install: install-dirs install-links brew npm-install-packages
-	@echo '$(GREEN)Next target to run:$(RESET)'
+	@echo '$(YELLOW)Next target to run:$(RESET)'
 	@echo ''
-	@echo '$(YELLOW)make neovim$(RESET)'
+	@echo '$(GREEN)make neovim$(RESET)'
 
 ## Clean all cache systems.
 cleanup:
-	@brew $(_n) cleanup
+	@brew $(_DRY_RUN) cleanup
 	@npm cache verify
-	@gem cleanup --silent $(_n)
+	@gem cleanup --silent $(_DRY_RUN)
 
 ## Print the version number of main programs.
 versions:
@@ -102,145 +111,98 @@ versions:
 # Target: tree structure
 # -----------------------------------------------------------------------------
 
-.PHONY: install-dirs
-
-ENSURE_DIRS = $(XDG_DATA_HOME)/nvim/bundle \
-			  $(XDG_DATA_HOME)/nvim/shada \
-			  $(XDG_DATA_HOME)/nvim/swap \
-			  $(XDG_DATA_HOME)/nvim/undo \
-			  $(XDG_DATA_HOME)/nvim/view \
-			  $(XDG_DATA_HOME)/tmux \
-			  $(XDG_DATA_HOME)/zoxide \
-			  $(XDG_CACHE_HOME)/zsh \
-			  ${HOME}/go/bin
+ENSURE_DIRS = \
+							$(XDG_DATA_HOME)/nvim/bundle \
+							$(XDG_DATA_HOME)/dictionaries \
+							$(XDG_DATA_HOME)/nvim/shada \
+							$(XDG_DATA_HOME)/nvim/swap \
+							$(XDG_DATA_HOME)/nvim/undo \
+							$(XDG_DATA_HOME)/nvim/view \
+							$(XDG_DATA_HOME)/tmux \
+							$(XDG_DATA_HOME)/zoxide \
+							$(XDG_CACHE_HOME)/zsh \
+							${HOME}/go/bin
 
 ## Creates the dotfiles tree structure.
 install-dirs: $(ENSURE_DIRS)
+.PHONY: install-dirs
 
 $(ENSURE_DIRS):
 	mkdir -p $@
 
 # -----------------------------------------------------------------------------
+# Import OS specific variables
+# -----------------------------------------------------------------------------
+
+include include/make/$(if OS_MACOS,macos,linux)-variables.mk
+
+# -----------------------------------------------------------------------------
 # Target: symlinks
 # -----------------------------------------------------------------------------
 
-.PHONY: install-links link-home link-dirs unlink-all unlink-home unlink-dirs
-.PHONY: link-bash link-bat link-bin link-clifm link-environment link-fzf link-git link-home link-kitty link-lazygit link-neovim
-.PHONY: link-ranger link-ripgrep link-rofi link-sway link-zsh
+TO_LINK = bash \
+					bat \
+					clifm \
+					environment \
+					fd \
+					fzf \
+					git \
+					kitty \
+					lazygit \
+					nvim \
+					ranger \
+					ripgrep \
+					zsh \
+					$(SPECIFIC_TO_LINK)
+LINK_TARGETS = $(addprefix link-,$(TO_LINK))
+UNLINK_TARGETS = $(addprefix unlink-,$(TO_LINK))
+
+# The `::` allow to re-declare the target to act as post-processing target.
+$(LINK_TARGETS)::
+	@echo -n '$(YELLOW)Link $(subst link-,,$(@)) environment…$(RESET)'
+	@stow $(_DRY_RUN) --restow $(subst link-,,$(@)) && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+.PHONY: $(LINK_TARGETS)
 
 ## Generates all the symlinks.
-install-links: link-bash \
-	link-bat \
-	link-bin \
-	link-clifm \
-	link-environment \
-	link-fd \
-	link-fzf \
-	link-git \
-	link-home \
-	link-kitty \
-	link-lazygit \
-	link-neovim \
-	link-ranger \
-	link-ripgrep \
-	link-rofi \
-	link-sway \
-	link-zsh
+install-links: link-bin link-home $(LINK_TARGETS)
+.PHONY: install-links
 
-## Generates only symlinks in the Home directory.
+## Generates only symlinks in the Home directory
 link-home:
 	@echo -n '$(YELLOW)Link home environment…$(RESET)'
 	@stow --restow --dotfiles dot && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+.PHONY: link-home
 
-## Install environment configutation
-link-environment:
-	@echo -n '$(YELLOW)Link environment…$(RESET)'
-	@stow --restow environment && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
-
-## Install zsh environment
-link-zsh:
-	@echo -n '$(YELLOW)Link zsh environment…$(RESET)'
-	@stow --restow zsh && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
-
-## Install bash environment
-link-bash:
-	@echo -n '$(YELLOW)Link bash environment…$(RESET)'
-	@stow --restow bash && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
-
-## Install git environment
-link-git:
-	@echo -n '$(YELLOW)Link git environment…$(RESET)'
-	@stow --restow git && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
-
-## Install ripgrep environment
-link-ripgrep:
-	@echo -n '$(YELLOW)Link ripgrep environment…$(RESET)'
-	@stow --restow ripgrep && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
-
-## Install neovim environment
-link-neovim:
-	@echo -n '$(YELLOW)Link neovim environment…$(RESET)'
-	@stow --restow nvim && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
-
-## Install kitty environment
-link-kitty:
-	@echo -n '$(YELLOW)Link kitty environment…$(RESET)'
-	@stow --restow kitty && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
-
-## Install Lazygit environment
-link-lazygit:
-	@echo -n '$(YELLOW)Link lazygit environment…$(RESET)'
-	@stow --restow lazygit && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
-
-## Install fd environment
-link-fd:
-	@echo -n '$(YELLOW)Link fd environment…$(RESET)'
-	@stow --restow fd && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
-
-## Install fzf environment
-link-fzf:
-	@echo -n '$(YELLOW)Link fzf environment…$(RESET)'
-	@stow --restow fzf && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
-
-## Install bat environment
-link-bat:
-	@echo -n '$(YELLOW)Link bat environment…$(RESET)'
-	@stow --restow bat && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
-
-## Install ranger environment
-link-ranger:
-	@echo -n '$(YELLOW)Link ranger environment…$(RESET)'
-	@stow --restow ranger && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
-
-## Install clifm environment
-link-clifm:
-	@echo -n '$(YELLOW)Link clifm environment…$(RESET)'
-	@stow --restow --restow --restow clifm && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
-
+## Install custom binaries.
 link-bin:
 	@echo -n '$(YELLOW)Link binaries…$(RESET)'
 	@mkdir -p $(XDG_DATA_HOME)/bin
 	@stow --restow --target=$(XDG_DATA_HOME)/bin bin && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+.PHONY: link-bin
 
-## Install Sway environment
-link-sway:
-	@echo -n '$(YELLOW)Link sway environment…$(RESET)'
-	@stow --restow sway && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
-
-## Install Rofi environment
-link-rofi:
-	@echo -n '$(YELLOW)Link rofi environment…$(RESET)'
-	@stow --restow rofi && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+link-ranger::
+	@pip install --upgrade Pillow
+.PHONY: link-ranger
 
 ## Deletes all the symlinks.
-unlink-all: unlink-home unlink-dirs
+unlink-all: unlink-home unlink-bin $(UNLINK_TARGETS)
+.PHONY: unlink-all
+
+## Delete other symlinks.
+$(UNLINK_TARGETS):
+	@echo -n "$(YELLOW)Unlink $(subst unlink-,,$(@)) environment…$(RESET)"
+	@stow --delete $(subst unlink-,,$(@)) && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+.PHONY: $(UNLINK_TARGETS)
 
 ## Deletes symlinks in the Home directory.
 unlink-home:
 	@stow --dotfiles --delete dot
+.PHONY: unlink-home
 
+## Delete symlink of custom binaries.
 unlink-bin:
 	@stow --target=$(XDG_DATA_HOME)/bin --delete bin
+.PHONY: unlink-bin
 
 # -----------------------------------------------------------------------------
 # Target: Downloads
@@ -250,22 +212,18 @@ bin/vim-profiler:
 	@curl --silent --create-dirs -o $@ "https://raw.githubusercontent.com/bchretien/vim-profiler/master/vim-profiler.py"
 	@chmod +x $@
 
-bin/imgcat:
-	@curl --silent --create-dirs -o $@ "https://iterm2.com/utilities/imgcat"
-	@chmod +x $@
-
-bin/imgls:
-	@curl --silent --create-dirs -o $@ "https://iterm2.com/utilities/imgls"
-	@chmod +x $@
-
 ranger/.config/ranger/devicons.py ranger/.config/ranger/plugins/devicons_linemode.py:
 	@curl --silent -o $@ "https://raw.githubusercontent.com/alexanderjeurissen/ranger_devicons/master/$(notdir $@)"
 
 ${XDG_CACHE_HOME}/zim/zimfw.zsh:
 	@curl -fsSL --create-dirs -o $@ "https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh"
 
-download-dictionaries:
-	 @curl --silent --create-dirs --output-dir $(XDG_DATA_HOME)/dictionaries/ --output "fr.wordlist" "https://raw.githubusercontent.com/redacted/XKCD-password-generator/master/xkcdpass/static/fr-corrected.txt" && sed -i '' 's@c/@ç@g' "$(XDG_DATA_HOME)/dictionaries/fr.wordlist"
+$(XDG_DATA_HOME)/dictionaries/fr.wordlist: $(ENSURE_DIRS)
+	@echo -n "$(YELLOW)Download French wordlist…$(RESET)"
+	@curl --silent --create-dirs --output-dir $(XDG_DATA_HOME)/dictionaries/ --output "fr.wordlist" "https://raw.githubusercontent.com/redacted/XKCD-password-generator/master/xkcdpass/static/fr-corrected.txt" && sed -i '' 's@c/@ç@g' "$(XDG_DATA_HOME)/dictionaries/fr.wordlist" && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+
+download-dictionaries: $(XDG_DATA_HOME)/dictionaries/fr.wordlist
+.PHONY: download-dictionaries
 
 # -----------------------------------------------------------------------------
 # Target: Themes
@@ -352,76 +310,34 @@ theme-postinstall:
 # Target: Fonts
 # -----------------------------------------------------------------------------
 
-.PHONY: install-fonts codeicon nerd-fonts
-
 FONTS_DIR = $(XDG_DATA_HOME)/fonts
 FONTS_IA = $(FONTS_DIR)/iAWriterQuattroS-Bold.ttf \
 					 $(FONTS_DIR)/iAWriterQuattroS-BoldItalic.ttf \
 					 $(FONTS_DIR)/iAWriterQuattroS-Italic.ttf \
 					 $(FONTS_DIR)/iAWriterQuattroS-Regular.ttf
 
-## Download and install fonts
-install-fonts: codicon nerd-fonts $(FONTS_IA)
-ifdef OS_LINUX
-	@fc-cache -f $(FONTS_DIR)
-endif
+## Download and install fonts.
+install-fonts:: codicon nerd-fonts $(FONTS_IA)
+	@$(MAKE) postinstall-fonts
+.PHONY: install-fonts 
 
+## Download and install iA Writter QuattroS font.
 $(FONTS_IA):
-	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/iaolo/iA-Fonts/raw/master/iA%20Writer%20Quattro/Static/$(notdir $@)"
+	@echo "$(YELLOW)Download $(@F) font$(RESET)"
+	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/iaolo/iA-Fonts/raw/master/iA%20Writer%20Quattro/Static/$(@F)"
 
+## Download and install Codicon font.
 codicon:
+	@echo "$(YELLOW)Download Codicon font$(RESET)"
 	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/microsoft/vscode-codicons/raw/main/dist/codicon.ttf"
+.PHONY: codeicon
 
+## Download and install Nerd Fonts.
 nerd-fonts:
+	@echo "$(YELLOW)Download Nerd Fonts$(RESET)"
 	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFontMono-Regular.ttf"
 	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFont-Regular.ttf"
-ifdef OS_MACOS
-	@cp "$(FONTS_DIR)/SymbolsNerdFont-Regular.ttf" "$(FONTS_DIR)/SymbolsNerdFontMono-Regular.ttf"  ~/Library/Fonts/
-endif
-
-# -----------------------------------------------------------------------------
-# Target: Homebrew
-# -----------------------------------------------------------------------------
-
-ifdef OS_MACOS
-.PHONY: brew brew-download brew-dump brew-install brew-postinstall brew-upgrade
-
-## Install Homebrew and your packages.
-brew: brew-download brew-install brew-postinstall brew-upgrade
-
-# Download Homebrew the first time.
-brew-download:
-	@echo '$(YELLOW)Download Homebrew if necessary…$(RESET)'
-	@$(call cmd_exists,brew) && exit 0 || \
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-
-## Dump Homebrew packages.
-brew-dump:
-	@echo '$(YELLOW)Dump Homebrew packages…$(RESET)'
-	@$(call cmd_exists,brew) && brew list | grep -Fw pcre2 >/dev/null || brew install pcre2
-	@$(call cmd_exists,brew) && $(realpath bin/macos/brew-dump) $(realpath Brewfile)
-
-## Install Homebrew packages.
-brew-install:
-	@echo '$(YELLOW)Install Homebrew packages…$(RESET)'
-	@$(call cmd_exists,brew) && brew bundle --no-upgrade --file=$(realpath Brewfile)
-
-# Run Homebrew post-install tasks.
-brew-postinstall:
-	@echo '$(YELLOW)Run Homebrew post-install…$(RESET)'
-	@brew completions link
-	@pip3 install --upgrade pip setuptools wheel
-	@update_rubygems
-	@gem update --system --no-document
-	@$(call cmd_exists,fzf) && $(MAKE) fzf-postinstall
-
-## Update Homebrew packages.
-brew-upgrade:
-	@brew update
-	@brew upgrade
-	@$(call cmd_exists,fzf) && $(MAKE) fzf-update
-	@$(MAKE) brew-postinstall
-endif
+.PHONY: nerd-fonts
 
 # -----------------------------------------------------------------------------
 # Target: npm
@@ -449,8 +365,6 @@ npm-update-packages:
 
 .PHONY: neovim neovim-update neovim-dependencies neovim-plugins neovim-treesitter neovim-packer
 
-neovim-dependencies: GEM_COMMAND = $(shell gem list --silent -i neovim && echo 'update' || echo 'install')
-
 ## Update the Neovim environment.
 neovim: neovim-treesitter neovim-update neovim-dependencies neovim-packer
 	@nvim +checkhealth
@@ -476,6 +390,7 @@ neovim-packer:
 	@git clone --depth 1 https://github.com/wbthomason/packer.nvim $$XDG_DATA_HOME/nvim/site/pack/packer/start/packer.nvim
 
 ## Updates Neovim dependencies.
+neovim-dependencies: GEM_COMMAND = $(shell gem list --silent -i neovim && echo 'update' || echo 'install')
 neovim-dependencies:
 	@npm install -g neovim --no-progress
 	@pip3 install --upgrade pynvim neovim
@@ -486,7 +401,7 @@ neovim-dependencies:
 # Target: applications
 # -----------------------------------------------------------------------------
 
-.PHONY: fzf-postinstall fzf-update lua-install-packages icon-kitty-dark icon-kitty-light
+.PHONY: fzf-postinstall fzf-update lua-install-packages
 
 fzf-postinstall:
 	@$$(brew --prefix)/opt/fzf/install --xdg --key-bindings --completion --no-update-rc --no-bash --no-fish
@@ -494,8 +409,7 @@ fzf-postinstall:
 
 ## Updates fzf.
 fzf-update:
-	@$(call cmd_exists,fzf) && brew reinstall fzf || exit 0
-	@$(call cmd_exists,fzf) && $(MAKE) fzf-postinstall
+	@$(call cmd_exists,fzf) && brew reinstall fzf && $(MAKE) fzf-postinstall || exit 0
 
 lua-install-packages:
 ifdef OS_MACOS
@@ -503,15 +417,11 @@ ifdef OS_MACOS
 endif
 	@$(call cmd_exists,luarocks) && luarocks install --server=https://luarocks.org/dev luaformatter
 
-icon-kitty-dark:
-	@cp ./kitty/assets/kitty-dark.icns "$$(mdfind kMDItemCFBundleIdentifier = 'net.kovidgoyal.kitty')/Contents/Resources/kitty.icns"
-	@rm /var/folders/*/*/*/com.apple.dock.iconcache
-	@killall Dock
+# -----------------------------------------------------------------------------
+# Import OS specific targets
+# -----------------------------------------------------------------------------
 
-icon-kitty-light:
-	@cp ./kitty/assets/kitty-light.icns "$$(mdfind kMDItemCFBundleIdentifier = 'net.kovidgoyal.kitty')/Contents/Resources/kitty.icns"
-	@rm /var/folders/*/*/*/com.apple.dock.iconcache
-	@killall Dock
+include include/make/$(if OS_MACOS,macos,linux).mk
 
 # -----------------------------------------------------------------------------
 # Target: usage and help
@@ -519,8 +429,6 @@ icon-kitty-light:
 # -----------------------------------------------------------------------------
 
 .PHONY: help
-
-TARGET_MAX_CHAR_NUM := 20
 
 ## Print usage and this help message.
 help:
@@ -534,7 +442,13 @@ help:
 		if (helpMessage) { \
 			helpCommand = substr($$1, 0, index($$1, ":")-1); \
 			helpMessage = substr(lastLine, RSTART + 3, RLENGTH); \
-			printf "  $(YELLOW)%-$(TARGET_MAX_CHAR_NUM)s$(RESET) $(GREEN)%s$(RESET)\n", helpCommand, helpMessage; \
+			printf "  $(YELLOW)%-20s$(RESET) $(GREEN)%s$(RESET)\n", helpCommand, helpMessage; \
 		} \
 	} \
 	{ lastLine = $$0 }' $(MAKEFILE_LIST)
+	@echo ''
+	@echo 'Link targets:'
+	@printf  '  $(YELLOW)link-%-15s$(RESET) $(GREEN)Create symlinks for %1$$s$(RESET).\n' $(subst link-,,$(LINK_TARGETS))
+	@echo ''
+	@echo 'Unlink targets:'
+	@printf  '  $(YELLOW)unlink-%-13s$(RESET) $(GREEN)Delete symlinks for %1$$s$(RESET).\n' $(subst unlink-,,$(UNLINK_TARGETS))
