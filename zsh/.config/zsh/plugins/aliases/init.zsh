@@ -15,8 +15,6 @@ alias dotfiles="nvim $HOME/.dotfiles"
 alias ll="ls -laGH"
 
 # Tools
-alias gitui="gitui -t $XDG_CONFIG_HOME/gitui/theme-catppuccin.ron"
-alias gu="gitui"
 alias icat="kitty +kitten icat --align=left"
 alias idimensions='identify -format "%f: %G\n"'
 alias nerdfonts='fc-list : family | rg -i nerd'

@@ -69,5 +69,3 @@ bindkey -M vicmd 'j' history-substring-search-down
 if which zoxide >/dev/null 2>&1; then
   _evalcache zoxide init zsh
 fi
-
-# [ -s "$HOME/bin/cloud_functions.sh" ] && source "$HOME/bin/cloud_functions.sh"

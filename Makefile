@@ -105,6 +105,7 @@ versions:
 	@echo "$(YELLOW)node$(RESET) $$(node --version)"
 	@echo "$(YELLOW)npm$(RESET) $$(npm --version)"
 	@ruby --version
+	@/usr/local/opt/ruby/bin/ruby --version
 	@echo "$(YELLOW)gem$(RESET) $$(gem --version)"
 
 # -----------------------------------------------------------------------------
@@ -112,15 +113,19 @@ versions:
 # -----------------------------------------------------------------------------
 
 ENSURE_DIRS = \
-							$(XDG_DATA_HOME)/nvim/bundle \
+							$(XDG_CACHE_HOME)/gem \
+							$(XDG_CACHE_HOME)/less \
+							$(XDG_CACHE_HOME)/zsh \
+							$(XDG_DATA_HOME)/cargo \
 							$(XDG_DATA_HOME)/dictionaries \
+							$(XDG_DATA_HOME)/gem \
+							$(XDG_DATA_HOME)/nvim/bundle \
 							$(XDG_DATA_HOME)/nvim/shada \
 							$(XDG_DATA_HOME)/nvim/swap \
 							$(XDG_DATA_HOME)/nvim/undo \
 							$(XDG_DATA_HOME)/nvim/view \
 							$(XDG_DATA_HOME)/tmux \
 							$(XDG_DATA_HOME)/zoxide \
-							$(XDG_CACHE_HOME)/zsh \
 							${HOME}/go/bin
 
 ## Creates the dotfiles tree structure.
@@ -152,6 +157,7 @@ TO_LINK = bash \
 					nvim \
 					ranger \
 					ripgrep \
+					tmux \
 					zsh \
 					$(SPECIFIC_TO_LINK)
 LINK_TARGETS = $(addprefix link-,$(TO_LINK))
