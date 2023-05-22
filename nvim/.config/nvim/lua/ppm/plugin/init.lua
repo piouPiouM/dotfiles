@@ -67,6 +67,7 @@ return require("packer").startup({
       config = config("neotree"),
       cmd = { "Neotree", "NeoTreeFloatToggle", "NeoTreeRevealToggle" },
     }
+    use { "stevearc/oil.nvim", config = config("oil") }
 
     -- Maximize or restore windows.
     use { "szw/vim-maximizer", cmd = "MaximizerToggle", keys = { { "n", "<F3>" } } }
