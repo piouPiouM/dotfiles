@@ -22,8 +22,6 @@ if [[ "${UNAME_S:l}" == "darwin" ]]
 then
   export CURRENT_OS="macos"
   export OS_MACOS=true
-  # Useful for Packer's Hererocks (nvim)
-  export MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion)
 elif [[ "${UNAME_S:l}" == "linux" ]]
 then
   export CURRENT_OS="linux"
@@ -35,7 +33,6 @@ fi
 #
 # XDG Specification
 #
-
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-"$HOME"/.cache}
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME"/.config}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-"$HOME"/.local/share}
@@ -58,14 +55,10 @@ export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 
-export PPM_BREW_PREFIX=/usr/local
 export VISUAL="nvim"
 export EDITOR="nvim"
 export TERMINAL="kitty"
 export BROWSER="firefox"
-
-# Opting out
-export HOMEBREW_NO_ANALYTICS=1
 
 #
 # Language
@@ -100,25 +93,3 @@ export PNPM_HOME="$XDG_DATA_HOME"/pnpm
 if [[ -s "$XDG_DATA_HOME"/zsh/exports.zsh ]] then
   source "$XDG_DATA_HOME"/zsh/exports.zsh
 fi
-
-#
-# Path management
-#
-
-path=(
-  $GOBIN
-  # $GOROOT/bin
-  $PNPM_HOME
-  "$HOME"/.luarocks/bin
-  "$CARGO_HOME"/bin
-  "$XDG_DATA_HOME/bin/${CURRENT_OS}"
-	"$XDG_DATA_HOME"/bin
-	"$XDG_DATA_HOME"/gem/ruby/3.1.0/bin
-  /usr/local/opt/ruby/bin
-	"$HOME"/.gem/ruby/2.6.0/bin
-	/usr/local/opt/curl/bin
-	$path
-)
-
-# Eliminate duplicates in *paths
-typeset -gU cdpath fpath mailpath path

@@ -3,40 +3,11 @@
 # `.zshrc' is sourced in interactive shells. It should contain commands to set up aliases, functions, options, key
 # bindings, etc.
 
-# Set editor default keymap to emacs (`-e`) or vi (`-v`)
-bindkey -e
-
-# Remove older command from the history if a duplicate is to be added.
-setopt HIST_IGNORE_ALL_DUPS
-
-# Save timestamp of command and duration.
-setopt EXTENDED_HISTORY
-
-# When trimming history, lose oldest duplicates first.
-setopt HIST_EXPIRE_DUPS_FIRST
-
-# Disable spelling correction for arguments.
-unsetopt CORRECT_ALL
-
-# Prompt for spelling correction of commands.
-setopt CORRECT
-
-# Customize spelling correction prompt.
-SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
-
-# Remove path separator from WORDCHARS.
-WORDCHARS=${WORDCHARS//[\/]}
-
-# Disable automatic widget re-binding on each precmd. This can be set when
-# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-
-# Set what highlighters will be used.
-# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-
 # Set a custom path for the completion dump file.
 zstyle ':zim:completion' dumpfile "${XDG_CACHE_HOME}/zsh/.zcompdump-${ZSH_VERSION}"
+
+# Enable double-dot parent directory expansion.
+zstyle ':zim:input' double-dot-expand yes
 
 # Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
 if [[ ! "${ZIM_HOME}/init.zsh" -nt "${ZDOTDIR:-${HOME}}/.zimrc" ]]; then

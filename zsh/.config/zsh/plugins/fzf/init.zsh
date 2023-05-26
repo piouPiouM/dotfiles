@@ -14,12 +14,14 @@ _fzf_preview() {
 }
 
 [[ -z "$FZF_PREVIEW" ]]        && export FZF_PREVIEW="$(_fzf_preview)"
+export FZF_PREVIEW="$(_fzf_preview)"
 # [[ -z "$FZF_PREVIEW_WINDOW" ]] && export FZF_PREVIEW_WINDOW=':hidden'
   # "--preview-window='${FZF_PREVIEW_WINDOW}'"
 
 _fzf_default_opts+=(
   "--layout=reverse"
   "--info=inline"
+  "--no-separator"
   "--multi"
   "--cycle"
   "--scroll-off=3"
@@ -47,6 +49,7 @@ fi
 typeset -a _fzf_theme=( ${=FZF_THEME} )
 _fzf_default_opts+=("${_fzf_theme[@]}")
 
+export FZF_COMPLETION_DIR_COMMANDS='cd pushd rmdir tree bd'
 export FZF_DEFAULT_OPTS=$(printf '%s\n' "${_fzf_default_opts[@]}")
 export FZF_DEFAULT_COMMAND="fd ${FD_DEFAULT_OPTS} --follow"
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"

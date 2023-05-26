@@ -1,14 +1,11 @@
 # vim:ft=zsh
 
-# -------
-# Modules
-# -------
-
 # Boost evalued tools like zoxide
 zmodule mroth/evalcache
 
 # Sets sane Zsh built-in environment options.
 zmodule environment
+zmodule "${ZDOTDIR}"/plugins/environment --name ppm-environment
 
 # Provides handy git aliases and functions.
 zmodule git
@@ -20,29 +17,31 @@ zmodule input
 # TODO: use a custom plugin to do that
 zmodule utility
 
-zmodule $ZDOTDIR/plugins/aliases
-zmodule $ZDOTDIR/plugins/theme
+zmodule "${ZDOTDIR}"/plugins/theme
+zmodule "${ZDOTDIR}"/plugins/aliases
 
-[[ -v $OS_MACOS ]] && zmodule $ZDOTDIR/plugins/macos
+if [[ -r "${ZDOTDIR}"/plugins/"${CURRENT_OS}" ]]; then
+  zmodule "${ZDOTDIR}"/plugins/"${CURRENT_OS}"
+fi
 
-zmodule $ZDOTDIR/plugins/starship
+zmodule "${ZDOTDIR}"/plugins/starship
 
 # Additional completion definitions for Zsh.
 zmodule zsh-users/zsh-completions
 
 # Enables and configures smart and extensive tab completion.
-# completion must be sourced after zsh-users/zsh-completions
+# Must be sourced after zsh-users/zsh-completions
 zmodule completion
 
-zmodule $ZDOTDIR/plugins/fd
-zmodule $ZDOTDIR/plugins/fzf
+zmodule "${ZDOTDIR}"/plugins/fd
+zmodule "${ZDOTDIR}"/plugins/fzf
 zmodule unixorn/fzf-zsh-plugin
 
 # Fish-like syntax highlighting for Zsh.
 zmodule zdharma-continuum/fast-syntax-highlighting
 
 # Fish-like history search (up arrow) for Zsh.
-# zsh-users/zsh-history-substring-search must be sourced after zsh-users/zsh-syntax-highlighting
+# Must be sourced after zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-history-substring-search
 
 # Fish-like autosuggestions for Zsh.
