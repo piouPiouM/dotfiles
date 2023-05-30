@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+function check_dependency() {
+	if ! (builtin command -V "$1" >/dev/null 2>&1); then
+		echo "preview-image: missing dependency: can't find $1" 1>&2
+		exit 1
+	fi
+}
+
+check_dependency viu
+
+file="$1"
+w=$2
+h=$3
+x=${4:-0}
+y=${5:-0}

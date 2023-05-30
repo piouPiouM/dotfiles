@@ -37,6 +37,6 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 # }}}
 
-if which zoxide >/dev/null 2>&1; then
+if (( ${+commands[zoxide]} )); then
   _evalcache zoxide init zsh
 fi

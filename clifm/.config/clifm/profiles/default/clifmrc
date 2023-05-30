@@ -15,7 +15,7 @@
 #=====================================#
 
 # Show hidden files (i.e. files starting with a dot)?
-;ShowHiddenFiles=false
+ShowHiddenFiles=true
 
 # Use a regular expression to filter files from the files list.
 # Example: "!.*~$" to exclude backup files (ending with ~), or "^\." to
@@ -198,7 +198,7 @@
 #=====================================#
 
 # Enable fuzzy matching for filename/path completions and suggestions
-;FuzzyMatching=false
+FuzzyMatching=true
 
 # Fuzzy algorithm. Available options are:
 # 1 = faster, not Unicode aware
@@ -232,7 +232,7 @@
 
 # If set to true, suggest file names using the corresponding file type
 # color (set via the color scheme file)
-;SuggestFiletypeColor=false
+SuggestFiletypeColor=true
 
 # Suggest a brief description for internal commands
 ;SuggestCmdDesc=true
@@ -259,7 +259,7 @@
 ;AutoOpen=true
 
 # If set to true, the 'r' command executes 'trash' instead of rm(1).
-;TrashAsRm=false
+TrashAsRm=true
 
 # Set the default copy command. Available options are:
 # 0 = 'cp -iRp', 1 = 'cp -Rp', 2 = 'advcp -giRp', 3 = 'advcp -gRp',
@@ -286,7 +286,7 @@
 # Only used when opening a directory via a new CliFM instance (with the
 # 'x' command), this option specifies the command to be used to launch a
 # terminal emulator to run CliFM on it.
-;TerminalCmd="xterm -e"
+TerminalCmd="kitty"
 
 # We have three search strategies: 0 = glob-only, 1 = regex-only,
 # and 2 = glob-regex. Used by the quick search function
@@ -334,7 +334,7 @@
 #=====================================#
 
 # Enable case sensitive listing for files in the current directory
-;CaseSensitiveList=false
+CaseSensitiveList=true
 
 # Enable case sensitive lookup for the directory jumper function (via 
 # the 'j' command)
@@ -356,7 +356,7 @@
 
 # If set to true, start CliFM in the last visited directory (and in the
 # last used workspace). This option is overriden by StartingPath (if set).
-;RestoreLastPath=true
+RestoreLastPath=false
 
 # MaxPath is only used for the /p option of the prompt: the current
 # working directory will be abbreviated to its basename (everything after

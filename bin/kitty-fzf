@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+# It should search the history in the current kitty terminal with fzf.
+#  The result is just written into the terminal, without a newline.
+#
+# fzf main view doesnt preserve coloring(?TODO) but made it's preview do it. But the preview does lack a nice marker (?TODO)
+
+# Add to ~/.config/kitty/kitty.conf
+#  map kitty_mod+g  launch --allow-remote-control --location=hsplit --stdin-add-formatting --stdin-source=@screen_scrollback /home/jasper/.bin/util/kitty_fzf.sh @active-kitty-window-id
+# Change the relevant parts, /home/jasper/.bin/util/ and the exact key binding kitty_mod+/ (?)
+#
+# An alternative approach might use `skim` instead https://github.com/lotabout/skim
+
+# Not very subtle, but other kittens may have reduced the size..
+kitty @ resize-window --self --axis=vertical --increment=+50
+
+FILE=${TMPDIR}/mine/kitty_fzf
+mkdir -p "${TMPDIR}"/mine/
+
+echo "\n\n\n\n" >$FILE # (the lines extra so its more center of preview.
+cat >>$FILE
+
+# Yeez, terminals have colors, why no command to remove them.
+#   https://stackoverflow.com/questions/17998978/removing-colors-from-output
+# The `cut` also deals with that.
+
+cat $FILE | sed -r 's/\x1B\[(;?[0-9]{1,3})+[mGK]//g' | cut -b 1-3 --complement |
+	fzf --tac -e --preview-window=down \
+		--preview 'tail +{n} '$FILE |
+	tr -d '\n' \
+		>/tmp/mine/kitty_fzf_result
+
+# Maybe there is a better way to talk back a result.. Maybe scroll there anyway?
+out() {
+	echo -n s='"'
+	cat /tmp/mine/kitty_fzf_result
+	echo '"'
+}
+out | kitty @ send-text --match=id:$1 --stdin
+
+# Attempts to add a marker on the preview, failed.
+#        --preview 'N=0 tail +{n} '$FILE' | while read LINE; do if [ $N == 3 ]; then echo "> $LINE"; else echo "  $LINE"; fi;N=$(expr $N + 1); done'
+#
+#  # Turning colors off doesnt make it use pre-existing ones.
+#  --color='bg:-1,bg+:-1,fg:-1,fg+:-1'

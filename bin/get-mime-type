@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+# -------------------------------------------------------------------
+# @name get-mime-type
+# @brief Returns the MIME type of the given files
+# -------------------------------------------------------------------
+file --dereference --brief --mime-type -- "$@"

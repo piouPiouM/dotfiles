@@ -1,0 +1,15 @@
+# -------------------------------------------------------------------
+# List unicode codes of the given font file.
+# -------------------------------------------------------------------
+# vim:et sts=2 sw=2 ft=zsh
+
+unicode-list() {
+  if [[ ! -f "$1" ]] then
+    echo "Given font file does not exists."
+    return 1
+  fi
+
+  local table=($(fc-query --format='%{charset}\n' "${1}"))
+
+  echo "${table[@]}"
+}

@@ -25,6 +25,7 @@ g.node_host_prog = "/usr/local/bin/neovim-node-host"
 if fn.has("macunix") then
   g.python_host_prog = "/usr/local/bin/python2"
   g.python3_host_prog = "/usr/local/bin/python3"
+  g.ruby_host_prog = vim.fn.expand("~/.gem/ruby/2.6.0/bin/neovim-ruby-host")
 else
   g.python3_host_prog = "/usr/bin/python"
 end
@@ -41,17 +42,15 @@ require("ppm.plugin")
 
 cmd [[syntax enable]]
 
--- if filereadable(expand("$HOME/.local/vimrc")) then
---   source $HOME/.local/vimrc
--- end
+local config_file = vim.fn.expand('~/.theme')
 
--- if filereadable(expand("$XDG_DATA_HOME/nvim/init.vim")) then
---   source $XDG_DATA_HOME/nvim/init.vim
--- end
+if vim.fn.filereadable(config_file) then
+  local background, scheme = unpack(vim.fn.readfile(config_file, '', 2))
+  o.background = background
+else
+  o.background = "dark"
+end
 
-o.background = "dark"
-
-require("ppm.colorscheme.rose-pine").use()
 require("ppm.colorscheme.catppuccin").use()
 
 -- Lazy load plugins using a custom autocmd `User ActuallyEditing` {{{

@@ -10,6 +10,6 @@ typeset -Ar _resolved=(
   "rose-pine" "Rosé Pine"
   "rose-pine-dawn" "Rosé Pine Dawn"
 )
-kitty +kitten themes --reload-in=all ${_resolved[$1]}
+kitty +kitten themes --reload-in=parent ${_resolved[$1]}
 
 return $?

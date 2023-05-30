@@ -1,0 +1,50 @@
+# -------------------------------------------------------------------
+# vim:et sts=2 sw=2 ft=zsh
+# -------------------------------------------------------------------
+# @name luma
+# @description
+#   Takes a hex color in the form of "RRGGBB" and outputs its luma
+#   (0-255, where 0 is black and 255 is white).
+# @arg $1 string Hex color
+# @see https://github.com/wincent/wincent/blob/7a8dcd92/roles/dotfiles/files/.zsh/colors
+luma() {
+  local COLOR_HEX
+  COLOR_HEX=$1
+
+  if [ -z "$COLOR_HEX" ]
+  then
+    echo "Missing argument hex color (RRGGBB)"
+    return 1
+  fi
+
+  # Extract hex channels from background color (RRGGBB)
+  local COLOR_HEX_RED
+  local COLOR_HEX_GREEN
+  local COLOR_HEX_BLUE
+  COLOR_HEX_RED=$(echo "$COLOR_HEX" | cut -c 1-2)
+  COLOR_HEX_GREEN=$(echo "$COLOR_HEX" | cut -c 3-4)
+  COLOR_HEX_BLUE=$(echo "$COLOR_HEX" | cut -c 5-6)
+
+  # Convert hex colors to decimal
+  local COLOR_DEC_RED
+  local COLOR_DEC_GREEN
+  local COLOR_DEC_BLUE
+  COLOR_DEC_RED=$((16#$COLOR_HEX_RED))
+  COLOR_DEC_GREEN=$((16#$COLOR_HEX_GREEN))
+  COLOR_DEC_BLUE=$((16#$COLOR_HEX_BLUE))
+
+  # Calculate perceived brightness of background per ITU-R BT.709
+  # https://en.wikipedia.org/wiki/Rec._709#Luma_coefficients
+  # http://stackoverflow.com/a/12043228/18986
+  local COLOR_LUMA_RED
+  local COLOR_LUMA_GREEN
+  local COLOR_LUMA_BLUE
+  COLOR_LUMA_RED=$((0.2126 * $COLOR_DEC_RED))
+  COLOR_LUMA_GREEN=$((0.7152 * $COLOR_DEC_GREEN))
+  COLOR_LUMA_BLUE=$((0.0722 * $COLOR_DEC_BLUE))
+
+  local COLOR_LUMA
+  COLOR_LUMA=$(($COLOR_LUMA_RED + $COLOR_LUMA_GREEN + $COLOR_LUMA_BLUE))
+
+  echo "$COLOR_LUMA"
+}

@@ -8,12 +8,12 @@ _fzf_preview() {
   local -r preview_file='([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {}))'
   local -r preview_dir='([[ -d {} ]] && (tree -C {} | less))'
   local -r preview_fallback='echo {} 2>/dev/null | head -n 200'
-  # local -r preview_image='([[ -f {} && "${$(file --dereference --brief --mime-type -- {})//\/*}" ]]) && kitty +kitten icat --clear --silent --stdin=no --unicode-placeholder --place "40x40@150x12" {}'
+  # local -r preview_image='([[ -f {} ]] && [[ "${$(file --dereference --brief --mime-type -- {})//\/*}" == "image" ]] && (kitty +kitten icat --clear --silent --stdin=no  --transfer-mode=file --place "40x40@150x12" {}))'
+  local -r preview_image='([[ -f {} ]] && [[ "${$(file --dereference --brief --mime-type -- {})//\/*}" == "image" ]] && (chafa -c full -s 80 {}))'
 
-  echo "${preview_file} || ${preview_dir} || ${preview_fallback}"
+  echo "${preview_image} || ${preview_file} || ${preview_dir} || ${preview_fallback}"
 }
 
-[[ -z "$FZF_PREVIEW" ]]        && export FZF_PREVIEW="$(_fzf_preview)"
 export FZF_PREVIEW="$(_fzf_preview)"
 # [[ -z "$FZF_PREVIEW_WINDOW" ]] && export FZF_PREVIEW_WINDOW=':hidden'
   # "--preview-window='${FZF_PREVIEW_WINDOW}'"

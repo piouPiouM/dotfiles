@@ -1,0 +1,16 @@
+# -------------------------------------------------------------------
+# Update a local bare repository
+# From https://github.com/zanshin/dotfiles
+# -------------------------------------------------------------------
+# vim:et sts=2 sw=2 ft=zsh
+
+git-bare-update() {
+  if [[ ! -a '.bare' ]]; then
+    echo "The current directory is not a bare repository."
+
+    return 1
+  fi
+
+  local main=$(git symbolic-ref --short HEAD)
+  cd .bare && git fetch origin $main:$main && cd ..
+}

@@ -1,5 +1,23 @@
 local code_key = function(key) return "<leader>g" .. key end
 
+local K = {
+  leader = " ",
+  local_leader = "ù",
+
+  -- Split management
+  open_in_split = "s",
+  open_in_vertical_split = "v",
+  open_in_tab = "t",
+
+  -- Preview navigation
+  scroll_down = "<C-d>",
+  scroll_up = "<C-u>",
+
+  -- Completion
+  completion_complete = "<C-Space>",
+  completion_close = "<C-e>",
+}
+
 local M = {
   open = "o",
   split = "s",

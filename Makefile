@@ -157,7 +157,9 @@ TO_LINK = bash \
 					nvim \
 					ranger \
 					ripgrep \
+					starship \
 					tmux \
+					wezterm \
 					zsh \
 					$(SPECIFIC_TO_LINK)
 LINK_TARGETS = $(addprefix link-,$(TO_LINK))

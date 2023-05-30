@@ -6,7 +6,7 @@ return require("packer").startup({
   function(use, use_rocks)
     local ft = require("ppm.filetype")
     local config = function(name) return string.format("require('ppm.plugin.%s')", name) end
-    local simple_setup = function(name) return string.format("require('%s').setup({})", name) end
+    local quick_config = function(name) return string.format("require('%s').setup({})", name) end
 
     use "wbthomason/packer.nvim"
     use "lewis6991/impatient.nvim"
@@ -70,7 +70,14 @@ return require("packer").startup({
     use { "stevearc/oil.nvim", config = config("oil") }
 
     -- Maximize or restore windows.
-    use { "szw/vim-maximizer", cmd = "MaximizerToggle", keys = { { "n", "<F3>" } } }
+    -- use { "szw/vim-maximizer", cmd = "MaximizerToggle", keys = { { "n", "<F3>" } } }
+    use {
+      "Pocco81/true-zen.nvim",
+      setup = config("true-zen/setup"),
+      config = config("true-zen"),
+      cmd = { "TZAtaraxis", "TZMinimalist", "TZNarrow", "TZFocus" },
+      keys = { { "n", "<F3>" } }
+    }
 
     -- Editor
     use {
@@ -149,16 +156,12 @@ return require("packer").startup({
         cmd = "Telescope",
         module = "telescope",
       },
-      { "nvim-lua/plenary.nvim",                   opt = true },
-      { "nvim-lua/popup.nvim",                     opt = true },
-      { "kkharji/sqlite.lua",                      opt = true },
-      { "nvim-telescope/telescope-symbols.nvim",   opt = true },
-      { "nvim-telescope/telescope-ui-select.nvim", opt = true, disable = true },
+      { "nvim-lua/plenary.nvim",                     opt = true },
+      { "nvim-lua/popup.nvim",                       opt = true },
+      { "kkharji/sqlite.lua",                        opt = true },
+      { "nvim-telescope/telescope-symbols.nvim",     opt = true },
+      { "nvim-telescope/telescope-ui-select.nvim",   opt = true, disable = true },
     }
-
-    -- use { "camspiers/snap", rocks = { "fzy" } }
-    -- The project seems to be on pause :/
-    -- use { "camspiers/snap", config = config("snap") }
 
     use {
       { "rafamadriz/friendly-snippets", opt = true },
@@ -217,7 +220,7 @@ return require("packer").startup({
       {
         "folke/trouble.nvim",
         cmd = { "Trouble", "TroubleToggle" },
-        config = simple_setup("trouble"),
+        config = quick_config("trouble"),
       },
       {
         "jose-elias-alvarez/typescript.nvim",
@@ -295,7 +298,7 @@ return require("packer").startup({
       "ggandor/leap.nvim",
       config = config("leap"),
       requires = {
-        { "ggandor/flit.nvim", config = simple_setup("flit") }
+        { "ggandor/flit.nvim", config = quick_config("flit") }
       },
     }
 
@@ -303,6 +306,7 @@ return require("packer").startup({
 
     -- Git
     use { "lewis6991/gitsigns.nvim", config = config("gitsigns"), event = "User ActuallyEditing" }
+    use { "sindrets/diffview.nvim", cmd = { "DiffviewOpen", "DiffviewFileHistory" } }
 
     -- Utils
     use { "tpope/vim-repeat", event = "User ActuallyEditing" }
@@ -329,31 +333,16 @@ return require("packer").startup({
     }
 
     use { "mbbill/undotree", cmd = "UndotreeToggle" }
-
     -- use "wincent/pinnacle"
 
-    -- Colorscheme
-    use {
-      "catppuccin/nvim",
-      as = "catppuccin",
-      config = function() require("ppm.colorscheme.catppuccin").setup() end,
-    }
-    use { "shaunsingh/nord.nvim", config = function() require("ppm.colorscheme.nord").setup() end }
-    use {
-      "maaslalani/nordbuddy",
-      config = function() require("ppm.colorscheme.nordbuddy").setup() end,
-    }
-    use {
-      "EdenEast/nightfox.nvim",
-      config = function() require("ppm.colorscheme.nightfox").setup() end,
-      run = ":NightfoxCompile",
-    }
-    use {
-      "rose-pine/neovim",
-      as = "rose-pine",
-      tag = "v1.*",
-      config = function() require("ppm.colorscheme.rose-pine").setup() end,
-    }
+    -- Colorschemes
+    use { "catppuccin/nvim", as = "catppuccin", config = quick_config("ppm.colorscheme.catppuccin") }
+    use { "shaunsingh/nord.nvim", config = quick_config("ppm.colorscheme.nord") }
+    use { "maaslalani/nordbuddy", config = quick_config("ppm.colorscheme.nordbuddy") }
+    use { "EdenEast/nightfox.nvim", config = quick_config("ppm.colorscheme.nightfox"), run = ":NightfoxCompile" }
+    use { "rose-pine/neovim", as = "rose-pine", tag = "v1.*", config = quick_config("ppm.colorscheme.rose-pine") }
+    use { "decaycs/decay.nvim", as = "decay" }
+    use { "projekt0n/github-nvim-theme" }
   end,
   config = {
     display = {
