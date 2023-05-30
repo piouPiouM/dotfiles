@@ -125,6 +125,7 @@ $(ENSURE_DIRS):
 
 ## Generates all the symlinks.
 install-links: link-bash \
+	link-awesome \
 	link-bat \
 	link-bin \
 	link-broot \
@@ -208,6 +209,11 @@ link-sway:
 link-rofi:
 	@echo -n '$(YELLOW)Link rofi environment…$(RESET)'
 	@stow rofi && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+
+## Install Awesome environment
+link-awesome:
+	@echo -n '$(YELLOW)Link Awesome environment…$(RESET)'
+	@stow awesome && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 ## Deletes all the symlinks.
 unlink-all: unlink-home unlink-dirs

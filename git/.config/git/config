@@ -1,6 +1,7 @@
 # vim: ft=gitconfig
 [user]
   name = Mehdi Kabab
+	signingkey = sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAICBpaDOi2nNqxkkNdg6iNNIw5klq4smNA5AKqktcRDohAAAABHNzaDo= 20159652-2022-08-29
 [color]
   ui = auto
 [core]

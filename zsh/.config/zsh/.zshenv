@@ -65,8 +65,8 @@ export HOMEBREW_NO_ANALYTICS=1
 #
 
 if [[ -z "$LANG" ]]; then
-	export LANG='fr_FR.UTF-8'
-	export LANGUAGE=fr_FR.UTF-8
+  export LANG='fr_FR.UTF-8'
+  export LANGUAGE=fr_FR.UTF-8
 fi
 
 export LC_COLLATE=fr_FR.UTF-8
@@ -96,12 +96,13 @@ path=(
   # $GOROOT/bin
   $HOME/.luarocks/bin
   $HOME/.cargo/bin
-	$XDG_DATA_HOME/gem/ruby/bin
-	$XDG_DATA_HOME/bin
-	"$XDG_DATA_HOME/bin/${CURRENT_OS}"
-	"$HOME/.gem/ruby/2.6.0/bin"
-	$HOME/bin
-	$path
+  $HOME/.local/bin
+  $XDG_DATA_HOME/gem/ruby/bin
+  $XDG_DATA_HOME/bin
+  "$XDG_DATA_HOME/bin/${CURRENT_OS}"
+  "$HOME/.gem/ruby/2.6.0/bin"
+  $HOME/bin
+  $path
 )
 
 # Eliminates duplicates in *paths
