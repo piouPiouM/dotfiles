@@ -35,18 +35,23 @@ uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
 
 ifeq ($(uname_S),Linux)
 	OS_LINUX = Yes
+	OS_MACOS =
 endif
 
 ifeq ($(uname_S),Darwin)
+	OS_LINUX =
 	OS_MACOS = Yes
 endif
 
 # https://stackoverflow.com/a/44221541/392725
 _DRY_RUN := $(findstring -n,$(firstword -$(MAKEFLAGS)))
 
-RED    := $(shell tput -Txterm setaf 1)
-GREEN  := $(shell tput -Txterm setaf 2)
+RED   := $(shell tput -Txterm setaf 1)
+GREEN := $(shell tput -Txterm setaf 2)
+# Need interaction
 YELLOW := $(shell tput -Txterm setaf 3)
+# Information
+PURPLE := $(shell tput -Txterm setaf 5)
 WHITE  := $(shell tput -Txterm setaf 7)
 RESET  := $(shell tput -Txterm sgr0)
 
@@ -56,14 +61,14 @@ endef
 
 define MSG_UPDATE_SHELLS
 
-$(YELLOW)In order to add zsh to list of acceptable shells,
+$(PURPLE)In order to add zsh to list of acceptable shells,
 please execute the following commands:$(RESET)
 $(WHITE)
 	sudo -s
 	sudo echo $$(brew --prefix)/bin/zsh >> /etc/shells
 	exit
 $(RESET)
-$(YELLOW)In order to use zsh as default shell,
+$(PURPLE)In order to use zsh as default shell,
 please execute the following commands:$(RESET)
 $(WHITE)
 	chsh -s $$(brew --prefix)/bin/zsh
@@ -87,9 +92,13 @@ zsh-activate:
 
 .PHONY: install cleanup versions
 
+## Perform setup of the device.
+setup:: install-dirs install-links
+.PHONY: setup
+
 ## Install all the prerequisites and perform installation of Homebrew.
 install: install-dirs install-links brew npm-install-packages
-	@echo '$(YELLOW)Next target to run:$(RESET)'
+	@echo '$(PURPLE)• Next target to run:$(RESET)'
 	@echo ''
 	@echo '$(GREEN)make neovim$(RESET)'
 
@@ -102,11 +111,11 @@ cleanup:
 ## Print the version number of main programs.
 versions:
 	@brew --version
-	@echo "$(YELLOW)node$(RESET) $$(node --version)"
-	@echo "$(YELLOW)npm$(RESET) $$(npm --version)"
+	@echo "$(PURPLE)node$(RESET) $$(node --version)"
+	@echo "$(PURPLE)npm$(RESET) $$(npm --version)"
 	@ruby --version
 	@/usr/local/opt/ruby/bin/ruby --version
-	@echo "$(YELLOW)gem$(RESET) $$(gem --version)"
+	@echo "$(PURPLE)gem$(RESET) $$(gem --version)"
 
 # -----------------------------------------------------------------------------
 # Target: tree structure
@@ -118,6 +127,7 @@ ENSURE_DIRS = \
 							$(XDG_CACHE_HOME)/zsh \
 							$(XDG_DATA_HOME)/cargo \
 							$(XDG_DATA_HOME)/dictionaries \
+							$(XDG_DATA_HOME)/fonts \
 							$(XDG_DATA_HOME)/gem \
 							$(XDG_DATA_HOME)/nvim/bundle \
 							$(XDG_DATA_HOME)/nvim/shada \
@@ -129,7 +139,9 @@ ENSURE_DIRS = \
 							${HOME}/go/bin
 
 ## Creates the dotfiles tree structure.
-install-dirs: $(ENSURE_DIRS)
+install-dirs:
+	@echo "$(PURPLE)• Creating directories$(RESET)"
+	@$(MAKE) --silent $(ENSURE_DIRS)
 .PHONY: install-dirs
 
 $(ENSURE_DIRS):
@@ -165,7 +177,7 @@ UNLINK_TARGETS = $(addprefix unlink-,$(TO_LINK))
 
 # The `::` allow to re-declare the target to act as post-processing target.
 $(LINK_TARGETS)::
-	@echo -n '$(YELLOW)Link $(subst link-,,$(@)) environment…$(RESET)'
+	@echo -n '$(PURPLE)• Link $(subst link-,,$(@)) environment…$(RESET)'
 	@stow $(_DRY_RUN) --restow $(subst link-,,$(@)) && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 .PHONY: $(LINK_TARGETS)
 
@@ -175,13 +187,13 @@ install-links: link-bin link-home $(LINK_TARGETS)
 
 ## Generates only symlinks in the Home directory
 link-home:
-	@echo -n '$(YELLOW)Link home environment…$(RESET)'
+	@echo -n '$(PURPLE)• Link home environment…$(RESET)'
 	@stow --restow --dotfiles dot && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 .PHONY: link-home
 
 ## Install custom binaries.
 link-bin:
-	@echo -n '$(YELLOW)Link binaries…$(RESET)'
+	@echo -n '$(PURPLE)• Link binaries…$(RESET)'
 	@mkdir -p $(XDG_DATA_HOME)/bin
 	@stow --restow --target=$(XDG_DATA_HOME)/bin bin && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 .PHONY: link-bin
@@ -196,7 +208,7 @@ unlink-all: unlink-home unlink-bin $(UNLINK_TARGETS)
 
 ## Delete other symlinks.
 $(UNLINK_TARGETS):
-	@echo -n "$(YELLOW)Unlink $(subst unlink-,,$(@)) environment…$(RESET)"
+	@echo -n "$(PURPLE)• Unlink $(subst unlink-,,$(@)) environment…$(RESET)"
 	@stow --delete $(subst unlink-,,$(@)) && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 .PHONY: $(UNLINK_TARGETS)
 
@@ -225,7 +237,7 @@ ${XDG_CACHE_HOME}/zim/zimfw.zsh:
 	@curl -fsSL --create-dirs -o $@ "https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh"
 
 $(XDG_DATA_HOME)/dictionaries/fr.wordlist: $(ENSURE_DIRS)
-	@echo -n "$(YELLOW)Download French wordlist…$(RESET)"
+	@echo -n "$(PURPLE)• Download French wordlist…$(RESET)"
 	@curl --silent --create-dirs --output-dir $(XDG_DATA_HOME)/dictionaries/ --output "fr.wordlist" "https://raw.githubusercontent.com/redacted/XKCD-password-generator/master/xkcdpass/static/fr-corrected.txt" && sed -i '' 's@c/@ç@g' "$(XDG_DATA_HOME)/dictionaries/fr.wordlist" && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 download-dictionaries: $(XDG_DATA_HOME)/dictionaries/fr.wordlist
@@ -267,38 +279,38 @@ THEME_ROSE_PINE_FZF := $(XDG_DATA_HOME)/fzf/themes/rose-pine.sh \
 install-themes: theme-catppuccin theme-nightfox theme-rose-pine
 
 $(THEME_CATPPUCCIN_BAT):
-	@echo "$(YELLOW)Download $(@F) for bat$(RESET)"
+	@echo "$(PURPLE)• Download $(@F) for bat$(RESET)"
 	@curl --silent --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/bat/main/$(subst catppuccin,Catppuccin,$(@F))" -o $(@F)
 
 $(THEME_CATPPUCCIN_LAZYGIT):
-	@echo "$(YELLOW)Download $(@F) for Lazygit$(RESET)"
+	@echo "$(PURPLE)• Download $(@F) for Lazygit$(RESET)"
 	@curl --silent --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/lazygit/main/themes/$(subst catppuccin-,,$(@F))" -o $(@F)
 	@sed -i '' -e 's/^/  /' -e '1s/^/gui:\n/' $(@)
 
 $(THEME_CATPPUCCIN_ROFI):
 ifdef OS_LINUX
-	@echo "$(YELLOW)Download $(@F) for Rofi$(RESET)"
+	@echo "$(PURPLE)• Download $(@F) for Rofi$(RESET)"
 	@curl --silent --output-dir $(@D) --remote-name "https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/$(@F)"
 endif
 
 $(THEME_ROSE_PINE_ROFI):
 ifdef OS_LINUX
-	@echo "$(YELLOW)Download $(@F) for Rofi$(RESET)"
+	@echo "$(PURPLE)• Download $(@F) for Rofi$(RESET)"
 	@curl --silent --output-dir $(@D) --remote-name "https://raw.githubusercontent.com/rose-pine/rofi/main/$(@F)"
 endif
 
 $(THEME_ROSE_PINE_FZF):
-	@echo "$(YELLOW)Download $(@F) for fzf$(RESET)"
+	@echo "$(PURPLE)• Download $(@F) for fzf$(RESET)"
 	@curl --silent --output-dir $(@D) --remote-name "https://raw.githubusercontent.com/rose-pine/fzf/main/dist/$(@F)"
 	@sed -i '' 's/FZF_DEFAULT_OPTS/FZF_THEME/' $(@)
 
 ## Download Catppuccin theme
 theme-catppuccin: | $(THEME_CATPPUCCIN_BAT) $(THEME_CATPPUCCIN_LAZYGIT) $(THEME_CATPPUCCIN_ROFI)
-	@$(MAKE) theme-postinstall
+	@$(MAKE) --silent theme-postinstall
 
 ## Download Nightfox theme
 theme-nightfox:
-	@echo "$(YELLOW)Install Nightfox for Kitty from Neovim$(RESET)"
+	@echo "$(PURPLE)• Install Nightfox for Kitty from Neovim$(RESET)"
 	@cp "$(NIGHTFOX_THEME_PATH)/dawnfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Dawnfox.conf"
 	@cp "$(NIGHTFOX_THEME_PATH)/dayfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Dayfox.conf"
 	@cp "$(NIGHTFOX_THEME_PATH)/duskfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Duskfox.conf"
@@ -307,7 +319,7 @@ theme-nightfox:
 	@cp "$(NIGHTFOX_THEME_PATH)/terafox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Terafox.conf"
 
 theme-rose-pine: | $(THEME_ROSE_PINE_FZF) $(THEME_ROSE_PINE_ROFI)
-	@$(MAKE) theme-postinstall
+	@$(MAKE) --silent theme-postinstall
 
 theme-postinstall:
 	@$(call cmd_exists,bat) && bat cache --build
@@ -323,26 +335,42 @@ FONTS_IA = $(FONTS_DIR)/iAWriterQuattroS-Bold.ttf \
 					 $(FONTS_DIR)/iAWriterQuattroS-Regular.ttf
 
 ## Download and install fonts.
-install-fonts:: codicon nerd-fonts $(FONTS_IA)
-	@$(MAKE) postinstall-fonts
+install-fonts:: codicon nerd-fonts ibm-plex-fonts $(FONTS_IA) | $(ENSURE_DIRS)
+	@$(MAKE) --silent postinstall-fonts
 .PHONY: install-fonts 
 
 ## Download and install iA Writter QuattroS font.
 $(FONTS_IA):
-	@echo "$(YELLOW)Download $(@F) font$(RESET)"
+	@echo "$(PURPLE)• Download $(@F) font$(RESET)"
 	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/iaolo/iA-Fonts/raw/master/iA%20Writer%20Quattro/Static/$(@F)"
 
 ## Download and install Codicon font.
 codicon:
-	@echo "$(YELLOW)Download Codicon font$(RESET)"
+	@echo "$(PURPLE)• Download Codicon font$(RESET)"
 	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/microsoft/vscode-codicons/raw/main/dist/codicon.ttf"
 .PHONY: codeicon
 
+## Download and install IBM Plex.
+ibm-plex-fonts:
+	@echo "$(PURPLE)• Download IMB Plex fonts$(RESET)"
+	$(eval TMP := $(shell mktemp -d))
+	@curl -fsSL --output-dir $(TMP) --remote-name "https://github.com/IBM/plex/releases/latest/download/OpenType.zip"
+	@unzip -qq $(TMP)/OpenType.zip -d $(TMP)
+	@cp $(TMP)/OpenType/IBM-Plex-{Mono,Sans{,-Condensed},Serif}/*.otf $(FONTS_DIR)/
+	@cp $(TMP)/OpenType/IBM-Plex-Sans-JP/hinted/*.otf $(FONTS_DIR)/
+	@rm -rf $(TMP)
+.PHONY: ibm-plex-fonts
+
 ## Download and install Nerd Fonts.
 nerd-fonts:
-	@echo "$(YELLOW)Download Nerd Fonts$(RESET)"
-	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFontMono-Regular.ttf"
-	@curl -fsSL --create-dirs --output-dir $(FONTS_DIR) --remote-name "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFont-Regular.ttf"
+	@echo "$(PURPLE)• Download Nerd Fonts$(RESET)"
+	$(eval TMP := $(shell mktemp -d))
+	@curl -fsSL --output-dir $(TMP) --remote-name "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.zip"
+	@unzip -qq $(TMP)/NerdFontsSymbolsOnly.zip *.ttf -d $(TMP)
+	@curl -fsSL --output-dir $(TMP) --remote-name "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+	@unzip -qq $(TMP)/JetBrainsMono.zip *.ttf -d $(TMP)
+	@mv $(TMP)/*.ttf $(FONTS_DIR)/
+	@rm -rf $(TMP)
 .PHONY: nerd-fonts
 
 # -----------------------------------------------------------------------------
@@ -369,65 +397,81 @@ npm-update-packages:
 # Target: Neovim
 # -----------------------------------------------------------------------------
 
-.PHONY: neovim neovim-update neovim-dependencies neovim-plugins neovim-treesitter neovim-packer
+NVIM := nvim "+set nomore"
 
 ## Update the Neovim environment.
-neovim: neovim-treesitter neovim-update neovim-dependencies neovim-packer
-	@nvim +checkhealth
-
-## Updates Neovim from Homebrew.
-neovim-update: | $(ENSURE_DIRS)
-	@brew upgrade luajit luajit-openresty
-	@brew upgrade --fetch-HEAD tree-sitter neovim || exit 0
-
-## Updates Neovim's plugins.
-neovim-plugins:
-	# @nvim +PlugInstall +PlugUpdate +qa
-	@tmp_file=$$(mktemp -t dotfiles); mv $$tmp_file "$${tmp_file}.ts" && tmp_file="$${tmp_file}.ts" && \
-		nvim $$tmp_file +UpdateRemotePlugins +qa && \
-		rm -f $$tmp_file
+neovim: neovim-treesitter install-neovim neovim-dependencies neovim-packer
+	@$(NVIM) +checkhealth
+.PHONY: neovim
 
 ## Update tree-sitter parsers.
 neovim-treesitter:
-	@nvim "+TSUninstall all" +qa
+	@$(NVIM) "+TSUninstall all" +qa
+.PHONY: neovim-treesitter
 
-neovim-packer:
-	@rm -rf $$XDG_DATA_HOME/nvim/site/pack/packer/*
-	@git clone --depth 1 https://github.com/wbthomason/packer.nvim $$XDG_DATA_HOME/nvim/site/pack/packer/start/packer.nvim
+## Install or update Neovim from Homebrew.
+install-neovim:: | $(ENSURE_DIRS)
+	@echo "$(PURPLE)• Installing Neovim$(RESET)"
+.PHONY: install-neovim
 
-## Updates Neovim dependencies.
-neovim-dependencies: GEM_COMMAND = $(shell gem list --silent -i neovim && echo 'update' || echo 'install')
-neovim-dependencies:
-	@npm install -g neovim --no-progress
+postinstall-neovim:
+	@echo "$(PURPLE)• Running Neovim post-installation$(RESET)"
+	@$(MAKE) --silent install-neovim-plugins
+	@$(NVIM) +UpdateRemotePlugins +qa
+.PHONY: postinstall-neovim
+
+## Install or update Neovim dependencies.
+install-neovim-dependencies:: GEM_COMMAND = $(shell gem list --silent -i neovim && echo 'update' || echo 'install')
+install-neovim-dependencies::
+	@echo "$(PURPLE)• Installing Neovim dependencies$(RESET)"
+	@sudo npm install -g neovim@latest --no-progress
 	@pip3 install --upgrade pynvim neovim
 	@gem $(GEM_COMMAND) neovim --no-document
-	@brew upgrade lua-language-server
+	@go install github.com/mattn/efm-langserver@latest
+.PHONY: install-neovim-dependencies
+
+## Install or reinstall Neovim plugins.
+install-neovim-plugins:
+	@echo "$(PURPLE)• Reinstall Neovim plugins$(RESET)"
+	@mkdir -p $(XDG_DATA_HOME)/nvim/site/pack/packer
+	@rm -rf $(XDG_DATA_HOME)/nvim/site/pack/packer/*
+	@git clone --depth 1 https://github.com/wbthomason/packer.nvim $(XDG_DATA_HOME)/nvim/site/pack/packer/start/packer.nvim
+	@$(NVIM) +PackerInstall +qa
+.PHONY: install-neovim-plugins
 
 # -----------------------------------------------------------------------------
 # Target: applications
 # -----------------------------------------------------------------------------
 
-.PHONY: fzf-postinstall fzf-update lua-install-packages
-
-fzf-postinstall:
-	@$$(brew --prefix)/opt/fzf/install --xdg --key-bindings --completion --no-update-rc --no-bash --no-fish
-	@nvim "+set nomore" "+PlugUpdate fzf" +qa
-
-## Updates fzf.
-fzf-update:
-	@$(call cmd_exists,fzf) && brew reinstall fzf && $(MAKE) fzf-postinstall || exit 0
-
-lua-install-packages:
-ifdef OS_MACOS
-	@$(call cmd_exists,luarocks) && brew reinstall luarocks || exit 0
+install-fzf:
+	@echo "$(PURPLE)• Installing fzf from sources$(RESET)"
+ifeq ($(wildcard $(XDG_DATA_HOME)/fzf-repo/.git/.),)
+	@git clone --quiet --depth 1 https://github.com/junegunn/fzf.git $(XDG_DATA_HOME)/fzf-repo
+else
+	@cd $(XDG_DATA_HOME)/fzf-repo && git pull --quiet
 endif
+	@$(XDG_DATA_HOME)/fzf-repo/install --xdg --key-bindings --completion --no-update-rc --no-bash --no-fish
+	@ln -rs $(XDG_DATA_HOME)/fzf-repo/fzf $(XDG_DATA_HOME)/bin/fzf
+	@ln -rs $(XDG_DATA_HOME)/fzf-repo/fzf-tmux $(XDG_DATA_HOME)/bin/fzf-tmux
+.PHONY: install-fzf
+
+uninstall-fzf:
+	@echo "$(PURPLE)• Uninstalling fzf$(RESET)"
+	@$(XDG_CACHE_HOME)/fzf-repo/uninstall --xdg
+	@rm -f $(XDG_DATA_HOME)/bin/fzf
+	@rm -f $(XDG_DATA_HOME)/bin/fzf-tmux
+	@rm -rf $(XDG_DATA_HOME)/fzf-repo
+.PHONY: uninstall-fzf
+
+install-packages-lua:
 	@$(call cmd_exists,luarocks) && luarocks install --server=https://luarocks.org/dev luaformatter
+.PHONY: install-packages-lua
 
 # -----------------------------------------------------------------------------
 # Import OS specific targets
 # -----------------------------------------------------------------------------
 
-include include/make/$(if OS_MACOS,macos,linux).mk
+include include/make/$(if $(OS_MACOS),macos,linux).mk
 
 # -----------------------------------------------------------------------------
 # Target: usage and help
@@ -440,7 +484,7 @@ include include/make/$(if OS_MACOS,macos,linux).mk
 help:
 	@echo ''
 	@echo 'Usage:'
-	@echo '  $(YELLOW)make$(RESET) $(GREEN)<target>$(RESET)'
+	@echo '  $(PURPLE)make$(RESET) $(GREEN)<target>$(RESET)'
 	@echo ''
 	@echo 'Targets:'
 	@awk '/^[a-zA-Z0-9_-]+:/ { \
@@ -448,13 +492,13 @@ help:
 		if (helpMessage) { \
 			helpCommand = substr($$1, 0, index($$1, ":")-1); \
 			helpMessage = substr(lastLine, RSTART + 3, RLENGTH); \
-			printf "  $(YELLOW)%-20s$(RESET) $(GREEN)%s$(RESET)\n", helpCommand, helpMessage; \
+			printf "  $(PURPLE)%-20s$(RESET) $(GREEN)%s$(RESET)\n", helpCommand, helpMessage; \
 		} \
 	} \
 	{ lastLine = $$0 }' $(MAKEFILE_LIST)
 	@echo ''
 	@echo 'Link targets:'
-	@printf  '  $(YELLOW)link-%-15s$(RESET) $(GREEN)Create symlinks for %1$$s$(RESET).\n' $(subst link-,,$(LINK_TARGETS))
+	@printf  '  $(PURPLE)link-%-15s$(RESET) $(GREEN)Create symlinks for %1$$s$(RESET).\n' $(subst link-,,$(LINK_TARGETS))
 	@echo ''
 	@echo 'Unlink targets:'
-	@printf  '  $(YELLOW)unlink-%-13s$(RESET) $(GREEN)Delete symlinks for %1$$s$(RESET).\n' $(subst unlink-,,$(UNLINK_TARGETS))
+	@printf  '  $(PURPLE)unlink-%-13s$(RESET) $(GREEN)Delete symlinks for %1$$s$(RESET).\n' $(subst unlink-,,$(UNLINK_TARGETS))

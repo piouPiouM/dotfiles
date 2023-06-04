@@ -17,19 +17,6 @@ skip_global_compinit=1
 
 # setopt noglobalrcs
 
-local UNAME_S=$(uname -s 2>/dev/null || echo "unkown")
-if [[ "${UNAME_S:l}" == "darwin" ]]
-then
-  export CURRENT_OS="macos"
-  export OS_MACOS=true
-elif [[ "${UNAME_S:l}" == "linux" ]]
-then
-  export CURRENT_OS="linux"
-  export OS_LINUX=true
-else
-  export CURRENT_OS="unknown"
-fi
-
 #
 # XDG Specification
 #
@@ -38,9 +25,11 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME"/.config}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-"$HOME"/.local/share}
 export XDG_STATE_HOME=${XDG_STATE_HOME:-"$HOME"/.local/state}
 export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-"$TMPDIR"}
+export ZDOTDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}"
+
 
 # Clean-up my home directory
-export ZDOTDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}"
+source "$ZDOTDIR"/include/detect-os.zsh
 export HISTFILE="$XDG_CACHE_HOME"/zsh/history
 export _ZO_DATA_DIR="$XDG_DATA_HOME"/zoxide
 export ZIM_HOME="$XDG_CACHE_HOME"/zim
@@ -92,4 +81,11 @@ export PNPM_HOME="$XDG_DATA_HOME"/pnpm
 
 if [[ -s "$XDG_DATA_HOME"/zsh/exports.zsh ]] then
   source "$XDG_DATA_HOME"/zsh/exports.zsh
+fi
+
+#
+# Force loading of .zprofile in charge of updating $PATH.
+#
+if [[ ! -o login ]]; then
+  source "$ZDOTDIR"/.zprofile
 fi

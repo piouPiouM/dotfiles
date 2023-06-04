@@ -1,0 +1,4 @@
+copr.fedorainfracloud.org/agriffis/neovim-nightly
+copr.fedorainfracloud.org/lexa/SwayNotificationCenter
+copr.fedorainfracloud.org/phracek/PyCharm
+copr.fedorainfracloud.org/yorickpeterse/lua-language-server

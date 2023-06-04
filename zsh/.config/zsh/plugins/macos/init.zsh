@@ -23,6 +23,7 @@
   export CPPFLAGS
 
   path+=(
+    "$HOME"/.gem/ruby/2.6.0/bin
     $PPM_BREW_PREFIX/opt/ruby/bin
     $PPM_BREW_PREFIX/opt/curl/bin
   )
