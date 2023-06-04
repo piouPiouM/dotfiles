@@ -1,33 +1,3 @@
-FEDORA_VERSION := $(shell rpm -E %fedora)
-INSTALL_FLAGS := -yq --best
-INSTALL := sudo dnf $(INSTALL_FLAGS) install
-FLATPAK := flatpak install -y --or-update --user
-
-# Used to isolate shell commands from a foreach.
-# https://www.extrema.is/blog/2021/12/17/makefile-foreach-commands
-define newline
-
-
-endef
-
-# -----------------------------------------------------------------------------
-# Target: Backup
-# -----------------------------------------------------------------------------
-
-setup/fedora/copr.txt: backup-dnf-copr
-setup/fedora/gnome-extensions.txt: backup-gnome-extensions
-
-## Backup list of enabled Copr repo.
-backup-dnf-copr:
-	@echo "$(PURPLE)• Backup list of enabled Copr repo$(RESET)"
-	@dnf copr list --enabled > setup/fedora/copr.txt
-.PHONY: backup-dnf-copr
-
-## Backup list of installed GNOME Extensions.
-backup-gnome-extensions:
-	@echo "$(PURPLE)• Backup list of installed GNOME Extensions$(RESET)"
-	@gext list | grep -Po '(?<=\()(\S+@\S+)(?=\))' > setup/fedora/gnome-extensions.txt
-.PHONY: backup-gnome-extensions
 
 # -----------------------------------------------------------------------------
 # Target: Setup Linux device. Currently only supports Fedora.
@@ -36,6 +6,7 @@ backup-gnome-extensions:
 setup:: setup-hostname setup-dnf setup-zsh setup-packages setup-terminal
 .PHONY: setup
 
+## Setup battery management.
 setup-battery-management:
 	@echo "$(PURPLE)• Setting battery management$(RESET)"
 	@$(INSTALL) power-profiles-daemon
@@ -44,6 +15,7 @@ setup-battery-management:
 	# @sudo tlp-stat
 .PHONY: setup-battery-management
 
+## Setup DNF configuration and repositories.
 setup-dnf: setup-dnf-config setup-dnf-copr
 	@echo "$(PURPLE)• Setting RPM Fusion repositories$(RESET)"
 	@$(INSTALL) https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(FEDORA_VERSION).noarch.rpm
@@ -62,8 +34,8 @@ setup-dnf-config:
 
 setup-dnf-copr:
 	@echo "$(PURPLE)• Setting DNF Copr repo$(RESET)"
-	$(foreach REPO,$(shell cat setup/fedora/copr.txt), \
-		@sudo dnf $(INSTALL_FLAGS) copr enable $(REPO) $(newline) \
+	$(foreach REPO,$(shell cat setup/linux/fedora/copr.txt),
+		@sudo dnf $(INSTALL_FLAGS) copr enable $(REPO) $(newline)
 	)
 .PHONY: setup-dnf-copr
 
@@ -80,6 +52,7 @@ setup-gnome:
 	@$(MAKE) --silent install-gnome-extensions
 .PHONY: setup-gnome
 
+## Setup hostname.
 setup-hostname:
 	@echo "$(PURPLE)• Setting hostname$(RESET)"
 	@echo -n "$(YELLOW)  Type in your hostname:$(RESET) "
@@ -111,7 +84,7 @@ setup-multimedia-codec:
 	@$(INSTALL) intel-media-driver
 .PHONY: setup-multimedia-codec
 
-## Install CLI and GUI packages.
+## Install all packages.
 setup-packages: install-packages-basic install-packages-cli install-packages-gui install-packages-flatpak
 .PHONY: setup-packages
 
@@ -122,8 +95,10 @@ setup-sync:
 	@systemctl --user start syncthing
 .PHONY: setup-sync
 
-setup-terminal: install-fonts install-themes install-starship
+## Setup terminal application.
+setup-terminal:
 	@echo "$(PURPLE)• Setting terminal$(RESET)"
+	@$(MAKE) --silent install-fonts install-themes install-starship link-kitty
 	@$(INSTALL) kitty
 .PHONY: setup-terminal
 
@@ -148,35 +123,23 @@ install-browser-firefox:
 .PHONY: install-browser
 
 install-browser-brave:
+	@echo "$(PURPLE)• Installing Brave$(RESET)"
 	@$(INSTALL) dnf-plugins-core
 	@sudo dnf $(INSTALL_FLAGS) config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 	@sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 	@$(INSTALL) brave-browser
 .PHONY: install-browser-brave
 
+## Install or update GNOME Shell Extensions.
 install-gnome-extensions:
-	@echo "$(PURPLE)• Updating or installing GNOME Extensions$(RESET)"
+	@echo "$(PURPLE)• Updating or installing GNOME Shell Extensions$(RESET)"
 	@pipx install gnome-extensions-cli --system-site-packages
-	$(foreach UUID,$(shell cat setup/fedora/gnome-extensions), \
-		@gext update --install $(UUID) $(newline) \
+	$(foreach UUID,$(shell cat setup/linux/fedora/gnome-extensions.txt),
+		@gext update --install $(UUID) $(newline)
 	)
 .PHONY: install-gnome-extensions
 
-install-neovim::
-	@sudo dnf $(INSTALL_FLAGS) copr enable agriffis/neovim-nightly
-	@$(INSTALL) lua lua-devel cmake luarocks
-	@$(INSTALL) gcc-c++ golang
-	@$(INSTALL) libtree-sitter tree-sitter-cli
-	@$(INSTALL) neovim python3-neovim
-	@$(MAKE) --silent install-neovim-dependencies
-	@$(MAKE) --silent postinstall-neovim
-.PHONY: install-neovim
-
-install-neovim-dependencies::
-	@sudo dnf $(INSTALL_FLAGS) copr enable yorickpeterse/lua-language-server
-	@$(INSTALL) lua-language-server
-.PHONY: install-neovim-dependencies
-
+## Install or update Obsidian.
 install-obsidian: APP_ID := md.obsidian.Obsidian
 install-obsidian: setup-flatpak-flathub
 	@echo "$(PURPLE)• Installing Obsidian$(RESET)"
@@ -197,33 +160,34 @@ install-packages-basic:
 	@$(INSTALL) stow ripgrep fd-find bat
 .PHONY: install-packages-basic
 
+## Install CLI packages.
 install-packages-cli:
 	@echo "$(PURPLE)• Installing CLI packages$(RESET)"
 	@$(INSTALL) tealdeer trash-cli
 	@$(INSTALL) wev
 .PHONY: install-packages-cli
 
+## Install GUI packages.
 install-packages-gui:
 	@echo "$(PURPLE)• Installing GUI packages$(RESET)"
 	@$(INSTALL) keepassxc yubikey-manager-qt
 .PHONY: install-packages-gui
 
-install-packages-flatpak: APPS := \
-	com.spotify.Client \
-	com.visualstudio.code \
-	com.mattjakeman.ExtensionManager \
-	me.kozec.syncthingtk
+## Install Flatpak applications.
 install-packages-flatpak: install-obsidian
-	$(foreach APP_ID,$(APPS), \
-		@$(FLATPAK) flathub $(APP_ID) $(newline) \
+	@echo "$(PURPLE)• Installing Flatpak applications$(RESET)"
+	$(foreach APP_ID,$(shell cat setup/linux/fedora/flatpak.txt),
+		@$(FLATPAK) flathub $(APP_ID) $(newline)
 	)
 .PHONY: install-packages-flatpak
 
+## Install Starship shell prompt.
 install-starship:
 	@echo "$(PURPLE)• Installing Starship shell prompt$(RESET)"
 	@cargo install starship --locked
 .PHONY: install-starship
 
+## Update Starship shell prompt.
 update-starship:
 	@echo "$(PURPLE)• Updating Starship shell prompt$(RESET)"
 	@cargo update -p starship
@@ -240,29 +204,3 @@ install-sway:
 	@sudo dnf copr enable lexa/SwayNotificationCenter
 	@$(INSTALL) SwayNotificationCenter
 .PHONY: setup-sway
-
-# -----------------------------------------------------------------------------
-# Target: Fonts
-# -----------------------------------------------------------------------------
-
-install-fonts::
-	@echo "$(PURPLE)• Installing packaged fonts$(RESET)"
-	@sudo dnf group install fonts
-	@$(INSTALL) \
-		adobe-source-code-pro-fonts \
-		adobe-source-sans-pro-fonts \
-		adobe-source-serif-pro-fonts \
-		bitstream-vera-sans-fonts \
-		bitstream-vera-serif-fonts \
-		dejavu-sans-fonts \
-		dejavu-serif-fonts \
-		jetbrains-mono-fonts \
-		google-carlito-fonts \
-		google-noto-emoji-fonts \
-		google-roboto-fonts
-.PHONY: install-fonts
-
-postinstall-fonts:
-	@echo "$(PURPLE)• Installing new downloaded fonts$(RESET)"
-	@fc-cache -fr $(FONTS_DIR)
-.PHONY: postinstall-fonts

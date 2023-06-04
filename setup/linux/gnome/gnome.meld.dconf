@@ -1,0 +1,17 @@
+[/]
+custom-font='JetBrains Mono 14'
+folder-columns=[('size', true), ('modification time', true), ('permissions', true)]
+highlight-current-line=true
+highlight-syntax=true
+indent-width=4
+insert-spaces-instead-of-tabs=true
+show-line-numbers=true
+style-scheme='meld-dark'
+use-system-font=false
+wrap-mode='word'
+
+[window-state]
+height=333
+is-fullscreen=true
+is-maximized=true
+width=1125

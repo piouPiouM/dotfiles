@@ -1,23 +1,33 @@
 # -----------------------------------------------------------------------------
-# Target: Downloads
+# Makefile for macOS
 # -----------------------------------------------------------------------------
 
-bin/imgcat:
-	@curl --silent --create-dirs -o $@ "https://iterm2.com/utilities/$(@F)"
-	@chmod +x $@
+define MSG_UPDATE_SHELLS
 
-bin/imgls:
-	@curl --silent --create-dirs -o $@ "https://iterm2.com/utilities/$(@F)"
-	@chmod +x $@
+$(PURPLE)In order to add zsh to list of acceptable shells,
+please execute the following commands:$(RESET)
+$(WHITE)
+	sudo -s
+	sudo echo $$(brew --prefix)/bin/zsh >> /etc/shells
+	exit
+$(RESET)
+$(PURPLE)In order to use zsh as default shell,
+please execute the following commands:$(RESET)
+$(WHITE)
+	chsh -s $$(brew --prefix)/bin/zsh
+$(RESET)
+endef
 
-# -----------------------------------------------------------------------------
-# Target: Fonts
-# -----------------------------------------------------------------------------
+# Checks that zsh (brew version) is in the acceptable shells list.
+zsh-check: export MSG_UPDATE_SHELLS := $(MSG_UPDATE_SHELLS)
+zsh-check:
+	@[ $$SHELL = "$$(brew --prefix)/bin/zsh" ] && \
+		(grep -qx $$(brew --prefix)/bin/zsh /etc/shells || echo "$$MSG_UPDATE_SHELLS")
 
-postinstall-fonts:
-	@echo "$(PURPLE)• Installing new fonts$(RESET)"
-	@cp $(FONTS_DIR)/*.ttf ~/Library/Fonts/
-.PHONY: postinstall-fonts
+# Activate zsh as default shell.
+zsh-activate:
+	command -v zsh | sudo tee -a /etc/shells
+	chsh -s $$(brew --prefix)/bin/zsh
 
 # -----------------------------------------------------------------------------
 # Target: Homebrew
@@ -80,14 +90,3 @@ icon-kitty-light:
 	@rm /var/folders/*/*/*/com.apple.dock.iconcache
 	@killall Dock
 .PHONY: icon-kitty-light
-
-install-neovim::
-	@brew install -q luajit luajit-openresty luarocks
-	@brew install -q --fetch-HEAD tree-sitter neovim || exit 0
-	@$(MAKE) --silent install-neovim-dependencies
-	@$(MAKE) --silent postinstall-neovim
-.PHONY: install-neovim
-
-install-neovim-dependencies::
-	@brew install -q lua-language-server
-.PHONY: install-neovim-dependencies:

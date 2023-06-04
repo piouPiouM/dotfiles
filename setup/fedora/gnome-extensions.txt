@@ -1,4 +1,0 @@
-[33mappindicatorsupport@rgcjonas.gmail.com[39m
-[33mapps-menu@gnome-shell-extensions.gcampax.github.com[39m
-[33msp-tray@sp-tray.esenliyim.github.com[39m
-[33msyncthing@gnome.2nv2u.com[39m

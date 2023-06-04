@@ -19,6 +19,7 @@ path=(
   "$HOME"/.local/bin
   "$GOBIN"
   "$PNPM_HOME"
+  "$NPM_PACKAGES"/bin
   "$HOME"/.luarocks/bin
   "$CARGO_HOME"/bin
 	"$_GEM_BIN"
