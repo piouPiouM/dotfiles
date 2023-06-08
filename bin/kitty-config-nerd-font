@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# @name kitty-config-nerd-font
+# @brief Declare Nerd Fonts code points inside Kitty's configuration.
+# @arg $1 string Configuration file to update.
+
+set -eu +x -o pipefail
+
+print_code_points ()
+{
+  local -r _font_name='Symbols Nerd Font'
+  fc-match --format='%{charset}' "$_font_name" \
+    | sed 's/[[:alnum:]]*/U+&/ig' \
+    | fold -s --width=60 \
+    | sed -E 's/ /,/g;s/^/symbol_map /g;s/,?$/ '"$_font_name"'/g'
+}
+
+clear_conf ()
+{
+	sed -i '/^[^#]/d' "$1"
+}
+
+CONF="${1:-"$XDG_CONFIG_HOME"/kitty/nerd-fonts.conf}"
+
+clear_conf "$CONF"
+print_code_points >> "$CONF"

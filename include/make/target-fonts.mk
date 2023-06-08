@@ -39,12 +39,24 @@ install-fonts-ibm-plex:
 	@rm -rf $(TMP)
 .PHONY: install-fonts-ibm-plex
 
-## Download and install Nerd Fonts.
-install-fonts-nerd:
+## Download and install Nerd Fonts Symbols only.
+install-fonts-nerd-symbols-only: KITTY_NERD_FONTS_CONF := kitty/.config/kitty/nerd-fonts.conf
+install-fonts-nerd-symbols-only:
 	@echo "$(PURPLE)• Download Nerd Fonts$(RESET)"
 	$(eval TMP := $(shell mktemp -d))
 	@curl -fsSL --output-dir $(TMP) --remote-name "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.zip"
 	@unzip -qq $(TMP)/NerdFontsSymbolsOnly.zip *.ttf -d $(TMP)
+	@mv $(TMP)/*.ttf $(FONTS_DIR)/
+	@rm -rf $(TMP)
+	@$(MAKE) --silent postinstall-fonts
+	@echo "$(PURPLE)• Updating Kitty's configuration to manage Nerd fonts$(RESET)"
+	@bin/kitty-config-nerd-font $(realpath $(KITTY_NERD_FONTS_CONF))
+.PHONY: install-fonts-nerd-symbols-only
+
+## Download and install Nerd Fonts.
+install-fonts-nerd: install-fonts-nerd-symbols-only
+	@echo "$(PURPLE)• Download JetBrains Mono Nerd Font$(RESET)"
+	$(eval TMP := $(shell mktemp -d))
 	@curl -fsSL --output-dir $(TMP) --remote-name "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
 	@unzip -qq $(TMP)/JetBrainsMono.zip *.ttf -d $(TMP)
 	@mv $(TMP)/*.ttf $(FONTS_DIR)/
