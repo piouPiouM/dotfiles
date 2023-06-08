@@ -5,6 +5,7 @@
 
 TO_LINK := bash \
 					 bat \
+					 btop \
 					 clifm \
 					 environment \
 					 fd \

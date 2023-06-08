@@ -1,0 +1,14 @@
+# -------------------------------------------------------------------
+# vim:et sts=2 sw=2 ft=zsh
+# -------------------------------------------------------------------
+# @name theme-btop
+# @arg $1 string Theme name
+
+local -r _theme_file="${XDG_CONFIG_HOME}/btop/themes/${1}.theme"
+if [[ -f $_theme_file ]]; then
+  sed -i 's/\b\(color_theme\s*=\s*"\)[^"]*/\1'"${1}"'/' "$XDG_CONFIG_HOME"/btop/btop.conf
+
+  return $?
+fi
+
+return 1

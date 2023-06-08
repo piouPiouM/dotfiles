@@ -10,6 +10,11 @@ THEME_CATPPUCCIN_BAT := $(XDG_CONFIG_HOME)/bat/themes/catppuccin-frappe.tmTheme 
 												$(XDG_CONFIG_HOME)/bat/themes/catppuccin-macchiato.tmTheme \
 												$(XDG_CONFIG_HOME)/bat/themes/catppuccin-mocha.tmTheme
 
+THEME_CATPPUCCIN_BTOP := $(XDG_CONFIG_HOME)/btop/themes/catppuccin-frappe.theme \
+												 $(XDG_CONFIG_HOME)/btop/themes/catppuccin-latte.theme \
+												 $(XDG_CONFIG_HOME)/btop/themes/catppuccin-macchiato.theme \
+												 $(XDG_CONFIG_HOME)/btop/themes/catppuccin-mocha.theme
+
 THEME_CATPPUCCIN_LAZYGIT := $(XDG_DATA_HOME)/lazygit/themes/catppuccin-frappe.yml \
 														$(XDG_DATA_HOME)/lazygit/themes/catppuccin-latte.yml \
 														$(XDG_DATA_HOME)/lazygit/themes/catppuccin-macchiato.yml \
@@ -27,6 +32,10 @@ $(THEME_CATPPUCCIN_BAT):
 	@echo "$(PURPLE)• Download $(@F) for bat$(RESET)"
 	@curl --silent --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/bat/main/$(subst catppuccin,Catppuccin,$(@F))" -o $(@F)
 
+$(THEME_CATPPUCCIN_BTOP):
+	@echo "$(PURPLE)• Download $(@F) for btop$(RESET)"
+	@curl --silent --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/btop/main/themes/$(subst -,_,$(@F))" -o $(@F)
+
 $(THEME_CATPPUCCIN_LAZYGIT):
 	@echo "$(PURPLE)• Download $(@F) for Lazygit$(RESET)"
 	@curl --silent --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/lazygit/main/themes/$(subst catppuccin-,,$(@F))" -o $(@F)
@@ -38,7 +47,7 @@ $(THEME_ROSE_PINE_FZF):
 	@sed -i '' 's/FZF_DEFAULT_OPTS/FZF_THEME/' $(@)
 
 ## Download Catppuccin theme.
-theme-catppuccin:: | $(THEME_CATPPUCCIN_BAT) $(THEME_CATPPUCCIN_LAZYGIT)
+theme-catppuccin:: | $(THEME_CATPPUCCIN_BAT) $(THEME_CATPPUCCIN_BTOP) $(THEME_CATPPUCCIN_LAZYGIT)
 	@$(MAKE) --silent theme-postinstall
 .PHONY: theme-catppuccin
 

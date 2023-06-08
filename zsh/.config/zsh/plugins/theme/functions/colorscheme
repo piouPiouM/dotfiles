@@ -5,6 +5,12 @@
 # @description Apply the colorscheme corresponding to the given mode to my tools.
 # @arg $1 string One of available modes.
 
+_success() {
+  builtin emulate -L zsh
+
+  echo "⍻ Theme applied for ${1}"
+}
+
 typeset -Ar _mode_map=(
   "dark" "catppuccin-mocha"
   "light" "catppuccin-latte"
@@ -12,23 +18,25 @@ typeset -Ar _mode_map=(
   "soft-light" "rose-pine-dawn"
 )
 
-_success() {
-  echo "⍻ Theme applied for ${1}"
-}
-
-local -r _mode=$1
+local -r _current_mode="$(<$HOME/.theme)" 2> /dev/null
+local -r _mode="$1"
 
 if [[ -z $_mode_map[$_mode] ]]; then
-  echo "Unknown mode given. Use one of ${(k)mode_map}."
+  echo "Unknown mode given. Use one of ${(k)_mode_map}."
   return 1
 fi
 
 local -r _theme=$_mode_map[$_mode]
 
+export PPM_THEME=$_theme
+
 # Use `>|` to bypass noclobber option
-echo $_mode >| "${HOME}/.theme" 
-theme-kitty $_theme && _success "Kitty"
-theme-bat $_theme && _success "Bat"
-theme-fzf $_theme && _success "fzf"
-theme-lazygit $_theme && _success "Lazygit"
-zimfw compile
+if [[ $_current_mode != $_mode ]]; then
+  echo $_mode >| "${HOME}/.theme" 
+  theme-kitty $_theme && _success "Kitty"
+  theme-bat $_theme && _success "Bat"
+  theme-btop $_theme && _success "btop"
+  theme-fzf $_theme && _success "fzf"
+  theme-lazygit $_theme && _success "Lazygit"
+  zimfw compile
+fi
