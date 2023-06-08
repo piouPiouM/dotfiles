@@ -15,7 +15,7 @@ backup-npm: NPM_GLOBAL_ROOT := $(shell sh -c 'npm root -g')
 backup-npm:
 	@echo "$(PURPLE)• Backup npm global packages$(RESET)"
 	@npm list --global --parseable --depth=0 \
-		| sed "1d;s:^$(NPM_GLOBAL_ROOT)/::" \
+		| $(GNU_SED) "1d;s:^$(NPM_GLOBAL_ROOT)/::" \
 		| grep -v '^npm$' \
 		> $(BACKUP_NPM_FILE)
 .PHONY: backup-npm

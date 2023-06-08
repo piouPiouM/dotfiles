@@ -39,12 +39,12 @@ $(THEME_CATPPUCCIN_BTOP):
 $(THEME_CATPPUCCIN_LAZYGIT):
 	@echo "$(PURPLE)• Download $(@F) for Lazygit$(RESET)"
 	@curl --silent --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/lazygit/main/themes/$(subst catppuccin-,,$(@F))" -o $(@F)
-	@sed -i '' -e 's/^/  /' -e '1s/^/gui:\n/' $(@)
+	@$(GNU_SED) -i 's/^/  /;1s/^/gui:\n/' "$@"
 
 $(THEME_ROSE_PINE_FZF):
 	@echo "$(PURPLE)• Download $(@F) for fzf$(RESET)"
 	@curl --silent --output-dir $(@D) --remote-name "https://raw.githubusercontent.com/rose-pine/fzf/main/dist/$(@F)"
-	@sed -i '' 's/FZF_DEFAULT_OPTS/FZF_THEME/' $(@)
+	@$(GNU_SED) -i 's/FZF_DEFAULT_OPTS/FZF_THEME/' $(@)
 
 ## Download Catppuccin theme.
 theme-catppuccin:: | $(THEME_CATPPUCCIN_BAT) $(THEME_CATPPUCCIN_BTOP) $(THEME_CATPPUCCIN_LAZYGIT)

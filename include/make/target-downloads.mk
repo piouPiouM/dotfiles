@@ -14,7 +14,7 @@ ${XDG_CACHE_HOME}/zim/zimfw.zsh:
 
 $(XDG_DATA_HOME)/dictionaries/fr.wordlist: $(ENSURE_DIRS)
 	@echo -n "$(PURPLE)• Download French wordlist…$(RESET)"
-	@curl --silent --create-dirs --output-dir $(XDG_DATA_HOME)/dictionaries/ --output "fr.wordlist" "https://raw.githubusercontent.com/redacted/XKCD-password-generator/master/xkcdpass/static/fr-corrected.txt" && sed -i '' 's@c/@ç@g' "$(XDG_DATA_HOME)/dictionaries/fr.wordlist" && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
+	@curl --silent --create-dirs --output-dir $(XDG_DATA_HOME)/dictionaries/ --output "fr.wordlist" "https://raw.githubusercontent.com/redacted/XKCD-password-generator/master/xkcdpass/static/fr-corrected.txt" && $(GNU_SED) -i 's@c/@ç@g' "$(XDG_DATA_HOME)/dictionaries/fr.wordlist" && echo ' $(GREEN)$(RESET)' || echo ' $(RED)✗$(RESET)'
 
 download-dictionaries: $(XDG_DATA_HOME)/dictionaries/fr.wordlist
 .PHONY: download-dictionaries

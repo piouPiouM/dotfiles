@@ -6,7 +6,7 @@
 
 local -r _theme_file="${XDG_CONFIG_HOME}/btop/themes/${1}.theme"
 if [[ -f $_theme_file ]]; then
-  sed -i 's/\b\(color_theme\s*=\s*"\)[^"]*/\1'"${1}"'/' "$XDG_CONFIG_HOME"/btop/btop.conf
+  $GNU_SED -i 's/\b\(color_theme\s*=\s*"\)[^"]*/\1'"${1}"'/' "$XDG_CONFIG_HOME"/btop/btop.conf
 
   return $?
 fi

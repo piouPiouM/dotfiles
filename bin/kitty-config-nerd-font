@@ -5,18 +5,23 @@
 
 set -eu +x -o pipefail
 
+# Use gnu sed if on macOS for better portability.
+GNU_SED="gsed"
+type $GNU_SED >/dev/null 2>&1 || GNU_SED="sed"
+
 print_code_points ()
 {
   local -r _font_name='Symbols Nerd Font'
   fc-match --format='%{charset}' "$_font_name" \
-    | sed 's/[[:alnum:]]*/U+&/ig' \
+    | $GNU_SED 's/[[:alnum:]]*/U+&/ig' \
     | fold -s --width=60 \
-    | sed -E 's/ /,/g;s/^/symbol_map /g;s/,?$/ '"$_font_name"'/g'
+    | $GNU_SED -E 's/ /,/g;s/^/symbol_map /g;s/,?$/ '"$_font_name"'/g'
 }
 
+# Keep only commented lines.
 clear_conf ()
 {
-	sed -i '/^[^#]/d' "$1"
+	$GNU_SED -i -E '/^[^#]|^$/d' "$1"
 }
 
 CONF="${1:-"$XDG_CONFIG_HOME"/kitty/nerd-fonts.conf}"

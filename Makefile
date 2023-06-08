@@ -202,7 +202,7 @@ help:
 			printf "$(PURPLE)%s$(RESET) %s\n", helpCommand, helpMessage; \
 		} \
 	} \
-	{ lastLine = $$0 }' $(MAKEFILE_LIST) | sort | column -t -l 2 | sed "s/^/  /"
+	{ lastLine = $$0 }' $(MAKEFILE_LIST) | sort | column -t -l 2 | $(GNU_SED) "s/^/  /"
 	@echo ''
 	@echo 'Symlink targets:'
 	@printf "  $(PURPLE)[un]%s$(RESET)\n" $(sort $(LINK_TARGETS))

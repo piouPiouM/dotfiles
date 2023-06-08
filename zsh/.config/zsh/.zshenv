@@ -27,8 +27,9 @@ export XDG_STATE_HOME=${XDG_STATE_HOME:-"$HOME"/.local/state}
 export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-"$TMPDIR"}
 export ZDOTDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}"
 
-
+#
 # Clean-up my home directory
+#
 source "$ZDOTDIR"/include/detect-os.zsh
 export HISTFILE="$XDG_CACHE_HOME"/zsh/history
 export _ZO_DATA_DIR="$XDG_DATA_HOME"/zoxide
@@ -44,10 +45,18 @@ export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 
+#
+# Declare tools
+#
 export VISUAL="nvim"
 export EDITOR="nvim"
 export TERMINAL="kitty"
 export BROWSER="firefox"
+
+# Use gnu sed if on macOS for better portability.
+GNU_SED="gsed"
+type $GNU_SED >/dev/null 2>&1 || GNU_SED="sed"
+export GNU_SED
 
 #
 # Language
