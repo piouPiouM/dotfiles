@@ -35,7 +35,7 @@ setup-links: link-bin link-home $(LINK_TARGETS)
 ## Generates only symlinks for the $HOME directory.
 link-home:
 	@echo -n "$(PURPLE)• Link home environment…$(RESET)"
-	@stow --restow --dotfiles dot && echo " $(SUCCESS)" || echo " $(FAILURE)"
+	@stow --restow --dotfiles home && echo " $(SUCCESS)" || echo " $(FAILURE)"
 .PHONY: link-home
 
 ## Link personnal binaries.
@@ -61,7 +61,7 @@ $(UNLINK_TARGETS)::
 
 ## Deletes symlinks in the Home directory.
 unlink-home:
-	@stow --dotfiles --delete dot
+	@stow --dotfiles --delete home
 .PHONY: unlink-home
 
 ## Delete symlink of custom binaries.
