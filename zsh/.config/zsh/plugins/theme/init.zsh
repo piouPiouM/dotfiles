@@ -1,3 +1,6 @@
+export GREP_COLORS="mt=30;45"
+export GREP_COLOR="$GREP_COLORS"
+
 local -r _mode="$(<$HOME/.theme)" 2> /dev/null
 
 if [[ $? -ne 0 ]]; then
