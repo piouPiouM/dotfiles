@@ -1,0 +1,9 @@
+[mouse]
+natural-scroll=false
+speed=-0.3970588235294118
+
+[touchpad]
+click-method='fingers'
+edge-scrolling-enabled=false
+natural-scroll=false
+two-finger-scrolling-enabled=true
