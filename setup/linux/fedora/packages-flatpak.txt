@@ -1,0 +1,5 @@
+com.github.GradienceTeam.Gradience
+com.mattjakeman.ExtensionManager
+com.spotify.Client
+com.visualstudio.code
+me.kozec.syncthingtk

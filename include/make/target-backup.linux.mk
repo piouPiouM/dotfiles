@@ -23,7 +23,7 @@ backup-dnf-copr:
 ## Backup list of installed Flatpak applications (see install-packages-flatpak).
 backup-flatpak:
 	@echo "$(PURPLE)• Backup list of installed Flatpak applications$(RESET)"
-	@flatpak list --app --columns=application | tail -n +1 | grep -v obsidian > setup/linux/fedora/flatpak.txt
+	@flatpak list --app --columns=application | tail -n +1 | grep -v obsidian > setup/linux/fedora/packages-flatpak.txt
 .PHONY: backup-flatpak
 
 ## Backup GNOME user settings.

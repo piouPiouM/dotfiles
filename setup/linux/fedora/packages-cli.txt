@@ -1,0 +1,10 @@
+azote
+bat
+btop
+fd-find
+neofetch
+pcsc-tools
+ripgrep
+trash-cli
+wev
+zoxide

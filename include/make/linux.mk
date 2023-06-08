@@ -63,7 +63,7 @@ setup-hostname:
 setup-locale-fr:
 	@$(INSTALL) langpacks-core-font-fr langpacks-core-fr langpacks-fr
 	@$(INSTALL) man-pages-fr
-	@$(INSTALL) unspell-filesystem hunspell-fr hyphen-fr
+	@$(INSTALL) unspell-filesystem hunspell-fr hyphen-fr autocorr-fr
 .PHONY: setup-locale-fr
 
 ## Setup multimedia capabilities.
@@ -104,7 +104,7 @@ setup-terminal:
 
 setup-zsh:
 	@echo "$(PURPLE)• Setting Zsh$(RESET)"
-	@$(INSTALL) zsh
+	@$(INSTALL) zsh zoxide
 	@echo "$(PURPLE)  Type /usr/bin/zsh in the next prompt$(RESET)"
 	@sudo lchsh $$USER
 .PHONY: setup-zsh
@@ -163,22 +163,19 @@ install-packages-basic:
 ## Install CLI packages.
 install-packages-cli:
 	@echo "$(PURPLE)• Installing CLI packages$(RESET)"
-	@$(INSTALL) tealdeer trash-cli
-	@$(INSTALL) wev
+	@xargs $(INSTALL) < setup/linux/fedora/packages-cli.txt
 .PHONY: install-packages-cli
 
 ## Install GUI packages.
 install-packages-gui:
 	@echo "$(PURPLE)• Installing GUI packages$(RESET)"
-	@$(INSTALL) keepassxc yubikey-manager-qt
+	@xargs $(INSTALL) < setup/linux/fedora/packages-gui.txt
 .PHONY: install-packages-gui
 
 ## Install Flatpak applications.
 install-packages-flatpak: install-obsidian
 	@echo "$(PURPLE)• Installing Flatpak applications$(RESET)"
-	$(foreach APP_ID,$(shell cat setup/linux/fedora/flatpak.txt),
-		@$(FLATPAK) flathub $(APP_ID) $(newline)
-	)
+	@xargs $(FLATPAK) flathub < setup/linux/fedora/packages-flatpak.txt
 .PHONY: install-packages-flatpak
 
 ## Install Starship shell prompt.
@@ -193,14 +190,9 @@ update-starship:
 	@cargo update -p starship
 .PHONY: install-starship
 
+## Install Sway window manager.
 install-sway:
 	@echo "$(PURPLE)• Installing Sway$(RESET)"
-	@$(INSTALL) wayland-devel wayland-protocols-devel
-	@$(INSTALL) sway waybar -x alacritty -x swaybar
-	@$(INSTALL) sway-config-upstream sway-wallpapers
-	@$(INSTALL) wlsunset wob
-	@$(INSTALL) azote grimshot playerctl
-	@$(INSTALL) brightnessctl
 	@sudo dnf copr enable lexa/SwayNotificationCenter
-	@$(INSTALL) SwayNotificationCenter
+	@xargs $(INSTALL) < setup/linux/fedora/packages-sway.txt
 .PHONY: setup-sway

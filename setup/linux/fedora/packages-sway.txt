@@ -1,0 +1,11 @@
+wayland-devel
+wayland-protocols-devel
+sway-config-upstream
+sway-wallpapers
+SwayNotificationCenter
+azote
+brightnessctl
+grimshot
+playerctl
+wlsunset
+wob
