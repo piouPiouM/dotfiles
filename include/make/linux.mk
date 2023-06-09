@@ -1,4 +1,3 @@
-
 # -----------------------------------------------------------------------------
 # Target: Setup Linux device. Currently only supports Fedora.
 # -----------------------------------------------------------------------------
@@ -103,9 +102,9 @@ setup-terminal:
 .PHONY: setup-terminal
 
 setup-zsh:
-	@echo "$(PURPLE)• Setting Zsh$(RESET)"
+	@echo "$(PURPLE)• Setting Zsh as default shell$(RESET)"
 	@$(INSTALL) zsh zoxide
-	@echo "$(PURPLE)  Type /usr/bin/zsh in the next prompt$(RESET)"
+	@echo "$(PURPLE)  💡 Type /usr/bin/zsh in the next prompt$(RESET)"
 	@sudo lchsh $$USER
 .PHONY: setup-zsh
 

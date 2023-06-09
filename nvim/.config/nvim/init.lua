@@ -22,10 +22,11 @@ g.vimsyn_embed = "l"
 -- See https://neovim.io/doc/user/provider.html
 g.node_host_prog = "/usr/local/bin/neovim-node-host"
 
-if fn.has("macunix") then
+if fn.has("macunix") == 1 then
   g.python_host_prog = "/usr/local/bin/python2"
   g.python3_host_prog = "/usr/local/bin/python3"
 else
+  g.python_host_prog = "/usr/bin/python2"
   g.python3_host_prog = "/usr/bin/python"
 end
 

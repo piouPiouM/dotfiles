@@ -39,7 +39,7 @@ $(THEME_CATPPUCCIN_BTOP):
 $(THEME_CATPPUCCIN_LAZYGIT):
 	@echo "$(PURPLE)• Download $(@F) for Lazygit$(RESET)"
 	@curl --silent --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/lazygit/main/themes/$(subst catppuccin-,,$(@F))" -o $(@F)
-	@$(GNU_SED) -i 's/^/  /;1s/^/gui:\n/' "$@"
+	@$(GNU_SED) -i 's/^/  /;1 i gui:' "$@"
 
 $(THEME_ROSE_PINE_FZF):
 	@echo "$(PURPLE)• Download $(@F) for fzf$(RESET)"

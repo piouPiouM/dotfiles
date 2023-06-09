@@ -1,3 +1,4 @@
+ShellCheck
 azote
 bat
 btop
@@ -5,6 +6,7 @@ fd-find
 neofetch
 pcsc-tools
 ripgrep
+shfmt
 trash-cli
 wev
 zoxide
