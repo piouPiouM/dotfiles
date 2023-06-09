@@ -30,36 +30,39 @@ zsh-activate:
 	chsh -s $$(brew --prefix)/bin/zsh
 
 # -----------------------------------------------------------------------------
-# Target: Homebrew
+# Target: Setup macOS device.
 # -----------------------------------------------------------------------------
 
+setup:: setup-brew
+.PHONY: setup
+
+install:: install-packages-homebrew
+.PHONY: install
+
+cleanup::
+	@$(call cmd_exists,brew) && brew $(_DRY_RUN) cleanup
+.PHONY: cleanup
+
 ## Install Homebrew and your packages.
-brew: brew-download brew-install brew-postinstall brew-upgrade
-.PHONY: brew
+setup-brew: brew-download install-packages-homebrew postinstall-packages-homebrew update-packages-homebrew
+.PHONY: setup-brew
 
 # Download Homebrew the first time.
 brew-download:
-	@echo "$(PURPLE)• Download Homebrew if necessary$(RESET)"
+	@echo "$(PURPLE)• Downloading and install Homebrew if needed$(RESET)"
 	@$(call cmd_exists,brew) || \
-		curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh
+		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 .PHONY: brew-download
 
-## Dump Homebrew packages.
-brew-dump:
-	@echo "$(PURPLE)• Dump Homebrew packages$(RESET)"
-	@$(call cmd_exists,brew) && brew list | grep -Fw pcre2 >/dev/null || brew install pcre2
-	@$(call cmd_exists,brew) && $(realpath bin/macos/brew-dump) $(realpath Brewfile)
-.PHONY: brew-dump
-
 ## Install Homebrew packages.
-brew-install:
-	@echo "$(PURPLE)• Install Homebrew packages$(RESET)"
-	@$(call cmd_exists,brew) && brew bundle --no-upgrade --file=$(realpath Brewfile)
+install-packages-homebrew:
+	@echo "$(PURPLE)• Installing Homebrew packages$(RESET)"
+	@$(call cmd_exists,brew) && brew bundle --no-upgrade --file=$(BREWFILE)
 .PHONY: brew-install
 
 # Run Homebrew post-install tasks.
-brew-postinstall:
-	@echo "$(PURPLE)• Run Homebrew post-install$(RESET)"
+postinstall-packages-homebrew:
+	@echo "$(PURPLE)• Running Homebrew post-install$(RESET)"
 	@brew completions link
 	@pip3 install --upgrade pip setuptools wheel
 	@update_rubygems
@@ -67,7 +70,8 @@ brew-postinstall:
 .PHONY: brew-postinstall
 
 ## Update Homebrew packages.
-brew-upgrade:
+update-packages-homebrew:
+	@echo "$(PURPLE)• Updating Homebrew packages$(RESET)"
 	@brew update
 	@brew upgrade
 	@$(MAKE) --silent brew-postinstall

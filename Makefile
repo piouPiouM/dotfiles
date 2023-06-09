@@ -81,6 +81,7 @@ endef
 
 ## Perform setup of the device.
 setup:: setup-dirs setup-links
+	$(MAKE) --silent install
 .PHONY: setup
 
 ## Install all the prerequisites.
@@ -88,8 +89,7 @@ install:: setup-dirs setup-links
 .PHONY: install
 
 ## Clean all cache systems.
-cleanup:
-	@brew $(_DRY_RUN) cleanup
+cleanup::
 	@npm cache verify
 	@gem cleanup --silent $(_DRY_RUN)
 .PHONY: cleanup
