@@ -2,29 +2,34 @@
 # @name kitty-config-nerd-font
 # @brief Declare Nerd Fonts code points inside Kitty's configuration.
 # @arg $1 string Configuration file to update.
+# @arg $2 string Version of Nerd Fonts. Defaut to current date.
 
 set -eu +x -o pipefail
 
 # Use gnu sed if on macOS for better portability.
 GNU_SED="gsed"
-type $GNU_SED >/dev/null 2>&1 || GNU_SED="sed"
+type $GNU_SED > /dev/null 2>&1 || GNU_SED="sed"
 
-print_code_points ()
-{
-  local -r _font_name='Symbols Nerd Font'
-  fc-match --format='%{charset}' "$_font_name" \
-    | $GNU_SED 's/[[:alnum:]]*/U+&/ig' \
-    | fold -s --width=60 \
-    | $GNU_SED -E 's/ /,/g;s/^/symbol_map /g;s/,?$/ '"$_font_name"'/g'
+print_code_points() {
+	local -r _font_name='Symbols Nerd Font'
+	fc-match --format='%{charset}' "$_font_name" \
+		| $GNU_SED 's/[[:alnum:]]*/U+&/ig' \
+		| fold -s --width=60 \
+		| $GNU_SED -E 's/ /,/g;s/^/symbol_map /g;s/,?$/ '"$_font_name"'/g'
 }
 
 # Keep only commented lines.
-clear_conf ()
-{
+clear_conf() {
 	$GNU_SED -i -E '/^[^#]|^$/d' "$1"
 }
 
+add_version() {
+	$GNU_SED -i '1s/\(Nerd Fonts\).*/\1 '"$1"'/' "$2"
+}
+
 CONF="${1:-"$XDG_CONFIG_HOME"/kitty/nerd-fonts.conf}"
+VERSION="${2:-$(date '+%Y-%m-%d')}"
 
 clear_conf "$CONF"
+add_version "$VERSION" "$CONF"
 print_code_points >> "$CONF"

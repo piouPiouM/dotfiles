@@ -12,6 +12,9 @@ o.fileencoding = "utf-8"
 g.mapleader = " "
 g.maplocalleader = "ù"
 
+-- Enable builtin support of `.editorconfig` files
+g.editorconfig = true
+
 -- To avoid to memorize my final choice
 g.snippets = "luasnip"
 

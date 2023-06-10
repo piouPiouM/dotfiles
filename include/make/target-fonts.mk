@@ -49,8 +49,10 @@ install-fonts-nerd-symbols-only:
 	@mv $(TMP)/*.ttf $(FONTS_DIR)/
 	@rm -rf $(TMP)
 	@$(MAKE) --silent postinstall-fonts
-	@echo "$(PURPLE)• Updating Kitty's configuration to manage Nerd fonts$(RESET)"
-	@bin/kitty-config-nerd-font $(realpath $(KITTY_NERD_FONTS_CONF))
+	@echo "$(PURPLE)• Updating Kitty's configuration to handle Nerd fonts' symbols$(RESET)"
+	@bin/kitty-config-nerd-font \
+		$(realpath $(KITTY_NERD_FONTS_CONF)) \
+		$(shell curl -fsSL https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep -oP '(?<=tag_name": ")(v[^"]+)')
 .PHONY: install-fonts-nerd-symbols-only
 
 ## Download and install Nerd Fonts.
