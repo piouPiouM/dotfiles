@@ -5,4 +5,4 @@
 # @arg $1 string Path of the file to quick look.
 # -------------------------------------------------------------------
 
-qlmanage -p "$1" &>/dev/null
+qlmanage -p "$1" &> /dev/null

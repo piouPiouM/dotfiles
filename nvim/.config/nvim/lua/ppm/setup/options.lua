@@ -67,13 +67,11 @@ wo.fillchars = "eob:" -- Hide the end of buffer tilde.
 opt.suffixesadd = { ".js", ".jsx", ".json", ".ts", ".tsx", ".tsx.styl", ".css", ".scss", ".sass" }
 
 o.textwidth = 120
-if fn.executable("par") then
-  o.formatprg = string.format("par -w%dre", vim.api.nvim_get_option("textwidth"))
-end
+-- if fn.executable("par") then o.formatprg = string.format("par -w%dre", vim.api.nvim_get_option("textwidth")) end
 
 wo.foldminlines = 3
 wo.foldmethod = "expr"
-wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 wo.foldlevel = 10
 
 -- }}}1

@@ -8,7 +8,7 @@ local sh = {
   lintSource = "shellcheck",
   lintStdin = true,
   lintFormats = { "-:%l:%c: %trror: %m", "-:%l:%c: %tarning: %m", "-:%l:%c: %tote: %m" },
-  formatCommand = "shfmt -",
+  formatCommand = "shfmt -bn -ci -kp -sr -",
   formatStdin = true,
 }
 

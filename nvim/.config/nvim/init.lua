@@ -63,7 +63,9 @@ require("ppm.colorscheme.catppuccin").use()
 local autocmd = vim.api.nvim_create_autocmd
 local group_id = vim.api.nvim_create_augroup("lazyLoading", { clear = true })
 local function emitActuallyEditingEvent()
-  api.nvim_exec_autocmds("User", { pattern = "ActuallyEditing" })
+  api.nvim_exec_autocmds("User", {
+    pattern = "ActuallyEditing",
+  })
 end
 
 autocmd("BufReadPre", {
@@ -71,9 +73,7 @@ autocmd("BufReadPre", {
   pattern = "*",
   once = true,
   callback = function()
-    if fn.argc() ~= 0 or fn.line2byte(fn.line("$")) ~= -1 or o.insertmode then
-      emitActuallyEditingEvent()
-    end
+    if fn.argc() ~= 0 or fn.line2byte(fn.line("$")) ~= -1 or o.insertmode then emitActuallyEditingEvent() end
   end,
 })
 

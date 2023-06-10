@@ -1,6 +1,8 @@
 {
-    "diagnostics.globals": [
-        "vim",
-        "packer_plugins"
-    ]
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "diagnostics.globals": [
+    "vim",
+    "packer_plugins"
+  ],
+  "format.enable": true
 }
