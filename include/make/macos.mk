@@ -44,7 +44,13 @@ cleanup::
 .PHONY: cleanup
 
 ## Install Homebrew and your packages.
-setup-brew: brew-download install-packages-homebrew postinstall-packages-homebrew update-packages-homebrew
+setup-brew:
+	@$(MAKE) brew-download
+	@$(MAKE) install-stow
+	@$(MAKE) setup-links
+	@$(MAKE) install-packages-homebrew
+	@$(MAKE) postinstall-packages-homebrew
+	@$(MAKE) update-packages-homebrew
 .PHONY: setup-brew
 
 # Download Homebrew the first time.

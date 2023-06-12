@@ -2,7 +2,10 @@
 # Target: Setup Linux device. Currently only supports Fedora.
 # -----------------------------------------------------------------------------
 
-setup:: setup-hostname setup-dnf setup-zsh setup-packages setup-terminal
+setup:: setup-hostname setup-dnf setup-zsh install-stow
+	@$(MAKE) setup-links
+	@$(MAKE) setup-packages
+	@$(MAKE) setup-terminal
 .PHONY: setup
 
 ## Setup battery management.
@@ -104,7 +107,7 @@ setup-terminal:
 setup-zsh:
 	@echo "$(PURPLE)• Setting Zsh as default shell$(RESET)"
 	@$(INSTALL) zsh zoxide
-	@echo "$(PURPLE)  💡 Type /usr/bin/zsh in the next prompt$(RESET)"
+	@echo "$(PURPLE)  🛈 Type /usr/bin/zsh in the next prompt$(RESET)"
 	@sudo lchsh $$USER
 .PHONY: setup-zsh
 
@@ -156,7 +159,6 @@ install-packages-basic:
 	@$(INSTALL) git curl wget unzip sqlite
 	@$(INSTALL) python3-pip pipx
 	@$(INSTALL) cargo golang nodejs-npm rubygems
-	@$(INSTALL) stow ripgrep fd-find bat
 .PHONY: install-packages-basic
 
 ## Install CLI packages.

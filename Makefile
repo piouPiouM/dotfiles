@@ -81,13 +81,17 @@ endef
 # -----------------------------------------------------------------------------
 
 ## Perform setup of the device.
-setup:: setup-dirs setup-links
-	$(MAKE) --silent install
+setup:: setup-dirs
 .PHONY: setup
 
 ## Install all the prerequisites.
-install:: setup-dirs setup-links
+install:: setup-dirs install-stow setup-links
 .PHONY: install
+
+install-stow:
+	@echo "$(PURPLE)• Installing GNU Stow$(RESET)"
+	@$(INSTALL) stow
+.PHONY: install-stow
 
 ## Clean all cache systems.
 cleanup::
