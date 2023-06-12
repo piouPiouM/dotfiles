@@ -188,8 +188,13 @@ return require("packer").startup({
 
     -- Language Server Protocol
     use {
-      { "folke/neodev.nvim", event = "User ActuallyEditing" },
-      { "j-hui/fidget.nvim", event = "User ActuallyEditing", config = config("fidget") },
+      { "folke/neodev.nvim",                event = "User ActuallyEditing" },
+      {
+        "j-hui/fidget.nvim",
+        event = "User ActuallyEditing",
+        branch = "legacy",
+        config = config("fidget"),
+      },
       {
         "neovim/nvim-lspconfig",
         config = config("lsp"),
