@@ -13,7 +13,7 @@
   alias vi="nvim"
   alias v="nvim"
   alias view="nvim -R"
-  alias dotfiles="cd $HOME/.dotfiles && nvim; cd -"
+  alias dotfiles="cd $HOME/.dotfiles && $EDITOR; cd -"
 
   # Files and directory
   alias ll="ls -Glah"
