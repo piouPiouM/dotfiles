@@ -7,6 +7,7 @@
   <img src="https://img.shields.io/badge/Fedora-51A2DA?style=for-the-badge&logo=Fedora&logoColor=fff" alt="Fedora"/>
   <img src="https://img.shields.io/badge/macOS-000?style=for-the-badge&logo=Apple&logoColor=fff" alt="macOS"/>
 </p>
+
 Manage backup, restore, and installation of my environments [since 2011](https://github.com/piouPiouM/dotfiles/commit/ec918b4). Based on the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) and uses [GNU Stow](https://www.gnu.org/software/stow/) to maintain symlinks to my home directory. Mainly to reduce the mess in my `$HOME` 🍺
 
 ![neovim.png](_assets/neovim.png)
@@ -49,7 +50,7 @@ $ git clone --depth 1 https://github.com/piouPiouM/dotfiles.git ~/.dotfiles
 $ cd ~/.dotfiles
 ```
 
-> **Note**
+> **Note**  
 > I use `~/.dotfiles` as the destination directory because an alias allows me to directly edit the folder from any location: [`dotfiles`](https://github.com/piouPiouM/dotfiles/blob/ddc85554b0d2e5c9e6a386800612130c2d246e4d/zsh/.config/zsh/plugins/aliases/init.zsh#L16).
 ### Installation à la carte
 
