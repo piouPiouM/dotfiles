@@ -4,7 +4,7 @@ install-neovim::
 	@$(INSTALL) gcc-c++ golang
 	@$(INSTALL) libtree-sitter tree-sitter-cli
 	@$(INSTALL) neovim python3-neovim
-	@$(MAKE) --silent postinstall-neovim
+	@$(MAKE) postinstall-neovim
 .PHONY: install-neovim
 
 install-neovim-dependencies::

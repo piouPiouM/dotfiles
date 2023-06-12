@@ -30,5 +30,5 @@ restore-npm:
 update-packages-npm:
 	@echo "$(PURPLE)• Update npm global packages$(RESET)"
 	@xargs npm update $(NPM_FLAGS) < $(BACKUP_NPM_FILE)
-	$(MAKE) --silent backup-npm
+	$(MAKE) backup-npm
 .PHONY: restore-update-npm

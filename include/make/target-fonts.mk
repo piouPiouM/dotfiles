@@ -14,7 +14,7 @@ install-fonts:: \
 	install-fonts-nerd \
 	install-fonts-ibm-plex \
 	$(FONTS_IA) | $(ENSURE_DIRS)
-	@$(MAKE) --silent postinstall-fonts
+	@$(MAKE) postinstall-fonts
 .PHONY: install-fonts 
 
 ## Download and install iA Writter QuattroS font.
@@ -48,7 +48,7 @@ install-fonts-nerd-symbols-only:
 	@unzip -qq $(TMP)/NerdFontsSymbolsOnly.zip *.ttf -d $(TMP)
 	@mv $(TMP)/*.ttf $(FONTS_DIR)/
 	@rm -rf $(TMP)
-	@$(MAKE) --silent postinstall-fonts
+	@$(MAKE) postinstall-fonts
 	@echo "$(PURPLE)• Updating Kitty's configuration to handle Nerd fonts' symbols$(RESET)"
 	@bin/kitty-config-nerd-font \
 		$(realpath $(KITTY_NERD_FONTS_CONF)) \

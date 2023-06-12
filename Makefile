@@ -1,6 +1,7 @@
 SHELL=/bin/bash
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
+MAKEFLAGS += --silent
 .DEFAULT_GOAL = help
 .DELETE_ON_ERROR:
 .NOTPARALLEL:
@@ -130,7 +131,7 @@ ENSURE_DIRS = $(XDG_CACHE_HOME)/gem \
 ## Creates the dotfiles tree structure.
 setup-dirs:
 	@echo "$(PURPLE)• Creating directories$(RESET)"
-	@$(MAKE) --silent $(ENSURE_DIRS)
+	@$(MAKE) $(ENSURE_DIRS)
 .PHONY: setup-dirs
 
 $(ENSURE_DIRS):
@@ -177,7 +178,7 @@ setup-npm: | $(ENSURE_DIRS)
 	@npm config set cache $(XDG_CACHE_HOME)/npm
 	@npm config set prefix $(NPM_PACKAGES)
 	@$(call register_manpath,$(NPM_PACKAGES)/share/man)
-	$(MAKE) --silent restore-npm
+	@$(MAKE) restore-npm
 .PHONY: setup-npm
 
 # -----------------------------------------------------------------------------

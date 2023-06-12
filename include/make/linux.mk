@@ -48,7 +48,7 @@ setup-gnome:
 	@sudo dnf group update core
 	@$(INSTALL) gnome-extensions-app gnome-font-viewer
 	@$(INSTALL) qt5ct qgnomeplatform-qt5
-	@$(MAKE) --silent install-gnome-extensions
+	@$(MAKE) install-gnome-extensions
 .PHONY: setup-gnome
 
 ## Setup hostname.
@@ -97,7 +97,7 @@ setup-sync:
 ## Setup terminal application.
 setup-terminal:
 	@echo "$(PURPLE)• Setting terminal$(RESET)"
-	@$(MAKE) --silent install-fonts install-themes install-starship link-kitty
+	@$(MAKE) install-fonts install-themes install-starship link-kitty
 	@$(INSTALL) kitty
 .PHONY: setup-terminal
 
@@ -152,7 +152,7 @@ install-packages-basic:
 	@echo "$(PURPLE)• Setting basic packages$(RESET)"
 	@$(INSTALL) fedora-workstation-repositories fedora-flathub-remote fedora-third-party
 	@$(INSTALL) flatpak flatseal
-	@$(MAKE) --silent setup-flatpak-flathub
+	@$(MAKE) setup-flatpak-flathub
 	@$(INSTALL) git curl wget unzip sqlite
 	@$(INSTALL) python3-pip pipx
 	@$(INSTALL) cargo golang nodejs-npm rubygems

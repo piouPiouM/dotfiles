@@ -74,7 +74,7 @@ update-packages-homebrew:
 	@echo "$(PURPLE)• Updating Homebrew packages$(RESET)"
 	@brew update
 	@brew upgrade
-	@$(MAKE) --silent brew-postinstall
+	@$(MAKE) brew-postinstall
 .PHONY: brew-upgrade
 
 # -----------------------------------------------------------------------------

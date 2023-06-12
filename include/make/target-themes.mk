@@ -48,7 +48,7 @@ $(THEME_ROSE_PINE_FZF):
 
 ## Download Catppuccin theme.
 theme-catppuccin:: | $(THEME_CATPPUCCIN_BAT) $(THEME_CATPPUCCIN_BTOP) $(THEME_CATPPUCCIN_LAZYGIT)
-	@$(MAKE) --silent theme-postinstall
+	@$(MAKE) theme-postinstall
 .PHONY: theme-catppuccin
 
 ## Download Nightfox theme.
@@ -64,7 +64,7 @@ theme-nightfox:
 
 ## Download Rosé Pine theme.
 theme-rose-pine:: | $(THEME_ROSE_PINE_FZF)
-	@$(MAKE) --silent theme-postinstall
+	@$(MAKE) theme-postinstall
 .PHONY: theme-rose-pine
 
 theme-postinstall:

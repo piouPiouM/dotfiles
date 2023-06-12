@@ -20,7 +20,7 @@ install-neovim:: | $(ENSURE_DIRS)
 
 postinstall-neovim: install-neovim-dependencies
 	@echo "$(PURPLE)• Running Neovim post-installation$(RESET)"
-	@$(MAKE) --silent install-neovim-plugins
+	@$(MAKE) install-neovim-plugins
 	@$(NVIM) +UpdateRemotePlugins +qa
 .PHONY: postinstall-neovim
 
