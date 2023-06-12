@@ -13,7 +13,7 @@ neovim-treesitter:
 	@$(NVIM) "+TSUninstall all" +qa
 .PHONY: neovim-treesitter
 
-## Install or update Neovim.
+## Install or update Neovim nightly.
 install-neovim:: | $(ENSURE_DIRS)
 	@echo "$(PURPLE)• Installing Neovim$(RESET)"
 .PHONY: install-neovim
