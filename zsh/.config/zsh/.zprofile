@@ -26,8 +26,14 @@ path=(
 	"${=path}"
 )
 
+fpath=(
+  "$XDG_DATA_HOME"/bin/functions
+	"${=fpath}"
+)
+
 # Remove empty values
 path=($path)
+fpath=($fpath)
 
 # Eliminate duplicates in *paths
 typeset -gU cdpath fpath mailpath path

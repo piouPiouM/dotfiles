@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+# -------------------------------------------------------------------
+# vim:et sts=2 sw=2 ft=zsh
+# -------------------------------------------------------------------
+# @name theme-bat
+# @arg $1 string Theme name
+
+export BAT_THEME="${1:-catppuccin-mocha}"
