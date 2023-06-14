@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+# @name failed
+# @brief Exits the script with an error message.
+# @arg $1 number Exit code to raise.
+# @arg $2 string Error message prefixed by an error mark.
+failed() {
+  builtin emulate -L zsh
+
+	echo "✗ ${2}"
+	exit $1
+}

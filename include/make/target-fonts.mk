@@ -41,18 +41,19 @@ install-fonts-ibm-plex:
 
 ## Download and install Nerd Fonts Symbols only.
 install-fonts-nerd-symbols-only: KITTY_NERD_FONTS_CONF := kitty/.config/kitty/nerd-fonts.conf
+install-fonts-nerd-symbols-only: TMP := $(shell mktemp -d)
+install-fonts-nerd-symbols-only: VERSION := $(shell curl -fsSL https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep -oP '(?<=tag_name": ")(v[^"]+)')
 install-fonts-nerd-symbols-only:
 	@echo "$(PURPLE)• Download Nerd Fonts$(RESET)"
-	$(eval TMP := $(shell mktemp -d))
 	@curl -fsSL --output-dir $(TMP) --remote-name "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.zip"
 	@unzip -qq $(TMP)/NerdFontsSymbolsOnly.zip *.ttf -d $(TMP)
 	@mv $(TMP)/*.ttf $(FONTS_DIR)/
 	@rm -rf $(TMP)
 	@$(MAKE) postinstall-fonts
 	@echo "$(PURPLE)• Updating Kitty's configuration to handle Nerd fonts' symbols$(RESET)"
-	@bin/kitty-config-nerd-font \
-		$(realpath $(KITTY_NERD_FONTS_CONF)) \
-		$(shell curl -fsSL https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep -oP '(?<=tag_name": ")(v[^"]+)')
+	@bin/kitty-config-nerd-font $(realpath $(KITTY_NERD_FONTS_CONF)) $(VERSION)
+	@echo "$(PURPLE)• Generate JSON file used by fzf$(RESET)"
+	@bin/nerdfonts-fetch-glythnames $(VERSION) $(XDG_DATA_HOME)/$$USER/symbols/nerdfonts.json
 .PHONY: install-fonts-nerd-symbols-only
 
 ## Download and install Nerd Fonts.

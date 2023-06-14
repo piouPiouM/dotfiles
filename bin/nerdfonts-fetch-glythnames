@@ -1,0 +1,45 @@
+#!/usr/bin/env zsh
+# @name nerdfonts-fetch-glythnames
+# @arg $1 string Version of Nerd Fonts.
+# @arg $2 string Output file. Default to `$XDG_DATA_HOME/$USER/symbols/nerdfonts.json`
+
+check_prerequisites() {
+  builtin emulate -L zsh
+
+	autoload -Uz check-command
+	check-command 'curl'
+	check-command 'jq'
+}
+
+format() {
+  builtin emulate -L zsh
+
+	command jq --monochrome-output --compact-output \
+		'del(.METADATA) | [keys[] as $key | [$key, .[$key].char]]' "$1"
+}
+
+# Downlaod JSON of Nerd Fonts glyphmanes.
+# @arg $1 string Version of Nerd Fonts.
+# @arg $2 string Output file.
+fetch() {
+  builtin emulate -L zsh
+
+	local -r _url="https://raw.githubusercontent.com/ryanoasis/nerd-fonts/${1}/glyphnames.json"
+
+	command curl -fsL --create-dirs --output "$2" "$_url" \
+		|| failed 1 "Downloading of ${_url} has failed."
+}
+
+main() {
+  builtin emulate -L zsh
+
+	local -r _json="${2:-$XDG_DATA_HOME/$USER/symbols/nerdfonts.json}"
+	local -r _raw_json="${_json:r}.raw.${_json:e}"
+
+	check_prerequisites
+	fetch "$1" "$_raw_json" \
+		&& format "$_raw_json" > "$_json" \
+		&& rm -f "$_raw_json"
+}
+
+main "${1}" "${2}"

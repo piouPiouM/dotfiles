@@ -97,6 +97,7 @@ install-stow:
 cleanup::
 	@npm cache verify
 	@gem cleanup --silent $(_DRY_RUN)
+	@rm -f $(XDG_DATA_HOME)/$$USER/symbols/nerdfonts.json
 .PHONY: cleanup
 
 ## Print the version number of main programs.
