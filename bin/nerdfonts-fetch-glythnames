@@ -15,7 +15,7 @@ format() {
   builtin emulate -L zsh
 
 	command jq --monochrome-output --compact-output \
-		'del(.METADATA) | [keys[] as $key | [$key, .[$key].char]]' "$1"
+		'del(.METADATA) | [keys[] as $key | [.[$key].char, $key]]' "$1"
 }
 
 # Downlaod JSON of Nerd Fonts glyphmanes.
