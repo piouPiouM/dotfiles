@@ -14,7 +14,6 @@ return require("packer").startup({
     use_rocks {
       "fun",   -- functional programming library
       "moses", -- functional programming library
-      { "luaformatter", server = "https://luarocks.org/dev" },
     }
 
     -- TODO: use https://github.com/folke/neoconf.nvim instead
@@ -40,10 +39,7 @@ return require("packer").startup({
     }
 
     -- Notification
-    use {
-      "rcarriga/nvim-notify",
-      config = config("notify"),
-    }
+    use { "rcarriga/nvim-notify", config = config("notify") }
 
     -- StatusLine
     use {
@@ -135,30 +131,18 @@ return require("packer").startup({
         requires = {
           "nvim-lua/plenary.nvim",
           "nvim-lua/popup.nvim",
-          "nvim-telescope/telescope-symbols.nvim",
-          -- "nvim-telescope/telescope-ui-select.nvim",
         },
         wants = {
           "plenary.nvim",
           "popup.nvim",
-          "telescope-symbols.nvim",
-          -- "telescope-ui-select.nvim",
         },
-        -- setup = config("telescope_setup"),
         config = config("telescope"),
         cmd = "Telescope",
         module = "telescope",
       },
-      { "nvim-lua/plenary.nvim",                   opt = true },
-      { "nvim-lua/popup.nvim",                     opt = true },
-      { "kkharji/sqlite.lua",                      opt = true },
-      { "nvim-telescope/telescope-symbols.nvim",   opt = true },
-      { "nvim-telescope/telescope-ui-select.nvim", opt = true, disable = true },
+      { "nvim-lua/plenary.nvim", opt = true },
+      { "nvim-lua/popup.nvim",   opt = true },
     }
-
-    -- use { "camspiers/snap", rocks = { "fzy" } }
-    -- The project seems to be on pause :/
-    -- use { "camspiers/snap", config = config("snap") }
 
     use {
       { "rafamadriz/friendly-snippets", opt = true },
@@ -188,7 +172,10 @@ return require("packer").startup({
 
     -- Language Server Protocol
     use {
-      { "folke/neodev.nvim",                event = "User ActuallyEditing" },
+      {
+        "folke/neodev.nvim",
+        event = "User ActuallyEditing",
+      },
       {
         "j-hui/fidget.nvim",
         event = "User ActuallyEditing",
@@ -204,10 +191,7 @@ return require("packer").startup({
       {
         "nvimdev/lspsaga.nvim",
         branch = "main",
-        requires = {
-          "nvim-tree/nvim-web-devicons",
-          "nvim-treesitter/nvim-treesitter"
-        },
+        requires = { "nvim-tree/nvim-web-devicons", "nvim-treesitter/nvim-treesitter" },
         event = "LspAttach",
         setup = config("lspsaga_setup"),
         config = config("lspsaga"),
@@ -222,7 +206,7 @@ return require("packer").startup({
       {
         "folke/trouble.nvim",
         cmd = { "Trouble", "TroubleToggle" },
-        config = simple_setup("trouble"),
+        config = simple_setup("trouble")
       },
       {
         "jose-elias-alvarez/typescript.nvim",
@@ -230,11 +214,7 @@ return require("packer").startup({
         config = config("typescript"),
         ft = ft.typescript,
       },
-      {
-        "marilari88/twoslash-queries.nvim",
-        config = config("twoslash-queries"),
-        ft = ft.typescript,
-      }
+      { "marilari88/twoslash-queries.nvim", config = config("twoslash-queries"), ft = ft.typescript },
     }
 
     -- Syntax
@@ -286,11 +266,8 @@ return require("packer").startup({
       event = "User ActuallyEditing",
     }
 
-    use {
-      "kylechui/nvim-surround",
-      config = config("nvim-surround"),
-      event = "User ActuallyEditing",
-    }
+    use { "kylechui/nvim-surround", config = config("nvim-surround"),
+      event = "User ActuallyEditing" }
 
     -- s{c1}{c2}
     -- S{c1}{c2}
@@ -299,9 +276,7 @@ return require("packer").startup({
     use {
       "ggandor/leap.nvim",
       config = config("leap"),
-      requires = {
-        { "ggandor/flit.nvim", config = simple_setup("flit") }
-      },
+      requires = { { "ggandor/flit.nvim", config = simple_setup("flit") } },
     }
 
     -- TODO consider wellle/targets.vim
