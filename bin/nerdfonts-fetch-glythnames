@@ -11,11 +11,21 @@ check_prerequisites() {
 	check-command 'jq'
 }
 
+get_longest_word_length() {
+  builtin emulate -L zsh
+
+	command jq --raw-output --monochrome-output \
+		'del(.METADATA) | keys[] | length' "$1" \
+		| sort -rn \
+		| head -1
+}
+
 format() {
   builtin emulate -L zsh
 
-	command jq --monochrome-output --compact-output \
-		'del(.METADATA) | [keys[] as $key | [.[$key].char, $key]]' "$1"
+  local -ir _max_length=$(get_longest_word_length "$1")
+	command jq --monochrome-output --compact-output --arg 'max-length' $_max_length \
+    '({ METADATA: (.METADATA += $ARGS.named).METADATA, glyths: del(.METADATA) | [keys[] as $key | [.[$key].char, $key]] })' "$1"
 }
 
 # Downlaod JSON of Nerd Fonts glyphmanes.
