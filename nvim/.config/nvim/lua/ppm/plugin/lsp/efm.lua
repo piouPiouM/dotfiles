@@ -24,19 +24,8 @@ M.config = {
     locale = "fr",
   },
   filetypes = { "json", "jsonc", "sh", "bash", "zsh", "lua" },
-  settings = {
-    rootMarkers = { ".git/", "package.json" },
-    languages = {
-      bash = { sh },
-      sh = { sh },
-      lua = {
-        {
-          formatCommand = "lua-format --config=$XDG_CONFIG_HOME/luaformatter/config.yaml -i",
-          formatStdin = true,
-        },
-      },
-    },
-  },
+  settings = { rootMarkers = { ".git/", "package.json" },
+               languages = { bash = { sh }, sh = { sh } } },
 }
 
 return M

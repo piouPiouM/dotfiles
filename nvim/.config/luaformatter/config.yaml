@@ -6,5 +6,6 @@ column_table_limit_kv: 100
 continuation_indent_width: 4
 extra_sep_at_table_end: true
 indent_width: 2
+keep_simple_function_one_line: false
 single_quote_to_double_quote: true
 spaces_inside_table_braces: true
