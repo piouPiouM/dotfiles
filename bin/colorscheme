@@ -16,7 +16,7 @@ typeset -Ar _mode_map=(
 _success() {
   builtin emulate -L zsh
 
-  echo "⍻ Theme applied for ${1}"
+  echo "✓ Theme applied for ${1}"
 }
 
 main() {
@@ -26,7 +26,7 @@ main() {
   local -r _mode="$1"
 
   if [[ -z $_mode_map[$_mode] ]]; then
-    echo "Unknown mode given. Use one of ${(k)_mode_map}."
+    echo "Unknown mode given. Use one of ${(k)_mode_map}." >&2
     return 1
   fi
 
@@ -35,17 +35,15 @@ main() {
   export PPM_THEME=$_theme
 
   # Use `>|` to bypass noclobber option
-  if [[ $_current_mode != $_mode ]]; then
-    echo $_mode >| "${HOME}/.theme" 
-    autoload -Uz theme-kitty && theme-kitty $_theme && _success "Kitty"
-    autoload -Uz theme-bat && theme-bat $_theme && _success "Bat"
-    autoload -Uz theme-btop && theme-btop $_theme && _success "btop"
-    autoload -Uz theme-fzf && theme-fzf $_theme && _success "fzf"
-    autoload -Uz theme-lazygit && theme-lazygit && autoload theme-lazygit && theme-lazygit $_theme && _success "Lazygit"
+  echo $_mode >| "${HOME}/.theme" 
+  autoload -Uz theme-kitty && theme-kitty $_theme && _success "Kitty"
+  autoload -Uz theme-bat && theme-bat $_theme && _success "Bat"
+  autoload -Uz theme-btop && theme-btop $_theme && _success "btop"
+  autoload -Uz theme-fzf && theme-fzf $_theme && _success "fzf"
+  autoload -Uz theme-lazygit && theme-lazygit $_theme && _success "Lazygit"
 
-    # zimfw command is not available because it's a function loaded by `$ZIM_HOME/init.zsh`.
-    [ -f "${ZIM_HOME}"/zimfw.zsh ] && source "${ZIM_HOME}"/zimfw.zsh compile -q
-  fi
+  # zimfw command is not available because it's a function loaded by `$ZIM_HOME/init.zsh`.
+  [ -f "${ZIM_HOME}"/zimfw.zsh ] && source "${ZIM_HOME}"/zimfw.zsh compile -q
 }
 
 main "$@"
