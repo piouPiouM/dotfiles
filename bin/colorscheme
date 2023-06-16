@@ -1,7 +1,4 @@
 #!/usr/bin/env zsh
-# -------------------------------------------------------------------
-# vim:et sts=2 sw=2 ft=zsh
-# -------------------------------------------------------------------
 # @name colorscheme
 # @description Apply the colorscheme corresponding to the given mode to my tools.
 # @arg $1 string One of available modes.
@@ -13,7 +10,13 @@ typeset -Ar _mode_map=(
   "soft-light" "rose-pine-dawn"
 )
 
-_success() {
+usage() {
+  builtin emulate -L zsh
+
+  echo "Usage: colorscheme " "$(IFS='|'; echo "${(k)_mode_map}")"
+}
+
+success() {
   builtin emulate -L zsh
 
   echo "✓ Theme applied for ${1}"
@@ -22,25 +25,24 @@ _success() {
 main() {
   builtin emulate -L zsh
 
-  local -r _current_mode="$(<$HOME/.theme)" 2> /dev/null
   local -r _mode="$1"
 
   if [[ -z $_mode_map[$_mode] ]]; then
-    echo "Unknown mode given. Use one of ${(k)_mode_map}." >&2
+    echo -e "Unknown mode given.\n\n$(usage)" >&2
     return 1
   fi
 
-  local -r _theme=$_mode_map[$_mode]
+  local -r _theme="${_mode_map[$_mode]}"
 
   export PPM_THEME=$_theme
 
   # Use `>|` to bypass noclobber option
-  echo $_mode >| "${HOME}/.theme" 
-  autoload -Uz theme-kitty && theme-kitty $_theme && _success "Kitty"
-  autoload -Uz theme-bat && theme-bat $_theme && _success "Bat"
-  autoload -Uz theme-btop && theme-btop $_theme && _success "btop"
-  autoload -Uz theme-fzf && theme-fzf $_theme && _success "fzf"
-  autoload -Uz theme-lazygit && theme-lazygit $_theme && _success "Lazygit"
+  echo "${_mode}" >| "${HOME}/.theme" 
+  autoload -Uz theme_kitty && theme_kitty $_theme && success "Kitty"
+  autoload -Uz theme_bat && theme_bat $_theme && success "Bat"
+  autoload -Uz theme_btop && theme_btop $_theme && success "btop"
+  autoload -Uz theme_fzf && theme_fzf $_theme && success "fzf"
+  autoload -Uz theme_lazygit && theme_lazygit $_theme && success "Lazygit"
 
   # zimfw command is not available because it's a function loaded by `$ZIM_HOME/init.zsh`.
   [ -f "${ZIM_HOME}"/zimfw.zsh ] && source "${ZIM_HOME}"/zimfw.zsh compile -q
