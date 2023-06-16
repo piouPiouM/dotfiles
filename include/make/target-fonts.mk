@@ -52,8 +52,8 @@ install-fonts-nerd-symbols-only:
 	@$(MAKE) postinstall-fonts
 	@echo "$(PURPLE)• Updating Kitty's configuration to handle Nerd fonts' symbols$(RESET)"
 	@bin/kitty-config-nerd-font $(realpath $(KITTY_NERD_FONTS_CONF)) $(VERSION)
-	@echo "$(PURPLE)• Generate JSON file used by fzf$(RESET)"
-	@bin/nerdfonts-fetch-glythnames $(VERSION) $(XDG_DATA_HOME)/$$USER/symbols/nerdfonts.json
+	@echo "$(PURPLE)• Generate JSON file used by fzf-lua$(RESET)"
+	@bin/nerdfonts-fetch-glyphnames $(VERSION) "$(XDG_DATA_HOME)/$$USER/symbols/nerdfonts.json"
 .PHONY: install-fonts-nerd-symbols-only
 
 ## Download and install Nerd Fonts.
