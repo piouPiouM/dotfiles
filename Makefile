@@ -1,7 +1,7 @@
 SHELL=/bin/bash
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
-MAKEFLAGS += --silent
+# MAKEFLAGS += --silent
 .DEFAULT_GOAL = help
 .DELETE_ON_ERROR:
 .NOTPARALLEL:

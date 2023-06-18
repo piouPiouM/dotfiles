@@ -112,6 +112,18 @@ setup-zsh:
 .PHONY: setup-zsh
 
 # -----------------------------------------------------------------------------
+# Target: Upgrade system
+# -----------------------------------------------------------------------------
+
+## Perform an offline upgrade of the system.
+upgrade-system:
+	@echo "$(PURPLE)• Starting download of updates$(RESET)"
+	@sudo dnf -yq offline-upgrade download
+	@echo "$(PURPLE)• Installing, computer will reboot$(RESET)"
+	@sudo dnf offline-upgrade reboot
+.PHONY: update-system
+
+# -----------------------------------------------------------------------------
 # Target: Applications
 # -----------------------------------------------------------------------------
 
