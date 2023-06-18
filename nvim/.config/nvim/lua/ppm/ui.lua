@@ -41,6 +41,9 @@ M.icons = {
   hover = " ",
   modified = "",
   readonly = "󰒃 ",
+  -- misc
+  history = " ",
+  terminal = " ",
 }
 
 M.borders = {
