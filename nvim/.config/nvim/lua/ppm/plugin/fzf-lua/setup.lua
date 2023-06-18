@@ -16,7 +16,7 @@ u.nquickmap(k.search.resume, [[<cmd>FzfLua resume<CR>]])
 vim.keymap.set({ "n", "v", "i" }, "<C-x><C-f>", function() require("fzf-lua").complete_file() end,
   { silent = true, desc = "Fuzzy complete path" })
 
-vim.keymap.set({ "n", "v", "i" }, "<C-x>:",
+vim.keymap.set("i", "<C-x>:",
   function() require("ppm.plugin.fzf-lua.providers.nerd-fonts").complete_symbol() end,
   { silent = true, desc = "Fuzzy complete Nerd Fonts symbol" })
 

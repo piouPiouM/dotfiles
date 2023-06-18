@@ -1,13 +1,12 @@
 local fn = vim.fn
-local fp = require("moses")
 local Path = require("plenary.path")
 local config = require("fzf-lua.config")
 local complete = require("fzf-lua.complete")
 local core = require("fzf-lua.core")
 local utils = require("fzf-lua.utils")
+local fp = require("ppm.toolkit.fp")
 local actions = require("ppm.plugin.fzf-lua.actions")
 local decorate = require("ppm.plugin.fzf-lua.decorators")
-local with_theme = require("ppm.plugin.fzf-lua.theme").with_theme
 
 local M = { actions = {} }
 
@@ -41,7 +40,7 @@ end
 local function normalize_opts(opts, ...) return config.normalize_opts(opts, vim.tbl_deep_extend("force", ...)) end
 
 function M.symbol(opts)
-  local defaults = {
+  local defaults = fp.pipe({
     actions = {
       default = function(selected)
         local symbol = fn.split(selected[1])[1]
@@ -49,7 +48,7 @@ function M.symbol(opts)
         actions.paste(symbol)
       end,
     },
-  }
+  }, decorate.with_theme("sidebar_right"))
 
   opts = normalize_opts(opts, global_defaults, defaults)
   if not opts then return end
@@ -69,7 +68,7 @@ function M.complete_symbol(opts)
         actions.insert(symbol, ...)
       end,
     },
-  }, with_theme("cursor"))
+  }, decorate.with_theme("cursor"))
 
   opts = normalize_opts(opts, global_defaults, defaults)
   if not opts then return end
