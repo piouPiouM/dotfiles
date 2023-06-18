@@ -10,7 +10,7 @@
 
 Manage backup, restore, and installation of my environments [since 2011](https://github.com/piouPiouM/dotfiles/commit/ec918b4). Based on the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) and uses [GNU Stow](https://www.gnu.org/software/stow/) to maintain symlinks to my home directory. Mainly to reduce the mess in my `$HOME` 🍺
 
-![neovim.png](_assets/neovim.png)
+![neovim UI](https://user-images.githubusercontent.com/22614/246191008-5415dd02-7b59-49ef-9c62-79cc30010af9.png)
 <p align="center"><em>Preview of my Neovim interface</em></p>
 
 ## Contents
@@ -27,17 +27,19 @@ As Front-end developer, I am using CLI in my day-to-day workflow. The tools I us
 
 ### Linux
 
-I using Fedora with Wayland, switch between GNOME Desktop Environment and Sway compositor.
+I use Fedora with Wayland, switching between GNOME Desktop Environment and the Sway compositor. These dotfiles help me:
 
-- DNF and Flatpak as packages manager.
+- configure packages repos
+- install essential packages
+- setup multimedia capabilities
+- setup GNOME
+- setup Sway
+- backup configurations
 
 ### macOS
 
-I also use macOS in my daily life.
+I also use macOS in my daily life. [Homebrew](https://brew.sh/) is my packages manager.
 
-- Homebrew as packages manager.
-
----
 ## Installation
 
 > **Warning**  
@@ -91,8 +93,6 @@ I use my dotfiles for personal and professional purposes, on distinct devices. S
 | Git             | `~/.local/share/git/config` (see [local-config.sample][1]) |
 
 [1]: https://github.com/piouPiouM/dotfiles/blob/ddc85554b0d2e5c9e6a386800612130c2d246e4d/git/.local/share/git/local-config.sample
-
----
 
 ## Automated tasks
 
@@ -203,17 +203,7 @@ Saves manually changed or added items in the [`setup`](./setup/) directory:
 
 ### Neovim
 
-My Neovim configuration is the one that evolves most frequently. The plugins I use are no exception, as the Neovim ecosystem is so rich and constantly evolving.  I use [many plugins](https://github.com/piouPiouM/dotfiles/blob/master/nvim/.config/nvim/lua/ppm/plugin/init.lua)  like:
-
-- [packer.nvim](https://github.com/wbthomason/packer.nvim) for manage my plugins
-- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)  as langage parser
-- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) as LSP configuration helper
-- [lspsaga.nvim](https://github.com/nvimdev/lspsaga.nvim) for improve Neovim LSP experience
-- [fzf-lua](https://github.com/ibhagwan/fzf-lua) as powerful fuzzy finder 🌸
-- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) as completion engine
-- [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) for customize the status bar, tabs and winbar
-- [leap.nvim](https://github.com/ggandor/leap.nvim) as motion helper 🦘
-- [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) to integrate Git into Neovim
+My Neovim configuration is the one that evolves most frequently. The plugins I use are no exception, as the Neovim ecosystem is so rich and constantly evolving. Please refer to the [dedicated documentation](./nvim/README.md) for details of my configuration.
 
 ```sh
 $ make setup-neovim
@@ -233,7 +223,7 @@ Launch installation of used font-faces, mainly:
 - [Nerds Font](https://www.nerdfonts.com/) to enhance my TUI.
 
 > **Note**  
-> Symbols of Nerd Fonts are installed by the [`install-fonts-nerd-symbols-only`](https://github.com/piouPiouM/dotfiles/blob/ddc85554b0d2e5c9e6a386800612130c2d246e4d/include/make/target-fonts.mk#L43-L54) target, which also updates the list of symbols in [Kitty's configuration](./kitty/.config/kitty/nerd-fonts.conf) in order to always be up to date 🪄
+> Symbols of Nerd Fonts are installed by the [`install-fonts-nerd-symbols-only`](https://github.com/piouPiouM/dotfiles/blob/ddc85554b0d2e5c9e6a386800612130c2d246e4d/include/make/target-fonts.mk#L43-L54) target, which also updates the list of symbols in [Kitty's configuration](./kitty/.config/kitty/nerd-fonts.conf) and [fzf-lua dedicated picker](./nvim/config/nvim/lua/ppm/plugin/fzf-lua/providers/nerd-fonts.lua) in order to always be up to date 🪄
 
 ### Themes
 
