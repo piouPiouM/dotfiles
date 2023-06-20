@@ -5,12 +5,19 @@ local complete = require("fzf-lua.complete")
 local core = require("fzf-lua.core")
 local utils = require("fzf-lua.utils")
 local fp = require("ppm.toolkit.fp")
+local T = require("ppm.toolkit.fp.table")
+local str = require("ppm.toolkit.string")
+local ui = require("ppm.ui")
 local actions = require("ppm.plugin.fzf-lua.actions")
 local decorate = require("ppm.plugin.fzf-lua.decorators")
 
 local M = { actions = {} }
 
-local global_defaults = fp.pipe({}, decorate.with_title(" Nerd Fonts"), decorate.with_history("nf"))
+local global_defaults = fp.pipe(
+  {},
+  decorate.with_title(" Nerd Fonts"),
+  decorate.with_history("nf")
+)
 
 local function read_source()
   local source = fn.expand("$XDG_DATA_HOME/$USER/symbols/nerdfonts.json")
@@ -39,13 +46,20 @@ end
 
 local function normalize_opts(opts, ...) return config.normalize_opts(opts, vim.tbl_deep_extend("force", ...)) end
 
+local function parse_selected(selected, glue)
+  local first_word = fp.compose(T.head, str.words)
+
+  return fp.pipe(
+    T.map(selected, first_word),
+    T.concat(glue)
+  ) .. glue
+end
+
 function M.symbol(opts)
   local defaults = fp.pipe({
     actions = {
       default = function(selected)
-        local symbol = fn.split(selected[1])[1]
-
-        actions.paste(symbol)
+        actions.paste(parse_selected(selected, ui.icon_padding))
       end,
     },
   }, decorate.with_theme("sidebar_right"))
@@ -63,9 +77,7 @@ function M.complete_symbol(opts)
     content_width = content_width,
     actions = {
       default = function(selected, ...)
-        local symbol = fn.split(selected[1])[1]
-
-        actions.insert(symbol, ...)
+        actions.insert(parse_selected(selected, ui.icon_padding), ...)
       end,
     },
   }, decorate.with_theme("cursor"))

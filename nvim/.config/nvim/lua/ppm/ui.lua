@@ -1,5 +1,7 @@
 local M = {}
 
+M.icon_padding = vim.env.TERM == "xterm-kitty" and " " or ""
+
 M.icons = {
   -- completion
   comment = " ",

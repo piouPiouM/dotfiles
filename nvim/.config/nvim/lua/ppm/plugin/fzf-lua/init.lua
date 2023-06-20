@@ -1,3 +1,4 @@
+local ui = require("ppm.ui")
 local providers = require("ppm.plugin.fzf-lua.providers")
 
 local config = {
@@ -5,7 +6,7 @@ local config = {
   global_git_icons = true,
   global_resume = true,
   global_resume_query = true,
-  file_icon_padding = vim.env.TERM == "xterm-kitty" and " " or "",
+  file_icon_padding = ui.icon_padding,
   fzf_opts = { ["--no-separator"] = "" },
   winopts = { title = "", title_pos = "center" },
   previewers = {
