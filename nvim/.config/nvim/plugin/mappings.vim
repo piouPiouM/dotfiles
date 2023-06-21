@@ -110,4 +110,4 @@ nmap <localleader>a= glip=
 nmap <localleader>a: gLi{:
 
 " }}}1
-
+nmap <leader>t <Plug>PlenaryTestFile

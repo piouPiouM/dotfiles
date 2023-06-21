@@ -1,5 +1,19 @@
 local M = {}
 
+--- Shallowly clones an array table
+---
+---@param t table The table to clone.
+---@return table t_cloned
+function M.clone(t)
+  local r = {}
+
+  for i = 1, #t do
+    r[#r + 1] = t[i]
+  end
+
+  return r
+end
+
 function M.flatten(t)
   local ret = {}
 
