@@ -2,18 +2,19 @@ local T = require("ppm.toolkit.fp.table")
 
 local M = {}
 
-function M.identity(...)
-  return ...
-end
-
-function M.tap(func)
-  return function(...)
-    func(...)
-
-    return ...
+function M.apply(f)
+  return function(x)
+    return f(x)
   end
 end
 
+--- Creates a function that returns the result of invoking the given functions from right to left,
+--- where each successive invocation is supplied the return value of the previous.
+---
+---@generic T
+---@generic R
+---@param ... fun(v: T): R
+---@return fun(...: T): R
 function M.compose(...)
   local lambdas = { ... }
   local count = #lambdas
@@ -31,6 +32,59 @@ function M.compose(...)
   end
 end
 
+---
+---@generic A
+---@param value A
+---@return A value
+function M.constant(value)
+  return function(_)
+    return value
+  end
+end
+
+--- https://gist.github.com/jcmoyer/5571987
+function M.curry(f)
+  local info = debug.getinfo(f, 'u')
+
+  local function docurry(s, left, ...)
+    local ptbl = T.clone(s)
+    local vargs = { ... }
+    for i = 1, #vargs do
+      ptbl[#ptbl + 1] = vargs[i]
+    end
+    left = left - #vargs
+    if left > 0 then
+      return function(...)
+        return docurry(ptbl, left, ...)
+      end
+    else
+      return f(unpack(ptbl))
+    end
+  end
+
+  return function(...)
+    return docurry({}, info.nparams, ...)
+  end
+end
+
+--- Returns the first argument it receives.
+---
+---@generic T
+---@param value T
+---@param ... any Extra arguments are ignored.
+---@return T
+---@diagnostic disable-next-line: unused-vararg
+function M.identity(value, ...)
+  return value
+end
+
+--- Pipes the value of an expression into a pipeline of functions.
+---
+---@generic T
+---@generic R
+---@param value T
+---@param ... fun(a: T|R): R
+---@return R
 function M.pipe(value, ...)
   local lambdas = T.reverse({ ... })
   local lambda = M.compose(unpack(lambdas))
@@ -38,23 +92,17 @@ function M.pipe(value, ...)
   return lambda(value)
 end
 
--- http://lua-users.org/wiki/CurriedLua
-function M.curry(func, num_args)
-  num_args = num_args or debug.getinfo(func, "u").nparams
+--- Runs the given function with the supplied value, then returns the value.
+---
+---@generic A
+---@param f fun(value: A)
+---@return fun(value: A): A
+function M.tap(f)
+  return function(value)
+    f(value)
 
-  if num_args < 2 then return func end
-
-  local function helper(argtrace, n)
-    if n < 1 then
-      return func(unpack(T.flatten(argtrace)))
-    end
-
-    return function(...)
-      return helper({ argtrace, ... }, n - select("#", ...))
-    end
+    return value
   end
-
-  return helper({}, num_args)
 end
 
 return M
