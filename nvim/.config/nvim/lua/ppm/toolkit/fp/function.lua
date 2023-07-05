@@ -1,8 +1,18 @@
-local T = require("ppm.toolkit.fp.table")
-
 local M = {}
 
-function M.apply(f)
+M.debug = function(message)
+  local _ = require("ppm.setup.globals")
+
+  return function(x)
+    print(message)
+    return _.P(x)
+  end
+end
+
+--- A lazy argument.
+---@alias LazyArg<A> fun(): A
+
+M.apply = function(f)
   return function(x)
     return f(x)
   end
@@ -15,12 +25,12 @@ end
 ---@generic R
 ---@param ... fun(v: T): R
 ---@return fun(...: T): R
-function M.compose(...)
+M.compose = function(...)
   local lambdas = { ... }
   local count = #lambdas
 
   return function(...)
-    local state = table.pack(...)
+    local state = { ... }
     local index = count
 
     while index > 0 do
@@ -32,22 +42,52 @@ function M.compose(...)
   end
 end
 
+--- Returns a function that always returns the same value.
 ---
 ---@generic A
 ---@param value A
----@return A value
-function M.constant(value)
+---@return LazyArg<A> value
+M.constant = function(value)
   return function(_)
     return value
   end
 end
 
+--- A thunk that returns always `nil`.
+---
+---@return LazyArg<nil>
+M.constNil = function()
+  return M.constant(nil)
+end
+
+--- A thunk that returns always `false`.
+---
+---@return LazyArg<boolean>
+M.constFalse = function()
+  return M.constant(false)
+end
+
+--- A thunk that returns always `true`.
+---
+---@return LazyArg<boolean>
+M.constTrue = function()
+  return M.constant(true)
+end
+
+--- Get a shallow copy of the given table.
+---
+---@param t table
+---@return table
+M.copy = function(t)
+  return vim.fn.copy(t) --[[@as table]]
+end
+
 --- https://gist.github.com/jcmoyer/5571987
-function M.curry(f)
-  local info = debug.getinfo(f, 'u')
+M.curry = function(f)
+  local info = debug.getinfo(f, "u")
 
   local function docurry(s, left, ...)
-    local ptbl = T.clone(s)
+    local ptbl = M.copy(s)
     local vargs = { ... }
     for i = 1, #vargs do
       ptbl[#ptbl + 1] = vargs[i]
@@ -67,29 +107,99 @@ function M.curry(f)
   end
 end
 
+--- Performs left-to-right function composition.
+--- The first argument may have any arity, the remaining arguments must be unary.
+---
+---@see M.pipe
+---@generic A
+---@generic R
+---@param ... fun(a: A|R): R
+---@return R
+M.flow = function(...)
+  local lambdas = M.reverse({ ... })
+
+  return M.compose(unpack(lambdas))
+end
+
 --- Returns the first argument it receives.
 ---
 ---@generic T
 ---@param value T
 ---@param ... any Extra arguments are ignored.
 ---@return T
----@diagnostic disable-next-line: unused-vararg
-function M.identity(value, ...)
+M.identity = function(value, ...)
   return value
+end
+
+--- Applies the `iteratee` function to each element of the `collection`.
+---
+--- The iteratee is invoked with three arguments: `(value, index|key, collection)`.
+--- Returns a new table.
+---
+---@generic A Input values
+---@generic B Ouput values
+---@generic K Keys
+---@param iteratee? Iteratee<A,B> The function invoked per iteration.
+---@return fun(collection: table<K,A>): table<K,B> # The new mapped table.
+M.map = function(iteratee)
+  local callback = iteratee or M.identity
+
+  return function(collection)
+    local result = {}
+
+    for key, value in pairs(collection) do
+      result[key] = callback(value, key, collection)
+    end
+
+    return result
+  end
+end
+
+M.noop = function(...) end
+
+--TODO
+---@generic A
+---@generic B
+---@generic K
+---@param initial A
+---@param iteratee fun(accumulator: A, value: B, key: K?, dict: table<K,B>?): A
+---@return fun(t: table<K,B>): A
+M.reduce = function(initial, iteratee)
+  return function(t)
+    local acc = initial
+    for key, value in pairs(t) do
+      acc = iteratee(acc, value, key, t)
+    end
+
+    return acc
+  end
 end
 
 --- Pipes the value of an expression into a pipeline of functions.
 ---
----@generic T
+---@generic A
 ---@generic R
----@param value T
----@param ... fun(a: T|R): R
+---@param value A
+---@param ... fun(a: A|R): R
 ---@return R
-function M.pipe(value, ...)
-  local lambdas = T.reverse({ ... })
-  local lambda = M.compose(unpack(lambdas))
+M.pipe = function(value, ...)
+  return M.flow(...)(value)
+end
 
-  return lambda(value)
+--- Reverse an array, creating a new array
+--- The passed-in array should not be sparse.
+---
+---@generic A
+---@param array table<A> The table to reverse.
+---@return table<A> reversed A new array where values are in reverse order.
+M.reverse = function(array)
+  local _array = {}
+
+  for i = #array, 1, -1 do
+    _array[#_array + 1] = array[i]
+  end
+
+  return _array
 end
 
 --- Runs the given function with the supplied value, then returns the value.
@@ -97,12 +207,26 @@ end
 ---@generic A
 ---@param f fun(value: A)
 ---@return fun(value: A): A
-function M.tap(f)
+M.tap = function(f)
   return function(value)
     f(value)
 
     return value
   end
 end
+
+M.foldm = function(monoid)
+  assert(
+    type(monoid["concat"]) == "function" and monoid["empty"] ~= nil,
+    "Given `monoid` is not a Monoid.")
+
+  return function(...)
+    return M.reduce(monoid.empty, monoid.concat)({ ... })
+  end
+end
+
+---@section Aliases
+
+M.always = M.constant
 
 return M

@@ -1,0 +1,40 @@
+local _u = require("tests.ppm.utils")
+local F = require("ppm.toolkit.fp.function")
+local pipe = F.pipe
+
+describe("identity", function()
+  local Module = require("ppm.toolkit.fp.Identity")
+
+  describe("pipeables", function()
+    it("alt()", function ()
+      local actual = pipe(1, Module.alt(function () return 2 end))
+      assert.are.equals(1, actual)
+    end)
+
+    describe("ap()", function ()
+      it("should applicate the given function to the number", function()
+        local actual = pipe(_u.double, Module.ap(1))
+        assert.are.equals(2, actual)
+      end)
+    end)
+
+    -- describe("duplicate()")
+    -- describe("extend()")
+    -- describe("extract()")
+    -- describe("flatmap()")
+    -- describe("flatten()")
+    -- describe("foldmap()")
+
+    describe("map()", function()
+      it("should double the given number", function()
+        local actual = pipe(1, Module.map(_u.double))
+        assert.are.equals(2, actual)
+      end)
+    end)
+
+    -- describe("reduce()")
+    -- describe("reduce_right()")
+    -- describe("sequence()")
+    -- describe("traverse()")
+  end)
+end)

@@ -4,5 +4,8 @@
     "vim",
     "packer_plugins"
   ],
+  "diagnostics.disable": [
+    "unused-vararg"
+  ],
   "format.enable": true
 }

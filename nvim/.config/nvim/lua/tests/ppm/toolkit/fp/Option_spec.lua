@@ -1,22 +1,23 @@
+local spy = require("luassert.spy")
 local _u = require("tests.ppm.utils")
 local fp = require("ppm.toolkit.fp.function")
 local pipe = fp.pipe
 
 
 describe("Option", function()
-  local Option = require("ppm.toolkit.fp.option")
+  local Option = require("ppm.toolkit.fp.Option")
   local none, some = Option.none, Option.some
 
   describe("metamethods", function()
     describe("__tostring()", function()
       it("should return 'None' for missing value", function()
         local actual = tostring(none)
-        assert.are.equals('None', actual)
+        assert.are.equals("None", actual)
       end)
 
       it("should return 'Some(0)' for an existing value", function()
         local actual = tostring(some(0))
-        assert.are.equals('Some(0)', actual)
+        assert.are.equals("Some(0)", actual)
       end)
     end)
   end)
@@ -82,14 +83,42 @@ describe("Option", function()
   end)
 
   describe("pipeables", function()
-    describe('ap()', function()
+    describe("ap()", function()
       it("should apply double() to the encapsulated value", function()
-        assert.are.same(some(4), pipe(some(_u.double), Option.ap(some(2))))
+        local actual = pipe(some(_u.double), Option.ap(some(2)))
+        assert.are.same(some(4), actual)
+      end)
+
+      it("should return a None", function()
         assert.are.same(none, pipe(some(_u.double), Option.ap(none)))
         assert.are.same(none, pipe(none, Option.ap(some(0))))
         assert.are.same(none, pipe(none, Option.ap(none)))
       end)
     end)
+
+    describe("filter()", function()
+      local predicate = function(value)
+        return 0 == value
+      end
+
+      it("should return a None when the predicate is falsy", function()
+        local actual = pipe(some(1), Option.filter(predicate))
+        assert.are.same(none, actual)
+        assert.are.same(none, pipe(none, Option.filter(predicate)))
+      end)
+
+      it("should return a None when the object to filter is a None", function()
+        local actual = pipe(none, Option.filter(predicate))
+        assert.are.same(none, actual)
+      end)
+
+      it("should return the given Some", function()
+        local original = some(0)
+        local actual = pipe(original, Option.filter(predicate))
+        assert.are.equals(original, actual)
+      end)
+    end)
+
 
     describe("flatMap()", function()
       local function f(n) return some(_u.double(n)) end
@@ -172,8 +201,6 @@ describe("Option", function()
     end)
 
     describe("orElse()", function()
-      local spy = require 'luassert.spy'
-
       it("should return the given Option, without calling the callback", function()
         local callback = spy.new(function() return some(0) end)
         ---@diagnostic disable-next-line: param-type-mismatch
