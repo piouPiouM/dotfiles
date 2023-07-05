@@ -5,7 +5,7 @@ local complete = require("fzf-lua.complete")
 local core = require("fzf-lua.core")
 local utils = require("fzf-lua.utils")
 local fp = require("ppm.toolkit.fp")
-local T = require("ppm.toolkit.fp.table")
+local A = require("ppm.toolkit.fp.Array")
 local str = require("ppm.toolkit.string")
 local ui = require("ppm.ui")
 local actions = require("ppm.plugin.fzf-lua.actions")
@@ -47,11 +47,11 @@ end
 local function normalize_opts(opts, ...) return config.normalize_opts(opts, vim.tbl_deep_extend("force", ...)) end
 
 local function parse_selected(selected, glue)
-  local first_word = fp.compose(T.head, str.words)
+  local first_word = fp.compose(A.head, str.words)
 
   return fp.pipe(
-    T.map(selected, first_word),
-    T.concat(glue)
+    A.map(selected, first_word),
+    A.concat(glue)
   ) .. glue
 end
 

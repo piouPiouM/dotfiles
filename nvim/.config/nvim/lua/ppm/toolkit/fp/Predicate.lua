@@ -1,4 +1,4 @@
----@module 'ppm.toolkit.fp.predicate'
+---@module 'ppm.toolkit.fp.Predicate'
 
 ---@alias Predicate<T> fun(a: `T`): boolean
 
