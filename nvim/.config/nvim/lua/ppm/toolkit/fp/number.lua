@@ -7,8 +7,16 @@ M.Eq = {
   equals = function(first, second) return first == second end
 }
 
+---@type Ord<number>
+M.Ord = {
+  equals = M.Eq.equals,
+  compare = function(first, second)
+    return first < second and -1 or first > second and 1 or 0
+  end
+}
+
 ---@type Semigroup<number>
-M.semigroup_max = {
+M.Semigroup_max = {
   ---@param first number
   ---@param second number
   ---@return number
@@ -18,7 +26,7 @@ M.semigroup_max = {
 }
 
 ---@type Semigroup<number>
-M.semigroup_min = {
+M.Semigroup_min = {
   ---@param first number
   ---@param second number
   ---@return number
@@ -28,7 +36,7 @@ M.semigroup_min = {
 }
 
 ---@type Magma<number>
-M.magma_sub = {
+M.Magma_sub = {
   ---@param first number
   ---@param second number
   ---@return number
@@ -38,7 +46,7 @@ M.magma_sub = {
 }
 
 ---@type Semigroup<number>
-M.semigroup_sum = {
+M.Semigroup_sum = {
   ---@param first number
   ---@param second number
   ---@return number
@@ -48,7 +56,7 @@ M.semigroup_sum = {
 }
 
 ---@type Semigroup<number>
-M.semigroup_product = {
+M.Semigroup_product = {
   ---@param first number
   ---@param second number
   ---@return number
@@ -58,15 +66,22 @@ M.semigroup_product = {
 }
 
 ---@type Monoid<number>
-M.monoid_sum = {
-  concat = M.semigroup_sum.concat,
+M.Monoid_sum = {
+  concat = M.Semigroup_sum.concat,
   empty = 0
 }
 
 ---@type Monoid<number>
-M.monoid_product = {
-  concat = M.semigroup_product.concat,
+M.Monoid_product = {
+  concat = M.Semigroup_product.concat,
   empty = 1
+}
+
+M.Bounded = {
+  equals = M.Eq.equals,
+  compare = M.Ord.compare,
+  top = math.huge,
+  bottom = math.huge * -1
 }
 
 return M

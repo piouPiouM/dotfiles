@@ -6,10 +6,10 @@ local unpack = unpack or table.unpack
 local map, pipe = F.map, F.pipe
 
 ---@class Array
-local M = {}
+local Array = {}
 
 local function _assertType(array)
-  assert(vim.tbl_isarray(array), " not an array")
+  assert(vim.tbl_isarray(array), "not an array -> " .. tostring(array))
 end
 
 ---@section Constructors
@@ -19,23 +19,15 @@ end
 ---@generic A
 ---@param value A
 ---@return Array<A>
-M.of = function(value)
+Array.of = function(value)
   return { value }
-end
-
---- Makes an empty array.
----
----@generic A
----@return Array<A>
-M.zero = function()
-  return {}
 end
 
 ---
 ---@generic A
 ---@param maker fun(index: number): A
 ---@return fun(n: number): NonEmptyArray<A>
-M.makeBy = function(maker)
+Array.make_by = function(maker)
   return function(n)
     local result = { maker(1) }
 
@@ -53,16 +45,41 @@ end
 ---@generic A
 ---@param eq Eq<A>
 ---@return Eq<A[]>
-M.getEq = function(eq)
+Array.get_eq = function(eq)
   -- Must be loaded on demand to avoid circular dependency error.
   local Eq = require("ppm.toolkit.fp.Eq")
 
   ---@param first unknown[]
   ---@param second unknown[]
-  return Eq.fromEquals(function(first, second)
+  return Eq.from_equals(function(first, second)
     return #first == #second
-        and pipe(first, M.every(function(x, i) return eq.equals(x, second[i]) end))
+        and pipe(first, Array.every(function(x, i) return eq.equals(x, second[i]) end))
   end)
+end
+
+---@generic A
+---@return Semigroup<A[]>
+Array.get_semigroup = function()
+  return {
+    concat = function(first, second)
+      return pipe(first, Array.concat(second))
+    end
+  }
+end
+
+---@generic A
+---@return Monoid<A[]>
+Array.get_monoid = function()
+  return {
+    concat = Array.get_semigroup().concat,
+    empty = {},
+  }
+end
+
+--- To implement.
+---@package
+Array.get_ord = function()
+  ---TODO
 end
 
 ---@section Refinements
@@ -72,7 +89,7 @@ end
 ---@generic A
 ---@param array Array<A>
 ---@return boolean
-M.is_empty = function(array)
+Array.is_empty = function(array)
   _assertType(array)
   return vim.tbl_isempty(array)
 end
@@ -82,8 +99,8 @@ end
 ---@generic A
 ---@param array Array<A>
 ---@return boolean
-M.is_non_empty = function(array)
-  return not M.is_empty(array)
+Array.is_non_empty = function(array)
+  return not Array.is_empty(array)
 end
 
 ---@section Conversions
@@ -95,7 +112,7 @@ end
 ---@generic A
 ---@param ma Option<A> The Option used to create the new array.
 ---@return Array<A> array
-M.fromOption = function(ma)
+Array.from_option = function(ma)
   local O = require("ppm.toolkit.fp.Option")
 
   return O.is_none(ma) and {} or { ma.value }
@@ -103,17 +120,100 @@ end
 
 ---@section Combinators
 
+--- Sort the given array by using an Ord.
+---
+---@generic A
+---@generic B
+---@param ord Ord<B>
+---@return fun(array: A[]): A[]
+Array.sort = function(ord)
+  return function(array)
+    return #array == 1
+        and array
+        or vim.fn.sort(array, ord.compare)
+  end
+end
+
+---@section Filtering
+
+--- Removes each entry that doesn't satisfy the given predicate function.
+---
+---@generic A
+---@param predicate PredicateArray<A>
+---@return fun(array: A[]): A[]
+Array.filter = function(predicate)
+  return function(array)
+    local result = {}
+
+    for index, value in ipairs(array) do
+      if predicate(value, index, array) then
+        table.insert(result, value)
+      end
+    end
+
+    return result
+  end
+end
+
+--- FIXME: add a description.
+---
+---@generic A
+---@generic B
+---@param f fun(value: A, index: integer): Option<B>
+---@return fun(array: A[]): B[]
+Array.filter_map = function(f)
+  local O = require("ppm.toolkit.fp.Option")
+
+  return function(array)
+    local result = {}
+
+    for index, value in ipairs(array) do
+      local option_b = f(value, index)
+      if O.is_some(option_b) then
+        table.insert(result, option_b.value)
+      end
+    end
+
+    return result
+  end
+end
+
+--- Removes the `None` from an array of optionals.
+---
+---@generic A
+---@generic B
+---@diagnostic disable-next-line: undefined-doc-name
+---@overload fun(array: Option<A>[]): Option<B>[]
+Array.compact = Array.filter_map(F.identity)
+
 ---@section Utils
 
---- Clones array and appends values from another array.
----@deprecated
----@see Array.concat
-function M.append(array, other)
-  local t = {}
-  for i, v in ipairs(array) do t[i] = v end
-  for _, v in ipairs(other) do t[#t + 1] = v end
+--- Inserts `value` to the end of `array`.
+---
+---@generic A
+---@param value A
+---@return fun(array: A[]): A
+function Array.append(value)
+  return function(array)
+    local t = Array.copy(array)
+    table.insert(t, value)
 
-  return t
+    return t
+  end
+end
+
+--- Inserts `value` to the begining of `array`.
+---
+---@generic A
+---@param value A
+---@return fun(array: A[]): A
+function Array.prepend(value)
+  return function(array)
+    local t = Array.copy(array)
+    table.insert(t, 1, value)
+
+    return t
+  end
 end
 
 --- Concatenate two arrays into a new array.
@@ -122,10 +222,10 @@ end
 ---@generic B
 ---@param second B[]
 ---@return fun(first: Array<A> | Array<B>): Array<A | B>
-M.concat = function(second)
+Array.concat = function(second)
   return function(first)
-    if M.is_empty(first) then return F.copy(second) end
-    if M.is_empty(second) then return F.copy(first) end
+    if Array.is_empty(first) then return F.copy(second) end
+    if Array.is_empty(second) then return F.copy(first) end
 
     local result = F.copy(first)
 
@@ -137,13 +237,22 @@ M.concat = function(second)
   end
 end
 
+--- Shallowly clones an array table
+---
+---@generic A
+---@param array A[] The dictionary to clone.
+---@return A[] copy
+Array.copy = function(array)
+  return F.copy(array)
+end
+
 --- Test whether an array contains a particular index.
 ---
 ---@generic A
 ---@param index number The index to look for.
 ---@param array Array<A> The array in which to look.
 ---@return boolean
-M.is_out_of_bound = function(index, array)
+Array.is_out_of_bound = function(index, array)
   _assertType(array)
 
   return index < 1 or index > #array
@@ -154,23 +263,25 @@ end
 ---@generic A
 ---@param array Array<A> The array to query.
 ---@return Option<A> first The first element of `array` if exists.
-M.head = function(array)
+Array.head = function(array)
   _assertType(array)
   local O = require("ppm.toolkit.fp.Option")
 
-  return M.is_empty(array) and O.none or O.some(array[1])
+  return Array.is_empty(array) and O.none or O.some(array[1])
 end
+
+Array.map = map
 
 --- Get the last element in an array, or a `None` if the array is empty.
 ---
 ---@generic A
 ---@param array Array<A> The array to query.
 ---@return Option<A> last The last element of `array` if exists.
-M.last = function(array)
+Array.last = function(array)
   _assertType(array)
   local O = require("ppm.toolkit.fp.Option")
 
-  return M.is_empty(array) and O.none or O.some(array[#array])
+  return Array.is_empty(array) and O.none or O.some(array[#array])
 end
 
 --- Provides a safe way to read a value at a particular index from an array.
@@ -180,22 +291,22 @@ end
 ---@generic A
 ---@param index number
 ---@return fun(array: Array<A>): Option<A> value
-M.lookup = function(index)
+Array.lookup = function(index)
   local O = require("ppm.toolkit.fp.Option")
 
   return function(array)
-    return M.is_out_of_bound(index, array) and O.none or O.is_some(array[index])
+    return Array.is_out_of_bound(index, array) and O.none or O.is_some(array[index])
   end
 end
 
-M.reverse = F.reverse
+Array.reverse = F.reverse
 
 --- Calculate the number of elements in an array.
 ---
 ---@generic A
 ---@param array Array<A>
 ---@return number length
-M.size = function(array)
+Array.size = function(array)
   _assertType(array)
 
   return #array
@@ -206,9 +317,9 @@ end
 ---@generic A
 ---@param num number
 ---@return fun(array: Array<A>): Array<A>
-M.takeLeft = function(num)
+Array.take_left = function(num)
   return function(array)
-    return num == 0 and {} or M.is_out_of_bound(num, array)
+    return num == 0 and {} or Array.is_out_of_bound(num, array)
         and F.copy(array)
         or { unpack(array, 1, num) }
   end
@@ -219,9 +330,9 @@ end
 ---@generic A
 ---@param num number
 ---@return fun(array: Array<A>): Array<A>
-M.takeRight = function(num)
+Array.take_right = function(num)
   return function(array)
-    return num == 0 and {} or M.is_out_of_bound(num, array)
+    return num == 0 and {} or Array.is_out_of_bound(num, array)
         and F.copy(array)
         or { unpack(array, #array - (num - 1)) }
   end
@@ -231,8 +342,8 @@ end
 ---@generic B
 ---@param fa Array<A>
 ---@return fun(fab: Array<fun(a: A): B>): Array<B>
-M.ap = function(fa)
-  return M.flatMap(function(f)
+Array.ap = function(fa)
+  return Array.flatmap(function(f)
     return pipe(fa, map(f))
   end)
 end
@@ -242,12 +353,12 @@ end
 ---@generic A
 ---@param array Array<A>
 ---@return Array<A>
-M.join = function(array)
+Array.join = function(array)
   local result = {}
 
   for _, value in ipairs(array) do
     if type(value) == "table" then
-      result = M.concat(value)(result)
+      result = Array.concat(value)(result)
     else
       table.insert(result, value)
     end
@@ -261,26 +372,26 @@ end
 ---@generic B
 ---@param iteratee Iteratee<A, B>
 ---@return fun(array: Array<A>): Array<B>
-M.flatMap = function(iteratee)
+Array.flatmap = function(iteratee)
   return function(array)
     return pipe(
       array,
       map(iteratee),
-      M.join
+      Array.join
     )
   end
 end
 
-M.flatten = M.flatMap(F.identity)
+Array.flatten = Array.flatmap(F.identity)
 
 --- Checks if `predicate` returns truthy for all elements of array.
 ---
 ---@generic A
 ---@param predicate Iteratee<A, boolean, number>
 ---@return fun(array: Array<A>): boolean
-M.every = function(predicate)
+Array.every = function(predicate)
   return function(array)
-    if M.is_empty(array) then return true end
+    if Array.is_empty(array) then return true end
 
     local result, success = false, false
 
@@ -295,4 +406,4 @@ M.every = function(predicate)
   end
 end
 
-return M
+return Array

@@ -12,16 +12,16 @@ local Eq = {}
 ---@section Constructors
 
 ---@generic A
----@param equals EqualsFunc<A>
+---@param operation EqualsFunc<A>
 ---@return Eq<A>
-Eq.fromEquals = function(equals)
+Eq.from_equals = function(operation)
   return {
     ---@generic A
     ---@param first A
     ---@param second A
     ---@return boolean
     equals = function(first, second)
-      return first == second or equals(first, second)
+      return first == second or operation(first, second)
     end
   }
 end
@@ -36,7 +36,7 @@ Eq.contramap = function(f)
   ---@generic A
   ---@param fa Eq<A>
   return function(fa)
-    return Eq.fromEquals(function(first, second)
+    return Eq.from_equals(function(first, second)
       return fa.equals(f(first), f(second))
     end)
   end
@@ -48,7 +48,7 @@ end
 ---@param eqs_by_property table<K, Eq<unknown>>
 ---@return Eq<table<K, unknown>>
 Eq.struct = function(eqs_by_property)
-  return Eq.fromEquals(function(first, second)
+  return Eq.from_equals(function(first, second)
     for key, instance in pairs(eqs_by_property) do
       if not instance.equals(first[key], second[key]) then
         return false
@@ -67,7 +67,7 @@ Eq.tuple = function(...)
   local A = require("ppm.toolkit.fp.Array")
   local eqs = { ... }
 
-  return Eq.fromEquals(function(first, second)
+  return Eq.from_equals(function(first, second)
     return pipe(
       eqs,
       A.every(function(instance, i) return instance.equals(first[i], second[i]) end)
@@ -82,7 +82,7 @@ end
 Eq.get_semigroup = function()
   return {
     concat = function(first, second)
-      return Eq.fromEquals(function(a, b)
+      return Eq.from_equals(function(a, b)
         return first.equals(a, b) and second.equals(a, b)
       end)
     end

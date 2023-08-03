@@ -223,12 +223,12 @@ end
 ---@generic A
 ---@generic B
 ---@param f LazyArg<A>
----@param onFailure fun(e: unknown): E
+---@param on_failure fun(reason: unknown): E
 ---@return Either<E, A> ma
-Either.tryCatch = function(f, onFailure)
+Either.try_catch = function(f, on_failure)
   local status, result = pcall(f)
 
-  return status and right(result) or left(onFailure(result))
+  return status and right(result) or left(on_failure(result))
 end
 
 ---@section Pattern matching
@@ -321,6 +321,56 @@ Either.tapLeft = function(onLeft)
     return ma
   end
 end
+
+---@section Instances
+
+---@generic E
+---@generic A
+---@param EqE Eq<E>
+---@param EqA Eq<A>
+---@return Eq<Either<E, A>>
+Either.get_eq = function(EqE, EqA)
+  return {
+    ---@generic E
+    ---@generic A
+    ---@param first Either<E, A>
+    ---@param second Either<E, A>
+    equals = function(first, second)
+      if first == second then
+        return true
+      end
+      if is_left(first) then
+        return is_left(second) and EqE.equals(first.left, second.left)
+      end
+
+      return is_right(second) and EqA.equals(first.right, second.right)
+    end
+  }
+end
+
+---@generic E
+---@generic A
+---@param semigroup Semigroup<A>
+---@return Semigroup<Either<E, A>>
+Either.get_semigroup = function(semigroup)
+  return {
+    ---@generic E
+    ---@generic A
+    ---@param first Either<E, A>
+    ---@param second Either<E, A>
+    concat = function(first, second)
+      if is_left(second) then return first end
+      if is_left(first) then return second end
+      return right(semigroup.concat(first.right, second.right))
+    end
+  }
+end
+
+Either.Functor = {
+  map = function(fa, f)
+    return pipe(fa, Either.map(f))
+  end
+}
 
 ---@section Aliases
 

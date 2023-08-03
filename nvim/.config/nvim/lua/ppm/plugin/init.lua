@@ -342,6 +342,11 @@ return require("packer").startup({
       tag = "v1.*",
       config = function() require("ppm.colorscheme.rose-pine").setup() end,
     }
+    use {
+      "ramojus/mellifluous.nvim",
+      config = simple_setup("mellifluous")
+    }
+    use { "projekt0n/github-nvim-theme" }
   end,
   config = {
     display = {

@@ -7,8 +7,16 @@ M.Eq = {
   equals = function(first, second) return first == second end
 }
 
+---@type Ord<boolean>
+M.Ord = {
+  equals = M.Eq.equals,
+  compare = function(first, second)
+    return first == second and 0 or first == false and -1 or 1
+  end
+}
+
 ---@type Semigroup<boolean>
-M.semigroup_all = {
+M.Semigroup_all = {
   ---@param first boolean
   ---@param second boolean
   ---@return boolean
@@ -18,7 +26,7 @@ M.semigroup_all = {
 }
 
 ---@type Semigroup<boolean>
-M.semigroup_any = {
+M.Semigroup_any = {
   ---@param first boolean
   ---@param second boolean
   ---@return boolean
@@ -28,14 +36,14 @@ M.semigroup_any = {
 }
 
 ---@type Monoid<boolean>
-M.monoid_all = {
-  concat = M.semigroup_all.concat,
+M.Monoid_all = {
+  concat = M.Semigroup_all.concat,
   empty = true
 }
 
 ---@type Monoid<boolean>
-M.monoid_any = {
-  concat = M.semigroup_any.concat,
+M.Monoid_any = {
+  concat = M.Semigroup_any.concat,
   empty = false
 }
 

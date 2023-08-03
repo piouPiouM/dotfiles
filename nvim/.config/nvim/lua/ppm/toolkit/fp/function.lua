@@ -1,9 +1,11 @@
 local M = {}
 
 M.debug = function(message)
+  local _ = require("ppm.setup.globals")
+
   return function(x)
     print(message)
-    P(x)
+    return _.P(x)
   end
 end
 
@@ -72,8 +74,12 @@ M.constTrue = function()
   return M.constant(true)
 end
 
+--- Get a shallow copy of the given table.
+---
+---@param t table
+---@return table
 M.copy = function(t)
-  return vim.tbl_extend("force", {}, t)
+  return vim.fn.copy(t) --[[@as table]]
 end
 
 --- https://gist.github.com/jcmoyer/5571987
@@ -99,6 +105,20 @@ M.curry = function(f)
   return function(...)
     return docurry({}, info.nparams, ...)
   end
+end
+
+--- Performs left-to-right function composition.
+--- The first argument may have any arity, the remaining arguments must be unary.
+---
+---@see M.pipe
+---@generic A
+---@generic R
+---@param ... fun(a: A|R): R
+---@return R
+M.flow = function(...)
+  local lambdas = M.reverse({ ... })
+
+  return M.compose(unpack(lambdas))
 end
 
 --- Returns the first argument it receives.
@@ -135,7 +155,15 @@ M.map = function(iteratee)
   end
 end
 
+M.noop = function(...) end
+
 --TODO
+---@generic A
+---@generic B
+---@generic K
+---@param initial A
+---@param iteratee fun(accumulator: A, value: B, key: K?, dict: table<K,B>?): A
+---@return fun(t: table<K,B>): A
 M.reduce = function(initial, iteratee)
   return function(t)
     local acc = initial
@@ -149,16 +177,13 @@ end
 
 --- Pipes the value of an expression into a pipeline of functions.
 ---
----@generic T
+---@generic A
 ---@generic R
----@param value T
----@param ... fun(a: T|R): R
+---@param value A
+---@param ... fun(a: A|R): R
 ---@return R
 M.pipe = function(value, ...)
-  local lambdas = M.reverse({ ... })
-  local lambda = M.compose(unpack(lambdas))
-
-  return lambda(value)
+  return M.flow(...)(value)
 end
 
 --- Reverse an array, creating a new array

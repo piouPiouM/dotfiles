@@ -185,6 +185,12 @@ Option.orElse = function(alternateFn)
   end
 end
 
+Option.try_catch = function(f)
+  local status, result = pcall(f)
+
+  return status and some(result) or NONE
+end
+
 ---@section Pattern matching
 
 ---@generic A
@@ -195,11 +201,26 @@ end
 ---@return fun(ma: Option<A>): B | C
 Option.match = function(onNone, onSome)
   return function(ma)
-    return is_none(ma) and onNone() or onSome(ma.value)
+    if is_none(ma) then
+      return onNone()
+    end
+
+    return onSome(ma.value)
   end
 end
 
 ---@section Filtering
+
+--- Checks if the wrapped value satisfy the `predicate`.
+---
+---@generic A
+---@param predicate Predicate<A>
+---@return fun(ma: Option<A>): boolean
+Option.exists = function(predicate)
+  return function(ma)
+    return is_none(ma) and false or predicate(ma.value)
+  end
+end
 
 --- Keeps the content of the Option which satisfy the given predicate.
 ---
@@ -228,6 +249,52 @@ Option.ap = function(mo)
 
     return some(fab.value(mo.value))
   end
+end
+
+---@section Instances
+
+Option.get_eq = function(instance)
+  return {
+    equals = function(first, second)
+      if first == second or (is_none(first) and is_none(second)) then return true end
+
+      if is_none(first) or is_none(second) then return false end
+
+      return instance.equals(first.value, second.value)
+    end
+  }
+end
+
+Option.get_ord = function(instance)
+  return {
+    equals = Option.get_eq(instance).equals,
+    compare = function(first, second)
+      if first == second then return 0 end
+
+      if is_some(first) then
+        return is_some(second) and instance.compare(first.value, second.value) or 1
+      end
+
+      return -1
+    end
+  }
+end
+
+---@generic A
+---@param instance Semigroup<A>
+---@return Monoid<A>
+Option.get_monoid = function(instance)
+  return {
+    concat = function(first, second)
+      return
+          is_none(first) and second
+          or
+          is_none(second) and first
+          or
+          some(instance.concat(first.value, second.value))
+    end,
+    empty = NONE
+  }
 end
 
 ---@section Aliases

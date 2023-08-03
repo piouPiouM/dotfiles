@@ -106,6 +106,12 @@ Dict.to_option = function(dict)
   return Dict.is_empty(dict) and O.none or O.some(dict._data)
 end
 
+Dict.from_either = function(either)
+  local E = require("ppm.toolkit.fp.Either")
+
+  return Dict.of(E.is_either(either) and E.is_right(either) and either.right or {})
+end
+
 ---@section Utils
 
 ---@section To organize

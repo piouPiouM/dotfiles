@@ -3,6 +3,7 @@ local ft = require("ppm.filetype")
 require("nvim-treesitter.configs").setup {
   ensure_installed = {
     "astro",
+    "awk",
     "bash",
     "comment",
     "css",
@@ -18,6 +19,7 @@ require("nvim-treesitter.configs").setup {
     "go",
     "graphql",
     "html",
+    "ini",
     "javascript",
     "jq",
     "jsdoc",

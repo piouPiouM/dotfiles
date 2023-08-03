@@ -9,7 +9,7 @@ describe("Eq", function()
   local Eq = require("ppm.toolkit.fp.Eq")
 
   describe("constructors", function()
-    describe("fromEquals()", function()
+    describe("from_equals()", function()
       local arr1, arr2, callback, comparator
 
       before_each(function()
@@ -18,8 +18,20 @@ describe("Eq", function()
         callback = spy.new(function(x, y)
           return x[1] == y[1]
         end)
-        comparator = Eq.fromEquals(callback)
+        comparator = Eq.from_equals(callback)
       end)
+
+        it("should return true when the two numbers are equals", function ()
+          local numberEquals = Eq.from_equals(N.Eq.equals)
+          assert.is_true(numberEquals.equals(0, 0))
+          assert.is_true(numberEquals.equals(1, 1))
+        end)
+
+        it("should return false when the two numbers are differents", function ()
+          local numberEquals = Eq.from_equals(N.Eq.equals)
+          assert.is_false(numberEquals.equals(0, 1))
+          assert.is_false(numberEquals.equals(1, 0))
+        end)
 
       it("should not calls the given function when arguments are the sames", function()
         assert.is_true(comparator.equals(arr1, arr1))

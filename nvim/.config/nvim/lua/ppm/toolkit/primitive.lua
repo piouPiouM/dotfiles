@@ -1,4 +1,10 @@
+local A = require("ppm.toolkit.fp.Array")
+local F = require("ppm.toolkit.fp.function")
+local S = require("ppm.toolkit.fp.string")
+
 local M = {}
+
+---@section Numbers
 
 --- Decrements its argument by 1.
 ---
@@ -30,6 +36,24 @@ end
 ---@return boolean
 M.odd = function(n)
   return n % 2 == 1
+end
+
+---@section Strings
+
+--- Returns the optional first word of the given string.
+---
+---@param s string
+---@return Option<string>[]
+M.first_word = function(s)
+  return A.head(S.words(s))
+end
+
+--- Returns the optional last word of the given string.
+---
+---@param s string
+---@return Option<string>[]
+M.last_word = function(s)
+  return A.last(S.words(s))
 end
 
 return M

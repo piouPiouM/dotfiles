@@ -1,9 +1,10 @@
 ---@meta
 
----@class Magma<A>: { concat: fun(x: A, y: A): A }
+---@alias Ordering -1 | 0 | 1
 
---- Implements `Magma<A>`.
----@class Semigroup<A>: { concat: fun(x: A, y: A): A }
+--- Represents types that have an upper and lower boundary.
+--- Extends `Ord<A>`.
+---@class Bounded<A>: { compare: CompareFunc<A>, equals: EqualsFunc<A>, top: A, bottom: A }
 
 --- Extends `Semigroup<A>`.
 ---@class Monoid<A>: { concat: fun(x: A, y: A): A, empty: A }

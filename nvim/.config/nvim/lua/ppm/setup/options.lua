@@ -33,7 +33,7 @@ o.signcolumn = "yes"    -- Prevents buffer moving when adding/deleting sign.
 -- }}}2
 -- Windows {{{2
 
-o.equalalways = false
+o.equalalways = true
 o.splitright = true -- Splitting windows at the right...
 o.splitbelow = true -- ... bottom.
 
