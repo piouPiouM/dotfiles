@@ -4,8 +4,8 @@
 # @arg $1 string One of available modes.
 
 typeset -Ar _mode_map=(
-  "dark" "catppuccin-mocha"
-  "light" "catppuccin-latte"
+  "dark" "github-dark"
+  "light" "github-light"
   "soft-dark" "rose-pine"
   "soft-light" "rose-pine-dawn"
 )

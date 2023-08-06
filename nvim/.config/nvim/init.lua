@@ -53,10 +53,17 @@ cmd [[syntax enable]]
 --   source $XDG_DATA_HOME/nvim/init.vim
 -- end
 
-o.background = "dark"
+if fn.filereadable(fn.expand("$HOME/.theme")) then
+  local mode = unpack(fn.readfile(fn.expand("$HOME/.theme"), nil, 1))
+  o.background = mode or "dark"
+else
+  o.background = "dark"
+end
+
 
 require("ppm.colorscheme.rose-pine").use()
 require("ppm.colorscheme.catppuccin").use()
+vim.cmd [[colorscheme github_dark]]
 
 -- Lazy load plugins using a custom autocmd `User ActuallyEditing` {{{
 
