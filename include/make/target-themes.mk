@@ -3,6 +3,9 @@
 # https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html
 # -----------------------------------------------------------------------------
 
+KITTY_PATH := $(XDG_CONFIG_HOME)/kitty/themes
+FZF_PATH := $(XDG_DATA_HOME)/fzf/themes
+
 NIGHTFOX_THEME_PATH := "$(XDG_DATA_HOME)/nvim/site/pack/packer/start/nightfox.nvim/extra"
 
 THEME_CATPPUCCIN_BAT := $(XDG_CONFIG_HOME)/bat/themes/catppuccin-frappe.tmTheme \
@@ -20,9 +23,9 @@ THEME_CATPPUCCIN_LAZYGIT := $(XDG_DATA_HOME)/lazygit/themes/catppuccin-frappe.ym
 														$(XDG_DATA_HOME)/lazygit/themes/catppuccin-macchiato.yml \
 														$(XDG_DATA_HOME)/lazygit/themes/catppuccin-mocha.yml
 
-THEME_ROSE_PINE_FZF := $(XDG_DATA_HOME)/fzf/themes/rose-pine.sh \
-											 $(XDG_DATA_HOME)/fzf/themes/rose-pine-dawn.sh \
-											 $(XDG_DATA_HOME)/fzf/themes/rose-pine-moon.sh
+THEME_ROSE_PINE_FZF := $(FZF_PATH)/rose-pine.sh \
+											 $(FZF_PATH)/rose-pine-dawn.sh \
+											 $(FZF_PATH)/rose-pine-moon.sh
 
 ## Install themes for various tools.
 install-themes:: theme-catppuccin theme-nightfox theme-rose-pine
@@ -51,15 +54,32 @@ theme-catppuccin:: | $(THEME_CATPPUCCIN_BAT) $(THEME_CATPPUCCIN_BTOP) $(THEME_CA
 	@$(MAKE) theme-postinstall
 .PHONY: theme-catppuccin
 
+## Download Github Contrib themes.
+theme-github: TMP := $(shell mktemp -d)
+theme-github::
+	@echo "$(PURPLE)• Install Github themes$(RESET)"
+	@git clone --quiet --depth=1 https://github.com/projekt0n/github-theme-contrib.git $(TMP)
+	@cp -f $(TMP)/themes/fzf/* $(FZF_PATH)/ && echo "  $(SUCCESS) fzf$(RESET)"
+	@cp -f $(TMP)/themes/kitty/*.conf $(KITTY_PATH)/ && echo "  $(SUCCESS) Kitty$(RESET)"
+	@rm -rf $(TMP)
+theme-github::
+	@$(MAKE) --silent $(addsuffix .sh,$(wildcard $(FZF_PATH)/github_*))
+.PHONY: theme-github
+
+$(FZF_PATH)/github_%.sh: $(FZF_PATH)/github_%
+	@echo "$(PURPLE)• Format fzf's theme $(subst _,-,$(@F))$(RESET)"
+	@$(GNU_SED) -i -E "s/.*'(.*)'/export FZF_THEME=\"\1\"/;s@ --@\n  --@g" $<
+	@mv $< $(subst _,-,$@)
+
 ## Download Nightfox theme.
 theme-nightfox:
 	@echo "$(PURPLE)• Install Nightfox for Kitty from Neovim$(RESET)"
-	@cp "$(NIGHTFOX_THEME_PATH)/dawnfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Dawnfox.conf"
-	@cp "$(NIGHTFOX_THEME_PATH)/dayfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Dayfox.conf"
-	@cp "$(NIGHTFOX_THEME_PATH)/duskfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Duskfox.conf"
-	@cp "$(NIGHTFOX_THEME_PATH)/nightfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Nightfox.conf"
-	@cp "$(NIGHTFOX_THEME_PATH)/nordfox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Nordfox.conf"
-	@cp "$(NIGHTFOX_THEME_PATH)/terafox/nightfox_kitty.conf" "./kitty/.config/kitty/themes/Terafox.conf"
+	@cp "$(NIGHTFOX_THEME_PATH)/dawnfox/nightfox_kitty.conf" "$(KITTY_PATH)/Dawnfox.conf"
+	@cp "$(NIGHTFOX_THEME_PATH)/dayfox/nightfox_kitty.conf" "$(KITTY_PATH)/Dayfox.conf"
+	@cp "$(NIGHTFOX_THEME_PATH)/duskfox/nightfox_kitty.conf" "$(KITTY_PATH)/Duskfox.conf"
+	@cp "$(NIGHTFOX_THEME_PATH)/nightfox/nightfox_kitty.conf" "$(KITTY_PATH)/Nightfox.conf"
+	@cp "$(NIGHTFOX_THEME_PATH)/nordfox/nightfox_kitty.conf" "$(KITTY_PATH)/Nordfox.conf"
+	@cp "$(NIGHTFOX_THEME_PATH)/terafox/nightfox_kitty.conf" "$(KITTY_PATH)/Terafox.conf"
 .PHONY: theme-nightfox
 
 ## Download Rosé Pine theme.

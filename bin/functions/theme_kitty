@@ -6,6 +6,8 @@
 # @arg $1 string Theme name
 
 typeset -Ar _resolved=(
+  "github-dark" "Github Dark"
+  "github-light" "Github light"
   "catppuccin-mocha" "Catppuccin-Mocha"
   "catppuccin-latte" "Catppuccin-Latte"
   "rose-pine" "Rosé Pine"

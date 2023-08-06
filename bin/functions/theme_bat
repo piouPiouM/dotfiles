@@ -6,3 +6,4 @@
 # @arg $1 string Theme name
 
 export BAT_THEME="${1:-catppuccin-mocha}"
+bat cache --build &> /dev/null
