@@ -43,6 +43,6 @@ watch-one:
 .PHONY: watch-one
 
 # Inhibits fake targets
-MAKEFLAGS += --silent
 $(TARGET_ARGS):
 	@true
+.PHONY: $(TARGET_ARGS)

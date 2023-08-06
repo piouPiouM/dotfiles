@@ -29,8 +29,8 @@ backup-flatpak:
 ## Backup GNOME user settings.
 backup-gnome-settings:
 	@echo "$(PURPLE)• Backup GNOME customized settings$(RESET)"
-	$(foreach DIR,$(BACKUP_DCONF_DIRS),
-		@dconf dump /org/gnome/$(DIR)/ > setup/linux/gnome/$(subst /,.,$(DIR)).dconf 2>/dev/null \
+	@$(foreach DIR,$(BACKUP_DCONF_DIRS),
+		dconf dump /org/gnome/$(DIR)/ > setup/linux/gnome/$(subst /,.,$(DIR)).dconf 2>/dev/null \
 			&& echo "  $(SUCCESS)setup/linux/gnome/$(subst /,.,$(DIR)).dconf" $(newline)
 	)
 .PHONY: backup-gnome-settings
