@@ -30,7 +30,7 @@ M.compose = function(...)
   local count = #lambdas
 
   return function(...)
-    local state = table.pack(...)
+    local state = { ... }
     local index = count
 
     while index > 0 do
