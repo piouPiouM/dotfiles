@@ -4,7 +4,7 @@
 
 BACKUP_NPM_FILE := setup/npm/packages.txt
 NPM_FLAGS := --global --loglevel silent
-BACKUP_TARGETS = $(shell grep --perl-regexp --only-matching --no-filename --color=never '^backup-\S+(?=:)' $(MAKEFILE_LIST) | uniq)
+BACKUP_TARGETS = $(shell $(GNU_GREP) --perl-regexp --only-matching --no-filename --color=never '^backup-\S+(?=:)' $(MAKEFILE_LIST) | uniq)
 
 ## Backup all settings.
 backup:
@@ -17,7 +17,7 @@ backup-npm:
 	@echo "$(PURPLE)• Backup npm global packages$(RESET)"
 	@npm list --global --parseable --depth=0 \
 		| $(GNU_SED) "1d;s:^$(NPM_GLOBAL_ROOT)/::" \
-		| grep -v '^npm$$' \
+		| $(GNU_GREP) -v '^npm$$' \
 		> $(BACKUP_NPM_FILE)
 .PHONY: backup-npm
 
