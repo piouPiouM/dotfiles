@@ -4,5 +4,5 @@
 
 postinstall-fonts:
 	@echo "$(PURPLE)• Installing new fonts$(RESET)"
-	@cp $(FONTS_DIR)/*.ttf ~/Library/Fonts/
+	@cp $(FONTS_DIR)/*.{otf,ttf} ~/Library/Fonts/
 .PHONY: postinstall-fonts

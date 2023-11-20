@@ -6,15 +6,17 @@
 
 set -eu +x -o pipefail
 
-# Use gnu sed if on macOS for better portability.
+# Use gnu coreutils on macOS for better portability.
 GNU_SED="gsed"
 type $GNU_SED > /dev/null 2>&1 || GNU_SED="sed"
+GNU_FOLD="gfold"
+type $GNU_FOLD > /dev/null 2>&1 || GNU_FOLD="fold"
 
 print_code_points() {
 	local -r _font_name='Symbols Nerd Font'
 	fc-match --format='%{charset}' "$_font_name" \
 		| $GNU_SED 's/[[:alnum:]]*/U+&/ig' \
-		| fold -s --width=60 \
+		| $GNU_FOLD -s -w 60 \
 		| $GNU_SED -E 's/ /,/g;s/^/symbol_map /g;s/,?$/ '"$_font_name"'/g'
 }
 
