@@ -48,7 +48,10 @@ ft:*.feature
 
 # Add a 'jest tests' type
 --type-add
-jest:*.{int,spec}.js
+jest:*.{int,spec}.{js,ts}
+
+--type-add
+int:*.int.{js,ts}
 
 # Add an global 'ignore' type, like the wildignore option in Vim.
 --type-add
@@ -57,4 +60,3 @@ ignore:*.{aux,out,toc,luac,o,obj,exe,dll,manifest,pyc,pyo,spl,sw?}
 ignore:*.{sassc,scssc,sass-cache,svn,git,gitkeep,bundle,DS_Store}
 --type-add
 ignore:.?{cache,node_modules,tmp,vendors?}
-
