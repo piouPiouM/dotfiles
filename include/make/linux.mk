@@ -28,9 +28,9 @@ setup-dnf: setup-dnf-config setup-dnf-copr
 setup-dnf-config: CONF := /etc/dnf/dnf.conf
 setup-dnf-config:
 	@echo "$(PURPLE)• Setting DNF config$(RESET)"
-	@grep -qxF 'fastestmirror=True' $(CONF) || echo 'fastestmirror=True' | sudo tee -a $(CONF) >/dev/null
-	@grep -qxF 'max_parallel_downloads=10' $(CONF) || echo 'max_parallel_downloads=10' | sudo tee -a $(CONF) >/dev/null
-	@grep -qxF 'deltarpm=True' $(CONF) || echo 'deltarpm=True' | sudo tee -a $(CONF) >/dev/null
+	@$(GNU_GREP) -qxF 'fastestmirror=True' $(CONF) || echo 'fastestmirror=True' | sudo tee -a $(CONF) >/dev/null
+	@$(GNU_GREP) -qxF 'max_parallel_downloads=10' $(CONF) || echo 'max_parallel_downloads=10' | sudo tee -a $(CONF) >/dev/null
+	@$(GNU_GREP) -qxF 'deltarpm=True' $(CONF) || echo 'deltarpm=True' | sudo tee -a $(CONF) >/dev/null
 	cat $(CONF)
 .PHONY: setup-dnf-config
 
