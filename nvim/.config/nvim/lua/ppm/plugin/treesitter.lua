@@ -39,6 +39,10 @@ require("nvim-treesitter.configs").setup {
   auto_install = true,
   sync_install = false,
 
+  highlight = { enable = true, },
+  incremental_selection = { enable = true },
+  indent = { enable = true },
+
   modules = {
     highlight = { enable = true },
     incremental_selection = { enable = true },
