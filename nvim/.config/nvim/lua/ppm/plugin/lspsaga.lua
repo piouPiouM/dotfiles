@@ -32,6 +32,8 @@ require("lspsaga").setup({
   preview = { lines_above = 2, lines_below = 10 },
   scroll_preview = { scroll_down = keymaps.scroll_down, scroll_up = keymaps.scroll_up },
   finder = {
+    left_width = 0.4,
+    right_width = 0.6,
     keys = {
       expand_or_jump = keymaps.open,
       vsplit = keymaps.vsplit,
