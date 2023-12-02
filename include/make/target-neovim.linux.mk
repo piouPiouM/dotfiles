@@ -19,5 +19,4 @@ upgrade-neovim:
 	@$(MAKE) --silent install-neovim-thirdparty-dependencies
 	@$(MAKE) --silent install-neovim-plugins
 	@$(NVIM) +UpdateRemotePlugins +qa
-	@$(NVIM) +checkhealth
 .PHONY: upgrade-neovim

@@ -8,7 +8,7 @@ BACKUP_TARGETS = $(shell $(GNU_GREP) --perl-regexp --only-matching --no-filename
 
 ## Backup all settings.
 backup:
-	@$(MAKE) $(BACKUP_TARGETS)
+	@$(MAKE) --silent $(BACKUP_TARGETS)
 .PHONY: backup
 
 ## Backup list of global npm packages.
@@ -31,5 +31,5 @@ restore-npm:
 update-packages-npm:
 	@echo "$(PURPLE)• Update npm global packages$(RESET)"
 	@xargs npm update $(NPM_FLAGS) < $(BACKUP_NPM_FILE)
-	$(MAKE) backup-npm
+	@$(MAKE) --silent backup-npm
 .PHONY: restore-update-npm
