@@ -18,7 +18,6 @@
   precomposeunicode = false
 
   ; pager = delta --highlight-removed --theme='Nord' --minus-color="#3f0001" --minus-emph-color="#901011" --plus-color="#0c2c10" --plus-emph-color="#006000"
-
 [init]
 	defaultBranch = main
 [alias]
@@ -131,6 +130,7 @@
   process = git-lfs filter-process
   required = true
 [include]
+  path = ~/.local/share/git/linux-config
   path = ~/.local/share/git/config
 
 [url "git@github.com:"]
