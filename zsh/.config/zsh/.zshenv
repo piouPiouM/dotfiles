@@ -95,6 +95,13 @@ if [[ -s "$XDG_DATA_HOME"/zsh/exports.zsh ]] then
 fi
 
 #
+# tabtab completion used by pnpm.
+#
+if [[ -f "$XDG_CONFIG_HOME/tabtab/zsh/__tabtab.zsh" ]] then
+  source "$XDG_CONFIG_HOME/tabtab/zsh/__tabtab.zsh"
+fi
+
+#
 # Force loading of .zprofile in charge of updating $PATH.
 #
 if [[ ! -o login ]]; then

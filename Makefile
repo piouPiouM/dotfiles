@@ -186,6 +186,11 @@ setup-npm: | $(ENSURE_DIRS)
 	@$(MAKE) restore-npm
 .PHONY: setup-npm
 
+setup-pnpm:
+	@pnpm add -g @pnpm/tabtab
+	@pnpm install-completion zsh
+.PHONY: setup-pnpm
+
 # -----------------------------------------------------------------------------
 # Target: usage and help
 # credits: https://gist.github.com/prwhite/8168133#gistcomment-2278355
