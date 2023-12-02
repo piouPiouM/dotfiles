@@ -15,7 +15,6 @@ return require("packer").startup({
 
     use_rocks {
       "fun",   -- functional programming library
-      "moses", -- functional programming library
     }
 
     use { "nvim-lua/plenary.nvim" }

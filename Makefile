@@ -171,7 +171,8 @@ include include/make/target-themes.mk
 # -----------------------------------------------------------------------------
 
 install-packages-lua:
-	@$(call cmd_exists,luarocks) && luarocks install --server=https://luarocks.org/dev luaformatter
+	@$(call cmd_exists,luarocks) && luarocks install --local --server=https://luarocks.org/dev luaformatter
+	@$(call cmd_exists,luarocks) && luarocks install --local fun
 .PHONY: install-packages-lua
 
 ## Setup npm environment.
