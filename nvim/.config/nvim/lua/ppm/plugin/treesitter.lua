@@ -2,6 +2,7 @@ local ft = require("ppm.filetype")
 
 require("nvim-treesitter.configs").setup {
   ensure_installed = {
+    "astro",
     "awk",
     "bash",
     "comment",
@@ -39,17 +40,16 @@ require("nvim-treesitter.configs").setup {
   sync_install = false,
 
   modules = {
-    highlight = { enable = true, },
+    highlight = { enable = true },
     incremental_selection = { enable = true },
     indent = { enable = true },
   },
+  highlight = { enable = true },
+  incremental_selection = { enable = true },
+  indent = { enable = true },
 
   -- Plugins
   autotag = { enable = true },
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false, -- Disable CursorHold to work with Comment.nvim
-  },
   textobjects = {
     enable = true,
     swap = {
@@ -64,13 +64,17 @@ require("nvim-treesitter.configs").setup {
   },
   textsubjects = {
     enable = true,
-    prev_selection = ',',
+    prev_selection = ",",
     keymaps = {
-      ['.'] = 'textsubjects-smart',
-      [';'] = 'textsubjects-container-outer',
-      ['i;'] = 'textsubjects-container-inner',
+      ["."] = "textsubjects-smart",
+      [";"] = "textsubjects-container-outer",
+      ["i;"] = "textsubjects-container-inner",
     },
-  }
+  },
+}
+
+require('ts_context_commentstring').setup {
+  enable_autocmd = false,
 }
 
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs(a, b)
