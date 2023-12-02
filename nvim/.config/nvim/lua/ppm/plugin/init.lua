@@ -4,6 +4,8 @@ require("packer.luarocks").install_commands()
 
 return require("packer").startup({
   function(use, use_rocks)
+    local F = require("ppm.toolkit.fp.function")
+    local A = require("ppm.toolkit.fp.Array")
     local ft = require("ppm.filetype")
     local config = function(name) return string.format("require('ppm.plugin.%s')", name) end
     local simple_setup = function(name) return string.format("require('%s').setup({})", name) end
@@ -214,7 +216,7 @@ return require("packer").startup({
         "jose-elias-alvarez/typescript.nvim",
         requires = { "neovim/nvim-lspconfig", "nvim-lua/plenary.nvim" },
         config = config("typescript"),
-        ft = ft.typescript,
+        ft = F.pipe(ft.typescript, A.append("markdown.mdx")),
       },
       { "marilari88/twoslash-queries.nvim", config = config("twoslash-queries"), ft = ft.typescript },
     }

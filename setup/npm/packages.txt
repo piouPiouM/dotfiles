@@ -1,5 +1,6 @@
 @astrojs/language-server
 @cucumber/language-server
+@mdx-js/language-server
 @vscode/codicons
 bash-language-server
 browserslist-cli
@@ -13,6 +14,7 @@ neovim
 npm-check-updates
 npm-check
 prettier
+remark-language-server
 stylelint-lsp
 typescript-language-server
 typescript
