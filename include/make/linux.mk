@@ -209,3 +209,12 @@ install-sway:
 	@sudo dnf copr enable lexa/SwayNotificationCenter
 	@xargs $(INSTALL) < setup/linux/fedora/packages-sway.txt
 .PHONY: setup-sway
+
+## Install Ulauncher dependencies.
+setup-ulauncher:
+	@echo "$(PURPLE)• Installing Ulauncher dependencies$(RESET)"
+	@pip install -qq --upgrade --user deepl
+	@pip install -qq --upgrade --user py_expression_eval
+	@pip install -qq --upgrade --user Pint simpleeval parsedatetime pytz babel
+	@pip install -qq --upgrade --user faker
+.PHONY: setup-ulauncher
