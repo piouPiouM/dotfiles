@@ -93,10 +93,9 @@ cmp.setup.cmdline({ "/", "?" }, {
 cmp.setup.cmdline(":", {
   completion = { autocomplete = true },
   mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({ { name = "async_path" } }, {
-    { name = "cmdline", max_item_count = 30, keyword_length = 3 },
-  }),
-  view = {
-    entries = { name = 'custom', selection_order = 'near_cursor' }
-  }
+  sources = cmp.config.sources({ { name = "async_path" } },
+    {
+      { name = "cmdline", keyword_length = 3, performance = { max_view_entries = 30 } },
+    }),
+  view = { entries = { name = "custom", selection_order = "near_cursor" } },
 })
