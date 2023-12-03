@@ -1,33 +1,34 @@
-local fp = require("ppm.toolkit.fp")
+local F = require("ppm.toolkit.fp")
 local ui = require("ppm.ui")
 local decorate = require("ppm.plugin.fzf-lua.decorators")
 
+local pipe = F.pipe
 local icons = ui.icons
 local with_theme, with_title, with_history = decorate.with_theme, decorate.with_title, decorate.with_history
 
 local M = {}
 
-M.command_history = fp.pipe(
+M.command_history = pipe(
   { prompt = icons.terminal .. " " },
   with_theme("ivy"), with_title("Command history")
 )
 
-M.search_history = fp.pipe(
+M.search_history = pipe(
   { prompt = icons.terminal .. " " },
   with_theme("ivy"), with_title("Search history")
 )
 
-M.complete_file = fp.pipe(
+M.complete_file = pipe(
   { prompt = icons.search .. " ", },
   with_theme("cursor"), with_title("Insert filepath")
 )
 
-M.registers = fp.pipe(
+M.registers = pipe(
   {},
   with_theme("sidebar_right")
 )
 
-M.files = fp.pipe(
+M.files = pipe(
   {
     git_icons = false,
     prompt = icons.search .. " ",
@@ -37,12 +38,12 @@ M.files = fp.pipe(
   with_theme("ivy")
 )
 
-M.lines = fp.pipe(
+M.lines = pipe(
   { prompt = icons.search .. " " },
   with_title("Find Lines"), with_theme("vertical")
 )
 
-M.oldfiles = fp.pipe(
+M.oldfiles = pipe(
   { prompt = icons.search .. " " },
   with_title("History"),
   with_history("files"),
@@ -50,17 +51,17 @@ M.oldfiles = fp.pipe(
 )
 
 M.git = {
-  files = fp.pipe(
+  files = pipe(
     { prompt = icons.search .. " " },
     with_title("Git files"),
     with_history("files"),
     with_theme("ivy")
   ),
-  commits = fp.pipe(
+  commits = pipe(
     { prompt = icons.history .. " " },
     with_title("Git commits"), with_theme("vertical")
   ),
-  bcommits = fp.pipe(
+  bcommits = pipe(
     { prompt = icons.history .. " " },
     with_theme("vertical"), with_title("Git commits of current buffer")
   ),
@@ -75,7 +76,7 @@ M.git = {
   },
 }
 
-M.grep = fp.pipe({
+M.grep = pipe({
   rg_glob = true,
   -- Add support for all arguments passed to rg after the separator ` --`.
   -- @example
@@ -88,7 +89,7 @@ M.grep = fp.pipe({
   end,
 }, with_history("grep"), with_theme("ivy"))
 
-M.keymaps = fp.pipe(
+M.keymaps = pipe(
   {
     prompt = icons.search .. " ",
     no_action_zz = true,
@@ -97,7 +98,7 @@ M.keymaps = fp.pipe(
   with_theme("ivy")
 )
 
-M.spell_suggest = fp.pipe(
+M.spell_suggest = pipe(
   { prompt = icons.search .. " " },
   with_title("Spell suggestions"), with_theme("cursor")
 )

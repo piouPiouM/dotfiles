@@ -1,19 +1,22 @@
 local telescope_utils = require("telescope.utils")
+local F = require("ppm.toolkit.fp")
+local S = require("ppm.toolkit.fp.string")
+local pipe = F.pipe
 
 local M = {}
 
---- Converts user directory to tidle notation.
---- @param path string Path to manipulate.
---- @return string
-function M.with_tilde(path)
-  local shorten = path:gsub("^" .. vim.env.HOME:gsub("^/", "/?"), "~", 1)
+local home_trimed = pipe(vim.env.HOME, S.trim_start("/"))
 
-  return shorten
-end
+--- Converts user directory to tidle notation.
+---
+---@param path string Path to manipulate.
+---@return string
+M.with_tilde = S.replace_first("^" .. home_trimed, "~")
 
 --- Shorten given path by omitting middle paths.
---- @param path string Long path to shorten.
---- @return string
+---
+---@param path string Long path to shorten.
+---@return string
 function M.shorten_path(path)
   return telescope_utils.transform_path({
     path_display = {

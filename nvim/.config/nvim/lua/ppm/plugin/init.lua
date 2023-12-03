@@ -16,6 +16,8 @@ return require("packer").startup({
       "moses", -- functional programming library
     }
 
+    use { "nvim-lua/plenary.nvim" }
+
     -- TODO: use https://github.com/folke/neoconf.nvim instead
     use { "embear/vim-localvimrc", config = config("localvimrc"), disable = true }
 
@@ -140,8 +142,7 @@ return require("packer").startup({
         cmd = "Telescope",
         module = "telescope",
       },
-      { "nvim-lua/plenary.nvim", opt = true },
-      { "nvim-lua/popup.nvim",   opt = true },
+      { "nvim-lua/popup.nvim", opt = true },
     }
 
     use {
@@ -215,6 +216,13 @@ return require("packer").startup({
         ft = ft.typescript,
       },
       { "marilari88/twoslash-queries.nvim", config = config("twoslash-queries"), ft = ft.typescript },
+    }
+
+    -- Documentation
+    use {
+      "danymat/neogen",
+      config = simple_setup("neogen"),
+      requires = "nvim-treesitter/nvim-treesitter",
     }
 
     -- Syntax
