@@ -1,8 +1,35 @@
 local pkind = require("ppm.plugin.cmp.kind")
+local F = require("ppm.toolkit.fp.function")
+local A = require("ppm.toolkit.fp.Array")
+local O = require("ppm.toolkit.fp.Option")
+local pipe = F.pipe
 
 local M = {
-  filters = {}
+  filters = {},
+  fp = {}
 }
+
+
+M.fp.character_is_member_expression = function()
+  local node = require("nvim-treesitter.ts_utils").get_node_at_cursor();
+  local member_expression_types = {
+    "dot_index_expression",    -- lua
+    "method_index_expression", -- lua
+    "member_expression",       -- typescript
+  }
+
+  return pipe(
+    O.of(node),
+    O.flatMap(function(n) return n:type() end),
+    O.getOrElse(F.constFalse)
+  );
+
+  -- return node ~= nil and (
+  --     node:type() == "dot_index_expression"       -- lua
+  --     or node:type() == "method_index_expression" -- lua
+  --     or node:type() == "member_expression"       -- typescript
+  --     )
+end
 
 local function character_before_cursor(context)
   local line = context.cursor_line
@@ -16,10 +43,10 @@ local function character_is_member_expression()
   local node = ts_utils.get_node_at_cursor();
 
   return node ~= nil and (
-      node:type() == "dot_index_expression"       -- lua
-      or node:type() == "method_index_expression" -- lua
-      or node:type() == "member_expression"       -- typescript
-      )
+    node:type() == "dot_index_expression"         -- lua
+    or node:type() == "method_index_expression"   -- lua
+    or node:type() == "member_expression"         -- typescript
+  )
 end
 
 --- Keeps only the members of the current expression.
