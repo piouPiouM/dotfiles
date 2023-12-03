@@ -99,6 +99,7 @@ return require("packer").startup({
 
     use {
       "lukas-reineke/indent-blankline.nvim",
+      module = "ibl",
       config = config("indent-blankline"),
       event = "User ActuallyEditing",
     }
