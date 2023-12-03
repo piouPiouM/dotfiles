@@ -45,5 +45,5 @@ install-neovim-plugins:
 	@rm -rf $(XDG_DATA_HOME)/nvim/site/pack/packer/*
 	@rm -f $(XDG_CONFIG_HOME)/nvim/plugin/packer_compiled.lua
 	@git clone --depth 1 https://github.com/wbthomason/packer.nvim $(XDG_DATA_HOME)/nvim/site/pack/packer/start/packer.nvim
-	@$(NVIM) +PackerInstall +qa
+	@$(NVIM) +PackerSync +qa
 .PHONY: install-neovim-plugins

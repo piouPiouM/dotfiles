@@ -22,7 +22,7 @@ endef
 zsh-check: export MSG_UPDATE_SHELLS := $(MSG_UPDATE_SHELLS)
 zsh-check:
 	@[ $$SHELL = "$$(brew --prefix)/bin/zsh" ] && \
-		(grep -qx $$(brew --prefix)/bin/zsh /etc/shells || echo "$$MSG_UPDATE_SHELLS")
+		($(GNU_GREP) -qx $$(brew --prefix)/bin/zsh /etc/shells || echo "$$MSG_UPDATE_SHELLS")
 
 # Activate zsh as default shell.
 zsh-activate:

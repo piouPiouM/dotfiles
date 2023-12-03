@@ -73,7 +73,7 @@ define cmd_exists
 endef
 
 define register_manpath
-	grep -qs $(1) $$HOME/.manpath || echo "MANDATORY_MANPATH $(1)" >> $$HOME/.manpath
+	$(GNU_GREP) -qs $(1) $$HOME/.manpath || echo "MANDATORY_MANPATH $(1)" >> $$HOME/.manpath
 endef
 
 # -----------------------------------------------------------------------------

@@ -1,6 +1,7 @@
 SPECIFIC_TO_LINK := rofi sway
 
 GNU_SED := sed
+GNU_GREP := grep
 
 FEDORA_VERSION := $(shell rpm -E %fedora)
 INSTALL_FLAGS := -yq --best

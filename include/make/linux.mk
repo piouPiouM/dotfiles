@@ -28,16 +28,16 @@ setup-dnf: setup-dnf-config setup-dnf-copr
 setup-dnf-config: CONF := /etc/dnf/dnf.conf
 setup-dnf-config:
 	@echo "$(PURPLE)• Setting DNF config$(RESET)"
-	@grep -qxF 'fastestmirror=True' $(CONF) || echo 'fastestmirror=True' | sudo tee -a $(CONF) >/dev/null
-	@grep -qxF 'max_parallel_downloads=10' $(CONF) || echo 'max_parallel_downloads=10' | sudo tee -a $(CONF) >/dev/null
-	@grep -qxF 'deltarpm=True' $(CONF) || echo 'deltarpm=True' | sudo tee -a $(CONF) >/dev/null
+	@$(GNU_GREP) -qxF 'fastestmirror=True' $(CONF) || echo 'fastestmirror=True' | sudo tee -a $(CONF) >/dev/null
+	@$(GNU_GREP) -qxF 'max_parallel_downloads=10' $(CONF) || echo 'max_parallel_downloads=10' | sudo tee -a $(CONF) >/dev/null
+	@$(GNU_GREP) -qxF 'deltarpm=True' $(CONF) || echo 'deltarpm=True' | sudo tee -a $(CONF) >/dev/null
 	cat $(CONF)
 .PHONY: setup-dnf-config
 
 setup-dnf-copr:
 	@echo "$(PURPLE)• Setting DNF Copr repo$(RESET)"
-	$(foreach REPO,$(shell cat setup/linux/fedora/copr.txt),
-		@sudo dnf $(INSTALL_FLAGS) copr enable $(REPO) $(newline)
+	@$(foreach REPO,$(shell cat setup/linux/fedora/copr.txt),
+		sudo dnf $(INSTALL_FLAGS) copr enable $(REPO) $(newline)
 	)
 .PHONY: setup-dnf-copr
 
@@ -148,8 +148,8 @@ install-browser-brave:
 install-gnome-extensions:
 	@echo "$(PURPLE)• Updating or installing GNOME Shell Extensions$(RESET)"
 	@pipx install gnome-extensions-cli --system-site-packages
-	$(foreach UUID,$(shell cat setup/linux/fedora/gnome-extensions.txt),
-		@gext update --install $(UUID) $(newline)
+	@$(foreach UUID,$(shell cat setup/linux/fedora/gnome-extensions.txt),
+		gext update --install $(UUID) $(newline)
 	)
 .PHONY: install-gnome-extensions
 
