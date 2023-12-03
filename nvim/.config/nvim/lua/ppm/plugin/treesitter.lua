@@ -3,21 +3,18 @@ local ft = require("ppm.filetype")
 require("nvim-treesitter.configs").setup {
   ensure_installed = {
     "astro",
+    "awk",
     "bash",
     "comment",
     "css",
     "diff",
-    "dockerfile",
-    "elm",
-    "fennel",
     "git_config",
     "git_rebase",
     "gitattributes",
     "gitcommit",
     "gitignore",
-    "go",
-    "graphql",
     "html",
+    "ini",
     "javascript",
     "jq",
     "jsdoc",
@@ -30,43 +27,35 @@ require("nvim-treesitter.configs").setup {
     "make",
     "markdown",
     "markdown_inline",
-    "php",
-    "python",
     "query",
-    "rasi",
     "regex",
-    "rst",
-    "ruby",
-    "rust",
     "scss",
-    "terraform",
-    "toml",
     "tsx",
     "typescript",
     "vim",
     "vimdoc",
-    "vue",
     "yaml",
-  },                    -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
-  highlight = {
-    enable = true,      -- false will disable the whole extension
-    disable = {},       -- list of language that will be disabled
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
   },
+  auto_install = true,
+  sync_install = false,
+
+  highlight = { enable = true, },
+  incremental_selection = { enable = true },
+  indent = { enable = true },
+
+  modules = {
+    highlight = { enable = true },
+    incremental_selection = { enable = true },
+    indent = { enable = true },
+  },
+  highlight = { enable = true },
+  incremental_selection = { enable = true },
   indent = { enable = true },
 
   -- Plugins
   autotag = { enable = true },
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false, -- Disable CursorHold to work with Comment.nvim
-  },
   textobjects = {
+    enable = true,
     swap = {
       enable = true,
       swap_next = {
@@ -79,14 +68,18 @@ require("nvim-treesitter.configs").setup {
   },
   textsubjects = {
     enable = true,
-    prev_selection = ',',
+    prev_selection = ",",
     keymaps = {
-      ['.'] = 'textsubjects-smart',
-      [';'] = 'textsubjects-container-outer',
-      ['i;'] = 'textsubjects-container-inner',
+      ["."] = "textsubjects-smart",
+      [";"] = "textsubjects-container-outer",
+      ["i;"] = "textsubjects-container-inner",
     },
-  }
+  },
 }
 
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+require('ts_context_commentstring').setup {
+  enable_autocmd = false,
+}
+
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs(a, b)
 parser_config.tsx.filetype_to_parsername = ft.typescript
