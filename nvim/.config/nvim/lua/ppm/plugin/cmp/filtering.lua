@@ -1,4 +1,3 @@
-local fun = require("fun")
 local pkind = require("ppm.plugin.cmp.kind")
 
 local M = {
@@ -23,6 +22,11 @@ local function character_is_member_expression()
       )
 end
 
+--- Keeps only the members of the current expression.
+---
+---@param entry cmp.Entry
+---@param context cmp.Context
+---@return boolean
 M.filters.keepMembersOnly = function(entry, context)
   local kind = entry:get_kind()
   local current_char = character_before_cursor(context)
@@ -39,19 +43,19 @@ M.filters.keepMembersOnly = function(entry, context)
   return true
 end
 
-M.all = function(...)
-  local predicates = fun.iter(...):filter(function(func) return type(func) == "function" end)
-  return function(entry, context)
-    return predicates:all(function(fn) return fn(entry, context) end)
-  end
-end
-
-
-M.some = function(...)
-  local predicates = fun.iter(...):filter(function(func) return type(func) == "function" end)
-  return function(entry, context)
-    return predicates:some(function(fn) return fn(entry, context) end)
-  end
-end
+-- M.all = function(...)
+--   local predicates = fun.iter(...):filter(function(func) return type(func) == "function" end)
+--   return function(entry, context)
+--     return predicates:all(function(fn) return fn(entry, context) end)
+--   end
+-- end
+--
+--
+-- M.some = function(...)
+--   local predicates = fun.iter(...):filter(function(func) return type(func) == "function" end)
+--   return function(entry, context)
+--     return predicates:some(function(fn) return fn(entry, context) end)
+--   end
+-- end
 
 return M

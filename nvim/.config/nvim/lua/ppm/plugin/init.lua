@@ -3,7 +3,7 @@ vim.cmd("packadd packer.nvim")
 require("packer.luarocks").install_commands()
 
 return require("packer").startup({
-  function(use, use_rocks)
+  function(use)
     local F = require("ppm.toolkit.fp.function")
     local A = require("ppm.toolkit.fp.Array")
     local ft = require("ppm.filetype")
@@ -12,10 +12,6 @@ return require("packer").startup({
 
     use "wbthomason/packer.nvim"
     use "lewis6991/impatient.nvim"
-
-    use_rocks {
-      "fun",   -- functional programming library
-    }
 
     use { "nvim-lua/plenary.nvim" }
 
@@ -38,7 +34,6 @@ return require("packer").startup({
       "goolord/alpha-nvim",
       requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons" },
       config = config("alpha"),
-
     }
 
     -- Notification
