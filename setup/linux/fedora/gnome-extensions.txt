@@ -2,6 +2,7 @@ appindicatorsupport@rgcjonas.gmail.com
 auto-move-windows@gnome-shell-extensions.gcampax.github.com
 autoselectheadset@josephlbarnett.github.com
 blur-my-shell@aunetx
+emoji-copy@felipeftn
 horizontal-workspace-indicator@tty2.io
 just-perfection-desktop@just-perfection
 sp-tray@sp-tray.esenliyim.github.com

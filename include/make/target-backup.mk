@@ -18,7 +18,9 @@ backup-npm:
 	@npm list --global --parseable --depth=0 \
 		| $(GNU_SED) "1d;s:^$(NPM_GLOBAL_ROOT)/::" \
 		| $(GNU_GREP) -v '^npm$$' \
-		> $(BACKUP_NPM_FILE)
+		> $(BACKUP_NPM_FILE) \
+		&& echo "  $(SUCCESS)$$(cat $(BACKUP_NPM_FILE) | wc -l) packages saved" \
+		|| echo "  $(FAILURE)No packages to save$(RESET)"
 .PHONY: backup-npm
 
 ## Install globaly npm packages.

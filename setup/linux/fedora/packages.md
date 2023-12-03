@@ -1,0 +1,440 @@
+| package | summary |
+| ------- | ------- |
+| Box2D | A 2D Physics Engine for Games |
+| NetworkManager-initscripts-ifcfg-rh | NetworkManager plugin for reading and writing connections in ifcfg-rh format |
+| NetworkManager-initscripts-updown | Legacy ifup/ifdown scripts for NetworkManager that replace initscripts (network-scripts) |
+| SDL2_image | Image loading library for SDL |
+| SwayNotificationCenter | Notification daemon with GTK GUI |
+| aalib-libs | Library files for aalib |
+| aardvark-dns | Authoritative DNS server for A/AAAA container records |
+| abrt-tui | abrt's command line interface |
+| abseil-cpp | C++ Common Libraries |
+| amd-gpu-firmware | Firmware for AMD GPUs |
+| anaconda | Graphical system installer |
+| anaconda-install-env-deps | Installation environment specific dependencies |
+| anaconda-live | Live installation specific files and dependencies |
+| ansible-srpm-macros | SRPM stage RPM packaging macros for Ansible collections |
+| antiword | MS Word to ASCII/Postscript converter |
+| appstream | Utilities to generate, maintain and access the AppStream database |
+| atheros-firmware | Firmware for Qualcomm Atheros WiFi/Bluetooth adapters |
+| autocorr-fr | French auto-correction rules |
+| avahi-tools | Command line tools for mDNS browsing and publishing |
+| awesome | Highly configurable, framework window manager for X. Fast, light and extensible |
+| azote | Wallpaper and color manager for Sway, i3 and some other WMs |
+| bat | Cat(1) clone with wings |
+| boost-atomic | Run-time component of boost atomic library |
+| botan2 | Crypto and TLS for C++11 |
+| braille-printer-app | Braille printer application |
+| brave-browser | Brave Web Browser |
+| brcmfmac-firmware | Firmware for Broadcom/Cypress brcmfmac WiFi/Bluetooth adapters |
+| brightnessctl | Read and control device brightness |
+| cargo | Rust's package manager and build tool |
+| chkconfig | A system tool for maintaining the /etc/rc*.d hierarchy |
+| cjson | Ultralightweight JSON parser in ANSI C |
+| cmake | Cross-platform make system |
+| cmark-lib | CommonMark parsing and rendering library |
+| colord-gtk4 | GTK 4 support library for colord |
+| containers-common | Common configuration and documentation for containers |
+| containers-common-extra | Extra dependencies for Podman and Buildah |
+| cxl-libs | Management library for CXL devices |
+| dash | Small and fast POSIX-compliant shell |
+| device-mapper-multipath | Tools to manage multipath devices using device-mapper |
+| distribution-gpg-keys | GPG keys of various Linux distributions |
+| dleyna | Services and D-Bus APIs for UPnP access |
+| dnsmasq-langpack | Translations for few languages |
+| double-conversion | Library providing binary-decimal and decimal-binary routines for IEEE doubles |
+| dracut-live | dracut modules to build a dracut initramfs with live image capabilities |
+| duktape | Embeddable Javascript engine |
+| epiphany-runtime | Epiphany runtime suitable for web applications |
+| evince-previewer | Evince previewer |
+| evolution | Mail and calendar client for GNOME |
+| evolution-langpacks | Translations for evolution |
+| f35-backgrounds-base | Base images for Fedora  35 default background |
+| f35-backgrounds-gnome | Fedora  35 default wallpaper for Gnome and Cinnamon |
+| f36-backgrounds-base | Base images for Fedora  36 default background |
+| f36-backgrounds-gnome | Fedora  36 default wallpaper for Gnome and Cinnamon |
+| f38-backgrounds-base | Base images for Fedora  38 default background |
+| f38-backgrounds-gnome | Fedora  38 default wallpaper for Gnome and Cinnamon |
+| fcft | Simple library for font loading and glyph rasterization |
+| fcoe-utils | Fibre Channel over Ethernet utilities |
+| fd-find | Fd is a simple, fast and user-friendly alternative to find |
+| fedora-chromium-config-gnome | GNOME integration for Chrome |
+| fedora-chromium-config-gssapi | GSSAPI support for Fedora Services |
+| fedora-flathub-remote | Third party remote pointing to a filtered version of flathub.org |
+| fedora-logos | Fedora-related icons and pictures |
+| fedora-third-party | Tool for handling third-party RPM and Flatpak repositories in Fedora |
+| fedora-workstation-repositories | Repository files for searchable repositories |
+| ffmpeg-free | A complete solution to record, convert and stream audio and video |
+| ffmpeg-free-devel | Development package for ffmpeg |
+| file-devel | Libraries and header files for file development |
+| firefox-langpacks | Firefox langpacks |
+| flite | Small, fast speech synthesis engine (text-to-speech) |
+| foot | Fast, lightweight and minimalistic Wayland terminal emulator |
+| foot-terminfo | Terminfo files for foot terminal |
+| fwupd-efi | Firmware update EFI binaries |
+| fwupd-plugin-uefi-capsule-data | Localized data for the UEFI UX capsule |
+| game-music-emu | Video game music file emulation/playback library |
+| gcc-c++ | C++ support for GCC |
+| gcc-plugin-annobin | The annobin plugin for gcc, built by the installed version of gcc |
+| gcr-libs | gcr and gck libraries |
+| gcr3 | A library for bits of crypto UI and parsing |
+| gcr3-base | Library files for gcr |
+| geocode-glib-data | Icon files for geocode-glib |
+| geocode-glib2 | Development files for geocode-glib |
+| gettext-envsubst | Substitutes the values of environment variables |
+| gettext-runtime | GNU runtime libraries and programs for producing multi-lingual messages |
+| ghostscript-tools-fonts | Ghostscript's font utilities |
+| ghostscript-tools-printing | Ghostscript's printing utilities |
+| gimp | GNU Image Manipulation Program |
+| gimp-libs | GIMP libraries |
+| glances | A cross-platform system monitoring tool |
+| glibc-gconv-extra | All iconv converter modules for glibc. |
+| glibc-langpack-fr | Locale data for French |
+| glibmm2.4 | C++ interface for the GLib library |
+| glslang | OpenGL and OpenGL ES shader front end and validator |
+| glslang-devel | Development files for glslang |
+| gnome-browser-connector | GNOME Shell browser connector |
+| gnome-desktop4 | Library with common API for various GNOME modules |
+| gnome-extensions-app | Manage GNOME Shell extensions |
+| gnome-tweaks | Customize advanced GNOME 3 options |
+| gnutls-dane | A DANE protocol implementation for GnuTLS |
+| gnutls-utils | Command line tools for TLS protocol |
+| golang | The Go Programming Language |
+| google-crosextra-caladea-fonts | Serif font metric-compatible with Cambria font |
+| google-noto-sans-cjk-vf-fonts | Google Noto Sans CJK Variable Fonts |
+| google-noto-sans-mono-vf-fonts | Noto Sans Mono variable font |
+| google-noto-sans-vf-fonts | Noto Sans variable font |
+| google-noto-serif-vf-fonts | Noto Serif variable font |
+| gperftools-libs | Libraries provided by gperftools |
+| grimshot | Helper for screenshots within sway |
+| gstreamer1-plugin-openh264 | GStreamer H.264 plugin |
+| gtk4 | GTK graphical user interface library |
+| gtkmm3.0 | C++ interface for the GTK+ library |
+| gtksourceview5 | Source code editing widget |
+| gvncpulse | A Pulse Audio bridge for VNC connections |
+| highcontrast-icon-theme | HighContrast icon theme |
+| highlight | Universal source code to formatted text converter |
+| highway | Efficient and performance-portable SIMD |
+| htop | Interactive process viewer |
+| httpd-core | httpd minimal core |
+| hunspell-filesystem | Hunspell filesystem layout |
+| hunspell-fr | French hunspell dictionaries |
+| hyphen-fr | French hyphenation rules |
+| iceauth | Display the authorization information used in connecting with ICE |
+| imath | Library of 2D and 3D vector, matrix, and math operations for computer graphics |
+| iniparser | C library for parsing "INI-style" files |
+| initscripts | Basic support for legacy System V init scripts |
+| initscripts-rename-device | Udev helper utility that provides network interface naming |
+| initscripts-service | Support for service command |
+| intel-gpu-firmware | Firmware for Intel GPUs |
+| ipp-usb | HTTP reverse proxy capable of IPP-over-USB connection |
+| iptables-compat | Temporary transitioning package |
+| iptables-legacy | Legacy tools for managing Linux kernel packet filtering capabilities |
+| iptables-legacy-libs | iptables legacy libraries |
+| iptables-utils | iptables and ip6tables misc utilities |
+| iw | A nl80211 based wireless configuration tool |
+| iwlax2xx-firmware | Firmware for Intel(R) Wireless WiFi Link AX2xx Series Adapters |
+| java-17-openjdk-headless | OpenJDK 17 Headless Runtime Environment |
+| javascriptcoregtk4.0 | JavaScript engine from webkit2gtk4.0 |
+| javascriptcoregtk4.1 | JavaScript engine from webkit2gtk4.1 |
+| javascriptcoregtk6.0 | JavaScript engine from webkitgtk6.0 |
+| jemalloc | General-purpose scalable concurrent malloc implementation |
+| jetbrains-mono-fonts | A mono-space font family containing coding ligatures |
+| jxl-pixbuf-loader | JPEG-XL image loader for GTK+ applications |
+| keepassxc | Cross-platform password manager |
+| kernel | The Linux kernel |
+| kernel-modules-core | Core kernel modules to match the core kernel |
+| kernel-modules-extra | Extra kernel modules to match the kernel |
+| khmer-os-content-fonts | Content font family |
+| khmer-os-system-fonts | System font |
+| kitty | Cross-platform, fast, feature full, GPU based terminal emulator |
+| langpacks-core-font-fr | French core font meta-package |
+| langpacks-core-fr | French langpacks core meta-package |
+| langpacks-en | English langpacks meta-package |
+| langpacks-fr | French langpacks meta-package |
+| libadwaita | Building blocks for modern GNOME applications |
+| libatomic | The GNU Atomic library |
+| libavif | Library for encoding and decoding .avif files |
+| libb2 | C library providing BLAKE2b, BLAKE2s, BLAKE2bp, BLAKE2sp |
+| libblkio | Block device I/O library |
+| libblockdev-lvm-dbus | The LVM plugin for the libblockdev library |
+| libbpf | Libbpf library |
+| libcap-ng-python3 | Python3 bindings for libcap-ng library |
+| libcloudproviders | Library for integration of cloud storage providers |
+| libconfig | C/C++ configuration file library |
+| libcupsfilters | Library for developing printing filters |
+| libdav1d | Library files for dav1d |
+| libdecor | Wayland client side decoration library |
+| libdmapsharing4 | A DMAP client and server library |
+| libdrm-devel | Direct Rendering Manager development package |
+| libfsverity | Development package for fsverity-utils |
+| libgit2_1.5 | C implementation of the Git core methods as a library with a solid API |
+| libglvnd-devel | Development files for libglvnd |
+| libglvnd-opengl | OpenGL support for libglvnd |
+| libgweather4 | A library for weather information |
+| libheif | HEIF and AVIF file format decoder and encoder |
+| libicu67 | Compat package with icu libraries |
+| libinput-devel | Development files for libinput |
+| libjose | Library implementing JSON Object Signing and Encryption |
+| libjxl | Library files for JPEG-XL |
+| liblouis-utils | Command-line utilities to test liblouis |
+| liblouisutdml | Braille transcription library for UTDML documents |
+| liblouisutdml-utils | Utilities that convert various file formats into braille |
+| libmanette | Game controller library |
+| libmd | Library that provides message digest functions from BSD systems |
+| libmypaint | Library for making brush strokes |
+| libnma-gtk4 | Experimental GTK 4 version of NetworkManager GUI library |
+| libplacebo | Reusable library for GPU-accelerated video/image rendering primitives |
+| libpmemobj | Persistent Memory Transactional Object Store library |
+| libpng-devel | Development tools for programs to manipulate PNG image format files |
+| libportal | Flatpak portal library |
+| libportal-gtk3 | GTK+ 3 libraries for libportal |
+| libportal-gtk4 | GTK 4 libraries for libportal |
+| libppd | Library for retro-fitting legacy printer drivers |
+| libproxy-duktape | Plugin for libproxy and duktape |
+| libqrtr-glib | Support library to use and manage the QRTR (Qualcomm IPC Router) bus. |
+| librabbitmq | Client library for AMQP |
+| libreoffice-data | LibreOffice data files |
+| libreoffice-gtk4 | LibreOffice GTK+ 4 experimental integration plug-in |
+| libreoffice-help-fr | French help for LibreOffice |
+| libreoffice-langpack-fr | French language pack for LibreOffice |
+| libreoffice-ure-common | Common UNO Runtime Environment |
+| librist | Library for Reliable Internet Stream Transport (RIST) protocol |
+| libseat-devel | Development files for libseat |
+| libshumate | GTK widget to display maps |
+| libsoup3 | Soup, an HTTP library implementation |
+| libtpms | Library providing Trusted Platform Module (TPM) functionality |
+| libudfread | UDF reader library |
+| libunistring1.0 | Compatibility version of GNU Unicode string library |
+| libusb1 | Library for accessing USB devices |
+| libuv | Platform layer for node.js |
+| libvirt-client | Client side utilities of the libvirt library |
+| libwmf | Windows MetaFile Library |
+| libxcvt | VESA CVT standard timing modelines generator |
+| libxkbcommon-devel | X.Org X11 XKB parsing development package |
+| libytnef | TNEF Stream Reader Library |
+| libzip | C library for reading, creating, and modifying zip archives |
+| lilv-libs | Libraries for lilv |
+| lldpad | Intel LLDP Agent |
+| llvm15-libs | LLVM shared libraries |
+| lua-devel | Development files for lua |
+| lua-language-server | A language server that offers Lua language support |
+| lua5.1-lpeg | Parsing Expression Grammars for Lua 5.1 |
+| luarocks | A deployment and management system for Lua modules |
+| lvm2-dbusd | LVM2 D-Bus daemon |
+| malcontent | Parental controls implementation |
+| malcontent-control | Parental Controls UI |
+| malcontent-libs | Libraries for malcontent |
+| malcontent-ui-libs | Libraries for malcontent |
+| man-pages-fr | French man pages from the Linux Documentation Project |
+| mbedtls | Light-weight cryptographic and SSL/TLS library |
+| mdevctl | A mediated device management utility for Linux |
+| meld | Visual diff and merge tool |
+| mesa-libgbm-devel | Mesa libgbm development package |
+| mesa-va-drivers | Mesa-based VA-API video acceleration drivers |
+| meson | High productivity build system |
+| minizip-compat | Library for manipulation with .zip archives |
+| minizip-ng | Minizip-ng contrib in zlib-ng with the latest bug fixes and advanced features |
+| mod_lua | Lua scripting support for the Apache HTTP Server |
+| mozilla-openh264 | H.264 codec support for Mozilla browsers |
+| mozjs102 | SpiderMonkey JavaScript library |
+| mozjs91 | SpiderMonkey JavaScript library |
+| mpdecimal | Library for general decimal arithmetic |
+| mt7xxx-firmware | Firmware for Mediatek 7600/7900 series WiFi/Bluetooth adapters |
+| mypaint-brushes | Brushes to be used with the MyPaint library |
+| mythes-fr | French thesaurus |
+| neofetch | CLI system information tool written in Bash |
+| neovim | Vim-fork focused on extensibility and agility |
+| netavark | OCI network stack |
+| ninja-build | Small build system with a focus on speed |
+| nodejs-npm | Node.js Package Manager |
+| ntfs-3g-libs | Runtime libraries for ntfs-3g |
+| nvidia-gpu-firmware | Firmware for NVIDIA GPUs |
+| oneVPL | oneAPI Video Processing Library |
+| oneVPL-intel-gpu | Intel oneVPL GPU Runtime |
+| open-sans-fonts | Open Sans is a humanist sans-serif typeface designed by Steve Matteson |
+| opencore-amr | OpenCORE Adaptive Multi Rate Narrowband and Wideband speech lib |
+| openexr-libs | OpenEXR Libraries |
+| openfec | Application-Level Forward Erasure Correction codes |
+| openh264 | H.264 codec library |
+| openldap-compat | Package providing legacy non-threaded libldap |
+| openssl1.1 | Compatibility version of the OpenSSL library |
+| package-notes-srpm-macros | Generate LDFLAGS to insert .note.package section |
+| pam-libs | Shared libraries of the PAM package |
+| passt | User-mode networking daemons for virtual machines and namespaces |
+| passt-selinux | SELinux support for passt and pasta |
+| pcsc-tools | Tools to be used with smart cards and PC/SC |
+| perl-locale | Pragma to use or avoid POSIX locales for built-in operations |
+| pipewire-alsa | PipeWire media server ALSA support |
+| pipewire-jack-audio-connection-kit | PipeWire JACK implementation |
+| pipewire-pulseaudio | PipeWire PulseAudio implementation |
+| pixman-devel | Pixel manipulation library development package |
+| playerctl | Command-line MPRIS-compatible Media Player Controller |
+| plocate | Much faster locate |
+| podman-gvproxy | Go replacement for libslirp and VPNKit |
+| power-profiles-daemon | Makes power profiles handling available over D-Bus |
+| pygobject2 | Python 2 bindings for GObject |
+| pygtk2 | Python bindings for GTK+ |
+| pyproject-srpm-macros | Minimal implementation of %pyproject_buildrequires |
+| python2-cairo | Python 2 bindings for the cairo library |
+| python2.7 | Version 2.7 of the Python interpreter |
+| python3-bottle | Fast and simple WSGI-framework for small web-applications |
+| python3-charset-normalizer | The Real First Universal Charset Detector |
+| python3-click | Simple wrapper around optparse for powerful command line utilities |
+| python3-defusedxml | XML bomb protection for Python stdlib modules |
+| python3-devel | Libraries and header files needed for Python development |
+| python3-fb-re2 | Python wrapper for Google's RE2 library |
+| python3-file-magic | Python 3 bindings for the libmagic API |
+| python3-gobject-base-noarch | Python 3 bindings for GObject Introspection base (not architecture dependent) |
+| python3-importlib-metadata | Library to access the metadata for a Python package |
+| python3-jaraco | A Parent package for jaraco's parent dir and init file. |
+| python3-jaraco-classes | Utility functions for Python class constructs |
+| python3-jeepney | Low-level, pure Python DBus protocol wrapper |
+| python3-keyring | Python 3 library to access the system keyring service |
+| python3-more-itertools | More routines for operating on Python iterables, beyond itertools |
+| python3-neovim | Python client to Neovim |
+| python3-packaging | Core utilities for Python packages |
+| python3-pyparsing | Python package with an object-oriented approach to text processing |
+| python3-pyyaml | YAML parser and emitter for Python |
+| python3-regex | Alternative regular expression module, to replace re |
+| python3-satyr | Python 3 bindings for satyr |
+| python3-secretstorage | Python bindings to FreeDesktop.org Secret Service API |
+| python3-simpleaudio | Simple, asynchronous audio playback module for Python 3 |
+| python3-tkinter | A GUI toolkit for Python |
+| python3-ujson | Ultra fast JSON encoder and decoder written in pure C |
+| python3-zipp | Backport of pathlib-compatible object wrapper for zip files |
+| qemu-audio-dbus | QEMU D-Bus audio driver |
+| qemu-audio-jack | QEMU Jack audio driver |
+| qemu-audio-spice | QEMU spice audio driver |
+| qemu-block-blkio | QEMU blkio block driver |
+| qemu-char-spice | QEMU spice chardev driver |
+| qemu-device-display-vhost-user-gpu | QEMU QXL display device |
+| qemu-device-display-virtio-gpu | QEMU virtio-gpu display device |
+| qemu-device-display-virtio-gpu-ccw | QEMU virtio-gpu-ccw display device |
+| qemu-device-display-virtio-gpu-gl | QEMU virtio-gpu-gl display device |
+| qemu-device-display-virtio-gpu-pci | QEMU virtio-gpu-pci display device |
+| qemu-device-display-virtio-gpu-pci-gl | QEMU virtio-gpu-pci-gl display device |
+| qemu-device-display-virtio-vga | QEMU virtio-vga display device |
+| qemu-device-display-virtio-vga-gl | QEMU virtio-vga-gl display device |
+| qemu-device-usb-host | QEMU usb host device |
+| qemu-pr-helper | qemu-pr-helper utility for qemu |
+| qemu-ui-egl-headless | QEMU EGL headless driver |
+| qemu-ui-opengl | QEMU opengl support |
+| qemu-ui-spice-core | QEMU spice-core UI driver |
+| qemu-user-static | QEMU user mode emulation of qemu targets static build |
+| qemu-user-static-aarch64 | QEMU user mode emulation of aarch64 qemu targets static build |
+| qemu-user-static-alpha | QEMU user mode emulation of alpha qemu targets static build |
+| qemu-user-static-arm | QEMU user mode emulation of arm qemu targets static build |
+| qemu-user-static-cris | QEMU user mode emulation of cris qemu targets static build |
+| qemu-user-static-hexagon | QEMU user mode emulation of hexagon qemu targets static build |
+| qemu-user-static-hppa | QEMU user mode emulation of hppa qemu targets static build |
+| qemu-user-static-loongarch64 | QEMU user mode emulation of loongarch64 qemu targets static build |
+| qemu-user-static-m68k | QEMU user mode emulation of m68k qemu targets static build |
+| qemu-user-static-microblaze | QEMU user mode emulation of microblaze qemu targets static build |
+| qemu-user-static-mips | QEMU user mode emulation of mips qemu targets static build |
+| qemu-user-static-nios2 | QEMU user mode emulation of nios2 qemu targets static build |
+| qemu-user-static-or1k | QEMU user mode emulation of or1k qemu targets static build |
+| qemu-user-static-ppc | QEMU user mode emulation of ppc qemu targets static build |
+| qemu-user-static-riscv | QEMU user mode emulation of riscv qemu targets static build |
+| qemu-user-static-s390x | QEMU user mode emulation of s390x qemu targets static build |
+| qemu-user-static-sh4 | QEMU user mode emulation of sh4 qemu targets static build |
+| qemu-user-static-sparc | QEMU user mode emulation of sparc qemu targets static build |
+| qemu-user-static-x86 | QEMU user mode emulation of x86 qemu targets static build |
+| qemu-user-static-xtensa | QEMU user mode emulation of xtensa qemu targets static build |
+| qemu-virtiofsd | QEMU virtio-fs shared file system daemon |
+| qgnomeplatform-qt5 | Qt5 Platform Theme aimed to accommodate Gnome settings |
+| qt5ct | Qt5 Configuration Tool |
+| rav1e-libs | Library files for rav1e |
+| rdma-core | RDMA core userspace libraries and daemons |
+| re2 | C++ fast alternative to backtracking RE engines |
+| realtek-firmware | Firmware for Realtek WiFi/Bluetooth adapters |
+| rest0.7 | A library for access to RESTful web services |
+| rgb | X color name database |
+| ripgrep | Line-oriented search tool |
+| rit-meera-new-fonts | OpenType sans-serif font for Malayalam traditional script |
+| roc-toolkit | Real-time audio streaming |
+| rofi | A window switcher, application launcher and dmenu replacement |
+| rofimoji | A character picker for rofi 😀 |
+| rpm-sequoia | Implementation of the RPM PGP interface using Sequoia |
+| ruby-devel | A Ruby development environment |
+| rubygems | The Ruby standard for packaging ruby libraries |
+| seahorse | A GNOME application for managing encryption keys |
+| sessreg | Utility to manage utmp/wtmp entries for X sessions |
+| setxkbmap | X11 keymap client |
+| shadow-utils-subid | A library to manage subordinate uid and gid ranges |
+| srm | Secure file deletion |
+| sssd-idp | Kerberos plugins and OIDC helper for external identity providers. |
+| stow | Manage the installation of software packages from source |
+| svt-av1-libs | SVT-AV1 libraries |
+| sway | i3-compatible window manager for Wayland |
+| sway-config-upstream | Upstream configuration for Sway |
+| sway-wallpapers | Wallpapers for Sway |
+| swtpm | TPM Emulator |
+| swtpm-libs | Private libraries for swtpm TPM emulators |
+| swtpm-tools | Tools for the TPM emulator |
+| syncthing | Continuous File Synchronization |
+| systemd-boot-unsigned | UEFI boot manager (unsigned version) |
+| systemd-devel | Development headers for systemd |
+| systemd-resolved | Network Name Resolution manager |
+| tealdeer | Fetch and show tldr help pages for many CLI commands |
+| texttopaps | CUPS filter based on paps |
+| tix | A set of extension widgets for Tk |
+| tk | The graphical toolkit for the Tcl scripting language |
+| totem-video-thumbnailer | Totem video thumbnailer |
+| tpm2-tools | A bunch of TPM testing toolS build upon tpm2-tss |
+| trash-cli | Command line interface to the freedesktop.org trashcan |
+| tree-sitter-cli | CLI tool for developing, testing, and using Tree-sitter parsers |
+| uchardet | An encoding detector library ported from Mozilla |
+| unbound-anchor | DNSSEC trust anchor maintaining tool |
+| util-linux-core | The most essential utilities from the util-linux suite |
+| vim-data | Shared data for Vi and Vim |
+| vo-amrwbenc | VisualOn AMR-WB encoder library |
+| vulkan-headers | Vulkan Header files and API registry |
+| vulkan-loader-devel | Development files for vulkan-loader |
+| waybar | Highly customizable Wayland bar for Sway and Wlroots based compositors |
+| wayland-devel | Development files for wayland |
+| wayland-protocols-devel | Wayland protocols that adds functionality not available in the core protocol |
+| webkit2gtk4.0 | WebKitGTK for GTK 3 and libsoup 2 |
+| webkit2gtk4.1 | WebKitGTK for GTK 3 and libsoup 3 |
+| webkitgtk6.0 | WebKitGTK for GTK 4 |
+| webp-pixbuf-loader | WebP image loader for GTK+ applications |
+| wev | A tool for debugging events on a sway Wayland window |
+| wireless-regdb | Regulatory database for 802.11 wireless networking |
+| wireplumber | A modular session/policy manager for PipeWire |
+| wireplumber-libs | Libraries for WirePlumber clients |
+| wlsunset | Day/night gamma adjustments for Sway |
+| wob | A lightweight overlay volume/backlight/progress/anything bar for Wayland |
+| xcb-util-renderutil-devel | Development and header files for xcb-util-renderutil |
+| xcb-util-wm-devel | Development and header files for xcb-util-vm |
+| xdg-desktop-portal-gnome | Backend implementation for xdg-desktop-portal using GNOME |
+| xdpyinfo | X11 display information utility |
+| xev | X Event utility |
+| xgamma | X utility to query and alter the gamma correction of a monitor |
+| xhost | Manage hosts or users allowed to connect to the X server |
+| xinput | Utility to query X Input devices |
+| xisxwayland | Tool to check if the X server is XWayland |
+| xkbcomp | XKB keymap compiler |
+| xkill | Utility to force-close an X client's connection |
+| xlsatoms | X11 atom list utility |
+| xlsclients | X client list utility |
+| xlsfonts | X font list utility |
+| xmodmap | Edit and display the X11 core keyboard map |
+| xorg-x11-server-Xwayland-devel | Development package |
+| xprop | X property display utility |
+| xrandr | Commandline utility to change output properties |
+| xrdb | X server resource database utility |
+| xrefresh | Refresh all or part of an X screen |
+| xset | User preference utility for X |
+| xsetroot | Root window parameter setting utility for X |
+| xstdcmap | Utility to define standard colormap properties |
+| xvidcore | MPEG-4 Simple and Advanced Simple Profile codec |
+| xvinfo | X video extension query utility |
+| xwininfo | X window info utility |
+| yp-tools | NIS (or YP) client programs |
+| yubikey-manager-qt | Application for configuring any YubiKey over all USB interfaces |
+| yubioath-desktop | Yubikey tool for generating OATH event-based HOTP and time-based TOTP codes |
+| zoxide | Smarter cd command for your terminal |
+| zsh | Powerful interactive shell |
+| zstd | Zstd compression library |
+| zvbi | Raw VBI, Teletext and Closed Caption decoding library |
+| zxing-cpp | C++ port of the ZXing ("Zebra Crossing") barcode scanning library |

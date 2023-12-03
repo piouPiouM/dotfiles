@@ -2,8 +2,8 @@
 command-history=['keepassxc', 'terminal', 'Terminal', 'gnome-terminal']
 disable-user-extensions=false
 disabled-extensions=['background-logo@fedorahosted.org', 'trayIconsReloaded@selfmade.pl', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'workspaces-by-open-apps@favo02.github.com', 'Hide_Activities@shay.shayel.org', 'apps-menu@gnome-shell-extensions.gcampax.github.com']
-enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'sp-tray@sp-tray.esenliyim.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'syncthing@gnome.2nv2u.com', 'autoselectheadset@josephlbarnett.github.com', 'workspace-switch-wraparound@theychx.org', 'just-perfection-desktop@just-perfection', 'horizontal-workspace-indicator@tty2.io', 'blur-my-shell@aunetx', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com']
-favorite-apps=['kitty.desktop', 'firefox.desktop', 'md.obsidian.Obsidian.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop', 'org.gnome.Evolution.desktop']
+enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'sp-tray@sp-tray.esenliyim.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'syncthing@gnome.2nv2u.com', 'autoselectheadset@josephlbarnett.github.com', 'workspace-switch-wraparound@theychx.org', 'horizontal-workspace-indicator@tty2.io', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'just-perfection-desktop@just-perfection', 'blur-my-shell@aunetx', 'emoji-copy@felipeftn']
+favorite-apps=['kitty.desktop', 'firefox.desktop', 'md.obsidian.Obsidian.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop']
 last-selected-power-profile='power-saver'
 welcome-dialog-last-shown-version='41.4'
 
@@ -19,6 +19,12 @@ blur=true
 [extensions/blur-my-shell/panel]
 blur=true
 customize=true
+
+[extensions/emoji-copy]
+emoji-keybinding=['<Super><Ctrl><space>']
+paste-on-select=true
+skin-tone=0
+use-keybinding=true
 
 [extensions/horizontal-workspace-indicator]
 icons-style='lines'

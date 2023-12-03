@@ -1,5 +1,13 @@
+app.drey.Dialect
 com.github.GradienceTeam.Gradience
+com.github.kmwallio.thiefmd
+com.github.marktext.marktext
 com.mattjakeman.ExtensionManager
 com.spotify.Client
 com.visualstudio.code
+io.github.mightycreak.Diffuse
 me.kozec.syncthingtk
+nl.hjdskes.gcolor3
+org.gnome.Dictionary
+org.kde.kdiff3
+org.zealdocs.Zeal

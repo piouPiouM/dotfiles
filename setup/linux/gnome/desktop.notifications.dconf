@@ -1,5 +1,8 @@
 [/]
-application-children=['org-gnome-software', 'org-gnome-terminal', 'firefox', 'org-keepassxc-keepassxc', 'gnome-power-panel', 'gnome-network-panel', 'org-gnome-fileroller', 'org-gnome-nautilus', 'libreoffice-writer', 'org-freedesktop-problems-applet', 'com-spotify-client', 'org-gnome-evolution', 'org-gnome-extensions-desktop', 'me-kozec-syncthingtk', 'md-obsidian-obsidian', 'org-gnome-tweaks']
+application-children=['org-gnome-software', 'org-gnome-terminal', 'firefox', 'org-keepassxc-keepassxc', 'gnome-power-panel', 'gnome-network-panel', 'org-gnome-fileroller', 'org-gnome-nautilus', 'libreoffice-writer', 'org-freedesktop-problems-applet', 'com-spotify-client', 'org-gnome-evolution', 'org-gnome-extensions-desktop', 'me-kozec-syncthingtk', 'md-obsidian-obsidian', 'org-gnome-tweaks', 'org-gnome-evolution-alarm-notify', 'ulauncher', 'brave-browser']
+
+[application/brave-browser]
+application-id='brave-browser.desktop'
 
 [application/com-spotify-client]
 application-id='com.spotify.Client.desktop'
@@ -28,6 +31,9 @@ application-id='me.kozec.syncthingtk.desktop'
 [application/org-freedesktop-problems-applet]
 application-id='org.freedesktop.problems.applet.desktop'
 
+[application/org-gnome-evolution-alarm-notify]
+application-id='org.gnome.Evolution-alarm-notify.desktop'
+
 [application/org-gnome-evolution]
 application-id='org.gnome.Evolution.desktop'
 
@@ -51,3 +57,6 @@ application-id='org.gnome.tweaks.desktop'
 
 [application/org-keepassxc-keepassxc]
 application-id='org.keepassxc.KeePassXC.desktop'
+
+[application/ulauncher]
+application-id='ulauncher.desktop'
