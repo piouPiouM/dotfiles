@@ -27,7 +27,7 @@ fi
 zmodule "${ZDOTDIR}"/plugins/starship
 
 # Additional completion definitions for Zsh.
-zmodule zsh-users/zsh-completions
+zmodule zsh-users/zsh-completions --fpath src
 
 # Enables and configures smart and extensive tab completion.
 # Must be sourced after zsh-users/zsh-completions
