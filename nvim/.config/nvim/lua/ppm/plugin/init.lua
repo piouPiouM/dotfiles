@@ -156,7 +156,7 @@ return require("packer").startup({
     }
 
     -- Completion
-    use { "b0o/schemastore.nvim", ft = { "json", "yaml" } }
+    -- use { "b0o/schemastore.nvim", ft = { "json", "yaml" }, disable = true }
     use {
       "hrsh7th/nvim-cmp",
       requires = {

@@ -4,6 +4,7 @@
 bash-language-server
 browserslist-cli
 corepack
+cssmodules-language-server
 emmet-ls
 htmlhint
 name-color
@@ -12,6 +13,7 @@ neovim
 npm-check-updates
 npm-check
 prettier
+stylelint-lsp
 typescript-language-server
 typescript
 vim-language-server
