@@ -44,6 +44,7 @@ export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
+# export TF_CLI_CONFIG_FILE="$XDG_DATA_HOME"/terraform/.terraformrc
 
 #
 # Declare tools

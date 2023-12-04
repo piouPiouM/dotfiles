@@ -165,6 +165,7 @@ include include/make/target-neovim.mk
 -include include/make/target-neovim.$(CURRENT_OS).mk
 include include/make/target-themes.mk
 -include include/make/target-themes.$(CURRENT_OS).mk
+-include include/make/bedrock.mk
 
 # -----------------------------------------------------------------------------
 # Target: applications

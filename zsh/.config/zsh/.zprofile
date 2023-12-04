@@ -17,6 +17,7 @@ path=(
   "$XDG_DATA_HOME/bin/$CURRENT_OS"
   "$XDG_DATA_HOME"/bin
   "$HOME"/.local/bin
+  "$HOME"/bin
   "$GOBIN"
   "$PNPM_HOME"
   "$NPM_PACKAGES"/bin
