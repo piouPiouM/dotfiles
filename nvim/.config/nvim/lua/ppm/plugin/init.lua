@@ -72,6 +72,10 @@ return require("packer").startup({
 
     -- Editor
     use {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      config = config("ts_context_commentstring"),
+    }
+    use {
       {
         "nvim-treesitter/nvim-treesitter",
         requires = {

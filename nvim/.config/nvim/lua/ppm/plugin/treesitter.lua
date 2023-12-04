@@ -50,10 +50,6 @@ require("nvim-treesitter.configs").setup {
 
   -- Plugins
   autotag = { enable = true },
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false, -- Disable CursorHold to work with Comment.nvim
-  },
   textobjects = {
     enable = true,
     swap = {
