@@ -346,7 +346,11 @@ return require("packer").startup({
       "ramojus/mellifluous.nvim",
       config = simple_setup("mellifluous")
     }
-    use { "projekt0n/github-nvim-theme" }
+    use {
+      "projekt0n/github-nvim-theme",
+      tag = "v1.*",
+      config = config("colorscheme.github")
+    }
   end,
   config = {
     display = {
