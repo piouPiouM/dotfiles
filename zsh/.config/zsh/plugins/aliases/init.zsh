@@ -22,6 +22,6 @@
   alias icat="kitty +kitten icat --align=left"
   alias idimensions='identify -format "%f: %G\n"'
   alias nerdfonts='fc-list : family | rg -i nerd'
-  alias samlcredential='saml2aws login --skip-prompt'
+  alias saml2awslogin='saml2aws login --force --cache-saml --skip-prompt'
   alias zim="zimfw"
 }

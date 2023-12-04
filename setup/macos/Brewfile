@@ -67,6 +67,10 @@ cask "yubico-authenticator"
 cask "yubico-yubikey-manager"
 # Text processor and publishing toolchain for AsciiDoc
 brew "asciidoctor"
+# Official Amazon AWS command-line interface
+brew "awscli"
+# Bourne-Again SHell, a UNIX command interpreter
+brew "bash"
 # Programmable completion for Bash 3.2
 brew "bash-completion"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -155,6 +159,8 @@ brew "ripgrep"
 brew "ruby"
 # Safe, concurrent, practical language
 brew "rust"
+# Login and retrieve AWS temporary credentials using a SAML IDP
+brew "saml2aws"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
