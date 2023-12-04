@@ -29,6 +29,7 @@
   sha = rev-parse HEAD
   origin = config --get remote.origin.url
   current = rev-parse --abbrev-ref HEAD
+  default-branch = symbolic-ref refs/remotes/origin/HEAD --short
 
   oneline = log --pretty=oneline --abbrev-commit --graph --decorate
   lg = log --graph --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'
@@ -73,6 +74,7 @@
   mateall = !git-ls-files -m -o --exclude-standard -z | xargs -0 mate
   undo = git reset --soft HEAD^
 
+  wt-reset = !git fetch && git reset --hard origin/master
 [apply]
   # Detect whitespace errors when applying a patch
   whitespace = fix
