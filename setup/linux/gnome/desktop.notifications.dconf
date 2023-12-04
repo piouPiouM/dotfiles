@@ -1,5 +1,5 @@
 [/]
-application-children=['org-gnome-software', 'org-gnome-terminal', 'firefox', 'org-keepassxc-keepassxc', 'gnome-power-panel', 'gnome-network-panel', 'org-gnome-fileroller', 'org-gnome-nautilus', 'libreoffice-writer', 'org-freedesktop-problems-applet', 'com-spotify-client', 'org-gnome-evolution', 'org-gnome-extensions-desktop', 'me-kozec-syncthingtk', 'md-obsidian-obsidian', 'org-gnome-tweaks', 'org-gnome-evolution-alarm-notify', 'ulauncher', 'brave-browser']
+application-children=['org-gnome-software', 'org-gnome-terminal', 'firefox', 'org-keepassxc-keepassxc', 'gnome-power-panel', 'gnome-network-panel', 'org-gnome-fileroller', 'org-gnome-nautilus', 'libreoffice-writer', 'org-freedesktop-problems-applet', 'com-spotify-client', 'org-gnome-evolution', 'org-gnome-extensions-desktop', 'me-kozec-syncthingtk', 'md-obsidian-obsidian', 'org-gnome-tweaks', 'org-gnome-evolution-alarm-notify', 'ulauncher', 'brave-browser', 'org-gnome-settings']
 
 [application/brave-browser]
 application-id='brave-browser.desktop'
@@ -45,6 +45,9 @@ application-id='org.gnome.FileRoller.desktop'
 
 [application/org-gnome-nautilus]
 application-id='org.gnome.Nautilus.desktop'
+
+[application/org-gnome-settings]
+application-id='org.gnome.Settings.desktop'
 
 [application/org-gnome-software]
 application-id='org.gnome.Software.desktop'

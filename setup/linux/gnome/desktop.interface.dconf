@@ -2,7 +2,7 @@
 color-scheme='prefer-dark'
 enable-animations=true
 font-antialiasing='rgba'
-font-hinting='slight'
+font-hinting='full'
 gtk-theme='Adwaita'
 locate-pointer=false
 show-battery-percentage=true
