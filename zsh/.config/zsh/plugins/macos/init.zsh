@@ -3,7 +3,6 @@
 
   # Opt out
   export HOMEBREW_NO_ANALYTICS=1
-  export HOMEBREW_NO_GOOGLE_ANALYTICS=1
 
   # Avoid long-running Homebrew commands being killed due to no output.
   export HOMEBREW_VERBOSE_USING_DOTS=1
