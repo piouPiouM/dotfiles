@@ -4,12 +4,15 @@ tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
+# Lightweight and flexible command-line JSON processor
 # Collaborative design tool with support for Sketch files
 cask "abstract"
 # Application launcher and productivity software
 cask "alfred"
 # Automatic tiling window manager similar to xmonad
 cask "amethyst"
+# Web browser focusing on privacy
+cask "brave-browser"
 # Web browser focusing on privacy
 cask "brave-browser-beta"
 # Server and cloud storage browser
@@ -33,6 +36,8 @@ cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 # Free and open-source image editor
 cask "gimp"
+# Web browser
+cask "google-chrome"
 # Tool to optimize images to a smaller size
 cask "imageoptim"
 # Terminal emulator as alternative to Apple's Terminal app
@@ -43,6 +48,8 @@ cask "karabiner-elements"
 cask "keepassxc"
 # GPU-based terminal emulator
 cask "kitty"
+# Open-source Markdown editor
+cask "macdown"
 # Web browser
 cask "microsoft-edge"
 # Minimal installer for conda
@@ -65,6 +72,20 @@ cask "wezterm"
 cask "yubico-authenticator"
 # Application for configuring any YubiKey
 cask "yubico-yubikey-manager"
+vscode "bierner.color-info"
+vscode "Catppuccin.catppuccin-vsc"
+vscode "guillaumedoutriaux.name-that-color"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-toolsai.jupyter"
+vscode "ms-toolsai.jupyter-keymap"
+vscode "ms-toolsai.jupyter-renderers"
+vscode "ms-toolsai.vscode-jupyter-cell-tags"
+vscode "ms-toolsai.vscode-jupyter-slideshow"
+vscode "ms-vscode.vscode-typescript-next"
+vscode "royaction.color-manager"
+vscode "styled-components.vscode-styled-components"
+vscode "sumneko.lua"
 # Text processor and publishing toolchain for AsciiDoc
 brew "asciidoctor"
 # Official Amazon AWS command-line interface
@@ -75,8 +96,10 @@ brew "bash"
 brew "bash-completion"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Utility for caching the results of shell commands
+# CLI utility for caching the output of subprocesses
 brew "bkt"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
+brew "btop"
 # Versatile and fast Unicode/ASCII/ANSI graphics renderer
 brew "chafa"
 # Command-line Interface File Manager
@@ -93,6 +116,8 @@ brew "emscripten"
 brew "exiftool"
 # Fast partial replacement for the codemod tool
 brew "fastmod"
+# Facebook's branch of Apache Thrift, including a new C++ server
+brew "fbthrift"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # macOS CLI for managing custom icons for files and folders
@@ -113,9 +138,10 @@ brew "go"
 brew "gobject-introspection"
 # Image processing tools collection
 brew "graphicsmagick"
+# GNU grep, egrep and fgrep
+brew "grep"
 # Convert source code to formatted text with syntax highlighting
 brew "highlight"
-# Lightweight and flexible command-line JSON processor
 brew "jq"
 # Simple terminal UI for git commands
 brew "lazygit"
@@ -131,14 +157,20 @@ brew "lnav"
 brew "lua-language-server"
 # OpenResty's Branch of LuaJIT 2
 brew "luajit-openresty"
+# Package manager for the Lua programming language
+brew "luarocks"
+# Show markdown documents on text terminals
+brew "mdcat"
 # Unified display of technical and tag data for audio/video
 brew "media-info"
+# Nice to use pager for humans
+brew "moar"
 # Node version management
 brew "n"
 # Parser generator tool and incremental parsing library
 brew "tree-sitter", args: ["HEAD"]
 # Ambitious Vim-fork focused on extensibility and agility
-brew "neovim", args: ["HEAD"]
+brew "neovim"
 # HTTP/2 C Library
 brew "nghttp2"
 # Small build system for use with gyp or CMake
@@ -151,10 +183,10 @@ brew "par"
 brew "python@3.10"
 # File browser
 brew "ranger"
+# SVG rendering tool and library
+brew "resvg"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# Powerful, clean, object-oriented scripting language
-brew "ruby"
 # Safe, concurrent, practical language
 brew "rust"
 # Login and retrieve AWS temporary credentials using a SAML IDP
@@ -191,6 +223,8 @@ brew "w3m"
 brew "watchman"
 # Internet file retriever
 brew "wget"
+# Check your $HOME for unwanted files and directories
+brew "xdg-ninja"
 # Hackable, minimal, fast TUI file explorer
 brew "xplr"
 # Shell extension to navigate your filesystem faster
