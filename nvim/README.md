@@ -6,9 +6,9 @@ My **leader key** is the `Space` and my *local leader key* is `ù` because these
 
 ## Plugins
 
-I use [many plugins](https://github.com/piouPiouM/dotfiles/blob/master/nvim/.config/nvim/lua/ppm/plugin/init.lua), the main ones being :
+I use [many plugins](https://github.com/piouPiouM/dotfiles/blob/master/nvim/.config/nvim/lua/plugins/), the main ones being :
 
-- [packer.nvim](https://github.com/wbthomason/packer.nvim) for manage my plugins
+- [lazy.nvim](https://github.com/folke/lazy.nvim) for manage my plugins
 - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)  as langage parser
 - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) as LSP configuration helper
 - [lspsaga.nvim](https://github.com/nvimdev/lspsaga.nvim) for improve Neovim LSP experience
@@ -17,6 +17,7 @@ I use [many plugins](https://github.com/piouPiouM/dotfiles/blob/master/nvim/.con
 - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) for customize the status bar, tabs and winbar
 - [leap.nvim](https://github.com/ggandor/leap.nvim) as motion helper 🦘
 - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) to integrate Git into Neovim
+
 ## Pickers
 
 Like everyone else, I use a set of pickers to navigate efficiently through my code bases. These pickers are powered by [fzf-lua](https://github.com/ibhagwan/fzf-lua), which offers great responsiveness. Accustomed to the layouts of the Telescope plugin, I have created [4 new themes](./.config/nvim/lua/ppm/plugin/fzf-lua/themes.lua) for fzf-lua:
@@ -50,7 +51,6 @@ List of keyboard shortcuts assigned to certain pickers:
 - `i`: insert mode
 - `n`: normal mode
 - `v`: visual mode
-
 
 
 

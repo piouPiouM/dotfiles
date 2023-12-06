@@ -1,5 +1,3 @@
-pcall(require, "impatient")
-
 local api = vim.api
 local g = vim.g
 local o = vim.o
@@ -37,11 +35,10 @@ end
 
 cmd [[
   runtime! lua/ppm/setup/globals.lua
-  runtime! lua/ppm/setup/disable-builtin.lua
   runtime! lua/ppm/setup/options.lua
 ]]
 
-require("ppm.plugin")
+require("ppm.plugin.lazy")
 
 cmd [[syntax enable]]
 
@@ -60,10 +57,6 @@ else
   o.background = "dark"
 end
 
-
-require("ppm.colorscheme.rose-pine").use()
-require("ppm.colorscheme.catppuccin").use()
-vim.cmd [[colorscheme github_dark]]
 
 -- Lazy load plugins using a custom autocmd `User ActuallyEditing` {{{
 

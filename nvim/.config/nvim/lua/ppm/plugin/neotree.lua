@@ -8,7 +8,9 @@ require("neo-tree").setup({
   open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "TelescopePrompt", "lspsagaoutline" },
   filesystem = {
     filtered_items = { hide_by_name = { "node_modules" }, always_show = { ".config" }, never_show = { ".DS_Store" } },
-    follow_current_file = true,
+    follow_current_file = {
+      enabled = true,
+    },
     use_libuv_file_watcher = true,
     window = { mappings = { ["h"] = "toggle_hidden" } },
   },

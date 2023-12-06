@@ -37,9 +37,7 @@ cmp.setup({
     { name = "nvim_lsp_signature_help" },
     {
       name = "nvim_lsp",
-      entry_filter = filter.some({
-        filter.filters.keepMembersOnly,
-      }),
+      entry_filter = filter.filters.keepMembersOnly,
     },
     { name = "calc" },
     {
