@@ -20,7 +20,6 @@ install-neovim:: | $(ENSURE_DIRS)
 
 postinstall-neovim: install-neovim-dependencies
 	@echo "$(PURPLE)• Running Neovim post-installation$(RESET)"
-	@$(MAKE) --silent install-neovim-plugins
 	@$(NVIM) +UpdateRemotePlugins +qa
 .PHONY: postinstall-neovim
 
@@ -37,13 +36,3 @@ install-neovim-thirdparty-dependencies:
 	@gem $(GEM_COMMAND) neovim --no-document
 	@go install github.com/mattn/efm-langserver@latest
 .PHONY: install-neovim-thirdparty-dependencies
-
-## Install or reinstall Neovim plugins.
-install-neovim-plugins:
-	@echo "$(PURPLE)• Reinstall Neovim plugins$(RESET)"
-	@mkdir -p $(XDG_DATA_HOME)/nvim/site/pack/packer
-	@rm -rf $(XDG_DATA_HOME)/nvim/site/pack/packer/*
-	@rm -f $(XDG_CONFIG_HOME)/nvim/plugin/packer_compiled.lua
-	@git clone --depth 1 https://github.com/wbthomason/packer.nvim $(XDG_DATA_HOME)/nvim/site/pack/packer/start/packer.nvim
-	@$(NVIM) +PackerSync +qa
-.PHONY: install-neovim-plugins

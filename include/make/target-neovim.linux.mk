@@ -16,7 +16,6 @@ install-neovim-dependencies::
 upgrade-neovim:
 	@echo "$(PURPLE)• Upgrade Neovim environment after update of the packages$(RESET)"
 	@$(MAKE) --silent neovim-treesitter
-	@$(MAKE) --silent install-neovim-thirdparty-dependencies
-	@$(MAKE) --silent install-neovim-plugins
+	@$(MAKE) --silent install-neovim-dependencies
 	@$(NVIM) +UpdateRemotePlugins +qa
 .PHONY: upgrade-neovim

@@ -35,4 +35,10 @@ M.prequire = function(...)
   return nil
 end
 
+M.lazy_config = function(name)
+  return function()
+    require(string.format("ppm.plugin.%s", name))
+  end
+end
+
 return M

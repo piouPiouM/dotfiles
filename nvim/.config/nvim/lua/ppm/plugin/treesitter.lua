@@ -1,6 +1,6 @@
 local ft = require("ppm.filetype")
 
-require("nvim-treesitter.configs").setup {
+require("nvim-treesitter.configs").setup({
   ensure_installed = {
     "astro",
     "awk",
@@ -39,10 +39,6 @@ require("nvim-treesitter.configs").setup {
   auto_install = true,
   sync_install = false,
 
-  highlight = { enable = true, },
-  incremental_selection = { enable = true },
-  indent = { enable = true },
-
   modules = {
     highlight = { enable = true },
     incremental_selection = { enable = true },
@@ -75,7 +71,7 @@ require("nvim-treesitter.configs").setup {
       ["i;"] = "textsubjects-container-inner",
     },
   },
-}
+})
 
 require('ts_context_commentstring').setup {
   enable_autocmd = false,
