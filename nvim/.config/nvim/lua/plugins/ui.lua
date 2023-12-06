@@ -17,7 +17,24 @@ return {
     end,
   },
 
-  { "rcarriga/nvim-notify" },
+  {
+    "folke/noice.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+    event = "VeryLazy",
+    keys = {
+      {
+        "<leader>L",
+        function()
+          require("notify").dismiss({ silent = true, pending = true })
+        end,
+        desc = "Dismiss all Notifications",
+      },
+    },
+    opts = require("ppm.plugin.noice"),
+  },
 
   {
     "nvim-lualine/lualine.nvim",

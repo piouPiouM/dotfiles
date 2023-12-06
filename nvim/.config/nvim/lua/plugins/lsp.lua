@@ -10,15 +10,6 @@ return {
   },
 
   {
-    "j-hui/fidget.nvim",
-    branch = "legacy",
-    opts = {
-      text = { spinner = "moon" }
-    },
-    event = "VeryLazy",
-  },
-
-  {
     "neovim/nvim-lspconfig",
     config = config("lsp"),
     event = "VeryLazy",

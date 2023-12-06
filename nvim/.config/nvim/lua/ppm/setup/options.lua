@@ -135,9 +135,9 @@ opt.completeopt:remove({ "preview" }) -- Disable Scratch window
 -- }}}1
 -- Speed up! {{{1
 
-o.lazyredraw = true -- Do not redraw while running macros (much faster).
-o.synmaxcol = 800   -- vs 3000 by default.
-o.updatetime = 600  -- Smaller updatetime for CursorHold & CursorHoldI.
-o.fsync = false     -- Let the OS decide when it's appropriate to flush the cache, rather than vim (much faster).
+o.lazyredraw = false -- Do not redraw while running macros (much faster).
+o.synmaxcol = 800    -- vs 3000 by default.
+o.updatetime = 600   -- Smaller updatetime for CursorHold & CursorHoldI.
+o.fsync = false      -- Let the OS decide when it's appropriate to flush the cache, rather than vim (much faster).
 
 -- }}}1
