@@ -51,7 +51,7 @@ return {
 
   {
     "shaunsingh/nord.nvim",
-    config = function()
+    init = function()
       vim.g.nord_contrast = true
       vim.g.nord_borders = true
       vim.g.nord_disable_background = false
@@ -61,15 +61,16 @@ return {
   },
 
   {
-    "maaslalani/nordbuddy",
-    config = function()
-      require('nordic').colorscheme({
-        underline_option = 'undercurl',
-        italic = true,
-        italic_comments = true,
-        minimal_mode = false,
-        alternate_backgrounds = false
-      })
+    "andersevenrud/nordic.nvim",
+    opts = {
+      underline_option = 'undercurl',
+      italic = true,
+      italic_comments = true,
+      minimal_mode = false,
+      alternate_backgrounds = false
+    },
+    config = function(_, opts)
+      require('nordic').colorscheme(opts)
     end,
   },
 
