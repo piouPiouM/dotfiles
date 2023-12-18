@@ -18,20 +18,20 @@ local configuration = {
   },
   defaults = {
     lazy = true,
-    performance = {
-      rtp = {
-        disabled_plugins = {
-          "getscriptPlugin",
-          "gzip",
-          "tarPlugin",
-          "tohtml",
-          "tutor",
-          "zipPlugin",
-        },
+  },
+  install = { colorscheme = { "github", "habamax" } },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "getscriptPlugin",
+        "gzip",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
       },
     },
   },
-  install = { colorscheme = { "github", "habamax" } },
 }
 
 require("lazy").setup(configuration)
