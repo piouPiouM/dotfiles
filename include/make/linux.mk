@@ -218,3 +218,20 @@ setup-ulauncher:
 	@pip install -qq --upgrade --user Pint simpleeval parsedatetime pytz babel
 	@pip install -qq --upgrade --user faker
 .PHONY: setup-ulauncher
+
+## Install Smartgit.
+install-smartgit: SMARTGIT_DIR := $(HOME)/.var/app/com.syntevo.SmartGit
+install-smartgit: FLATHUB_MANIFEST := https://raw.githubusercontent.com/flathub/com.syntevo.SmartGit/master/com.syntevo.SmartGit.yaml
+install-smartgit: DOWNLOAD_PATTERN := (?<=\burl:\s).*smartgit-linux-[\d\.-_]+.tar.gz
+install-smartgit: DOWNLOAD_URL := $(shell curl -fsSL $(FLATHUB_MANIFEST) | $(GNU_GREP) --color=never -Po "$(DOWNLOAD_PATTERN)")
+install-smartgit: SMARTGIT_VERSION := $(shell echo "$(DOWNLOAD_URL)" | $(GNU_GREP) -Po "[\d\.-_]+(?=.tar)" | tr "_" ".")
+install-smartgit: TMP := $(shell mktemp -d)
+install-smartgit:
+	@echo "$(PURPLE)• Installing Smartgit $(SMARTGIT_VERSION)$(RESET)"
+	@trash -f "$(SMARTGIT_DIR)/smartgit"
+	@mkdir -p "$(SMARTGIT_DIR)"
+	@curl -fsSL --output "$(TMP)/smartgit.tar.gz" "$(DOWNLOAD_URL)"
+	@tar xzf "$(TMP)/smartgit.tar.gz" --directory="$(HOME)/.var/app/com.syntevo.SmartGit/"
+	@sh "$(SMARTGIT_DIR)/smartgit/bin/add-menuitem.sh"
+	@rm -rf $(TMP)
+.PHONY: install-smartgit
