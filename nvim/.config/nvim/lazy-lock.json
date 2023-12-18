@@ -62,7 +62,6 @@
   "typescript.nvim": { "branch": "main", "commit": "4de85ef699d7e6010528dcfbddc2ed4c2c421467" },
   "undotree": { "branch": "master", "commit": "36ff7abb6b60980338344982ad4cdf03f7961ecd" },
   "vim-docvim": { "branch": "main", "commit": "f8f90408beaeb793ac080f001d2f8fdcc2c8f7e2" },
-  "vim-eunuch": { "branch": "master", "commit": "67f3dd32b4dcd1c427085f42ff5f29c7adc645c6" },
   "vim-kitty": { "branch": "main", "commit": "891475671feebc4bf0f29f0a0987067913a81686" },
   "vim-maximizer": { "branch": "master", "commit": "2e54952fe91e140a2e69f35f22131219fcd9c5f1" },
   "vim-mdx-js": { "branch": "master", "commit": "17179d7f2a73172af5f9a8d65b01a3acf12ddd50" },
