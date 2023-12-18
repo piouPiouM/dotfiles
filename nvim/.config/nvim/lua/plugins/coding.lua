@@ -3,9 +3,32 @@ local config = require("ppm.utils").lazy_config
 return {
   {
     "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    config = config("indent-blankline"),
     event = "VeryLazy",
+    init = function()
+      vim.opt.list = true
+    end,
+    main = "ibl",
+    opts = {
+      exclude = {
+        filetypes = { "Trouble" },
+        buftypes = {
+          "alpha",
+          "fzf",
+          "help",
+          "lazy",
+          "lazyterm",
+          "lspsagaoutline",
+          "neo-tree",
+          "notify",
+          "startify",
+          "toggleterm",
+          "trouble",
+        },
+      },
+      scope = {
+        show_start = false,
+      }
+    },
   },
 
   {
