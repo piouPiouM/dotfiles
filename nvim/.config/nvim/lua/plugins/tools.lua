@@ -56,28 +56,6 @@ return {
   },
 
   {
-    "tpope/vim-eunuch",
-    cmd = {
-      "Cfind",       -- Run find and load the results into the quickfix list.
-      "Lfind",       -- Like above, but use the location list.
-      "Clocate",     -- Run locate and load the results into the quickfix list.
-      "Llocate",     -- Like above, but use the location list.
-      "Chmod",       -- Change the permissions of the current file
-      "Copy",
-      "Delete",      -- Delete a buffer and the file on disk simultaneously
-      "Duplicate",
-      "Mkdir",       -- Create a directory, defaulting to the parent of the current file
-      "Move",        -- Rename a buffer and the file on disk simultaneously
-      "Remove",      -- Delete a file on disk without E211: File no longer available
-      "Rename",      -- LikeMove,", -but relative to the current file's containing directory
-      "SudoEdit",    -- Edit a privileged file with sudo
-      "SudoWrite",   -- Write a privileged file with sudo
-      "Unlink",      -- LikeRemove,", -but keeps the now empty buffer
-      "Wall",        -- Write every open window. Handy for kicking off tools like guard
-    },
-  },
-
-  {
     "mbbill/undotree",
     cmd = "UndotreeToggle"
   },
