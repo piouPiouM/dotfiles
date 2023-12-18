@@ -134,4 +134,6 @@
   path = ~/.local/share/git/config
 
 [url "git@github.com:"]
-	insteadOf = git://github.com/
+  insteadOf = git://github.com/
+[gc]
+  autoDetach = false
