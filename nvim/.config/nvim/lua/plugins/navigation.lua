@@ -48,8 +48,11 @@ return {
   -- gs{c1}{c2}
   {
     "ggandor/leap.nvim",
-    config = config("leap"),
-    dependencies = { "ggandor/flit.nvim" },
+    config = function(plugin)
+      require(plugin.name).add_default_mappings()
+    end,
+    dependencies = { "ggandor/flit.nvim", "tpope/vim-repeat" },
     event = "VeryLazy",
+    name = "leap",
   },
 }
