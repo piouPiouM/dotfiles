@@ -50,6 +50,8 @@ return {
 
   {
     "stevearc/oil.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       delete_to_trash = true,
       view_options = {
