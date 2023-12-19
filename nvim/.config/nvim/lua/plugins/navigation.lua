@@ -4,7 +4,7 @@ return {
   {
     "ibhagwan/fzf-lua",
     init = config("fzf-lua.setup"),
-    config = config("fzf-lua"),
+    opts = require("ppm.plugin.fzf-lua"),
     cmd = "FzfLua",
   },
 
@@ -61,6 +61,7 @@ return {
   },
 
   {
+    --- Used for `telescope.utils.transform_path()`.
     "nvim-telescope/telescope.nvim",
     version = "0.1.x",
     dependencies = {

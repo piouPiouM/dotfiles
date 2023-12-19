@@ -1,25 +1,18 @@
-local fn              = vim.fn
-local Path            = require("plenary.path")
-local config          = require("fzf-lua.config")
-local complete        = require("fzf-lua.complete")
-local core            = require("fzf-lua.core")
-local utils           = require("fzf-lua.utils")
-local F               = require("ppm.toolkit.fp")
-local O               = require("ppm.toolkit.fp.Option")
-local ui              = require("ppm.ui")
-local actions         = require("ppm.plugin.fzf-lua.actions")
-local decorate        = require("ppm.plugin.fzf-lua.decorators")
-local helpers         = require("ppm.plugin.fzf-lua.helpers")
-local IOEither        = require("ppm.toolkit.fp.IOEither")
-local pipe            = F.pipe
-
-local M               = { actions = {} }
-
-local global_defaults = pipe(
-  {},
-  decorate.with_title(" Nerd Fonts"),
-  decorate.with_history("nf")
-)
+local fn       = vim.fn
+local Path     = require("plenary.path")
+local config   = require("fzf-lua.config")
+local complete = require("fzf-lua.complete")
+local core     = require("fzf-lua.core")
+local utils    = require("fzf-lua.utils")
+local F        = require("ppm.toolkit.fp")
+local O        = require("ppm.toolkit.fp.Option")
+local ui       = require("ppm.ui")
+local actions  = require("ppm.plugin.fzf-lua.actions")
+local decorate = require("ppm.plugin.fzf-lua.decorators")
+local helpers  = require("ppm.plugin.fzf-lua.helpers")
+local IOEither = require("ppm.toolkit.fp.IOEither")
+local pipe     = F.pipe
+local M        = { actions = {} }
 
 local function read_source()
   local source = fn.expand("$XDG_DATA_HOME/$USER/symbols/nerdfonts.json")
@@ -57,6 +50,12 @@ local function normalize_opts(opts, ...)
 end
 
 local parse_selected = helpers.join_first_words(ui.icon_padding)
+
+local global_defaults = pipe(
+  {},
+  decorate.with_title(" Nerd Fonts"),
+  decorate.with_history("nf")
+)
 
 function M.symbol(opts)
   local data = read_source()
