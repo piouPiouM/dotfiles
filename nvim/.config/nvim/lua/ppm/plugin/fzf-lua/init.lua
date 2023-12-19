@@ -22,4 +22,4 @@ local config = {
   keymap = { builtin = { ["?"] = "toggle-preview" } },
 }
 
-require("fzf-lua").setup(vim.tbl_deep_extend("force", config, providers))
+return vim.tbl_deep_extend("force", config, providers)

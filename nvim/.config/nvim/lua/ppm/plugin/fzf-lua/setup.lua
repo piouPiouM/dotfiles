@@ -13,7 +13,7 @@ u.nquickmap(k.search.help_tags, [[<cmd>FzfLua help_tags<CR>]])
 u.nquickmap(k.search.oldfile, [[<cmd>FzfLua oldfiles<CR>]])
 u.nquickmap(k.search.resume, [[<cmd>FzfLua resume<CR>]])
 
-vim.keymap.set({ "n", "v", "i" }, "<C-x><C-f>", function() require("fzf-lua").complete_file() end,
+vim.keymap.set("i", "<C-x><C-f>", function() require("fzf-lua").complete_file() end,
   { silent = true, desc = "Fuzzy complete path" })
 
 vim.keymap.set("i", "<C-x>:",
