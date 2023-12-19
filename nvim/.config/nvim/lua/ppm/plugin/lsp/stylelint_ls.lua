@@ -6,7 +6,7 @@ local M = {}
 M.config = {
   filetypes = F.pipe(
     { "astro", "css", "scss", "less", "vue" },
-    A.append(ft.typescript)
+    A.concat(ft.typescript)
   ),
   settings = {
     stylelintplus = {

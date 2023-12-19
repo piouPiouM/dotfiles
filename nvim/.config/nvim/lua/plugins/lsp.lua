@@ -76,6 +76,6 @@ return {
     opts = {
       multi_line = true,
     },
-    ft = ft.typescript
+    ft = ft.typescript,
   },
 }

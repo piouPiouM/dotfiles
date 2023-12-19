@@ -10,9 +10,6 @@ M.jsx = {
   "typescript.tsx",
 }
 
-M.typescript = F.pipe(M.jsx, A.prepend({
-  "javascript",
-  "typescript",
-}))
+M.typescript = F.pipe({ "javascript", "typescript" }, A.concat(M.jsx))
 
 return M
