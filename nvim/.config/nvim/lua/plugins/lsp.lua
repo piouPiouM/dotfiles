@@ -44,13 +44,31 @@ return {
   },
 
   {
-    "jose-elias-alvarez/typescript.nvim",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "nvim-lua/plenary.nvim"
-    },
-    config = config("typescript"),
+    "pmizio/typescript-tools.nvim",
+    build = "npm i -g @styled/typescript-styled-plugin typescript-styled-plugin",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     ft = F.pipe(ft.typescript, A.append("markdown.mdx")),
+    opts = {
+      on_attach = function(client, bufnr)
+        local u = require("ppm.utils")
+        require("twoslash-queries").attach(client, bufnr)
+
+        u.buf_map(bufnr, "n", "go", ":TSToolsOrganizeImports<CR>")
+      end,
+
+      expose_as_code_action = "all",
+      jsx_close_tag = {
+        enable = true,
+        filetypes = { "javascriptreact", "typescriptreact" },
+      },
+
+      tsserver_plugins = {
+        -- for TypeScript v4.9+
+        "@styled/typescript-styled-plugin",
+        -- or for older TypeScript versions
+        -- "typescript-styled-plugin",
+      },
+    },
   },
 
   {
