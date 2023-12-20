@@ -12,4 +12,11 @@ if [[ -f $_theme_file ]]; then
   return 0
 fi
 
+local -r _theme_file_alt="${XDG_DATA_HOME}/lazygit/themes/${1//-/_}.yml"
+if [[ -f $_theme_file_alt ]]; then
+  export LG_CONFIG_FILE="${XDG_CONFIG_HOME}/lazygit/config.yml,${_theme_file_alt}"
+
+  return 0
+fi
+
 return 1

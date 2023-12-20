@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
+# (Github Light High Contrast) Colors for Lazygit
+gui:
+  theme:
+    activeBorderColor:
+      - "#1168e3"
+      - bold
+    inactiveBorderColor:
+      - "#0e1116"
+    searchingActiveBorderColor:
+      - "#055d20"
+      - bold
+    optionsTextColor:
+      - "#ed4baf"
+    selectedLineBgColor:
+      - "#e7ecf0"
+      - bold
+    selectedRangeBgColor:
+      - reverse
+    cherryPickedCommitBgColor:
+      - "#e7ecf0"
+    cherryPickedCommitFgColor:
+      - "#ffffff"
+      - underline
+    markedBaseCommitFgColor:
+      - "#873800"
+      - underline
+    markedBaseCommitBgColor:
+      - "#e7ecf0"
+    unstagedChangesColor:
+      - "#622cbc"
+    defaultFgColor:
+      - "#010409"

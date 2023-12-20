@@ -1,5 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
 gui:
   border: 'rounded'
-  showIcons: true
+  nerdFontsVersion: '3'
+  shortTimeFormat: '15h04'
+  timeFormat: '02/01/2006'
 os:
   editPreset: 'nvim'
