@@ -11,6 +11,7 @@ TO_LINK := bash \
 					 fd \
 					 fzf \
 					 git \
+					 go \
 					 kitty \
 					 lazygit \
 					 nvim \

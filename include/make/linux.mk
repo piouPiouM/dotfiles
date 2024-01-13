@@ -235,3 +235,15 @@ install-smartgit:
 	@sh "$(SMARTGIT_DIR)/smartgit/bin/add-menuitem.sh"
 	@rm -rf $(TMP)
 .PHONY: install-smartgit
+
+## Install Go applications.
+install-go-apps:
+	@echo "$(PURPLE)• Installing Go applications$(RESET)"
+	@xargs go install < setup/linux/fedora/packages-go.txt
+.PHONY: install-go-apps
+
+## Update Go applications.
+update-go-apps:
+	@echo "$(PURPLE)• Updating Go applications$(RESET)"
+	@(GNU_GREP) -Po '.*(?=@.+)' setup/linux/fedora/packages-go.txt | xargs go get -u
+.PHONY: update-go-apps

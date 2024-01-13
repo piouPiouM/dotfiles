@@ -1,0 +1,2 @@
+github.com/mattn/efm-langserver@latest
+github.com/jesseduffield/lazygit@latest
