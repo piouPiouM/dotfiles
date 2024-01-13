@@ -79,6 +79,8 @@ brew "chafa"
 brew "clifm"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# Diff that understands syntax
+brew "difftastic"
 # Maintain consistent coding style between multiple editors
 brew "editorconfig"
 # General purpose Language Server

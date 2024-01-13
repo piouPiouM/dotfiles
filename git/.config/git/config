@@ -85,19 +85,28 @@
 [status]
   submoduleSummary = true
   showUntrackedFiles = all
+
 [diff]
-  submodule = log
-  wordRegex = .
-  mnemonicPrefix = true
-  tool = kitty
+  external = kitty
   guitool = kitty.gui
+  mnemonicPrefix = true
+  submodule = log
+  tool = difftastic
+  wordRegex = .
 [difftool]
   prompt = false
   trustExitCode = true
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
 [difftool "kitty"]
   cmd = kitty +kitten diff $LOCAL $REMOTE
 [difftool "kitty.gui"]
   cmd = kitty kitty +kitten diff $LOCAL $REMOTE
+[difftool "meld"]
+  cmd = meld "$LOCAL" "$REMOTE"
+[pager]
+  difftool = true
+
 [merge]
   conflictStyle = diff3
 [mergetool]
@@ -105,6 +114,11 @@
   keepTemporaries = false
   writeToTemp = true
   prompt = false
+[mergetool "meld"]
+  cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+[mergetool "meld-base"]
+  cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
+
 [fetch]
   recurseSubmodules = on-demand
 [push]
