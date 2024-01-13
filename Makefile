@@ -15,9 +15,10 @@ all: help
 # Configutation
 # -----------------------------------------------------------------------------
 
+export XDG_CACHE_HOME  := $(HOME)/.cache
 export XDG_CONFIG_HOME := $(HOME)/.config
 export XDG_DATA_HOME   := $(HOME)/.local/share
-export XDG_CACHE_HOME  := $(HOME)/.cache
+export XDG_STATE_HOME  := $(HOME)/.local/state
 
 # -----------------------------------------------------------------------------
 # Utilities
@@ -126,11 +127,10 @@ ENSURE_DIRS = $(XDG_CACHE_HOME)/gem \
 							$(XDG_DATA_HOME)/fonts \
 							$(XDG_DATA_HOME)/gem \
 							$(XDG_DATA_HOME)/npm-packages \
-							$(XDG_DATA_HOME)/nvim/bundle \
-							$(XDG_DATA_HOME)/nvim/shada \
-							$(XDG_DATA_HOME)/nvim/swap \
-							$(XDG_DATA_HOME)/nvim/undo \
-							$(XDG_DATA_HOME)/nvim/view \
+							$(XDG_STATE_HOME)/nvim/shada \
+							$(XDG_STATE_HOME)/nvim/swap \
+							$(XDG_STATE_HOME)/nvim/undo \
+							$(XDG_STATE_HOME)/nvim/view \
 							$(XDG_DATA_HOME)/tmux \
 							$(XDG_DATA_HOME)/zoxide \
 							$(HOME)/go/bin

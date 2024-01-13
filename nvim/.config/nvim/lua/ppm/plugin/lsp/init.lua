@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 local lsp_defaults = lspconfig.util.default_config
 
-lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities,
+lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities or {},
   require("cmp_nvim_lsp").default_capabilities(), {
     textDocument = {
       completion = { completionItem = { insertTextModeSupport = { valueSet = { 2 } } } },
@@ -38,6 +38,7 @@ local servers = {
   cucumber_language_server = {},
   emmet_ls = {},
   efm = require("ppm.plugin.lsp.efm").config,
+  yamlls = {},
 }
 
 for name, opts in pairs(servers) do

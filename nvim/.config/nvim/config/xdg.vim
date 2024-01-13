@@ -35,9 +35,9 @@ if !isdirectory($XDG_DATA_HOME)
   silent call mkdir($XDG_DATA_HOME . '/vim', 'p')
 endif
 
-set directory=$XDG_CACHE_HOME/vim/swap//,/tmp//
-set backupdir=$XDG_CACHE_HOME/vim/backup//,/tmp//
-set undodir=$XDG_CACHE_HOME/vim/undo//,/tmp//
+set directory=$XDG_STATE_HOME/vim/swap//,/tmp//
+set backupdir=$XDG_STATE_HOME/vim/backup//,/tmp//
+set undodir=$XDG_STATE_HOME/vim/undo//,/tmp//
 
 " TODO: make vim fully XDG compatible
 "set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
