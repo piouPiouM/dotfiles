@@ -23,6 +23,8 @@ export XDG_CACHE_HOME  := $(HOME)/.cache
 # Utilities
 # -----------------------------------------------------------------------------
 
+NPM_FLAGS := --global --no-progress --no-fund --loglevel silent
+
 # Use the FORCE rule as dependency to force the execution of the target rule when
 # the false prerequisites contain `%` which is interpreted as a literal.
 # https://www.gnu.org/software/make/manual/html_node/Force-Targets.html
@@ -182,6 +184,8 @@ setup-npm: | $(ENSURE_DIRS)
 	@npm config set userconfig $$NPM_CONFIG_USERCONFIG
 	@npm config set cache $(XDG_CACHE_HOME)/npm
 	@npm config set prefix $(NPM_PACKAGES)
+	@npm config set fund false
+	@npm config set progress false
 	@$(call register_manpath,$(NPM_PACKAGES)/share/man)
 	@$(MAKE) restore-npm
 .PHONY: setup-npm

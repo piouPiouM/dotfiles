@@ -3,7 +3,6 @@
 # -----------------------------------------------------------------------------
 
 BACKUP_NPM_FILE := setup/npm/packages.txt
-NPM_FLAGS := --global --loglevel silent
 BACKUP_TARGETS = $(shell $(GNU_GREP) --perl-regexp --only-matching --no-filename --color=never '^backup-\S+(?=:)' $(MAKEFILE_LIST) | uniq)
 
 ## Backup all settings.
