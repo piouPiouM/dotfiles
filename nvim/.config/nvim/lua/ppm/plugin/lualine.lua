@@ -103,5 +103,5 @@ require("lualine").setup({
   },
   inactive_sections = {}, -- No longer useful since I use the global status bar.
   tabline = {},
-  extensions = { "quickfix", "neo-tree", "trouble" },
+  extensions = { "lazy", "neo-tree", "oil", "quickfix", "trouble" },
 })
