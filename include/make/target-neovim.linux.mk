@@ -8,6 +8,7 @@ install-neovim::
 .PHONY: install-neovim
 
 install-neovim-dependencies::
+	@echo "$(PURPLE)  • Installing Lua Language Server$(RESET)"
 	@sudo dnf $(INSTALL_FLAGS) copr enable yorickpeterse/lua-language-server
 	@$(INSTALL) lua-language-server
 .PHONY: install-neovim-dependencies
