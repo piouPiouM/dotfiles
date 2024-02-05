@@ -24,7 +24,8 @@ export XDG_STATE_HOME  := $(HOME)/.local/state
 # Utilities
 # -----------------------------------------------------------------------------
 
-NPM_FLAGS := --global --no-progress --no-fund --loglevel silent
+include include/make/variables.mk
+-include include/make/variables.$(CURRENT_OS).mk
 
 # Use the FORCE rule as dependency to force the execution of the target rule when
 # the false prerequisites contain `%` which is interpreted as a literal.
@@ -34,23 +35,6 @@ FORCE:
 .PHONY: FORCE
 
 .PHONY: zsh-activate zsh-check
-
-uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
-
-ifeq ($(uname_S),Linux)
-	CURRENT_OS := linux
-	OS_LINUX := Yes
-	OS_MACOS :=
-endif
-
-ifeq ($(uname_S),Darwin)
-	CURRENT_OS := macos
-	OS_LINUX :=
-	OS_MACOS := Yes
-endif
-
-# https://stackoverflow.com/a/44221541/392725
-_DRY_RUN := $(findstring -n,$(firstword -$(MAKEFLAGS)))
 
 RED   := $(shell tput -Txterm setaf 1)
 GREEN := $(shell tput -Txterm setaf 2)
@@ -143,12 +127,6 @@ setup-dirs:
 
 $(ENSURE_DIRS):
 	mkdir -p $@
-
-# -----------------------------------------------------------------------------
-# Import OS specific variables
-# -----------------------------------------------------------------------------
-
--include include/make/variables.$(CURRENT_OS).mk
 
 # -----------------------------------------------------------------------------
 # Targets
