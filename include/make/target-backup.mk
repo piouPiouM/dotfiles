@@ -25,7 +25,7 @@ backup-npm:
 ## Install globaly npm packages.
 restore-npm:
 	@echo "$(PURPLE)• Restore npm global packages$(RESET)"
-	@xargs npm install $(NPM_FLAGS) < $(BACKUP_NPM_FILE)
+	@xargs npm install --force $(NPM_FLAGS) < $(BACKUP_NPM_FILE)
 .PHONY: restore-npm
 
 ## Update globaly all npm packages.

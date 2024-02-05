@@ -1,2 +1,3 @@
+github.com/Gelio/go-global-update@latest
 github.com/mattn/efm-langserver@latest
 github.com/jesseduffield/lazygit@latest

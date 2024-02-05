@@ -23,11 +23,13 @@ zsh-check: export MSG_UPDATE_SHELLS := $(MSG_UPDATE_SHELLS)
 zsh-check:
 	@[ $$SHELL = "$$(brew --prefix)/bin/zsh" ] && \
 		($(GNU_GREP) -qx $$(brew --prefix)/bin/zsh /etc/shells || echo "$$MSG_UPDATE_SHELLS")
+.PHONY: zsh-check
 
 # Activate zsh as default shell.
 zsh-activate:
 	command -v zsh | sudo tee -a /etc/shells
 	chsh -s $$(brew --prefix)/bin/zsh
+.PHONY: zsh-activate
 
 # -----------------------------------------------------------------------------
 # Target: Setup macOS device.
@@ -46,6 +48,7 @@ cleanup::
 ## Install Homebrew and your packages.
 setup-brew:
 	@$(MAKE) brew-download
+	@${INSTALL} grep go kitty rust zsh
 	@$(MAKE) install-stow
 	@$(MAKE) setup-links
 	@$(MAKE) install-packages-homebrew
@@ -71,7 +74,6 @@ postinstall-packages-homebrew:
 	@echo "$(PURPLE)• Running Homebrew post-install$(RESET)"
 	@brew completions link
 	@pip3 install --upgrade pip setuptools wheel
-	@update_rubygems
 	@gem update --system --no-document
 .PHONY: brew-postinstall
 
