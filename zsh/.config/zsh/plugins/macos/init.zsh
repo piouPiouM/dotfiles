@@ -8,7 +8,7 @@
   export HOMEBREW_VERBOSE_USING_DOTS=1
 
   # Avoids calling the `brew -prefix` command repeatedly.
-  export PPM_BREW_PREFIX=/usr/local
+  export PPM_BREW_PREFIX=/opt/homebrew
 
   # Useful for Packer's Hererocks (nvim)
   export MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion)
@@ -20,13 +20,6 @@
 
   export LDFLAGS
   export CPPFLAGS
-
-  path+=(
-    "$HOME"/.gem/ruby/2.6.0/bin
-    $PPM_BREW_PREFIX/opt/ruby/bin
-    $PPM_BREW_PREFIX/opt/curl/bin
-  )
-  typeset -gU path
 
   # Replace the built-in `ls` with the coreutils `ls` to benefit from
   # Kitty's hyperlink support.
