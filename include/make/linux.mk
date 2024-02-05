@@ -51,7 +51,7 @@ setup-gnome:
 	@sudo dnf group update core
 	@$(INSTALL) gnome-extensions-app gnome-font-viewer
 	@$(INSTALL) qt5ct qgnomeplatform-qt5
-	@$(MAKE) install-gnome-extensions
+	@$(MAKE) apps-install-gnome-extensions
 .PHONY: setup-gnome
 
 ## Setup hostname.
@@ -100,7 +100,7 @@ setup-sync:
 ## Setup terminal application.
 setup-terminal:
 	@echo "$(PURPLE)• Setting terminal$(RESET)"
-	@$(MAKE) install-fonts install-themes install-starship link-kitty
+	@$(MAKE) link-kitty install-fonts install-themes apps-install-starship
 	@$(INSTALL) kitty
 .PHONY: setup-terminal
 
@@ -126,42 +126,6 @@ upgrade-system:
 # -----------------------------------------------------------------------------
 # Target: Applications
 # -----------------------------------------------------------------------------
-
-## Install Web browsers.
-install-browser: install-browser-firefox install-browser-brave
-.PHONY: install-browser
-
-install-browser-firefox:
-	@echo "$(PURPLE)• Installing Firefox$(RESET)"
-	@$(INSTALL) firefox firefox-langpacks
-.PHONY: install-browser
-
-install-browser-brave:
-	@echo "$(PURPLE)• Installing Brave$(RESET)"
-	@$(INSTALL) dnf-plugins-core
-	@sudo dnf $(INSTALL_FLAGS) config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-	@sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-	@$(INSTALL) brave-browser
-.PHONY: install-browser-brave
-
-## Install or update GNOME Shell Extensions.
-install-gnome-extensions:
-	@echo "$(PURPLE)• Updating or installing GNOME Shell Extensions$(RESET)"
-	@pipx install gnome-extensions-cli --system-site-packages
-	@$(foreach UUID,$(shell cat setup/linux/fedora/gnome-extensions.txt),
-		gext update --install $(UUID) $(newline)
-	)
-.PHONY: install-gnome-extensions
-
-## Install or update Obsidian.
-install-obsidian: APP_ID := md.obsidian.Obsidian
-install-obsidian: setup-flatpak-flathub
-	@echo "$(PURPLE)• Installing Obsidian$(RESET)"
-	@$(FLATPAK) flathub $(APP_ID)
-	@flatpak override --user --env=OBSIDIAN_USE_WAYLAND=1 $(APP_ID)
-	@echo "$(YELLOW)  Use the following command to launch Obsidian the first time:$(RESET)"
-	@echo "$(WHITE)    flatpak run $(APP_ID)$(RESET)"
-.PHONY: install-obsidian
 
 install-packages-basic:
 	@echo "$(PURPLE)• Setting basic packages$(RESET)"
@@ -191,25 +155,6 @@ install-packages-flatpak: install-obsidian
 	@xargs $(FLATPAK) flathub < setup/linux/fedora/packages-flatpak.txt
 .PHONY: install-packages-flatpak
 
-## Install Starship shell prompt.
-install-starship:
-	@echo "$(PURPLE)• Installing Starship shell prompt$(RESET)"
-	@cargo install starship --locked
-.PHONY: install-starship
-
-## Update Starship shell prompt.
-update-starship:
-	@echo "$(PURPLE)• Updating Starship shell prompt$(RESET)"
-	@cargo update -p starship
-.PHONY: install-starship
-
-## Install Sway window manager.
-install-sway:
-	@echo "$(PURPLE)• Installing Sway$(RESET)"
-	@sudo dnf copr enable lexa/SwayNotificationCenter
-	@xargs $(INSTALL) < setup/linux/fedora/packages-sway.txt
-.PHONY: setup-sway
-
 ## Install Ulauncher dependencies.
 setup-ulauncher:
 	@echo "$(PURPLE)• Installing Ulauncher dependencies$(RESET)"
@@ -218,32 +163,3 @@ setup-ulauncher:
 	@pip install -qq --upgrade --user Pint simpleeval parsedatetime pytz babel
 	@pip install -qq --upgrade --user faker
 .PHONY: setup-ulauncher
-
-## Install Smartgit.
-install-smartgit: SMARTGIT_DIR := $(HOME)/.var/app/com.syntevo.SmartGit
-install-smartgit: FLATHUB_MANIFEST := https://raw.githubusercontent.com/flathub/com.syntevo.SmartGit/master/com.syntevo.SmartGit.yaml
-install-smartgit: DOWNLOAD_PATTERN := (?<=\burl:\s).*smartgit-linux-[\d\.-_]+.tar.gz
-install-smartgit: DOWNLOAD_URL := $(shell curl -fsSL $(FLATHUB_MANIFEST) | $(GNU_GREP) --color=never -Po "$(DOWNLOAD_PATTERN)")
-install-smartgit: SMARTGIT_VERSION := $(shell echo "$(DOWNLOAD_URL)" | $(GNU_GREP) -Po "[\d\.-_]+(?=.tar)" | tr "_" ".")
-install-smartgit: TMP := $(shell mktemp -d)
-install-smartgit:
-	@echo "$(PURPLE)• Installing Smartgit $(SMARTGIT_VERSION)$(RESET)"
-	@trash -f "$(SMARTGIT_DIR)/smartgit"
-	@mkdir -p "$(SMARTGIT_DIR)"
-	@curl -fsSL --output "$(TMP)/smartgit.tar.gz" "$(DOWNLOAD_URL)"
-	@tar xzf "$(TMP)/smartgit.tar.gz" --directory="$(HOME)/.var/app/com.syntevo.SmartGit/"
-	@sh "$(SMARTGIT_DIR)/smartgit/bin/add-menuitem.sh"
-	@rm -rf $(TMP)
-.PHONY: install-smartgit
-
-## Install Go applications.
-install-go-apps:
-	@echo "$(PURPLE)• Installing Go applications$(RESET)"
-	@xargs go install < setup/linux/fedora/packages-go.txt
-.PHONY: install-go-apps
-
-## Update Go applications.
-update-go-apps:
-	@echo "$(PURPLE)• Updating Go applications$(RESET)"
-	@(GNU_GREP) -Po '.*(?=@.+)' setup/linux/fedora/packages-go.txt | xargs go get -u
-.PHONY: update-go-apps

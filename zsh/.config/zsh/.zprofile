@@ -21,6 +21,7 @@ path=(
   "$HOME"/.local/bin
   "$HOME"/bin
   "$GOBIN"
+  "$N_PREFIX"/bin
   "$PNPM_HOME"
 )
 

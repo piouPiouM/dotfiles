@@ -61,7 +61,6 @@ versions:
 	@echo "$(PURPLE)node$(RESET) $$(node --version)"
 	@echo "$(PURPLE)npm$(RESET) $$(npm --version)"
 	@ruby --version
-	@/usr/local/opt/ruby/bin/ruby --version
 	@echo "$(PURPLE)gem$(RESET) $$(gem --version)"
 .PHONY: versions
 
@@ -101,6 +100,8 @@ $(ENSURE_DIRS):
 # -----------------------------------------------------------------------------
 
 -include include/make/$(CURRENT_OS).mk
+include include/make/target-apps.mk
+-include include/make/target-apps.$(CURRENT_OS).mk
 include include/make/target-backup.mk
 -include include/make/target-backup.$(CURRENT_OS).mk
 include include/make/target-links.mk
@@ -108,39 +109,11 @@ include include/make/target-downloads.mk
 -include include/make/target-downloads.$(CURRENT_OS).mk
 include include/make/target-fonts.mk
 -include include/make/target-fonts.$(CURRENT_OS).mk
-include include/make/target-fzf.mk
 include include/make/target-neovim.mk
 -include include/make/target-neovim.$(CURRENT_OS).mk
 include include/make/target-themes.mk
 -include include/make/target-themes.$(CURRENT_OS).mk
 -include include/make/bedrock.mk
-
-# -----------------------------------------------------------------------------
-# Target: applications
-# -----------------------------------------------------------------------------
-
-install-packages-lua:
-	@$(call cmd_exists,luarocks) && luarocks install --local --server=https://luarocks.org/dev luaformatter
-.PHONY: install-packages-lua
-
-## Setup npm environment.
-setup-npm: NPM_PACKAGES := $(XDG_DATA_HOME)/npm-packages
-setup-npm: | $(ENSURE_DIRS)
-	@echo "$(PURPLE)• Setting npm global packages into home directory$(RESET)"
-	@export NPM_CONFIG_USERCONFIG=$(XDG_CONFIG_HOME)/npm/npmrc
-	@npm config set userconfig $$NPM_CONFIG_USERCONFIG
-	@npm config set cache $(XDG_CACHE_HOME)/npm
-	@npm config set prefix $(NPM_PACKAGES)
-	@npm config set fund false
-	@npm config set progress false
-	@$(call register_manpath,$(NPM_PACKAGES)/share/man)
-	@$(MAKE) restore-npm
-.PHONY: setup-npm
-
-setup-pnpm:
-	@pnpm add -g @pnpm/tabtab
-	@pnpm install-completion zsh
-.PHONY: setup-pnpm
 
 # -----------------------------------------------------------------------------
 # Target: usage and help
