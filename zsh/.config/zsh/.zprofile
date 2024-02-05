@@ -13,6 +13,8 @@ source "$ZDOTDIR"/include/detect-os.zsh
 _GEM_HOME="$(gem environment user_gemhome 2>/dev/null)"
 _GEM_BIN=${_GEM_HOME:+"${_GEM_HOME}"/bin}
 
+local _current_path="${=path}"
+
 path=(
   "$XDG_DATA_HOME/bin/$CURRENT_OS"
   "$XDG_DATA_HOME"/bin
@@ -20,11 +22,19 @@ path=(
   "$HOME"/bin
   "$GOBIN"
   "$PNPM_HOME"
+)
+
+if [[ -s "$ZDOTDIR/plugins/$CURRENT_OS/path.zsh" ]] then
+  typeset -gU path
+  source "$ZDOTDIR/plugins/$CURRENT_OS/path.zsh"
+fi
+
+path+=(
   "$NPM_PACKAGES"/bin
   "$HOME"/.luarocks/bin
   "$CARGO_HOME"/bin
 	"$_GEM_BIN"
-	"${=path}"
+	"${=_current_path}"
 )
 
 fpath=(

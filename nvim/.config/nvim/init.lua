@@ -3,6 +3,7 @@ local g = vim.g
 local o = vim.o
 local cmd = vim.cmd
 local fn = vim.fn
+local bin_path = fn.has("macunix") == 1 and os.getenv("PPM_BREW_PREFIX") .. "/bin" or "/usr/bin"
 
 o.encoding = "utf-8"
 o.fileencoding = "utf-8"
@@ -21,21 +22,15 @@ g.vimsyn_embed = "l"
 
 -- Configure providers to make startup faster {{{
 -- See https://neovim.io/doc/user/provider.html
-g.node_host_prog = "/usr/local/bin/neovim-node-host"
+g.node_host_prog = bin_path .. "/neovim-node-host"
 
 -- Disable Perl provider support
 g.loaded_perl_provider = 0
 
 -- Disable Python 2 provider support
 g.loaded_python_provider = 0
-
-if fn.has("macunix") == 1 then
-  g.python_host_prog = "/usr/local/bin/python2"
-  g.python3_host_prog = "/usr/local/bin/python3"
-else
-  g.python_host_prog = "/usr/bin/python2"
-  g.python3_host_prog = "/usr/bin/python"
-end
+g.python_host_prog = bin_path .. "/python2"
+g.python3_host_prog = bin_path .. "/python3"
 
 -- }}}
 
