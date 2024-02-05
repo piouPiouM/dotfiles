@@ -20,12 +20,9 @@ export XDG_CONFIG_HOME := $(HOME)/.config
 export XDG_DATA_HOME   := $(HOME)/.local/share
 export XDG_STATE_HOME  := $(HOME)/.local/state
 
-# -----------------------------------------------------------------------------
-# Utilities
-# -----------------------------------------------------------------------------
-
 include include/make/variables.mk
 -include include/make/variables.$(CURRENT_OS).mk
+include include/make/utils.mk
 
 # Use the FORCE rule as dependency to force the execution of the target rule when
 # the false prerequisites contain `%` which is interpreted as a literal.
@@ -33,35 +30,6 @@ include include/make/variables.mk
 # https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html
 FORCE:
 .PHONY: FORCE
-
-.PHONY: zsh-activate zsh-check
-
-RED   := $(shell tput -Txterm setaf 1)
-GREEN := $(shell tput -Txterm setaf 2)
-# Need interaction
-YELLOW := $(shell tput -Txterm setaf 3)
-# Information
-PURPLE := $(shell tput -Txterm setaf 5)
-WHITE  := $(shell tput -Txterm setaf 7)
-RESET  := $(shell tput -Txterm sgr0)
-
-SUCCESS := $(GREEN) $(RESET)
-FAILURE := $(RED)✗ $(RESET)
-
-# Used to isolate shell commands from a foreach.
-# https://www.extrema.is/blog/2021/12/17/makefile-foreach-commands
-define newline
-
-
-endef
-
-define cmd_exists
-	type -a $(1) > /dev/null 2>&1
-endef
-
-define register_manpath
-	$(GNU_GREP) -qs $(1) $$HOME/.manpath || echo "MANDATORY_MANPATH $(1)" >> $$HOME/.manpath
-endef
 
 # -----------------------------------------------------------------------------
 # Target: main
