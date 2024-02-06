@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # @file ppm::init
+# @package ppm
 # @set PPM_ROOT string Directory of my custom scripts.
 
 set -euo pipefail
@@ -10,6 +11,7 @@ set -euo pipefail
 PPM_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
 export PPM_ROOT
 
+source "${PPM_ROOT}/lib/pipeline.sh"
 source "${PPM_ROOT}/lib/failed.sh"
 source "${PPM_ROOT}/lib/is_cmd.sh"
 source "${PPM_ROOT}/lib/check_command.sh"

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # @name ppm::check_command
 # @brief Check for the existence of a command, otherwise exit with an error message.
+# @package ppm
 #
 # @arg $1 string Name of the command to test.
 #

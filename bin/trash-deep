@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# @name trash-deep
+
+set -euo pipefail
+
+LIB_PATH="$(dirname "$(greadlink -f "${BASH_SOURCE[0]}")")/lib"
+
+# shellcheck source=./lib/init.sh
+source "${LIB_PATH}/init.sh"
+
+ppm::check_command 'trash-put'
+
+# @internal
+show_help() {
+	cat << EOF
+Usage: ${0##*/} [-hnv] [path="."] target ...
+  Put to system trash the given target(s) name recursively founded in the given path.
+
+Options:
+  -h  Print this message and exit.
+  -n  Don't actually delete matching targets; just print them.
+  -v  Verbose mode.
+EOF
+}
+
+declare -i verbose=0
+declare -i dryrun=0
+
+while getopts hnv opt; do
+	case $opt in
+		h)
+			show_help
+			exit 0
+			;;
+		n)
+			dryrun=1
+			;;
+		v)
+			verbose=1
+			;;
+		*)
+			ppm::as_error show_help
+			exit 1
+			;;
+	esac
+done
+shift $((OPTIND - 1))
+
+(($# == 0)) && show_help >&2 && exit 1
+
+declare path
+(($# > 1)) && path="$1" && shift || path="."
+
+declare -a cmd=(command find -x "$path" -false)
+for arg; do
+	cmd+=(-or -name "${arg}")
+done
+cmd+=(-prune)
+
+((dryrun == 0))   && args+=(-exec trash-put {} +)
+((verbose == 0))   && cmd=(ppm::mute "${cmd[@]}")
+
+"${cmd[@]}"
