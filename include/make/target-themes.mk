@@ -43,9 +43,8 @@ $(THEME_CATPPUCCIN_LAZYGIT): FORCE
 	@curl $(CURL_FLAGS) --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/lazygit/main/themes/$(subst catppuccin-,,$(@F))" -o $(@F) && $(call success,$(@F) for Lazygit) || $(call failure,$(@F) for Lazygit)
 	@$(GNU_SED) -i 's/^/  /;1 i gui:' "$@"
 
-$(THEME_ROSE_PINE_FZF):
-	@echo "$(PURPLE)• Download $(@F) for fzf$(RESET)"
-	@curl --silent --output-dir $(@D) --remote-name "https://raw.githubusercontent.com/rose-pine/fzf/main/dist/$(@F)"
+$(THEME_ROSE_PINE_FZF): FORCE
+	@curl $(CURL_FLAGS) --output-dir $(@D) --remote-name "https://raw.githubusercontent.com/rose-pine/fzf/main/dist/$(@F)" && $(call success,$(@F) for fzf) || $(call failure,$(@F) for fzf)
 	@$(GNU_SED) -i 's/FZF_DEFAULT_OPTS/FZF_THEME/' $(@)
 
 ## Download Catppuccin theme.
@@ -88,7 +87,9 @@ theme-nightfox:
 .PHONY: theme-nightfox
 
 ## Download Rosé Pine theme.
-theme-rose-pine:: | $(THEME_ROSE_PINE_FZF)
+theme-rose-pine::
+	@echo "$(PURPLE)• Install Rose Pine themes$(RESET)"
+	@$(MAKE) $(THEME_ROSE_PINE_FZF)
 	@$(MAKE) theme-postinstall
 .PHONY: theme-rose-pine
 
