@@ -33,17 +33,14 @@ install-themes:: \
 	theme-rose-pine
 .PHONY: install-themes
 
-$(THEME_CATPPUCCIN_BAT):
-	@echo "$(PURPLE)• Download $(@F) for bat$(RESET)"
-	@curl --silent --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/bat/main/$(subst catppuccin,Catppuccin,$(@F))" -o $(@F)
+$(THEME_CATPPUCCIN_BAT): FORCE
+	@curl $(CURL_FLAGS) --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/bat/main/$(subst catppuccin,Catppuccin,$(@F))" -o $(@F) && $(call success,$(@F) for bat) || $(call failure,$(@F) for bat)
 
-$(THEME_CATPPUCCIN_BTOP):
-	@echo "$(PURPLE)• Download $(@F) for btop$(RESET)"
-	@curl --silent --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/btop/main/themes/$(subst -,_,$(@F))" -o $(@F)
+$(THEME_CATPPUCCIN_BTOP): FORCE
+	@curl $(CURL_FLAGS) --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/btop/main/themes/$(subst -,_,$(@F))" -o $(@F) && $(call success,$(@F) for btop) || $(call failure,$(@F) for btop)
 
-$(THEME_CATPPUCCIN_LAZYGIT):
-	@echo "$(PURPLE)• Download $(@F) for Lazygit$(RESET)"
-	@curl --silent --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/lazygit/main/themes/$(subst catppuccin-,,$(@F))" -o $(@F)
+$(THEME_CATPPUCCIN_LAZYGIT): FORCE
+	@curl $(CURL_FLAGS) --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/lazygit/main/themes/$(subst catppuccin-,,$(@F))" -o $(@F) && $(call success,$(@F) for Lazygit) || $(call failure,$(@F) for Lazygit)
 	@$(GNU_SED) -i 's/^/  /;1 i gui:' "$@"
 
 $(THEME_ROSE_PINE_FZF):
@@ -52,7 +49,11 @@ $(THEME_ROSE_PINE_FZF):
 	@$(GNU_SED) -i 's/FZF_DEFAULT_OPTS/FZF_THEME/' $(@)
 
 ## Download Catppuccin theme.
-theme-catppuccin:: | $(THEME_CATPPUCCIN_BAT) $(THEME_CATPPUCCIN_BTOP) $(THEME_CATPPUCCIN_LAZYGIT)
+theme-catppuccin::
+	@echo "$(PURPLE)• Install Catppuccin themes$(RESET)"
+	@$(MAKE) $(THEME_CATPPUCCIN_BAT)
+	@$(MAKE) $(THEME_CATPPUCCIN_BTOP)
+	@$(MAKE) $(THEME_CATPPUCCIN_LAZYGIT)
 	@$(MAKE) theme-postinstall
 .PHONY: theme-catppuccin
 
