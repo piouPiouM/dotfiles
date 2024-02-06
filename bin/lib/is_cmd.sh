@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # @name ppm::is_cmd
 # @brief Test for existence of a command.
+# @package ppm
 #
 # @arg $1 string Name of the command to test.
 #
