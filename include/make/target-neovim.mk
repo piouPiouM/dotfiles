@@ -5,13 +5,13 @@
 NVIM := nvim "+set nomore"
 
 ## Setup Neovim environment.
-setup-neovim: neovim-treesitter install-neovim neovim-dependencies neovim-packer
+setup-neovim: neovim-treesitter install-neovim install-neovim-dependencies
 	@$(NVIM) +checkhealth
 .PHONY: setup-neovim
 
 neovim-treesitter:
 	@echo "$(PURPLE)• Uninstalling all Treesitter parsers$(RESET)"
-	@$(NVIM) "+TSUninstall all" +qa
+	@$(NVIM) "+TSUninstall all" +qa || exit 0
 .PHONY: neovim-treesitter
 
 ## Install or update Neovim nightly.
