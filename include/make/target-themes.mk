@@ -28,7 +28,11 @@ THEME_ROSE_PINE_FZF := $(FZF_PATH)/rose-pine.sh \
 											 $(FZF_PATH)/rose-pine-moon.sh
 
 ## Install themes for various tools.
-install-themes:: theme-catppuccin theme-nightfox theme-rose-pine
+install-themes:: \
+	theme-catppuccin \
+	theme-nightfox \
+	theme-github \
+	theme-rose-pine
 .PHONY: install-themes
 
 $(THEME_CATPPUCCIN_BAT):
@@ -59,17 +63,17 @@ theme-github: TMP := $(shell mktemp -d)
 theme-github::
 	@echo "$(PURPLE)• Install Github themes$(RESET)"
 	@git clone --quiet --depth=1 https://github.com/projekt0n/github-theme-contrib.git $(TMP)
-	@cp -f $(TMP)/themes/fzf/* $(FZF_PATH)/ && echo "  $(SUCCESS) fzf$(RESET)"
-	@cp -f $(TMP)/themes/kitty/*.conf $(KITTY_PATH)/ && echo "  $(SUCCESS) Kitty$(RESET)"
+	@cp -f $(TMP)/themes/kitty/*.conf $(KITTY_PATH)/ && $(call success,Kitty)
+	@cp -f $(TMP)/themes/fzf/* $(FZF_PATH)/ && $(call success,fzf)
 	@rm -rf $(TMP)
 theme-github::
 	@$(MAKE) --silent $(addsuffix .sh,$(wildcard $(FZF_PATH)/github_*))
 .PHONY: theme-github
 
 $(FZF_PATH)/github_%.sh: $(FZF_PATH)/github_%
-	@echo "$(PURPLE)• Format fzf's theme $(subst _,-,$(@F))$(RESET)"
 	@$(GNU_SED) -i -E "s/.*'(.*)'/export FZF_THEME=\"\1\"/;s@ --@\n  --@g" $<
 	@mv $< $(subst _,-,$@)
+	@$(call success,Format fzf's theme $(subst _,-,$(@F)))
 
 ## Download Nightfox theme.
 theme-nightfox:
@@ -88,5 +92,6 @@ theme-rose-pine:: | $(THEME_ROSE_PINE_FZF)
 .PHONY: theme-rose-pine
 
 theme-postinstall:
+	@echo "$(PURPLE)• Build bat themes$(RESET)"
 	@$(call cmd_exists,bat) && bat cache --build > /dev/null
 .PHONY: theme-postinstall
