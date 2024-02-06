@@ -4,7 +4,7 @@
 [color]
   ui = auto
 [core]
-	excludesfile = ~/.config/git/ignore
+  excludesfile = ~/.config/git/ignore
   editor = nvim
   ignoreCase = false
   whitespace = -trailing-space
@@ -19,24 +19,22 @@
 
   ; pager = delta --highlight-removed --theme='Nord' --minus-color="#3f0001" --minus-emph-color="#901011" --plus-color="#0c2c10" --plus-emph-color="#006000"
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [alias]
-  ci = commit
   st = status
   s = status -s
 
-  last = rev-parse --short HEAD
-  sha = rev-parse HEAD
-  origin = config --get remote.origin.url
-  current = rev-parse --abbrev-ref HEAD
-  default-branch = symbolic-ref refs/remotes/origin/HEAD --short
+  get-branch-name = rev-parse --abbrev-ref HEAD
+  get-branch-default = symbolic-ref refs/remotes/origin/HEAD --short
+  get-branch-recents = !git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads/ | head -n 20
+  get-commit-short = rev-parse --short HEAD
+  get-commit-long = rev-parse HEAD
+  get-origin = config --get remote.origin.url
 
   oneline = log --pretty=oneline --abbrev-commit --graph --decorate
   lg = log --graph --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'
   lc = !git lg @{u}..
   l = !git oneline -n 20
-
-  recent = !git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads/ | head -n 20
 
   fa = !FILES=`git status -s | awk '{ print $2 }' | fzf -x -m` && git add --all ${FILES}
   fs = !HASH=`git log --pretty=oneline | head -n 100 | fzf` && git show `echo ${HASH} | awk '{ print $1 }'`
@@ -51,7 +49,7 @@
   diffstat = diff --stat
 
   # Show the diff between the latest commit and the current state
-  d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+  d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
 
   # `git di $number` shows the diff between the state `$number` revisions ago and the current state
   di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
@@ -65,13 +63,9 @@
   # Commit all changes
   ca = !git add -A && git commit -av
 
-  svnpull = svn rebase
-  svnpush = svn dcommit
   addm = !git-ls-files -m -z | xargs -0 git-add && git status
   addu = !git-ls-files -o --exclude-standard -z | xargs -0 git-add && git status
   rmm = !git ls-files -d -z | xargs -0 git-rm && git status
-  mate = !git-ls-files -m -z | xargs -0 mate
-  mateall = !git-ls-files -m -o --exclude-standard -z | xargs -0 mate
   undo = git reset --soft HEAD^
 
   wt-reset = !git fetch && git reset --hard origin/master
