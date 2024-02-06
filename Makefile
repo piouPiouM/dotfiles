@@ -121,6 +121,7 @@ include include/make/target-themes.mk
 # -----------------------------------------------------------------------------
 
 ## Print usage and this help message.
+help: SEPARATOR := |
 help:
 	@echo ''
 	@echo "$(GREEN)Dotfiles management on $(CURRENT_OS)$(RESET)."
@@ -134,10 +135,10 @@ help:
 		if (helpMessage) { \
 			helpCommand = substr($$1, 0, index($$1, ":")-1); \
 			helpMessage = substr(lastLine, RSTART + 3, RLENGTH); \
-			printf "$(PURPLE)%s$(RESET) %s\n", helpCommand, helpMessage; \
+			printf "$(PURPLE)%s$(RESET)$(SEPARATOR)%s\n", helpCommand, helpMessage; \
 		} \
 	} \
-	{ lastLine = $$0 }' $(MAKEFILE_LIST) | sort | column -t -l 2 | $(GNU_SED) "s/^/  /"
+	{ lastLine = $$0 }' $(MAKEFILE_LIST) | sort | column -t -s "$(SEPARATOR)" | $(GNU_SED) "s/^/  /"
 	@echo ''
 	@echo 'Symlink targets:'
 	@printf "  $(PURPLE)[un]%s$(RESET)\n" $(sort $(LINK_TARGETS))
