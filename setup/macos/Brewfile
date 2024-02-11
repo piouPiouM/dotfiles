@@ -1,24 +1,14 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
-tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
-tap "homebrew/core"
 # Lightweight and flexible command-line JSON processor
 # Collaborative design tool with support for Sketch files
 cask "abstract"
 # Application launcher and productivity software
 cask "alfred"
-# Automatic tiling window manager similar to xmonad
-cask "amethyst"
 # Web browser focusing on privacy
 cask "brave-browser"
-# Web browser focusing on privacy
-cask "brave-browser-beta"
-# Server and cloud storage browser
-cask "cyberduck"
-# API documentation browser and code snippet manager
-cask "dash"
 # Trains AIs to understand and translate texts
 cask "deepl"
 # Visually compare and merge files
@@ -36,14 +26,8 @@ cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 # Free and open-source image editor
 cask "gimp"
-# Web browser
-cask "google-chrome"
 # Tool to optimize images to a smaller size
 cask "imageoptim"
-# Terminal emulator as alternative to Apple's Terminal app
-cask "iterm2"
-# Keyboard customizer
-cask "karabiner-elements"
 # Password manager app
 cask "keepassxc"
 # GPU-based terminal emulator
@@ -52,12 +36,8 @@ cask "kitty"
 cask "macdown"
 # Web browser
 cask "microsoft-edge"
-# Minimal installer for conda
-cask "miniconda"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
-# All-in-one bookmark manager
-cask "raindropio"
 # Team communication and collaboration software
 cask "slack"
 # Graphical client for Git version control
@@ -66,12 +46,6 @@ cask "sourcetree"
 cask "syncthing"
 # Open-source code editor
 cask "visual-studio-code"
-# GPU-accelerated cross-platform terminal emulator and multiplexer
-cask "wezterm"
-# Application for generating TOTP and HOTP codes
-cask "yubico-authenticator"
-# Application for configuring any YubiKey
-cask "yubico-yubikey-manager"
 vscode "bierner.color-info"
 vscode "Catppuccin.catppuccin-vsc"
 vscode "guillaumedoutriaux.name-that-color"
@@ -88,48 +62,34 @@ vscode "styled-components.vscode-styled-components"
 vscode "sumneko.lua"
 # Text processor and publishing toolchain for AsciiDoc
 brew "asciidoctor"
-# Official Amazon AWS command-line interface
-brew "awscli"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
 # Programmable completion for Bash 3.2
 brew "bash-completion"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# CLI utility for caching the output of subprocesses
-brew "bkt"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
 # Versatile and fast Unicode/ASCII/ANSI graphics renderer
 brew "chafa"
-# Command-line Interface File Manager
-brew "clifm"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 # Diff that understands syntax
 brew "difftastic"
 # Maintain consistent coding style between multiple editors
 brew "editorconfig"
-# General purpose Language Server
-brew "efm-langserver"
 # LLVM bytecode to JavaScript compiler
 brew "emscripten"
 # Perl lib for reading and writing EXIF metadata
 brew "exiftool"
 # Fast partial replacement for the codemod tool
 brew "fastmod"
-# Facebook's branch of Apache Thrift, including a new C++ server
-brew "fbthrift"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # macOS CLI for managing custom icons for files and folders
 brew "fileicon"
 # Terminal JSON viewer
 brew "fx"
-# Command-line fuzzy finder written in Go
-brew "fzf"
-# Fast, simple fuzzy text selector with an advanced scoring algorithm
-brew "fzy"
 # Distributed revision control system
 brew "git"
 # Syntax-highlighting pager for git and diff output
@@ -145,22 +105,12 @@ brew "grep"
 # Convert source code to formatted text with syntax highlighting
 brew "highlight"
 brew "jq"
-# Simple terminal UI for git commands
-brew "lazygit"
 # Pager program similar to more
 brew "less"
-# Terminal file manager
-brew "lf"
 # SIXEL encoder/decoder implementation
 brew "libsixel"
 # Curses-based tool for viewing and analyzing log files
 brew "lnav"
-# Language Server for the Lua language
-brew "lua-language-server"
-# OpenResty's Branch of LuaJIT 2
-brew "luajit-openresty"
-# Package manager for the Lua programming language
-brew "luarocks"
 # Show markdown documents on text terminals
 brew "mdcat"
 # Unified display of technical and tag data for audio/video
@@ -169,16 +119,10 @@ brew "media-info"
 brew "moar"
 # Node version management
 brew "n"
-# Parser generator tool and incremental parsing library
-brew "tree-sitter", args: ["HEAD"]
-# Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
 # HTTP/2 C Library
 brew "nghttp2"
 # Small build system for use with gyp or CMake
 brew "ninja"
-# Tiny, lightning fast, feature-packed file manager
-brew "nnn"
 # Paragraph reflow for email
 brew "par"
 # Interpreted, interactive, object-oriented programming language
@@ -189,18 +133,10 @@ brew "ranger"
 brew "resvg"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# Safe, concurrent, practical language
-brew "rust"
-# Login and retrieve AWS temporary credentials using a SAML IDP
-brew "saml2aws"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
 brew "shfmt"
-# Cross-shell prompt for astronauts
-brew "starship"
-# Organize software neatly under a single directory tree (e.g. /usr/local)
-brew "stow"
 # Nodejs-based tool for optimizing SVG vector graphics files
 brew "svgo"
 # Very fast implementation of tldr in Rust
@@ -227,11 +163,7 @@ brew "watchman"
 brew "wget"
 # Check your $HOME for unwanted files and directories
 brew "xdg-ninja"
-# Hackable, minimal, fast TUI file explorer
-brew "xplr"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
-# Next-generation plugin manager for zsh
-brew "zplug"
 # UNIX shell (command interpreter)
 brew "zsh"
