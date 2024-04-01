@@ -111,59 +111,53 @@ $ make help
 <details>
   <summary>Output of <code>make help</code></summary>
   <pre>Targets:
+  apps-install-difftastic          Install Difftastic, a structural diff tool.
+  apps-install-fzf                 Install fzf (Fuzzy finder) from sources.
+  apps-install-go                  Install Go applications.
+  apps-install-lua                 Install Lua packages.
+  apps-install-rust                Install Rust applications.
+  apps-install-starship            Install Starship shell prompt.
+  apps-uninstall-fzf               Uninstall fzf (Fuzzy finder).
+  apps-update-fzf                  Update fzf (Fuzzy finder).
+  apps-update-go                   Update Go applications.
+  apps-update-rust                 Update Rust applications.
   backup                           Backup all settings.
-  backup-dnf-copr                  Backup list of enabled Copr repo (see setup-dnf-copr).
-  backup-flatpak                   Backup list of installed Flatpak applications (see install-packages-flatpak).
-  backup-gnome-extensions          Backup list of installed GNOME Shell Extensions (see install-gnome-extensions).
-  backup-gnome-settings            Backup GNOME user settings.
+  backup-brew                      Backup Homebrew packages.
   backup-npm                       Backup list of global npm packages.
   cleanup                          Clean all cache systems.
   help                             Print usage and this help message.
+  icon-kitty-dark                  Apply a fancy dark icon to Kitty.
+  icon-kitty-light                 Apply a fancy light icon to Kitty.
   install                          Install all the prerequisites.
-  install-browser                  Install Web browsers.
   install-fonts                    Download and install fonts.
   install-fonts-codicon            Download and install Codicon font.
   install-fonts-ibm-plex           Download and install IBM Plex.
   install-fonts-nerd               Download and install Nerd Fonts.
   install-fonts-nerd-symbols-only  Download and install Nerd Fonts Symbols only.
-  install-fzf                      Install fzf (Fuzzy finder) from sources.
-  install-gnome-extensions         Install or update GNOME Shell Extensions.
-  install-neovim                   Install or update Neovim.
+  install-neovim                   Install or update Neovim nightly.
   install-neovim-dependencies      Install or update Neovim dependencies.
-  install-neovim-plugins           Install or reinstall Neovim plugins.
-  install-obsidian                 Install or update Obsidian.
-  install-packages-cli             Install CLI packages.
-  install-packages-flatpak         Install Flatpak applications.
-  install-packages-gui             Install GUI packages.
-  install-starship                 Install Starship shell prompt.
-  install-sway                     Install Sway window manager.
+  install-packages-homebrew        Install Homebrew packages.
   install-themes                   Install themes for various tools.
   link-bin                         Link personnal binaries.
   link-home                        Generates only symlinks for the $HOME directory.
-  restore-gnome-settings           Restore GNOME user settings.
   restore-npm                      Install globaly npm packages.
-  setup-battery-management         Setup battery management.
   setup                            Perform setup of the device.
+  setup-brew                       Install Homebrew and your packages.
   setup-dirs                       Creates the dotfiles tree structure.
-  setup-dnf                        Setup DNF configuration and repositories.
-  setup-hostname                   Setup hostname.
   setup-links                      Generates all the symlinks.
   setup-neovim                     Setup Neovim environment.
   setup-npm                        Setup npm environment.
-  setup-packages                   Install all packages.
-  setup-sync                       Setup synchronization tools.
-  setup-terminal                   Setup terminal application.
   theme-catppuccin                 Download Catppuccin theme.
+  theme-github                     Download Github Contrib themes.
   theme-nightfox                   Download Nightfox theme.
   theme-rose-pine                  Download Rosé Pine theme.
-  uninstall-fzf                    Uninstall fzf (Fuzzy finder).
   unlink-all                       Deletes all the symlinks.
   unlink-bin                       Delete symlink of custom binaries.
   unlink-home                      Deletes symlinks in the Home directory.
+  update-packages-homebrew         Update Homebrew packages.
   update-packages-npm              Update globaly all npm packages.
-  update-starship                  Update Starship shell prompt.
   versions                         Print the version number of main programs.
-  
+
 Symlink targets:
   [un]link-bash
   [un]link-bat
@@ -173,13 +167,12 @@ Symlink targets:
   [un]link-fd
   [un]link-fzf
   [un]link-git
+  [un]link-go
   [un]link-kitty
   [un]link-lazygit
   [un]link-nvim
   [un]link-ranger
   [un]link-ripgrep
-  [un]link-rofi
-  [un]link-sway
   [un]link-tmux
   [un]link-zsh</pre>
 </details>
@@ -209,7 +202,8 @@ My Neovim configuration is the one that evolves most frequently. The plugins I u
 $ make setup-neovim
 ```
 
-The task will install Neovim Nightly (which follows the HEAD of the git master branch) with the needed dependencies and providers. 
+The task will install Neovim Nightly (which follows the HEAD of the git master branch) with the needed dependencies and providers.
+
 ### Fonts
 
 ```sh
@@ -220,7 +214,7 @@ Launch installation of used font-faces, mainly:
 
 - [JetBrains Mono](https://www.jetbrains.com/lp/mono/) as monospace font.
 - [IBM Plex](https://www.ibm.com/plex/) for Obsidian.
-- [Nerds Font](https://www.nerdfonts.com/) to enhance my TUI.
+- [Nerd Fonts](https://www.nerdfonts.com/) to enhance my TUI.
 
 > **Note**  
 > Symbols of Nerd Fonts are installed by the [`install-fonts-nerd-symbols-only`](https://github.com/piouPiouM/dotfiles/blob/ddc85554b0d2e5c9e6a386800612130c2d246e4d/include/make/target-fonts.mk#L43-L54) target, which also updates the list of symbols in [Kitty's configuration](./kitty/.config/kitty/nerd-fonts.conf) and [fzf-lua dedicated picker](./nvim/config/nvim/lua/ppm/plugin/fzf-lua/providers/nerd-fonts.lua) in order to always be up to date 🪄
@@ -279,6 +273,7 @@ $ make -B theme-rose-pine # Force
 • Download rose-pine-dawn.rasi theme for Rofi
 • Download rose-pine-moon.rasi theme for Rofi
 ```
+
 ### Error `zsh compinit: insecure directories, run compaudit for list`
 
 This error may occur when opening a new shell. The following command will certainly solve the problem:
