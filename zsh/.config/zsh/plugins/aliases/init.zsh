@@ -24,4 +24,5 @@
   alias nerdfonts='fc-list : family | rg -i nerd'
   alias saml2awslogin='saml2aws login --force --cache-saml --skip-prompt'
   alias zim="zimfw"
+  alias ptw='pnpm test -- --watch -u'
 }
