@@ -48,7 +48,8 @@ cleanup::
 ## Install Homebrew and your packages.
 setup-brew:
 	@$(MAKE) brew-download
-	@${INSTALL} grep go kitty rust zsh
+	@$(INSTALL) $(COMPAT_PACKAGES)
+	@$(INSTALL) $(REQUIRED_PACKAGES)
 	@$(MAKE) install-stow
 	@$(MAKE) setup-links
 	@$(MAKE) install-packages-homebrew
