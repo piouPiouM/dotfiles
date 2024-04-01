@@ -9,3 +9,6 @@ GNU_SED := gsed
 GNU_GREP := ggrep
 
 INSTALL := brew install
+
+COMPAT_PACKAGES := coreutils curl gnu-sed grep
+REQUIRED_PACKAGES := bash zsh kitty pcre2 wget go rust stow
