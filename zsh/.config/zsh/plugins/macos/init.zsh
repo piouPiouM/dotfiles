@@ -21,9 +21,7 @@
   export LDFLAGS
   export CPPFLAGS
 
-  # Replace the built-in `ls` with the coreutils `ls` to benefit from
-  # Kitty's hyperlink support.
-  alias -g ls='ls --hyperlink=auto --color=auto --classify=auto'
+  alias -g ls='ls --color=auto'
 
   alias flush-dns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
   alias flush-downloads="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
