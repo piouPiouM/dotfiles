@@ -84,6 +84,7 @@ ENSURE_DIRS = $(XDG_CACHE_HOME)/gem \
 							$(XDG_STATE_HOME)/nvim/view \
 							$(XDG_DATA_HOME)/tmux \
 							$(XDG_DATA_HOME)/zoxide \
+							$(HOME)/.local/bin \
 							$(HOME)/go/bin
 
 ## Creates the dotfiles tree structure.
@@ -93,7 +94,7 @@ setup-dirs:
 .PHONY: setup-dirs
 
 $(ENSURE_DIRS):
-	mkdir -p $@
+	@mkdir -p $@
 
 # -----------------------------------------------------------------------------
 # Targets

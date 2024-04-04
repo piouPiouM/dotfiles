@@ -30,6 +30,11 @@ if [[ -s "$ZDOTDIR/plugins/$CURRENT_OS/path.zsh" ]] then
   source "$ZDOTDIR/plugins/$CURRENT_OS/path.zsh"
 fi
 
+if [[ -s "$HOME"/.local/bin/venv/bin/activate ]] then
+  export VIRTUAL_ENV_DISABLE_PROMPT=1
+  source "$HOME"/.local/bin/venv/bin/activate
+fi
+
 path+=(
   "$NPM_PACKAGES"/bin
   "$HOME"/.luarocks/bin

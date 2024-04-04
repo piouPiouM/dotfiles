@@ -9,6 +9,12 @@ export GOBIN := $(GOPATH)/bin
 apps-update-all:: apps-update-fzf apps-update-go apps-update-rust
 .PHONY: apps-update-all
 
+## Setup Python3 environment.
+apps-setup-python: | $(ENSURE_DIRS)
+	@echo "$(PURPLE)• Setting Python virtual environment$(RESET)"
+	@python3 -m venv $(HOME)/.local/bin/venv
+.PHONY: apps-setup-python
+
 ## Install Go applications.
 apps-install-go:
 	@echo "$(PURPLE)• Installing Go applications$(RESET)"
