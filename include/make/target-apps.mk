@@ -69,8 +69,8 @@ else
 	@cd $(XDG_DATA_HOME)/fzf-repo && git pull --quiet
 endif
 	@$(XDG_DATA_HOME)/fzf-repo/install --xdg --key-bindings --completion --no-update-rc --no-bash --no-fish
-	@ln -rs $(XDG_DATA_HOME)/fzf-repo/fzf $(XDG_DATA_HOME)/bin/fzf
-	@ln -rs $(XDG_DATA_HOME)/fzf-repo/fzf-tmux $(XDG_DATA_HOME)/bin/fzf-tmux
+	@$(GNU_LN) -rs $(XDG_DATA_HOME)/fzf-repo/fzf $(XDG_DATA_HOME)/bin/fzf
+	@$(GNU_LN) -rs $(XDG_DATA_HOME)/fzf-repo/fzf-tmux $(XDG_DATA_HOME)/bin/fzf-tmux
 .PHONY: apps-install-fzf
 
 ## Update fzf (Fuzzy finder).
