@@ -11,6 +11,6 @@
 set -euo pipefail
 
 ppm::failed() {
-	ppm::as_error "✗ $2"
-	exit $1
+  ppm::as_error "✗ $2"
+  exit $1
 }

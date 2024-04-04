@@ -19,5 +19,5 @@ source "${PPM_ROOT}/lib/check_command.sh"
 # @noargs
 # @internal
 ppm::init::loaded() {
-	return 0
+  return 0
 }

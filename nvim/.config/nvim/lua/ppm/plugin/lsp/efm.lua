@@ -8,7 +8,7 @@ local sh = {
   lintSource = "shellcheck",
   lintStdin = true,
   lintFormats = { "-:%l:%c: %trror: %m", "-:%l:%c: %tarning: %m", "-:%l:%c: %tote: %m" },
-  formatCommand = "shfmt -bn -ci -kp -sr -",
+  formatCommand = "shfmt --binary-next-line --case-indent --keep-padding --space-redirects --indent 2 --simplify -",
   formatStdin = true,
 }
 
@@ -24,8 +24,10 @@ M.config = {
     locale = "fr",
   },
   filetypes = { "json", "jsonc", "sh", "bash", "zsh", "lua" },
-  settings = { rootMarkers = { ".git/", "package.json" },
-               languages = { bash = { sh }, sh = { sh } } },
+  settings = {
+    rootMarkers = { ".git/", "package.json" },
+    languages = { bash = { sh }, sh = { sh } }
+  },
 }
 
 return M

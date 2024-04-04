@@ -12,7 +12,7 @@ ppm::check_command 'trash-put'
 
 # @internal
 show_help() {
-	cat << EOF
+  cat << EOF
 Usage: ${0##*/} [-hnv] [path="."] target ...
   Put to system trash the given target(s) name recursively founded in the given path.
 
@@ -27,22 +27,22 @@ declare -i verbose=0
 declare -i dryrun=0
 
 while getopts hnv opt; do
-	case $opt in
-		h)
-			show_help
-			exit 0
-			;;
-		n)
-			dryrun=1
-			;;
-		v)
-			verbose=1
-			;;
-		*)
-			ppm::as_error show_help
-			exit 1
-			;;
-	esac
+  case $opt in
+    h)
+      show_help
+      exit 0
+      ;;
+    n)
+      dryrun=1
+      ;;
+    v)
+      verbose=1
+      ;;
+    *)
+      ppm::as_error show_help
+      exit 1
+      ;;
+  esac
 done
 shift $((OPTIND - 1))
 
@@ -53,7 +53,7 @@ declare path
 
 declare -a cmd=(command find -x "$path" -false)
 for arg; do
-	cmd+=(-or -name "${arg}")
+  cmd+=(-or -name "${arg}")
 done
 cmd+=(-prune)
 
