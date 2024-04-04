@@ -50,6 +50,7 @@ install-stow:
 
 ## Clean all cache systems.
 cleanup::
+	@trash-put "$ZSH_EVALCACHE_DIR"/init-*.sh
 	@npm cache verify
 	@gem cleanup --silent $(_DRY_RUN)
 	@rm -f $(XDG_DATA_HOME)/$$USER/symbols/nerdfonts.json

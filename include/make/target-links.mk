@@ -17,6 +17,7 @@ TO_LINK := bash \
 					 nvim \
 					 ranger \
 					 ripgrep \
+					 starship \
 					 tmux \
 					 zsh \
 					 $(SPECIFIC_TO_LINK)
