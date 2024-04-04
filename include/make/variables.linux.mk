@@ -1,5 +1,6 @@
 SPECIFIC_TO_LINK := rofi sway
 
+GNU_LN := ln
 GNU_SED := sed
 GNU_GREP := grep
 
