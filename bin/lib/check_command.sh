@@ -11,5 +11,5 @@
 set -euo pipefail
 
 ppm::check_command() {
-	ppm::is_cmd "${1}" || ppm::failed 127 "Command not found: ${1}"
+  ppm::is_cmd "${1}" || ppm::failed 127 "Command not found: ${1}"
 }

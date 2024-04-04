@@ -10,13 +10,13 @@
 set -euo pipefail
 
 ppm::is_cmd() {
-	local n=0
-	if [[ "$1" = "-n" ]]; then
-		n=1
-		shift
-	fi
+  local n=0
+  if [[ $1 == "-n" ]]; then
+    n=1
+    shift
+  fi
 
-	command -v "$1" > /dev/null
+  command -v "$1" > /dev/null
 
-	return $((n ^ $?))
+  return $((n ^ $?))
 }

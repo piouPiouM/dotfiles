@@ -13,24 +13,24 @@ GNU_FOLD="gfold"
 type $GNU_FOLD > /dev/null 2>&1 || GNU_FOLD="fold"
 
 get_ps_name() {
-	kitty +list-fonts --psnames | $GNU_SED -n -E 's/^\s*'"$1"'.*\((\w+)\)/\1/p'
+  kitty +list-fonts --psnames | $GNU_SED -n -E 's/^\s*'"$1"'.*\((\w+)\)/\1/p'
 }
 
 print_code_points() {
-	local -r _font_name='Symbols Nerd Font'
-	fc-match --format='%{charset}' "$_font_name" \
-		| $GNU_SED 's/[[:alnum:]]*/U+&/ig' \
-		| $GNU_FOLD -s -w 60 \
-		| $GNU_SED -E 's/ /,/g;s/^/symbol_map /g;s/,?$/ '"$(get_ps_name "$_font_name")"'/g'
+  local -r _font_name='Symbols Nerd Font'
+  fc-match --format='%{charset}' "$_font_name" \
+    | $GNU_SED 's/[[:alnum:]]*/U+&/ig' \
+    | $GNU_FOLD -s -w 60 \
+    | $GNU_SED -E 's/ /,/g;s/^/symbol_map /g;s/,?$/ '"$(get_ps_name "$_font_name")"'/g'
 }
 
 # Keep only commented lines.
 clear_conf() {
-	$GNU_SED -i -E '/^[^#]|^$/d' "$1"
+  $GNU_SED -i -E '/^[^#]|^$/d' "$1"
 }
 
 add_version() {
-	$GNU_SED -i '1s/\(Nerd Fonts\).*/\1 '"$1"'/' "$2"
+  $GNU_SED -i '1s/\(Nerd Fonts\).*/\1 '"$1"'/' "$2"
 }
 
 CONF="${1:-"$XDG_CONFIG_HOME"/kitty/nerd-fonts.conf}"

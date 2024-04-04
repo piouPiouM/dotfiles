@@ -5,10 +5,10 @@ set -u
 
 WM="sway"
 
-wmpid(){
+wmpid() {
   tree="$(pstree -ps $$)"
   tree="${tree#*$WM(}"
-	echo "${tree%%)*}"
+  echo "${tree%%)*}"
 }
 
 all=(lockscreen logout leave renew suspend shutdown)

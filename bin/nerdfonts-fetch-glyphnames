@@ -16,33 +16,33 @@ _json_downloaded=$(mktemp -q)
 
 # @internal
 cleanup() {
-	[[ -f "$_json_downloaded" ]] && rm -f "$_json_downloaded"
+  [[ -f $_json_downloaded  ]] && rm -f "$_json_downloaded"
 }
 
 # @internal
 check_prerequisites() {
-	ppm::check_command 'curl'
-	ppm::check_command 'jq'
+  ppm::check_command 'curl'
+  ppm::check_command 'jq'
 }
 
 # @internal
 ensure_dir() {
-	[[ -d "$1" ]] || mkdir -p "$1"
+  [[ -d $1  ]] || mkdir -p "$1"
 }
 
 # @internal
 get_longest_word_length() {
-	command jq --raw-output --monochrome-output \
-		'del(.METADATA) | keys[] | length' "$1" \
-		| sort -rn \
-		| head -1
+  command jq --raw-output --monochrome-output \
+    'del(.METADATA) | keys[] | length' "$1" \
+    | sort -rn \
+    | head -1
 }
 
 # @internal
 format() {
-	local -ir _max_length=$(get_longest_word_length "$1")
-	command jq --monochrome-output --compact-output --arg 'max-length' $_max_length \
-		'({ METADATA: (.METADATA += $ARGS.named).METADATA, glyths: del(.METADATA) | [keys[] as $key | [.[$key].char, $key]] })' "$1"
+  local -ir _max_length=$(get_longest_word_length "$1")
+  command jq --monochrome-output --compact-output --arg 'max-length' $_max_length \
+    '({ METADATA: (.METADATA += $ARGS.named).METADATA, glyths: del(.METADATA) | [keys[] as $key | [.[$key].char, $key]] })' "$1"
 }
 
 # Downlaod JSON of Nerd Fonts glyphmanes.
@@ -50,22 +50,22 @@ format() {
 # @arg $2 string Output file.
 # @internal
 fetch() {
-	local -r _url="https://raw.githubusercontent.com/ryanoasis/nerd-fonts/${1}/glyphnames.json"
+  local -r _url="https://raw.githubusercontent.com/ryanoasis/nerd-fonts/${1}/glyphnames.json"
 
-	command curl -fsL --create-dirs --output "$2" "$_url" \
-		|| ppm::failed 1 "Downloading of ${_url} has failed."
+  command curl -fsL --create-dirs --output "$2" "$_url" \
+    || ppm::failed 1 "Downloading of ${_url} has failed."
 }
 
 # Downlaod JSON of Nerd Fonts glyphmanes.
 # @arg $1 string Version of Nerd Fonts.
 # @arg $2 string Output file.
 main() {
-	check_prerequisites
+  check_prerequisites
 
-	local -r _json="${2:-$XDG_DATA_HOME/$USER/symbols/nerdfonts.json}"
-	ensure_dir "$(dirname "${_json}")"
-	fetch "$1" "${_json_downloaded}" \
-		&& format "${_json_downloaded}" > "${_json}"
+  local -r _json="${2:-$XDG_DATA_HOME/$USER/symbols/nerdfonts.json}"
+  ensure_dir "$(dirname "${_json}")"
+  fetch "$1" "${_json_downloaded}" \
+    && format "${_json_downloaded}" > "${_json}"
 }
 
 main "$1" "$2"
