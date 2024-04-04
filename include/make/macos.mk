@@ -35,56 +35,15 @@ zsh-activate:
 # Target: Setup macOS device.
 # -----------------------------------------------------------------------------
 
-setup:: setup-brew
+setup:: apps-setup-homebrew
 .PHONY: setup
 
-install:: install-packages-homebrew
+install:: apps-setup-homebrew
 .PHONY: install
 
 cleanup::
 	@$(call cmd_exists,brew) && brew $(_DRY_RUN) cleanup
 .PHONY: cleanup
-
-## Install Homebrew and your packages.
-setup-brew:
-	@$(MAKE) brew-download
-	@$(INSTALL) $(COMPAT_PACKAGES)
-	@$(INSTALL) $(REQUIRED_PACKAGES)
-	@$(MAKE) install-stow
-	@$(MAKE) setup-links
-	@$(MAKE) install-packages-homebrew
-	@$(MAKE) postinstall-packages-homebrew
-	@$(MAKE) update-packages-homebrew
-.PHONY: setup-brew
-
-# Download Homebrew the first time.
-brew-download:
-	@echo "$(PURPLE)• Downloading and install Homebrew if needed$(RESET)"
-	@$(call cmd_exists,brew) || \
-		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-.PHONY: brew-download
-
-## Install Homebrew packages.
-install-packages-homebrew:
-	@echo "$(PURPLE)• Installing Homebrew packages$(RESET)"
-	@$(call cmd_exists,brew) && brew bundle --no-upgrade --file=$(BREWFILE)
-.PHONY: brew-install
-
-# Run Homebrew post-install tasks.
-postinstall-packages-homebrew:
-	@echo "$(PURPLE)• Running Homebrew post-install$(RESET)"
-	@brew completions link
-	@pip3 install --upgrade pip setuptools wheel
-	@gem update --system --no-document
-.PHONY: brew-postinstall
-
-## Update Homebrew packages.
-update-packages-homebrew:
-	@echo "$(PURPLE)• Updating Homebrew packages$(RESET)"
-	@brew update
-	@brew upgrade
-	@$(MAKE) brew-postinstall
-.PHONY: brew-upgrade
 
 # -----------------------------------------------------------------------------
 # Target: Applications
