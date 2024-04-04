@@ -5,5 +5,10 @@
 # @name theme-bat
 # @arg $1 string Theme name
 
-export BAT_THEME="${1:-catppuccin-mocha}"
-bat cache --build &> /dev/null
+if ! command_exist bat; then
+  return 0
+fi
+
+export BAT_THEME=$(bat --list-themes --no-config | grep --quiet -i "Theme: $1" && echo "$1" || echo "catppuccin-mocha")
+
+# bat cache --build &> /dev/null
