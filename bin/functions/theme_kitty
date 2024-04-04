@@ -13,6 +13,7 @@ typeset -Ar _resolved=(
   "rose-pine" "Rosé Pine"
   "rose-pine-dawn" "Rosé Pine Dawn"
 )
-kitty +kitten themes --reload-in=all ${_resolved[$1]}
+
+grep --no-messages --quiet ${_resolved[$1]} "$XDG_CONFIG_HOME/kitty/current-theme.conf" || kitty +kitten themes --reload-in=all ${_resolved[$1]}
 
 return $?

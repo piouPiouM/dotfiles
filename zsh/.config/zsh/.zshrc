@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
-
 # `.zshrc' is sourced in interactive shells. It should contain commands to set up aliases, functions, options, key
 # bindings, etc.
+
+# zmodload zsh/zprof
 
 # Set a custom path for the completion dump file.
 zstyle ':zim:completion' dumpfile "${XDG_CACHE_HOME}/zsh/.zcompdump-${ZSH_VERSION}"
