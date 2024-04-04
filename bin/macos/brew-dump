@@ -1,15 +1,93 @@
 #!/usr/bin/env bash
-# @file @brew-dump
-# @brief Dump first level formula installed with Homebrew.
-#        NOTE: requires installing the `pcre2` formula.
-# @arg $1 string Output file. Default to './setup/macos/Brewfile'.
+# -------------------------------------------------------------------
+# @name brew-dump
+# -------------------------------------------------------------------
 
-DUMP=$(brew bundle dump --describe --file=-)
-BREWS=$(echo "$DUMP" | grep -B 1 -Fw -f <(brew leaves --installed-on-request) | grep -v '^--')
-OTHERS=$(echo "$DUMP" | grep -v -f <(echo "$BREWS") | pcre2grep -vM '^(# .*$\n)?brew ')
-BREWFILE="${1:-${PWD}/setup/macos/Brewfile}"
+set -euo pipefail
 
-(
-	echo "$OTHERS"
-	echo "$BREWS"
-) > "$BREWFILE"
+LIB_PATH="$(dirname "$(dirname "$(greadlink -f "${BASH_SOURCE[0]}")")")/lib"
+
+# shellcheck source=./lib/init.sh
+source "${LIB_PATH}/init.sh"
+
+ppm::check_command 'pcre2grep'
+
+# @internal
+show_help() {
+  cat << EOF
+Usage: ${0##*/} [-hnD] output [exclude...]
+  Save the first level of formulas installed with Homebrew.
+
+Arguments:
+  output        Path of output Brewfile.
+  [exclude...]  List of dependencies to exclude.
+
+Options:
+  -h  Print this message and exit.
+  -n  Don't actually save result into output file.
+  -D  Enable debug logs.
+EOF
+}
+
+# @internal
+output() {
+  printf "%s\n" "$@"
+}
+#
+# @internal
+debug() {
+  local -r count="$(echo "$2" | wc -w | bc)"
+
+  printf "\n[DEBUG] %s (${count}):\n%s\n\n" "$@"
+}
+
+declare -i dryrun=0
+declare -i debug=0
+
+while getopts hnD opt; do
+  case $opt in
+    h)
+      show_help
+      exit 0
+      ;;
+    n)
+      dryrun=1
+      ;;
+    D)
+      debug=1
+      ;;
+    *)
+      ppm::as_error show_help
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+(($# == 0)) && show_help >&2 && exit 1
+
+declare -r brewfile="$1"
+shift
+
+declare -ar exclude=("$@")
+declare dump installed_packages packages not_packages
+
+installed_packages=$(brew leaves --installed-on-request)
+((debug == 1)) && debug "Installed on request packages" "$installed_packages"
+
+((${#exclude[@]} > 0)) && installed_packages=$(echo "$installed_packages" | grep -vw -f <(printf "^%s$\n" "${exclude[@]}"))
+((debug == 1)) && debug "Installed on request packages w/o excluded" "$installed_packages"
+
+dump=$(brew bundle dump --describe --file=-)
+((debug == 1)) && debug "Raw dump" "$dump"
+
+packages=$(echo "$dump" | grep -B 1 -Fw -f <(echo "$installed_packages") | grep -v '^--')
+((debug == 1)) && debug "Final packages" "$packages"
+
+not_packages=$(echo "$dump" | grep -v -f <(echo "$packages") | pcre2grep -vM '^(# .*$\n)?brew ')
+((debug == 1)) && debug "Final other packages" "$not_packages"
+
+((dryrun == 1 && debug != 1)) && output "$not_packages" "$packages"
+((dryrun == 1)) && exit 0
+
+output "$not_packages" "$packages" > "$brewfile"
