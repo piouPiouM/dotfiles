@@ -175,9 +175,9 @@
   },
   "network": {
     "format-wifi": "",
-    "format-ethernet": "{ipaddr}/{cidr} ",
-    "tooltip-format": "{ifname} via {gwaddr} ",
-    "format-linked": "{ifname} (No IP) ",
+    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "format-linked": "{ifname} (No IP) 󰊗",
     "format-disconnected": "Disconnected ⚠",
     "format-alt": "{essid} ({signalStrength}%) "
   },
@@ -185,14 +185,14 @@
     // "scroll-step": 1, // %, can be a float
     "format": "{volume}% {icon} {format_source}",
     "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-bluetooth-muted": "󰅶 {icon} {format_source}",
     "format-muted": " {format_source}",
     "format-source": "{volume}% ",
     "format-source-muted": "",
     "format-icons": {
       "headphone": "",
-      "hands-free": "",
-      "headset": "",
+      "hands-free": "󰂑",
+      "headset": "󰂑",
       "phone": "",
       "portable": "",
       "car": "",
@@ -233,10 +233,10 @@
     "tooltip": true,
     "format": "{icon}",
     "format-icons": {
-      "notification": "",
-      "none": "",
-      "dnd-notification": "",
-      "dnd-none": ""
+      "notification": "󰂚",
+      "none": "󰂜",
+      "dnd-notification": "󰂛",
+      "dnd-none": "󰂠"
     },
     "return-type": "json",
     "exec-if": "pidof swaync-client",
@@ -253,7 +253,7 @@
   "custom/nightshift": {
     "format": "{icon}",
     "format-icons": {
-      "enabled": "望",
+      "enabled": "󰖔",
       "disabled": ""
     },
     "exec": "~/.local/share/bin/linux/wlsunset-toggle -s",

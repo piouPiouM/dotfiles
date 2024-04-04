@@ -16,6 +16,6 @@ vim.diagnostic.config {
   signs = true,
   severity_sort = true,
   update_in_insert = false,
-  virtual_text = { prefix = "ﯭ ", spacing = 4, source = "if_many" },
+  virtual_text = { prefix = "󰛯 ", spacing = 4, source = "if_many" },
   float = { border = ui.borders.rounded, header = false, max_width = 80 },
 }
