@@ -5,6 +5,10 @@
 export GOPATH := $(XDG_DATA_HOME)/go
 export GOBIN := $(GOPATH)/bin
 
+## Update all applications.
+apps-update-all:: apps-update-fzf apps-update-go apps-update-rust
+.PHONY: apps-update-all
+
 ## Install Go applications.
 apps-install-go:
 	@echo "$(PURPLE)• Installing Go applications$(RESET)"
@@ -19,6 +23,7 @@ apps-update-go:
 
 ## Install Lua packages.
 apps-install-lua:
+	@echo "$(PURPLE)• Installing Lua packages$(RESET)"
 	@$(call cmd_exists,luarocks) && luarocks install --local --server=https://luarocks.org/dev luaformatter
 .PHONY: apps-install-lua
 
@@ -54,18 +59,6 @@ apps-update-rust:
 	@echo "$(PURPLE)• Updating Rust applications$(RESET)"
 	@cargo install-update -a || $(call failure,Missing cargo-update crate.)
 .PHONY: apps-update-rust
-
-## Install Difftastic, a structural diff tool.
-apps-install-difftastic:
-	@echo "$(PURPLE)• Installing Difftastic, a structural diff tool$(RESET)"
-	@cargo install difftastic --locked
-.PHONY: apps-install-difftastic
-
-## Install Starship shell prompt.
-apps-install-starship:
-	@echo "$(PURPLE)• Installing Starship shell prompt$(RESET)"
-	@cargo install starship --locked
-.PHONY: apps-install-starship
 
 ## Install fzf (Fuzzy finder) from sources.
 apps-install-fzf:
