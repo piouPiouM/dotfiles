@@ -5,11 +5,7 @@
 
 set -euo pipefail
 
-LIB_PATH="$(dirname "$(dirname "$(greadlink -f "${BASH_SOURCE[0]}")")")/lib"
-
-# shellcheck source=./lib/init.sh
-source "${LIB_PATH}/init.sh"
-
+source ppm::lib
 ppm::check_command 'pcre2grep'
 
 # @internal

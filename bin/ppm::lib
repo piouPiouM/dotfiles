@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+# @file ppm::lib
+# @package ppm
+# @usage
+#   source ppm::lib
+
+set -euo pipefail
+
+# Short-circuit if init.sh has already been sourced.
+[[ -v PPM_LIB_LOADED ]] && return 0
+typeset -gx PPM_LIB_LOADED=1
+
+source "${PPM_LIB_PATH}/pipeline.sh"
+source "${PPM_LIB_PATH}/failed.sh"
+source "${PPM_LIB_PATH}/is_cmd.sh"
+source "${PPM_LIB_PATH}/check_command.sh"

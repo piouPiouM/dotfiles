@@ -28,6 +28,13 @@ export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-"$TMPDIR"}
 export ZDOTDIR="${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}"
 
 #
+# ppm lib
+#
+
+local -r lib_dir="$XDG_DATA_HOME"/bin/lib
+export PPM_LIB_PATH="${lib_dir:P}"
+
+#
 # Clean-up my home directory
 #
 source "$ZDOTDIR"/include/detect-os.zsh
