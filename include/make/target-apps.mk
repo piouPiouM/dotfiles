@@ -6,14 +6,61 @@ export GOPATH := $(XDG_DATA_HOME)/go
 export GOBIN := $(GOPATH)/bin
 
 ## Update all applications.
-apps-update-all:: apps-update-fzf apps-update-go apps-update-rust
+apps-update-all: UPDATE_TARGETS = $(shell $(GNU_GREP) --perl-regexp --only-matching --no-filename --color=never '^apps-update-\S+(?=:)' $(MAKEFILE_LIST) | uniq)
+apps-update-all:
+	@$(MAKE) $(UPDATE_TARGETS)
 .PHONY: apps-update-all
 
-## Setup Python3 environment.
+## Install fzf (Fuzzy finder) from sources.
+apps-install-fzf:
+	@echo "$(PURPLE)• Installing fzf from sources$(RESET)"
+ifeq ($(wildcard $(XDG_DATA_HOME)/fzf-repo/.git/.),)
+	@git clone --quiet --depth 1 https://github.com/junegunn/fzf.git $(XDG_DATA_HOME)/fzf-repo
+else
+	@cd $(XDG_DATA_HOME)/fzf-repo && git pull --quiet
+endif
+	@$(XDG_DATA_HOME)/fzf-repo/install --xdg --key-bindings --completion --no-update-rc --no-bash --no-fish
+	@$(GNU_LN) -frs $(XDG_DATA_HOME)/fzf-repo/fzf $(XDG_DATA_HOME)/bin/fzf
+	@$(GNU_LN) -frs $(XDG_DATA_HOME)/fzf-repo/fzf-tmux $(XDG_DATA_HOME)/bin/fzf-tmux
+.PHONY: apps-install-fzf
+
+## Update fzf (Fuzzy finder).
+apps-update-fzf:
+	@$(MAKE) apps-install-fzf
+.PHONY: apps-update-fzf
+
+## Uninstall fzf (Fuzzy finder).
+apps-uninstall-fzf:
+	@echo "$(PURPLE)• Uninstalling fzf$(RESET)"
+	@$(XDG_CACHE_HOME)/fzf-repo/uninstall --xdg
+	@rm -f $(XDG_DATA_HOME)/bin/fzf
+	@rm -f $(XDG_DATA_HOME)/bin/fzf-tmux
+	@rm -rf $(XDG_DATA_HOME)/fzf-repo
+.PHONY: apps-uninstall-fzf
+
+## Setup Python environment.
 apps-setup-python: | $(ENSURE_DIRS)
 	@echo "$(PURPLE)• Setting Python virtual environment$(RESET)"
-	@python3 -m venv $(HOME)/.local/bin/venv
+	@python -m venv $(HOME)/.local/bin/venv
+	@$(MAKE) --silent apps-restore-python
 .PHONY: apps-setup-python
+
+## Backup Python packages.
+apps-backup-python:
+	@echo "$(PURPLE)• Backuping Python packages$(RESET)"
+	@pip freeze > setup/all/packages-python.txt
+.PHONY: apps-backup-python
+
+## Install Python packages.
+apps-install-python:
+	@echo "$(PURPLE)• Restoring Python packages$(RESET)"
+	@pip install --requirement setup/all/packages-python.txt
+.PHONY: apps-install-python
+
+apps-update-python:
+	@echo "$(PURPLE)• Updating Python packages$(RESET)"
+	@bin/venv-upgrade
+.PHONY: apps-update-python
 
 ## Install Go applications.
 apps-install-go:
@@ -33,27 +80,6 @@ apps-install-lua:
 	@$(call cmd_exists,luarocks) && luarocks install --local --server=https://luarocks.org/dev luaformatter
 .PHONY: apps-install-lua
 
-## Setup npm environment.
-setup-npm: NPM_PACKAGES := $(XDG_DATA_HOME)/npm-packages
-setup-npm: | $(ENSURE_DIRS)
-	@echo "$(PURPLE)• Setting npm global packages into home directory$(RESET)"
-	@export NPM_CONFIG_USERCONFIG=$(XDG_CONFIG_HOME)/npm/npmrc
-	@touch $$NPM_CONFIG_USERCONFIG
-	@npm config set userconfig $$NPM_CONFIG_USERCONFIG
-	@npm config set cache $(XDG_CACHE_HOME)/npm
-	@npm config set prefix $(NPM_PACKAGES)
-	@npm config set fund false
-	@npm config set progress false
-	@$(call register_manpath,$(NPM_PACKAGES)/share/man)
-	@$(MAKE) restore-npm
-.PHONY: setup-npm
-
-## Setup pnpm environment.
-setup-pnpm:
-	@pnpm add -g @pnpm/tabtab
-	@pnpm install-completion zsh
-.PHONY: setup-pnpm
-
 ## Install Rust applications.
 apps-install-rust:
 	@echo "$(PURPLE)• Installing Rust applications$(RESET)"
@@ -66,29 +92,49 @@ apps-update-rust:
 	@cargo install-update -a || $(call failure,Missing cargo-update crate.)
 .PHONY: apps-update-rust
 
-## Install fzf (Fuzzy finder) from sources.
-apps-install-fzf:
-	@echo "$(PURPLE)• Installing fzf from sources$(RESET)"
-ifeq ($(wildcard $(XDG_DATA_HOME)/fzf-repo/.git/.),)
-	@git clone --quiet --depth 1 https://github.com/junegunn/fzf.git $(XDG_DATA_HOME)/fzf-repo
-else
-	@cd $(XDG_DATA_HOME)/fzf-repo && git pull --quiet
-endif
-	@$(XDG_DATA_HOME)/fzf-repo/install --xdg --key-bindings --completion --no-update-rc --no-bash --no-fish
-	@$(GNU_LN) -rs $(XDG_DATA_HOME)/fzf-repo/fzf $(XDG_DATA_HOME)/bin/fzf
-	@$(GNU_LN) -rs $(XDG_DATA_HOME)/fzf-repo/fzf-tmux $(XDG_DATA_HOME)/bin/fzf-tmux
-.PHONY: apps-install-fzf
+## Setup npm environment.
+apps-setup-npm: NPM_PACKAGES := $(XDG_DATA_HOME)/npm-packages
+apps-setup-npm: | $(ENSURE_DIRS)
+	@echo "$(PURPLE)• Setting npm global packages into home directory$(RESET)"
+	@export NPM_CONFIG_USERCONFIG=$(XDG_CONFIG_HOME)/npm/npmrc
+	@touch $$NPM_CONFIG_USERCONFIG
+	@npm config set userconfig $$NPM_CONFIG_USERCONFIG
+	@npm config set cache $(XDG_CACHE_HOME)/npm
+	@npm config set prefix $(NPM_PACKAGES)
+	@npm config set fund false
+	@npm config set progress false
+	@$(call register_manpath,$(NPM_PACKAGES)/share/man)
+	@$(MAKE) apps-restore-npm
+.PHONY: apps-setup-npm
 
-## Update fzf (Fuzzy finder).
-apps-update-fzf:
-	@$(MAKE) apps-install-fzf
-.PHONY: apps-update-fzf
+BACKUP_NPM_FILE := setup/npm/packages.txt
 
-## Uninstall fzf (Fuzzy finder).
-apps-uninstall-fzf:
-	@echo "$(PURPLE)• Uninstalling fzf$(RESET)"
-	@$(XDG_CACHE_HOME)/fzf-repo/uninstall --xdg
-	@rm -f $(XDG_DATA_HOME)/bin/fzf
-	@rm -f $(XDG_DATA_HOME)/bin/fzf-tmux
-	@rm -rf $(XDG_DATA_HOME)/fzf-repo
-.PHONY: apps-uninstall-fzf
+## Backup list of global npm packages.
+apps-backup-npm: NPM_GLOBAL_ROOT := $(shell command npm root -g)
+apps-backup-npm:
+	@echo "$(PURPLE)• Backup npm global packages$(RESET)"
+	@npm list --global --parseable --depth=0 \
+		| $(GNU_SED) "1d;s:^$(NPM_GLOBAL_ROOT)/::" \
+		| $(GNU_GREP) -v '^npm$$' \
+		> $(BACKUP_NPM_FILE) \
+		&& echo "  $(SUCCESS)$$(cat $(BACKUP_NPM_FILE) | wc -l) packages saved" \
+		|| echo "  $(FAILURE)No packages to save$(RESET)"
+.PHONY: apps-backup-npm
+
+## Install globaly npm packages.
+apps-install-npm:
+	@echo "$(PURPLE)• Restore npm global packages$(RESET)"
+	@xargs npm install --force $(NPM_FLAGS) < $(BACKUP_NPM_FILE)
+.PHONY: apps-restore-npm
+
+## Update globaly all npm packages.
+apps-update-npm:
+	@echo "$(PURPLE)• Update npm global packages$(RESET)"
+	@xargs npm update $(NPM_FLAGS) < $(BACKUP_NPM_FILE)
+.PHONY: apps-update-npm
+
+## Install pnpm environment.
+apps-install-pnpm:
+	@pnpm add -g @pnpm/tabtab
+	@pnpm install-completion zsh
+.PHONY: apps-setup-pnpm
