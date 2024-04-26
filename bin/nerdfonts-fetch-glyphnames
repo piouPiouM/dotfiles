@@ -6,9 +6,7 @@
 
 set -euo pipefail
 
-unset CDPATH
-cd "$(dirname "${BASH_SOURCE[0]}")"
-source ./lib/init.sh
+source ppm::lib
 
 trap cleanup EXIT
 

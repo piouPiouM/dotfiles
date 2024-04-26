@@ -9,7 +9,6 @@ set -euo pipefail
 [[ $(type -t ppm::init::loaded) == function ]] && return 0
 
 PPM_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
-export PPM_ROOT
 
 source "${PPM_ROOT}/lib/pipeline.sh"
 source "${PPM_ROOT}/lib/failed.sh"
