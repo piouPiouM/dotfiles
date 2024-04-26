@@ -13,7 +13,7 @@ gui:
     optionsTextColor:
       - "rgba(219,97,162,0.4)"
     selectedLineBgColor:
-      - "#363c44"
+      - "#484f58"
       - bold
     selectedRangeBgColor:
       - reverse

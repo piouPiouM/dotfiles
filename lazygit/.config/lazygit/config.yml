@@ -1,12 +1,14 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
 git:
   paging:
-    externalDiffCommand: difft --color=always --display=inline
+    externalDiffCommand: difft --color=always --display=side-by-side-show-both
     useConfig: false
+  parseEmoji: true
 gui:
   border: 'rounded'
   nerdFontsVersion: '3'
-  shortTimeFormat: '15h04'
-  timeFormat: '02/01/2006'
+  scrollPastBottom: true
+  showBranchCommitHash: true
+  showPanelJumps: true
 os:
   editPreset: 'nvim'
