@@ -1,5 +1,3 @@
-local code_key = function(key) return "<leader>g" .. key end
-
 local M = {
   open = "o",
   split = "s",
@@ -26,24 +24,24 @@ local M = {
     },
   },
   lsp = {
-    codeaction = { key = code_key("a"), desc = "Display code actions" },
-    rename = { key = code_key("r"), desc = "Rename current symbol" },
-    search = { key = code_key("f"), desc = "LSP finder" },
-    definition = { key = code_key("d"), desc = "Preview definition of current symbol" },
+    codeaction = { key = "<leader>ga", desc = "Display code actions" },
+    rename = { key = "<leader>gr", desc = "Rename current symbol" },
+    search = { key = "<leader>gf", desc = "LSP finder" },
+    definition = { key = "<leader>gd", desc = "Preview definition of current symbol" },
     hover_doc = { key = "K", desc = "Display hover documentation" },
-    outline = { key = code_key("o"), desc = "Display outline symbols" },
-    signature_help = { key = code_key("s"), desc = "Display signature of the current function" },
+    outline = { key = "<leader>go", desc = "Display outline symbols" },
+    signature_help = { key = "<leader>gs", desc = "Display signature of the current function" },
     diagnostic = {
-      previous = { key = code_key("k"), desc = "Go to previous diagnostic" },
-      next = { key = code_key("j"), desc = "Go to next diagnostic" },
+      previous = { key = "<leader>gk", desc = "Go to previous diagnostic" },
+      next = { key = "<leader>gj", desc = "Go to next diagnostic" },
       -- "h" for "Health"
-      cursor = { key = code_key("h;"), desc = "Display diagnostic under the cursor" },
-      line = { key = code_key("hl"), desc = "Display diagnostic for the current line" },
+      cursor = { key = "<leader>gh;", desc = "Display diagnostic under the cursor" },
+      line = { key = "<leader>ghl", desc = "Display diagnostic for the current line" },
     },
   },
   code = {
-    swap_prev_arg = { key = code_key("S"), desc = "Swap with previous argument" },
-    swap_next_arg = { key = code_key("s"), desc = "Swap with next argument" },
+    swap_prev_arg = { key = "<leader>gS", desc = "Swap with previous argument" },
+    swap_next_arg = { key = "<leader>gs", desc = "Swap with next argument" },
   },
 }
 
