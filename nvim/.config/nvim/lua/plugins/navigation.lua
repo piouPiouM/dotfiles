@@ -72,16 +72,24 @@ return {
     cmd = "Telescope",
   },
 
-  -- s{c1}{c2}
-  -- S{c1}{c2}
-  -- gs{c1}{c2}
   {
-    "ggandor/leap.nvim",
-    config = function(plugin)
-      require(plugin.name).add_default_mappings()
+    "woosaaahh/sj.nvim",
+    opts = {
+      pattern_type = "vim_very_magic",
+      prompt_prefix = " ",
+      keymaps = {
+        send_to_qflist = "<C-q>",
+      },
+    },
+    keys = function (plugin)
+      local sj = require(plugin.name)
+
+      return {
+        { "Z", sj.run, mode = "n" },
+        { "<localleader>Z", function() sj.run({ select_window = true }) end, mode = "n" },
+      }
     end,
-    dependencies = { "ggandor/flit.nvim", "tpope/vim-repeat" },
     event = "VeryLazy",
-    name = "leap",
+    name = "sj",
   },
 }
