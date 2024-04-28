@@ -59,18 +59,6 @@ nnoremap <localleader>t cit
 " Change content inside named tag
 nnoremap <localleader>< ci<
 
-" Surround word with single quotes (visual: S')
-nmap <leader>' ysiw'
-
-" Surround word with double quotes (visual: S")
-nmap <leader>" ysiw"
-
-" Surround word with square brackets (visual: S])
-nmap <leader>] ysiw]
-
-" Surround word with parentheses (visual: S))
-nmap <leader>) ysiw)
-
 nnoremap <silent> <leader>k <C-]>
 
 " Create window splits easier.
@@ -101,9 +89,6 @@ nnoremap <silent> ¨* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 " vim-quickhl
 nmap <localleader>k <Plug>(quickhl-cword-toggle)
 nmap <localleader>] <Plug>(quickhl-tag-toggle)
-
-" ArgWrap
-nnoremap <silent> <localleader>aw :ArgWrap<CR>
 
 " vim-lion
 nmap <localleader>a= glip=

@@ -47,4 +47,19 @@ local M = {
   },
 }
 
+M.surround = {
+  {
+    '<leader>"',
+    'siw"',
+    mode = { "n", "v" },
+    desc = "Surround word with double quotes",
+  },
+  {
+    "<leader>'",
+    "siw'",
+    mode = { "n", "v" },
+    desc = "Surround word with single quotes",
+  },
+}
+
 return M

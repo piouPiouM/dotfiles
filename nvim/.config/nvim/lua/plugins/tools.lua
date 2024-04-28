@@ -46,8 +46,12 @@ return {
   },
 
   {
-    "kylechui/nvim-surround",
-    event = "VeryLazy"
+    'echasnovski/mini.surround',
+    event = "VeryLazy",
+    opts = {
+      silent = true,
+    },
+    version = false, -- `main` branch
   },
 
   {
