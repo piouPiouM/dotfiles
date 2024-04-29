@@ -9,7 +9,7 @@ local map, pipe = F.map, F.pipe
 local Array = {}
 
 local function _assertType(array)
-  assert(vim.tbl_isarray(array), "not an array -> " .. tostring(array))
+  assert(vim.isarray(array), "not an array -> " .. tostring(array))
 end
 
 ---@section Constructors
