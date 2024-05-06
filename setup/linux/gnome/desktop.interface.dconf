@@ -1,4 +1,5 @@
 [/]
+clock-show-weekday=false
 color-scheme='prefer-dark'
 enable-animations=true
 font-antialiasing='rgba'

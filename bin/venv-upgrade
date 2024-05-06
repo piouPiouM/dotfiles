@@ -3,4 +3,5 @@ from importlib.metadata import distributions
 from subprocess import call
 
 packages = [x.name for x in distributions()]
+call("python -m pip install --upgrade pip", shell=True)
 call("python -m pip install --upgrade " + ' '.join(packages), shell=True)

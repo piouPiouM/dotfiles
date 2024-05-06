@@ -61,3 +61,13 @@ apps-install-sway:
 	@sudo dnf copr enable lexa/SwayNotificationCenter
 	@xargs $(INSTALL) < setup/linux/fedora/packages-sway.txt
 .PHONY: apps-install-sway
+
+## Install Miniconda 🐍️
+apps-install-miniconda: TMP := $(shell mktemp -d)
+apps-install-miniconda:
+	@echo "$(PURPLE)• Installing Miniconda$(RESET)"
+	@mkdir -p "$(HOME)/.local/bin/miniconda"
+	@wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $(TMP)/miniconda.sh
+	@bash $(TMP)/miniconda.sh -b -u -p "$(HOME)/.local/bin/miniconda"
+	@rm -rf $(TMP)
+.PHONY: apps-install-miniconda

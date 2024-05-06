@@ -5,6 +5,7 @@ com.github.marktext.marktext
 com.mattjakeman.ExtensionManager
 com.spotify.Client
 com.visualstudio.code
+fr.romainvigier.MetadataCleaner
 io.github.mightycreak.Diffuse
 me.kozec.syncthingtk
 me.timschneeberger.GalaxyBudsClient

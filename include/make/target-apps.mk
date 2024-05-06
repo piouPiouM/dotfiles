@@ -42,7 +42,7 @@ apps-uninstall-fzf:
 apps-setup-python: | $(ENSURE_DIRS)
 	@echo "$(PURPLE)• Setting Python virtual environment$(RESET)"
 	@python -m venv $(HOME)/.local/bin/venv
-	@$(MAKE) --silent apps-restore-python
+	@$(MAKE) --silent apps-install-python
 .PHONY: apps-setup-python
 
 ## Backup Python packages.
@@ -60,6 +60,7 @@ apps-install-python:
 apps-update-python:
 	@echo "$(PURPLE)• Updating Python packages$(RESET)"
 	@bin/venv-upgrade
+	@$(MAKE) --silent apps-backup-python
 .PHONY: apps-update-python
 
 ## Install Go applications.
@@ -104,7 +105,7 @@ apps-setup-npm: | $(ENSURE_DIRS)
 	@npm config set fund false
 	@npm config set progress false
 	@$(call register_manpath,$(NPM_PACKAGES)/share/man)
-	@$(MAKE) apps-restore-npm
+	@$(MAKE) apps-install-npm
 .PHONY: apps-setup-npm
 
 BACKUP_NPM_FILE := setup/npm/packages.txt
@@ -125,7 +126,7 @@ apps-backup-npm:
 apps-install-npm:
 	@echo "$(PURPLE)• Restore npm global packages$(RESET)"
 	@xargs npm install --force $(NPM_FLAGS) < $(BACKUP_NPM_FILE)
-.PHONY: apps-restore-npm
+.PHONY: apps-install-npm
 
 ## Update globaly all npm packages.
 apps-update-npm:

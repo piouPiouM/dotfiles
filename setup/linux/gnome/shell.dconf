@@ -2,8 +2,8 @@
 command-history=['keepassxc', 'terminal', 'Terminal', 'gnome-terminal']
 disable-user-extensions=false
 disabled-extensions=['background-logo@fedorahosted.org', 'trayIconsReloaded@selfmade.pl', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'workspaces-by-open-apps@favo02.github.com', 'Hide_Activities@shay.shayel.org', 'apps-menu@gnome-shell-extensions.gcampax.github.com']
-enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'sp-tray@sp-tray.esenliyim.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'syncthing@gnome.2nv2u.com', 'autoselectheadset@josephlbarnett.github.com', 'workspace-switch-wraparound@theychx.org', 'horizontal-workspace-indicator@tty2.io', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'just-perfection-desktop@just-perfection', 'blur-my-shell@aunetx', 'emoji-copy@felipeftn']
-favorite-apps=['kitty.desktop', 'firefox.desktop', 'md.obsidian.Obsidian.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop']
+enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'sp-tray@sp-tray.esenliyim.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'syncthing@gnome.2nv2u.com', 'autoselectheadset@josephlbarnett.github.com', 'workspace-switch-wraparound@theychx.org', 'horizontal-workspace-indicator@tty2.io', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'just-perfection-desktop@just-perfection', 'emoji-copy@felipeftn', 'blur-my-shell@aunetx']
+favorite-apps=['kitty.desktop', 'org.mozilla.firefox.desktop', 'md.obsidian.Obsidian.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop']
 last-selected-power-profile='power-saver'
 welcome-dialog-last-shown-version='41.4'
 
@@ -13,12 +13,28 @@ custom-icons=@a(sss) []
 [extensions/auto-move-windows]
 application-list=['firefox.desktop:1', 'com.spotify.Client.desktop:3', 'md.obsidian.Obsidian.desktop:2']
 
+[extensions/blur-my-shell]
+hacks-level=0
+settings-version=2
+
+[extensions/blur-my-shell/appfolder]
+brightness=0.59999999999999998
+sigma=30
+
 [extensions/blur-my-shell/dash-to-dock]
 blur=true
+brightness=0.59999999999999998
+sigma=30
+static-blur=true
+style-dash-to-dock=0
 
 [extensions/blur-my-shell/panel]
 blur=true
-customize=true
+style-panel=0
+
+[extensions/blur-my-shell/window-list]
+brightness=0.59999999999999998
+sigma=30
 
 [extensions/emoji-copy]
 emoji-keybinding=['<Super><Ctrl><space>']
