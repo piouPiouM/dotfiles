@@ -10,6 +10,13 @@ typeset -Ar _mode_map=(
   "soft-light" "rose-pine-dawn"
 )
 
+typeset -Ar _nvim_theme_map=(
+  "dark" "github_dark"
+  "light" "github_light"
+  "soft-dark" "rose-pine"
+  "soft-light" "rose-pine-dawn"
+)
+
 usage() {
   builtin emulate -L zsh
 
@@ -37,7 +44,7 @@ main() {
   export PPM_THEME=$_theme
 
   # Use `>|` to bypass noclobber option
-  echo "${_mode}" >| "${HOME}/.theme" 
+  echo -e "${_mode}\n${_nvim_theme_map[$_mode]}" >| "${HOME}/.theme"
   autoload -Uz theme_kitty && theme_kitty $_theme && success "Kitty"
   autoload -Uz theme_bat && theme_bat $_theme && success "Bat"
   autoload -Uz theme_btop && theme_btop $_theme && success "btop"

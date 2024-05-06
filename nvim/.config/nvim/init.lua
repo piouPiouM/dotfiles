@@ -51,8 +51,10 @@ cmd [[syntax enable]]
 -- end
 
 if fn.filereadable(fn.expand("$HOME/.theme")) then
-  local mode = unpack(fn.readfile(fn.expand("$HOME/.theme"), nil, 1))
-  o.background = mode or "dark"
+  local S = require("ppm.toolkit.fp.string")
+  local mode, theme = unpack(fn.readfile(fn.expand("$HOME/.theme"), nil, 2))
+  o.background = S.replace("soft--", "")(mode) or "dark"
+  cmd("colorscheme " .. theme)
 else
   o.background = "dark"
 end
