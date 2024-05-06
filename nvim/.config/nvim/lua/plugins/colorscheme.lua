@@ -121,4 +121,10 @@ return {
       dim_inactive = true,
     },
   },
+
+  {
+    "rebelot/kanagawa.nvim",
+    build = 'cp $XDG_DATA_HOME/nvim/lazy/kanagawa.nvim/extras/kanagawa*.conf $XDG_CONFIG_HOME/kitty/themes/',
+    lazy = false,
+  },
 }
