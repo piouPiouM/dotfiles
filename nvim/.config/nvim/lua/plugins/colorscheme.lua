@@ -11,6 +11,7 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
+    lazy = false,
     opts = {
       background = {
         light = "latte",
@@ -57,11 +58,15 @@ return {
       vim.g.nord_disable_background = false
       vim.g.nord_cursorline_transparent = true
       vim.g.nord_italic = true
-    end
+    end,
+    lazy = false,
   },
 
   {
     "andersevenrud/nordic.nvim",
+    enabled = false,
+    lazy = false,
+    name = 'nordic-frost',
     opts = {
       underline_option = 'undercurl',
       italic = true,
@@ -76,6 +81,7 @@ return {
 
   {
     "EdenEast/nightfox.nvim",
+    lazy = false,
     opts = {
       options = { dim_inactive = true }
     },
@@ -93,6 +99,7 @@ return {
 
   {
     "rose-pine/neovim",
+    lazy = false,
     name = "rose-pine",
     opts = {
       dark_variant = "moon",
@@ -100,5 +107,9 @@ return {
     },
   },
 
-  { "ramojus/mellifluous.nvim" },
+  {
+    "ramojus/mellifluous.nvim",
+    lazy = false,
+  },
+
 }
