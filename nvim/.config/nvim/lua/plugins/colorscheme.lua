@@ -112,4 +112,13 @@ return {
     lazy = false,
   },
 
+  {
+    "miikanissi/modus-themes.nvim",
+    build = 'cp $XDG_DATA_HOME/nvim/lazy/modus-themes.nvim/extras/kitty/*.conf $XDG_CONFIG_HOME/kitty/themes/',
+    lazy = false,
+    opts = {
+      transparent = false,
+      dim_inactive = true,
+    },
+  },
 }
