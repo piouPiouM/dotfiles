@@ -37,7 +37,6 @@ THEME_ROSE_PINE_FZF := $(FZF_PATH)/rose-pine.sh \
 ## Install themes for various tools.
 install-themes:: \
 	theme-catppuccin \
-	theme-nightfox \
 	theme-github \
 	theme-rose-pine
 .PHONY: install-themes
@@ -89,19 +88,6 @@ $(FZF_PATH)/github_%.sh: $(FZF_PATH)/github_%
 	@$(GNU_SED) -i -E "s/.*'(.*)'/export FZF_THEME=\"\1\"/;s@ --@\n  --@g" $<
 	@mv $< $(subst _,-,$@)
 	@$(call success,Format fzf's theme $(subst _,-,$(@F)))
-
-## Download Nightfox theme.
-theme-nightfox: NIGHTFOX_THEME_PATH := "$(XDG_DATA_HOME)/nvim/lazy/nightfox.nvim/extra"
-theme-nightfox:
-	@echo "$(PURPLE)• Install Nightfox for Kitty from Neovim$(RESET)"
-	@cp "$(NIGHTFOX_THEME_PATH)/carbonfox/kitty.conf" "$(KITTY_PATH)/Carbonfox.conf"
-	@cp "$(NIGHTFOX_THEME_PATH)/dawnfox/kitty.conf" "$(KITTY_PATH)/Dawnfox.conf"
-	@cp "$(NIGHTFOX_THEME_PATH)/dayfox/kitty.conf" "$(KITTY_PATH)/Dayfox.conf"
-	@cp "$(NIGHTFOX_THEME_PATH)/duskfox/kitty.conf" "$(KITTY_PATH)/Duskfox.conf"
-	@cp "$(NIGHTFOX_THEME_PATH)/nightfox/kitty.conf" "$(KITTY_PATH)/Nightfox.conf"
-	@cp "$(NIGHTFOX_THEME_PATH)/nordfox/kitty.conf" "$(KITTY_PATH)/Nordfox.conf"
-	@cp "$(NIGHTFOX_THEME_PATH)/terafox/kitty.conf" "$(KITTY_PATH)/Terafox.conf"
-.PHONY: theme-nightfox
 
 ## Download Rosé Pine theme.
 theme-rose-pine::

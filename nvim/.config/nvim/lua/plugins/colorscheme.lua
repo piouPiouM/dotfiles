@@ -79,7 +79,16 @@ return {
     opts = {
       options = { dim_inactive = true }
     },
-    build = ":NightfoxCompile",
+    build = {
+      ":NightfoxCompile",
+      'cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/carbonfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Carbonfox.conf',
+      'cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/dawnfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Dawnfox.conf',
+      'cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/dayfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Dayfox.conf',
+      'cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/duskfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Duskfox.conf',
+      'cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/nightfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Nightfox.conf',
+      'cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/nordfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Nordfox.conf',
+      'cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/terafox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Terafox.conf',
+    },
   },
 
   {
