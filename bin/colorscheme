@@ -41,6 +41,7 @@ main() {
   autoload -Uz theme_kitty && theme_kitty $_theme && success "Kitty"
   autoload -Uz theme_bat && theme_bat $_theme && success "Bat"
   autoload -Uz theme_btop && theme_btop $_theme && success "btop"
+  autoload -Uz theme_fsh && theme_fsh $_theme $_mode && success "ZSH Fast Syntax Highlighting"
   autoload -Uz theme_fzf && theme_fzf $_theme && success "fzf"
   autoload -Uz theme_lazygit && theme_lazygit $_theme && success "Lazygit"
 

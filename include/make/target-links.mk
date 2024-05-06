@@ -9,6 +9,7 @@ TO_LINK := bash \
 					 clifm \
 					 environment \
 					 fd \
+					 fsh \
 					 fzf \
 					 git \
 					 go \

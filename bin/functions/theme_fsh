@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+# -------------------------------------------------------------------
+# vim:et sts=2 sw=2 ft=zsh
+# -------------------------------------------------------------------
+# @name theme-fsh
+# @brief Apply theme for ZSH Fast Syntax Highlighting.
+# @arg $1 string Theme name
+
+if ! typeset -f fast-theme > /dev/null; then
+  return 0
+fi
+
+local _mode="${2:-dark}"
+local _theme
+
+if [[ "$2" = *"dark" ]]; then
+  _theme="catppuccin-mocha"
+else
+  _theme="catppuccin-latte"
+fi
+
+[ -f "$XDG_CONFIG_HOME/fsh/$1.ini" ] && _theme="$1"
+
+fast-theme --quiet XDG:"$_theme"

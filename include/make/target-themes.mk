@@ -21,6 +21,11 @@ THEME_CATPPUCCIN_LAZYGIT := $(XDG_DATA_HOME)/lazygit/themes/catppuccin-frappe.ym
 														$(XDG_DATA_HOME)/lazygit/themes/catppuccin-macchiato.yml \
 														$(XDG_DATA_HOME)/lazygit/themes/catppuccin-mocha.yml
 
+THEME_CATPPUCCIN_FSH := $(XDG_CONFIG_HOME)/fsh/catppuccin-frappe.ini \
+												$(XDG_CONFIG_HOME)/fsh/catppuccin-latte.ini \
+												$(XDG_CONFIG_HOME)/fsh/catppuccin-macchiato.ini \
+												$(XDG_CONFIG_HOME)/fsh/catppuccin-mocha.ini
+
 THEME_ROSE_PINE_BTOP := $(XDG_CONFIG_HOME)/btop/themes/rose-pine.theme \
 												 $(XDG_CONFIG_HOME)/btop/themes/rose-pine-dawn.theme \
 												 $(XDG_CONFIG_HOME)/btop/themes/rose-pine-moon.theme
@@ -45,12 +50,16 @@ $(THEME_CATPPUCCIN_BTOP): FORCE
 	# https://github.com/catppuccin/btop/releases/latest/download/themes.tar.gz
 	@curl $(CURL_FLAGS) --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/btop/main/themes/$(subst -,_,$(@F))" -o $(@F) && $(call success,$(@F) for btop) || $(call failure,$(@F) for btop)
 
+$(THEME_CATPPUCCIN_FSH): FORCE
+	@curl $(CURL_FLAGS) --output-dir $(@D) --remote-name "https://raw.githubusercontent.com/catppuccin/zsh-fsh/main/themes/$(@F)" && $(call success,$(@F) for ZSH Fast Syntax Highlighting) || $(call failure,$(@F) for ZSH Fast Syntax Highlighting)
+
 $(THEME_CATPPUCCIN_LAZYGIT): FORCE
 	@curl $(CURL_FLAGS) --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/lazygit/main/themes/$(subst catppuccin-,,$(@F))" -o $(@F) && $(call success,$(@F) for Lazygit) || $(call failure,$(@F) for Lazygit)
 	@$(GNU_SED) -i 's/^/  /;1 i gui:' "$@"
 
 $(THEME_ROSE_PINE_BTOP): FORCE
 	@curl $(CURL_FLAGS) --output-dir $(@D) "https://raw.githubusercontent.com/rose-pine/btop/main/$(@F)" -o $(@F) && $(call success,$(@F) for btop) || $(call failure,$(@F) for btop)
+
 $(THEME_ROSE_PINE_FZF): FORCE
 	@curl $(CURL_FLAGS) --output-dir $(@D) --remote-name "https://raw.githubusercontent.com/rose-pine/fzf/main/dist/$(@F)" && $(call success,$(@F) for fzf) || $(call failure,$(@F) for fzf)
 	@$(GNU_SED) -i 's/FZF_DEFAULT_OPTS/FZF_THEME/' $(@)
@@ -60,6 +69,7 @@ theme-catppuccin::
 	@echo "$(PURPLE)• Install Catppuccin themes$(RESET)"
 	@$(MAKE) --silent $(THEME_CATPPUCCIN_BAT)
 	@$(MAKE) --silent $(THEME_CATPPUCCIN_BTOP)
+	@$(MAKE) --silent $(THEME_CATPPUCCIN_FSH)
 	@$(MAKE) --silent $(THEME_CATPPUCCIN_LAZYGIT)
 	@$(MAKE) --silent theme-postinstall
 .PHONY: theme-catppuccin
