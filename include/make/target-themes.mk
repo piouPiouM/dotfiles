@@ -21,6 +21,10 @@ THEME_CATPPUCCIN_LAZYGIT := $(XDG_DATA_HOME)/lazygit/themes/catppuccin-frappe.ym
 														$(XDG_DATA_HOME)/lazygit/themes/catppuccin-macchiato.yml \
 														$(XDG_DATA_HOME)/lazygit/themes/catppuccin-mocha.yml
 
+THEME_ROSE_PINE_BTOP := $(XDG_CONFIG_HOME)/btop/themes/rose-pine.theme \
+												 $(XDG_CONFIG_HOME)/btop/themes/rose-pine-dawn.theme \
+												 $(XDG_CONFIG_HOME)/btop/themes/rose-pine-moon.theme
+
 THEME_ROSE_PINE_FZF := $(FZF_PATH)/rose-pine.sh \
 											 $(FZF_PATH)/rose-pine-dawn.sh \
 											 $(FZF_PATH)/rose-pine-moon.sh
@@ -34,15 +38,19 @@ install-themes:: \
 .PHONY: install-themes
 
 $(THEME_CATPPUCCIN_BAT): FORCE
-	@curl $(CURL_FLAGS) --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/bat/main/$(subst catppuccin,Catppuccin,$(@F))" -o $(@F) && $(call success,$(@F) for bat) || $(call failure,$(@F) for bat)
+	$(eval REMOTE_NAME := $(shell echo "$(@F)" | $(GNU_SED) -e "s/\b\(.\)/\u\1/g; s/\.T/\.t/; s/-/%20/"))
+	@curl $(CURL_FLAGS) --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/bat/main/themes/$(REMOTE_NAME)" -o $(@F) && $(call success,$(@F) for bat) || $(call failure,$(@F) for bat)
 
 $(THEME_CATPPUCCIN_BTOP): FORCE
+	# https://github.com/catppuccin/btop/releases/latest/download/themes.tar.gz
 	@curl $(CURL_FLAGS) --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/btop/main/themes/$(subst -,_,$(@F))" -o $(@F) && $(call success,$(@F) for btop) || $(call failure,$(@F) for btop)
 
 $(THEME_CATPPUCCIN_LAZYGIT): FORCE
 	@curl $(CURL_FLAGS) --output-dir $(@D) "https://raw.githubusercontent.com/catppuccin/lazygit/main/themes/$(subst catppuccin-,,$(@F))" -o $(@F) && $(call success,$(@F) for Lazygit) || $(call failure,$(@F) for Lazygit)
 	@$(GNU_SED) -i 's/^/  /;1 i gui:' "$@"
 
+$(THEME_ROSE_PINE_BTOP): FORCE
+	@curl $(CURL_FLAGS) --output-dir $(@D) "https://raw.githubusercontent.com/rose-pine/btop/main/$(@F)" -o $(@F) && $(call success,$(@F) for btop) || $(call failure,$(@F) for btop)
 $(THEME_ROSE_PINE_FZF): FORCE
 	@curl $(CURL_FLAGS) --output-dir $(@D) --remote-name "https://raw.githubusercontent.com/rose-pine/fzf/main/dist/$(@F)" && $(call success,$(@F) for fzf) || $(call failure,$(@F) for fzf)
 	@$(GNU_SED) -i 's/FZF_DEFAULT_OPTS/FZF_THEME/' $(@)
@@ -50,10 +58,10 @@ $(THEME_ROSE_PINE_FZF): FORCE
 ## Download Catppuccin theme.
 theme-catppuccin::
 	@echo "$(PURPLE)• Install Catppuccin themes$(RESET)"
-	@$(MAKE) $(THEME_CATPPUCCIN_BAT)
-	@$(MAKE) $(THEME_CATPPUCCIN_BTOP)
-	@$(MAKE) $(THEME_CATPPUCCIN_LAZYGIT)
-	@$(MAKE) theme-postinstall
+	@$(MAKE) --silent $(THEME_CATPPUCCIN_BAT)
+	@$(MAKE) --silent $(THEME_CATPPUCCIN_BTOP)
+	@$(MAKE) --silent $(THEME_CATPPUCCIN_LAZYGIT)
+	@$(MAKE) --silent theme-postinstall
 .PHONY: theme-catppuccin
 
 ## Download Github Contrib themes.
@@ -62,9 +70,8 @@ theme-github::
 	@echo "$(PURPLE)• Install Github themes$(RESET)"
 	@git clone --quiet --depth=1 https://github.com/projekt0n/github-theme-contrib.git $(TMP)
 	@cp -f $(TMP)/themes/kitty/*.conf $(KITTY_PATH)/ && $(call success,Kitty)
-	@cp -f $(TMP)/themes/fzf/* $(FZF_PATH)/ && $(call success,fzf)
+	@cp -f $(TMP)/themes/fzf/github* $(FZF_PATH)/ && $(call success,fzf)
 	@rm -rf $(TMP)
-theme-github::
 	@$(MAKE) --silent $(addsuffix .sh,$(wildcard $(FZF_PATH)/github_*))
 .PHONY: theme-github
 
@@ -89,8 +96,9 @@ theme-nightfox:
 ## Download Rosé Pine theme.
 theme-rose-pine::
 	@echo "$(PURPLE)• Install Rose Pine themes$(RESET)"
-	@$(MAKE) $(THEME_ROSE_PINE_FZF)
-	@$(MAKE) theme-postinstall
+	@$(MAKE) --silent $(THEME_ROSE_PINE_BTOP)
+	@$(MAKE) --silent $(THEME_ROSE_PINE_FZF)
+	@$(MAKE) --silent theme-postinstall
 .PHONY: theme-rose-pine
 
 theme-postinstall:
