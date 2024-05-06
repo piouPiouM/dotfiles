@@ -63,23 +63,6 @@ return {
   },
 
   {
-    "andersevenrud/nordic.nvim",
-    enabled = false,
-    lazy = false,
-    name = 'nordic-frost',
-    opts = {
-      underline_option = 'undercurl',
-      italic = true,
-      italic_comments = true,
-      minimal_mode = false,
-      alternate_backgrounds = false
-    },
-    config = function(_, opts)
-      require('nordic').colorscheme(opts)
-    end,
-  },
-
-  {
     "EdenEast/nightfox.nvim",
     lazy = false,
     opts = {
@@ -126,5 +109,15 @@ return {
     "rebelot/kanagawa.nvim",
     build = 'cp $XDG_DATA_HOME/nvim/lazy/kanagawa.nvim/extras/kanagawa*.conf $XDG_CONFIG_HOME/kitty/themes/',
     lazy = false,
+  },
+
+  {
+    "AlexvZyl/nordic.nvim",
+    build = 'cp $XDG_DATA_HOME/nvim/lazy/nordic.nvim/platforms/kitty/*.conf $XDG_CONFIG_HOME/kitty/themes/',
+    config = function()
+      require 'nordic'.load()
+    end,
+    lazy = false,
+    priority = 1100,
   },
 }
