@@ -1,0 +1,6 @@
+# vim: ft=gitconfig
+[credential]
+  helper = osxkeychain
+
+[merge]
+  tool = diffmerge

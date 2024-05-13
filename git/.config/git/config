@@ -73,8 +73,6 @@
   # Detect whitespace errors when applying a patch
   whitespace = fix
 
-[credential]
-  helper = osxkeychain
 [rerere]
   enabled = true
   autoupdate = true
@@ -83,7 +81,7 @@
   showUntrackedFiles = all
 
 [diff]
-  external = kitty
+  external = difft
   guitool = kitty.gui
   mnemonicPrefix = true
   submodule = log
@@ -139,11 +137,10 @@
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
-[include]
-  path = ~/.local/share/git/linux-config
-  path = ~/.local/share/git/config
-
 [url "git@github.com:"]
   insteadOf = git://github.com/
 [gc]
   autoDetach = false
+[include]
+  path = ~/.local/share/git/current-os-config
+  path = ~/.local/share/git/config

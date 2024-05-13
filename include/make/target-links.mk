@@ -48,9 +48,11 @@ link-bin:
 	@stow --restow --target=$(XDG_DATA_HOME)/bin bin && echo " $(SUCCESS)" || echo " $(FAILURE)"
 .PHONY: link-bin
 
+link-git::
+	@cd $(XDG_DATA_HOME)/git/; ln -sf ./$(CURRENT_OS)-config ./current-os-config
+
 link-ranger::
 	@pip install --upgrade Pillow
-.PHONY: link-ranger
 
 ## Deletes all the symlinks.
 unlink-all: unlink-home unlink-bin $(UNLINK_TARGETS)

@@ -1,2 +1,3 @@
 # Device specific configuration
 config
+current-os-config
