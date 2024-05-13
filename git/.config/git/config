@@ -115,6 +115,8 @@
 
 [fetch]
   recurseSubmodules = on-demand
+[pull]
+	rebase = true
 [push]
   default = current
 [grep]
