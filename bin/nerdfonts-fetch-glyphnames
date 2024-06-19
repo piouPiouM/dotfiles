@@ -24,11 +24,6 @@ check_prerequisites() {
 }
 
 # @internal
-ensure_dir() {
-  [[ -d $1  ]] || mkdir -p "$1"
-}
-
-# @internal
 get_longest_word_length() {
   command jq --raw-output --monochrome-output \
     'del(.METADATA) | keys[] | length' "$1" \
@@ -61,7 +56,7 @@ main() {
   check_prerequisites
 
   local -r _json="${2:-$XDG_DATA_HOME/$USER/symbols/nerdfonts.json}"
-  ensure_dir "$(dirname "${_json}")"
+  ppm::ensure_dir "$(dirname "${_json}")"
   fetch "$1" "${_json_downloaded}" \
     && format "${_json_downloaded}" > "${_json}"
 }

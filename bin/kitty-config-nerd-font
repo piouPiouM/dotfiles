@@ -4,7 +4,7 @@
 # @arg $1 string Configuration file to update.
 # @arg $2 string Version of Nerd Fonts. Defaut to current date.
 
-set -eu +x -o pipefail
+set -euo pipefail
 
 # Use gnu coreutils on macOS for better portability.
 GNU_SED="gsed"
@@ -13,15 +13,12 @@ GNU_FOLD="gfold"
 type $GNU_FOLD > /dev/null 2>&1 || GNU_FOLD="fold"
 
 get_ps_name() {
-  kitty +list-fonts --psnames | $GNU_SED -n -E 's/^\s*'"$1"'.*\((\w+)\)/\1/p'
+  kitty +list-fonts --psnames | $GNU_SED -n -E 's/^\s*'"$1"'\s+\((\w+)\)/\1/p'
 }
 
 print_code_points() {
   local -r _font_name='Symbols Nerd Font'
-  fc-match --format='%{charset}' "$_font_name" \
-    | $GNU_SED 's/[[:alnum:]]*/U+&/ig' \
-    | $GNU_FOLD -s -w 60 \
-    | $GNU_SED -E 's/ /,/g;s/^/symbol_map /g;s/,?$/ '"$(get_ps_name "$_font_name")"'/g'
+  fc-match --format='%{charset}' "$_font_name" | $GNU_SED 's/[[:alnum:]]*/U+&/ig' | $GNU_FOLD -s -w 60 | $GNU_SED -E 's/ /,/g;s/^/symbol_map /g;s/,?$/ '"$(get_ps_name "$_font_name")"'/g'
 }
 
 # Keep only commented lines.
