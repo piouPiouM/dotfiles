@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# @name install-exodus
+# @brief Install Exodus non-custodial wallet from official source.
+
+set -euo pipefail
+
+trap cleanup EXIT
+
+source ppm::lib
+
+declare _tmp
+
+# @internal
+cleanup() {
+  [[ -d $_tmp ]] && rm -rf "$_tmp"
+}
+
+ppm::check_command 'curl'
+ppm::check_command 'trash-put'
+ppm::check_command 'unzip'
+ppm::ensure_dir "$HOME/Applications"
+
+declare -l _version
+
+read -rp "Which Exodus version to download? " _version
+
+declare -r _zip="exodus-linux-x64-${_version}.zip"
+declare -r _hashes="hashes-exodus-${_version}.txt"
+
+_tmp=$(mktemp -d)
+
+curl -fSL --output-dir "${_tmp}" \
+  --remote-name-all "https://downloads.exodus.com/releases/{${_zip},${_hashes}}" \
+  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:126.0) Gecko/20100101 Firefox/126.0' \
+  -H 'Referer: https://www.exodus.com/' \
+  -H 'Sec-GPC: 1' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'Sec-Fetch-Dest: document' \
+  -H 'Sec-Fetch-Mode: navigate' \
+  -H 'Sec-Fetch-Site: same-site'
+
+if [[ -f "${_tmp}/${_hashes}" ]]; then
+  echo "$(grep --color=never -Po "^([a-z0-9]{64})(?=\s+${_zip})" "${_tmp}/${_hashes}") ${_tmp}/${_zip}" | sha256sum --status --check || ppm::failed 1 "Downloaded ${_zip} archive does not satisfy the checksum"
+fi
+
+declare -r _target="$HOME"/Applications/Exodus-linux-x64
+trash-put -f "$_target"
+unzip -qq "${_tmp}/$_zip" -d "$HOME"/Applications
+
+(
+  cd "$_target"
+  ./install-desktop-file.sh
+)
+
+declare -r _icon_path="$XDG_DATA_HOME"/icons/exodus-192x192.png
+declare -r _desktop_path="$XDG_DATA_HOME"/applications/exodus-zip.desktop
+curl -fsSL \
+  --output "$_icon_path" \
+  "https://www.exodus.com/img/favicons/android-icon-192x192.png"
+grep --quiet --regexp='^Icon=' "$_desktop_path" || echo "Icon=${_icon_path}" >> "$_desktop_path"
