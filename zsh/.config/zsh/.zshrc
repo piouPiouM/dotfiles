@@ -41,3 +41,7 @@ bindkey -M vicmd 'j' history-substring-search-down
 if which zoxide >/dev/null 2>&1; then
   _evalcache zoxide init zsh
 fi
+
+if which atuin >/dev/null 2>&1; then
+  _evalcache atuin init zsh
+fi

@@ -3,7 +3,8 @@
 # Symlinks are managed with Stow: https://www.gnu.org/software/stow/stow.html
 # -----------------------------------------------------------------------------
 
-TO_LINK := bash \
+TO_LINK := atuin \
+					 bash \
 					 bat \
 					 btop \
 					 clifm \
