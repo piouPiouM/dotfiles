@@ -43,5 +43,5 @@ if which zoxide >/dev/null 2>&1; then
 fi
 
 if which atuin >/dev/null 2>&1; then
-  _evalcache atuin init zsh
+  _evalcache atuin init zsh --disable-up-arrow
 fi
