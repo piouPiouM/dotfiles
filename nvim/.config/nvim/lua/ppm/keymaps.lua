@@ -60,4 +60,8 @@ M.surround = {
   },
 }
 
+M.Ctrl = function (key)
+  return "<C-" .. key .. ">"
+end
+
 return M
