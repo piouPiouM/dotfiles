@@ -45,4 +45,10 @@ return {
     ft = ft.typescript,
     opts = {},
   },
+
+  {
+    'dmmulroy/tsc.nvim',
+    ft = ft.typescript,
+    opts = {},
+  },
 }
