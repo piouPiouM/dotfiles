@@ -37,7 +37,7 @@ local servers = {
   -- remark_ls = {},
   bashls = {},
   cucumber_language_server = {},
-  emmet_ls = {},
+  emmet_language_server = {},
   efm = require("ppm.plugin.lsp.efm").config,
   yamlls = {},
 }

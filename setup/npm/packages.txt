@@ -1,13 +1,13 @@
 @astrojs/language-server
 @cucumber/language-server
 @mdx-js/language-server
+@olrtg/emmet-language-server
 @styled/typescript-styled-plugin
 @vscode/codicons
 bash-language-server
 browserslist-cli
 corepack
 cssmodules-language-server
-emmet-ls
 htmlhint
 name-color
 name-that-color
