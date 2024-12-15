@@ -30,6 +30,7 @@ local servers = {
   eslint = require("ppm.plugin.lsp.eslint").config,
   html = {},
   cssls = require("ppm.plugin.lsp.cssls").config,
+  css_variables = {},
   cssmodules_ls = require("ppm.plugin.lsp.cssmodules_ls").config,
   stylelint_lsp = require("ppm.plugin.lsp.stylelint_ls").config,
   mdx_analyzer = {},

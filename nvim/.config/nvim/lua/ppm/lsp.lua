@@ -1,9 +1,7 @@
 local api = vim.api
 local M = {}
 
-local function skipFormatting(client) return client.name ~= "tsserver" end
-
-M.format = function(bufnr) vim.lsp.buf.format({ filter = skipFormatting, bufnr = bufnr }) end
+M.format = function(bufnr) vim.lsp.buf.format({ bufnr = bufnr }) end
 
 M.event = {
   format = function(callback, _, bufnr)
