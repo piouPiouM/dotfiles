@@ -39,4 +39,10 @@ return {
     },
     ft = ft.typescript,
   },
+
+  {
+    'dmmulroy/ts-error-translator.nvim',
+    ft = ft.typescript,
+    opts = {},
+  },
 }
