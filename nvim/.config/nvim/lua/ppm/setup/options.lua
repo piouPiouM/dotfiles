@@ -82,6 +82,7 @@ o.smartcase = true  -- ... except there is a capital letter in the query
 o.magic = true      -- Set magic on, for regular expressions
 o.gdefault = true   -- Apply global substitutions
 o.incsearch = true  -- Makes search act like search in modern browsers
+o.inccommand = "split"
 o.grepprg = "rg --vimgrep"
 
 -- }}}1
