@@ -12,6 +12,8 @@ M.config = {
     stylelintplus = {
       autoFixOnFormat = true,
       autoFixOnSave = true,
+      cssInJs = true,
+      unknownAtRules = false,
     },
   },
 }
