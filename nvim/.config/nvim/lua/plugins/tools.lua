@@ -10,6 +10,15 @@ return {
   },
 
   {
+    "max397574/colortils.nvim",
+    ft = colorizer_ft,
+    cmd = "Colortils",
+    config = function()
+      require("colortils").setup()
+    end,
+  },
+
+  {
     "kana/vim-textobj-user",
     dependencies = {
       -- Adds text objects for word-based columns in Vim
