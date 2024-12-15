@@ -17,6 +17,7 @@ npm-check
 prettier
 remark-language-server
 stylelint-lsp
+typescript-language-server
 typescript-styled-plugin
 typescript
 vim-language-server
