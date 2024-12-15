@@ -141,6 +141,9 @@
   required = true
 [url "git@github.com:"]
   insteadOf = git://github.com/
+# Use HTTPS protocol as recommended by Github for performance reasons.
+[url "https://github.com/"]
+  insteadOf = ssh://git@github.com/
 [gc]
   autoDetach = false
 [include]
