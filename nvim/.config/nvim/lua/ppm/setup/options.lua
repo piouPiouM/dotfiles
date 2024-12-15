@@ -51,7 +51,7 @@ o.wrap = true                 -- Wrap lines.
 o.joinspaces = false          -- Only insert 1 space
 opt.formatoptions:append("12jp")
 opt.nrformats:append("alpha") -- Single alphabetical characters will be incremented or decremented.
-opt.diffopt:append({ "algorithm:patience" })
+opt.diffopt:append({ "hiddenoff", "algorithm:minimal" })
 
 o.modeline = true
 o.scrolloff = 10   -- Provide some context when editing.
