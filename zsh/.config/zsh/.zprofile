@@ -10,9 +10,6 @@ source "$ZDOTDIR"/include/detect-os.zsh
 # Path management
 #
 
-_GEM_HOME="$(gem environment user_gemhome 2>/dev/null)"
-_GEM_BIN=${_GEM_HOME:+"${_GEM_HOME}"/bin}
-
 local _current_path="${=path}"
 
 path=(
@@ -25,6 +22,8 @@ path=(
   "$PNPM_HOME"
 )
 
+_GEM_HOME=${_GEM_HOME:-"$(gem environment user_gemhome 2>/dev/null)"}
+
 if [[ -s "$ZDOTDIR/plugins/$CURRENT_OS/path.zsh" ]] then
   typeset -gU path
   source "$ZDOTDIR/plugins/$CURRENT_OS/path.zsh"
@@ -34,6 +33,8 @@ if [[ -s "$HOME"/.local/bin/venv/bin/activate ]] then
   export VIRTUAL_ENV_DISABLE_PROMPT=1
   source "$HOME"/.local/bin/venv/bin/activate
 fi
+
+_GEM_BIN=${_GEM_HOME:+"${_GEM_HOME}"/bin}
 
 path+=(
   "$NPM_PACKAGES"/bin
