@@ -1,4 +1,5 @@
 local config = require("ppm.utils").lazy_config
+local k = require("ppm.keymaps");
 
 return {
   {
@@ -52,8 +53,15 @@ return {
     "stevearc/oil.nvim",
     event = "VeryLazy",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = {
+      { "-", "<CMD>Oil<CR>", { desc = "Browse parent directory" } },
+    },
     opts = {
       delete_to_trash = true,
+      keymaps = {
+        [k.Ctrl(k.vsplit)] = "actions.select_vsplit",
+        [k.Ctrl(k.split)] = "actions.select_split",
+      },
       view_options = {
         show_hidden = true,
       }
@@ -81,11 +89,11 @@ return {
         send_to_qflist = "<C-q>",
       },
     },
-    keys = function (plugin)
+    keys = function(plugin)
       local sj = require(plugin.name)
 
       return {
-        { "Z", sj.run, mode = "n" },
+        { "Z",              sj.run,                                          mode = "n" },
         { "<localleader>Z", function() sj.run({ select_window = true }) end, mode = "n" },
       }
     end,
