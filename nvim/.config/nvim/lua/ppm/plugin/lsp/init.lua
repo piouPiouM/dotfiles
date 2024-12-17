@@ -28,6 +28,7 @@ local servers = {
   lua_ls = require("ppm.plugin.lsp.lua_ls").config,
   jsonls = require("ppm.plugin.lsp.json").config,
   eslint = require("ppm.plugin.lsp.eslint").config,
+  ts_ls = {},
   html = {},
   cssls = require("ppm.plugin.lsp.cssls").config,
   css_variables = {},
