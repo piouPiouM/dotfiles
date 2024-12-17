@@ -3,10 +3,14 @@ local colorizer_ft = { "css", "scss", "sass", "less", "javascript", "typescript"
 
 return {
   {
-    "NvChad/nvim-colorizer.lua",
-    opts = { filetypes = colorizer_ft },
-    ft = colorizer_ft,
-    cmd = "ColorizerToggle",
+    "echasnovski/mini.hipatterns",
+    version = false,
+    event = "VeryLazy",
+    opts = function()
+      return {
+        highlighters = require("ppm.plugin.hipatterns").highlighters
+      }
+    end,
   },
 
   -- Adds text objects for word-based columns in Vim
