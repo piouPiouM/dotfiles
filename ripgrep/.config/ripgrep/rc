@@ -3,6 +3,7 @@
 # vim: ft=conf
 
 # Classical configuration.
+--engine=auto
 --color=auto
 --follow
 --hidden
@@ -10,6 +11,10 @@
 --smart-case
 --no-require-git
 --one-file-system
+
+# Exclude specific files not supported by the global .ignore file
+-g
+!**/chromecast/polyfill.js
 
 # Colors, like Ag
 # --colors=line:fg:yellow
