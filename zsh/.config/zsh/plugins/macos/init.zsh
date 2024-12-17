@@ -17,9 +17,12 @@
   CPPFLAGS="-I${PPM_BREW_PREFIX}/opt/curl/include ${CPPFLAGS}"
   LDFLAGS="-L${PPM_BREW_PREFIX}/opt/ruby/lib ${LDFLAGS}"
   CPPFLAGS="-I${PPM_BREW_PREFIX}/opt/ruby/include ${CPPFLAGS}"
+  LDFLAGS="-L${PPM_BREW_PREFIX}/opt/luajit-openresty/lib ${LDFLAGS}"
+  CPPFLAGS="-I${PPM_BREW_PREFIX}/opt/luajit-openresty/include ${CPPFLAGS}"
 
   export LDFLAGS
   export CPPFLAGS
+  export PKG_CONFIG_PATH="${PPM_BREW_PREFIX}/opt/luajit-openresty/lib/pkgconfig:${PKG_CONFIG_PATH}"
 
   alias -g ls='ls --color=auto'
 
