@@ -22,6 +22,7 @@ TO_LINK := ai \
 					 ripgrep \
 					 starship \
 					 tmux \
+					 yazi \
 					 zsh \
 					 $(SPECIFIC_TO_LINK)
 LINK_TARGETS := $(addprefix link-,$(TO_LINK))

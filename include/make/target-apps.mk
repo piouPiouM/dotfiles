@@ -38,6 +38,10 @@ apps-uninstall-fzf:
 	@rm -rf $(XDG_DATA_HOME)/fzf-repo
 .PHONY: apps-uninstall-fzf
 
+apps-install-yazi:
+	@ya pack --add GrzegorzKozub/mdcat
+	@ya pack --add yazi-rs/plugins:max-preview
+
 ## Setup Python environment.
 apps-setup-python: | $(ENSURE_DIRS)
 	@echo "$(PURPLE)• Setting Python virtual environment$(RESET)"
