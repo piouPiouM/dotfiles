@@ -2,5 +2,8 @@ cargo-update
 difftastic
 starship
 --git https://github.com/loichyan/nerdfix.git
-tokei
 ast-grep
+tokei--locked --git https://github.com/sxyazi/yazi.git yazi-fm
+--locked --git https://github.com/sxyazi/yazi.git yazi-fm
+--locked --git https://github.com/sxyazi/yazi.git yazi-cli
+mdcat
