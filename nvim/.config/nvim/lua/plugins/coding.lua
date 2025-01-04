@@ -89,4 +89,19 @@ return {
     },
     event = "VeryLazy"
   },
+
+  {
+    "zbirenbaum/copilot-cmp",
+    config = config("copilot_cmp"),
+    dependencies = {
+      "hrsh7th/nvim-cmp",
+      {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = config("copilot"),
+      },
+      { 'AndreM222/copilot-lualine' }
+    },
+  },
 }

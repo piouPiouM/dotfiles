@@ -13,6 +13,7 @@ local filter = require("ppm.plugin.cmp.filtering")
 vim.api.nvim_set_hl(0, "CmpItemMenu", { link = "@conditional" })
 vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { link = "TelescopeMatching" })
 vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { link = "TelescopeMatching" })
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { link = "DevIconAi"})
 
 cmp.setup({
   enabled = function()
@@ -35,6 +36,7 @@ cmp.setup({
   mapping = require("ppm.plugin.cmp.mapping"),
   sources = cmp.config.sources({
     { name = "nvim_lsp_signature_help" },
+    { name = "copilot" },
     {
       name = "nvim_lsp",
       entry_filter = filter.filters.keepMembersOnly,

@@ -7,6 +7,7 @@ local function format_source(name)
     buffer = ui.icons.buffer,
     calc = ui.icons.calc,
     comment = ui.icons.comment,
+    copilot = ui.icons.copilot,
     luasnip = ui.icons.snippet,
     nvim_lsp = ui.icons.lsp,
     nvim_lua = ui.icons.lua,

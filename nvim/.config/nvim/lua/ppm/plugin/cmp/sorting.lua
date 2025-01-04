@@ -7,6 +7,7 @@ end
 
 local M = {
   comparators = {
+    require("copilot_cmp.comparators").prioritize,
     compare.recently_used,
     compare.exact,
     compare.score,

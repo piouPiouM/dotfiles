@@ -4,14 +4,15 @@ M.icon_padding = vim.env.TERM == "xterm-kitty" and " " or ""
 
 M.icons = {
   -- completion
-  comment = " ",
-  lua = "󰢱 ",
-  lsp = "",
-  treesitter = " ",
-  snippet = "󱐋",
   buffer = " ",
   calc = "󱖦 ",
+  comment = " ",
+  copilot = " ",
   ellipsis = " ",
+  lsp = "",
+  lua = "󰢱 ",
+  snippet = "󱐋",
+  treesitter = " ",
   -- diagnostic / log
   error = " ",
   warn = " ",
