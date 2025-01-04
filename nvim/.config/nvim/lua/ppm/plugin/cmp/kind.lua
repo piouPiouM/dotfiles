@@ -10,8 +10,9 @@ end
 M.get_icon = function(kind)
   local codicon = require("codicons")
   local icon_name = cik.symbols[kind] ~= nil and cik.symbols[kind].icon or 'symbol-misc'
+  local icon = kind:lower() == "copilot" and "" or codicon.get(icon_name:lower(), 'icon')
 
-  return string.format("%s ", codicon.get(icon_name, 'icon'))
+  return string.format("%s ", icon)
 end
 
 M.is = function(name, kind)

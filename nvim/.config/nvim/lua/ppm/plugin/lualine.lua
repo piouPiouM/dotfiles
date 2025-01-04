@@ -86,7 +86,33 @@ require("lualine").setup({
     lualine_a = { { "mode", fmt = fmt_mode } },
     lualine_b = { { "b:gitsigns_head", icon = icons.git_head } },
     lualine_c = { { "filename", file_status = true, path = 3, symbols = file_status_symbols } },
-    lualine_x = {},
+    lualine_x = {
+      {
+        "copilot",
+        cond = function() return vim.tbl_get(require("lazy.core.config"), "plugins", "copilot.lua", "_", "installed") end,
+        show_colors = true,
+        symbols = {
+          status = {
+            icons = {
+              enabled = " ",
+              sleep = " ",
+              disabled = " ",
+              warning = " ",
+              unknown = " "
+            },
+            hl = {
+              enabled = require('copilot-lualine.colors').get_hl_value(0, "DiagnosticSignOk", "fg"),
+              sleep = require('copilot-lualine.colors').get_hl_value(0, "DiagnosticSignInfo", "fg"),
+              disabled = require('copilot-lualine.colors').get_hl_value(0, "DiagnosticSignHint", "fg"),
+              warning = require('copilot-lualine.colors').get_hl_value(0, "DiagnosticSignWarn", "fg"),
+              unknown = require('copilot-lualine.colors').get_hl_value(0, "DiagnosticSignHint", "fg"),
+            }
+          },
+          spinners = require("copilot-lualine.spinners").dots,
+          spinner_color = "#6272A4"
+        },
+      }
+    },
     lualine_y = {
       { "searchcount" },
       {
