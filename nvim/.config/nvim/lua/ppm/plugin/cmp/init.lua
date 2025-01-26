@@ -13,7 +13,7 @@ local filter = require("ppm.plugin.cmp.filtering")
 vim.api.nvim_set_hl(0, "CmpItemMenu", { link = "@conditional" })
 vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { link = "TelescopeMatching" })
 vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { link = "TelescopeMatching" })
-vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { link = "DevIconAi"})
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { link = "DevIconAi" })
 
 cmp.setup({
   enabled = function()
@@ -34,38 +34,41 @@ cmp.setup({
   end,
   snippet = { expand = function(args) if luasnip ~= nil then luasnip.lsp_expand(args.body) end end },
   mapping = require("ppm.plugin.cmp.mapping"),
-  sources = cmp.config.sources({
-    { name = "nvim_lsp_signature_help" },
-    { name = "copilot" },
+  sources = cmp.config.sources(
     {
-      name = "nvim_lsp",
-      entry_filter = filter.filters.keepMembersOnly,
-    },
-    { name = "calc" },
-    {
-      name = "luasnip",
-      keyword_length = 1
-    },
-  }, {
-    { name = "async_path" },
-    {
-      name = "treesitter",
-      keyword_length = 3,
-    },
-    {
-      name = "buffer",
-      keyword_length = 5,
-      option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end },
-    },
-    {
-      name = 'spell',
-      option = {
-        enable_in_context = function()
-          return require('cmp.config.context').in_treesitter_capture('spell')
-        end,
+      { name = "nvim_lsp_signature_help" },
+      { name = "copilot" },
+      {
+        name = "nvim_lsp",
+        entry_filter = filter.filters.keepMembersOnly,
       },
+      { name = "calc" },
+      {
+        name = "luasnip",
+        keyword_length = 1
+      },
+      { name = 'render-markdown' },
     },
-  }),
+    {
+      { name = "async_path" },
+      {
+        name = "treesitter",
+        keyword_length = 3,
+      },
+      {
+        name = "buffer",
+        keyword_length = 5,
+        option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end },
+      },
+      {
+        name = 'spell',
+        option = {
+          enable_in_context = function()
+            return require('cmp.config.context').in_treesitter_capture('spell')
+          end,
+        },
+      },
+    }),
   sorting = require("ppm.plugin.cmp.sorting"),
   formatting = require("ppm.plugin.cmp.formatting"),
   experimental = { ghost_text = true },
