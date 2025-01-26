@@ -2,8 +2,7 @@ local ui = require("ppm.ui")
 local providers = require("ppm.plugin.fzf-lua.providers")
 
 local config = {
-  "telescope",
-  global_git_icons = true,
+  git_icons = true,
   global_resume = true,
   global_resume_query = true,
   file_icon_padding = ui.icon_padding,
@@ -19,7 +18,12 @@ local config = {
       },
     },
   },
-  keymap = { builtin = { ["?"] = "toggle-preview" } },
+  keymap = {
+    builtin = { ["<M-,>"] = "toggle-preview" }
+  },
+  actions = {
+    files = { true },
+  },
 }
 
 return vim.tbl_deep_extend("force", config, providers)
