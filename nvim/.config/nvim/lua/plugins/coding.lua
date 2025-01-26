@@ -43,6 +43,17 @@ return {
   },
 
   {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+    ft = { "markdown", "markdown.mdx", "codecompanion", "fzf" },
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {
+      file_types = { "markdown", "markdown.mdx", "codecompanion" }
+    },
+  },
+
+  {
     "rafamadriz/friendly-snippets",
     event = "InsertEnter",
   },

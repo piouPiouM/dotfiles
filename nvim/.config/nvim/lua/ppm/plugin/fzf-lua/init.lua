@@ -16,6 +16,12 @@ local config = {
         ["jpg"] = { "viu", "-t" },
         ["png"] = { "viu", "-t" },
       },
+      render_markdown = {
+        filetypes = {
+          ["markdown"] = true,
+          ["markdown.mdx"] = true
+        }
+      },
     },
   },
   keymap = {
