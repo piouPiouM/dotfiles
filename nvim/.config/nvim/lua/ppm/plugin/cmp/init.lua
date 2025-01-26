@@ -48,6 +48,15 @@ cmp.setup({
         keyword_length = 1
       },
       { name = 'render-markdown' },
+      {
+        name = "rg",
+        keyword_length = 5,
+        option = {
+          additional_arguments = "--smart-case",
+          context_before = 3,
+          context_after = 3,
+        }
+      },
     },
     {
       { name = "async_path" },
