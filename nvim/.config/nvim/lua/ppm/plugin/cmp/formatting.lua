@@ -14,6 +14,7 @@ local function format_source(name)
     path = ui.icons.folder,
     asyn_path = ui.icons.folder,
     treesitter = ui.icons.treesitter,
+    rg = ui.icons.rg,
   }
 
   return source_icon[name:lower()] or ""

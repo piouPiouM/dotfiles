@@ -82,6 +82,7 @@ return {
       "saadparwaiz1/cmp_luasnip",
       "ray-x/cmp-treesitter",
       "f3fora/cmp-spell",
+      "lukas-reineke/cmp-rg",
     },
     event = "InsertEnter",
     config = config("cmp"),
