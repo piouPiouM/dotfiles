@@ -11,6 +11,7 @@ M.icons = {
   ellipsis = " ",
   lsp = "",
   lua = "󰢱 ",
+  rg = "󱎸 ",
   snippet = "󱐋",
   treesitter = " ",
   -- diagnostic / log

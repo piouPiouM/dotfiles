@@ -1,4 +1,4 @@
-local actions = require("fzf-lua.actions")
+local actions = require("fzf-lua").actions
 
 local M = {}
 
