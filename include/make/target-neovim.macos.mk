@@ -10,7 +10,7 @@ install-neovim-dependencies::
 	@brew install -q lua-language-server
 .PHONY: install-neovim-dependencies
 
-update-neovim::
+update-neovim:
 	@brew upgrade -q luajit luajit-openresty luarocks
 	@brew upgrade -q --fetch-HEAD utf8proc || exit 0
 	@brew upgrade -q --fetch-HEAD tree-sitter || exit 0

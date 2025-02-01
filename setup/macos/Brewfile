@@ -7,19 +7,13 @@ cask "abstract"
 cask "alfred"
 # Web browser focusing on privacy
 cask "brave-browser"
-# Trains AIs to understand and translate texts
-cask "deepl"
 # Visually compare and merge files
 cask "diffmerge"
 # Web browser
-cask "firefox", args: { language: "en" }
-cask "firefox-developer-edition"
-# Developer targeted fonts with a high number of glyphs
+cask "firefox@developer-edition"
 cask "font-fira-code-nerd-font"
-# Developer targeted fonts with a high number of glyphs
 cask "font-hasklug-nerd-font"
 cask "font-inconsolata"
-# Typeface made for developers
 cask "font-jetbrains-mono"
 # Free and open-source image editor
 cask "gimp"
@@ -31,10 +25,12 @@ cask "keepassxc"
 cask "kitty"
 # Markdown editor
 cask "mark-text"
-# Web browser
+# Multi-platform web browser
 cask "microsoft-edge"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# Colour picker for colours onscreen
+cask "pika"
 # Team communication and collaboration software
 cask "slack"
 # Graphical client for Git version control
@@ -43,9 +39,14 @@ cask "sourcetree"
 cask "syncthing"
 # Open-source code editor
 cask "visual-studio-code"
+# Web browser with built-in email client focusing on customization and control
+cask "vivaldi"
 vscode "bierner.color-info"
 vscode "catppuccin.catppuccin-vsc"
+vscode "github.copilot"
+vscode "github.copilot-chat"
 vscode "guillaumedoutriaux.name-that-color"
+vscode "ms-python.debugpy"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
 vscode "ms-toolsai.jupyter"
@@ -60,6 +61,8 @@ vscode "styled-components.vscode-styled-components"
 vscode "sumneko.lua"
 # Text processor and publishing toolchain for AsciiDoc
 brew "asciidoctor"
+# Improved shell history for zsh, bash, fish and nushell
+brew "atuin"
 # Programmable completion for Bash 3.2
 brew "bash-completion"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -72,6 +75,8 @@ brew "chafa"
 brew "editorconfig"
 # LLVM bytecode to JavaScript compiler
 brew "emscripten"
+# Run arbitrary commands when files change
+brew "entr"
 # Perl lib for reading and writing EXIF metadata
 brew "exiftool"
 # Fast partial replacement for the codemod tool
@@ -86,6 +91,8 @@ brew "fx"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Audit git repos for secrets
+brew "gitleaks"
 # Generate introspection data for GObject libraries
 brew "gobject-introspection"
 # Image processing tools collection
@@ -108,12 +115,16 @@ brew "luarocks"
 brew "mdcat"
 # Unified display of technical and tag data for audio/video
 brew "media-info"
+# Simple tool to make locally trusted development certificates
+brew "mkcert"
 # Nice to use pager for humans
 brew "moar"
 # Node version management
 brew "n"
 # Parser generator tool and incremental parsing library
 brew "tree-sitter", args: ["HEAD"]
+# Clean C library for processing UTF-8 Unicode data
+brew "utf8proc", args: ["HEAD"]
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim", args: ["HEAD"]
 # HTTP/2 C Library
@@ -130,6 +141,8 @@ brew "ranger"
 brew "resvg"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Rust toolchain installer
+brew "rustup"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
@@ -144,7 +157,7 @@ brew "tidy-html5"
 # Program that allows you to count code, quickly
 brew "tokei"
 # CLI tool that moves files or folder to the trash
-brew "trash"
+brew "trash", link: true
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # URL extractor/launcher

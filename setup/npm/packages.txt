@@ -5,8 +5,9 @@
 @styled/typescript-styled-plugin
 @vscode/codicons
 bash-language-server
-browserslist-cli
+browserslist
 corepack
+css-variables-language-server
 cssmodules-language-server
 htmlhint
 name-color
