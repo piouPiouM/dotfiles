@@ -1,21 +1,24 @@
 local fp = require("ppm.toolkit.fp")
 
-local with_classic_cmd = function(opts)
+---@param opts NoiceConfig
+local with_presets = function(opts)
   return vim.tbl_deep_extend("force", opts or {}, {
-    cmdline = {
-      view = "cmdline",
-      format = {
-        search_down = {
-          view = "cmdline",
-        },
-        search_up = {
-          view = "cmdline",
-        },
-      },
+    presets = {
+      command_palette = false,
     },
   })
 end
 
+---@param opts NoiceConfig
+local with_classic_cmd = function(opts)
+  return vim.tbl_deep_extend("force", opts or {}, {
+    cmdline = {
+      view = "cmdline",
+    },
+  })
+end
+
+---@param opts NoiceConfig
 local filter_noise = function(opts)
   return vim.tbl_deep_extend("force", opts or {}, {
     routes = {
@@ -26,6 +29,15 @@ local filter_noise = function(opts)
           find = "written",
         },
         opts = { skip = true },
+      },
+      {
+        view = "mini",
+        filter = {
+          event = "msg_showmode",
+          any = {
+            { find = "recording" },
+          },
+        },
       },
     },
   })
@@ -58,16 +70,18 @@ local pimp = function(opts)
     max_width = function()
       return math.floor(vim.o.columns * 0.75)
     end,
-    on_open = function(win)
-      vim.api.nvim_win_set_config(win, { zindex = 100 })
-    end,
+    -- on_open = function(win)
+    --   vim.api.nvim_win_set_config(win, { zindex = 100 })
+    -- end,
   })
 end
 
+---@param opts NoiceConfig
 return function(_, opts)
   return fp.pipe(
     opts,
     pimp,
+    with_presets,
     with_classic_cmd,
     override_lsp,
     filter_noise

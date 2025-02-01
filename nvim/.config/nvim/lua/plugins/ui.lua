@@ -21,14 +21,20 @@ return {
     "folke/noice.nvim",
     dependencies = {
       "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
+      {
+        "rcarriga/nvim-notify",
+        opts = {
+          background_colour = "#000000",
+          render = "wrapped-compact"
+        },
+      }
     },
     event = "VeryLazy",
     keys = {
       {
         "<leader>L",
         function()
-          require("notify").dismiss({ silent = true, pending = true })
+          require("noice").cmd("dismiss")
         end,
         desc = "Dismiss all Notifications",
       },
