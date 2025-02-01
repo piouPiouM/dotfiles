@@ -3,8 +3,7 @@
 local fp = require("ppm.toolkit.fp.function")
 local pipe, reduce = fp.pipe, fp.reduce
 
----@class Dict<K, A>: { _data: table<K, table>, _len: number }
----@field _len number Size of the contained data.
+---@class Dict<K, A>: { _data: table<K, table> }
 ---@field _data table Actual stored data.
 local Dict = {}
 
@@ -12,7 +11,7 @@ local mt = {
   _tag = "dict",
   __index = Dict,
   __len = function(dict)
-    return dict._len
+    return vim.tbl_count(dict._data)
   end,
   __tostring = function(ma)
     return ("Dict(%s)"):format(vim.inspect(ma._data))
@@ -29,7 +28,6 @@ local mt = {
 ---@return Dict<K, A> dict The new dictionary.
 Dict.of = function(t)
   local instance = {
-    _len = 0,
     _data = {},
   }
 
@@ -37,7 +35,6 @@ Dict.of = function(t)
     for key, value in pairs(t) do
       if type(value) == "nil" then goto continue end
 
-      instance._len = instance._len + 1
       instance._data[key] = { key, value }
       ::continue::
     end
@@ -192,6 +189,7 @@ Dict.lookup = function(...)
   end
 end
 
+---@todo
 Dict.delete = function(...)
   local path = arg
 

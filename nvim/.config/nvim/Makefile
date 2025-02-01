@@ -9,7 +9,6 @@ MAKEFLAGS += --no-builtin-rules
 
 test:
 	@nvim --headless --noplugin \
-		-u $$XDG_DATA_HOME/nvim/site/pack/packer/start/plenary.nvim/tests/minimal_init.vim \
 		-c "PlenaryBustedDirectory ./lua/tests/"
 .PHONY: test
 
@@ -34,8 +33,7 @@ endif
 
 test-one:
 	@nvim --headless --noplugin \
-		-u $$XDG_DATA_HOME/nvim/site/pack/packer/start/plenary.nvim/tests/minimal_init.vim \
-		-c "PlenaryBustedFile $(SPEC_FILE)"
+		-c "PlenaryTestFile $(SPEC_FILE)"
 .PHONY: test-one
 
 watch-one:
