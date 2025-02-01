@@ -57,6 +57,7 @@ return {
       { "-", "<CMD>Oil<CR>", { desc = "Browse parent directory" } },
     },
     opts = {
+      default_file_explorer = true,
       delete_to_trash = true,
       keymaps = {
         [k.Ctrl(k.vsplit)] = "actions.select_vsplit",
