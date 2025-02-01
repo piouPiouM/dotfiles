@@ -8,4 +8,5 @@ path+=(
   "$PPM_BREW_PREFIX"/opt/curl/bin
   "$PPM_BREW_PREFIX"/opt/rustup/bin
   "$PPM_BREW_PREFIX"/opt/luajit-openresty/bin
+  "$PPM_BREW_PREFIX/opt/libgit2@1.7/bin"
 )
