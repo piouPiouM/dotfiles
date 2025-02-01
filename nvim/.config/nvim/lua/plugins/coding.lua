@@ -63,7 +63,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-cmdline", -- TODO: to replace w/ Noice
       "FelipeLema/cmp-async-path",
       "hrsh7th/cmp-calc",
       "hrsh7th/cmp-nvim-lsp-signature-help",
@@ -88,20 +88,5 @@ return {
       numhl = true
     },
     event = "VeryLazy"
-  },
-
-  {
-    "zbirenbaum/copilot-cmp",
-    config = config("copilot_cmp"),
-    dependencies = {
-      "hrsh7th/nvim-cmp",
-      {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = config("copilot"),
-      },
-      { 'AndreM222/copilot-lualine' }
-    },
   },
 }

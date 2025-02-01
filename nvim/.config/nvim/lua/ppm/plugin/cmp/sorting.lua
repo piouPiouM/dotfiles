@@ -6,6 +6,7 @@ local function vscode(entry1, entry2)
 end
 
 local M = {
+  priority_weight = 2,
   comparators = {
     require("copilot_cmp.comparators").prioritize,
     compare.recently_used,
