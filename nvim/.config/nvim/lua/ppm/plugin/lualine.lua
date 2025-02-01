@@ -1,6 +1,7 @@
 -- +-------------------------------------------------+
 -- | A | B | C                             X | Y | Z |
 -- +-------------------------------------------------+
+local codecompanion = require("ppm.plugin.lualine.components.codecompanion")
 local ui = require("ppm.ui")
 local icons = ui.icons
 
@@ -57,7 +58,7 @@ local winbar = {
       "diff",
       source = diff_source,
       symbols = { added = icons.diff_added, modified = icons.diff_modified, removed = icons.diff_removed },
-      cond = function() return vim.api.nvim_buf_get_option(0, "filetype") ~= "alpha" end,
+      cond = function() return vim.api.nvim_get_option_value("filetype", {}) ~= "alpha" end,
     },
   },
 }
@@ -88,6 +89,10 @@ require("lualine").setup({
     lualine_c = { { "filename", file_status = true, path = 3, symbols = file_status_symbols } },
     lualine_x = {
       {
+        codecompanion,
+        cond = function() return vim.tbl_get(require("lazy.core.config"), "plugins", "copilot.lua", "_", "installed") end,
+      },
+      {
         "copilot",
         cond = function() return vim.tbl_get(require("lazy.core.config"), "plugins", "copilot.lua", "_", "installed") end,
         show_colors = true,
@@ -117,11 +122,11 @@ require("lualine").setup({
       { "searchcount" },
       {
         "encoding",
-        cond = function() return vim.api.nvim_buf_get_option(0, "fileencoding") ~= "utf-8" end,
+        cond = function() return vim.api.nvim_get_option_value("fileencoding", {}) ~= "utf-8" end,
       },
       {
         "fileformat",
-        cond = function() return vim.api.nvim_buf_get_option(0, "fileformat") ~= "unix" end,
+        cond = function() return vim.api.nvim_get_option_value("fileformat", {}) ~= "unix" end,
       },
       "filetype",
     },
@@ -129,5 +134,5 @@ require("lualine").setup({
   },
   inactive_sections = {}, -- No longer useful since I use the global status bar.
   tabline = {},
-  extensions = { "lazy", "neo-tree", "oil", "quickfix", "trouble" },
+  extensions = { "lazy", "fzf", "neo-tree", "oil", "quickfix", "trouble" },
 })
