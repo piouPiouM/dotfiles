@@ -1,3 +1,5 @@
+local async_util = require("plenary.async.util")
+
 local M = {}
 
 M.debug = function(message)
@@ -79,6 +81,11 @@ end
 ---@param t table
 ---@return table
 M.copy = function(t)
+  -- If we are in a fast event await the scheduler.
+  if vim.in_fast_event() then
+    async_util.scheduler()
+  end
+
   return vim.fn.copy(t) --[[@as table]]
 end
 
