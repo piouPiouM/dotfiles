@@ -106,6 +106,10 @@ Either.fromOption = function(errorValue)
   end
 end
 
+---@generic A
+---@generic E
+---@param ma Either<E,A>
+---@return A|nil
 Either.toNullable = function(ma)
   return is_right(ma) and ma.right or nil
 end

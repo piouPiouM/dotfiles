@@ -20,6 +20,8 @@ g.snippets = "luasnip"
 -- Support embedded lua
 g.vimsyn_embed = "l"
 
+g.enable_codecompanion_custom_messages = true
+
 -- Configure providers to make startup faster {{{
 -- See https://neovim.io/doc/user/provider.html
 g.node_host_prog = bin_path .. "/neovim-node-host"

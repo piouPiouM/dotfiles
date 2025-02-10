@@ -3,7 +3,8 @@
 # Symlinks are managed with Stow: https://www.gnu.org/software/stow/stow.html
 # -----------------------------------------------------------------------------
 
-TO_LINK := atuin \
+TO_LINK := ai \
+					 atuin \
 					 bash \
 					 bat \
 					 btop \

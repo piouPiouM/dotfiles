@@ -5,6 +5,7 @@ return {
     mapping_key_prefix .. "a",
     "<cmd>CodeCompanionActions<cr>",
     desc = "Code Companion - Actions",
+    mode = { "n", "v" },
   },
   {
     mapping_key_prefix .. "v",

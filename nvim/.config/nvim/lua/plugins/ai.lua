@@ -78,7 +78,7 @@ return {
     --     desc = "Add visually selected chat to the current chat buffer",
     --   },
     -- },
-    config = config("codecompanion.config"),
+    config = config("codecompanion"),
     keys = require("ppm.plugin.codecompanion.keys"),
   },
 }
