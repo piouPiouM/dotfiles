@@ -40,6 +40,12 @@ end
 
 ---@section Strings
 
+---@param s string
+---@return string
+M.trim = function(s)
+  return S.trim()(s)
+end
+
 --- Returns the optional first word of the given string.
 ---
 ---@param s string

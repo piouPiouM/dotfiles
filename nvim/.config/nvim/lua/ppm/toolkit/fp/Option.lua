@@ -175,6 +175,8 @@ end
 --- if the `mo` value is a `Some`, returns that `mo`; otherwise,
 --- returns the result of the `elseFn` callback.
 ---
+--- Common name: altW
+---
 ---@generic A
 ---@generic B
 ---@param alternateFn LazyArg<Option<B>> The function to apply if `mo` is `None`.
@@ -299,12 +301,12 @@ end
 
 ---@section Aliases
 
-Option.of = Option.fromNullable
-Option.unit = Option.fromNullable
 Option.bind = Option.flatMap
 Option.chain = Option.flatMap
 Option.fmap = Option.map
 Option.lift = Option.map
+Option.of = Option.fromNullable
+Option.unit = Option.fromNullable
 
 -- Expose locals
 

@@ -202,8 +202,7 @@ describe("Option", function()
 
     describe("orElse()", function()
       it("should return the given Option, without calling the callback", function()
-        local callback = spy.new(function() return some(0) end)
-        ---@diagnostic disable-next-line: param-type-mismatch
+        local callback = spy.new(function() return some(0) end) --[[@as LazyArg<Option<number>>]]
         local actual = pipe(some(1), Option.orElse(callback))
         assert.are.same(some(1), actual)
         assert.spy(callback).was_not.called()
@@ -211,8 +210,7 @@ describe("Option", function()
       end)
 
       it("should call the callback and returns branched Option", function()
-        local callback = spy.new(function() return some(0) end)
-        ---@diagnostic disable-next-line: param-type-mismatch
+        local callback = spy.new(function() return some(0) end) --[[@as LazyArg<Option<number>>]]
         local actual = pipe(none, Option.orElse(callback))
         assert.are.same(some(0), actual)
         assert.spy(callback).was.called()

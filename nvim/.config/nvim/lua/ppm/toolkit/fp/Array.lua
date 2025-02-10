@@ -195,7 +195,7 @@ Array.compact = Array.filter_map(F.identity)
 ---@return fun(array: A[]): A
 function Array.append(value)
   return function(array)
-    local t = Array.copy(array)
+    local t = F.copy(array)
     table.insert(t, value)
 
     return t
@@ -209,7 +209,7 @@ end
 ---@return fun(array: A[]): A
 function Array.prepend(value)
   return function(array)
-    local t = Array.copy(array)
+    local t = F.copy(array)
     table.insert(t, 1, value)
 
     return t
@@ -242,9 +242,7 @@ end
 ---@generic A
 ---@param array A[] The dictionary to clone.
 ---@return A[] copy
-Array.copy = function(array)
-  return F.copy(array)
-end
+Array.copy = F.copy
 
 --- Test whether an array contains a particular index.
 ---

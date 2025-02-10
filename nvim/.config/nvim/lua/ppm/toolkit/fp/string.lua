@@ -94,15 +94,18 @@ M.trim = function(chars)
   return F.compose(M.trim_end(chars), M.trim_start(chars))
 end
 
+---@class StringSplitOptions
+---@field plain boolean? Use `separator` literally and not as pattern (as in string.find).
+---@field trimempty boolean? Discard empty segments at start and end of the sequence.
+
 --- Splits `s`tring by `separator`.
 ---
 ---@param separator string The separator pattern to split by.
+---@param opts StringSplitOptions?
 ---@return fun(s: string): string[]
-M.split = function(separator)
-  local opts = { trimempty = true, plain = false }
-
+M.split = function(separator, opts)
   return function(s)
-    return vim.split(s, separator, opts)
+    return vim.split(s, separator, vim.tbl_extend("force", { trimempty = true, plain = false }, opts or {}))
   end
 end
 
