@@ -8,8 +8,8 @@ MAKEFLAGS += --no-builtin-rules
 .SHELLFLAGS := -eu -o pipefail -c
 
 test:
-	@nvim --headless --noplugin \
-		-u $$XDG_DATA_HOME/nvim/site/pack/packer/start/plenary.nvim/tests/minimal_init.vim \
+	@APP_ENV=test nvim --headless --noplugin \
+		-u ./scripts/minimal_init.lua \
 		-c "PlenaryBustedDirectory ./lua/tests/"
 .PHONY: test
 
@@ -33,8 +33,8 @@ ifeq (watch-one,$(FIRST_TARGET))
 endif
 
 test-one:
-	@nvim --headless --noplugin \
-		-u $$XDG_DATA_HOME/nvim/site/pack/packer/start/plenary.nvim/tests/minimal_init.vim \
+	@APP_ENV=test nvim --headless --noplugin \
+		-u ./scripts/minimal_init.lua \
 		-c "PlenaryBustedFile $(SPEC_FILE)"
 .PHONY: test-one
 

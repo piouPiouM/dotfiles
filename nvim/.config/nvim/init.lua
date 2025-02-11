@@ -8,6 +8,13 @@ local bin_path = fn.has("macunix") == 1 and os.getenv("PPM_BREW_PREFIX") .. "/bi
 o.encoding = "utf-8"
 o.fileencoding = "utf-8"
 
+cmd([[runtime! lua/ppm/setup/globals.lua]])
+
+-- Stop here when running in test environement.
+if os.getenv("APP_ENV") == "test" then
+  return
+end
+
 g.mapleader = " "
 g.maplocalleader = "ù"
 
@@ -35,10 +42,7 @@ g.python3_host_prog = os.getenv("VIRTUAL_ENV") and fn.expand("$VIRTUAL_ENV/bin/p
 
 -- }}}
 
-cmd [[
-  runtime! lua/ppm/setup/globals.lua
-  runtime! lua/ppm/setup/options.lua
-]]
+cmd([[runtime! lua/ppm/setup/options.lua]])
 
 require("ppm.plugin.lazy")
 
