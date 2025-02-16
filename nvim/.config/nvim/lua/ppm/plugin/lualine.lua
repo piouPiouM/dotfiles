@@ -2,6 +2,7 @@
 -- | A | B | C                             X | Y | Z |
 -- +-------------------------------------------------+
 local codecompanion = require("ppm.plugin.lualine.components.codecompanion")
+local macro_is_recording = require("ppm.plugin.lualine.components.macro")
 local ui = require("ppm.ui")
 local icons = ui.icons
 
@@ -88,6 +89,11 @@ require("lualine").setup({
     lualine_b = { { "b:gitsigns_head", icon = icons.git_head } },
     lualine_c = { { "filename", file_status = true, path = 3, symbols = file_status_symbols } },
     lualine_x = {
+      {
+        macro_is_recording,
+        color = { fg = "#333333", bg = "#ff6666" },
+        separator = { left = "", right = " " },
+      },
       {
         codecompanion,
         cond = function() return vim.tbl_get(require("lazy.core.config"), "plugins", "copilot.lua", "_", "installed") end,
