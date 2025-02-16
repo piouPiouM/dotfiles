@@ -20,6 +20,8 @@ M.event = {
 
     api.nvim_buf_create_user_command(bufnr, "Format", make_formater,
       { desc = "Format current buffer with LSP" })
+
+    vim.keymap.set('n', '<Leader>=', "<Cmd>Format<CR>", { buffer = true, desc = "Format current buffer with LSP" })
   end,
 }
 
