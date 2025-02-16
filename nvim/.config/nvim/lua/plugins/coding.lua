@@ -49,7 +49,11 @@ return {
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {
-      file_types = { "markdown", "markdown.mdx", "codecompanion" }
+      file_types = { "markdown", "markdown.mdx", "codecompanion" },
+      heading = {
+        icons = { "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 ", "󰉯 ", "󰉰 " },
+        signs = { "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 ", "󰉯 ", "󰉰 " },
+      },
     },
   },
 
