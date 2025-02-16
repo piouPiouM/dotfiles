@@ -36,8 +36,13 @@ return {
     "marilari88/twoslash-queries.nvim",
     opts = {
       multi_line = true,
+      is_enabled = true,
     },
     ft = ft.typescript,
+    keys = {
+      { "<leader>,", ":TwoslashQueriesInspect<CR>", mode = "n", desc = "Inspect twoslash queries" },
+      { "<leader>?", ":TwoslashQueriesRemove<CR>", mode = "n", desc = "Remove twoslash queries" },
+    },
   },
 
   {
