@@ -21,6 +21,7 @@ local M = {
 
 
 M.git.blame = pipe({}, decorate.with_theme("up"))
+M.git.status = pipe({}, decorate.with_theme("fullscreen"))
 
 M.git.files = pipe(
   {
