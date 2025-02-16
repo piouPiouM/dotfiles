@@ -28,7 +28,7 @@ local servers = {
   lua_ls = require("ppm.plugin.lsp.lua_ls").config,
   jsonls = require("ppm.plugin.lsp.json").config,
   eslint = require("ppm.plugin.lsp.eslint").config,
-  ts_ls = {},
+  ts_ls = require("ppm.plugin.lsp.ts_ls").config,
   html = {},
   cssls = require("ppm.plugin.lsp.cssls").config,
   css_variables = {},
@@ -55,9 +55,8 @@ for name, opts in pairs(servers) do
 
     client.setup(vim.tbl_extend("force", {
       flags = { debounce_text_changes = 150 },
-      on_attach = events.on_attach,
       on_init = events.on_init,
       capabilities = lsp_defaults.capabilities,
-    }, opts))
+    }, opts, { on_attach = events.on_attach(opts.on_attach or nil) }))
   end
 end
