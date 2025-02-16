@@ -16,6 +16,11 @@
 --- └──────────────────────────────────────────────────┘
 return function(opts)
   return {
+    fzf_opts = vim.tbl_deep_extend("force",
+      opts.fzf_opts or {},
+      {
+        ["--layout"] = "default",
+      }),
     winopts = function()
       local WIN_WIDTH = vim.o.columns
       local max_width = math.floor(WIN_WIDTH * 0.25)
