@@ -33,9 +33,9 @@ local filter_noise = function(opts)
       {
         view = "mini",
         filter = {
-          event = "msg_showmode",
+          event = "msg_show",
           any = {
-            { find = "recording" },
+            { find = "CodeCompanion" },
           },
         },
       },
