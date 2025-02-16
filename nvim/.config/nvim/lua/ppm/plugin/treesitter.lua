@@ -1,6 +1,7 @@
 local ft = require("ppm.filetype")
 
 require("nvim-treesitter.configs").setup({
+  ignore_install = {},
   ensure_installed = {
     "astro",
     "awk",
@@ -39,11 +40,7 @@ require("nvim-treesitter.configs").setup({
   auto_install = true,
   sync_install = false,
 
-  modules = {
-    highlight = { enable = true },
-    incremental_selection = { enable = true },
-    indent = { enable = true },
-  },
+  modules = {},
   highlight = { enable = true },
   incremental_selection = { enable = true },
   indent = { enable = true },
@@ -77,5 +74,5 @@ require('ts_context_commentstring').setup {
   enable_autocmd = false,
 }
 
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs(a, b)
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 parser_config.tsx.filetype_to_parsername = ft.typescript

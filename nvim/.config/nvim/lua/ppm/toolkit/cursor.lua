@@ -32,6 +32,13 @@ function M.get_previous_word()
   return vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(1, col):match("[^%s%p]*$")
 end
 
+--- Tests if the previous word before the cursor is present.
+--- @param word string Word to compare against previous word.
+--- @return boolean Returns true if previous word matches, false otherwise
+function M.prev_word(word)
+  return M.get_previous_word() == word
+end
+
 --- Checks the presence of a word before the cursor position.
 --- @return boolean
 function M.has_words_before()

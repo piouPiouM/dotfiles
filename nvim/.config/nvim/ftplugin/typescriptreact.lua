@@ -1,0 +1,1 @@
+vim.keymap.set('i', 't', require('ppm.ftplugin.javascript').add_async, { buffer = true })
