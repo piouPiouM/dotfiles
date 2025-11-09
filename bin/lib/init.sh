@@ -15,6 +15,7 @@ source "${PPM_ROOT}/lib/failed.sh"
 source "${PPM_ROOT}/lib/is_cmd.sh"
 source "${PPM_ROOT}/lib/check_command.sh"
 source "${PPM_ROOT}/lib/ensure_dir.sh"
+source "${PPM_ROOT}/lib/github/fetch_latest.sh"
 
 # @noargs
 # @internal
