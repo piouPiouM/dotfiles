@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# @name install-lua-language-server
+# @brief Install Lua Language Server used with Neovim.
+
+set -euo pipefail
+
+trap cleanup EXIT
+
+source ppm::lib
+
+declare _tmp
+declare _destination
+
+_tmp=$(mktemp -d)
+_destination="$HOME/.local/bin/lua-language-server"
+
+# @internal
+cleanup() {
+  [[ -d $_tmp ]] && rm -rf "$_tmp"
+}
+
+# @internal
+check_prerequisites() {
+  ppm::check_command 'tar'
+  ppm::ensure_dir "$_destination"
+}
+
+main() {
+  check_prerequisites
+  local -r tarball=$(ppm::github::fetch_latest "LuaLS/lua-language-server" "$_tmp" "linux-x64")
+  local -r version=$(echo "$tarball" | grep -oP '\d+\.\d+\.\d+')
+
+  echo "Installing Lua Language Server version ${version}"
+
+  tar xzf "$tarball" --recursive-unlink --directory="$_destination" \
+    || ppm::failed 1 "Extract of ${tarball} has failed."
+}
+
+main
