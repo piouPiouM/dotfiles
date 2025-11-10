@@ -81,3 +81,16 @@ apps-install-mkcert:
 	chmod u+x "$(MKCERT_PATH)"
 	mkcert --version
 .PHONY: apps-install-mkcert
+
+## Install Proton Pass
+apps-install-proton-pass: TMP := $(shell mktemp -d)
+apps-install-proton-pass: RELEASE_META := $(shell curl -fsSL "https://proton.me/download/PassDesktop/linux/x64/version.json" | jq '.Releases[0]')
+apps-install-proton-pass: RELEASE_VERSION := $(shell echo '$(RELEASE_META)' | jq --raw-output '.Version')
+apps-install-proton-pass: RELEASE_RPM := $(shell echo '$(RELEASE_META)' | jq --raw-output '.File[]|select(.Identifier | startswith(".rpm")).Url')
+apps-install-proton-pass: RELEASE_CHECKSUM := $(shell echo '$(RELEASE_META)' | jq --raw-output '.File[]|select(.Identifier | startswith(".rpm")).Sha512CheckSum')
+apps-install-proton-pass:
+	@echo "$(PURPLE)• Installing Proton Pass version $(RELEASE_VERSION)$(RESET)"
+	@curl -fsSL --output "$(TMP)/ProtonPass.rpm" "$(RELEASE_RPM)"
+	@echo "$(RELEASE_CHECKSUM) $(TMP)/ProtonPass.rpm" | sha512sum --status --check - 2>/dev/null && sudo rpm --install --force "$(TMP)/ProtonPass.rpm" || $(call failure,Incorrect checksum.)
+	@rm -rf $(TMP)
+.PHONY: apps-install-proton-pass
