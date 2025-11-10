@@ -3,7 +3,11 @@ difftastic
 starship
 --git https://github.com/loichyan/nerdfix.git
 ast-grep
-tokei--locked --git https://github.com/sxyazi/yazi.git yazi-fm
+tokei
+atuin
+grex
+sd
+navi
 --locked --git https://github.com/sxyazi/yazi.git yazi-fm
 --locked --git https://github.com/sxyazi/yazi.git yazi-cli
 mdcat

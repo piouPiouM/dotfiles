@@ -53,9 +53,20 @@ link-bin:
 
 link-git::
 	@cd $(XDG_DATA_HOME)/git/; ln -sf ./$(CURRENT_OS)-config ./current-os-config
+.PHONY: link-git
 
 link-ranger::
 	@pip install --upgrade Pillow
+.PHONY: link-ranger
+
+link-atuin::
+	@$(call cmd_exists,atuin) && atuin import auto
+.PHONY: link-atuin
+
+link-podman:
+	@mkdir -p $(XDG_CONFIG_HOME)/containers
+	@ln -s $(ROOT_DIR)/podman/.config/containers/containers.conf $(XDG_CONFIG_HOME)/containers/containers.conf
+.PHONY: link-podman
 
 ## Deletes all the symlinks.
 unlink-all: unlink-home unlink-bin $(UNLINK_TARGETS)
