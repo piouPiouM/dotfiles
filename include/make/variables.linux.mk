@@ -7,4 +7,5 @@ GNU_GREP := grep
 FEDORA_VERSION := $(shell rpm -E %fedora)
 INSTALL_FLAGS := -yq --best
 INSTALL := sudo dnf $(INSTALL_FLAGS) install
+UPDATE := sudo dnf -yq upgrade
 FLATPAK := flatpak install -y --or-update --user

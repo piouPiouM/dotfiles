@@ -14,7 +14,11 @@ install-neovim-dependencies::
 
 ## Upgrade Neovim environment.
 upgrade-neovim:
-	@echo "$(PURPLE)• Upgrade Neovim environment after update of the packages$(RESET)"
+	@echo "$(PURPLE)• Upgrade Neovim environment$(RESET)"
+	@$(UPDATE) utf8proc
+	@$(UPDATE) libtree-sitter tree-sitter-cli
+	@$(UPDATE) neovim
+	@$(UPDATE) python3-neovim
 	@bin/linux/install-lua-language-server
 	@$(MAKE) --silent neovim-treesitter
 	@$(MAKE) --silent postinstall-neovim
