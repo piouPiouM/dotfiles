@@ -71,3 +71,13 @@ apps-install-miniconda:
 	@bash $(TMP)/miniconda.sh -b -u -p "$(HOME)/.local/bin/miniconda"
 	@rm -rf $(TMP)
 .PHONY: apps-install-miniconda
+
+apps-install-mkcert: BINARY_URL := $(shell curl -s https://api.github.com/repos/FiloSottile/mkcert/releases/latest | grep -oE 'https:[^"]+linux-amd64')
+apps-install-mkcert: MKCERT_PATH := $(HOME)/.local/bin/mkcert
+apps-install-mkcert:
+	@echo "$(PURPLE)• Installing mkcert$(RESET)"
+	$(INSTALL) nss-tools
+	curl -fsSL --output "$(MKCERT_PATH)" "$(BINARY_URL)"
+	chmod u+x "$(MKCERT_PATH)"
+	mkcert --version
+.PHONY: apps-install-mkcert
