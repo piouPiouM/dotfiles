@@ -38,6 +38,11 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 # }}}
 
+if [[ -s "$XDG_DATA_HOME"/nvim/venv/bin/activate ]] then
+  export VIRTUAL_ENV_DISABLE_PROMPT=1
+  source "$XDG_DATA_HOME"/nvim/venv/bin/activate
+fi
+
 if which zoxide >/dev/null 2>&1; then
   _evalcache zoxide init zsh
 fi

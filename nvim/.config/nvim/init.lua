@@ -38,7 +38,7 @@ g.loaded_perl_provider = 0
 
 -- Disable Python 2 provider support
 g.loaded_python_provider = 0
-g.python3_host_prog = os.getenv("VIRTUAL_ENV") and fn.expand("$VIRTUAL_ENV/bin/python") or bin_path .. "/python3"
+g.python3_host_prog = os.getenv("VIRTUAL_ENV") and fn.expand("$VIRTUAL_ENV/bin/python3") or bin_path .. "/python3"
 
 -- }}}
 
