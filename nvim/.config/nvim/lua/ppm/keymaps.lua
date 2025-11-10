@@ -37,7 +37,7 @@ M.lsp = {
   definition = { key = "<leader>gd", desc = "Preview definition of current symbol" },
   hover_doc = { key = "K", desc = "Display hover documentation" },
   outline = { key = "<leader>go", desc = "Display outline symbols" },
-  signature_help = { key = "<leader>gs", desc = "Display signature of the current function" },
+  signature_help = { key = "<leader>gH", desc = "Display signature of the current function" },
   diagnostic = {
     previous = { key = "<leader>gk", desc = "Go to previous diagnostic" },
     next = { key = "<leader>gj", desc = "Go to next diagnostic" },

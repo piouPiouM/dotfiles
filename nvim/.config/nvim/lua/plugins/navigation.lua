@@ -82,10 +82,95 @@ return {
   },
 
   {
+    "arsham/listish.nvim",
+    dependencies = {
+      "arsham/arshlib.nvim",
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
+    opts = {
+      theme_list = false,
+      signs = {
+        loclist = "",
+        qflist = "",
+        priority = 10,
+      },
+      quickfix = {
+        open = false,
+        on_cursor = "<leader>qa", -- add current position to the list
+        add_note = "<leader>qn",  -- add current position with your note to the list
+        clear = "<leader>qd",     -- clear all items
+        close = false,
+        next = "]q",
+        prev = "[q",
+      },
+      loclist = {
+        open = false,
+        on_cursor = "<leader>la",
+        add_note = "<leader>ln",
+        clear = "<leader>ld",
+        close = false,
+        next = "]l",
+        prev = "[l",
+      },
+    },
+    keys = {
+      "<leader>qa", -- add current position to the quicklist
+      "<leader>qn", -- add current position with your note to the quicklist
+      "<leader>la", -- add current position to the loclist
+      "<leader>ln", -- add current position with your note to the loclist
+    },
+    ft = { "qf" },
+  },
+
+  {
+    'stevearc/quicker.nvim',
+    event = "FileType qf",
+    keys = {
+      {
+        "<leader>qq",
+        function() require('quicker').toggle() end,
+        { desc = "Toggle the quickfix list" },
+      },
+      {
+        "<leader>ll",
+        function() require('quicker').toggle({ loclist = true }) end,
+        { desc = "Toggle the loclist list" },
+      },
+    },
+    ---@module "quicker"
+    ---@type quicker.SetupOptions
+    opts = {
+      type_icons = {
+        E = "󰅚 ",
+        W = "󰀪 ",
+        I = " ",
+        N = " ",
+        H = " ",
+      },
+      keys = {
+        {
+          ">",
+          function()
+            require("quicker").expand({ before = 2, after = 2, add_to_existing = true })
+          end,
+          desc = "Expand quickfix context",
+        },
+        {
+          "<",
+          function()
+            require("quicker").collapse()
+          end,
+          desc = "Collapse quickfix context",
+        },
+      },
+    },
+  },
+
+  {
     "woosaaahh/sj.nvim",
     opts = {
       pattern_type = "vim_very_magic",
-      prompt_prefix = " ",
+      prompt_prefix = "󰆷 ",
       keymaps = {
         send_to_qflist = "<C-q>",
       },
@@ -94,11 +179,21 @@ return {
       local sj = require(plugin.name)
 
       return {
-        { "Z",              sj.run,                                          mode = "n" },
-        { "<localleader>Z", function() sj.run({ select_window = true }) end, mode = "n" },
+        { "!",     sj.run,                                          mode = "n", desc = "Quick search & jump" },
+        { "<A-!>", function() sj.run({ select_window = true }) end, mode = "n", desc = "Quick search & jump in all windows" },
       }
     end,
     event = "VeryLazy",
     name = "sj",
   },
+
+  {
+    'skardyy/neo-img',
+    event = "VeryLazy",
+    -- cond = function() return vim.fn.has("macunix") ~= 1 end,
+    opts = {
+      backend = "kitty",
+      ttyimg = "global",
+    }
+  }
 }

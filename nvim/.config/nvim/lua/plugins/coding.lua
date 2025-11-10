@@ -105,4 +105,18 @@ return {
     },
     event = "VeryLazy"
   },
+
+  {
+    "yarospace/lua-console.nvim",
+    lazy = true,
+    cmd = "LuaConsole",
+    keys = { 'ù', '<Leader>ù' },
+    ft = { "lua" },
+    opts = {
+      mappings = {
+        toggle = 'ù',
+        attach = '<Leader>ù',
+      },
+    },
+  },
 }

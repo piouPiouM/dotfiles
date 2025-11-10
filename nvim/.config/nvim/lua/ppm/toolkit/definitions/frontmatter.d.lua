@@ -1,10 +1,10 @@
 ---@meta
 
----@alias FrontmatterMetadata string | number | boolean | table | string[]
+---@alias Frontmatter.Data string | number | boolean | table | string[]
 
----@class FrontmatterData
----@field [string]? FrontmatterMetadata
+---@class Frontmatter.Metadata
+---@field [string]? Frontmatter.Data
 
----@class FrontmatterResult
----@field frontmatter FrontmatterData
+---@class Frontmatter.Result
+---@field metadata Frontmatter.Metadata
 ---@field content string

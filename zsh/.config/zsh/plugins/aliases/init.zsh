@@ -25,7 +25,7 @@
   alias nerdfontsfix='nerdfix fix --quiet $(fd -t f --hidden "$@")'
   alias saml2awslogin='saml2aws login --force --cache-saml --skip-prompt'
   alias zim="zimfw"
-  alias ptw='pnpm test -- --watch -u'
+  alias ptw='pnpm test:watch -- -u'
 
   # Corepack
   if command_exist corepack; then

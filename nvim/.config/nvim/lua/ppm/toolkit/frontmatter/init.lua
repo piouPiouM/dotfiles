@@ -12,10 +12,10 @@ local Frontmatter = {}
 --- Return an table with Frontmatter and content parsed.
 ---
 ---@param text string
----@return Either<string, FrontmatterResult>
+---@return Either<string, Frontmatter.Result>
 Frontmatter.parse = function(text)
-  ---@type FrontmatterData
-  local frontmatter = {}
+  ---@type Frontmatter.Metadata
+  local metadata = {}
 
   ---@type string
   local content = ""
@@ -44,7 +44,7 @@ Frontmatter.parse = function(text)
     end
 
     if in_frontmatter then
-      local e_parsed = frontmatter_utils.process_line(frontmatter, current_key, line)
+      local e_parsed = frontmatter_utils.process_line(metadata, current_key, line)
 
       if E.is_left(e_parsed) then
         return e_parsed
@@ -53,7 +53,7 @@ Frontmatter.parse = function(text)
       local parsed = E.toNullable(e_parsed)
       if type(parsed) ~= "nil" then
         current_key = parsed.current_key
-        frontmatter = parsed.data
+        metadata = parsed.data
       end
     end
 
@@ -61,22 +61,21 @@ Frontmatter.parse = function(text)
   end
 
   return E.right({
-    frontmatter = frontmatter,
-    content = #frontmatter > 0 and (content or text) or (string.len(content) > 0 and content or text)
+    metadata = metadata,
+    content = #metadata > 0 and (content or text) or (string.len(content) > 0 and content or text)
   })
 end
 
 --- Return an table with Frontmatter and content parsed.
 ---
 ---@param filepath string File to read.
----@return Either<string, FrontmatterResult>
+---@return Either<string, Frontmatter.Result>
 Frontmatter.parse_file = function(filepath)
-  local file = fs.read_file(filepath)
-
   return pipe(
-    file,
-    E.map(Frontmatter.parse),
-    E.getOrElse(F.identity)
+    filepath,
+    fs.no_go_up,
+    E.map(fs.read_file),
+    E.map(Frontmatter.parse)
   )
 end
 

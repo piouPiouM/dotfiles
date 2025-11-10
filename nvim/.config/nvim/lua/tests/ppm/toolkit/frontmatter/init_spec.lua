@@ -15,7 +15,7 @@ Content here
       local result = Module.parse(content)
       assert.is_true(E.is_right(result))
       assert.are.same({
-        frontmatter = {},
+        metadata = {},
         content = "Content here"
       }, E.toNullable(result))
     end)
@@ -31,7 +31,7 @@ Content here
       local result = Module.parse(content)
       assert.is_true(E.is_right(result))
       assert.are.same({
-        frontmatter = {
+        metadata = {
           title = "Hello World",
           author = "John Doe"
         },
@@ -53,7 +53,7 @@ Content here
       local result = Module.parse(content)
       assert.is_true(E.is_right(result))
       assert.are.same({
-        frontmatter = {
+        metadata = {
           tags = { "javascript", "programming" },
           categories = { "tutorial" }
         },
@@ -78,7 +78,7 @@ Content here
       local result = Module.parse(content)
       assert.is_true(E.is_right(result))
       assert.are.same({
-        frontmatter = {
+        metadata = {
           title = "Hello World",
           published = true,
           views = 42,
@@ -95,7 +95,7 @@ Content here
       local result = Module.parse(content)
       assert.is_true(E.is_right(result))
       assert.are.same({
-        frontmatter = {},
+        metadata = {},
         content = "Just content without frontmatter",
       }, E.toNullable(result))
     end)
@@ -110,7 +110,7 @@ Content
       local result = Module.parse(content)
       assert.is_true(E.is_right(result))
       assert.are.same({
-        frontmatter = {},
+        metadata = {},
         content = "Content"
       }, E.toNullable(result))
     end)
@@ -140,7 +140,7 @@ Normal line
       local result = Module.parse(content)
       assert.is_true(E.is_right(result))
       assert.are.same({
-        frontmatter = { title = "Test" },
+        metadata = { title = "Test" },
         content = "  Indented line\n    More indented\nNormal line"
       }, E.toNullable(result))
     end)
@@ -158,7 +158,7 @@ Content
         local result = Module.parse(content)
         assert.is_true(E.is_right(result))
         assert.are.same({
-          frontmatter = { title = "Test" },
+          metadata = { title = "Test" },
           content = "Content"
         }, E.toNullable(result))
       end)
@@ -175,7 +175,7 @@ Content
         local result = Module.parse(content)
         assert.is_true(E.is_right(result))
         assert.are.same({
-          frontmatter = { title = "Test" },
+          metadata = { title = "Test" },
           content = "Content"
         }, E.toNullable(result))
       end)
@@ -189,7 +189,7 @@ Content]]
         local result = Module.parse(content)
         assert.is_true(E.is_right(result))
         assert.are.same({
-          frontmatter = { title = "Test" },
+          metadata = { title = "Test" },
           content = "Content"
         }, E.toNullable(result))
       end)
@@ -206,7 +206,7 @@ Content]]
         local result = Module.parse(content)
         assert.is_true(E.is_right(result))
         assert.are.same({
-          frontmatter = {
+          metadata = {
             tags = { "item1", "item2", "item3" }
           },
           content = "Content"
@@ -224,7 +224,7 @@ Content]]
         local result = Module.parse(content)
         assert.is_true(E.is_right(result))
         assert.are.same({
-          frontmatter = {
+          metadata = {
             title = "Test",
             description = "Multiple spaces",
             key = "Tab separated"
@@ -249,7 +249,7 @@ Content]]
         local result = Module.parse(content)
         assert.is_true(E.is_right(result))
         assert.are.same({
-          frontmatter = {
+          metadata = {
             title = "Test",
             tags = { "item1", "item2" },
             description = "With empty lines"
@@ -267,7 +267,7 @@ Content]]
       local result = Module.parse_file(stubs_path .. "frontmatter/no_frontmatter.md")
       assert.is_true(E.is_right(result))
       assert.are.same({
-        frontmatter = {},
+        metadata = {},
         content = [[Lorem ipsum
 dolor sit amet,
 consectetur adipisicing elit.]]
@@ -278,7 +278,7 @@ consectetur adipisicing elit.]]
       local result = Module.parse_file(stubs_path .. "frontmatter/basic.md")
       assert.is_true(E.is_right(result))
       assert.are.same({
-        frontmatter = {
+        metadata = {
           title = "Hello, World!",
         },
         content = [[Lorem ipsum
@@ -291,7 +291,7 @@ consectetur adipisicing elit.]]
       local result = Module.parse_file(stubs_path .. "frontmatter/with_lists.md")
       assert.is_true(E.is_right(result))
       assert.are.same({
-        frontmatter = {
+        metadata = {
           title = "Hello, World!",
           colors = { "rebeccapurple", "deeppink" },
           tags = { "computer", "science" },

@@ -22,6 +22,9 @@ M.read_file_1 = function(filename)
   return E.right(content)
 end
 
+---@generic T : string
+---@param filepath T
+---@return Either<string, T>
 M.read_file = function(filepath)
   local err, fd = async.uv.fs_open(filepath, "r", 420)
   if err then
@@ -44,6 +47,13 @@ M.read_file = function(filepath)
   end
 
   return E.right(data)
+end
+
+---@generic T : string
+---@param filepath T
+---@return Either<string, T>
+M.no_go_up = function(filepath)
+  return string.match(filepath, "%.%.") and E.left("Moving up the tree is forbidden.") or E.right(filepath)
 end
 
 return M

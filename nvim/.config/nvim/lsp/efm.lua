@@ -1,7 +1,3 @@
-local M = {}
-
-M.name = "efm"
-
 local sh = {
   rootMarkers = {},
   lintCommand = "shellcheck --color=never --format=gcc -",
@@ -12,7 +8,7 @@ local sh = {
   formatStdin = true,
 }
 
-M.config = {
+return {
   init_options = {
     documentFormatting = true,
     documentRangeFormatting = true,
@@ -26,8 +22,6 @@ M.config = {
   filetypes = { "json", "jsonc", "sh", "bash", "zsh", "lua" },
   settings = {
     rootMarkers = { ".git/", "package.json" },
-    languages = { bash = { sh }, sh = { sh } }
+    languages = { bash = { sh }, sh = { sh } },
   },
 }
-
-return M

@@ -91,7 +91,7 @@ apps-install-rust:
 ## Update Rust applications.
 apps-update-rust:
 	@echo "$(PURPLE)• Updating Rust applications$(RESET)"
-	@cargo install-update -a || $(call failure,Missing cargo-update crate.)
+	@cargo install-update --all --git || $(call failure,Missing cargo-update crate.)
 .PHONY: apps-update-rust
 
 ## Setup npm environment.

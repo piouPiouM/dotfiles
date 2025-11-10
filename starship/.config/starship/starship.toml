@@ -36,12 +36,12 @@ symbol = ' '
 [git_branch]
 format = "[$symbol$branch(:[$remote_name/$remote_branch](red))]($style)"
 style = "bright-black"
-always_show_remote = false
+always_show_remote = true
 symbol = " "
 
 [git_commit]
 format = '[( $hash)$tag]($style)'
-only_detached = false
+only_detached = true
 tag_disabled = false
 tag_symbol = "  "
 

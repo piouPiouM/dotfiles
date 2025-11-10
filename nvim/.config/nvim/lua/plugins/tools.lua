@@ -1,6 +1,7 @@
 local config = require("ppm.utils").lazy_config
 local colorizer_ft = { "css", "scss", "sass", "less", "javascript", "typescript", "vim", "lua", "markdown" }
 
+---@type LazySpec
 return {
   {
     "NvChad/nvim-colorizer.lua",
@@ -73,5 +74,12 @@ return {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
     event = "VeryLazy"
+  },
+
+  {
+    "MagicDuck/grug-far.nvim",
+    event = "VeryLazy",
+    opts = require("ppm.plugin.grug_far").opts,
+    keys = require("ppm.plugin.grug_far").keys,
   },
 }

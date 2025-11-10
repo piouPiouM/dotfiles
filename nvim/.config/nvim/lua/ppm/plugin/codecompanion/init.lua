@@ -5,14 +5,14 @@ require("codecompanion").setup({
       return require("codecompanion.adapters").extend("copilot", {
         schema = {
           model = {
-            default = "claude-3.5-sonnet",
+            default = "claude-sonnet-4",
           },
         },
       })
     end,
-    copilot_custom_rules = function()
-      return require("ppm.plugin.codecompanion.adapters.custom_rules")
-    end,
+    -- copilot_custom_rules = function()
+    --   return require("ppm.plugin.codecompanion.adapters.custom_rules")
+    -- end,
   },
   display = {
     chat = {
@@ -27,7 +27,7 @@ require("codecompanion").setup({
   },
   strategies = {
     chat = {
-      adapter = "copilot_custom_rules",
+      -- adapter = "copilot_custom_rules",
       roles = {
         user = "󰟶 Human"
       },

@@ -123,13 +123,19 @@ describe("Frontmatter Utils", function()
     it("should process key-value lines", function()
       local result = Module.process_line({}, O.none, "title: Hello")
       assert.is_true(E.is_right(result))
-      assert.are.same({ title = "Hello" }, E.toNullable(result))
+      assert.are.same({
+        current_key = O.none,
+        metadata = { title = "Hello" }
+      }, E.toNullable(result))
     end)
 
     it("should process list items with current key", function()
       local result = Module.process_line({}, O.some("tags"), "- tag1")
       assert.is_true(E.is_right(result))
-      assert.are.same({ tags = { "tag1" } }, E.match(F.identity, F.identity)(result))
+      assert.are.same({
+        current_key = O.some("tags"),
+        metadata = { tags = { "tag1" } },
+      }, E.match(F.identity, F.identity)(result))
     end)
 
     it("should return error for list items without key", function()
@@ -141,7 +147,10 @@ describe("Frontmatter Utils", function()
     it("should ignore empty lines", function()
       local result = Module.process_line({ title = "Hello" }, O.none, "")
       assert.is_true(E.is_right(result))
-      assert.are.same({ title = "Hello" }, E.toNullable(result))
+      assert.are.same({
+        current_key = O.none,
+        metadata = { title = "Hello" }
+      }, E.toNullable(result))
     end)
   end)
 end)
