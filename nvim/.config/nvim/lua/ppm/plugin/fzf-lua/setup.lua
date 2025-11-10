@@ -7,7 +7,7 @@ u.nquickmap(k.search.file_all,
 u.nquickmap(k.search.file, [[<cmd>FzfLua files<CR>]])
 u.nquickmap(k.search.file_cwd, [[<cmd>FzfLua files cwd=%:p:h<CR>]])
 u.nquickmap(k.search.git_file, [[<cmd>FzfLua git_files<CR>]])
-u.nquickmap(k.search.grep, [[<cmd>FzfLua live_grep_glob<CR>]])
+u.nquickmap(k.search.grep, [[<cmd>FzfLua live_grep<CR>]])
 u.nquickmap(k.search.grep_cursor, [[<cmd>FzfLua grep_cword<CR>]])
 u.nquickmap(k.search.help_tags, [[<cmd>FzfLua help_tags<CR>]])
 u.nquickmap(k.search.oldfile, [[<cmd>FzfLua oldfiles<CR>]])

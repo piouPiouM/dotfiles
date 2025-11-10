@@ -2,6 +2,7 @@
 -- | A | B | C                             X | Y | Z |
 -- +-------------------------------------------------+
 local codecompanion = require("ppm.plugin.lualine.components.codecompanion")
+local copilot_model = require("ppm.plugin.lualine.components.copilot_model")
 local macro_is_recording = require("ppm.plugin.lualine.components.macro")
 local ui = require("ppm.ui")
 local icons = ui.icons
@@ -22,8 +23,8 @@ end
 local file_status_symbols = {
   modified = icons.modified,
   readonly = icons.readonly,
-  unnamed = "[No Name]",
-  newfile = "[New]",
+  unnamed = " No Name",
+  newfile = " New",
 }
 
 local winbar = {
@@ -100,16 +101,15 @@ require("lualine").setup({
       },
       {
         "copilot",
-        cond = function() return vim.tbl_get(require("lazy.core.config"), "plugins", "copilot.lua", "_", "installed") end,
         show_colors = true,
         symbols = {
           status = {
             icons = {
-              enabled = " ",
-              sleep = " ",
-              disabled = " ",
-              warning = " ",
-              unknown = " "
+              enabled = "",
+              sleep = "",
+              disabled = "",
+              warning = "",
+              unknown = "",
             },
             hl = {
               enabled = require('copilot-lualine.colors').get_hl_value(0, "DiagnosticSignOk", "fg"),
@@ -119,9 +119,15 @@ require("lualine").setup({
               unknown = require('copilot-lualine.colors').get_hl_value(0, "DiagnosticSignHint", "fg"),
             }
           },
-          spinners = require("copilot-lualine.spinners").dots,
+          spinners = "dots",
           spinner_color = "#6272A4"
         },
+        component_separators = { right = "" },
+      },
+      {
+        copilot_model,
+        component_separators = { left = "" },
+        color = "DiagnosticSignHint",
       }
     },
     lualine_y = {

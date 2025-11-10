@@ -6,12 +6,12 @@ local S = require("ppm.toolkit.fp.string")
 local pk = require("ppm.toolkit.primitive")
 local pipe = F.pipe
 
----@generic D : FrontmatterData
+---@generic D : Frontmatter.Metadata
 ---@generic K : Option<string>
----@class LineParsed<K,D>: { current_key: K, frontmatter: D }
+---@class LineParsed<K,D>: { current_key: K, metadata: D }
 
 ---@param value string
----@return string | number | boolean | table | string[]
+---@return Frontmatter.Data
 local function parse_value(value)
   local trimmed = pipe(value, S.trim())
 
@@ -28,27 +28,27 @@ local function parse_value(value)
   return trimmed
 end
 
----@param frontmatter FrontmatterData
+---@param metadata Frontmatter.Metadata
 ---@param key string
 ---@param item string
----@return Either<string, FrontmatterData>
-local function handle_list_item(frontmatter, key, item)
+---@return Either<string, Frontmatter.Metadata>
+local function handle_list_item(metadata, key, item)
   local new_value = parse_value(item)
-  local current_value = frontmatter[key]
-  local new_frontmatter = vim.tbl_extend("force", {}, frontmatter)
+  local current_value = metadata[key]
+  local new_metadata = vim.tbl_extend("force", {}, metadata)
 
   if type(current_value) == "table" then
     if vim.tbl_contains(current_value, new_value) then
-      return E.right(new_frontmatter)
+      return E.right(new_metadata)
     end
 
-    new_frontmatter[key] = A.append(new_value)(current_value)
+    new_metadata[key] = A.append(new_value)(current_value)
 
-    return E.right(new_frontmatter)
+    return E.right(new_metadata)
   elseif type(current_value) == "nil" then
-    new_frontmatter[key] = { new_value }
+    new_metadata[key] = { new_value }
 
-    return E.right(new_frontmatter)
+    return E.right(new_metadata)
   end
 
   return E.left("Invalid list syntax.")
@@ -62,14 +62,14 @@ local function parse_list_item(line)
   return match and O.some(match) or O.none
 end
 
----@param frontmatter FrontmatterData
+---@param metadata Frontmatter.Metadata
 ---@param key string
 ---@param value string
----@return Either<string, FrontmatterData>
-local function handle_line_with_value(frontmatter, key, value)
+---@return Either<string, Frontmatter.Metadata>
+local function handle_line_with_value(metadata, key, value)
   local parsed_value = parse_value(value)
 
-  return E.right(vim.tbl_extend("force", frontmatter, { [key] = parsed_value }))
+  return E.right(vim.tbl_extend("force", metadata, { [key] = parsed_value }))
 end
 
 ---@param line string
@@ -80,13 +80,13 @@ local function parse_line(line)
   return key and O.some({ pk.trim(key), pk.trim(value) }) or O.none
 end
 
----@generic A : FrontmatterData
+---@generic A : Frontmatter.Metadata
 ---@generic B : Option<string>
----@param frontmatter A
+---@param metadata A
 ---@param current_key B
 ---@param line string
 ---@return Either<string, LineParsed<B, A>>
-local function process_line(frontmatter, current_key, line)
+local function process_line(metadata, current_key, line)
   local parsed_line = parse_line(line)
   local list_key = O.none
 
@@ -96,13 +96,13 @@ local function process_line(frontmatter, current_key, line)
     if S.trim()(value) == "" then
       list_key = O.some(key)
 
-      return E.right({ current_key = list_key, frontmatter = frontmatter })
+      return E.right({ current_key = list_key, metadata = metadata })
     end
 
     return pipe(
-      handle_line_with_value(frontmatter, key, value),
+      handle_line_with_value(metadata, key, value),
       E.map(function(v)
-        return { current_key = current_key, frontmatter = v }
+        return { current_key = current_key, metadata = v }
       end)
     )
   end
@@ -121,9 +121,9 @@ local function process_line(frontmatter, current_key, line)
         end,
         function(key)
           return pipe(
-            handle_list_item(frontmatter, key, item),
+            handle_list_item(metadata, key, item),
             E.map(function(v)
-              return { current_key = current_key, frontmatter = v }
+              return { current_key = current_key, metadata = v }
             end)
           )
         end
@@ -131,7 +131,7 @@ local function process_line(frontmatter, current_key, line)
     )
   end
 
-  return E.right({ current_key = current_key, frontmatter = frontmatter })
+  return E.right({ current_key = current_key, metadata = metadata })
 end
 
 return {

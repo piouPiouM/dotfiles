@@ -39,6 +39,10 @@ cmp.setup({
       { name = "nvim_lsp_signature_help" },
       { name = "copilot" },
       {
+        name = "lazydev",
+        group_index = 0,
+      },
+      {
         name = "nvim_lsp",
         entry_filter = filter.filters.keepMembersOnly,
       },

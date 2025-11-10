@@ -70,14 +70,11 @@ nnoremap <silent> gx :call ppm#functions#plug_gx()<CR>
 " }}}1
 " Section: Everyday tasks {{{1
 
-" Clear out search with //
-nnoremap <silent> // :nohlsearch<cr>
+" Clear out search
+nnoremap <silent> <leader>// :nohlsearch<cr>
 
-" Open a Quickfix window for the last search with <leader>/
+" Open a Quickfix window for the last search
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
-
-" Close the Quickfix or Location window with <leader>//
-nnoremap <silent> <leader>// :cclose<BAR>lclose<CR>
 
 " ¨* for highlight all occurrences of current word (like '*' but without moving)
 " http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches

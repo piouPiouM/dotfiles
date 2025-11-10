@@ -4,6 +4,7 @@ local providers = {
   "files",
   "git",
   "grep",
+  "lsp",
   "nvim",
 }
 

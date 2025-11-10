@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ast-grep/ast-grep/main/schemas/rule.json
+
+id: no-await-in-promise-all
+language: TypeScript
+rule:
+  pattern: Promise.all($A)
+  has:
+    pattern: await $_
+    stopBy: end

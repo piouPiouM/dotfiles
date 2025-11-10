@@ -29,6 +29,9 @@ g.vimsyn_embed = "l"
 
 g.enable_codecompanion_custom_messages = true
 
+-- Configure the path to the AI directory where are custom prompts and rules.
+g.ppm_ai_path = fn.fnamemodify(fn.stdpath("data"), ":h") .. "/ai"
+
 -- Configure providers to make startup faster {{{
 -- See https://neovim.io/doc/user/provider.html
 g.node_host_prog = fn.expand("$XDG_DATA_HOME/npm-packages/bin/neovim-node-host")

@@ -3,3 +3,4 @@ difftastic
 starship
 --git https://github.com/loichyan/nerdfix.git
 tokei
+ast-grep
