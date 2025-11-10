@@ -68,7 +68,12 @@
   rmm = !git ls-files -d -z | xargs -0 git-rm && git status
   undo = git reset --soft HEAD^
 
+  ## Worktree
+
   wt-reset = !git fetch && git reset --hard origin/master
+  wt-checkout = !"run() { git worktree add --track -b "$1" "$1" origin/"$1"; }; run"
+  wt-add = !"run() { ppm::git::worktree-add "$1"; }; run"
+  wt-rm = !"run() { trash -F "$1" && git worktree remove "$1" && git branch -D "$1"; }; run"
 [apply]
   # Detect whitespace errors when applying a patch
   whitespace = fix
