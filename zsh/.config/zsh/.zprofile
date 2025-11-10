@@ -19,7 +19,8 @@ path=(
   "$HOME"/bin
   "$GOBIN"
   "$N_PREFIX"/bin
-  "$PNPM_HOME"
+  # "$VOLTA_HOME"/bin
+  # "$PNPM_HOME"
 )
 
 _GEM_HOME=${_GEM_HOME:-"$(gem environment user_gemhome 2>/dev/null)"}

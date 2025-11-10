@@ -31,7 +31,7 @@ g.enable_codecompanion_custom_messages = true
 
 -- Configure providers to make startup faster {{{
 -- See https://neovim.io/doc/user/provider.html
-g.node_host_prog = bin_path .. "/neovim-node-host"
+g.node_host_prog = fn.expand("$XDG_DATA_HOME/npm-packages/bin/neovim-node-host")
 
 -- Disable Perl provider support
 g.loaded_perl_provider = 0

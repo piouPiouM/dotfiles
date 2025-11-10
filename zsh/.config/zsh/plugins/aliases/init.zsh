@@ -26,4 +26,14 @@
   alias saml2awslogin='saml2aws login --force --cache-saml --skip-prompt'
   alias zim="zimfw"
   alias ptw='pnpm test -- --watch -u'
+
+  # Corepack
+  if command_exist corepack; then
+    alias yarn="corepack yarn"
+    alias yarnpkg="corepack yarnpkg"
+    alias pnpm="corepack pnpm"
+    alias pnpx="corepack pnpx"
+    alias npm="corepack npm"
+    alias npx="corepack npx"
+  fi
 }

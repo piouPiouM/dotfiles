@@ -6,7 +6,6 @@
 @vscode/codicons
 bash-language-server
 browserslist
-corepack
 css-variables-language-server
 cssmodules-language-server
 htmlhint
@@ -24,4 +23,3 @@ typescript
 vim-language-server
 vscode-langservers-extracted
 yaml-language-server
-yarn

@@ -92,8 +92,10 @@ export GOPATH="$XDG_DATA_HOME"/go
 export GOBIN="$GOPATH"/bin
 export NPM_PACKAGES="$XDG_DATA_HOME"/npm-packages
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
-export PNPM_HOME="$XDG_DATA_HOME"/pnpm
+# export PNPM_HOME="$XDG_DATA_HOME"/pnpm
 export N_PREFIX="$HOME"/.local/bin/n
+# export VOLTA_HOME="$XDG_DATA_HOME"/volta
+# export VOLTA_FEATURE_PNPM=1
 
 #
 # Local to current device
