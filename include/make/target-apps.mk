@@ -55,6 +55,7 @@ apps-backup-python:
 apps-install-python:
 	@echo "$(PURPLE)• Restoring Python packages$(RESET)"
 	@pip install --requirement setup/all/packages-python.txt
+# @pipx --global install pynvim neovim
 .PHONY: apps-install-python
 
 apps-update-python:
