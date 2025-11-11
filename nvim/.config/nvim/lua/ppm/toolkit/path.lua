@@ -7,10 +7,7 @@ local M = {}
 
 local home_trimed = pipe(vim.env.HOME, S.trim_start("/"))
 
---- Converts user directory to tidle notation.
----
----@param path string Path to manipulate.
----@return string
+--- Converts user directory to tidle notation from the given path.
 M.with_tilde = S.replace_first("^" .. home_trimed, "~")
 
 --- Shorten given path by omitting middle paths.
@@ -18,11 +15,13 @@ M.with_tilde = S.replace_first("^" .. home_trimed, "~")
 ---@param path string Long path to shorten.
 ---@return string
 function M.shorten_path(path)
-  return telescope_utils.transform_path({
+  local shorten_path  = telescope_utils.transform_path({
     path_display = {
       shorten = { len = 2, exclude = { 1, 2, -2, -1 } }
     }
   }, path)
+
+  return shorten_path
 end
 
 -- M.relative_path_prefix = function(path)

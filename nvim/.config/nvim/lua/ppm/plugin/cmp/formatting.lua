@@ -21,10 +21,6 @@ local function format_source(name)
 end
 
 local function format_detail(detail)
-  -- pkit.log.info(vim.inspect(detail))
-  -- pkit.log.info(vim.inspect(pkit.with_tilde(detail)))
-  -- pkit.log.info(vim.inspect(pkit.shorten_path(detail)))
-
   if not detail:find("/") then
     return detail
   end
@@ -42,7 +38,7 @@ local function format_entry(entry, vim_item)
     table.insert(menu, format_source(source))
   end
 
-  if detail ~= nil and detail ~= "" then
+  if type(detail) == "string" and detail ~= "" then
     table.insert(menu, format_detail(detail))
   end
 
