@@ -68,6 +68,7 @@ local winbar = {
 local inactive_winbar = { lualine_a = winbar.lualine_a, lualine_y = winbar.lualine_y }
 
 local fmt_mode = function(str)
+  if str == "NORMAL" then return "" end
   if str == "V-BLOCK" then return "B" end
 
   return str:sub(1, 1)
