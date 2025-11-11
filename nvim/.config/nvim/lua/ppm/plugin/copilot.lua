@@ -1,5 +1,5 @@
 require("copilot").setup({
-  copilot_model = "claude-sonnet-4",
+  copilot_model = nil,
   copilot_node_command = vim.fn.expand("$HOME/.local/bin/n/n/versions/node/24.10.0/bin/node"),
   suggestion = { enabled = false },
   panel = { enabled = false },

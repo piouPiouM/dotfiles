@@ -38,10 +38,10 @@ function M:update_status()
 
   local model_name = get_copilot_model_name()
 
-  if model_name then
+  if model_name ~= "" then
     return model_name
   else
-    return "󰝾"
+    return "gpt-41-copilot"
   end
 end
 
