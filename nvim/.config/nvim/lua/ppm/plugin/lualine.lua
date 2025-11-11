@@ -97,7 +97,7 @@ require("lualine").setup({
       },
       {
         codecompanion,
-        cond = function() return vim.tbl_get(require("lazy.core.config"), "plugins", "copilot.lua", "_", "installed") end,
+        cond = function() return vim.tbl_get(require("lazy.core.config"), "plugins", "codecompanion.nvim", "_", "installed") end,
       },
       {
         "copilot",
