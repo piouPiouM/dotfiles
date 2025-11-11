@@ -1,15 +1,16 @@
 require("codecompanion").setup({
   adapters = {
-    copilot = function()
-      -- return require("ppm.plugin.codecompanion.adapters.custom_rules")
-      return require("codecompanion.adapters").extend("copilot", {
-        schema = {
-          model = {
-            default = "claude-sonnet-4",
+    http = {
+      copilot = function()
+        return require("codecompanion.adapters").extend("copilot", {
+          schema = {
+            model = {
+              default = "claude-sonnet-4.5",
+            },
           },
-        },
-      })
-    end,
+        })
+      end,
+    },
     -- copilot_custom_rules = function()
     --   return require("ppm.plugin.codecompanion.adapters.custom_rules")
     -- end,
@@ -28,6 +29,8 @@ require("codecompanion").setup({
   strategies = {
     chat = {
       -- adapter = "copilot_custom_rules",
+      adapter = "copilot",
+      model = "claude-sonnet-4.5",
       roles = {
         user = "󰟶 Human"
       },
@@ -54,8 +57,8 @@ require("codecompanion").setup({
         },
       },
     },
-    inline = { adapter = "copilot" },
-    agent = { adapter = "copilot" },
+    inline = { adapter = "copilot", model = "claude-sonnet-4.5" },
+    agent = { adapter = "copilot", model = "claude-sonnet-4.5" },
   },
   prompt_library = vim.tbl_deep_extend("force",
     require("ppm.ai.prompts.code"),
