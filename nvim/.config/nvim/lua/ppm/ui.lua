@@ -66,4 +66,10 @@ M.box = {
   CORNER = { TOP_LEFT = "╭", TOP_RIGHT = "╮" },
 }
 
+M.spinners = {
+  circle = { "󰪞 ", "󰪟 ", "󰪠 ", "󰪡 ", "󰪢 ", "󰪣 ", "󰪤 ", "󰪥 " },
+  hexagone = { "󰋙 ", "󰫃 ", "󰫄 ", "󰫅 ", "󰫆 ", "󰫇 ", "󰫈 " },
+  robot = { "󱙺 ", "󰚩 ", "󱚠 ", "󱚟 " },
+}
+
 return M
