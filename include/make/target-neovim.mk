@@ -38,7 +38,7 @@ install-neovim-thirdparty-dependencies:
 	@echo "$(PURPLE)  • Installing Node.js provider$(RESET)"
 	@npm install $(NPM_FLAGS) neovim@latest
 	@echo "$(PURPLE)  • Installing Python provider$(RESET)"
-	@uv tool install --upgrade pynvim neovim
+	@uv tool install --upgrade pynvim
 	@echo "$(PURPLE)  • Installing Ruby provider$(RESET)"
 	@gem $(GEM_COMMAND) neovim --no-document
 .PHONY: install-neovim-thirdparty-dependencies
