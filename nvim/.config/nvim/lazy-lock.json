@@ -66,7 +66,6 @@
   "rose-pine": { "branch": "main", "commit": "72a04c4065345b51b56aed4859ea1d884f734097" },
   "schemastore.nvim": { "branch": "main", "commit": "ee246c602853b47514ab7f26d616d8ad6b2578fa" },
   "sj": { "branch": "main", "commit": "7ca6186a9ce1588ded42cd9d67582ace0f9a9242" },
-  "sway-vim-syntax": { "branch": "master", "commit": "0e3ee955a27d4b64e412a8caa727e7a3c0ceaa4d" },
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "textobj-word-column.vim": { "branch": "master", "commit": "9cc25fb46b0c57843c4f82824014428a0b659452" },
   "tree-sitter-astro": { "branch": "master", "commit": "213f6e6973d9b456c6e50e86f19f66877e7ef0ee" },
