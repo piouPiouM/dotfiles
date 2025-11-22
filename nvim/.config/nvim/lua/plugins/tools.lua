@@ -1,13 +1,21 @@
 local config = require("ppm.utils").lazy_config
-local colorizer_ft = { "css", "scss", "sass", "less", "javascript", "typescript", "vim", "lua", "markdown" }
 
 ---@type LazySpec
 return {
   {
-    "NvChad/nvim-colorizer.lua",
-    opts = { filetypes = colorizer_ft },
-    ft = colorizer_ft,
-    cmd = "ColorizerToggle",
+    "catgoose/nvim-colorizer.lua",
+    event = "VeryLazy",
+    opts = {
+      user_default_options = {
+        mode = "virtualtext",
+        virtualtext = "󱓻 "
+      },
+      filetypes = {
+        html = { names = false },
+        markdown = { names = false },
+      },
+      lazy_load = true,
+    },
   },
 
   -- Adds text objects for word-based columns in Vim
