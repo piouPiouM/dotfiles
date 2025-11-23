@@ -46,6 +46,7 @@ M.icons = {
   modified = "",
   readonly = "󰒃 ",
   -- misc
+  color = "󱓻 ",
   history = " ",
   terminal = " ",
 }

@@ -3,19 +3,14 @@ local config = require("ppm.utils").lazy_config
 ---@type LazySpec
 return {
   {
-    "catgoose/nvim-colorizer.lua",
+    "echasnovski/mini.hipatterns",
+    version = false,
     event = "VeryLazy",
-    opts = {
-      user_default_options = {
-        mode = "virtualtext",
-        virtualtext = "󱓻 "
-      },
-      filetypes = {
-        html = { names = false },
-        markdown = { names = false },
-      },
-      lazy_load = true,
-    },
+    opts = function()
+      return {
+        highlighters = require("ppm.plugin.hipatterns").highlighters
+      }
+    end,
   },
 
   -- Adds text objects for word-based columns in Vim
