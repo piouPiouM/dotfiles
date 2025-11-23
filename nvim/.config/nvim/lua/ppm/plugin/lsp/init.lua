@@ -50,89 +50,18 @@ local servers = {
   yamlls = { format = true },
 }
 
--- Get the background color from the Normal highlight group
-local function get_theme_bg()
-  local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
-
-  if normal_hl.bg then
-    -- Convert decimal to hex
-    return string.format("#%06x", normal_hl.bg)
-  end
-
-  -- Fallback: check if background is dark or light
-  if vim.o.background == "dark" then
-    return "#000000"
-  else
-    return "#ffffff"
-  end
-end
-
 api.nvim_create_autocmd("LspAttach", {
   desc = "Performs LSP customization when a server is attached",
   callback = function(args)
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
+    if client:supports_method("textDocument/documentColor") then
+      client.server_capabilities.colorProvider = nil
+    end
+
     if servers[client.name] then
       if servers[client.name].format and client:supports_method("textDocument/formatting") then
         plsp.event.format(plsp.format, client, args.buf)
-      end
-
-      if client:supports_method("textDocument/documentColor") then
-        local ns_id = vim.api.nvim_create_namespace("document_color_virtual")
-
-        local virtual_after_color = function(bufnr, range, hex_code)
-          -- Validate inputs
-          if not range or not hex_code then
-            return
-          end
-
-          -- Range format: { start_line, start_col, end_line, end_col }
-          -- LSP uses 0-indexed positions, nvim_buf_set_extmark also uses 0-indexed lines
-          local end_line = range[3]
-          local end_col = range[4]
-
-          if not end_line or not end_col then
-            return
-          end
-
-          -- Get the line text and validate column
-          local line_text = vim.api.nvim_buf_get_lines(bufnr, end_line, end_line + 1, false)[1]
-          if not line_text then
-            return
-          end
-
-          local line_len = #line_text
-
-          -- Ensure end_col is within bounds
-          if end_col > line_len then
-            end_col = line_len
-          end
-
-          -- Check if there's a quote after the color
-          if end_col < line_len and line_text:sub(end_col + 1, end_col + 1):match('["\']') then
-            end_col = end_col + 1
-          end
-
-          -- Create a unique ID for this extmark based on position
-          local extmark_id = (end_line + 1) * 100000 + end_col
-
-          -- Create highlight group for the color swatch
-          local hl_name = "DocumentColor_" .. hex_code:gsub("#", "")
-          local bg_color = get_theme_bg()
-          vim.api.nvim_set_hl(0, hl_name, { fg = hex_code, bg = bg_color })
-
-          -- Set the virtual text with the color swatch and hex code
-          vim.api.nvim_buf_set_extmark(bufnr, ns_id, end_line, end_col, {
-            id = extmark_id,
-            virt_text = {
-              { " 󱓻 ", hl_name },
-            },
-            virt_text_pos = "inline",
-            hl_mode = "combine",
-          })
-        end
-
-        vim.lsp.document_color.enable(true, args.buf, { style = virtual_after_color })
       end
     end
 
