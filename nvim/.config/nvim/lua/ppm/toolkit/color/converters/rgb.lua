@@ -1,4 +1,15 @@
+local patterns = require("ppm.toolkit.color.patterns")
+
+local PATTERNS = {
+  "%srgba?%%(%sdeg%s%s%s%s%%)",
+  "%srgba?%%(%s%s%s%s%s%%)",
+  "%srgba?%%(%sdeg%s%s%s%s%s%%)",
+  "%srgba?%%(%s%s%s%s%s%s%%)",
+}
+
 local M = {}
+
+M.get_pattern = patterns.build_css_pattern(PATTERNS)
 
 ---@param hex HEX
 ---@return RGBA
@@ -63,12 +74,5 @@ M.to_hex = function(rgba)
 
   return string.format("#%06x", rgb)
 end
-
-M.pattern = {
-  '%f[%W]rgb%((%d+),?%s*(%d+),?%s*(%d+)%)',
-  '%f[%W]rgba%((%d+),?%s*(%d+),?%s*(%d+),?%s*(%d+%.?%d*%%?)%)',
-  '%f[%W]rgb%((%d+)%%,?%s*(%d+)%%,?%s*(%d+)%%%)',
-  '%f[%W]rgba%((%d+)%%,?%s*(%d+)%%,?%s*(%d+)%%?,?%s*(%d+%.?%d*%%?)%)',
-}
 
 return M
