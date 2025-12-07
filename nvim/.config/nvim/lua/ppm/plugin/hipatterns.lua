@@ -3,6 +3,7 @@ local icons = require("ppm.ui").icons
 local rgb = require("ppm.toolkit.color.converters.rgb")
 local hex = require("ppm.toolkit.color.converters.hex")
 local hsl = require("ppm.toolkit.color.converters.hsl")
+local named = require("ppm.toolkit.color.converters.named")
 
 local M = {
   highlighters = {},
@@ -71,6 +72,39 @@ M.highlighters.hsl_color = {
       alpha = tonumber(na)
     }
     local hex_color = hsl.to_hex(hsla_color)
+
+    return hi.compute_hex_color_group(hex_color, "fg")
+  end,
+  extmark_opts = extmark_opts_inline,
+}
+
+M.highlighters.named_color = {
+  pattern = named.get_pattern(),
+  group = function(bufnr, match, data)
+    local hex_color = named.to_hex(match)
+    local parser = vim.treesitter.get_parser(bufnr, nil, { error = false })
+    if parser ~= nil then
+      local node = parser:named_node_for_range({
+        data.line - 1,
+        data.from_col - 1,
+        data.line - 1,
+        data.to_col - 1,
+      })
+      if node == nil or not vim.tbl_contains({ "plain_value", "string_content" }, node:type()) then
+        return nil
+      end
+      if node and node:type() == "string_content" then
+        local parent = node:parent()
+        if parent and parent:type() == "string" then
+          local grandparent = parent:parent()
+          if grandparent and grandparent:type() == "field" then
+            return nil
+          end
+        end
+      end
+    end
+
+    if hex_color == nil then return nil end
 
     return hi.compute_hex_color_group(hex_color, "fg")
   end,
