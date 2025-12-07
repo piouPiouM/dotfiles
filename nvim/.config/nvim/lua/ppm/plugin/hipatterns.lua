@@ -4,6 +4,7 @@ local rgb = require("ppm.toolkit.color.converters.rgb")
 local hex = require("ppm.toolkit.color.converters.hex")
 local hsl = require("ppm.toolkit.color.converters.hsl")
 local named = require("ppm.toolkit.color.converters.named")
+local ansi = require("ppm.toolkit.color.converters.ansi")
 
 local M = {
   highlighters = {},
@@ -105,6 +106,20 @@ M.highlighters.named_color = {
     end
 
     if hex_color == nil then return nil end
+
+    return hi.compute_hex_color_group(hex_color, "fg")
+  end,
+  extmark_opts = extmark_opts_inline,
+}
+
+M.highlighters.ansi_color = {
+  pattern = ansi.get_pattern(),
+  group = function(_, match, _)
+    local hex_color = ansi.to_hex(match)
+
+    if not hex_color then
+      return nil
+    end
 
     return hi.compute_hex_color_group(hex_color, "fg")
   end,
