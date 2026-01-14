@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+if [[ -n "$CURSOR_AGENT" ]]; then
+  source ~/.config/zsh/.zshenv
+fi
