@@ -24,6 +24,8 @@ if [[ -r "${ZDOTDIR}"/plugins/"${CURRENT_OS}" ]]; then
   zmodule "${ZDOTDIR}"/plugins/"${CURRENT_OS}"
 fi
 
+zmodule "${ZDOTDIR}"/plugins/direnv
+
 zmodule "${ZDOTDIR}"/plugins/starship
 
 # Additional completion definitions for Zsh.

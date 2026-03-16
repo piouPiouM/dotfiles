@@ -10,6 +10,7 @@ TO_LINK := ai \
 					 btop \
 					 clifm \
 					 DankMaterialShell \
+					 direnv \
 					 eget \
 					 environment \
 					 fd \
