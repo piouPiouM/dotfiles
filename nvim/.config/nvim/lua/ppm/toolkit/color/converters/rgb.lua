@@ -70,7 +70,8 @@ end
 -- 0xRRGGBB
 ---@param rgba RGBA
 M.to_hex = function(rgba)
-  local rgb = (rgba.red * 0x10000) + (rgba.green * 0x100) + rgba.blue
+  local rgb = (math.floor(rgba.red + 0.5) * 0x10000) + (math.floor(rgba.green + 0.5) * 0x100) +
+      math.floor(rgba.blue + 0.5)
 
   return string.format("#%06x", rgb)
 end
