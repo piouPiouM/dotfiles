@@ -45,6 +45,7 @@ local servers = {
   stylelint_lsp = { format = true },
   efm = { format = true },
   yamlls = { format = true },
+  tinymist = { format = true },
 }
 
 api.nvim_create_autocmd("LspAttach", {

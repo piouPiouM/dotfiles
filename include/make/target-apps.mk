@@ -145,3 +145,8 @@ apps-install-pnpm:
 	@pnpm add -g @pnpm/tabtab
 	@pnpm install-completion zsh
 .PHONY: apps-setup-pnpm
+
+## Install Typst environment
+apps-install-typst:
+	curl --proto '=https' --tlsv1.2 -LsSf https://github.com/Myriad-Dreamin/tinymist/releases/download/v0.14.8/tinymist-installer.sh | sh
+.PHONY: apps-install-typst
