@@ -19,6 +19,7 @@ TO_LINK := ai \
 					 go \
 					 kitty \
 					 lazygit \
+					 niri \
 					 nvim \
 					 ranger \
 					 ripgrep \
