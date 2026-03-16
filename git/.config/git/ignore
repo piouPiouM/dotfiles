@@ -8,3 +8,5 @@ tags
 .config/vimrc
 *.swp
 .vscode
+
+**/.claude/settings.local.json
