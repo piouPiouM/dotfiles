@@ -38,6 +38,10 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 # }}}
 
+if [[ -s "$XDG_DATA_HOME"/zsh/rc.zsh ]] then
+  source "$XDG_DATA_HOME"/zsh/rc.zsh
+fi
+
 if [[ -s "$XDG_DATA_HOME"/nvim/venv/bin/activate ]] then
   export VIRTUAL_ENV_DISABLE_PROMPT=1
   source "$XDG_DATA_HOME"/nvim/venv/bin/activate
