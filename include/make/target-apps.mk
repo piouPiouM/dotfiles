@@ -95,6 +95,7 @@ apps-install-rust:
 ## Update Rust applications.
 apps-update-rust:
 	@echo "$(PURPLE)• Updating Rust applications$(RESET)"
+	@rustup update || $(call failure,Missing rustup command.)
 	@cargo install-update --all --git || $(call failure,Missing cargo-update crate.)
 .PHONY: apps-update-rust
 
