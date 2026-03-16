@@ -1,4 +1,4 @@
-SPECIFIC_TO_LINK := rofi sway
+SPECIFIC_TO_LINK := rofi sway zathura
 
 GNU_LN := ln
 GNU_SED := sed
