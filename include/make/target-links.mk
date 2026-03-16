@@ -17,6 +17,7 @@ TO_LINK := ai \
 					 fzf \
 					 git \
 					 go \
+					 hledger \
 					 kitty \
 					 lazygit \
 					 niri \
