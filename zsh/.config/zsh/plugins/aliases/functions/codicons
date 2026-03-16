@@ -7,7 +7,7 @@ codicons() {
   local doc="file://$(npm -g root)/@vscode/codicons/dist/codicon.html"
 
   if [[ $CURRENT_OS == "macos" ]] then
-    open -a firefox $doc
+    open -a "$BROWSER" $doc
   else
     xdg-open $doc
   fi

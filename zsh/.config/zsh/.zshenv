@@ -59,7 +59,6 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export VISUAL="nvim"
 export EDITOR="nvim"
 export TERMINAL="kitty"
-export BROWSER="firefox"
 
 # Use gnu sed if on macOS for better portability.
 GNU_SED="gsed"
@@ -103,6 +102,10 @@ export N_PREFIX="$HOME"/.local/bin/n
 
 if [[ -s "$XDG_DATA_HOME"/zsh/exports.zsh ]] then
   source "$XDG_DATA_HOME"/zsh/exports.zsh
+fi
+
+if [[ -s "$XDG_DATA_HOME"/zsh/"$HOSTNAME".zsh ]] then
+  source "$XDG_DATA_HOME"/zsh/"$HOSTNAME".zsh
 fi
 
 #

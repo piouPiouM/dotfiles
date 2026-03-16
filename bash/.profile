@@ -28,7 +28,6 @@ export HOMEBREW_NO_ANALYTICS=1
 
 export EDITOR="nvim"
 export TERMINAL="kitty"
-export BROWSER="firefox"
 
 # export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
@@ -86,4 +85,10 @@ if which zoxide >/dev/null 2>&1; then
 	export _ZO_DATA_DIR=$XDG_DATA_HOME
 fi
 
-[ -s "$HOME/bin/cloud_functions.sh" ] && source "$HOME/bin/cloud_functions.sh"
+if [[ -s "$XDG_DATA_HOME"/zsh/exports.zsh ]] then
+  source "$XDG_DATA_HOME"/zsh/exports.zsh
+fi
+
+if [[ -s "$XDG_DATA_HOME"/zsh/"$HOSTNAME".zsh ]] then
+  source "$XDG_DATA_HOME"/zsh/"$HOSTNAME".zsh
+fi
