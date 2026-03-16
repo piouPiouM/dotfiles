@@ -9,6 +9,7 @@ TO_LINK := ai \
 					 bat \
 					 btop \
 					 clifm \
+					 eget \
 					 environment \
 					 fd \
 					 fsh \
