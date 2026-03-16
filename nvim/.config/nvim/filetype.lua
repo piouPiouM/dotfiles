@@ -1,5 +1,7 @@
 vim.filetype.add({
   extension = {
+    beancount = "beancount",
+    bean = "beancount",
     mdx = "markdown",
     rasi = "rasi",
 

@@ -46,6 +46,7 @@ local servers = {
   efm = { format = true },
   yamlls = { format = true },
   tinymist = { format = true },
+  beancount = { format = true },
 }
 
 api.nvim_create_autocmd("LspAttach", {
