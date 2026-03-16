@@ -1,5 +1,34 @@
-[plugin]
-deps = [{ use = "GrzegorzKozub/mdcat", rev = "d3d5089" }, { use = "yazi-rs/plugins:max-preview", rev = "71c4fc2" }, { use = "AnirudhG07/rich-preview", rev = "8be4d27" }, { use = "yazi-rs/plugins:full-border", rev = "71c4fc2" }]
+[[plugin.deps]]
+use = "GrzegorzKozub/mdcat"
+rev = "7b7380a"
+hash = "40c20e6c1085d1f45309b9f148bf4f6e"
 
-[flavor]
-deps = [{ use = "yazi-rs/flavors:catppuccin-mocha", rev = "fc8eeaa" }, { use = "yazi-rs/flavors:catppuccin-frappe", rev = "fc8eeaa" }, { use = "yazi-rs/flavors:catppuccin-latte", rev = "fc8eeaa" }]
+[[plugin.deps]]
+use = "yazi-rs/plugins:max-preview"
+rev = "1962818"
+hash = "99aa06d3014798d86001c324468d497f"
+
+[[plugin.deps]]
+use = "AnirudhG07/rich-preview"
+rev = "7d616ad"
+hash = "d64feec9761392cbc250d199ab4b8a3a"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "1962818"
+hash = "6fa6a05a81c98dd000fbca3cca6e9682"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-mocha"
+rev = "9511cb0"
+hash = "7dfe41c9c3d9be76da8a844263d0bbed"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-frappe"
+rev = "9511cb0"
+hash = "1844f850b0c5d1af511c84399c95e3d7"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-latte"
+rev = "9511cb0"
+hash = "b8f46853c27707115f25f3423a47bd38"
