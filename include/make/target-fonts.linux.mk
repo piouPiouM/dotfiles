@@ -2,6 +2,11 @@
 # Target: Fonts for Linux
 # -----------------------------------------------------------------------------
 
+link-fontconfig:
+	@echo -n "$(PURPLE)• Link fontconfig…$(RESET)"
+	@stow $(_DRY_RUN) --restow fontconfig && echo " $(SUCCESS)" || echo " $(FAILURE)"
+.PHONY: link-fontconfig
+
 install-fonts::
 	@echo "$(PURPLE)• Installing packaged fonts$(RESET)"
 	@sudo dnf group install fonts
