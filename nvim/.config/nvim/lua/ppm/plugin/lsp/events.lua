@@ -22,7 +22,7 @@ M.on_attach = function(on_attach)
     ]]
     end
 
-    if client.supports_method("textDocument/formatting") then
+    if client:supports_method("textDocument/formatting") then
       plsp.event.format(plsp.format, client, bufnr)
     end
 

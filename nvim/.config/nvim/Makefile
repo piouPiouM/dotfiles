@@ -8,8 +8,7 @@ MAKEFLAGS += --no-builtin-rules
 .SHELLFLAGS := -eu -o pipefail -c
 
 test:
-	@APP_ENV=test nvim --headless --noplugin \
-		-u ./scripts/minimal_init.lua \
+	@nvim --headless --noplugin \
 		-c "PlenaryBustedDirectory ./lua/tests/"
 .PHONY: test
 
@@ -33,9 +32,8 @@ ifeq (watch-one,$(FIRST_TARGET))
 endif
 
 test-one:
-	@APP_ENV=test nvim --headless --noplugin \
-		-u ./scripts/minimal_init.lua \
-		-c "PlenaryBustedFile $(SPEC_FILE)"
+	@nvim --headless --noplugin \
+		-c "PlenaryTestFile $(SPEC_FILE)"
 .PHONY: test-one
 
 watch-one:

@@ -63,7 +63,7 @@ M["Efficiency estimator"] = {
     user_prompt = false,
     stop_context_insertion = true,
   },
-  propmts = {
+  prompts = {
     {
       role = "system",
       content =

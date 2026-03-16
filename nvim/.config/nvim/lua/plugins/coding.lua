@@ -27,7 +27,7 @@ return {
       },
       scope = {
         show_start = false,
-      }
+      },
     },
   },
 
@@ -43,8 +43,8 @@ return {
   },
 
   {
-    'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
     ft = { "markdown", "markdown.mdx", "codecompanion", "fzf" },
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
@@ -54,6 +54,7 @@ return {
         icons = { "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 ", "󰉯 ", "󰉰 " },
         signs = { "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 ", "󰉯 ", "󰉰 " },
       },
+      latex = { enabled = false },
     },
   },
 
@@ -101,21 +102,21 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     opts = {
-      numhl = true
+      numhl = true,
     },
-    event = "VeryLazy"
+    event = "VeryLazy",
   },
 
   {
     "yarospace/lua-console.nvim",
     lazy = true,
     cmd = "LuaConsole",
-    keys = { 'ù', '<Leader>ù' },
+    keys = { "ù", "<Leader>ù" },
     ft = { "lua" },
     opts = {
       mappings = {
-        toggle = 'ù',
-        attach = '<Leader>ù',
+        toggle = "ù",
+        attach = "<Leader>ù",
       },
     },
   },

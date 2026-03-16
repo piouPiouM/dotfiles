@@ -26,13 +26,23 @@ require("codecompanion").setup({
       intro_message = "Ask to CodeCompanion   Press ? for options",
     },
   },
+  memory = {
+    opts = {
+      chat = {
+        enabled = true,
+      },
+    },
+  },
   strategies = {
     chat = {
       -- adapter = "copilot_custom_rules",
       adapter = "copilot",
       model = "claude-sonnet-4.5",
       roles = {
-        user = "󰟶 Human"
+        user = "󰗋 Mehdi"
+      },
+      opts= {
+        completion_provider = "cmp",
       },
       slash_commands = {
         ["buffer"] = {
@@ -50,6 +60,11 @@ require("codecompanion").setup({
             provider = "fzf_lua",
           },
         },
+        ["image"] = {
+          opts = {
+            dirs = { "~/Pictures/screenshots" },
+          },
+        },
         ["symbols"] = {
           opts = {
             provider = "fzf_lua",
@@ -62,6 +77,7 @@ require("codecompanion").setup({
   },
   prompt_library = vim.tbl_deep_extend("force",
     require("ppm.ai.prompts.code"),
+    require("ppm.ai.prompts.react"),
     require("ppm.ai.prompts.text")
   ),
 })
