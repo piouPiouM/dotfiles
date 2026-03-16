@@ -9,6 +9,7 @@ TO_LINK := ai \
 					 bat \
 					 btop \
 					 clifm \
+					 DankMaterialShell \
 					 eget \
 					 environment \
 					 fd \
