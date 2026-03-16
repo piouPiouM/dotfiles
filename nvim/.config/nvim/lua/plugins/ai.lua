@@ -2,17 +2,21 @@ local config = require("ppm.utils").lazy_config
 
 return {
   {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = config("copilot"),
+    dependencies = {
+      "copilotlsp-nvim/copilot-lsp", -- for NES (Next Edit Suggestion) functionality
+    },
+  },
+  {
     "zbirenbaum/copilot-cmp",
     config = config("copilot_cmp"),
     dependencies = {
       "hrsh7th/nvim-cmp",
-      {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = config("copilot"),
-      },
-      { 'AndreM222/copilot-lualine' }
+      "zbirenbaum/copilot.lua",
+      "AndreM222/copilot-lualine",
     },
   },
 

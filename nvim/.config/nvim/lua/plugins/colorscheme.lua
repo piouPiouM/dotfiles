@@ -8,6 +8,43 @@ return {
     end,
   },
 
+  -- {
+  --   "mcncl/alabaster.nvim",
+  --   lazy = false,
+  --   priority = 1001,
+  --   opts = {
+  --     style = "dark",
+  --     transparent = true,
+  --     italic_comments = true,
+  --   },
+  --   -- config = function()
+  --   --   vim.cmd.colorscheme('alabaster')
+  --   -- end,
+  -- },
+
+  {
+    "https://git.sr.ht/~p00f/alabaster.nvim",
+    lazy = false,
+    priority = 1000,
+  },
+
+  {
+    "mjhika/alabastard.nvim",
+    priority = 1000,
+    lazy = false,
+    -- config = function()
+    --   require("alabastard").setup()
+    --
+    --   vim.cmd.colorscheme("AlabastardLight")
+    -- end,
+  },
+
+  {
+    dir = "~/Code/perso/tourmaline.nvim",
+    priority = 1000,
+    lazy = false,
+  },
+
   {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -66,17 +103,17 @@ return {
     "EdenEast/nightfox.nvim",
     lazy = false,
     opts = {
-      options = { dim_inactive = true }
+      options = { dim_inactive = true },
     },
     build = {
       ":NightfoxCompile",
-      'cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/carbonfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Carbonfox.conf',
-      'cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/dawnfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Dawnfox.conf',
-      'cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/dayfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Dayfox.conf',
-      'cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/duskfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Duskfox.conf',
-      'cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/nightfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Nightfox.conf',
-      'cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/nordfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Nordfox.conf',
-      'cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/terafox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Terafox.conf',
+      "cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/carbonfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Carbonfox.conf",
+      "cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/dawnfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Dawnfox.conf",
+      "cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/dayfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Dayfox.conf",
+      "cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/duskfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Duskfox.conf",
+      "cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/nightfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Nightfox.conf",
+      "cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/nordfox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Nordfox.conf",
+      "cp $XDG_DATA_HOME/nvim/lazy/nightfox.nvim/extra/terafox/kitty.conf $XDG_CONFIG_HOME/kitty/themes/Terafox.conf",
     },
   },
 
@@ -97,7 +134,7 @@ return {
 
   {
     "miikanissi/modus-themes.nvim",
-    build = 'cp $XDG_DATA_HOME/nvim/lazy/modus-themes.nvim/extras/kitty/*.conf $XDG_CONFIG_HOME/kitty/themes/',
+    build = "cp $XDG_DATA_HOME/nvim/lazy/modus-themes.nvim/extras/kitty/*.conf $XDG_CONFIG_HOME/kitty/themes/",
     lazy = false,
     opts = {
       transparent = false,
@@ -107,15 +144,15 @@ return {
 
   {
     "rebelot/kanagawa.nvim",
-    build = 'cp $XDG_DATA_HOME/nvim/lazy/kanagawa.nvim/extras/kitty/kanagawa*.conf $XDG_CONFIG_HOME/kitty/themes/',
+    build = "cp $XDG_DATA_HOME/nvim/lazy/kanagawa.nvim/extras/kitty/kanagawa*.conf $XDG_CONFIG_HOME/kitty/themes/",
     lazy = false,
   },
 
   {
     "AlexvZyl/nordic.nvim",
-    build = 'cp $XDG_DATA_HOME/nvim/lazy/nordic.nvim/platforms/kitty/*.conf $XDG_CONFIG_HOME/kitty/themes/',
+    build = "cp $XDG_DATA_HOME/nvim/lazy/nordic.nvim/platforms/kitty/*.conf $XDG_CONFIG_HOME/kitty/themes/",
     config = function()
-      require 'nordic'.load()
+      require "nordic".load()
     end,
     lazy = false,
     priority = 1100,

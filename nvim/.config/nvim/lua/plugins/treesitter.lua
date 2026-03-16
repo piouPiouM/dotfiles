@@ -28,4 +28,30 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     event = "VeryLazy",
   },
+
+  {
+    'Wansmer/treesj',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    keys = {
+      {
+        '<leader>jj',
+        function() require('treesj').toggle() end,
+        { desc = 'Toggle splitting/joining blocks of code' },
+      },
+      {
+        '<leader>jm',
+        function() require('treesj').join() end,
+        { desc = 'Merge (join) blocks of code' },
+      },
+      {
+        '<leader>js',
+        function() require('treesj').split() end,
+        { desc = 'Split blocks of code' },
+      },
+    },
+    opts = {
+      use_default_keymaps = false,
+      max_join_length = 240,
+    },
+  }
 }

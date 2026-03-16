@@ -60,7 +60,7 @@ return {
   },
 
   {
-    'echasnovski/mini.surround',
+    "echasnovski/mini.surround",
     event = "VeryLazy",
     opts = {
       silent = true,
@@ -70,13 +70,13 @@ return {
 
   {
     "tpope/vim-repeat",
-    event = "VeryLazy"
+    event = "VeryLazy",
   },
 
   {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
-    event = "VeryLazy"
+    event = "VeryLazy",
   },
 
   {

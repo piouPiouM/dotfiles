@@ -160,4 +160,14 @@ M.glue = function(separator)
   return MC.concat_all(M.get_glue_monoid(separator))
 end
 
+--- Formats a string according to the given pattern.
+---
+--- @param pattern string The formatting pattern.
+--- @return fun(s: string, ...:string[]): string
+M.format = function(pattern)
+  return function(...)
+    return type(...) == "table" and string.format(pattern, unpack(...)) or string.format(pattern, ...)
+  end
+end
+
 return M

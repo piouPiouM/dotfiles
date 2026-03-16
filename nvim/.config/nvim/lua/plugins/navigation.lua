@@ -65,7 +65,7 @@ return {
       },
       view_options = {
         show_hidden = true,
-      }
+      },
     },
   },
 
@@ -123,17 +123,17 @@ return {
   },
 
   {
-    'stevearc/quicker.nvim',
+    "stevearc/quicker.nvim",
     event = "FileType qf",
     keys = {
       {
         "<leader>qq",
-        function() require('quicker').toggle() end,
+        function() require("quicker").toggle() end,
         { desc = "Toggle the quickfix list" },
       },
       {
         "<leader>ll",
-        function() require('quicker').toggle({ loclist = true }) end,
+        function() require("quicker").toggle({ loclist = true }) end,
         { desc = "Toggle the loclist list" },
       },
     },
@@ -188,12 +188,15 @@ return {
   },
 
   {
-    'skardyy/neo-img',
+    "skardyy/neo-img",
+    enabled = false,
     event = "VeryLazy",
     -- cond = function() return vim.fn.has("macunix") ~= 1 end,
     opts = {
       backend = "kitty",
       ttyimg = "global",
-    }
-  }
+      auto_open = false,
+      oil_preview = true,
+    },
+  },
 }

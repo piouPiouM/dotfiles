@@ -1,3 +1,4 @@
+local log = require("ppm.toolkit.log").log
 local A = require("ppm.toolkit.fp.Array")
 local E = require("ppm.toolkit.fp.Either")
 local F = require("ppm.toolkit.fp.function")
@@ -53,7 +54,7 @@ Frontmatter.parse = function(text)
       local parsed = E.toNullable(e_parsed)
       if type(parsed) ~= "nil" then
         current_key = parsed.current_key
-        metadata = parsed.data
+        metadata = parsed.metadata
       end
     end
 

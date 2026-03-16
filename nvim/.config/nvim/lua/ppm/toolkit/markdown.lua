@@ -6,7 +6,7 @@ M.parse_frontmatter = function(content)
   local line_start = nil
   local line_end = nil
 
-  for line_number, line in content:gmatch("[^\r\n]+") do
+  for line_number, line in ipairs(content) do
     if line:match("^---$") then
       in_frontmatter = not in_frontmatter
 
