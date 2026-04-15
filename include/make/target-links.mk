@@ -10,6 +10,7 @@ TO_LINK := ai \
 					 btop \
 					 clifm \
 					 environment \
+					 dprint \
 					 fd \
 					 fsh \
 					 fzf \
