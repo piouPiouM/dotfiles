@@ -1,0 +1,6 @@
+{{- $email := promptStringOnce . "email" "Git email" -}}
+{{- $purpose := promptStringOnce . "purpose" "Machine purpose (personal/work)" -}}
+
+[data]
+email = {{ $email | quote }}
+purpose = {{ $purpose | quote }}

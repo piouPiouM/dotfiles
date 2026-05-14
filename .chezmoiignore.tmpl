@@ -1,0 +1,15 @@
+# Zsh
+**/*.zwc
+**/*.zwc.old
+**/.zcompcache
+**/.zcompdump*
+**/.zsh_history
+**/.zsh_sessions
+
+# Commons
+**/*.log
+
+{{- if eq .osRelease.id "ubuntu" }}
+.config/niri
+.config/niri/**
+{{ endif }}
