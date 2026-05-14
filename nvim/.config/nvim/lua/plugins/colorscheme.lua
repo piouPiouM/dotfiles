@@ -40,7 +40,7 @@ return {
   },
 
   {
-    dir = "~/Code/perso/tourmaline.nvim",
+    dir = "~/Code/tourmaline.nvim",
     priority = 1000,
     lazy = false,
   },

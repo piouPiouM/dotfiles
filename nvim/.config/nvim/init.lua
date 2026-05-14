@@ -63,22 +63,16 @@ if fn.filereadable(fn.expand("$HOME/.theme")) then
   local S = require("ppm.toolkit.fp.string")
   local mode, theme = unpack(fn.readfile(fn.expand("$HOME/.theme"), nil, 2))
   o.background = S.replace("soft--", "")(mode) or "dark"
-
-  if o.background == "light" then
-    theme = "tourmaline-paraiba"
-  end
-
-  cmd.colorscheme(theme)
+  cmd("colorscheme " .. theme)
 else
   o.background = "dark"
 end
--- o.background = "dark"
--- cmd.colorscheme("tourmaline-paraiba")
+
 
 -- Lazy load plugins using a custom autocmd `User ActuallyEditing` {{{
 
-local autocmd = api.nvim_create_autocmd
-local group_id = api.nvim_create_augroup("lazyLoading", { clear = true })
+local autocmd = vim.api.nvim_create_autocmd
+local group_id = vim.api.nvim_create_augroup("lazyLoading", { clear = true })
 local function emitActuallyEditingEvent()
   api.nvim_exec_autocmds("User", {
     pattern = "ActuallyEditing",
