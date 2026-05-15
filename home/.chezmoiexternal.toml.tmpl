@@ -1,0 +1,89 @@
+# =============================================================================
+# Themes — Catppuccin
+# =============================================================================
+
+# bat
+{{- range $flavor := list "frappe" "latte" "macchiato" "mocha" }}
+[".config/bat/themes/catppuccin-{{ $flavor }}.tmTheme"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/catppuccin/bat/main/themes/Catppuccin%20{{ $flavor | title }}.tmTheme"
+    refreshPeriod = "168h"
+{{- end }}
+
+# btop
+{{- range $flavor := list "frappe" "latte" "macchiato" "mocha" }}
+[".config/btop/themes/catppuccin-{{ $flavor }}.theme"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/catppuccin/btop/main/themes/catppuccin_{{ $flavor }}.theme"
+    refreshPeriod = "168h"
+{{- end }}
+
+# zsh-fast-syntax-highlighting
+{{- range $flavor := list "frappe" "latte" "macchiato" "mocha" }}
+[".config/fsh/catppuccin-{{ $flavor }}.ini"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/catppuccin/zsh-fsh/main/themes/catppuccin-{{ $flavor }}.ini"
+    refreshPeriod = "168h"
+{{- end }}
+
+# lazygit
+{{- range $flavor := list "frappe" "latte" "macchiato" "mocha" }}
+[".local/share/lazygit/themes/catppuccin-{{ $flavor }}.yml"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/catppuccin/lazygit/main/themes/{{ $flavor }}/mauve.yml"
+    refreshPeriod = "168h"
+{{- end }}
+
+# rofi
+{{- range $flavor := list "frappe" "latte" "macchiato" "mocha" }}
+[".local/share/rofi/themes/catppuccin-{{ $flavor }}.rasi"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-{{ $flavor }}.rasi"
+    refreshPeriod = "168h"
+{{- end }}
+
+# =============================================================================
+# Themes — Rose Pine
+# =============================================================================
+
+# btop
+{{- range $variant := list "rose-pine" "rose-pine-dawn" "rose-pine-moon" }}
+[".config/btop/themes/{{ $variant }}.theme"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/rose-pine/btop/main/{{ $variant }}.theme"
+    refreshPeriod = "168h"
+{{- end }}
+
+# fzf — NOTE: the original Makefile renames FZF_DEFAULT_OPTS → FZF_THEME after download;
+# apply that rename via run_onchange_after_fzf-themes.sh
+{{- range $variant := list "rose-pine" "rose-pine-dawn" "rose-pine-moon" }}
+[".local/share/fzf/themes/{{ $variant }}.sh"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/rose-pine/fzf/main/dist/{{ $variant }}.sh"
+    refreshPeriod = "168h"
+{{- end }}
+
+# rofi
+{{- range $variant := list "rose-pine" "rose-pine-dawn" "rose-pine-moon" }}
+[".local/share/rofi/themes/{{ $variant }}.rasi"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/rose-pine/rofi/main/{{ $variant }}.rasi"
+    refreshPeriod = "168h"
+{{- end }}
+
+# =============================================================================
+# Themes — GitHub (projekt0n/github-theme-contrib)
+# =============================================================================
+
+# kitty: filter to themes/kitty/*.conf, strip the leading archive prefix path
+[".config/kitty/themes"]
+    type = "archive"
+    url = "https://github.com/projekt0n/github-theme-contrib/archive/main.tar.gz"
+    exact = false
+    stripComponents = 3
+    include = ["*/themes/kitty/*.conf"]
+    refreshPeriod = "168h"
+
+# fzf GitHub themes require rename (github_dark → github-dark.sh) and content
+# reformatting via sed; handle via run_always_after_30-fzf-themes.sh
+

@@ -1,0 +1,8 @@
+home/dot_config/bat/themes/*
+home/dot_config/btop/themes/*
+home/dot_config/kitty/themes/*
+home/dot_local/share/fzf/themes/*
+home/dot_local/share/lazygit/themes/*
+home/dot_local/share/rofi/themes/*
+
+!**/.gitkeep
