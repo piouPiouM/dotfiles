@@ -1,0 +1,90 @@
+#:schema https://mise.en.dev/schema/mise.json
+
+redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
+
+[env]
+XDG_CACHE_HOME = "{{env.HOME}}/.cache"
+XDG_CONFIG_HOME = "{{env.HOME}}/.config"
+XDG_DATA_HOME = "{{env.HOME}}/.local/share"
+XDG_STATE_HOME = "{{env.HOME}}/.local/state"
+
+[settings]
+  color_theme         = "catppuccin"
+  minimum_release_age = "7d"
+  os                  = "linux"
+
+[settings.cargo]
+  binstall = true
+
+[settings.rust]
+  cargo_home = "{{ .cargoHome }}"
+
+[tools]
+  chezmoi = "latest"
+  node    = { version = "lts", postinstall = "corepack enable" }
+  go      = "latest"
+  rust    = "latest"
+  python  = "latest"
+  uv      = "latest"
+  ruby    = "latest"
+  lua     = "latest"
+
+  ast-grep   = "latest"
+  atuin      = "latest"
+  bat        = "latest"
+  difftastic = "latest"
+  direnv     = "latest"
+  fd         = "latest"
+  fzf        = "latest"
+  github-cli = "latest"
+  grex       = "latest"
+  jq         = "latest"
+  just       = "latest"
+  lazygit    = "latest"
+  ripgrep    = "latest"
+  sd         = "latest"
+  starship   = "latest"
+  tokei      = "latest"
+  tombi      = "latest"
+  yazi       = "latest"
+  zoxide     = "latest"
+
+  # {{- if eq .purpose "personal" }}
+  podman = "latest"
+  # {{- end }}
+
+  # Used by Neovim
+  neovim                              = "latest"
+  tree-sitter                         = "latest"
+  lua-language-server                 = "latest"
+  prettier                            = "latest"
+  shellcheck                          = "latest"
+  shfmt                               = "latest"
+  "npm:@emmetio/css-parser"           = "latest"
+  "npm:@mdx-js/language-server"       = "latest"
+  "npm:@olrtg/emmet-language-server"  = "latest"
+  "npm:@vscode/codicons"              = "latest"
+  "npm:bash-language-server"          = "latest"
+  "npm:css-variables-language-server" = "latest"
+  "npm:cssmodules-language-server"    = "latest"
+  "npm:htmlhint"                      = "latest"
+  "npm:name-color"                    = "latest"
+  "npm:name-that-color"               = "latest"
+  "npm:neovim"                        = "latest"
+  "npm:remark-language-server"        = "latest"
+  "npm:stylelint-lsp"                 = "latest"
+  "npm:typescript"                    = "latest"
+  "npm:typescript-language-server"    = "latest"
+  "npm:vim-language-server"           = "latest"
+  "npm:vscode-langservers-extracted"  = "latest"
+  "npm:yaml-language-server"          = "latest"
+  # {{- if eq .purpose "personal" }}
+  "npm:@astrojs/language-server"      = "latest"
+  # {{- end }}
+  # {{- if eq .purpose "hackuity" }}
+  "npm:oxfmt"                         = "latest"
+  # {{- end }}
+
+  # Claude
+  claude                = "latest"
+  "npm:@cometix/ccline" = "latest"
