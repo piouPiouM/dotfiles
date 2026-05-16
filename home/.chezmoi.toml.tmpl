@@ -19,6 +19,10 @@
   ]
 
 [data]
-  email = {{ $email | quote }}
-  purpose = {{ $purpose | quote }}
-  fontsDir = "~/.local/share/fonts"
+  email        = "{{ $email }}"
+  purpose      = "{{ $purpose }}"
+  xdgCacheDir  = "{{ .chezmoi.homeDir }}/.cache"
+  xdgConfigDir = "{{ .chezmoi.homeDir }}/.config"
+  xdgDataDir   = "{{ .chezmoi.homeDir }}/.local/share"
+  xdgStateDir  = "{{ .chezmoi.homeDir }}/.local/state"
+  fontsDir     = "{{ .xdgDataDir }}/fonts"

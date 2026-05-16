@@ -3,10 +3,10 @@
 redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
 
 [env]
-XDG_CACHE_HOME = "{{env.HOME}}/.cache"
-XDG_CONFIG_HOME = "{{env.HOME}}/.config"
-XDG_DATA_HOME = "{{env.HOME}}/.local/share"
-XDG_STATE_HOME = "{{env.HOME}}/.local/state"
+  XDG_CACHE_HOME = "{{env "HOME"}}/.cache"
+  XDG_CONFIG_HOME = "{{env "HOME"}}/.config"
+  XDG_DATA_HOME = "{{env "HOME"}}/.local/share"
+  XDG_STATE_HOME = "{{env "HOME"}}/.local/state"
 
 [settings]
   color_theme         = "catppuccin"
@@ -49,9 +49,9 @@ XDG_STATE_HOME = "{{env.HOME}}/.local/state"
   yazi       = "latest"
   zoxide     = "latest"
 
-  # {{- if eq .purpose "personal" }}
+  # {{- if eq .purpose "personal" -}}
   podman = "latest"
-  # {{- end }}
+  # {{- end -}}
 
   # Used by Neovim
   neovim                              = "latest"
@@ -78,12 +78,12 @@ XDG_STATE_HOME = "{{env.HOME}}/.local/state"
   "npm:vim-language-server"           = "latest"
   "npm:vscode-langservers-extracted"  = "latest"
   "npm:yaml-language-server"          = "latest"
-  # {{- if eq .purpose "personal" }}
+  # {{- if eq .purpose "personal" -}}
   "npm:@astrojs/language-server"      = "latest"
-  # {{- end }}
-  # {{- if eq .purpose "hackuity" }}
+  # {{- end -}}
+  # {{- if eq .purpose "hackuity" -}}
   "npm:oxfmt"                         = "latest"
-  # {{- end }}
+  # {{- end -}}
 
   # Claude
   claude                = "latest"
