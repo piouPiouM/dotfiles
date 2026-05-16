@@ -38,15 +38,6 @@
     exact = false
 {{- end }}
 
-# rofi
-{{- range $flavor := list "frappe" "latte" "macchiato" "mocha" }}
-[".local/share/rofi/themes/catppuccin-{{ $flavor }}.rasi"]
-    type = "file"
-    url = "https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-{{ $flavor }}.rasi"
-    refreshPeriod = "168h"
-    exact = false
-{{- end }}
-
 # =============================================================================
 # Themes — Rose Pine
 # =============================================================================
@@ -66,15 +57,6 @@
 [".local/share/fzf/themes/{{ $variant }}.sh"]
     type = "file"
     url = "https://raw.githubusercontent.com/rose-pine/fzf/main/dist/{{ $variant }}.sh"
-    refreshPeriod = "168h"
-    exact = false
-{{- end }}
-
-# rofi
-{{- range $variant := list "rose-pine" "rose-pine-dawn" "rose-pine-moon" }}
-[".local/share/rofi/themes/{{ $variant }}.rasi"]
-    type = "file"
-    url = "https://raw.githubusercontent.com/rose-pine/rofi/main/{{ $variant }}.rasi"
     refreshPeriod = "168h"
     exact = false
 {{- end }}
