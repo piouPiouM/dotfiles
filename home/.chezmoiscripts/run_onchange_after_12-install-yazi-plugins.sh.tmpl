@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v ya >/dev/null 2>&1; then
+  echo "ya not found — install yazi first"
+  exit 0
+fi
+
+{{ range .packages.yazi.plugins -}}
+ya pkg add {{ . | quote }}
+{{ end -}}
+{{ range .packages.yazi.flavors -}}
+ya pkg add {{ . | quote }}
+{{ end -}}
+
+echo "✔ Yazi packages installed"

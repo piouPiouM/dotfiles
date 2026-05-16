@@ -1,0 +1,10 @@
+packages:
+  yazi:
+    plugins:
+      - "yazi-rs/plugins:full-border"
+      - "yazi-rs/plugins:max-preview"
+      - "GrzegorzKozub/mdcat"
+      - "AnirudhG07/rich-preview"
+    flavors:
+      - "yazi-rs/flavors:catppuccin-latte"
+      - "yazi-rs/flavors:catppuccin-mocha"
