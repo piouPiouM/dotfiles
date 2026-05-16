@@ -10,6 +10,9 @@ set -euo pipefail
 TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT
 
+# FIXME: IBM Plex changed the way they publish the latest release.
+exit 0
+
 curl -fsSL -o "$TMP/OpenType.zip" \
   {{ gitHubLatestReleaseAssetURL "IBM/plex" "OpenType.zip" | quote }}
 unzip -qq "$TMP/OpenType.zip" -d "$TMP"
