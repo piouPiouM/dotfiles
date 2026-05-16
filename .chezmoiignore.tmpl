@@ -1,15 +1,18 @@
-# Zsh
-**/*.zwc
-**/*.zwc.old
-**/.zcompcache
-**/.zcompdump*
-**/.zsh_history
-**/.zsh_sessions
+.config/yazi/plugins
+.config/yazi/plugins/**
+.config/yazi/flavors
+.config/yazi/flavors/**
 
-# Commons
-**/*.log
+*.zwc
+*.zwc.old
+.zcompcache
+.zcompdump*
+.zsh_history
+.zsh_sessions
+
+*.log
 
 {{- if eq .osRelease.id "ubuntu" }}
 .config/niri
 .config/niri/**
-{{ endif }}
+{{- endif -}}

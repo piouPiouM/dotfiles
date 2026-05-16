@@ -1,0 +1,3 @@
+[directories]
+  cargoHome = "~/.local/share/cargo"
+  fontsDir  = "~/.local/share/fonts"

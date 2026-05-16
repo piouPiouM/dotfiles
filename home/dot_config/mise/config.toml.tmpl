@@ -17,7 +17,7 @@ XDG_STATE_HOME = "{{env.HOME}}/.local/state"
   binstall = true
 
 [settings.rust]
-  cargo_home = "{{ .cargoHome }}"
+  cargo_home = "{{ .directories.cargoHome }}"
 
 [tools]
   chezmoi = "latest"
