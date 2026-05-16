@@ -1,0 +1,13 @@
+toml-version = "v1.0.0"
+
+[files]
+include = ["**/*.toml", "**/*.toml.tmpl"]
+
+[format]
+[format.rules]
+indent-sub-tables = false
+indent-table-key-value-pairs = true
+key-value-equals-sign-alignment = true
+line-width = 80
+trailing-comment-alignment = true
+trailing-comment-space-width = 2
