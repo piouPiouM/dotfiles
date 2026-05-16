@@ -4,10 +4,11 @@
 # is what makes chezmoi detect the change and re-run this script.
 set -eu
 
-# mise config hash: {{ include "dot_config/mise/config.toml" | sha256sum }}
+# mise config hash: {{ include (joinPath .chezmoi.sourceDir "dot_config/mise/config.toml.tmpl") | sha256sum }}
 
 if ! command -v mise >/dev/null 2>&1; then
   echo "mise not found — install it first"
   exit 0
 fi
-mise install
+echo "run mise installations"
+# mise install
