@@ -41,7 +41,15 @@ require("nvim-treesitter.configs").setup({
   sync_install = false,
 
   modules = {},
-  highlight = { enable = true },
+  highlight = {
+    enable = true,
+    disable = function()
+      -- check if 'filetype' option includes 'chezmoitmpl'
+      if string.find(vim.bo.filetype, 'chezmoitmpl') then
+        return true
+      end
+    end,
+  },
   incremental_selection = { enable = true },
   indent = { enable = true },
 

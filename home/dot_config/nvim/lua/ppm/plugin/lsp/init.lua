@@ -46,6 +46,7 @@ local servers = {
   efm = { format = true },
   yamlls = { format = true },
   tinymist = { format = true },
+  tombi = { format = true },
   beancount = { format = true },
 }
 
@@ -67,11 +68,11 @@ api.nvim_create_autocmd("LspAttach", {
     end
 
     u.buf_map(args.buf, "n", k.lsp.diagnostic.previous.key, [[<cmd>Lspsaga diagnostic_jump_prev<cr>]],
-              k.lsp.diagnostic.previous.desc)
+      k.lsp.diagnostic.previous.desc)
     u.buf_map(args.buf, "n", k.lsp.diagnostic.next.key, [[<cmd>Lspsaga diagnostic_jump_next<cr>]],
-              k.lsp.diagnostic.next.desc)
+      k.lsp.diagnostic.next.desc)
     u.buf_map(args.buf, "n", k.lsp.diagnostic.line.key, [[<cmd>Lspsaga show_line_diagnostics<cr>]],
-              k.lsp.diagnostic.line.key)
+      k.lsp.diagnostic.line.key)
 
     api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = args.buf })
     api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = args.buf })
