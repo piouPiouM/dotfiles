@@ -1,6 +1,23 @@
 {{- $email := promptStringOnce . "email" "Git email" -}}
 {{- $purpose := promptStringOnce . "purpose" "Machine purpose (personal/work)" -}}
 
+[diff]
+  command = "difft"
+  args = [
+    "--color", "always",
+    "--skip-unchanged"
+  ]
+  pager = "cat"
+
+[merge]
+  command = "nvim"
+  args = [
+    "-d",
+    "{{ "{{" }} .Destination {{ "}}" }}",
+    "{{ "{{" }} .Source {{ "}}" }}",
+    "{{ "{{" }} .Target {{ "}}" }}"
+  ]
+
 [data]
   email = {{ $email | quote }}
   purpose = {{ $purpose | quote }}
