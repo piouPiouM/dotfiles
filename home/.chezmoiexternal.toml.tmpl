@@ -98,7 +98,7 @@
 # =============================================================================
 # Fonts
 # =============================================================================
-{{ $fontsDir := "~/.local/share/fonts" }}
+{{- $fontsDir := ".local/share/fonts" -}}
 
 # iA Writer Quattro S
 {{- range $f := list
@@ -116,9 +116,8 @@
 # Codicon
 ["{{ $fontsDir }}/codicon.ttf"]
     type = "file"
-    url = "https://github.com/microsoft/vscode-codicons/raw/main/dist/codicon.ttf"
+    url = "https://microsoft.github.io/vscode-codicons/dist/codicon.ttf"
     refreshPeriod = "168h"
-    exact = false
 
 # Nerd Fonts — Symbols Only (placed in subdirectory; fontconfig finds them recursively)
 ["{{ $fontsDir }}/nerd-fonts-symbols"]
