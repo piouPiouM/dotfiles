@@ -54,3 +54,7 @@ fi
 if which atuin >/dev/null 2>&1; then
   _evalcache atuin init zsh --disable-up-arrow
 fi
+
+if which mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+fi
