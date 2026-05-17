@@ -1,12 +1,8 @@
 .DS_Store
 *~
-tags
-.tern-project
-.tern-port
 .lvimrc
 .local.vimrc
 .config/vimrc
 *.swp
-.vscode
 
 **/.claude/settings.local.json
