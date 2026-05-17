@@ -1,0 +1,33 @@
+.config/yazi/plugins
+.config/yazi/plugins/**
+.config/yazi/flavors
+.config/yazi/flavors/**
+
+*.zwc
+*.zwc.old
+.zcompcache
+.zcompdump*
+.zsh_history
+.zsh_sessions
+
+*.log
+
+.config/git/config.local
+
+{{ if eq .chezmoi.osRelease.id "ubuntu" -}}
+.config/environment.d/wayland.conf
+.config/niri
+.config/niri/**
+.config/sway
+.config/sway/**
+.config/swaylock
+.config/swaylock/**
+.config/swaync
+.config/swaync/**
+.config/waybar
+.config/waybar/**
+{{ end -}}
+
+{{ if ne .purpose "bedrock" -}}
+.local/share/terraform
+{{ end -}}
