@@ -1,3 +1,6 @@
+[commands]
+  get_pass_item = "pass-cli item view"
+
 [directories]
   cargoHome = "~/.local/share/cargo"
   fontsDir  = "~/.local/share/fonts"

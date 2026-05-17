@@ -16,6 +16,9 @@ redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
 [settings.cargo]
   binstall = true
 
+[settings.github]
+  credential_command = "{{ .commands.get_pass_item }} '{{ .secrets.mise_github_token }}'"
+
 [settings.ruby]
   compile = false
 

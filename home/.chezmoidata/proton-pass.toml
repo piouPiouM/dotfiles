@@ -1,0 +1,2 @@
+[secrets]
+  mise_github_token = "pass://dotfiles/MISE_GITHUB_TOKEN/Clé API"
