@@ -25,4 +25,7 @@
   xdgConfigDir = "{{ .chezmoi.homeDir }}/.config"
   xdgDataDir   = "{{ .chezmoi.homeDir }}/.local/share"
   xdgStateDir  = "{{ .chezmoi.homeDir }}/.local/state"
-  fontsDir     = "{{ .xdgDataDir }}/fonts"
+
+[data.directories]
+  cargoHome = "{{ .xdgDataDir }}/mise-cargo"
+  fonts     = "{{ .xdgDataDir }}/fonts"

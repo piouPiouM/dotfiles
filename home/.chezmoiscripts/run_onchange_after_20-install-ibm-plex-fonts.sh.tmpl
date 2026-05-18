@@ -17,10 +17,10 @@ curl -fsSL -o "$TMP/OpenType.zip" \
   {{ gitHubLatestReleaseAssetURL "IBM/plex" "OpenType.zip" | quote }}
 unzip -qq "$TMP/OpenType.zip" -d "$TMP"
 
-cp "$TMP/OpenType/IBM-Plex-Mono"/*.otf "{{ .fontsDir }}/"
-cp "$TMP/OpenType/IBM-Plex-Sans"/*.otf "{{ .fontsDir }}/"
-cp "$TMP/OpenType/IBM-Plex-Sans-Condensed"/*.otf "{{ .fontsDir }}/"
-cp "$TMP/OpenType/IBM-Plex-Serif"/*.otf "{{ .fontsDir }}/"
-cp "$TMP/OpenType/IBM-Plex-Sans-JP/hinted"/*.otf "{{ .fontsDir }}/"
+cp "$TMP/OpenType/IBM-Plex-Mono"/*.otf "{{ .directories.fonts }}/"
+cp "$TMP/OpenType/IBM-Plex-Sans"/*.otf "{{ .directories.fonts }}/"
+cp "$TMP/OpenType/IBM-Plex-Sans-Condensed"/*.otf "{{ .directories.fonts }}/"
+cp "$TMP/OpenType/IBM-Plex-Serif"/*.otf "{{ .directories.fonts }}/"
+cp "$TMP/OpenType/IBM-Plex-Sans-JP/hinted"/*.otf "{{ .directories.fonts }}/"
 
-fc-cache -fr "{{ .fontsDir }}"
+fc-cache -fr "{{ .directories.fonts }}"
