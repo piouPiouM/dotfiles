@@ -38,6 +38,10 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 # }}}
 
+if which mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+fi
+
 if [[ -s "$XDG_DATA_HOME"/zsh/rc.zsh ]] then
   source "$XDG_DATA_HOME"/zsh/rc.zsh
 fi
@@ -53,8 +57,4 @@ fi
 
 if which atuin >/dev/null 2>&1; then
   _evalcache atuin init zsh --disable-up-arrow
-fi
-
-if which mise >/dev/null 2>&1; then
-  eval "$(mise activate zsh)"
 fi
