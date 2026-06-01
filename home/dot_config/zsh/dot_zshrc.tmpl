@@ -1,0 +1,219 @@
+# Set editor default keymap to emacs (`-e`) or vi (`-v`)
+bindkey -e
+
+#
+# Changing directories
+# --------------------
+
+# Perform cd to a directory if the typed command is invalid, but is a directory.
+setopt AUTO_CD
+
+# Make cd push the old directory to the directory stack.
+setopt AUTO_PUSHD
+
+# Don't print the working directory after a cd.
+setopt CD_SILENT
+
+# Don't push multiple copies of the same directory to the stack.
+setopt PUSHD_IGNORE_DUPS
+
+# Don't print the directory stack after pushd or popd.
+setopt PUSHD_SILENT
+
+# Have pushd without arguments act like `pushd ${HOME}`.
+setopt PUSHD_TO_HOME
+
+# Expansion and globbing
+# ----------------------
+
+# Treat `#`, `~`, and `^` as patterns for filename globbing.
+setopt EXTENDED_GLOB
+
+# History
+# -------
+
+# The maximum number of events stored internally and saved in the history file.
+# The former is greater than the latter in case user wants HIST_EXPIRE_DUPS_FIRST.
+HISTSIZE=50000
+SAVEHIST=30000
+
+# Don't display duplicates when searching the history.
+setopt HIST_FIND_NO_DUPS
+
+# Don't enter immediate duplicates into the history.
+setopt HIST_IGNORE_DUPS
+
+# Remove commands from the history that begin with a space.
+setopt HIST_IGNORE_SPACE
+
+# Don't execute the command directly upon history expansion.
+setopt HIST_VERIFY
+
+# Commands to ignore in history (extended pattern matching)
+HISTORY_IGNORE="(ls|ll|la|pwd|exit|clear|history|top|htop|btop|less|more|vim|nvim|code|which|man|df|du|free|ps|kill|:q)"
+
+# Set options for history
+# EXTENDED_HISTORY: Save timestamps
+# HIST_EXPIRE_DUPS_FIRST: Expire duplicates first when trimming history
+# HIST_FCNTL_LOCK: Use fcntl for file locking (safer for concurrent access)
+# HIST_IGNORE_ALL_DUPS: Remove older duplicate entries from history
+# HIST_NO_FUNCTIONS: Don't store function definitions
+# HIST_NO_STORE: Don't store 'history' or 'fc' commands
+# HIST_REDUCE_BLANKS: Remove superfluous blanks
+# HIST_SAVE_NO_DUPS: Don't write duplicate entries to history file
+# INC_APPEND_HISTORY: Write to history file immediately (no SHARE_HISTORY to avoid race conditions)
+setopt EXTENDED_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FCNTL_LOCK
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_NO_FUNCTIONS
+setopt HIST_NO_STORE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_NO_DUPS
+setopt INC_APPEND_HISTORY
+
+unsetopt HIST_BEEP
+
+# Input/output
+# ------------
+
+# Allow comments starting with `#` in the interactive shell.
+setopt INTERACTIVE_COMMENTS
+
+# Disallow `>` to overwrite existing files. Use `>|` or `>!` instead.
+setopt NO_CLOBBER
+
+#
+# Job control
+#
+
+# List jobs in verbose format by default.
+setopt LONG_LIST_JOBS
+
+# Prevent background jobs being given a lower priority.
+setopt NO_BG_NICE
+
+# Prevent status report of jobs on shell exit.
+setopt NO_CHECK_JOBS
+
+# Prevent SIGHUP to jobs on shell exit.
+setopt NO_HUP
+
+#------------------
+# Zstyle configurations
+# Remember to use single quotes here!
+# Source for zstyles: https://github.com/fluxninja/dotfiles/blob/master/dot_zshrc
+#------------------
+
+# Enable double-dot parent directory expansion.
+zstyle ':zim:input' double-dot-expand yes
+
+# Basic completion settings
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*' verbose true
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' squeeze-slashes true
+
+# Performance optimizations
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' file-sort modification
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/.zcompcache"
+
+# Visual improvements
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' menu select
+
+# Menu formatting
+zstyle ':completion:*:descriptions' format '-- %d --'
+zstyle ':completion:*:messages' format '%F{purple}-- %d --%f'
+zstyle ':completion:*:warnings' format '%F{red}-- no matches found --%f'
+
+# Ignore certain functions
+zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+
+# Git-specific settings
+zstyle ':completion:*:git-checkout:*' sort false
+
+# FZF-tab configurations
+zstyle ':fzf-tab:*' fzf-bindings 'space:accept'
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
+# Process completion (macOS compatible)
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm"
+zstyle ':fzf-tab:complete:kill:argument-rest' fzf-preview \
+  '[[ $group == "[process ID]" ]] && ps -p $word -o comm='
+zstyle ':fzf-tab:complete:kill:argument-rest' fzf-flags --preview-window=down:10:wrap
+
+# Directory and file preview with eza
+#zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1lh --icons --git-ignore --group-directories-first --sort=accessed --color=always $realpath'
+#zstyle ':fzf-tab:complete:cd:*' fzf-flags --height=35% --preview-window=right:65%
+
+# Environment variables preview
+zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand):*' \
+  fzf-preview 'echo ${(P)word}'
+zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand):*' \
+  fzf-flags --preview-window=down:10:wrap
+
+# Show man info in preview section
+zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
+
+if (( ${+commands[tldr]} )); then
+# Show man info in preview section
+  zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr --color always $word'
+
+  # Show tldr info of cli commands in preview section
+  zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
+    '(out=$(tldr --color always "$word" 2>/dev/null) && echo "$out" || \
+    out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word" 2>/dev/null) && echo "$out" || \
+    out=$(which "$word") && echo "$out" || echo "${(P)word}")'
+  zstyle ':fzf-tab:complete:-command-:*' fzf-flags --height=60% --preview-window=right:65%:wrap
+fi
+
+# File and directory preview with less (uses .lesspipe if available)
+zstyle ':fzf-tab:complete:(cat|bat|code|vim|eza|ls|fd|find|cp|mv|rm):argument-rest' fzf-preview 'less ${(Q)realpath}'
+zstyle ':fzf-tab:complete:(cat|bat|code|vim):argument-rest' fzf-flags --height=75% --preview-window=right:75%
+zstyle ':fzf-tab:complete:(eza|ls|fd|find|cp|mv|rm):argument-rest' fzf-flags --height=45% --preview-window=right:65%
+
+# Preview git -- these don't work with homebrew git package
+zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
+zstyle ':fzf-tab:complete:git-log:*' fzf-preview 'git log --color=always $word'
+zstyle ':fzf-tab:complete:git-help:*' fzf-preview 'git help $word | bat -plman --color=always'
+zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
+  'case "$group" in
+"commit tag") git show --color=always $word ;;
+*) git show --color=always $word | delta ;;
+esac'
+zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
+  'case "$group" in
+"modified file") git diff $word | delta ;;
+"recent commit object name") git show --color=always $word | delta ;;
+*) git log --color=always $word ;;
+esac'
+zstyle ':fzf-tab:complete:git-*:*' fzf-flags --height=85% --preview-window=right:75%:wrap
+
+#------------------
+# Load ZSH plugins
+#------------------
+
+function _eval() {
+  if (( ${+functions[_evalcache]} )); then
+    _evalcache "$@"
+  else
+    eval "$($@)"
+  fi
+}
+
+if (( ${+commands[mise]} )); then
+  _eval mise activate zsh
+fi
+
+if (( ${+commands[starship]} )); then
+  _eval starship init zsh
+fi
+
+if (( ${+commands[sheldon]} )); then
+  builtin source <(sheldon source)
+fi

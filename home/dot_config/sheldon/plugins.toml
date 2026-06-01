@@ -1,0 +1,86 @@
+# Load order of zsh-users plugins:
+# https://www.reddit.com/r/zsh/comments/1etl9mz/comment/lie04dt/
+# https://github.com/romkatv/zsh-bench?tab=readme-ov-file#deferred-initialization
+
+shell = "zsh"
+
+[templates]
+  defer      = """{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source "{{ file }}"\n{% endfor %}{{ hooks?.post | nl }}"""
+  defer-more = """{{ hooks?.pre | nl }}{% for file in files %}zsh-defer -t 0.5 source "{{ file }}"\n{% endfor %}{{ hooks?.post | nl }}"""
+  fpath      = 'fpath=( "{{ dir }}" $fpath )'
+  path       = 'path=( "{{ dir }}" $path )'
+
+  # ----------------------
+  # Completions
+  # ----------------------
+
+[plugins.zsh-completions]
+  github = "zsh-users/zsh-completions"
+  use    = ["{{ name }}.plugin.zsh"]
+
+[plugins.fzf]
+  github = "junegunn/fzf"
+  use    = ["{completion,key-bindings}.zsh"]
+
+  # ----------------------
+  # Sourced
+  # ----------------------
+
+[plugins.evalcache]
+  github = "mroth/evalcache"
+  use    = ["{{ name }}.plugin.zsh"]
+
+[plugins.zsh-defer]
+  github = "romkatv/zsh-defer"
+
+[plugins.compinit]
+  inline = "autoload -Uz compinit && zsh-defer compinit"
+
+[plugins.input]
+  github = "zimfw/input"
+  use    = ["init.zsh"]
+
+  # ----------------------
+  # Deferred plugins
+  # ----------------------
+
+# Set after compinit, so that tab completions are available for the cd command
+[plugins.ppm]
+  local = "~/.config/zsh/plugins"
+  use   = ["alias.zsh"]
+  apply = ["defer"]
+
+# fzf-tab needs to be loaded after compinit, but before plugins which will wrap widgets,
+# such as zsh-autosuggestions or fast-syntax-highlighting
+[plugins.fzf-tab]
+  github = "Aloxaf/fzf-tab"
+  use    = ["{{ name }}.plugin.zsh"]
+  apply  = ["defer"]
+
+[plugins.fast-syntax-highlighting]
+  github = "zdharma-continuum/fast-syntax-highlighting"
+  use    = ["{{ name }}.plugin.zsh"]
+  apply  = ["defer"]
+
+  # ----------------------
+  # Plugins that are even more deferred
+  # ----------------------
+
+# Fish-like history search (up arrow) for Zsh.
+# Must be sourced after zsh-users/zsh-syntax-highlighting
+[plugins.zsh-history-substring-search]
+  github = "zsh-users/zsh-history-substring-search"
+  use    = ["{{ name }}.zsh"]
+  apply  = ["defer-more"]
+
+# Fish-like autosuggestions for Zsh.
+[plugins.zsh-autosuggestions]
+  github = "zsh-users/zsh-autosuggestions"
+  use    = ["{{ name }}.zsh"]
+  apply  = ["defer-more"]
+
+[plugins.zoxide]
+  inline = "_evalcache zoxide init zsh --cmd cd"
+
+[plugins.atuin]
+  inline = "_evalcache atuin init zsh --disable-up-arrow"
