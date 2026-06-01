@@ -1,13 +1,19 @@
 {{- $email := promptStringOnce . "email" "Git email" -}}
 {{- $purpose := promptStringOnce . "purpose" "Machine purpose (personal/work)" -}}
 
-# [diff]
-#   command = "difft"
-#   args = [
-#     "--color", "always",
-#     "--skip-unchanged"
-#   ]
-#   pager = "cat"
+encryption = "age"
+
+[hooks.read-source-state.pre]
+  command = ".local/share/chezmoi/home/.install-prerequisites.sh"
+
+[diff]
+  command = "difft"
+  args = [
+    "--color", "always",
+    "--display", "side-by-side-show-both",
+    "--skip-unchanged",
+  ]
+  pager = "bat"
 
 [merge]
   command = "nvim"
