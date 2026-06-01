@@ -25,6 +25,9 @@ redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
 [settings.rust]
   cargo_home = "{{ .directories.cargoHome }}"
 
+[tool_alias]
+  kitty = "github:kovidgoyal/kitty"
+
 [tools]
   chezmoi = "latest"
   node    = { version = "lts", postinstall = "corepack enable" }
@@ -46,6 +49,7 @@ redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
   grex       = "latest"
   jq         = "latest"
   just       = "latest"
+  kitty      = "latest"
   lazygit    = "latest"
   ripgrep    = "latest"
   sd         = "latest"

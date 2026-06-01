@@ -1,0 +1,132 @@
+#!/usr/bin/env bash
+# run_onchange_after_20-kitty-gnome.sh.tmpl
+#
+# Purpose:
+#   Integrate Kitty into the GNOME desktop environment.
+#   This script:
+#     - Locates Kitty's installation directory via `mise where kitty@latest`.
+#     - Generates user-level kitty.desktop and kitty-open.desktop files under
+#       $XDG_DATA_HOME/applications (default: ~/.local/share/applications),
+#       rewriting TryExec/Exec/Icon to point at the mise shim and Kitty icon.
+#     - Creates or overwrites $XDG_CONFIG_HOME/xdg-terminals.list (default:
+#       ~/.config/xdg-terminals.list) so that Kitty is the preferred terminal.
+#
+# Execution:
+#   - Managed by chezmoi as a run_onchange_ script.
+#   - Runs automatically on `chezmoi apply` when the script content changes.
+#   - Safe to run multiple times: operations are idempotent.
+set -euo pipefail
+
+# ─── Logging ──────────────────────────────────────────────────────────────────
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+GRAY='\033[0;37m'
+BOLD='\033[1m'
+RESET='\033[0m'
+
+log() { echo -e "${GRAY}▶${RESET} ${BOLD}[kitty-gnome]${RESET} ${*:2}"; }
+step() { echo -e "${BLUE}▶${RESET} ${BOLD}[kitty-gnome]${RESET} ${*:2}"; }
+ok() { echo -e "${GREEN}✓${RESET} ${BOLD}[kitty-gnome]${RESET} ${*:2}"; }
+skip() { echo -e "${YELLOW}⊘${RESET} ${BOLD}[kitty-gnome]${RESET} ${*:2}"; }
+err() { echo -e "${RED}✗${RESET} ${BOLD}[kitty-gnome]${RESET} ${*:2}" >&2; }
+
+# ─── Main ─────────────────────────────────────────────────────────────────────
+step "Starting Kitty GNOME integration..."
+
+KITTY_PATH="$(mise where kitty@latest 2>/dev/null || true)"
+
+if [[ -z "${KITTY_PATH}" ]]; then
+  err "Kitty not found via 'mise where kitty@latest'."
+  err "Skipping GNOME integration. Install Kitty first with:"
+  err "    mise alias set kitty github:kovidgoyal/kitty"
+  err "    mise use --global kitty@latest"
+  exit 0
+fi
+
+# 2. Determine XDG base directories.
+LOCAL_SHARE="${XDG_DATA_HOME:-$HOME/.local/share}"
+LOCAL_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"
+APPLICATIONS_DIR="${LOCAL_SHARE}/applications"
+
+ICON_RELATIVE_PATH="share/icons/hicolor/256x256/apps/kitty.png"
+ICON_PATH="${KITTY_PATH}/${ICON_RELATIVE_PATH}"
+
+log "Applications will be written to: ${APPLICATIONS_DIR}"
+log "Kitty icon path: ${ICON_PATH}"
+
+mkdir -p "${APPLICATIONS_DIR}"
+mkdir -p "${LOCAL_CONFIG}"
+
+# 3. Resolve the mise shim path for Kitty.
+MISE_SHIMS_DIR="${LOCAL_SHARE}/mise/shims"
+KITTY_SHIM="${MISE_SHIMS_DIR}/kitty"
+
+if [[ ! -x "${KITTY_SHIM}" ]]; then
+  err "WARNING: Kitty shim not found or not executable at:"
+  err "  ${KITTY_SHIM}"
+  err "The integration will still proceed using this path, but"
+  err "verify that mise shims are correctly configured in PATH."
+fi
+
+# 4. Generate kitty.desktop in the user applications directory.
+UPSTREAM_DESKTOP_MAIN="${KITTY_PATH}/share/applications/kitty.desktop"
+TARGET_DESKTOP_MAIN="${APPLICATIONS_DIR}/kitty.desktop"
+
+if [[ -f "${UPSTREAM_DESKTOP_MAIN}" ]]; then
+  step "Generating ${TARGET_DESKTOP_MAIN} from upstream template..."
+
+  # Replace TryExec, Exec, and Icon fields to point to the mise shim and icon.
+  # We restrict substitutions to lines beginning with these keys.
+  sed -E \
+    -e "s|^TryExec=kitty|TryExec=${KITTY_SHIM}|" \
+    -e "s|^Exec=kitty|Exec=${KITTY_SHIM}|" \
+    -e "s|^Icon=kitty|Icon=${ICON_PATH}|" \
+    "${UPSTREAM_DESKTOP_MAIN}" > "${TARGET_DESKTOP_MAIN}"
+
+  ok "Wrote ${TARGET_DESKTOP_MAIN}"
+else
+  skip "WARNING: Upstream kitty.desktop not found at:"
+  skip "  ${UPSTREAM_DESKTOP_MAIN}"
+  skip "Skipping generation of user-level kitty.desktop."
+fi
+
+# 5. Generate kitty-open.desktop in the user applications directory.
+UPSTREAM_DESKTOP_OPEN="${KITTY_PATH}/share/applications/kitty-open.desktop"
+TARGET_DESKTOP_OPEN="${APPLICATIONS_DIR}/kitty-open.desktop"
+
+if [[ -f "${UPSTREAM_DESKTOP_OPEN}" ]]; then
+  step "Generating ${TARGET_DESKTOP_OPEN} from upstream template..."
+
+  sed -E \
+    -e "s|^TryExec=kitty|TryExec=${KITTY_SHIM}|" \
+    -e "s|^Exec=kitty|Exec=${KITTY_SHIM}|" \
+    -e "s|^Icon=kitty|Icon=${ICON_PATH}|" \
+    "${UPSTREAM_DESKTOP_OPEN}" > "${TARGET_DESKTOP_OPEN}"
+
+  ok "Wrote ${TARGET_DESKTOP_OPEN}"
+else
+  skip "WARNING: Upstream kitty-open.desktop not found at:"
+  skip "  ${UPSTREAM_DESKTOP_OPEN}"
+  skip "Skipping generation of user-level kitty-open.desktop."
+fi
+
+# 6. Set Kitty as the preferred terminal via xdg-terminals.list.
+#    For simplicity and determinism, we overwrite this file with a single line:
+#    kitty.desktop
+#
+#    If you prefer to keep multiple terminals, adapt this section to append
+#    kitty.desktop only if it is not already present.
+XDG_TERMINALS_LIST="${LOCAL_CONFIG}/xdg-terminals.list"
+
+step "[kitty-gnome] Setting Kitty as the preferred terminal in: ${XDG_TERMINALS_LIST}"
+
+cat > "${XDG_TERMINALS_LIST}" <<EOF
+kitty.desktop
+EOF
+
+ok "[kitty-gnome] xdg-terminals.list now contains:"
+cat "${XDG_TERMINALS_LIST}"
+
+ok "Kitty GNOME integration completed."
