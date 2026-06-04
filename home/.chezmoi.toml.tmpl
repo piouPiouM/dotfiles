@@ -2,6 +2,9 @@
 {{- $purpose := promptStringOnce . "purpose" "Machine purpose (personal/work)" -}}
 
 encryption = "age"
+[age]
+  identity = {{ joinPath .chezmoi.homeDir ".private/age/chezmoi.key.txt" | quote }}
+  recipient = {{ joinPath .chezmoi.homeDir ".private/age/chezmoi.recipient.txt" | include | trim | quote }}
 
 [hooks.read-source-state.pre]
   command = ".local/share/chezmoi/home/.install-prerequisites.sh"

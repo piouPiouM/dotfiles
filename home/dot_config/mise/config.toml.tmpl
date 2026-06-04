@@ -17,7 +17,7 @@ redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
   binstall = true
 
 [settings.github]
-  credential_command = "{{ .commands.get_pass_item }} '{{ .secrets.mise_github_token }}'"
+  credential_command = 'pass-cli item view "{{.secrets.proton.prefix}}{{.secrets.proton.github_tokens.mise}}"'
 
 [settings.ruby]
   compile = false

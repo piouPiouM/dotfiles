@@ -1,2 +1,3 @@
 [tools]
-tombi = "latest"
+  age   = "latest"
+  tombi = "latest"
