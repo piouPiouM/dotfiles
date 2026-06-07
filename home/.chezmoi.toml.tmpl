@@ -1,5 +1,9 @@
 {{- $email := promptStringOnce . "email" "Git email" -}}
 {{- $purpose := promptStringOnce . "purpose" "Machine purpose (personal/work)" -}}
+{{- $org := "" -}}
+{{- if eq $purpose "work" -}}
+{{-   $org := promptStringOnce . "org" "Organization name" -}}
+{{- end -}}
 
 encryption = "age"
 [age]
@@ -30,6 +34,7 @@ encryption = "age"
 [data]
   email        = "{{ $email }}"
   purpose      = "{{ $purpose }}"
+  org          = "{{ $org }}"
   xdgCacheDir  = "{{ .chezmoi.homeDir }}/.cache"
   xdgConfigDir = "{{ .chezmoi.homeDir }}/.config"
   xdgDataDir   = "{{ .chezmoi.homeDir }}/.local/share"

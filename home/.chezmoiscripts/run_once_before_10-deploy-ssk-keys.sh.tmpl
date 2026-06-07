@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+ssh_dir="${HOME}/.ssh"
+
+if [[ ! -d "${ssh_dir}" ]]; then
+  mkdir -p "${ssh_dir}"
+  chmod 700 "${ssh_dir}"
+fi
+
+{{ range $purpose, $store := .secrets.proton.ssh }}
+  {{- if and (ne $purpose $.purpose) (ne $purpose $.org) -}}
+    {{- continue -}}
+  {{- end -}}
+  {{- if not (len $store.keys) -}}
+    {{- continue -}}
+  {{- end -}}
+
+deploy_{{ $purpose }}_ssh_keys() {
+  echo -e "Deploying {{ $purpose }} SSH key...\n"
+
+  {{- range $key := $store.keys }}
+  {{ $itemPath := print $.secrets.proton.prefix $key -}}
+  {{ $filename := print $itemPath "/Filename" | protonPass | trim -}}
+  {{ $private_key := print "${ssh_dir}/" $filename -}}
+  {{ $public_key := print "${ssh_dir}/" $filename ".pub" -}}
+
+  if [ ! -f "{{ $private_key }}" ]; then
+    (umask 077 && cat > "{{ $private_key }}" <(pass-cli item view '{{ $itemPath }}/Private key'))
+    echo "[{{ $filename }}] Private key {{ $filename }} written."
+  else
+    echo "[{{ $filename }}] Private key  {{ $filename }} already exists; skipping."
+  fi
+
+  if [ ! -f "{{ $public_key }}" ]; then
+    cat > "{{ $public_key }}" <(pass-cli item view '{{ $itemPath }}/Public key')
+    chmod 600 "{{ $public_key }}"
+    echo "[{{ $filename }}] Public key {{ $filename }} written."
+  else
+    echo "[{{ $filename }}] Public key  {{ $filename }} already exists; skipping."
+  fi
+  {{- end }}
+}
+deploy_{{ $purpose }}_ssh_keys
+
+{{ end -}}

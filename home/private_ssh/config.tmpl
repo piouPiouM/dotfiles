@@ -1,0 +1,32 @@
+# vim: filetype=sshconfig
+Host *
+  AddKeysToAgent yes
+  Compression yes
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/{{ .purpose }}
+  PreferredAuthentications publickey
+  ServerAliveCountMax 3
+  ServerAliveInterval 120
+
+Host github.com
+  Hostname github.com
+  UpdateHostKeys yes
+  User git
+  IdentitiesOnly yes
+
+{{ range $purpose, $store := .secrets.proton.ssh }}
+  {{- if and (ne $purpose $.purpose) (ne $purpose $.org) -}}
+    {{- continue -}}
+  {{- end -}}
+  {{- range $store.config -}}
+    {{- $config := print $.secrets.proton.prefix . | protonPassJSON -}}
+    {{- $options := dict -}}
+    {{- range $field := $config.item.content.extra_fields -}}
+      {{- $_ := set $options $field.name $field.content.Text -}}
+    {{- end }}
+Host {{ $options.Alias }}
+    {{- range $option, $value := omit $options "Alias" }}
+  {{ $option }}: {{ ternary "~/.ssh/" "" (eq $option "IdentityFile") }}{{ $value }}
+    {{- end }}
+  {{ end -}}
+{{ end -}}
