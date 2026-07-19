@@ -1,7 +1,7 @@
 local M = require("lualine.component"):extend()
 
 local function get_copilot_model_name()
-  local status_ok, copilot_util = pcall(require, 'copilot.client.utils')
+  local status_ok, copilot_util = pcall(require, "copilot.client.utils")
 
   if not status_ok then
     return nil
@@ -31,18 +31,12 @@ function M:init(options)
 end
 
 function M:update_status()
-  local status_ok, copilot_lualine = pcall(require, 'copilot-lualine')
+  local status_ok, copilot_lualine = pcall(require, "copilot-lualine")
   if not status_ok or not copilot_lualine.is_enabled() then
     return
   end
 
-  local model_name = get_copilot_model_name()
-
-  if model_name ~= "" then
-    return model_name
-  else
-    return "gpt-41-copilot"
-  end
+  return get_copilot_model_name()
 end
 
 return M

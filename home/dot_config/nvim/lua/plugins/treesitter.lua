@@ -19,8 +19,14 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     lazy = false,
+    init = function()
+      -- Disable entire built-in ftplugin mappings to avoid conflicts.
+      -- See https://github.com/neovim/neovim/tree/master/runtime/ftplugin for built-in ftplugins.
+      vim.g.no_plugin_maps = true
+    end,
   },
 
   {
@@ -30,28 +36,28 @@ return {
   },
 
   {
-    'Wansmer/treesj',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    "Wansmer/treesj",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     keys = {
       {
-        '<leader>jj',
-        function() require('treesj').toggle() end,
-        { desc = 'Toggle splitting/joining blocks of code' },
+        "<leader>jj",
+        function() require("treesj").toggle() end,
+        { desc = "Toggle splitting/joining blocks of code" },
       },
       {
-        '<leader>jm',
-        function() require('treesj').join() end,
-        { desc = 'Merge (join) blocks of code' },
+        "<leader>jm",
+        function() require("treesj").join() end,
+        { desc = "Merge (join) blocks of code" },
       },
       {
-        '<leader>js',
-        function() require('treesj').split() end,
-        { desc = 'Split blocks of code' },
+        "<leader>js",
+        function() require("treesj").split() end,
+        { desc = "Split blocks of code" },
       },
     },
     opts = {
       use_default_keymaps = false,
       max_join_length = 240,
     },
-  }
+  },
 }
