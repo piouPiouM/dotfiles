@@ -8,22 +8,22 @@
 #----------------------
 
 # XDG Base Directory Specification
-typeset -x XDG_CACHE_HOME="$HOME/.cache"
-typeset -x XDG_CONFIG_HOME="$HOME/.config"
-typeset -x XDG_DATA_HOME="$HOME/.local/share"
-typeset -x XDG_STATE_HOME="$HOME/.local/state"
-typeset -x XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-"$TMPDIR"}
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-"$TMPDIR"}
 
-typeset -x GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
-typeset -x HISTFILE="$XDG_CACHE_HOME"/zsh/history
-typeset -x LESSHISTFILE="$XDG_CACHE_HOME"/less/history
-typeset -x NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
-typeset -x NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
-typeset -x RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/rc
-typeset -x STARSHIP_CONFIG="$XDG_CONFIG_HOME"/starship/starship.toml
-typeset -x TEALDEER_CONFIG_DIR="$XDG_CONFIG_HOME"/tealdeer
-typeset -x ZSH_EVALCACHE_DIR="$XDG_CACHE_HOME"/zsh/evalcache
-typeset -x _ZO_DATA_DIR="$XDG_DATA_HOME"/zoxide
+export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
+export HISTFILE="$XDG_CACHE_HOME"/zsh/history
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/rc
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME"/starship/starship.toml
+export TEALDEER_CONFIG_DIR="$XDG_CONFIG_HOME"/tealdeer
+export ZSH_EVALCACHE_DIR="$XDG_CACHE_HOME"/zsh/evalcache
+export _ZO_DATA_DIR="$XDG_DATA_HOME"/zoxide
 
 #----------------------
 # Path Configuration
@@ -41,14 +41,14 @@ fpath=(
 )
 
 # Ensure path arrays are unique and exported
-typeset -x -U PATH path FPATH fpath MANPATH manpath
-typeset -x -UT INFOPATH infopath
+typeset -g -U PATH path FPATH fpath MANPATH manpath
+typeset -g -UT INFOPATH infopath
 
 #----------------------
 # System Configuration
 #----------------------
 # Locale settings
-typeset -x LANG=${LANG:-{{ .lang }}} \
+export LANG=${LANG:-{{ .lang }}} \
   LC_ALL=${LC_ALL:-{{ .lang }}} \
   LC_COLLATE={{ .lang }} \
   LC_CTYPE={{ .lang }} \
@@ -59,7 +59,7 @@ typeset -x LANG=${LANG:-{{ .lang }}} \
   LESSCHARSET=utf-8
 
 # System utilities
-typeset -x EDITOR=nvim \
+export EDITOR=nvim \
   VISUAL=nvim \
   TERMINAL=kitty \
   PAGER=less \
@@ -69,12 +69,12 @@ typeset -x EDITOR=nvim \
   LESSOPEN="|$HOME/.lesspipe %s" \
   MANPAGER="col -xbf | bat -p -l man"
 
-typeset -x GREP_COLORS="mt=${GREP_COLOR}"
+export GREP_COLORS="mt=${GREP_COLOR}"
 
 #----------------------
 # fd
 #----------------------
-typeset -x FD_DEFAULT_OPTS="--hidden --no-require-git --one-file-system"
+export FD_DEFAULT_OPTS="--hidden --no-require-git --one-file-system"
 
 #----------------------
 # fzf
@@ -93,7 +93,7 @@ if (( ${+commands[fzf]} )); then
 
     echo "${preview_file} || ${preview_dir} || ${preview_fallback}"
   }
-  typeset -x FZF_PREVIEW="$(_fzf_preview)"
+  export FZF_PREVIEW="$(_fzf_preview)"
 
   _fzf_default_opts+=(
     "--border=top"
@@ -118,15 +118,15 @@ if (( ${+commands[fzf]} )); then
     "--bind 'shift-tab:toggle+up'"
     "--bind backward-eof:abort"
   )
-  typeset -x FZF_DEFAULT_COMMAND="fd ${FD_DEFAULT_OPTS} --follow --hidden --exclude .git --exclude node_modules"
-  typeset -x FZF_DEFAULT_OPTS=$(printf '%s\n' "${_fzf_default_opts[@]}")
+  export FZF_DEFAULT_COMMAND="fd ${FD_DEFAULT_OPTS} --follow --hidden --exclude .git --exclude node_modules"
+  export FZF_DEFAULT_OPTS=$(printf '%s\n' "${_fzf_default_opts[@]}")
 
-  typeset -x FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
+  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
 
-  typeset -x FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  typeset -x FZF_CTRL_T_OPTS="$FZF_DEFAULT_COMMAND"
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS"
 
-  typeset -x FZF_CTRL_R_OPTS='--prompt="History> " --preview="echo {}" --preview-window=down:3:wrap'
+  export FZF_CTRL_R_OPTS='--prompt="History> " --preview="echo {}" --preview-window=down:3:wrap'
 fi
 
 #------------------
