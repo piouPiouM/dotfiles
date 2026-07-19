@@ -1,13 +1,13 @@
 [plugin]
-prepend_previewers = [
-    { name = "*.csv", run = "rich-preview"},
-    { name = "*.md", run = "rich-preview" },
-    { name = "*.rst", run = "rich-preview"},
-    { name = "*.ipynb", run = "rich-preview"},
-    { name = "*.json", run = "rich-preview"},
-    { name = "*.lua", run = "rich-preview"},
-]
+  prepend_previewers = [
+    { url = "*.csv", run = "rich-preview" },
+    { url = "*.md", run = "rich-preview" },
+    { url = "*.rst", run = "rich-preview" },
+    { url = "*.ipynb", run = "rich-preview" },
+    { url = "*.json", run = "rich-preview" },
+    { url = "*.lua", run = "rich-preview" },
+  ]
 
 [preview]
-max_width  = 1500
-max_height = 1000
+  max_width  = 1500
+  max_height = 1000

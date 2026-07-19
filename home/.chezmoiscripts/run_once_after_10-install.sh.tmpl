@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+set -eu
+
+if (( ${+commands[ya]} )); then
+  echo "Installing Yazi packages..."
+  ya pkg install --discard
+else
+  echo "ya not found — install yazi first."
+fi
