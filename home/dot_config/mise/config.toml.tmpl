@@ -3,15 +3,17 @@
 redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
 
 [env]
-  XDG_CACHE_HOME = "{{env "HOME"}}/.cache"
-  XDG_CONFIG_HOME = "{{env "HOME"}}/.config"
-  XDG_DATA_HOME = "{{env "HOME"}}/.local/share"
-  XDG_STATE_HOME = "{{env "HOME"}}/.local/state"
+  XDG_CACHE_HOME  = '{{env "HOME"}}/.cache'
+  XDG_CONFIG_HOME = '{{env "HOME"}}/.config'
+  XDG_DATA_HOME   = '{{env "HOME"}}/.local/share'
+  XDG_STATE_HOME  = '{{env "HOME"}}/.local/state'
 
 [settings]
-  color_theme         = "catppuccin"
-  minimum_release_age = "7d"
-  os                  = "linux"
+  color_theme                         = "catppuccin"
+  minimum_release_age                 = "7d"
+  os                                  = "linux"
+  idiomatic_version_file_enable_tools = ["node", "python"]
+  not_found_auto_install              = false
 
 [settings.cargo]
   binstall = true
@@ -23,7 +25,7 @@ redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
   compile = false
 
 [settings.rust]
-  cargo_home = "{{ .directories.cargoHome }}"
+  cargo_home = "{{.directories.cargoHome}}"
 
 [tool_alias]
   kitty = "github:kovidgoyal/kitty"
@@ -32,6 +34,7 @@ redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
 [tools]
   chezmoi = "latest"
   node    = { version = "lts", postinstall = "corepack enable" }
+  bun     = "latest"
   go      = "latest"
   rust    = "latest"
   python  = "latest"
@@ -43,7 +46,7 @@ redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
   atuin      = "latest"
   bat        = "latest"
   difftastic = "latest"
-  # direnv     = "latest"
+  # direnv     = 'latest'
   fd         = "latest"
   fzf        = "latest"
   github-cli = "latest"
@@ -75,6 +78,7 @@ redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
   prettier                            = "latest"
   shellcheck                          = "latest"
   shfmt                               = "latest"
+  stylua                              = "latest"
   "gem:neovim"                        = "latest"
   "npm:@mdx-js/language-server"       = "latest"
   "npm:@olrtg/emmet-language-server"  = "latest"
@@ -101,6 +105,11 @@ redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
   "npm:oxfmt"                         = "latest"
   # {{- end }}
 
-  # Claude
-  claude                = "latest"
-  "npm:@cometix/ccline" = "latest"
+  # AI
+  herdr              = { version = "latest", postinstall = "herdr integration install claude" }
+  hunk               = "latest"
+  rtk                = "latest"
+
+[tasks.install-proton-pass]
+  description = "Install Proton Pass on Fedora from the official release"
+  file        = "{{ .chezmoi.sourceDir }}/mise/tasks/install-proton-pass.sh"
