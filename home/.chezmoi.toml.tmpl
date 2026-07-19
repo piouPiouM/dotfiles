@@ -39,8 +39,9 @@ encryption = "age"
   xdgConfigDir = "{{ .chezmoi.homeDir }}/.config"
   xdgDataDir   = "{{ .chezmoi.homeDir }}/.local/share"
   xdgStateDir  = "{{ .chezmoi.homeDir }}/.local/state"
-  lang         = "{{ ternary "fr_FR.UTF-8" "en_US.UTF-8" (eq .purpose "personal") }}"
+  lang         = "{{ ternary "fr_FR.UTF-8" "en_US.UTF-8" (eq $purpose "personal") }}"
 
 [data.directories]
   cargoHome = "{{ .xdgDataDir }}/mise-cargo"
   fonts     = "{{ .xdgDataDir }}/fonts"
+

@@ -2,6 +2,8 @@
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+[[ ":${PATH}:" == *":${HOME}/.local/bin:"* ]] || export PATH="${HOME}/.local/bin:${PATH}"
+
 LOUD_COMMANDS=('apply' 'doctor' 'init' 'status' 'update')
 _LOUD=0
 for _cmd in "${LOUD_COMMANDS[@]}"; do [[ $_cmd == "${CHEZMOI_COMMAND:-}" ]] && {
