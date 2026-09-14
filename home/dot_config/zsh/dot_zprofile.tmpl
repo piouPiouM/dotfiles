@@ -67,7 +67,8 @@ export EDITOR=nvim \
   GPG_TTY=$TTY \
   SHELL_SESSIONS_DISABLE=1 \
   LESSOPEN="|$HOME/.lesspipe %s" \
-  MANPAGER="col -xbf | bat -p -l man"
+  MANROFFOPT="-c" \
+  MANPAGER="sh -c 'col -bx | bat -p -lman'"
 
 export GREP_COLORS="mt=${GREP_COLOR}"
 
