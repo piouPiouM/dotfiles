@@ -122,3 +122,7 @@ redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
   description = "Install Proton Pass on Fedora from the official release"
   file        = "{{ dir .chezmoi.sourceDir }}/mise/tasks/install-proton-pass.sh"
   raw         = true
+
+[tasks.clean-caches]
+  description = "Clear uv/npm/pnpm/pip/bun/yarn caches in parallel"
+  file        = "{{ dir .chezmoi.sourceDir }}/mise/tasks/clean-caches.sh"
