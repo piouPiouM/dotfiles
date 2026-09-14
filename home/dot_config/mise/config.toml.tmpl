@@ -120,4 +120,5 @@ redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
 
 [tasks.install-proton-pass]
   description = "Install Proton Pass on Fedora from the official release"
-  file        = "{{ .chezmoi.sourceDir }}/mise/tasks/install-proton-pass.sh"
+  file        = "{{ dir .chezmoi.sourceDir }}/mise/tasks/install-proton-pass.sh"
+  raw         = true
