@@ -82,6 +82,7 @@ redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
   "gem:neovim"                        = "latest"
   "npm:@mdx-js/language-server"       = "latest"
   "npm:@olrtg/emmet-language-server"  = "latest"
+  "npm:@rivolink/leaf"                = "latest"
   "npm:@vscode/codicons"              = "latest"
   "npm:bash-language-server"          = "latest"
   "npm:css-variables-language-server" = "latest"
@@ -109,6 +110,13 @@ redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
   herdr              = { version = "latest", postinstall = "herdr integration install claude" }
   hunk               = "latest"
   rtk                = "latest"
+  "npm:context-mode" = "latest"
+  "go:github.com/tomasz-tomczyk/crit/cmd/crit" = { version = "latest", postinstall = "claude plugin marketplace add tomasz-tomczyk/crit && claude plugin install crit@crit" }
+  # {{- if eq .purpose "personal" }}
+  llmfit = "latest"
+  ansible = { version = "latest", pipx_args = "--include-deps", uvx = false }
+  "pipx:ansible-dev-tools" = "latest"
+  # {{- end }}
 
 [tasks.install-proton-pass]
   description = "Install Proton Pass on Fedora from the official release"
