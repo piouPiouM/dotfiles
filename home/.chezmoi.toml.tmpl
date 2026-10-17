@@ -23,9 +23,8 @@ encryption = "age"
   pager = "bat"
 
 [merge]
-  command = "nvim"
+  command = "meld"
   args = [
-    "-d",
     "{{ "{{" }} .Destination {{ "}}" }}",
     "{{ "{{" }} .Source {{ "}}" }}",
     "{{ "{{" }} .Target {{ "}}" }}"
@@ -44,4 +43,3 @@ encryption = "age"
 [data.directories]
   cargoHome = "{{ .xdgDataDir }}/mise-cargo"
   fonts     = "{{ .xdgDataDir }}/fonts"
-
