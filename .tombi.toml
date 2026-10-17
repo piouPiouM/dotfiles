@@ -3,11 +3,19 @@ toml-version = "v1.0.0"
 [files]
   include = ["**/*.toml", "**/*.toml.tmpl"]
 
+# Rules set to `true` globally cannot be reset to `false` by an override
+# (tombi 1.7.3), so alignment/indent are enabled through an override instead.
 [format]
 [format.rules]
-  indent-sub-tables               = false
+  indent-sub-tables            = false
+  line-width                   = 120
+  trailing-comment-alignment   = true
+  trailing-comment-space-width = 2
+
+[[overrides]]
+  files.include = [".tombi.toml", "**/*.toml", "**/*.toml.tmpl"]
+  files.exclude = ["home/dot_config/mise/config.toml.tmpl"]
+
+[overrides.format.rules]
   indent-table-key-value-pairs    = true
   key-value-equals-sign-alignment = true
-  line-width                      = 80
-  trailing-comment-alignment      = true
-  trailing-comment-space-width    = 2
