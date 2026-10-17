@@ -30,6 +30,7 @@ local servers = {
   lua_ls = { format = false },
   jsonls = { format = false },
   ts_ls = { format = false },
+  tsc = { format = false },
   html = { format = true },
   cssls = { format = false },
   css_variables = { format = true },
@@ -101,6 +102,30 @@ vim.lsp.config("*", {
   flags = { debounce_text_changes = 150 },
   capabilities = capabilities,
 });
+
+-- TypeScript 7+ is native: no tsserver.js for ts_ls, only `tsc --lsp`.
+-- No local typescript means the global one (mise, 7+) is used.
+local function uses_native_ts(root)
+  local pkg = vim.fs.joinpath(root, "node_modules/typescript/package.json")
+  if vim.fn.filereadable(pkg) == 0 then
+    return true
+  end
+  local version = vim.version.parse(vim.json.decode(table.concat(vim.fn.readfile(pkg), "\n")).version)
+  return version == nil or version.major >= 7
+end
+
+for name, native in pairs { ts_ls = false, tsc = true } do
+  local root_dir = vim.lsp.config[name].root_dir
+  vim.lsp.config(name, {
+    root_dir = function(bufnr, on_dir)
+      root_dir(bufnr, function(root)
+        if uses_native_ts(root) == native then
+          on_dir(root)
+        end
+      end)
+    end,
+  })
+end
 
 for name, _ in pairs(servers) do
   P("enable lsp:" .. name)
