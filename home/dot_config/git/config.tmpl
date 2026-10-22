@@ -68,7 +68,7 @@
   wt-reset = !git fetch && git reset --hard "$(git get-branch-default)"
   wt-checkout = !"run() { git worktree add --track -b "$1" "$1" origin/"$1"; }; run"
   wt-add = !"run() { git worktree add "$1" && cd "$1" && git wt-reset && pnpm i; }; run"
-  wt-rm = !"run() { trash -F "$1" && git worktree remove "$1" && git branch -D "$1"; }; run"
+  wt-rm = !"run() { for wt; do trash -f "$wt" && git worktree remove "$wt" && git branch -D "$wt" || return; done; }; run"
 
 [apply]
   # Detect whitespace errors when applying a patch
