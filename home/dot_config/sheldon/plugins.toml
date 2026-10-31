@@ -9,6 +9,7 @@ shell = "zsh"
   defer-more = """{{ hooks?.pre | nl }}{% for file in files %}zsh-defer -t 0.5 source "{{ file }}"\n{% endfor %}{{ hooks?.post | nl }}"""
   fpath      = 'fpath=( "{{ dir }}" $fpath )'
   path       = 'path=( "{{ dir }}" $path )'
+  autoload   = 'autoload -Uz "{{ dir }}"/*(N.:t)'
 
   # ----------------------
   # Completions
@@ -35,6 +36,10 @@ shell = "zsh"
 
 [plugins.compinit]
   inline = "autoload -Uz compinit && zsh-defer compinit"
+
+[plugins.functions]
+  local = "~/.config/zsh/plugins/aliases/functions"
+  apply = ["fpath", "autoload"]
 
 [plugins.input]
   github = "zimfw/input"
