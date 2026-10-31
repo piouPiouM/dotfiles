@@ -1,0 +1,12 @@
+# -------------------------------------------------------------------
+# Update Claude Code, plugin marketplaces and installed plugins
+# -------------------------------------------------------------------
+# vim:et sts=2 sw=2 ft=zsh
+
+update_claude() {
+  claude update && \
+  claude plugin marketplace update && \
+  claude plugin list --json | \
+  jq -r '[.[].id] | unique[]' | \
+  xargs -n1 claude plugin update -y
+}
