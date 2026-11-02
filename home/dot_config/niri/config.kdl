@@ -19,7 +19,17 @@ input {
             // If this section is empty, niri will fetch xkb settings
             // from org.freedesktop.locale1. You can control these using
             // localectl set-x11-keymap.
+
+            // From GNOME org.gnome.desktop.input-sources.
+            // Index 0 = us, 1 = fr (air75-layout.sh relies on this order).
+            layout "us,fr"
+            variant ",oss_nodeadkeys"
+            options "compose:rctrl"
         }
+
+        // From GNOME org.gnome.desktop.peripherals.keyboard (interval 30ms ≈ 33/s).
+        repeat-delay 500
+        repeat-rate 33
 
         // Enable numlock on startup, omitting this setting disables it.
         numlock
@@ -276,6 +286,7 @@ layout {
 // See the binds section below for more spawn examples.
 
 spawn-at-startup "noctalia"
+spawn-sh-at-startup "~/.config/niri/air75-layout.sh"
 
 environment {
   TERMINAL "kitty"
@@ -695,8 +706,9 @@ binds {
     // a matching layout switch hotkey configured in xkb options above.
     // Having both at once on the same hotkey will break the switching,
     // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
-    // Mod+Space       { switch-layout "next"; }
-    // Mod+Shift+Space { switch-layout "prev"; }
+    // Mod+Space is the Noctalia launcher, so layout switch lives on Mod+Shift+Space.
+    Mod+Shift+Space { switch-layout "next"; }
+    XF86Keyboard    { switch-layout "next"; }
 
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
