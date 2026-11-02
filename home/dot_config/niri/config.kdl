@@ -517,13 +517,12 @@ binds {
     // XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
-    // Example media keys mapping using playerctl.
-    // This will work with any MPRIS-enabled media player.
-    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioPause       allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
-    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
-    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+    // Media keys through Noctalia (MPRIS, active player); playerctl is not installed.
+    XF86AudioPlay        allow-when-locked=true { spawn "noctalia" "msg" "media" "toggle"; }
+    XF86AudioPause       allow-when-locked=true { spawn "noctalia" "msg" "media" "pause"; }
+    XF86AudioStop        allow-when-locked=true { spawn "noctalia" "msg" "media" "stop"; }
+    XF86AudioPrev        allow-when-locked=true { spawn "noctalia" "msg" "media" "previous"; }
+    XF86AudioNext        allow-when-locked=true { spawn "noctalia" "msg" "media" "next"; }
 
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
