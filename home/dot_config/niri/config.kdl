@@ -77,36 +77,39 @@ input {
 // The built-in laptop monitor is usually called "eDP-1".
 // Find more information on the wiki:
 // https://niri-wm.github.io/niri/Configuration:-Outputs
-// Remember to uncomment the node by removing "/-"!
-/-output "eDP-1" {
-    // Uncomment this line to disable this output.
-    // off
+//
+// Layout copied from Gnome (~/.config/monitors.xml): XPS on the left, external
+// screen on the right. Blocks for disconnected outputs are ignored, so the work
+// and home screens can both stay here. The XPS is the fixed origin; each external
+// gets its own y offset, as Gnome had a different vertical alignment per screen.
+// Names are "make model serial": check them with `niri msg outputs`.
 
-    // Resolution and, optionally, refresh rate of the output.
-    // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
-    // If the refresh rate is omitted, niri will pick the highest refresh rate
-    // for the resolution.
-    // If the mode is omitted altogether or is invalid, niri will pick one automatically.
-    // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-    mode "1920x1080@120.030"
+// Dell XPS built-in panel.
+output "eDP-1" {
+    mode "1920x1200"
+    scale 1
+    position x=0 y=0
+}
 
-    // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-    scale 2
+// Work: BenQ EL2870U (4K panel, run at 1440p like on Gnome).
+// "BNQ" is the raw EDID vendor ID: libdisplay-info has no full name for it.
+output "BNQ BenQ EL2870U 21N04859SL0" {
+    mode "2560x1440"
+    scale 1
+    // Sharper native 4K: swap the 2 lines above for these. Logical size stays
+    // 2560x1440, so the position is unchanged. Revert if the dock can't do 4K@60.
+    // mode "3840x2160"
+    // scale 1.5
+    position x=1920 y=-119
+    focus-at-startup
+}
 
-    // Transform allows to rotate the output counter-clockwise, valid values are:
-    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-    transform "normal"
-
-    // Position of the output in the global coordinate space.
-    // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
-    // The cursor can only move between directly adjacent outputs.
-    // Output scale and rotation has to be taken into account for positioning:
-    // outputs are sized in logical, or scaled, pixels.
-    // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
-    // so to put another output directly adjacent to it on the right, set its x to 1920.
-    // If the position is unset or results in an overlap, the output is instead placed
-    // automatically.
-    position x=1280 y=0
+// Home: ASUS VA27A.
+output "ASUSTek COMPUTER INC ASUS VA27A M1LMTF065997" {
+    mode "2560x1440"
+    scale 1
+    position x=1920 y=-401
+    focus-at-startup
 }
 
 // Settings that influence how windows are positioned and sized.
