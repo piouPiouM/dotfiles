@@ -490,6 +490,7 @@ binds {
     /-Mod {
         release { toggle-overview; }
     }
+    Mod+O repeat=false { toggle-overview; }
 
     // You can also bind both press and release actions like so.
     // If the press action fires, the release action
