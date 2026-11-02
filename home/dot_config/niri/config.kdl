@@ -289,7 +289,8 @@ spawn-at-startup "noctalia"
 spawn-sh-at-startup "~/.config/niri/air75-layout.sh"
 
 environment {
-  TERMINAL "kitty"
+  // Absolute: ~/.local/bin is not on niri's PATH, and env values get no ~ expansion.
+  TERMINAL "/home/mkabab/.local/bin/kitty"
 }
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
@@ -442,7 +443,8 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    // kitty lives in ~/.local/bin, which is not on niri's PATH.
+    Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "~/.local/bin/kitty"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
