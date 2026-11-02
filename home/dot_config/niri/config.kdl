@@ -436,6 +436,13 @@ window-rule {
 
 // ## Compositor Settings
 
+// Put the Noctalia wallpaper in the backdrop, so the overview shows it
+// full screen behind the workspaces (layout background-color is transparent).
+layer-rule {
+  match namespace="^noctalia-wallpaper"
+  place-within-backdrop true
+}
+
 // Enable rounded corners for all windows.
 window-rule {
   // Rounded corners for a modern look.
