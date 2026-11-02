@@ -461,7 +461,8 @@ binds {
     // XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
     // Some laptops have a key for toggling the touchpad.
-    XF86TouchpadToggle repeat=false { toggle-touchpad; }
+    // Disabled: needs niri > 26.04.
+    /-XF86TouchpadToggle repeat=false { toggle-touchpad; }
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
@@ -469,7 +470,8 @@ binds {
     //
     // This is a release bind.
     // Press and release Mod by itself to trigger it.
-    Mod {
+    // Disabled: needs niri > 26.04.
+    /-Mod {
         release { toggle-overview; }
     }
 
