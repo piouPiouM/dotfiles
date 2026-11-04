@@ -69,10 +69,12 @@
   ## Worktree
 
   wt-reset = !git fetch && git reset --hard "$(git get-branch-default)"
-  wt-checkout = !"run() { git worktree add --track -b "$1" "$1" origin/"$1"; }; run"
+  # branch "a/b" gets worktree dir "a-b"
+  wt-checkout = !"run() { git worktree add --track -b "$1" "$(echo "$1" | tr / -)" origin/"$1"; }; run"
   # unset GIT_DIR: git exports it to !aliases, so after cd the new worktree is ignored
-  wt-add = !"run() { git worktree add "$1" && unset GIT_DIR GIT_WORK_TREE && cd "$1" && git wt-reset && pnpm i; }; run"
-  wt-rm = !"run() { for wt; do trash -f "$wt" && git worktree remove "$wt" && git branch -D "$wt" || return; done; }; run"
+  wt-add = !"run() { d=$(echo "$1" | tr / -); git worktree add -b "$1" "$d" && unset GIT_DIR GIT_WORK_TREE && cd "$d" && git wt-reset && pnpm i; }; run"
+  # takes branch or dir names; the branch to delete is read from the worktree itself
+  wt-rm = !"run() { for wt; do d=$(echo "${wt%/}" | tr / -); b=$(cd "$d" && unset GIT_DIR GIT_WORK_TREE && git branch --show-current); trash -f "$d" && git worktree remove "$d" && git branch -D "$b" || return; done; }; run"
 
   base-name = "!f() { head=${1:-HEAD}; cur=$(git rev-parse --abbrev-ref \"$head\"); git for-each-ref --format=\"%(refname:short)\" refs/heads refs/remotes/origin | while read b; do case \"$b\" in \"$cur\"|origin/HEAD|origin|\"origin/$cur\"|backup/*) continue;; esac; git merge-base --is-ancestor \"$head\" \"$b\" && continue; mb=$(git merge-base \"$head\" \"$b\") || continue; [ \"$(git rev-parse \"$b\")\" = \"$mb\" ] && t=0 || t=1; echo \"$(git rev-list --count \"$mb..$head\") $t $b\"; done | sort -k1,1n -k2,2n | head -n 1 | cut -d\" \" -f3; }; f"
   get-base = "!f() { head=${1:-HEAD}; b=$(git base-name \"$head\"); [ -n \"$b\" ] || { echo \"no base branch found\" >&2; return 1; }; mb=$(git merge-base \"$head\" \"$b\"); n=$(git rev-list --count \"$mb..$head\"); [ \"$(git rev-parse \"$b\")\" = \"$mb\" ] && t=\"\" || t=\", base moved on\"; echo \"$b  ($n commits ahead$t)\"; }; f"
@@ -187,7 +189,7 @@
   hy-bugfix-branch = !git fetch --quiet && git branch --remotes | grep 'origin/bugfix-' | sort -Vr | head -1
   wt-hy-reset-bugfix = !git fetch --quiet && git reset --hard "$(git hy-bugfix-branch)"
   wt-hy-bugfix = !"run() { git worktree add "HY-$1_$2" && cd "HY-$1_$2" && git wt-hy-reset-bugfix && pnpm i; }; run"
-  wt-review = !"run() { TARGET="review-$1"; git fetch && git worktree add --track -b "$TARGET" "$TARGET" origin/"$1" && cd "$TARGET" && git hy-gui-env && pnpm i && pnpm hook:install; }; run"
+  wt-review = !"run() { TARGET="review-$1"; DIR=$(echo "$TARGET" | tr / -); git fetch && git worktree add --track -b "$TARGET" "$DIR" origin/"$1" && cd "$DIR" && git hy-gui-env && pnpm i && pnpm hook:install; }; run"
   hy-gui-env = !"cp ../_setup/mssp/.env.development.local apps/mssp/.env.development.local && cp ../_setup/web/.env.development.local apps/web/.env.development.local"
   hy-gui-env-qa = !"cp ../_setup/mssp/.env.development.local-qa apps/mssp/.env.development.local && cp ../_setup/web/.env.development.local-qa apps/web/.env.development.local"
 
