@@ -27,7 +27,7 @@ Sur Ubuntu, `work` gère 304 cibles : 263 identiques, 27 différents, 14 absents
 
 ### 1.1 Copiés à la main, identiques
 
-- [x] `~/.config/environment.d/991-mise.conf` — identique
+- [x] `~/.config/environment.d/991-path.conf` — identique
 
 ### 1.2 Copiés à la main, à réconcilier
 
