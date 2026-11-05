@@ -770,9 +770,15 @@ binds {
     Mod+Shift+Space { switch-layout "next"; }
     XF86Keyboard    { switch-layout "next"; }
 
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
+    // Noctalia screenshot tool; save/copy/annotate defaults live in Noctalia settings.
+    Print { spawn "noctalia" "msg" "screenshot-region"; }
+    Ctrl+Print { spawn "noctalia" "msg" "screenshot-fullscreen"; }
+    // Noctalia: "window capture is not available on this compositor" on niri, so use niri's own.
     Alt+Print { screenshot-window; }
+    // The Air75 screenshot key sends Super+Shift+S (Windows snip combo), not Print.
+    Mod+Shift+S { spawn "noctalia" "msg" "screenshot-region"; }
+    Mod+Ctrl+Shift+S { spawn "noctalia" "msg" "screenshot-fullscreen"; }
+    Mod+Alt+Shift+S { screenshot-window; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
