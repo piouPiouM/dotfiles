@@ -102,8 +102,10 @@ output "eDP-1" {
 }
 
 // Work: BenQ EL2870U (4K panel, run at 1440p like on Gnome).
-// "BNQ" is the raw EDID vendor ID: libdisplay-info has no full name for it.
-output "BNQ BenQ EL2870U 21N04859SL0" {
+// "PNP(BNQ)": libdisplay-info has no full name for vendor ID BNQ. niri matches
+// output names exactly (no patterns); if the screen is ignored again, copy the
+// name from `niri msg outputs`.
+output "PNP(BNQ) BenQ EL2870U 21N04859SL0" {
     mode "2560x1440"
     scale 1
     // Sharper native 4K: swap the 2 lines above for these. Logical size stays
