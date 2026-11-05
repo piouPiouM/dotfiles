@@ -59,6 +59,10 @@ redactions = ["*_TOKEN", "*_SECRET", "*_KEY", "*_PASSWORD"]
   # {{- if eq .purpose "personal" }}
   podman = "latest"
   # {{- end }}
+  # {{- if eq .purpose "hackuity" }}
+  # Built from source: system libs come from .chezmoiscripts/run_onchange_before_05-wl-screenrec-deps.sh.tmpl
+  "cargo:wl-screenrec" = "latest"
+  # {{- end }}
 
   # Used by Neovim
   neovim                              = "stable"

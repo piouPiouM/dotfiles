@@ -1,0 +1,17 @@
+{{ if eq .purpose "hackuity" -}}
+#!/usr/bin/env bash
+# System packages for wl-screenrec (https://github.com/rosalyntg/wl-screenrec), a VA-API
+# screen recorder for niri. mise builds it from source ("cargo:wl-screenrec" in
+# dot_config/mise/config.toml.tmpl), so this runs `before_` the mise install script.
+# The whole script renders empty, and chezmoi skips it, for any other purpose.
+#
+# - libav*-dev, libdrm-dev, clang: build deps of ffmpeg-sys-next (bindgen).
+# - intel-media-va-driver-non-free: iHD VA-API driver with H.264 encode (`--codec avc`).
+# - vainfo: check the encoders, `vainfo | grep -i enc`.
+set -euo pipefail
+
+# Ubuntu
+sudo apt-get install -y \
+  libavutil-dev libavformat-dev libavfilter-dev libavdevice-dev libdrm-dev clang \
+  intel-media-va-driver-non-free vainfo
+{{ end -}}
