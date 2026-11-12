@@ -12,6 +12,15 @@ ws_on() {
   niri msg workspaces | awk -v o="Output \"$1\":" '/^Output/ { on = ($0 == o); next } on'
 }
 
+# Put the named workspaces at index 1, 2, ... of their monitor, in this order.
+order() {
+  i=1
+  for ws in "$@"; do
+    niri msg action move-workspace-to-index --reference "$ws" "$i"
+    i=$((i + 1))
+  done
+}
+
 state=
 place() {
   # Full "Output <name> (<connector>)" lines: home and work screens can show up
@@ -22,28 +31,40 @@ place() {
   ext=$(printf '%s\n' "$outputs" | sed -n 's/^Output .*(\(.*\))$/\1/p' | grep -v -x "$LAPTOP" | head -n 1)
   if [ -z "$ext" ]; then state=$outputs; return; fi
 
-  # A move sent before niri is ready for a just-plugged monitor is dropped
-  # without an error, so retry until all three are there (5 s at most).
-  for _ in 1 2 3 4 5 6 7 8 9 10; do
-    # Reverse order: each move lands right after the active workspace.
-    for ws in Docs Code Browse; do
+  # niri drops actions without an error before it is ready for a just-plugged
+  # monitor, and for as long as the session is locked (dock plugged in while
+  # suspended: the moves run before you unlock). Unlocking sends no workspace
+  # event, so keep retrying until all three are there, unless the monitors
+  # change meanwhile: the event that follows reruns this for the new set.
+  # ponytail: polls 1/s while locked; a niri lock event would remove the poll.
+  tries=0
+  while :; do
+    tries=$((tries + 1))
+    for ws in Browse Code Docs; do
       niri msg action move-workspace-to-monitor --reference "$ws" "$ext"
     done
-    landed=$(ws_on "$ext" | grep -c -e '"Browse"' -e '"Code"' -e '"Docs"')
-    [ "$landed" = 3 ] && break
-    sleep 0.5
+    [ "$(ws_on "$ext" | grep -c -e '"Browse"' -e '"Code"' -e '"Docs"')" = 3 ] && break
+    [ "$tries" = 1 ] && logger -t ws-layout "ext=$ext waiting: locked or not ready"
+    sleep 1
+    if [ "$(niri msg outputs | grep '^Output ' | sort)" != "$outputs" ]; then
+      logger -t ws-layout "ext=$ext gone after $tries tries: monitors changed"
+      return
+    fi
   done
-  logger -t ws-layout "ext=$ext landed=$landed/3 outputs: $(printf '%s' "$outputs" | tr '\n' ' ')"
-  # Not committed on failure, so the next workspace event retries.
-  [ "$landed" = 3 ] || return
   state=$outputs
 
+  order Browse Code Docs
+  order Social Media
   niri msg action focus-monitor "$ext"
   # A just-plugged monitor keeps the empty workspace niri made for it active.
   ws_on "$ext" | grep -q -E '^ \* [0-9]+$' && niri msg action focus-workspace Browse
+  logger -t ws-layout "ext=$ext tries=$tries outputs: $(printf '%s' "$outputs" | tr '\n' ' ')"
 }
 
 # The event stream starts with the current state, so this also runs at login.
-niri msg event-stream | while read -r line; do
-  case $line in "Workspaces changed"*) place ;; esac
-done
+# Reconnect if the stream ends (niri can drop a client that stops reading, as
+# this one does while place() retries); stop once niri itself is gone.
+while niri msg version >/dev/null 2>&1; do niri msg event-stream; sleep 1; done |
+  while read -r line; do
+    case $line in "Workspaces changed"*) place ;; esac
+  done
