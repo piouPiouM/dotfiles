@@ -8,7 +8,7 @@ Relevé du 2026-11-04 sur la machine Ubuntu 26.04. Il compare `$HOME` aux branch
 
 1. `~/.dotfiles` a 59 changements non commités : 35 fichiers modifiés et 24 non suivis, dont 17 fichiers de télémétrie Go. Les fichiers servis par un lien stow incluent ces changements. Pour réconcilier, la référence est donc `$HOME`, pas l'historique git.
 2. `~/.config/git/` est un lien vers `~/.dotfiles`. La config git active vient de l'ancien dépôt et a 2 fichiers non commités.
-3. `.chezmoiignore` exclut `~/.config/niri` sur Ubuntu, alors que niri et Noctalia tournent ici. `~/.config/niri/` est un dépôt git à part, très différent de `work` (+632 / −297 sur `config.kdl`). `work` embarque encore `dms/` (DankMaterialShell).
+3. ~~`.chezmoiignore` exclut `~/.config/niri` sur Ubuntu, alors que niri et Noctalia tournent ici.~~ Résolu le 2026-11-13 : le contenu de `~/.config/niri/` a été absorbé dans `home/dot_config/niri/`, l'exclusion Ubuntu a été levée et `dms/` (DankMaterialShell) a été retiré. Ses 18 commits ont été importés (merge « Merge niri config history into home/dot_config/niri »).
 4. Trois liens parasites sont à la racine de `$HOME` : `~/assets`, `~/checks.zsh`, `~/copilot-models.lua` (section 2).
 5. Dans la branche `chezmoi`, `private_ssh/config.tmpl` vise `~/ssh/config` au lieu de `~/.ssh/config` : il manque `dot_`.
 
@@ -18,7 +18,7 @@ Relevé du 2026-11-04 sur la machine Ubuntu 26.04. Il compare `$HOME` aux branch
 - `[x]` : rien à faire. `[ ]` : à migrer ou à réconcilier.
 - `+N / −M` : lignes en plus / en moins dans `$HOME` par rapport à la branche.
 - `~/dossier/ (N fichiers)` regroupe des fichiers qui sont tous dans le même état.
-- 5 fichiers sont vides dans la source et n'ont pas le préfixe `empty_` : `nvim/lua/ppm/toolkit/color/init.lua`, `zsh/rc.sample.zsh` et `niri/dms/{cursor,outputs,windowrules}.kdl`. Ils manquent dans les comptes ci-dessous, et `chezmoi apply` supprimerait leurs équivalents vides dans `$HOME` (section 4.1).
+- 2 fichiers sont vides dans la source et n'ont pas le préfixe `empty_` : `nvim/lua/ppm/toolkit/color/init.lua` et `zsh/rc.sample.zsh`. Ils manquent dans les comptes ci-dessous, et `chezmoi apply` supprimerait leurs équivalents vides dans `$HOME` (section 4.1).
 - Hors relevé : les externals (thèmes Catppuccin, thèmes kitty, polices) et les scripts `.chezmoiscripts/`. Ils s'exécutent au premier `chezmoi apply`.
 
 ## 1. Branche `work` : état dans `$HOME`
@@ -54,8 +54,8 @@ Sur Ubuntu, `work` gère 304 cibles : 263 identiques, 27 différents, 14 absents
 Ces fichiers sont dans la source, mais `chezmoi apply` ne les écrira pas sur cette machine.
 
 - [ ] `~/.config/environment.d/wayland.conf` — absent de `$HOME`
-- [ ] `~/.config/niri/config.kdl` — différent (+632 / −297)
-- [ ] `~/.config/niri/dms/` (5 fichiers) — absents de `$HOME`
+- [x] `~/.config/niri/config.kdl` — absorbé depuis `~/.config/niri/`, plus ignoré sur Ubuntu (2026-11-13)
+- [x] `~/.config/niri/dms/` — retiré de la source : `config.kdl` ne l'inclut plus (2026-11-13)
 - [ ] `~/.config/sway/` (15 fichiers) — absents de `$HOME`
 - [ ] `~/.config/swaylock/config` — absent de `$HOME`
 - [ ] `~/.config/swaync/` (2 fichiers) — absents de `$HOME`
@@ -251,10 +251,8 @@ Chaque fichier suivi par git dans `~/.dotfiles` est cherché parmi les cibles de
 - [ ] `lazygit` — 1/14 fichiers migrés, 4 couverts par un external ou un script, 9 à décider · lié dans `$HOME`
   - [x] `~/.local/share/lazygit/themes/catppuccin-*` (4 fichiers) — external
   - [ ] `~/.local/share/lazygit/themes/github_*` (9 fichiers)
-- [ ] `niri` — 6/9 fichiers migrés, 3 à décider · non lié dans `$HOME`
-  - [ ] `~/.config/niri/dms/cursor.kdl` — vide : sans le préfixe `empty_`, `chezmoi apply` le supprime
-  - [ ] `~/.config/niri/dms/outputs.kdl` — vide : sans le préfixe `empty_`, `chezmoi apply` le supprime
-  - [ ] `~/.config/niri/dms/windowrules.kdl` — vide : sans le préfixe `empty_`, `chezmoi apply` le supprime
+- [x] `niri` — remplacé par le contenu de `~/.config/niri/` (2026-11-13) · non lié dans `$HOME`
+  - [x] `~/.config/niri/dms/` (`cursor.kdl`, `outputs.kdl`, `windowrules.kdl`) — retiré de la source avec `dms/`
 - [ ] `nvim` — 210/212 fichiers migrés, 2 à décider · lié dans `$HOME`
   - [ ] `~/.config/nvim/Makefile`
   - [ ] `~/.config/nvim/lua/ppm/toolkit/color/init.lua` — vide : sans le préfixe `empty_`, `chezmoi apply` le supprime
@@ -284,7 +282,7 @@ Hors stow, à ne pas migrer : `include/` et `setup/` (Makefile et listes de paqu
 
 Ces configurations existent dans `$HOME`, mais ni dans `~/.dotfiles` ni dans les deux branches.
 
-- [ ] `~/.config/niri/noctalia.kdl`, `ws-layout.sh`, `air75-layout.sh` : fichiers du dépôt `~/.config/niri/` absents de `work` (point d'attention 3).
+- [x] `~/.config/niri/noctalia.kdl`, `ws-layout.sh`, `air75-layout.sh`, `cfg/noctalia-rules-studio.kdl` : absorbés dans `home/dot_config/niri/` (2026-11-13).
 - [ ] `~/.config/doom/` (`config.el`, `init.el`, `packages.el`) : config Doom Emacs. `~/.config/emacs/` est le clone de Doom : à déclarer en external, pas à copier.
 - [ ] `~/.config/act/actrc`
 - [ ] `~/.config/gh/config.yml` : **jamais `hosts.yml`**, qui contient le jeton GitHub.
