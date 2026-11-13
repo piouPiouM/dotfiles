@@ -294,9 +294,6 @@ spawn-sh-at-startup "~/.config/niri/ws-layout.sh"
 environment {
   // Absolute: ~/.local/bin is not on niri's PATH, and env values get no ~ expansion.
   TERMINAL "/home/mkabab/.local/bin/kitty"
-  // Temporary: PATH for noctalia plugins (herdr, gh, fzf). Remove after next login,
-  // ~/.config/environment.d/991-path.conf takes over from there.
-  PATH "/home/mkabab/.local/share/mise/shims:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/linuxbrew/.linuxbrew/bin:/home/mkabab/.config/fzf/bin"
 }
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
