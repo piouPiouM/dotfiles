@@ -1,0 +1,11 @@
+# Bluetooth devices by machine purpose (the chezmoi `purpose` data).
+# Each name maps to device addresses: `bt-devices apply` renames every paired
+# one to "<device name> (<name>)", e.g. "Jabra Evolve2 65 (work)". chezmoi runs
+# it whenever this list changes for the current purpose.
+[bluetooth.hackuity]
+  home = [
+    "08:C8:C2:21:C3:0B",  # Jabra Evolve2 65
+  ]
+  work = [
+    "6C:FB:ED:EB:D6:25",  # Jabra Evolve2 65
+  ]

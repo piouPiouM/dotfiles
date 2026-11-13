@@ -1,0 +1,15 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+# Rename the paired Bluetooth devices listed in .chezmoidata/bluetooth.toml
+# whenever the list for this purpose changes.
+# devices hash: {{ includeTemplate "dot_config/bt-devices/devices.tmpl" . | sha256sum }}
+# The whole script renders empty, and chezmoi skips it, on other systems.
+set -euo pipefail
+
+if ! command -v bluetoothctl >/dev/null 2>&1; then
+  echo "bluetoothctl not found — skipping Bluetooth device names"
+  exit 0
+fi
+
+"$HOME/.local/share/bin/linux/bt-devices" apply
+{{ end -}}
